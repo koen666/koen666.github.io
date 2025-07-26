@@ -90,53 +90,104 @@
       </tags>
   </entry>
   <entry>
-    <title>Docker 基本使用教程</title>
-    <url>/2025/07/26/docker-basic-usage/</url>
-    <content><![CDATA[<blockquote>
-<p>Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。</p>
-</blockquote>
-<hr>
-<h2 id="一、Docker的用途"><a href="#一、Docker的用途" class="headerlink" title="一、Docker的用途"></a>一、Docker的用途</h2><p>Docker 的主要用途，目前有三大类。</p>
-<ol>
-<li><p>提供一次性的环境。比如，本地测试他人的软件、持续集成的时候提供单元测试和构建的环境。</p>
-</li>
-<li><p>提供弹性的云服务。因为 Docker 容器可以随开随关，很适合动态扩容和缩容。</p>
-</li>
-<li><p>组建微服务架构。通过多个容器，一台机器可以跑多个服务，因此在本机就可以模拟出微服务架构。</p>
-</li>
-</ol>
-<hr>
-<h2 id="二、验证是否安装成功"><a href="#二、验证是否安装成功" class="headerlink" title="二、验证是否安装成功"></a>二、验证是否安装成功</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
+    <title>Pytorch，深度学习与神经网络篇</title>
+    <url>/2025/07/26/pytorch/</url>
+    <content><![CDATA[<h2 id="一、AutoGrad"><a href="#一、AutoGrad" class="headerlink" title="一、AutoGrad"></a>一、AutoGrad</h2><p>autograd 包是 PyTorch 中所有神经网络的核心。首先让我们简要地介绍它，然后我们将会去训练我们的第一个神经网络。该 autograd 软件包为 Tensors 上的所有操作提供自动微分。它是一个由运行定义的框架，这意味着以代码运行方式定义你的后向传播，并且每次迭代都可以不同</p>
+<p>先丢张思维导图叭：<br><img src="/images/autograd.png" alt="autograd"></p>
+<p>首先要给x定义 <code>requires_grad=True</code> 属性</p>
+<p>其次要注意被<code>backward()</code>的张量需要是张量标量，即需要被<code>mean()</code>或者是<code>sum()</code></p>
+<p>最后x的梯度就是$\frac{dz}{dx}$</p>
+<p>将代码块包裹在 <code>with torch.no_grad()：</code> 中以停止自动微分</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(x.requires_grad)</span><br><span class="line"><span class="built_in">print</span>((x ** <span class="number">2</span>).requires_grad)</span><br><span class="line"></span><br><span class="line">with torch.no_grad():</span><br><span class="line">    print((x ** <span class="number">2</span>).requires_grad)</span><br></pre></td></tr></table></figure>
+<p>output:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">True</span><br><span class="line">True</span><br><span class="line">False</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h2 id="三、Image文件"><a href="#三、Image文件" class="headerlink" title="三、Image文件"></a>三、Image文件</h2><p>Docker 把应用程序及其依赖，打包在 <strong>image 文件</strong>里面。只有通过这个文件，才能生成 Docker 容器。<br>image 文件可以看作是容器的模板，Docker 根据 image 文件生成容器的实例。<br>同一个 image 文件，可以生成多个同时运行的容器实例。</p>
-<p>image 是一个 <strong>二进制文件</strong>。实际开发中，一个 image 文件往往通过继承另一个 image 文件，加上一些个性化设置而生成。<br>举例来说，你可以在 Ubuntu 的 image 基础上，往里面加入 Apache 服务器，形成你自己的 image。</p>
-<h3 id="📋-列出本机的所有-image-文件"><a href="#📋-列出本机的所有-image-文件" class="headerlink" title="📋 列出本机的所有 image 文件"></a>📋 列出本机的所有 image 文件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker image <span class="built_in">ls</span></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 🗑️ 删除 image 文件</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">$ docker image <span class="built_in">rm</span> [imageName]</span><br></pre></td></tr></table></figure>
-
-<p>image 文件是通用的，一台机器的 image 文件拷贝到另一台机器，照样可以使用。</p>
-<p>一般来说，为了节省时间，我们应该尽量使用别人制作好的 image 文件，而不是自己制作。<br>即使要定制，也应该基于别人的 image 文件进行加工，而不是从零开始制作。</p>
-<h3 id="🗂️-镜像仓库（Image-Repository）"><a href="#🗂️-镜像仓库（Image-Repository）" class="headerlink" title="🗂️ 镜像仓库（Image Repository）"></a>🗂️ 镜像仓库（Image Repository）</h3><p>为了方便共享，image 文件制作完成后，可以上传到网上的仓库。</p>
+<h2 id="二、神经网络基础"><a href="#二、神经网络基础" class="headerlink" title="二、神经网络基础"></a>二、神经网络基础</h2><h3 id="2-1-了解神经网络结构的分类"><a href="#2-1-了解神经网络结构的分类" class="headerlink" title="2.1 了解神经网络结构的分类"></a>2.1 了解神经网络结构的分类</h3><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>网络类型</th>
+<th>简介</th>
+<th>适用场景</th>
+<th>代表模型 &#x2F; 特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>前馈神经网络（FNN）</td>
+<td>最基础的神经网络，信息单向传播，无环</td>
+<td>通用场景</td>
+<td>多层感知器（MLP）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>卷积神经网络（CNN）</td>
+<td>提取图像局部特征，参数更少</td>
+<td>图像识别、目标检测</td>
+<td>LeNet、AlexNet、VGG、ResNet、EfficientNet</td>
+</tr>
+<tr>
+<td>3</td>
+<td>循环神经网络（RNN）</td>
+<td>处理序列数据，有“记忆”结构</td>
+<td>文本、语音、时间序列</td>
+<td>RNN、LSTM、GRU</td>
+</tr>
+<tr>
+<td>4</td>
+<td>残差神经网络（ResNet）</td>
+<td>使用残差连接避免梯度消失</td>
+<td>深层网络训练</td>
+<td>ResNet、输出&#x3D;F(x)+x</td>
+</tr>
+<tr>
+<td>5</td>
+<td>图神经网络（GNN）</td>
+<td>适用于图结构数据</td>
+<td>社交网络、知识图谱</td>
+<td>GCN、GAT、GraphSAGE</td>
+</tr>
+</tbody></table>
+<h3 id="2-2-了解神经网络的整个过程"><a href="#2-2-了解神经网络的整个过程" class="headerlink" title="2.2 了解神经网络的整个过程"></a>2.2 了解神经网络的整个过程</h3><p>输入数据 x<br>↓<br>正向传播（Linear + 激活函数）<br>↓<br>输出结果（预测值）<br>↓<br>计算损失（Loss 与真实值比较）<br>↓<br>反向传播（链式法则求导）<br>↓<br>参数梯度更新（Optimizer）<br>↓<br>下一轮训练  </p>
+<p>损失函数：计算”偏差”</p>
+<p>优化器：这个“偏差”通过损失函数计算出来，而优化器的工作，就是 通过反向传播得到的梯度，更新参数，使损失越来越小</p>
+<p>给出一个简单的前馈神经网络作为实例进行讲解</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import torch</span><br><span class="line">import torch.nn as nn</span><br><span class="line">import torch.optim as optim</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个简单的前馈神经网络，包含一个隐藏层</span></span><br><span class="line">class SimpleFNN(nn.Module):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super(SimpleFNN, self).__init__()</span><br><span class="line">        self.fc1 = nn.Linear(4, 8)   <span class="comment"># 输入层4个特征，隐藏层8个神经元</span></span><br><span class="line">        self.relu = nn.ReLU()        <span class="comment"># 激活函数</span></span><br><span class="line">        self.fc2 = nn.Linear(8, 3)   <span class="comment"># 输出层3个类别（比如3分类问题）</span></span><br><span class="line"></span><br><span class="line">    def forward(self, x):</span><br><span class="line">        x = self.fc1(x)</span><br><span class="line">        x = self.relu(x)</span><br><span class="line">        x = self.fc2(x)</span><br><span class="line">        <span class="built_in">return</span> x</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建模型</span></span><br><span class="line">model = SimpleFNN()</span><br><span class="line"><span class="built_in">print</span>(model)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 假设输入是4维特征</span></span><br><span class="line">sample_input = torch.randn(2, 4)  <span class="comment"># batch_size=2，4个特征</span></span><br><span class="line">output = model(sample_input)</span><br><span class="line"><span class="built_in">print</span>(output)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>__init__ </code>函数 — 网络结构的“搭建工厂”</p>
+<p>作用：<br>初始化神经网络的层和组件,相当于在这里定义好网络的“骨架”和“零件”。</p>
+<p>具体内容：</p>
 <ul>
-<li>Docker 的官方仓库 <strong>Docker Hub</strong> 是最重要、最常用的 image 仓库。</li>
-<li>此外，你也可以使用国内的镜像仓库（如阿里云、腾讯云）或者搭建私有仓库。</li>
-<li>出售自己制作的 image 文件也是可以的。</li>
+<li><p><code>super(SimpleFNN, self).__init__()</code><br>调用父类 nn.Module 的初始化方法，确保网络能正常工作和注册所有子模块。</p>
+</li>
+<li><p><code>self.fc1 = nn.Linear(4, 8)</code><br>定义第一个全连接层（线性层），它接受4维输入，输出8维数据。<br>这层会学习一个 4×8 的权重矩阵和偏置向量。</p>
+</li>
+<li><p><code>self.relu = nn.ReLU()</code><br>定义了一个激活函数ReLU，增加网络的非线性表达能力。<br>这里是先定义好，可以在 forward 中调用。</p>
+</li>
+<li><p><code>self.fc2 = nn.Linear(8, 3)</code><br>定义第二个全连接层，接受8维输入，输出3维结果。<br>这常用作分类任务的输出层，输出3个类别的分数。</p>
+</li>
 </ul>
-<h3 id="image-container"><a href="#image-container" class="headerlink" title="image&amp;&amp;container"></a>image&amp;&amp;container</h3><p>容器是镜像跑起来的实例，一个镜像可以有多个容器</p>
-<hr>
-<h2 id="四、如何跑起来呢"><a href="#四、如何跑起来呢" class="headerlink" title="四、如何跑起来呢"></a>四、如何跑起来呢</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker image pull &lt;project&gt;       <span class="comment">#将image文件从仓库抓取到本地</span></span><br><span class="line">docker container run &lt;project&gt;    <span class="comment">#将image文件在你的电脑上跑起来，新建容器</span></span><br><span class="line">docker container start [ID]       <span class="comment">#将已有的容器跑起来</span></span><br><span class="line">docker container <span class="built_in">kill</span> [ID]        <span class="comment">#手动终止容器的运行</span></span><br><span class="line">docker container <span class="built_in">ls</span>               <span class="comment">#在你电脑上正在跑起来的容器</span></span><br><span class="line">docker container <span class="built_in">ls</span> -all          <span class="comment">#列出本机所有容器，包括终止运行的容器</span></span><br><span class="line">docker container <span class="built_in">rm</span> [containerID] <span class="comment">#删除停止运行的容器，防止占用硬盘空间</span></span><br></pre></td></tr></table></figure>
-
-<p>注意，docker container run命令具有自动抓取 image 文件的功能。如果发现本地没有指定的 image 文件，就会从仓库自动抓取。因此，前面的docker image pull命令并不是必需的步骤。</p>
-<hr>
+<p><code>forward</code> 函数 — 数据的“运行流程”</p>
+<p>作用：<br>定义输入数据如何通过网络计算得到输出。<br>相当于网络的“运行步骤”，告诉 PyTorch 具体执行什么操作。</p>
+<p>具体流程：</p>
+<ul>
+<li><p><code>x = self.fc1(x)</code><br>输入数据 x 先经过第一个全连接层，变成8维的向量。</p>
+</li>
+<li><p><code>x = self.relu(x)</code><br>将刚得到的8维数据通过 ReLU 激活函数，增加非线性。<br>ReLU的作用是把负数变为0，正数保持不变。</p>
+</li>
+<li><p><code>x = self.fc2(x)</code><br>再把激活后的结果输入到第二个全连接层，变成3维输出。</p>
+</li>
+<li><p><code>return x</code><br>返回最终输出，通常是“分类分数”或“回归预测值”。</p>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>code</category>
       </categories>
       <tags>
-        <tag>learn</tag>
-        <tag>container</tag>
-        <tag>docker</tag>
-        <tag>linux</tag>
-        <tag>virtual</tag>
+        <tag>deeplearning</tag>
+        <tag>pytorch</tag>
+        <tag>Transformer</tag>
       </tags>
   </entry>
   <entry>
@@ -216,27 +267,53 @@
       </tags>
   </entry>
   <entry>
-    <title>Pytorch，深度学习与神经网络篇</title>
-    <url>/2025/07/26/pytorch/</url>
-    <content><![CDATA[<h2 id="一、AutoGrad"><a href="#一、AutoGrad" class="headerlink" title="一、AutoGrad"></a>一、AutoGrad</h2><p>autograd 包是 PyTorch 中所有神经网络的核心。首先让我们简要地介绍它，然后我们将会去训练我们的第一个神经网络。该 autograd 软件包为 Tensors 上的所有操作提供自动微分。它是一个由运行定义的框架，这意味着以代码运行方式定义你的后向传播，并且每次迭代都可以不同</p>
-<p>先丢张思维导图叭：<br><img src="/images/autograd.png" alt="autograd"></p>
-<p>首先要给x定义 <code>requires_grad=True</code> 属性</p>
-<p>其次要注意被<code>backward()</code>的张量需要是张量标量，即需要被<code>mean()</code>或者是<code>sum()</code></p>
-<p>最后x的梯度就是$\frac{dz}{dx}$</p>
-<p>将代码块包裹在 <code>with torch.no_grad()：</code> 中以停止自动微分</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(x.requires_grad)</span><br><span class="line"><span class="built_in">print</span>((x ** <span class="number">2</span>).requires_grad)</span><br><span class="line"></span><br><span class="line">with torch.no_grad():</span><br><span class="line">    print((x ** <span class="number">2</span>).requires_grad)</span><br></pre></td></tr></table></figure>
-<p>output:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">True</span><br><span class="line">True</span><br><span class="line">False</span><br></pre></td></tr></table></figure>
+    <title>Docker 基本使用教程</title>
+    <url>/2025/07/26/docker-basic-usage/</url>
+    <content><![CDATA[<blockquote>
+<p>Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。</p>
+</blockquote>
+<hr>
+<h2 id="一、Docker的用途"><a href="#一、Docker的用途" class="headerlink" title="一、Docker的用途"></a>一、Docker的用途</h2><p>Docker 的主要用途，目前有三大类。</p>
+<ol>
+<li><p>提供一次性的环境。比如，本地测试他人的软件、持续集成的时候提供单元测试和构建的环境。</p>
+</li>
+<li><p>提供弹性的云服务。因为 Docker 容器可以随开随关，很适合动态扩容和缩容。</p>
+</li>
+<li><p>组建微服务架构。通过多个容器，一台机器可以跑多个服务，因此在本机就可以模拟出微服务架构。</p>
+</li>
+</ol>
+<hr>
+<h2 id="二、验证是否安装成功"><a href="#二、验证是否安装成功" class="headerlink" title="二、验证是否安装成功"></a>二、验证是否安装成功</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
 
+<hr>
+<h2 id="三、Image文件"><a href="#三、Image文件" class="headerlink" title="三、Image文件"></a>三、Image文件</h2><p>Docker 把应用程序及其依赖，打包在 <strong>image 文件</strong>里面。只有通过这个文件，才能生成 Docker 容器。<br>image 文件可以看作是容器的模板，Docker 根据 image 文件生成容器的实例。<br>同一个 image 文件，可以生成多个同时运行的容器实例。</p>
+<p>image 是一个 <strong>二进制文件</strong>。实际开发中，一个 image 文件往往通过继承另一个 image 文件，加上一些个性化设置而生成。<br>举例来说，你可以在 Ubuntu 的 image 基础上，往里面加入 Apache 服务器，形成你自己的 image。</p>
+<h3 id="📋-列出本机的所有-image-文件"><a href="#📋-列出本机的所有-image-文件" class="headerlink" title="📋 列出本机的所有 image 文件"></a>📋 列出本机的所有 image 文件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker image <span class="built_in">ls</span></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 🗑️ 删除 image 文件</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">$ docker image <span class="built_in">rm</span> [imageName]</span><br></pre></td></tr></table></figure>
 
+<p>image 文件是通用的，一台机器的 image 文件拷贝到另一台机器，照样可以使用。</p>
+<p>一般来说，为了节省时间，我们应该尽量使用别人制作好的 image 文件，而不是自己制作。<br>即使要定制，也应该基于别人的 image 文件进行加工，而不是从零开始制作。</p>
+<h3 id="🗂️-镜像仓库（Image-Repository）"><a href="#🗂️-镜像仓库（Image-Repository）" class="headerlink" title="🗂️ 镜像仓库（Image Repository）"></a>🗂️ 镜像仓库（Image Repository）</h3><p>为了方便共享，image 文件制作完成后，可以上传到网上的仓库。</p>
+<ul>
+<li>Docker 的官方仓库 <strong>Docker Hub</strong> 是最重要、最常用的 image 仓库。</li>
+<li>此外，你也可以使用国内的镜像仓库（如阿里云、腾讯云）或者搭建私有仓库。</li>
+<li>出售自己制作的 image 文件也是可以的。</li>
+</ul>
+<h3 id="image-container"><a href="#image-container" class="headerlink" title="image&amp;&amp;container"></a>image&amp;&amp;container</h3><p>容器是镜像跑起来的实例，一个镜像可以有多个容器</p>
+<hr>
+<h2 id="四、如何跑起来呢"><a href="#四、如何跑起来呢" class="headerlink" title="四、如何跑起来呢"></a>四、如何跑起来呢</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker image pull &lt;project&gt;       <span class="comment">#将image文件从仓库抓取到本地</span></span><br><span class="line">docker container run &lt;project&gt;    <span class="comment">#将image文件在你的电脑上跑起来，新建容器</span></span><br><span class="line">docker container start [ID]       <span class="comment">#将已有的容器跑起来</span></span><br><span class="line">docker container <span class="built_in">kill</span> [ID]        <span class="comment">#手动终止容器的运行</span></span><br><span class="line">docker container <span class="built_in">ls</span>               <span class="comment">#在你电脑上正在跑起来的容器</span></span><br><span class="line">docker container <span class="built_in">ls</span> -all          <span class="comment">#列出本机所有容器，包括终止运行的容器</span></span><br><span class="line">docker container <span class="built_in">rm</span> [containerID] <span class="comment">#删除停止运行的容器，防止占用硬盘空间</span></span><br></pre></td></tr></table></figure>
+
+<p>注意，docker container run命令具有自动抓取 image 文件的功能。如果发现本地没有指定的 image 文件，就会从仓库自动抓取。因此，前面的docker image pull命令并不是必需的步骤。</p>
+<hr>
 ]]></content>
       <categories>
         <category>code</category>
       </categories>
       <tags>
-        <tag>deeplearning</tag>
-        <tag>pytorch</tag>
-        <tag>Transformer</tag>
+        <tag>learn</tag>
+        <tag>container</tag>
+        <tag>docker</tag>
+        <tag>linux</tag>
+        <tag>virtual</tag>
       </tags>
   </entry>
 </search>
