@@ -140,30 +140,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Pytorch，深度学习与神经网络篇</title>
-    <url>/2025/07/26/pytorch/</url>
-    <content><![CDATA[<h2 id="一、AutoGrad"><a href="#一、AutoGrad" class="headerlink" title="一、AutoGrad"></a>一、AutoGrad</h2><p>autograd 包是 PyTorch 中所有神经网络的核心。首先让我们简要地介绍它，然后我们将会去训练我们的第一个神经网络。该 autograd 软件包为 Tensors 上的所有操作提供自动微分。它是一个由运行定义的框架，这意味着以代码运行方式定义你的后向传播，并且每次迭代都可以不同</p>
-<p>先丢张思维导图叭：<br><img src="/../../themes/next/source/images/autograd.png" alt="autograd"></p>
-<p>首先要给x定义 <code>requires_grad=True</code> 属性</p>
-<p>其次要注意被<code>backward()</code>的张量需要是张量标量，即需要被<code>mean()</code>或者是<code>sum()</code></p>
-<p>最后x的梯度就是$\frac{dz}{dx}$</p>
-<p>将代码块包裹在 <code>with torch.no_grad()：</code> 中以停止自动微分</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(x.requires_grad)</span><br><span class="line"><span class="built_in">print</span>((x ** <span class="number">2</span>).requires_grad)</span><br><span class="line"></span><br><span class="line">with torch.no_grad():</span><br><span class="line">    print((x ** <span class="number">2</span>).requires_grad)</span><br></pre></td></tr></table></figure>
-<p>output:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">True</span><br><span class="line">True</span><br><span class="line">False</span><br></pre></td></tr></table></figure>
-
-
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>deeplearning</tag>
-        <tag>pytorch</tag>
-        <tag>Transformer</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Git 基本使用教程</title>
     <url>/2025/07/25/git-basic-usage/</url>
     <content><![CDATA[<blockquote>
@@ -237,6 +213,30 @@
         <tag>learn</tag>
         <tag>repo</tag>
         <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pytorch，深度学习与神经网络篇</title>
+    <url>/2025/07/26/pytorch/</url>
+    <content><![CDATA[<h2 id="一、AutoGrad"><a href="#一、AutoGrad" class="headerlink" title="一、AutoGrad"></a>一、AutoGrad</h2><p>autograd 包是 PyTorch 中所有神经网络的核心。首先让我们简要地介绍它，然后我们将会去训练我们的第一个神经网络。该 autograd 软件包为 Tensors 上的所有操作提供自动微分。它是一个由运行定义的框架，这意味着以代码运行方式定义你的后向传播，并且每次迭代都可以不同</p>
+<p>先丢张思维导图叭：<br><img src="/images/autograd.png" alt="autograd"></p>
+<p>首先要给x定义 <code>requires_grad=True</code> 属性</p>
+<p>其次要注意被<code>backward()</code>的张量需要是张量标量，即需要被<code>mean()</code>或者是<code>sum()</code></p>
+<p>最后x的梯度就是$\frac{dz}{dx}$</p>
+<p>将代码块包裹在 <code>with torch.no_grad()：</code> 中以停止自动微分</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(x.requires_grad)</span><br><span class="line"><span class="built_in">print</span>((x ** <span class="number">2</span>).requires_grad)</span><br><span class="line"></span><br><span class="line">with torch.no_grad():</span><br><span class="line">    print((x ** <span class="number">2</span>).requires_grad)</span><br></pre></td></tr></table></figure>
+<p>output:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">True</span><br><span class="line">True</span><br><span class="line">False</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>deeplearning</tag>
+        <tag>pytorch</tag>
+        <tag>Transformer</tag>
       </tags>
   </entry>
 </search>
