@@ -4,17 +4,26 @@
     <title>curl使用教学</title>
     <url>/2025/07/26/curl/</url>
     <content><![CDATA[<blockquote>
-<p>curl 是一个强大的命令行工具，用于在命令行或脚本中发送 HTTP 请求，与服务器通信。它可以用来下载网页、调用 API 接口、上传文件、发送表单等。几乎所有支持网络通信的协议 curl 都能处理，包括 HTTP、HTTPS、FTP、SFTP、SMTP 等</p>
+<p>curl 是一个强大的命令行工具，用于在命令行或脚本中发送 HTTP
+请求，与服务器通信。它可以用来下载网页、调用 API
+接口、上传文件、发送表单等。几乎所有支持网络通信的协议 curl
+都能处理，包括 HTTP、HTTPS、FTP、SFTP、SMTP 等</p>
 </blockquote>
-<hr>
-<h2 id="一、所以curl能干啥"><a href="#一、所以curl能干啥" class="headerlink" title="一、所以curl能干啥"></a>一、所以curl能干啥</h2><table>
+<hr />
+<h2 id="一所以curl能干啥">一、所以curl能干啥</h2>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 87%" />
+</colgroup>
 <thead>
 <tr>
 <th>功能</th>
 <th>示例</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>获取网页内容</td>
 <td><code>curl https://example.com</code></td>
 </tr>
@@ -24,49 +33,53 @@
 </tr>
 <tr>
 <td>发送 POST 请求</td>
-<td><code>curl -X POST -d &quot;name=Koen&amp;age=20&quot; https://example.com/api</code></td>
+<td><code>curl -X POST -d "name=Koen&amp;age=20" https://example.com/api</code></td>
 </tr>
 <tr>
 <td>添加请求头</td>
-<td><code>curl -H &quot;Authorization: Bearer TOKEN&quot; https://api.example.com/data</code></td>
+<td><code>curl -H "Authorization: Bearer TOKEN" https://api.example.com/data</code></td>
 </tr>
 <tr>
 <td>上传文件</td>
-<td><code>curl -F &quot;file=@test.png&quot; https://example.com/upload</code></td>
+<td><code>curl -F "file=@test.png" https://example.com/upload</code></td>
 </tr>
 <tr>
 <td>保存输出到文件</td>
 <td><code>curl https://example.com -o saved.html</code></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>以下将对其功能进行详细解释</p>
-<hr>
-<h2 id="二、利用curl获取网页内容"><a href="#二、利用curl获取网页内容" class="headerlink" title="二、利用curl获取网页内容"></a>二、利用curl获取网页内容</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl url</span><br></pre></td></tr></table></figure>
-
+<hr />
+<h2 id="二利用curl获取网页内容">二、利用curl获取网页内容</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl url</span><br></pre></td></tr></table></figure>
 <p>会将get请求返回结果直接输出在命令行中</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://example.com -o index.html</span><br></pre></td></tr></table></figure>
-
 <p>保存指定内容到文件，地址为cmd当前地址</p>
-<hr>
-<h2 id="三、发送post请求"><a href="#三、发送post请求" class="headerlink" title="三、发送post请求"></a>三、发送post请求</h2><p>一般用于测试接口是否正常</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -d <span class="string">&quot;name=Koen&amp;age=20&quot;</span> https://example.com/api</span><br></pre></td></tr></table></figure>
-<p>带上请求头和请求体：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST https://api.example.com/data \</span><br><span class="line">  -H <span class="string">&quot;Authorization: Bearer abc123&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;&quot;key&quot;:&quot;value&quot;&#125;&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">     -d <span class="string">&#x27;&#123;&quot;username&quot;:&quot;koen&quot;,&quot;password&quot;:&quot;123456&quot;&#125;&#x27;</span> \</span><br><span class="line">     https://example.com/api</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="四、利用curl进行文件上传"><a href="#四、利用curl进行文件上传" class="headerlink" title="四、利用curl进行文件上传"></a>四、利用curl进行文件上传</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -F <span class="string">&quot;file=@test.png&quot;</span> https://example.com/upload</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="三发送post请求">三、发送post请求</h2>
+<p>一般用于测试接口是否正常 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -d <span class="string">&quot;name=Koen&amp;age=20&quot;</span> https://example.com/api</span><br></pre></td></tr></table></figure> 带上请求头和请求体：
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST https://api.example.com/data \</span><br><span class="line">  -H <span class="string">&quot;Authorization: Bearer abc123&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;&quot;key&quot;:&quot;value&quot;&#125;&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">     -d <span class="string">&#x27;&#123;&quot;username&quot;:&quot;koen&quot;,&quot;password&quot;:&quot;123456&quot;&#125;&#x27;</span> \</span><br><span class="line">     https://example.com/api</span><br></pre></td></tr></table></figure></p>
+<hr />
+<h2 id="四利用curl进行文件上传">四、利用curl进行文件上传</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -F <span class="string">&quot;file=@test.png&quot;</span> https://example.com/upload</span><br></pre></td></tr></table></figure>
 <p>-F就是指定用表单的方式进行字段的上传</p>
 <table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 81%" />
+</colgroup>
 <thead>
 <tr>
 <th>部分</th>
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>file</code></td>
-<td>表单字段的名字。就像网页表单中 <code>&lt;input type=&quot;file&quot; name=&quot;file&quot;&gt;</code>。</td>
+<td>表单字段的名字。就像网页表单中
+<code>&lt;input type="file" name="file"&gt;</code>。</td>
 </tr>
 <tr>
 <td><code>=</code></td>
@@ -76,9 +89,10 @@
 <td><code>@test.png</code></td>
 <td>表示上传当前目录下名为 <code>test.png</code> 的文件</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>其实就是post请求上传文件的方式</p>
-<hr>
+<hr />
 ]]></content>
       <categories>
         <category>cmd</category>
@@ -90,30 +104,111 @@
       </tags>
   </entry>
   <entry>
+    <title>Docker 基本使用教程</title>
+    <url>/2025/07/26/docker-basic-usage/</url>
+    <content><![CDATA[<blockquote>
+<p>Docker
+可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的
+Linux 机器上，也可以实现虚拟化。</p>
+</blockquote>
+<hr />
+<h2 id="一docker的用途">一、Docker的用途</h2>
+<p>Docker 的主要用途，目前有三大类。</p>
+<ol type="1">
+<li><p>提供一次性的环境。比如，本地测试他人的软件、持续集成的时候提供单元测试和构建的环境。</p></li>
+<li><p>提供弹性的云服务。因为 Docker
+容器可以随开随关，很适合动态扩容和缩容。</p></li>
+<li><p>组建微服务架构。通过多个容器，一台机器可以跑多个服务，因此在本机就可以模拟出微服务架构。</p></li>
+</ol>
+<hr />
+<h2 id="二验证是否安装成功">二、验证是否安装成功</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="三image文件">三、Image文件</h2>
+<p>Docker 把应用程序及其依赖，打包在 <strong>image
+文件</strong>里面。只有通过这个文件，才能生成 Docker 容器。<br />
+image 文件可以看作是容器的模板，Docker 根据 image
+文件生成容器的实例。<br />
+同一个 image 文件，可以生成多个同时运行的容器实例。</p>
+<p>image 是一个 <strong>二进制文件</strong>。实际开发中，一个 image
+文件往往通过继承另一个 image 文件，加上一些个性化设置而生成。<br />
+举例来说，你可以在 Ubuntu 的 image 基础上，往里面加入 Apache
+服务器，形成你自己的 image。</p>
+<h3 id="列出本机的所有-image-文件">📋 列出本机的所有 image 文件</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker image <span class="built_in">ls</span></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 🗑️ 删除 image 文件</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">$ docker image <span class="built_in">rm</span> [imageName]</span><br></pre></td></tr></table></figure>
+<p>image 文件是通用的，一台机器的 image
+文件拷贝到另一台机器，照样可以使用。</p>
+<p>一般来说，为了节省时间，我们应该尽量使用别人制作好的 image
+文件，而不是自己制作。 即使要定制，也应该基于别人的 image
+文件进行加工，而不是从零开始制作。</p>
+<h3 id="镜像仓库image-repository">🗂️ 镜像仓库（Image Repository）</h3>
+<p>为了方便共享，image 文件制作完成后，可以上传到网上的仓库。</p>
+<ul>
+<li>Docker 的官方仓库 <strong>Docker Hub</strong> 是最重要、最常用的
+image 仓库。</li>
+<li>此外，你也可以使用国内的镜像仓库（如阿里云、腾讯云）或者搭建私有仓库。</li>
+<li>出售自己制作的 image 文件也是可以的。</li>
+</ul>
+<h3 id="imagecontainer">image&amp;&amp;container</h3>
+<p>容器是镜像跑起来的实例，一个镜像可以有多个容器</p>
+<hr />
+<h2 id="四如何跑起来呢">四、如何跑起来呢</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker image pull &lt;project&gt;       <span class="comment">#将image文件从仓库抓取到本地</span></span><br><span class="line">docker container run &lt;project&gt;    <span class="comment">#将image文件在你的电脑上跑起来，新建容器</span></span><br><span class="line">docker container start [ID]       <span class="comment">#将已有的容器跑起来</span></span><br><span class="line">docker container <span class="built_in">kill</span> [ID]        <span class="comment">#手动终止容器的运行</span></span><br><span class="line">docker container <span class="built_in">ls</span>               <span class="comment">#在你电脑上正在跑起来的容器</span></span><br><span class="line">docker container <span class="built_in">ls</span> -all          <span class="comment">#列出本机所有容器，包括终止运行的容器</span></span><br><span class="line">docker container <span class="built_in">rm</span> [containerID] <span class="comment">#删除停止运行的容器，防止占用硬盘空间</span></span><br></pre></td></tr></table></figure>
+<p>注意，docker container run命令具有自动抓取 image
+文件的功能。如果发现本地没有指定的 image
+文件，就会从仓库自动抓取。因此，前面的docker image
+pull命令并不是必需的步骤。</p>
+<hr />
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>learn</tag>
+        <tag>container</tag>
+        <tag>docker</tag>
+        <tag>linux</tag>
+        <tag>virtual</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Pytorch，深度学习与神经网络篇</title>
     <url>/2025/07/26/pytorch/</url>
-    <content><![CDATA[<h2 id="一、AutoGrad"><a href="#一、AutoGrad" class="headerlink" title="一、AutoGrad"></a>一、AutoGrad</h2><p>autograd 包是 PyTorch 中所有神经网络的核心。首先让我们简要地介绍它，然后我们将会去训练我们的第一个神经网络。该 autograd 软件包为 Tensors 上的所有操作提供自动微分。它是一个由运行定义的框架，这意味着以代码运行方式定义你的后向传播，并且每次迭代都可以不同</p>
-<p>先丢张思维导图叭：<br><img src="/images/autograd.png" alt="autograd"></p>
+    <content><![CDATA[<h2 id="一autograd">一、AutoGrad</h2>
+<p>autograd 包是 PyTorch
+中所有神经网络的核心。首先让我们简要地介绍它，然后我们将会去训练我们的第一个神经网络。该
+autograd 软件包为 Tensors
+上的所有操作提供自动微分。它是一个由运行定义的框架，这意味着以代码运行方式定义你的后向传播，并且每次迭代都可以不同</p>
+<p>先丢张思维导图叭： <img src="/images/autograd.png" alt="autograd"></p>
 <p>首先要给x定义 <code>requires_grad=True</code> 属性</p>
 <p>其次要注意被<code>backward()</code>的张量需要是张量标量，即需要被<code>mean()</code>或者是<code>sum()</code></p>
-<p>最后x的梯度就是$\frac{dz}{dx}$</p>
-<p>将代码块包裹在 <code>with torch.no_grad()：</code> 中以停止自动微分</p>
+<p>最后x的梯度就是<span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.798ex;" xmlns="http://www.w3.org/2000/svg" width="2.742ex" height="2.8ex" role="img" focusable="false" viewBox="0 -884.7 1212.2 1237.5"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mrow" transform="translate(257.8,394) scale(0.707)"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g><g data-mml-node="mi" transform="translate(520,0)"><path data-c="1D467" d="M347 338Q337 338 294 349T231 360Q211 360 197 356T174 346T162 335T155 324L153 320Q150 317 138 317Q117 317 117 325Q117 330 120 339Q133 378 163 406T229 440Q241 442 246 442Q271 442 291 425T329 392T367 375Q389 375 411 408T434 441Q435 442 449 442H462Q468 436 468 434Q468 430 463 420T449 399T432 377T418 358L411 349Q368 298 275 214T160 106L148 94L163 93Q185 93 227 82T290 71Q328 71 360 90T402 140Q406 149 409 151T424 153Q443 153 443 143Q443 138 442 134Q425 72 376 31T278 -11Q252 -11 232 6T193 40T155 57Q111 57 76 -3Q70 -11 59 -11H54H41Q35 -5 35 -2Q35 13 93 84Q132 129 225 214T340 322Q352 338 347 338Z"></path></g></g><g data-mml-node="mrow" transform="translate(220,-345) scale(0.707)"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g><g data-mml-node="mi" transform="translate(520,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g><rect width="972.2" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container></span></p>
+<p>将代码块包裹在 <code>with torch.no_grad()：</code>
+中以停止自动微分</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(x.requires_grad)</span><br><span class="line"><span class="built_in">print</span>((x ** <span class="number">2</span>).requires_grad)</span><br><span class="line"></span><br><span class="line">with torch.no_grad():</span><br><span class="line">    print((x ** <span class="number">2</span>).requires_grad)</span><br></pre></td></tr></table></figure>
-<p>output:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">True</span><br><span class="line">True</span><br><span class="line">False</span><br></pre></td></tr></table></figure>
-
+<p>output: <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">True</span><br><span class="line">True</span><br><span class="line">False</span><br></pre></td></tr></table></figure></p>
 <hr>
-<h2 id="二、神经网络基础"><a href="#二、神经网络基础" class="headerlink" title="二、神经网络基础"></a>二、神经网络基础</h2><h3 id="2-1-了解神经网络结构的分类"><a href="#2-1-了解神经网络结构的分类" class="headerlink" title="2.1 了解神经网络结构的分类"></a>2.1 了解神经网络结构的分类</h3><table>
+<h2 id="二神经网络基础">二、神经网络基础</h2>
+<h3 id="了解神经网络结构的分类">2.1 了解神经网络结构的分类</h3>
+<table>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 20%">
+<col style="width: 12%">
+<col style="width: 20%">
+<col style="width: 36%">
+</colgroup>
 <thead>
 <tr>
 <th>序号</th>
 <th>网络类型</th>
 <th>简介</th>
 <th>适用场景</th>
-<th>代表模型 &#x2F; 特点</th>
+<th>代表模型 / 特点</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>1</td>
 <td>前馈神经网络（FNN）</td>
 <td>最基础的神经网络，信息单向传播，无环</td>
@@ -139,7 +234,7 @@
 <td>残差神经网络（ResNet）</td>
 <td>使用残差连接避免梯度消失</td>
 <td>深层网络训练</td>
-<td>ResNet、输出&#x3D;F(x)+x</td>
+<td>ResNet、输出=F(x)+x</td>
 </tr>
 <tr>
 <td>5</td>
@@ -148,38 +243,291 @@
 <td>社交网络、知识图谱</td>
 <td>GCN、GAT、GraphSAGE</td>
 </tr>
-</tbody></table>
-<h3 id="2-2-了解神经网络的整个过程"><a href="#2-2-了解神经网络的整个过程" class="headerlink" title="2.2 了解神经网络的整个过程"></a>2.2 了解神经网络的整个过程</h3><p>输入数据 x<br>↓<br>正向传播（Linear + 激活函数）<br>↓<br>输出结果（预测值）<br>↓<br>计算损失（Loss 与真实值比较）<br>↓<br>反向传播（链式法则求导）<br>↓<br>参数梯度更新（Optimizer）<br>↓<br>下一轮训练  </p>
+</tbody>
+</table>
+<h3 id="了解神经网络的整个过程">2.2 了解神经网络的整个过程</h3>
+<p><code>输入数据 x                    输入层有几个神经元就输入几个数据（几维）</code></p>
+<p><code>正向传播（Linear + 激活函数）  隐藏层=线性层+激活函数（模拟复杂的数据分布）</code></p>
+<p><code>输出结果（预测值）</code></p>
+<p><code>计算损失（Loss 与真实值比较）</code></p>
+<p><code>反向传播（链式法则求导）</code></p>
+<p><code>参数梯度更新（Optimizer）</code></p>
+<p><code>下一轮训练</code></p>
 <p>损失函数：计算”偏差”</p>
-<p>优化器：这个“偏差”通过损失函数计算出来，而优化器的工作，就是 通过反向传播得到的梯度，更新参数，使损失越来越小</p>
-<p>给出一个简单的前馈神经网络作为实例进行讲解</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import torch</span><br><span class="line">import torch.nn as nn</span><br><span class="line">import torch.optim as optim</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个简单的前馈神经网络，包含一个隐藏层</span></span><br><span class="line">class SimpleFNN(nn.Module):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super(SimpleFNN, self).__init__()</span><br><span class="line">        self.fc1 = nn.Linear(4, 8)   <span class="comment"># 输入层4个特征，隐藏层8个神经元</span></span><br><span class="line">        self.relu = nn.ReLU()        <span class="comment"># 激活函数</span></span><br><span class="line">        self.fc2 = nn.Linear(8, 3)   <span class="comment"># 输出层3个类别（比如3分类问题）</span></span><br><span class="line"></span><br><span class="line">    def forward(self, x):</span><br><span class="line">        x = self.fc1(x)</span><br><span class="line">        x = self.relu(x)</span><br><span class="line">        x = self.fc2(x)</span><br><span class="line">        <span class="built_in">return</span> x</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建模型</span></span><br><span class="line">model = SimpleFNN()</span><br><span class="line"><span class="built_in">print</span>(model)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 假设输入是4维特征</span></span><br><span class="line">sample_input = torch.randn(2, 4)  <span class="comment"># batch_size=2，4个特征</span></span><br><span class="line">output = model(sample_input)</span><br><span class="line"><span class="built_in">print</span>(output)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><code>__init__ </code>函数 — 网络结构的“搭建工厂”</p>
-<p>作用：<br>初始化神经网络的层和组件,相当于在这里定义好网络的“骨架”和“零件”。</p>
-<p>具体内容：</p>
+<p>优化器：这个“偏差”通过损失函数计算出来，而优化器的工作，就是
+通过反向传播得到的梯度，更新参数，使损失越来越小</p>
+<p>给出一个简单的前馈神经网络作为实例进行讲解 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import torch</span><br><span class="line">import torch.nn as nn</span><br><span class="line">import torch.optim as optim</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个简单的前馈神经网络，包含一个隐藏层</span></span><br><span class="line">class SimpleFNN(nn.Module):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super(SimpleFNN, self).__init__()</span><br><span class="line">        self.fc1 = nn.Linear(4, 8)   <span class="comment"># 输入层4个特征，隐藏层8个神经元</span></span><br><span class="line">        self.relu = nn.ReLU()        <span class="comment"># 激活函数</span></span><br><span class="line">        self.fc2 = nn.Linear(8, 3)   <span class="comment"># 输出层3个类别（比如3分类问题）</span></span><br><span class="line"></span><br><span class="line">    def forward(self, x):</span><br><span class="line">        x = self.fc1(x)</span><br><span class="line">        x = self.relu(x)</span><br><span class="line">        x = self.fc2(x)</span><br><span class="line">        <span class="built_in">return</span> x</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建模型</span></span><br><span class="line">model = SimpleFNN()</span><br><span class="line"><span class="built_in">print</span>(model)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 假设输入是4维特征</span></span><br><span class="line">sample_input = torch.randn(2, 4)  <span class="comment"># batch_size=2，4个特征</span></span><br><span class="line">output = model(sample_input)</span><br><span class="line"><span class="built_in">print</span>(output)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<code>__init__</code>函数 — 网络结构的“搭建工厂”</p>
+<p>作用：
+初始化神经网络的层和组件,相当于在这里定义好网络的“骨架”和“零件”。</p>
+<p>一般<code>_init_</code>内包含如下内容 | 类型 | 内容 | 说明 | |
+———————– | ————————————- | —————————– | | 🔷 网络层 |
+<code>nn.Linear</code>, <code>nn.Conv2d</code>, <code>nn.LSTM</code> 等
+| 定义输入层、隐藏层、输出层结构 | | 🔶 激活函数 |
+<code>nn.ReLU()</code>, <code>nn.Sigmoid()</code> 等 |
+可以作为类成员，也可以直接在 <code>forward()</code> 里用 | | 🔸 Dropout
+/ BatchNorm | <code>nn.Dropout</code>, <code>nn.BatchNorm1d</code> 等 |
+用于正则化、加速收敛 | | 🔻 有时会放优化器 / 损失函数（但不推荐） |
+<code>optim.SGD</code>, <code>nn.CrossEntropyLoss</code> |
+一般在模型外单独写更清晰 |</p>
+<p>比如在上述示例代码中的具体内容： -
+<code>super(SimpleFNN, self).__init__()</code> 调用父类 nn.Module
+的初始化方法，确保网络能正常工作和注册所有子模块。</p>
 <ul>
-<li><p><code>super(SimpleFNN, self).__init__()</code><br>调用父类 nn.Module 的初始化方法，确保网络能正常工作和注册所有子模块。</p>
-</li>
-<li><p><code>self.fc1 = nn.Linear(4, 8)</code><br>定义第一个全连接层（线性层），它接受4维输入，输出8维数据。<br>这层会学习一个 4×8 的权重矩阵和偏置向量。</p>
-</li>
-<li><p><code>self.relu = nn.ReLU()</code><br>定义了一个激活函数ReLU，增加网络的非线性表达能力。<br>这里是先定义好，可以在 forward 中调用。</p>
-</li>
-<li><p><code>self.fc2 = nn.Linear(8, 3)</code><br>定义第二个全连接层，接受8维输入，输出3维结果。<br>这常用作分类任务的输出层，输出3个类别的分数。</p>
-</li>
+<li><p><code>self.fc1 = nn.Linear(4, 8)</code>
+定义第一个全连接层（线性层），它接受4维输入，输出8维数据。
+这层会学习一个 4×8 的权重矩阵和偏置向量。</p></li>
+<li><p><code>self.relu = nn.ReLU()</code>
+定义了一个激活函数ReLU，增加网络的非线性表达能力。
+这里是先定义好，可以在 forward 中调用。</p></li>
+<li><p><code>self.fc2 = nn.Linear(8, 3)</code>
+定义第二个全连接层，接受8维输入，输出3维结果。
+这常用作分类任务的输出层，输出3个类别的分数。</p></li>
 </ul>
 <p><code>forward</code> 函数 — 数据的“运行流程”</p>
-<p>作用：<br>定义输入数据如何通过网络计算得到输出。<br>相当于网络的“运行步骤”，告诉 PyTorch 具体执行什么操作。</p>
-<p>具体流程：</p>
+<p>作用： 定义输入数据如何通过网络计算得到输出。
+相当于网络的“运行步骤”，告诉 PyTorch 具体执行什么操作。</p>
+<p>具体流程： - <code>x = self.fc1(x)</code> 输入数据 x
+先经过第一个全连接层，变成8维的向量。</p>
 <ul>
-<li><p><code>x = self.fc1(x)</code><br>输入数据 x 先经过第一个全连接层，变成8维的向量。</p>
-</li>
-<li><p><code>x = self.relu(x)</code><br>将刚得到的8维数据通过 ReLU 激活函数，增加非线性。<br>ReLU的作用是把负数变为0，正数保持不变。</p>
-</li>
-<li><p><code>x = self.fc2(x)</code><br>再把激活后的结果输入到第二个全连接层，变成3维输出。</p>
-</li>
-<li><p><code>return x</code><br>返回最终输出，通常是“分类分数”或“回归预测值”。</p>
-</li>
+<li><p><code>x = self.relu(x)</code> 将刚得到的8维数据通过 ReLU
+激活函数，增加非线性。 ReLU的作用是把负数变为0，正数保持不变。</p></li>
+<li><p><code>x = self.fc2(x)</code>
+再把激活后的结果输入到第二个全连接层，变成3维输出。</p></li>
+<li><p><code>return x</code>
+返回最终输出，通常是“分类分数”或“回归预测值”。</p></li>
 </ul>
+<h3 id="激活函数">2.3激活函数</h3>
+<table>
+<colgroup>
+<col style="width: 16%">
+<col style="width: 49%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr>
+<th>激活函数</th>
+<th>数学形式</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ReLU</strong></td>
+<td><span class="math inline"><em>f</em>(<em>x</em>) = max (0, <em>x</em>)</span></td>
+<td>简单高效，梯度传播好，但会有”死神经元”问题</td>
+</tr>
+<tr>
+<td><strong>Sigmoid</strong></td>
+<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.912ex;" xmlns="http://www.w3.org/2000/svg" width="12.761ex" height="2.869ex" role="img" focusable="false" viewBox="0 -864.9 5640.4 1267.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D453" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"></path></g><g data-mml-node="mo" transform="translate(550,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(939,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mo" transform="translate(1511,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mo" transform="translate(2177.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mfrac" transform="translate(3233.6,0)"><g data-mml-node="mn" transform="translate(1026.7,394) scale(0.707)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mrow" transform="translate(220,-345) scale(0.707)"><g data-mml-node="mn"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mo" transform="translate(500,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="msup" transform="translate(1278,0)"><g data-mml-node="mi"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="TeXAtom" transform="translate(499,289) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mo"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mi" transform="translate(778,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g></g></g><rect width="2166.9" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container></span></td>
+<td>输出在(0,1)，容易梯度消失</td>
+</tr>
+<tr>
+<td><strong>Tanh</strong></td>
+<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.912ex;" xmlns="http://www.w3.org/2000/svg" width="13.487ex" height="3.052ex" role="img" focusable="false" viewBox="0 -946.2 5961.1 1349.1"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D453" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"></path></g><g data-mml-node="mo" transform="translate(550,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(939,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mo" transform="translate(1511,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mo" transform="translate(2177.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mfrac" transform="translate(3233.6,0)"><g data-mml-node="mrow" transform="translate(220,398) scale(0.707)"><g data-mml-node="msup"><g data-mml-node="mi"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="mi" transform="translate(499,363) scale(0.707)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g><g data-mml-node="mo" transform="translate(953.5,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="msup" transform="translate(1731.5,0)"><g data-mml-node="mi"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="TeXAtom" transform="translate(499,363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mo"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mi" transform="translate(778,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g></g></g><g data-mml-node="mrow" transform="translate(220,-345) scale(0.707)"><g data-mml-node="msup"><g data-mml-node="mi"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="mi" transform="translate(499,289) scale(0.707)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g><g data-mml-node="mo" transform="translate(953.5,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="msup" transform="translate(1731.5,0)"><g data-mml-node="mi"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="TeXAtom" transform="translate(499,289) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mo"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mi" transform="translate(778,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g></g></g><rect width="2487.5" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container></span></td>
+<td>输出在(-1,1)，比Sigmoid对称，但也可能梯度消失</td>
+</tr>
+<tr>
+<td><strong>Leaky ReLU</strong></td>
+<td><span class="math inline"><em>f</em>(<em>x</em>) = max (0.01<em>x</em>, <em>x</em>)</span></td>
+<td>解决ReLU死区问题</td>
+</tr>
+<tr>
+<td><strong>ELU</strong></td>
+<td>指数线性单元</td>
+<td>更平滑的梯度流</td>
+</tr>
+</tbody>
+</table>
+<p>作用：激活函数让隐藏层拥有表达复杂模式的能力，是神经网络“聪明起来”的关键。</p>
+<h3 id="损失函数">2.4损失函数</h3>
+<table>
+<colgroup>
+<col style="width: 16%">
+<col style="width: 20%">
+<col style="width: 16%">
+<col style="width: 36%">
+<col style="width: 9%">
+<col style="width: 0%">
+</colgroup>
+<thead>
+<tr>
+<th>损失函数名称</th>
+<th>PyTorch 名称</th>
+<th>适用任务</th>
+<th>数学表达式（简略）</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>均方误差</strong>（MSE）</td>
+<td><code>nn.MSELoss()</code></td>
+<td>回归</td>
+<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.798ex;" xmlns="http://www.w3.org/2000/svg" width="12.452ex" height="2.755ex" role="img" focusable="false" viewBox="0 -864.9 5503.9 1217.7"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mn" transform="translate(255.4,394) scale(0.707)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mi" transform="translate(220,-345) scale(0.707)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><rect width="624.3" height="60" x="120" y="220"></rect></g><g data-mml-node="mo" transform="translate(1030.9,0)"><path data-c="2211" d="M61 748Q64 750 489 750H913L954 640Q965 609 976 579T993 533T999 516H979L959 517Q936 579 886 621T777 682Q724 700 655 705T436 710H319Q183 710 183 709Q186 706 348 484T511 259Q517 250 513 244L490 216Q466 188 420 134T330 27L149 -187Q149 -188 362 -188Q388 -188 436 -188T506 -189Q679 -189 778 -162T936 -43Q946 -27 959 6H999L913 -249L489 -250Q65 -250 62 -248Q56 -246 56 -239Q56 -234 118 -161Q186 -81 245 -11L428 206Q428 207 242 462L57 717L56 728Q56 744 61 748Z"></path></g><g data-mml-node="mo" transform="translate(2086.9,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(2475.9,0)"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(3188.2,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(4188.4,0)"><g data-mml-node="mover"><g data-mml-node="mi"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(300.6,16) translate(-250 0)"><path data-c="5E" d="M112 560L249 694L257 686Q387 562 387 560L361 531Q359 532 303 581L250 627L195 580Q182 569 169 557T148 538L140 532Q138 530 125 546L112 560Z"></path></g></g></g><g data-mml-node="msup" transform="translate(4678.4,0)"><g data-mml-node="mo"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mn" transform="translate(422,363) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g></g></svg></mjx-container></span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>平均绝对误差</strong>（MAE）</td>
+<td><code>nn.L1Loss()</code></td>
+<td>回归</td>
+<td>( </td>
+<td>y - </td>
+<td>)</td>
+</tr>
+<tr>
+<td><strong>Huber损失</strong></td>
+<td><code>nn.SmoothL1Loss()</code></td>
+<td>回归（鲁棒）</td>
+<td>对异常值不敏感</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>二元交叉熵</strong></td>
+<td><code>nn.BCELoss()</code></td>
+<td>二分类</td>
+<td><span class="math inline">−[<em>y</em>log <em>ŷ</em> + (1 − <em>y</em>)log (1 − <em>ŷ</em>)]</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>带 Logits 的二元交叉熵</strong></td>
+<td><code>nn.BCEWithLogitsLoss()</code></td>
+<td>二分类</td>
+<td>将 Sigmoid + BCE 合并，提高数值稳定性</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>多分类交叉熵</strong></td>
+<td><code>nn.CrossEntropyLoss()</code></td>
+<td>多分类</td>
+<td>Softmax + Log-Loss 合并</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>KL散度损失</strong></td>
+<td><code>nn.KLDivLoss()</code></td>
+<td>分布拟合</td>
+<td>衡量两个概率分布的差异</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>负对数似然</strong></td>
+<td><code>nn.NLLLoss()</code></td>
+<td>多分类（配合 <code>LogSoftmax</code>）</td>
+<td>( -P(y</td>
+<td>) )</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>CTC 损失</strong></td>
+<td><code>nn.CTCLoss()</code></td>
+<td>语音/序列对齐</td>
+<td>用于无对齐标签的序列预测</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Triplet Loss</strong></td>
+<td><code>nn.TripletMarginLoss()</code></td>
+<td>人脸识别/度量学习</td>
+<td>距离学习，正样本比负样本更近</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="优化器">2.5优化器</h3>
+<table>
+<colgroup>
+<col style="width: 21%">
+<col style="width: 37%">
+<col style="width: 21%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr>
+<th>优化器名称</th>
+<th>PyTorch 类</th>
+<th>特点</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SGD（随机梯度下降）</strong></td>
+<td><code>torch.optim.SGD</code></td>
+<td>最基础的优化器</td>
+<td>可搭配 Momentum 使用</td>
+</tr>
+<tr>
+<td><strong>SGD + Momentum</strong></td>
+<td><code>torch.optim.SGD(momentum=0.9)</code></td>
+<td>缓冲梯度方向，减少震荡</td>
+<td>比单纯 SGD 更快收敛</td>
+</tr>
+<tr>
+<td><strong>Adagrad</strong></td>
+<td><code>torch.optim.Adagrad</code></td>
+<td>对稀疏梯度参数有优势</td>
+<td>可能学习率过早变小</td>
+</tr>
+<tr>
+<td><strong>RMSprop</strong></td>
+<td><code>torch.optim.RMSprop</code></td>
+<td>控制学习率衰减</td>
+<td>推荐用于 RNN</td>
+</tr>
+<tr>
+<td><strong>Adam</strong></td>
+<td><code>torch.optim.Adam</code></td>
+<td>自适应 + 动量</td>
+<td>最常用优化器之一</td>
+</tr>
+<tr>
+<td><strong>AdamW</strong></td>
+<td><code>torch.optim.AdamW</code></td>
+<td>改进的 Adam，加权衰减更科学</td>
+<td>推荐用于 Transformer</td>
+</tr>
+<tr>
+<td><strong>Adadelta</strong></td>
+<td><code>torch.optim.Adadelta</code></td>
+<td>改进 Adagrad，避免学习率消失</td>
+<td>少用但可选</td>
+</tr>
+<tr>
+<td><strong>NAdam</strong></td>
+<td><code>torch.optim.NAdam</code></td>
+<td>Adam + Nesterov 动量</td>
+<td>更快的收敛性</td>
+</tr>
+<tr>
+<td><strong>RAdam</strong></td>
+<td><code>torch.optim.RAdam</code></td>
+<td>修正初始训练阶段不稳定</td>
+<td>更鲁棒于训练初期</td>
+</tr>
+<tr>
+<td><strong>LAMB</strong></td>
+<td>无官方支持（用 HuggingFace 优化器）</td>
+<td>大模型（如 BERT）适用</td>
+<td>用于大 batch 训练</td>
+</tr>
+<tr>
+<td><strong>AdaBelief</strong></td>
+<td>第三方库</td>
+<td>改进 Adam，使更新更像 SGD</td>
+<td>收敛快 + 泛化强</td>
+</tr>
+</tbody>
+</table>
 ]]></content>
       <categories>
         <category>code</category>
@@ -194,67 +542,75 @@
     <title>Git 基本使用教程</title>
     <url>/2025/07/25/git-basic-usage/</url>
     <content><![CDATA[<blockquote>
-<p>Git 是一个分布式版本控制系统，适用于代码版本管理与团队协作开发。本文将简要介绍 Git 的一些常用操作命令，包括创建仓库、分支管理以及删除文件&#x2F;分支的方法。</p>
+<p>Git
+是一个分布式版本控制系统，适用于代码版本管理与团队协作开发。本文将简要介绍
+Git
+的一些常用操作命令，包括创建仓库、分支管理以及删除文件/分支的方法。</p>
 </blockquote>
-<hr>
-<h2 id="一、初始化仓库"><a href="#一、初始化仓库" class="headerlink" title="一、初始化仓库"></a>一、初始化仓库</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
-
+<hr />
+<h2 id="一初始化仓库">一、初始化仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
 <ul>
 <li>在当前目录初始化一个 Git 仓库。</li>
 <li>会创建 <code>.git</code> 文件夹作为版本控制目录。</li>
 </ul>
-<hr>
-<h2 id="二、克隆远程仓库"><a href="#二、克隆远程仓库" class="headerlink" title="二、克隆远程仓库"></a>二、克隆远程仓库</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;仓库地址&gt;</span><br><span class="line">```****</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/username/repo.git</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="三、添加与提交文件"><a href="#三、添加与提交文件" class="headerlink" title="三、添加与提交文件"></a>三、添加与提交文件</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add &lt;文件或目录&gt;</span><br><span class="line">git commit -m <span class="string">&quot;提交说明&quot;</span></span><br></pre></td></tr></table></figure>
-
+<hr />
+<h2 id="二克隆远程仓库">二、克隆远程仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;仓库地址&gt;</span><br><span class="line">```****</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/username/repo.git</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="三添加与提交文件">三、添加与提交文件</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add &lt;文件或目录&gt;</span><br><span class="line">git commit -m <span class="string">&quot;提交说明&quot;</span></span><br></pre></td></tr></table></figure>
 <p>示例：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;添加初始项目文件&quot;</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="四、查看状态与历史"><a href="#四、查看状态与历史" class="headerlink" title="四、查看状态与历史"></a>四、查看状态与历史</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status        <span class="comment"># 查看当前状态</span></span><br><span class="line">git <span class="built_in">log</span>           <span class="comment"># 查看提交历史</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="五、分支操作"><a href="#五、分支操作" class="headerlink" title="五、分支操作"></a>五、分支操作</h2><h3 id="创建新分支"><a href="#创建新分支" class="headerlink" title="创建新分支"></a>创建新分支</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch &lt;分支名&gt;</span><br><span class="line"><span class="comment"># 或（旧写法）</span></span><br><span class="line">git checkout &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="创建并切换新分支"><a href="#创建并切换新分支" class="headerlink" title="创建并切换新分支"></a>创建并切换新分支</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch -c &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="查看所有分支"><a href="#查看所有分支" class="headerlink" title="查看所有分支"></a>查看所有分支</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="六、合并分支"><a href="#六、合并分支" class="headerlink" title="六、合并分支"></a>六、合并分支</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git merge &lt;被合并的分支&gt;</span><br></pre></td></tr></table></figure>
-
+<hr />
+<h2 id="四查看状态与历史">四、查看状态与历史</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status        <span class="comment"># 查看当前状态</span></span><br><span class="line">git <span class="built_in">log</span>           <span class="comment"># 查看提交历史</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="五分支操作">五、分支操作</h2>
+<h3 id="创建新分支">创建新分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="切换分支">切换分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch &lt;分支名&gt;</span><br><span class="line"><span class="comment"># 或（旧写法）</span></span><br><span class="line">git checkout &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="创建并切换新分支">创建并切换新分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch -c &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="查看所有分支">查看所有分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="六合并分支">六、合并分支</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git merge &lt;被合并的分支&gt;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>注意：需要先切换到目标分支，再合并。</p>
 </blockquote>
-<hr>
-<h2 id="七、删除操作"><a href="#七、删除操作" class="headerlink" title="七、删除操作"></a>七、删除操作</h2><h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">rm</span> &lt;文件名&gt;</span><br><span class="line">git commit -m <span class="string">&quot;删除了某个文件&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="撤销删除（误删恢复）"><a href="#撤销删除（误删恢复）" class="headerlink" title="撤销删除（误删恢复）"></a>撤销删除（误删恢复）</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -- &lt;文件名&gt;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="删除本地分支"><a href="#删除本地分支" class="headerlink" title="删除本地分支"></a>删除本地分支</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -d &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-
+<hr />
+<h2 id="七删除操作">七、删除操作</h2>
+<h3 id="删除文件">删除文件</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">rm</span> &lt;文件名&gt;</span><br><span class="line">git commit -m <span class="string">&quot;删除了某个文件&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="撤销删除误删恢复">撤销删除（误删恢复）</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -- &lt;文件名&gt;</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="删除本地分支">删除本地分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -d &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>-d</code> 是安全删除（合并过的才允许删）</li>
 <li><code>-D</code> 是强制删除（无论是否合并）</li>
 </ul>
-<h3 id="删除远程分支"><a href="#删除远程分支" class="headerlink" title="删除远程分支"></a>删除远程分支</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin --delete &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="八、推送与拉取"><a href="#八、推送与拉取" class="headerlink" title="八、推送与拉取"></a>八、推送与拉取</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin &lt;分支名&gt;   <span class="comment"># 推送到远程</span></span><br><span class="line">git pull origin &lt;分支名&gt;   <span class="comment"># 拉取最新代码</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="九、查看远程仓库"><a href="#九、查看远程仓库" class="headerlink" title="九、查看远程仓库"></a>九、查看远程仓库</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="十、总结"><a href="#十、总结" class="headerlink" title="十、总结"></a>十、总结</h2><p>Git 是开发者日常工作中不可或缺的工具，掌握它可以大大提升协作效率与版本管理能力。希望本文能帮助你快速上手 Git 的基本操作。</p>
-<hr>
+<h3 id="删除远程分支">删除远程分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin --delete &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="八推送与拉取">八、推送与拉取</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin &lt;分支名&gt;   <span class="comment"># 推送到远程</span></span><br><span class="line">git pull origin &lt;分支名&gt;   <span class="comment"># 拉取最新代码</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="九查看远程仓库">九、查看远程仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="十总结">十、总结</h2>
+<p>Git
+是开发者日常工作中不可或缺的工具，掌握它可以大大提升协作效率与版本管理能力。希望本文能帮助你快速上手
+Git 的基本操作。</p>
+<hr />
 <blockquote>
-<p>如需进一步学习，可以参考 <a href="https://git-scm.com/book/zh/v2">Pro Git 中文版</a>。</p>
+<p>如需进一步学习，可以参考 <a href="https://git-scm.com/book/zh/v2">Pro
+Git 中文版</a>。</p>
 </blockquote>
 ]]></content>
       <categories>
@@ -264,56 +620,6 @@
         <tag>learn</tag>
         <tag>repo</tag>
         <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker 基本使用教程</title>
-    <url>/2025/07/26/docker-basic-usage/</url>
-    <content><![CDATA[<blockquote>
-<p>Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。</p>
-</blockquote>
-<hr>
-<h2 id="一、Docker的用途"><a href="#一、Docker的用途" class="headerlink" title="一、Docker的用途"></a>一、Docker的用途</h2><p>Docker 的主要用途，目前有三大类。</p>
-<ol>
-<li><p>提供一次性的环境。比如，本地测试他人的软件、持续集成的时候提供单元测试和构建的环境。</p>
-</li>
-<li><p>提供弹性的云服务。因为 Docker 容器可以随开随关，很适合动态扩容和缩容。</p>
-</li>
-<li><p>组建微服务架构。通过多个容器，一台机器可以跑多个服务，因此在本机就可以模拟出微服务架构。</p>
-</li>
-</ol>
-<hr>
-<h2 id="二、验证是否安装成功"><a href="#二、验证是否安装成功" class="headerlink" title="二、验证是否安装成功"></a>二、验证是否安装成功</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="三、Image文件"><a href="#三、Image文件" class="headerlink" title="三、Image文件"></a>三、Image文件</h2><p>Docker 把应用程序及其依赖，打包在 <strong>image 文件</strong>里面。只有通过这个文件，才能生成 Docker 容器。<br>image 文件可以看作是容器的模板，Docker 根据 image 文件生成容器的实例。<br>同一个 image 文件，可以生成多个同时运行的容器实例。</p>
-<p>image 是一个 <strong>二进制文件</strong>。实际开发中，一个 image 文件往往通过继承另一个 image 文件，加上一些个性化设置而生成。<br>举例来说，你可以在 Ubuntu 的 image 基础上，往里面加入 Apache 服务器，形成你自己的 image。</p>
-<h3 id="📋-列出本机的所有-image-文件"><a href="#📋-列出本机的所有-image-文件" class="headerlink" title="📋 列出本机的所有 image 文件"></a>📋 列出本机的所有 image 文件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker image <span class="built_in">ls</span></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 🗑️ 删除 image 文件</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">$ docker image <span class="built_in">rm</span> [imageName]</span><br></pre></td></tr></table></figure>
-
-<p>image 文件是通用的，一台机器的 image 文件拷贝到另一台机器，照样可以使用。</p>
-<p>一般来说，为了节省时间，我们应该尽量使用别人制作好的 image 文件，而不是自己制作。<br>即使要定制，也应该基于别人的 image 文件进行加工，而不是从零开始制作。</p>
-<h3 id="🗂️-镜像仓库（Image-Repository）"><a href="#🗂️-镜像仓库（Image-Repository）" class="headerlink" title="🗂️ 镜像仓库（Image Repository）"></a>🗂️ 镜像仓库（Image Repository）</h3><p>为了方便共享，image 文件制作完成后，可以上传到网上的仓库。</p>
-<ul>
-<li>Docker 的官方仓库 <strong>Docker Hub</strong> 是最重要、最常用的 image 仓库。</li>
-<li>此外，你也可以使用国内的镜像仓库（如阿里云、腾讯云）或者搭建私有仓库。</li>
-<li>出售自己制作的 image 文件也是可以的。</li>
-</ul>
-<h3 id="image-container"><a href="#image-container" class="headerlink" title="image&amp;&amp;container"></a>image&amp;&amp;container</h3><p>容器是镜像跑起来的实例，一个镜像可以有多个容器</p>
-<hr>
-<h2 id="四、如何跑起来呢"><a href="#四、如何跑起来呢" class="headerlink" title="四、如何跑起来呢"></a>四、如何跑起来呢</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker image pull &lt;project&gt;       <span class="comment">#将image文件从仓库抓取到本地</span></span><br><span class="line">docker container run &lt;project&gt;    <span class="comment">#将image文件在你的电脑上跑起来，新建容器</span></span><br><span class="line">docker container start [ID]       <span class="comment">#将已有的容器跑起来</span></span><br><span class="line">docker container <span class="built_in">kill</span> [ID]        <span class="comment">#手动终止容器的运行</span></span><br><span class="line">docker container <span class="built_in">ls</span>               <span class="comment">#在你电脑上正在跑起来的容器</span></span><br><span class="line">docker container <span class="built_in">ls</span> -all          <span class="comment">#列出本机所有容器，包括终止运行的容器</span></span><br><span class="line">docker container <span class="built_in">rm</span> [containerID] <span class="comment">#删除停止运行的容器，防止占用硬盘空间</span></span><br></pre></td></tr></table></figure>
-
-<p>注意，docker container run命令具有自动抓取 image 文件的功能。如果发现本地没有指定的 image 文件，就会从仓库自动抓取。因此，前面的docker image pull命令并不是必需的步骤。</p>
-<hr>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>learn</tag>
-        <tag>container</tag>
-        <tag>docker</tag>
-        <tag>linux</tag>
-        <tag>virtual</tag>
       </tags>
   </entry>
 </search>

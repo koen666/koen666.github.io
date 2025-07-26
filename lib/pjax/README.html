@@ -1,562 +1,778 @@
-<h1 align="center"><a href="https://github.com/MoOx/pjax">PJAX</a> for <a href="https://github.com/theme-next">NexT</a></h1>
-
-<h1 align="center">Installation</h1>
-
-<h2>If you want to use the CDN instead of clone this repo, please jump to the Step 3.</h2>
-
-<h2 align="center">Step 1 &rarr; Go to NexT dir</h2>
-
-<p>Change dir to <strong>NexT</strong> directory. There must be <code>layout</code>, <code>source</code>, <code>languages</code> and other directories:</p>
-<pre><code class="language-sh">$ cd themes/next
-$ ls
-_config.yml  crowdin.yml  docs  gulpfile.js  languages  layout  LICENSE.md  package.json  README.md  scripts  source
-</code></pre>
-<h2 align="center">Step 2 &rarr; Get module</h2>
-
+<h1 align="center">
+<a href="https://github.com/MoOx/pjax">PJAX</a> for
+<a href="https://github.com/theme-next">NexT</a>
+</h1>
+<h1 align="center">
+Installation
+</h1>
+<h2>
+If you want to use the CDN instead of clone this repo, please jump to
+the Step 3.
+</h2>
+<h2 align="center">
+Step 1 → Go to NexT dir
+</h2>
+<p>Change dir to <strong>NexT</strong> directory. There must be
+<code>layout</code>, <code>source</code>, <code>languages</code> and
+other directories:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd themes/next</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">_config.yml</span>  crowdin.yml  docs  gulpfile.js  languages  layout  LICENSE.md  package.json  README.md  scripts  source</span></code></pre></div>
+<h2 align="center">
+Step 2 → Get module
+</h2>
 <p>Install module to <code>source/lib</code> directory:</p>
-<pre><code class="language-sh">$ git clone https://github.com/theme-next/theme-next-pjax source/lib/pjax
-</code></pre>
-<h2 align="center">Step 3 &rarr; Set it up</h2>
-
-<p>Enable module in <strong>NexT</strong> <code>_config.yml</code> file and select your theme:</p>
-<pre><code class="language-yml">pjax: true
-</code></pre>
-<p><strong>And, if you wants to use the CDN, then need to set:</strong> (you also need to find your corresponding theme css link in <a href="https://www.jsdelivr.com/package/npm/pjax-js?path=themes">jsdelivr</a>)</p>
-<pre><code class="language-yml">vendors:
-  ...
-  pjax: //cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js
-</code></pre>
-<h1 align="center">Update</h1>
-
-<pre><code class="language-sh">$ cd themes/next/source/lib/pjax
-$ git pull
-</code></pre>
-<h1 id="Pjax"><a href="#Pjax" class="headerlink" title="Pjax"></a>Pjax</h1><p><a href="https://travis-ci.org/MoOx/pjax"><img src="https://img.shields.io/travis/MoOx/pjax.svg" alt="Build Status"></a>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git clone https://github.com/theme-next/theme-next-pjax source/lib/pjax</span></code></pre></div>
+<h2 align="center">
+Step 3 → Set it up
+</h2>
+<p>Enable module in <strong>NexT</strong> <code>_config.yml</code> file
+and select your theme:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode yml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pjax</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
+<p><strong>And, if you wants to use the CDN, then need to set:</strong>
+(you also need to find your corresponding theme css link in
+<a href="https://www.jsdelivr.com/package/npm/pjax-js?path=themes">jsdelivr</a>)</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode yml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vendors</span><span class="kw">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  ...</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pjax</span><span class="kw">:</span><span class="at"> //cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js</span></span></code></pre></div>
+<h1 align="center">
+Update
+</h1>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd themes/next/source/lib/pjax</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git pull</span></code></pre></div>
+<h1 id="pjax">Pjax</h1>
+<p><a href="https://travis-ci.org/MoOx/pjax"><img
+src="https://img.shields.io/travis/MoOx/pjax.svg"
+alt="Build Status" /></a>.</p>
 <blockquote>
-<p>Easily enable fast AJAX navigation on any website (using pushState() + XHR)</p>
+<p>Easily enable fast AJAX navigation on any website (using pushState()
++ XHR)</p>
 </blockquote>
-<p>Pjax is <strong>a standalone JavaScript module</strong> that uses <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX">AJAX</a> (XmlHttpRequest) and <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history">pushState()</a> to deliver a fast browsing experience.</p>
-<p><em>It allows you to completely transform the user experience of standard websites (server-side generated or static ones) to make users feel like they are browsing an app, especially for those with low bandwidth connections.</em></p>
-<p><strong>No more full page reloads. No more multiple HTTP requests.</strong></p>
-<p><em>Pjax does not rely on other libraries, like jQuery or similar. It is written entirely in vanilla JS.</em></p>
-<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><ul>
-<li><p>You can link directly to the <a href="https://cdn.jsdelivr.net/npm/pjax/pjax.js">bundle</a>:</p>
-<pre><code class="language-html">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/pjax@VERSION/pjax.js&quot;&gt;&lt;/script&gt;
-</code></pre>
-</li>
-<li><p>Or the <a href="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js">minified bundle</a>:</p>
-<pre><code class="language-html">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/pjax@VERSION/pjax.min.js&quot;&gt;&lt;/script&gt;
-</code></pre>
-</li>
+<p>Pjax is <strong>a standalone JavaScript module</strong> that uses <a
+href="https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX">AJAX</a>
+(XmlHttpRequest) and <a
+href="https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history">pushState()</a>
+to deliver a fast browsing experience.</p>
+<p><em>It allows you to completely transform the user experience of
+standard websites (server-side generated or static ones) to make users
+feel like they are browsing an app, especially for those with low
+bandwidth connections.</em></p>
+<p><strong>No more full page reloads. No more multiple HTTP
+requests.</strong></p>
+<p><em>Pjax does not rely on other libraries, like jQuery or similar. It
+is written entirely in vanilla JS.</em></p>
+<h2 id="installation">Installation</h2>
+<ul>
+<li><p>You can link directly to the <a
+href="https://cdn.jsdelivr.net/npm/pjax/pjax.js">bundle</a>:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> src</span><span class="op">=</span><span class="st">&quot;https://cdn.jsdelivr.net/npm/pjax@VERSION/pjax.js&quot;</span><span class="dt">&gt;&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span></code></pre></div></li>
+<li><p>Or the <a
+href="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js">minified
+bundle</a>:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> src</span><span class="op">=</span><span class="st">&quot;https://cdn.jsdelivr.net/npm/pjax@VERSION/pjax.min.js&quot;</span><span class="dt">&gt;&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span></code></pre></div></li>
 <li><p>You can also install Pjax from <strong>npm</strong>:</p>
-<pre><code class="language-shell">npm install pjax
-</code></pre>
-<p><strong>Note</strong>: If you use this option, you will need to do one of the following:</p>
+<pre class="shell"><code>npm install pjax</code></pre>
+<p><strong>Note</strong>: If you use this option, you will need to do
+one of the following:</p>
 <ul>
-<li>Link a script tag to either <code>pjax.js</code> or <code>pjax.min.js</code>. E.g.:</li>
+<li>Link a script tag to either <code>pjax.js</code> or
+<code>pjax.min.js</code>. E.g.:</li>
 </ul>
-<pre><code class="language-html">&lt;script src=&quot;./node_modules/pjax/pjax.js&quot;&gt;&lt;/script&gt;
-</code></pre>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> src</span><span class="op">=</span><span class="st">&quot;./node_modules/pjax/pjax.js&quot;</span><span class="dt">&gt;&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span></code></pre></div>
 <ul>
-<li>Use a bundler like Webpack. (<code>index.js</code> cannot be used in the browser without a bundler).</li>
-</ul>
-</li>
-<li><p>Or you can clone the repo and build the bundle from the source using npm:</p>
-<pre><code class="language-shell">git clone https://github.com/MoOx/pjax.git
+<li>Use a bundler like Webpack. (<code>index.js</code> cannot be used in
+the browser without a bundler).</li>
+</ul></li>
+<li><p>Or you can clone the repo and build the bundle from the source
+using npm:</p>
+<pre class="shell"><code>git clone https://github.com/MoOx/pjax.git
 cd pjax
 npm install
-npm run build
-</code></pre>
-<p>and then link a script tag to either <code>pjax.js</code> or <code>pjax.min.js</code>. E.g.:</p>
-<pre><code class="language-html">&lt;script src=&quot;./pjax.min.js&quot;&gt;&lt;/script&gt;
-</code></pre>
-</li>
+npm run build</code></pre>
+<p>and then link a script tag to either <code>pjax.js</code> or
+<code>pjax.min.js</code>. E.g.:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> src</span><span class="op">=</span><span class="st">&quot;./pjax.min.js&quot;</span><span class="dt">&gt;&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span></code></pre></div></li>
 </ul>
-<hr>
-<h2 id="What-Pjax-Does"><a href="#What-Pjax-Does" class="headerlink" title="What Pjax Does"></a>What Pjax Does</h2><p><em>Under the hood, it’s just ONE HTTP request with a <code>pushState()</code> call.</em></p>
-<p>Pjax loads pages using AJAX and updates the browser’s current URL using <code>pushState()</code> <em>without</em> reloading your page’s layout or any resources (JS, CSS), giving a fast page load.</p>
-<p>It works with all permalinks and can update all the parts of the page you want (including HTML metas, title, and navigation state).</p>
-<p>In the case of <a href="http://caniuse.com/#search=pushstate">browsers that don’t support <code>history.pushState()</code></a>, Pjax gracefully degrades and does not do anything at all.</p>
+<hr />
+<h2 id="what-pjax-does">What Pjax Does</h2>
+<p><em>Under the hood, it’s just ONE HTTP request with a
+<code>pushState()</code> call.</em></p>
+<p>Pjax loads pages using AJAX and updates the browser’s current URL
+using <code>pushState()</code> <em>without</em> reloading your page’s
+layout or any resources (JS, CSS), giving a fast page load.</p>
+<p>It works with all permalinks and can update all the parts of the page
+you want (including HTML metas, title, and navigation state).</p>
+<p>In the case of <a
+href="http://caniuse.com/#search=pushstate">browsers that don’t support
+<code>history.pushState()</code></a>, Pjax gracefully degrades and does
+not do anything at all.</p>
 <p>Additionally, Pjax:</p>
 <ul>
 <li>Is not limited to one container, like jQuery-Pjax is.</li>
 <li>Fully supports browser history (back and forward buttons).</li>
 <li>Supports keyboard browsing.</li>
-<li>Automatically falls back to standard navigation for external pages (thanks to Captain Obvious’s help).</li>
-<li>Automatically falls back to standard navigation for internal pages that do not have an appropriate DOM tree.</li>
+<li>Automatically falls back to standard navigation for external pages
+(thanks to Captain Obvious’s help).</li>
+<li>Automatically falls back to standard navigation for internal pages
+that do not have an appropriate DOM tree.</li>
 <li>Allows for CSS transitions (animations) very easily.</li>
 <li>Is only around 6kb (minified and gzipped).</li>
 </ul>
-<h2 id="How-Pjax-Works"><a href="#How-Pjax-Works" class="headerlink" title="How Pjax Works"></a>How Pjax Works</h2><ul>
-<li>It listens to every click on links <em>you want</em> (by default all of them).</li>
-<li>When an internal link is clicked, Pjax fetches the page’s HTML via AJAX.</li>
-<li>Pjax renders the page’s DOM tree (without loading any resources - images, CSS, JS, etc).</li>
-<li>It checks that all defined parts can be replaced:<ul>
-<li>If the page doesn’t meet the requirements, standard navigation is used.</li>
-<li>If the page meets the requirements, Pjax does all defined DOM replacements.</li>
+<h2 id="how-pjax-works">How Pjax Works</h2>
+<ul>
+<li>It listens to every click on links <em>you want</em> (by default all
+of them).</li>
+<li>When an internal link is clicked, Pjax fetches the page’s HTML via
+AJAX.</li>
+<li>Pjax renders the page’s DOM tree (without loading any resources -
+images, CSS, JS, etc).</li>
+<li>It checks that all defined parts can be replaced:
+<ul>
+<li>If the page doesn’t meet the requirements, standard navigation is
+used.</li>
+<li>If the page meets the requirements, Pjax does all defined DOM
+replacements.</li>
+</ul></li>
+<li>Then it updates the browser’s current URL using
+<code>pushState()</code>.</li>
 </ul>
-</li>
-<li>Then it updates the browser’s current URL using <code>pushState()</code>.</li>
-</ul>
-<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p><em>Pjax is fully automatic</em>. You don’t need to change anything about your existing HTML,<br>you just need to designate which elements on your page that you want to be replaced when your site is navigated.</p>
+<h2 id="overview">Overview</h2>
+<p><em>Pjax is fully automatic</em>. You don’t need to change anything
+about your existing HTML, you just need to designate which elements on
+your page that you want to be replaced when your site is navigated.</p>
 <p>Consider the following page.</p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;!-- metas, title, styles, etc --&gt;
-  &lt;title&gt;My Cool Blog&lt;/title&gt;
-  &lt;meta name=&quot;description&quot; content=&quot;Welcome to My Cool Blog&quot;&gt;
-  &lt;link href=&quot;/styles.css&quot; rel=&quot;stylesheet&quot;&gt;
-&lt;/head&gt;
-
-&lt;body&gt;
-  &lt;header class=&quot;the-header&quot;&gt;
-    &lt;nav&gt;
-      &lt;a href=&quot;/&quot; class=&quot;is-active&quot;&gt;Home&lt;/a&gt;
-      &lt;a href=&quot;/about&quot;&gt;About&lt;/a&gt;
-      &lt;a href=&quot;/contact&quot;&gt;Contact&lt;/a&gt;
-    &lt;/nav&gt;
-  &lt;/header&gt;
-
-  &lt;section class=&quot;the-content&quot;&gt;
-    &lt;h1&gt;My Cool Blog&lt;/h1&gt;
-    &lt;p&gt;
-      Thanks for stopping by!
-
-      &lt;a href=&quot;/about&quot;&gt;Click Here to find out more about me.&lt;/a&gt;
-    &lt;/p&gt;
-  &lt;/section&gt;
-
-  &lt;aside class=&quot;the-sidebar&quot;&gt;
-    &lt;h3&gt;Recent Posts&lt;/h3&gt;
-    &lt;!-- sidebar content --&gt;
-  &lt;/aside&gt;
-
-  &lt;footer class=&quot;the-footer&quot;&gt;
-    &amp;copy; My Cool Blog
-  &lt;/footer&gt;
-
-  &lt;script src=&quot;onDomReadystuff.js&quot;&gt;&lt;/script&gt;
-  &lt;script&gt;
-    // analytics
-  &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<p>We want Pjax to intercept the URL <code>/about</code>, and replace <code>.the-content</code> with the resulting content of the request.</p>
-<p>It would also be nice if we could replace the <code>&lt;nav&gt;</code> to show that the <code>/about</code> link is active, as well as update our page meta and the <code>&lt;aside&gt;</code> sidebar.</p>
-<p>So all in all we want to update the page title and meta, header, content area, and sidebar, <strong>without reloading styles or scripts</strong>.</p>
-<p>We can easily do this by telling Pjax to listen on all <code>a</code> tags (which is the default) and use CSS selectors defined above (without forgetting minimal meta):</p>
-<pre><code class="language-javascript">var pjax = new Pjax({
-  selectors: [
-    &quot;title&quot;,
-    &quot;meta[name=description]&quot;,
-    &quot;.the-header&quot;,
-    &quot;.the-content&quot;,
-    &quot;.the-sidebar&quot;,
-  ]
-})
-</code></pre>
-<p>Now, when someone in a Pjax-compatible browser clicks an internal link on the page, the content of each of the selectors will be replaced with the specific content pieces found in the next page’s content.</p>
-<p><em>Magic! For real!</em> <strong>There is no need to do anything server-side!</strong></p>
-<h2 id="Differences-with-jQuery-pjax"><a href="#Differences-with-jQuery-pjax" class="headerlink" title="Differences with jQuery-pjax"></a>Differences with <a href="https://github.com/defunkt/jquery-pjax">jQuery-pjax</a></h2><ul>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="dt">&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- metas, title, styles, etc --&gt;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>My Cool Blog<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;description&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;Welcome to My Cool Blog&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/styles.css&quot;</span><span class="ot"> rel</span><span class="op">=</span><span class="st">&quot;stylesheet&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">header</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;the-header&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">nav</span><span class="dt">&gt;</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/&quot;</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;is-active&quot;</span><span class="dt">&gt;</span>Home<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/about&quot;</span><span class="dt">&gt;</span>About<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/contact&quot;</span><span class="dt">&gt;</span>Contact<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">nav</span><span class="dt">&gt;</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">header</span><span class="dt">&gt;</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">section</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;the-content&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>My Cool Blog<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>      Thanks for stopping by!</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/about&quot;</span><span class="dt">&gt;</span>Click Here to find out more about me.<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">section</span><span class="dt">&gt;</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">aside</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;the-sidebar&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h3</span><span class="dt">&gt;</span>Recent Posts<span class="dt">&lt;/</span><span class="kw">h3</span><span class="dt">&gt;</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>    <span class="co">&lt;!-- sidebar content --&gt;</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">aside</span><span class="dt">&gt;</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">footer</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;the-footer&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>    <span class="dv">&amp;copy;</span> My Cool Blog</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">footer</span><span class="dt">&gt;</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> src</span><span class="op">=</span><span class="st">&quot;onDomReadystuff.js&quot;</span><span class="dt">&gt;&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">// analytics</span></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div>
+<p>We want Pjax to intercept the URL <code>/about</code>, and replace
+<code>.the-content</code> with the resulting content of the request.</p>
+<p>It would also be nice if we could replace the
+<code>&lt;nav&gt;</code> to show that the <code>/about</code> link is
+active, as well as update our page meta and the
+<code>&lt;aside&gt;</code> sidebar.</p>
+<p>So all in all we want to update the page title and meta, header,
+content area, and sidebar, <strong>without reloading styles or
+scripts</strong>.</p>
+<p>We can easily do this by telling Pjax to listen on all <code>a</code>
+tags (which is the default) and use CSS selectors defined above (without
+forgetting minimal meta):</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> pjax <span class="op">=</span> <span class="kw">new</span> <span class="fu">Pjax</span>({</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">selectors</span><span class="op">:</span> [</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;title&quot;</span><span class="op">,</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;meta[name=description]&quot;</span><span class="op">,</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;.the-header&quot;</span><span class="op">,</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;.the-content&quot;</span><span class="op">,</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;.the-sidebar&quot;</span><span class="op">,</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<p>Now, when someone in a Pjax-compatible browser clicks an internal
+link on the page, the content of each of the selectors will be replaced
+with the specific content pieces found in the next page’s content.</p>
+<p><em>Magic! For real!</em> <strong>There is no need to do anything
+server-side!</strong></p>
+<h2 id="differences-with-jquery-pjax">Differences with <a
+href="https://github.com/defunkt/jquery-pjax">jQuery-pjax</a></h2>
+<ul>
 <li>No jQuery dependency.</li>
 <li>Not limited to a container.</li>
 <li>No server-side requirements.</li>
-<li>Works for CommonJS environment (Webpack&#x2F;Browserify), AMD (RequireJS) or even globally.</li>
+<li>Works for CommonJS environment (Webpack/Browserify), AMD (RequireJS)
+or even globally.</li>
 <li>Allows page transitions with CSS animations.</li>
-<li>Can be easily tweaked, since every method is public (and as a result, overridable).</li>
+<li>Can be easily tweaked, since every method is public (and as a
+result, overridable).</li>
 </ul>
-<h2 id="Compatibility"><a href="#Compatibility" class="headerlink" title="Compatibility"></a>Compatibility</h2><p>Pjax only works with <a href="http://caniuse.com/#search=pushstate">browsers that support the <code>history.pushState()</code> API</a>. When the API isn’t supported, Pjax goes into fallback mode (and it just does nothing).</p>
-<p>To see if Pjax is actually supported by your browser, use <code>Pjax.isSupported()</code>.</p>
-<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><h3 id="new-Pjax"><a href="#new-Pjax" class="headerlink" title="new Pjax()"></a><code>new Pjax()</code></h3><p>Let’s talk more about the most basic way to get started.</p>
-<p>When instantiating <code>Pjax</code>, you can pass options into the constructor as an object:</p>
-<pre><code class="language-js">var pjax = new Pjax({
-  elements: &quot;a&quot;, // default is &quot;a[href], form[action]&quot;
-  selectors: [&quot;title&quot;, &quot;.the-header&quot;, &quot;.the-content&quot;, &quot;.the-sidebar&quot;]
-})
-</code></pre>
-<p>This will enable Pjax on all links, and designate the part to replace using CSS selectors <code>&quot;title&quot;, &quot;.the-header&quot;, &quot;.the-content&quot;, &quot;.the-sidebar&quot;</code>.</p>
-<p>In some cases, you might want to only target some specific elements to apply Pjax behavior. In that case, you can do two different things:</p>
-<ol>
-<li>Use a custom CSS selector( such as <code>&quot;a.js-Pjax&quot;</code> or <code>&quot;.js-Pjax a&quot;</code>, etc).</li>
-<li>Override <code>Pjax.prototype.getElements</code>.<ul>
-<li><strong>Note</strong>: If doing this, make sure to return a <code>NodeList</code>.</li>
-</ul>
-</li>
+<h2 id="compatibility">Compatibility</h2>
+<p>Pjax only works with <a
+href="http://caniuse.com/#search=pushstate">browsers that support the
+<code>history.pushState()</code> API</a>. When the API isn’t supported,
+Pjax goes into fallback mode (and it just does nothing).</p>
+<p>To see if Pjax is actually supported by your browser, use
+<code>Pjax.isSupported()</code>.</p>
+<h2 id="usage">Usage</h2>
+<h3 id="new-pjax"><code>new Pjax()</code></h3>
+<p>Let’s talk more about the most basic way to get started.</p>
+<p>When instantiating <code>Pjax</code>, you can pass options into the
+constructor as an object:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode js"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> pjax <span class="op">=</span> <span class="kw">new</span> <span class="fu">Pjax</span>({</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">elements</span><span class="op">:</span> <span class="st">&quot;a&quot;</span><span class="op">,</span> <span class="co">// default is &quot;a[href], form[action]&quot;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">selectors</span><span class="op">:</span> [<span class="st">&quot;title&quot;</span><span class="op">,</span> <span class="st">&quot;.the-header&quot;</span><span class="op">,</span> <span class="st">&quot;.the-content&quot;</span><span class="op">,</span> <span class="st">&quot;.the-sidebar&quot;</span>]</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<p>This will enable Pjax on all links, and designate the part to replace
+using CSS selectors
+<code>"title", ".the-header", ".the-content", ".the-sidebar"</code>.</p>
+<p>In some cases, you might want to only target some specific elements
+to apply Pjax behavior. In that case, you can do two different
+things:</p>
+<ol type="1">
+<li>Use a custom CSS selector( such as <code>"a.js-Pjax"</code> or
+<code>".js-Pjax a"</code>, etc).</li>
+<li>Override <code>Pjax.prototype.getElements</code>.
+<ul>
+<li><strong>Note</strong>: If doing this, make sure to return a
+<code>NodeList</code>.</li>
+</ul></li>
 </ol>
-<pre><code class="language-js">// use case 1
-var pjax = new Pjax({ elements: &quot;a.js-Pjax&quot; })
-</code></pre>
-<pre><code class="language-js">// use case 2
-Pjax.prototype.getElements = function() {
-  return document.getElementsByClassName(&quot;.js-Pjax&quot;)
-}
-
-var pjax = new Pjax()
-</code></pre>
-<h3 id="loadUrl-href-options"><a href="#loadUrl-href-options" class="headerlink" title="loadUrl(href, [options])"></a><code>loadUrl(href, [options])</code></h3><p>With this method, you can manually trigger the loading of a URL:</p>
-<pre><code class="language-js">var pjax = new Pjax()
-
-// use case 1
-pjax.loadUrl(&quot;/your-url&quot;)
-
-// use case 2 (with options override)
-pjax.loadUrl(&quot;/your-other-url&quot;, { timeout: 10 })
-</code></pre>
-<h3 id="handleResponse-responseText-request-href-options"><a href="#handleResponse-responseText-request-href-options" class="headerlink" title="handleResponse(responseText, request, href, options)"></a><code>handleResponse(responseText, request, href, options)</code></h3><p>This method takes the raw response, processes the URL, then calls <code>pjax.loadContent()</code> to actually load it into the DOM.</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode js"><code class="sourceCode javascript"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">// use case 1</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> pjax <span class="op">=</span> <span class="kw">new</span> <span class="fu">Pjax</span>({ <span class="dt">elements</span><span class="op">:</span> <span class="st">&quot;a.js-Pjax&quot;</span> })</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode js"><code class="sourceCode javascript"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">// use case 2</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>Pjax<span class="op">.</span><span class="at">prototype</span><span class="op">.</span><span class="at">getElements</span> <span class="op">=</span> <span class="kw">function</span>() {</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementsByClassName</span>(<span class="st">&quot;.js-Pjax&quot;</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> pjax <span class="op">=</span> <span class="kw">new</span> <span class="fu">Pjax</span>()</span></code></pre></div>
+<h3 id="loadurlhref-options"><code>loadUrl(href, [options])</code></h3>
+<p>With this method, you can manually trigger the loading of a URL:</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode js"><code class="sourceCode javascript"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> pjax <span class="op">=</span> <span class="kw">new</span> <span class="fu">Pjax</span>()</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">// use case 1</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>pjax<span class="op">.</span><span class="fu">loadUrl</span>(<span class="st">&quot;/your-url&quot;</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">// use case 2 (with options override)</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>pjax<span class="op">.</span><span class="fu">loadUrl</span>(<span class="st">&quot;/your-other-url&quot;</span><span class="op">,</span> { <span class="dt">timeout</span><span class="op">:</span> <span class="dv">10</span> })</span></code></pre></div>
+<h3
+id="handleresponseresponsetext-request-href-options"><code>handleResponse(responseText, request, href, options)</code></h3>
+<p>This method takes the raw response, processes the URL, then calls
+<code>pjax.loadContent()</code> to actually load it into the DOM.</p>
 <p>It is passed the following arguments:</p>
 <ul>
-<li><strong>responseText</strong> (string): This is the raw response text. This is equivalent to <code>request.responseText</code>.</li>
-<li><strong>request</strong> (XMLHttpRequest): This is the XHR object.</li>
-<li><strong>href</strong> (string): This is the URL that was passed to <code>loadUrl()</code>.</li>
-<li><strong>options</strong> (object): This is an object with the options for this request. The structure basically matches the regular options object, with a few extra internal properties.</li>
+<li><strong>responseText</strong> (string): This is the raw response
+text. This is equivalent to <code>request.responseText</code>.</li>
+<li><strong>request</strong> (XMLHttpRequest): This is the XHR
+object.</li>
+<li><strong>href</strong> (string): This is the URL that was passed to
+<code>loadUrl()</code>.</li>
+<li><strong>options</strong> (object): This is an object with the
+options for this request. The structure basically matches the regular
+options object, with a few extra internal properties.</li>
 </ul>
-<p>You can override this if you want to process the data before, or instead of, it being loaded into the DOM.</p>
-<p>For example, if you want to check for a non-HTML response, you could do the following:</p>
-<pre><code class="language-js">var pjax = new Pjax();
-
-pjax._handleResponse = pjax.handleResponse;
-
-pjax.handleResponse = function(responseText, request, href, options) {
-  if (request.responseText.match(&quot;&lt;html&quot;)) {
-    pjax._handleResponse(responseText, request, href, options);
-  } else {
-    // handle non-HTML response here
-  }
-}
-</code></pre>
-<h3 id="refresh-el"><a href="#refresh-el" class="headerlink" title="refresh([el])"></a><code>refresh([el])</code></h3><p>Use this method to bind Pjax to children of a DOM element that didn’t exist when Pjax was initialised e.g. content inserted dynamically by another library or script. If called with no arguments, Pjax will parse the entire document again to look for newly-inserted elements.</p>
-<pre><code class="language-js">// Inside a callback or Promise that runs after new DOM content has been inserted
-var newContent = document.querySelector(&quot;.new-content&quot;);
-
-pjax.refresh(newContent);
-</code></pre>
-<h3 id="reload"><a href="#reload" class="headerlink" title="reload()"></a><code>reload()</code></h3><p>A helper shortcut for <code>window.location.reload()</code>. Used to force a page reload.</p>
-<pre><code class="language-js">pjax.reload()
-</code></pre>
-<h2 id="Options"><a href="#Options" class="headerlink" title="Options"></a>Options</h2><h3 id="elements-String-default-a-href-form-action"><a href="#elements-String-default-a-href-form-action" class="headerlink" title="elements (String, default: &quot;a[href], form[action]&quot;)"></a><code>elements</code> (String, default: <code>&quot;a[href], form[action]&quot;</code>)</h3><p>CSS selector(s) used to find links to apply Pjax to. If needing multiple specific selectors, separate them by a comma.</p>
-<pre><code class="language-js">// Single element
-var pjax = new Pjax({
-  elements: &quot;.ajax&quot;
-})
-</code></pre>
-<pre><code class="language-js">// Multiple elements
-var pjax = new Pjax({
-  elements: &quot;.pjax, .ajax&quot;,
-})
-</code></pre>
-<h3 id="selectors-Array-default-title-js-Pjax"><a href="#selectors-Array-default-title-js-Pjax" class="headerlink" title="selectors (Array, default: [&quot;title&quot;, &quot;.js-Pjax&quot;])"></a><code>selectors</code> (Array, default: <code>[&quot;title&quot;, &quot;.js-Pjax&quot;]</code>)</h3><p>CSS selectors used to find which content to replace.</p>
-<pre><code class="language-js">var pjax = new Pjax({
-  selectors: [
-    &quot;title&quot;,
-    &quot;the-content&quot;,
-  ]
-})
-</code></pre>
+<p>You can override this if you want to process the data before, or
+instead of, it being loaded into the DOM.</p>
+<p>For example, if you want to check for a non-HTML response, you could
+do the following:</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode js"><code class="sourceCode javascript"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> pjax <span class="op">=</span> <span class="kw">new</span> <span class="fu">Pjax</span>()<span class="op">;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>pjax<span class="op">.</span><span class="at">_handleResponse</span> <span class="op">=</span> pjax<span class="op">.</span><span class="at">handleResponse</span><span class="op">;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>pjax<span class="op">.</span><span class="at">handleResponse</span> <span class="op">=</span> <span class="kw">function</span>(responseText<span class="op">,</span> request<span class="op">,</span> href<span class="op">,</span> options) {</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (request<span class="op">.</span><span class="at">responseText</span><span class="op">.</span><span class="fu">match</span>(<span class="st">&quot;&lt;html&quot;</span>)) {</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    pjax<span class="op">.</span><span class="fu">_handleResponse</span>(responseText<span class="op">,</span> request<span class="op">,</span> href<span class="op">,</span> options)<span class="op">;</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// handle non-HTML response here</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="refreshel"><code>refresh([el])</code></h3>
+<p>Use this method to bind Pjax to children of a DOM element that didn’t
+exist when Pjax was initialised e.g. content inserted dynamically by
+another library or script. If called with no arguments, Pjax will parse
+the entire document again to look for newly-inserted elements.</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode js"><code class="sourceCode javascript"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Inside a callback or Promise that runs after new DOM content has been inserted</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> newContent <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&quot;.new-content&quot;</span>)<span class="op">;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>pjax<span class="op">.</span><span class="fu">refresh</span>(newContent)<span class="op">;</span></span></code></pre></div>
+<h3 id="reload"><code>reload()</code></h3>
+<p>A helper shortcut for <code>window.location.reload()</code>. Used to
+force a page reload.</p>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode js"><code class="sourceCode javascript"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>pjax<span class="op">.</span><span class="fu">reload</span>()</span></code></pre></div>
+<h2 id="options">Options</h2>
+<h3 id="elements-string-default-ahref-formaction"><code>elements</code>
+(String, default: <code>"a[href], form[action]"</code>)</h3>
+<p>CSS selector(s) used to find links to apply Pjax to. If needing
+multiple specific selectors, separate them by a comma.</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode js"><code class="sourceCode javascript"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Single element</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> pjax <span class="op">=</span> <span class="kw">new</span> <span class="fu">Pjax</span>({</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">elements</span><span class="op">:</span> <span class="st">&quot;.ajax&quot;</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode js"><code class="sourceCode javascript"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Multiple elements</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> pjax <span class="op">=</span> <span class="kw">new</span> <span class="fu">Pjax</span>({</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">elements</span><span class="op">:</span> <span class="st">&quot;.pjax, .ajax&quot;</span><span class="op">,</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<h3 id="selectors-array-default-title-.js-pjax"><code>selectors</code>
+(Array, default: <code>["title", ".js-Pjax"]</code>)</h3>
+<p>CSS selectors used to find which content to replace.</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode js"><code class="sourceCode javascript"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> pjax <span class="op">=</span> <span class="kw">new</span> <span class="fu">Pjax</span>({</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">selectors</span><span class="op">:</span> [</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;title&quot;</span><span class="op">,</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;the-content&quot;</span><span class="op">,</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <p>If a query returns multiples items, it will just keep the index.</p>
 <p>Example of what you can do:</p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;Page title&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;header class=&quot;js-Pjax&quot;&gt;...&lt;/header&gt;
-  &lt;section class=&quot;js-Pjax&quot;&gt;...&lt;/section&gt;
-  &lt;footer class=&quot;the-footer&quot;&gt;...&lt;/footer&gt;
-  &lt;script&gt;...&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="dt">&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Page title<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">header</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;js-Pjax&quot;</span><span class="dt">&gt;</span>...<span class="dt">&lt;/</span><span class="kw">header</span><span class="dt">&gt;</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">section</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;js-Pjax&quot;</span><span class="dt">&gt;</span>...<span class="dt">&lt;/</span><span class="kw">section</span><span class="dt">&gt;</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">footer</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;the-footer&quot;</span><span class="dt">&gt;</span>...<span class="dt">&lt;/</span><span class="kw">footer</span><span class="dt">&gt;</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">script</span><span class="dt">&gt;</span><span class="op">...</span><span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div>
 <p>This example is correct and should work “as expected”.</p>
-<p><strong>NOTE:</strong> <em>If the current page and new page do not have the same amount of DOM elements, Pjax will fall back to normal page load.</em></p>
-<h3 id="switches-Object-default"><a href="#switches-Object-default" class="headerlink" title="switches (Object, default: {})"></a><code>switches</code> (Object, default: <code>{}</code>)</h3><p>This is an object containing callbacks that can be used to switch old elements with new elements.</p>
-<p>The object keys should be one of the defined selectors (from the <code>selectors</code> option).</p>
+<p><strong>NOTE:</strong> <em>If the current page and new page do not
+have the same amount of DOM elements, Pjax will fall back to normal page
+load.</em></p>
+<h3 id="switches-object-default"><code>switches</code> (Object, default:
+<code>{}</code>)</h3>
+<p>This is an object containing callbacks that can be used to switch old
+elements with new elements.</p>
+<p>The object keys should be one of the defined selectors (from the
+<code>selectors</code> option).</p>
 <p>Examples:</p>
-<pre><code class="language-js">var pjax = new Pjax({
-  selectors: [&quot;title&quot;, &quot;.Navbar&quot;, &quot;.js-Pjax&quot;],
-  switches: {
-    &quot;title&quot;: Pjax.switches.outerHTML, // default behavior
-    &quot;.the-content&quot;: function(oldEl, newEl, options) {
-      // this is identical to the default behavior
-      oldEl.outerHTML = newEl.outerHTML
-      this.onSwitch()
-    },
-    &quot;.js-Pjax&quot;: Pjax.switches.sideBySide
-  }
-})
-</code></pre>
-<p>Callbacks are bound to the Pjax instance itself to allow you to reuse it (ex: <code>this.onSwitch()</code>)</p>
-<h3 id="Existing-Switch-Callbacks"><a href="#Existing-Switch-Callbacks" class="headerlink" title="Existing Switch Callbacks"></a>Existing Switch Callbacks</h3><ul>
-<li><code>Pjax.switches.outerHTML</code>:<br>The default behavior, replaces elements using <code>outerHTML</code>.</li>
-<li><code>Pjax.switches.innerHTML</code>:<br>Replaces elements using <code>innerHTML</code> and copies <code>className</code>.</li>
-<li><code>Pjax.switches.replaceNode</code>:<br>Replaces elements using <code>replaceChild</code></li>
-<li><code>Pjax.switches.sideBySide</code>:<br>Smart replacing that allows you to have both elements in the same parent when you want to use CSS animations. Old elements are removed when all children have been fully animated (an <a href="http://www.w3.org/TR/css3-animations/#animationend">animationEnd</a> event is triggered).</li>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode js"><code class="sourceCode javascript"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> pjax <span class="op">=</span> <span class="kw">new</span> <span class="fu">Pjax</span>({</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">selectors</span><span class="op">:</span> [<span class="st">&quot;title&quot;</span><span class="op">,</span> <span class="st">&quot;.Navbar&quot;</span><span class="op">,</span> <span class="st">&quot;.js-Pjax&quot;</span>]<span class="op">,</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">switches</span><span class="op">:</span> {</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;title&quot;</span><span class="op">:</span> Pjax<span class="op">.</span><span class="at">switches</span><span class="op">.</span><span class="at">outerHTML</span><span class="op">,</span> <span class="co">// default behavior</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;.the-content&quot;</span><span class="op">:</span> <span class="kw">function</span>(oldEl<span class="op">,</span> newEl<span class="op">,</span> options) {</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>      <span class="co">// this is identical to the default behavior</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>      oldEl<span class="op">.</span><span class="at">outerHTML</span> <span class="op">=</span> newEl<span class="op">.</span><span class="at">outerHTML</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>      <span class="kw">this</span><span class="op">.</span><span class="fu">onSwitch</span>()</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;.js-Pjax&quot;</span><span class="op">:</span> Pjax<span class="op">.</span><span class="at">switches</span><span class="op">.</span><span class="at">sideBySide</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<p>Callbacks are bound to the Pjax instance itself to allow you to reuse
+it (ex: <code>this.onSwitch()</code>)</p>
+<h3 id="existing-switch-callbacks">Existing Switch Callbacks</h3>
+<ul>
+<li><code>Pjax.switches.outerHTML</code>: The default behavior, replaces
+elements using <code>outerHTML</code>.</li>
+<li><code>Pjax.switches.innerHTML</code>: Replaces elements using
+<code>innerHTML</code> and copies <code>className</code>.</li>
+<li><code>Pjax.switches.replaceNode</code>: Replaces elements using
+<code>replaceChild</code></li>
+<li><code>Pjax.switches.sideBySide</code>: Smart replacing that allows
+you to have both elements in the same parent when you want to use CSS
+animations. Old elements are removed when all children have been fully
+animated (an <a
+href="http://www.w3.org/TR/css3-animations/#animationend">animationEnd</a>
+event is triggered).</li>
 </ul>
-<h3 id="Creating-a-Switch-Callback"><a href="#Creating-a-Switch-Callback" class="headerlink" title="Creating a Switch Callback"></a>Creating a Switch Callback</h3><p>Your callback function can do whatever you want, but you need to:</p>
-<ol>
-<li>Replace the <code>oldEl</code>‘s content with the <code>newEl</code>‘s content in some fashion.</li>
-<li>Call <code>this.onSwitch()</code> to trigger the attached callback.</li>
+<h3 id="creating-a-switch-callback">Creating a Switch Callback</h3>
+<p>Your callback function can do whatever you want, but you need to:</p>
+<ol type="1">
+<li>Replace the <code>oldEl</code>’s content with the
+<code>newEl</code>’s content in some fashion.</li>
+<li>Call <code>this.onSwitch()</code> to trigger the attached
+callback.</li>
 </ol>
 <p>Here is the default behavior as an example:</p>
-<pre><code class="language-js">function(oldEl, newEl, pjaxOptions) {
-  oldEl.outerHTML = newEl.outerHTML
-  this.onSwitch()
-}
-</code></pre>
-<h3 id="switchesOptions-Object-default"><a href="#switchesOptions-Object-default" class="headerlink" title="switchesOptions (Object, default: {})"></a><code>switchesOptions</code> (Object, default: <code>{}</code>)</h3><p>These are options that can be used during content replacement by switches. For now, only <code>Pjax.switches.sideBySide</code> uses it. This is very convenient when you use something like <a href="https://github.com/daneden/animate.css">Animate.css</a> with or without <a href="https://github.com/matthieua/WOW">WOW.js</a>.</p>
-<pre><code class="language-js">var pjax = new Pjax({
-  selectors: [&quot;title&quot;, &quot;.js-Pjax&quot;],
-  switches: {
-    &quot;.js-Pjax&quot;: Pjax.switches.sideBySide
-  },
-  switchesOptions: {
-    &quot;.js-Pjax&quot;: {
-      classNames: {
-        // class added to the old element being replaced, e.g. a fade out
-        remove: &quot;Animated Animated--reverse Animate--fast Animate--noDelay&quot;,
-        // class added to the new element that is replacing the old one, e.g. a fade in
-        add: &quot;Animated&quot;,
-        // class added on the element when navigating back
-        backward: &quot;Animate--slideInRight&quot;,
-        // class added on the element when navigating forward (used for new page too)
-        forward: &quot;Animate--slideInLeft&quot;
-      },
-      callbacks: {
-        // to make a nice transition with 2 pages at the same time
-        // we are playing with absolute positioning for the element we are removing
-        // &amp; we need live metrics to have something great
-        // see associated CSS below
-        removeElement: function(el) {
-          el.style.marginLeft = &quot;-&quot; + (el.getBoundingClientRect().width/2) + &quot;px&quot;
-        }
-      }
-    }
-  }
-})
-</code></pre>
-<p><em>Note that <code>remove</code> includes <code>Animated--reverse</code> which is a simple way to not have to have a duplicate transition (slideIn + reverse &#x3D;&gt; slideOut).</em></p>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode js"><code class="sourceCode javascript"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span>(oldEl<span class="op">,</span> newEl<span class="op">,</span> pjaxOptions) {</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  oldEl<span class="op">.</span><span class="at">outerHTML</span> <span class="op">=</span> newEl<span class="op">.</span><span class="at">outerHTML</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">this</span><span class="op">.</span><span class="fu">onSwitch</span>()</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="switchesoptions-object-default"><code>switchesOptions</code>
+(Object, default: <code>{}</code>)</h3>
+<p>These are options that can be used during content replacement by
+switches. For now, only <code>Pjax.switches.sideBySide</code> uses it.
+This is very convenient when you use something like <a
+href="https://github.com/daneden/animate.css">Animate.css</a> with or
+without <a href="https://github.com/matthieua/WOW">WOW.js</a>.</p>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode js"><code class="sourceCode javascript"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> pjax <span class="op">=</span> <span class="kw">new</span> <span class="fu">Pjax</span>({</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">selectors</span><span class="op">:</span> [<span class="st">&quot;title&quot;</span><span class="op">,</span> <span class="st">&quot;.js-Pjax&quot;</span>]<span class="op">,</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">switches</span><span class="op">:</span> {</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;.js-Pjax&quot;</span><span class="op">:</span> Pjax<span class="op">.</span><span class="at">switches</span><span class="op">.</span><span class="at">sideBySide</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">switchesOptions</span><span class="op">:</span> {</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;.js-Pjax&quot;</span><span class="op">:</span> {</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">classNames</span><span class="op">:</span> {</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">// class added to the old element being replaced, e.g. a fade out</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>        <span class="dt">remove</span><span class="op">:</span> <span class="st">&quot;Animated Animated--reverse Animate--fast Animate--noDelay&quot;</span><span class="op">,</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">// class added to the new element that is replacing the old one, e.g. a fade in</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>        <span class="dt">add</span><span class="op">:</span> <span class="st">&quot;Animated&quot;</span><span class="op">,</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>        <span class="co">// class added on the element when navigating back</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>        <span class="dt">backward</span><span class="op">:</span> <span class="st">&quot;Animate--slideInRight&quot;</span><span class="op">,</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">// class added on the element when navigating forward (used for new page too)</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>        <span class="dt">forward</span><span class="op">:</span> <span class="st">&quot;Animate--slideInLeft&quot;</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>      }<span class="op">,</span></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>      <span class="dt">callbacks</span><span class="op">:</span> {</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>        <span class="co">// to make a nice transition with 2 pages at the same time</span></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>        <span class="co">// we are playing with absolute positioning for the element we are removing</span></span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>        <span class="co">// &amp; we need live metrics to have something great</span></span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>        <span class="co">// see associated CSS below</span></span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>        <span class="dt">removeElement</span><span class="op">:</span> <span class="kw">function</span>(el) {</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>          el<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">marginLeft</span> <span class="op">=</span> <span class="st">&quot;-&quot;</span> <span class="op">+</span> (el<span class="op">.</span><span class="fu">getBoundingClientRect</span>()<span class="op">.</span><span class="at">width</span><span class="op">/</span><span class="dv">2</span>) <span class="op">+</span> <span class="st">&quot;px&quot;</span></span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<p><em>Note that <code>remove</code> includes
+<code>Animated--reverse</code> which is a simple way to not have to have
+a duplicate transition (slideIn + reverse =&gt; slideOut).</em></p>
 <p>Here is some css that works well with the above configuration:</p>
-<pre><code class="language-css">/*
-  Note: If your content elements don&#39;t have a fixed width it can cause
-  an issue when positioning absolutely
-*/
-.js-Pjax { position: relative } /* parent element where switch will be made */
-
-.js-Pjax-child { width: 100% }
-
-/* position for the elements that will be removed */
-.js-Pjax-remove {
-  position: absolute;
-  left: 50%;
-  /* transform: translateX(-50%) */
-  /* transform can&#39;t be used since we already use generic translate for the remove effect (eg animate.css) */
-  /* margin-left: -width/2; // made with js */
-  /* you can totally drop the margin-left thing from switchesOptions if you use custom animations */
-}
-
-/* CSS animations */
-.Animated {
-  animation-fill-mode: both;
-  animation-duration: 1s;
-}
-
-.Animated--reverse { animation-direction: reverse }
-
-.Animate--fast { animation-duration: .5s }
-.Animate--noDelay { animation-delay: 0s !important;  }
-
-.Animate--slideInRight { animation-name: Animation-slideInRight }
-
-@keyframes Animation-slideInRight {
-  0% {
-    opacity: 0;
-    transform: translateX(100rem);
-  }
-
-  100% {
-    transform: translateX(0);
-  }
-}
-
-.Animate--slideInLeft { animation-name: Animation-slideInLeft }
-
-@keyframes Animation-slideInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-100rem);
-  }
-
-  100% {
-    transform: translateX(0);
-  }
-}
-</code></pre>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">/*</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">  Note: If your content elements don&#39;t have a fixed width it can cause</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">  an issue when positioning absolutely</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">.js-Pjax</span> { <span class="kw">position</span><span class="ch">:</span> <span class="dv">relative</span> } <span class="co">/* parent element where switch will be made */</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="fu">.js-Pjax-child</span> { <span class="kw">width</span><span class="ch">:</span> <span class="dv">100</span><span class="dt">%</span> }</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co">/* position for the elements that will be removed */</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="fu">.js-Pjax-remove</span> {</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">position</span><span class="ch">:</span> <span class="dv">absolute</span><span class="op">;</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">left</span><span class="ch">:</span> <span class="dv">50</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* transform: translateX(-50%) */</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* transform can&#39;t be used since we already use generic translate for the remove effect (eg animate.css) */</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* margin-left: -width/2; // made with js */</span></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* you can totally drop the margin-left thing from switchesOptions if you use custom animations */</span></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a><span class="co">/* CSS animations */</span></span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a><span class="fu">.Animated</span> {</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">animation-fill-mode</span><span class="ch">:</span> <span class="dv">both</span><span class="op">;</span></span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">animation-duration</span><span class="ch">:</span> <span class="dv">1</span><span class="dt">s</span><span class="op">;</span></span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a><span class="fu">.Animated--reverse</span> { <span class="kw">animation-direction</span><span class="ch">:</span> <span class="dv">reverse</span> }</span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a><span class="fu">.Animate--fast</span> { <span class="kw">animation-duration</span><span class="ch">:</span> <span class="dv">.5</span><span class="dt">s</span> }</span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a><span class="fu">.Animate--noDelay</span> { <span class="kw">animation-delay</span><span class="ch">:</span> <span class="dv">0</span><span class="dt">s</span> <span class="at">!important</span><span class="op">;</span>  }</span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a><span class="fu">.Animate--slideInRight</span> { <span class="kw">animation-name</span><span class="ch">:</span> <span class="dv">Animation-slideInRight </span>}</span>
+<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a><span class="im">@keyframes</span> Animation-slideInRight {</span>
+<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a>  <span class="dv">0%</span> {</span>
+<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a>    <span class="kw">opacity</span><span class="ch">:</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">transform</span><span class="ch">:</span> <span class="fu">translateX(</span><span class="dv">100</span><span class="dt">rem</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a>  <span class="dv">100%</span> {</span>
+<span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a>    <span class="kw">transform</span><span class="ch">:</span> <span class="fu">translateX(</span><span class="dv">0</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb28-40"><a href="#cb28-40" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb28-41"><a href="#cb28-41" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-42"><a href="#cb28-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-43"><a href="#cb28-43" aria-hidden="true" tabindex="-1"></a><span class="fu">.Animate--slideInLeft</span> { <span class="kw">animation-name</span><span class="ch">:</span> <span class="dv">Animation-slideInLeft </span>}</span>
+<span id="cb28-44"><a href="#cb28-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-45"><a href="#cb28-45" aria-hidden="true" tabindex="-1"></a><span class="im">@keyframes</span> Animation-slideInLeft {</span>
+<span id="cb28-46"><a href="#cb28-46" aria-hidden="true" tabindex="-1"></a>  <span class="dv">0%</span> {</span>
+<span id="cb28-47"><a href="#cb28-47" aria-hidden="true" tabindex="-1"></a>    <span class="kw">opacity</span><span class="ch">:</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb28-48"><a href="#cb28-48" aria-hidden="true" tabindex="-1"></a>    <span class="kw">transform</span><span class="ch">:</span> <span class="fu">translateX(</span><span class="dv">-100</span><span class="dt">rem</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb28-49"><a href="#cb28-49" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb28-50"><a href="#cb28-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-51"><a href="#cb28-51" aria-hidden="true" tabindex="-1"></a>  <span class="dv">100%</span> {</span>
+<span id="cb28-52"><a href="#cb28-52" aria-hidden="true" tabindex="-1"></a>    <span class="kw">transform</span><span class="ch">:</span> <span class="fu">translateX(</span><span class="dv">0</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb28-53"><a href="#cb28-53" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb28-54"><a href="#cb28-54" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>To give context to this CSS, here is an HTML snippet:</p>
-<pre><code class="language-html">&lt;!doctype html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;Page Title&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;section class=&quot;js-Pjax&quot;&gt;
-    &lt;div class=&quot;js-Pjax-child&quot;&gt;
-      Your content here
-    &lt;/div&gt;
-    &lt;!--
-    During the replacement process, you&#39;ll have the following tree:
-
-    &lt;div class=&quot;js-Pjax-child js-Pjax-remove Animate...&quot;&gt;
-      Your OLD content here
-    &lt;/div&gt;
-    &lt;div class=&quot;js-Pjax-child js-Pjax-add Animate...&quot;&gt;
-      Your NEW content here
-    &lt;/div&gt;
-
-    --&gt;
-  &lt;/section&gt;
-  &lt;script&gt;...&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<h3 id="history-Boolean-default-true"><a href="#history-Boolean-default-true" class="headerlink" title="history (Boolean, default: true)"></a><code>history</code> (Boolean, default: <code>true</code>)</h3><p>Enable the use of <code>pushState()</code>. Disabling this will prevent Pjax from updating browser history. While possible, there is almost no use case where you would want to do this.</p>
-<p>Internally, this option is used when a <code>popstate</code> event triggers Pjax (to not <code>pushState()</code> again).</p>
-<h3 id="analytics-Function-Boolean-default-a-function-that-pushes-gaq-trackPageview-or-sends-ga-pageview"><a href="#analytics-Function-Boolean-default-a-function-that-pushes-gaq-trackPageview-or-sends-ga-pageview" class="headerlink" title="analytics (Function | Boolean, default: a function that pushes _gaq _trackPageview or sends ga pageview"></a><code>analytics</code> (Function | Boolean, default: a function that pushes <code>_gaq</code> <code>_trackPageview</code> or sends <code>ga</code> <code>pageview</code></h3><p>Function that allows you to add behavior for analytics. By default it tries to track<br>a pageview with Google Analytics (if it exists on the page). It’s called every time a page is switched, even for history navigation.</p>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!doctype</span> html<span class="dt">&gt;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="dt">&gt;</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Page Title<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">section</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;js-Pjax&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;js-Pjax-child&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>      Your content here</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">&lt;!--</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co">    During the replacement process, you&#39;ll have the following tree:</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="co">    &lt;div class=&quot;js-Pjax-child js-Pjax-remove Animate...&quot;&gt;</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="co">      Your OLD content here</span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="co">    &lt;/div&gt;</span></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="co">    &lt;div class=&quot;js-Pjax-child js-Pjax-add Animate...&quot;&gt;</span></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a><span class="co">      Your NEW content here</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a><span class="co">    &lt;/div&gt;</span></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a><span class="co">    --&gt;</span></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">section</span><span class="dt">&gt;</span></span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">script</span><span class="dt">&gt;</span><span class="op">...</span><span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div>
+<h3 id="history-boolean-default-true"><code>history</code> (Boolean,
+default: <code>true</code>)</h3>
+<p>Enable the use of <code>pushState()</code>. Disabling this will
+prevent Pjax from updating browser history. While possible, there is
+almost no use case where you would want to do this.</p>
+<p>Internally, this option is used when a <code>popstate</code> event
+triggers Pjax (to not <code>pushState()</code> again).</p>
+<h3
+id="analytics-function-boolean-default-a-function-that-pushes-_gaq-_trackpageview-or-sends-ga-pageview"><code>analytics</code>
+(Function | Boolean, default: a function that pushes <code>_gaq</code>
+<code>_trackPageview</code> or sends <code>ga</code>
+<code>pageview</code></h3>
+<p>Function that allows you to add behavior for analytics. By default it
+tries to track a pageview with Google Analytics (if it exists on the
+page). It’s called every time a page is switched, even for history
+navigation.</p>
 <p>Set to <code>false</code> to disable this behavior.</p>
-<h3 id="scrollTo-Integer-Integer-Integer-False-default-0"><a href="#scrollTo-Integer-Integer-Integer-False-default-0" class="headerlink" title="scrollTo (Integer | [Integer, Integer] | False, default: 0)"></a><code>scrollTo</code> (Integer | [Integer, Integer] | False, default: <code>0</code>)</h3><p>When set to an integer, this is the value (in px from the top of the page) to scroll to when a page is switched.</p>
-<p>When set to an array of 2 integers ([x, y]), this is the value to scroll both horizontally and vertically.</p>
-<p>Set this to <code>false</code> to disable scrolling, which will mean the page will stay in that same position it was before loading the new elements.</p>
-<h3 id="scrollRestoration-Boolean-default-true"><a href="#scrollRestoration-Boolean-default-true" class="headerlink" title="scrollRestoration (Boolean, default: true)"></a><code>scrollRestoration</code> (Boolean, default: <code>true</code>)</h3><p>When set to <code>true</code>, Pjax will attempt to restore the scroll position when navigating backwards or forwards.</p>
-<h3 id="cacheBust-Boolean-default-true"><a href="#cacheBust-Boolean-default-true" class="headerlink" title="cacheBust (Boolean, default: true)"></a><code>cacheBust</code> (Boolean, default: <code>true</code>)</h3><p>When set to <code>true</code>, Pjax appends a timestamp query string segment to the requested URL in order to skip the browser cache.</p>
-<h3 id="debug-Boolean-default-false"><a href="#debug-Boolean-default-false" class="headerlink" title="debug (Boolean, default: false)"></a><code>debug</code> (Boolean, default: <code>false</code>)</h3><p>Enables verbose mode. Useful to debug page layout differences.</p>
-<h3 id="currentUrlFullReload-Boolean-default-false"><a href="#currentUrlFullReload-Boolean-default-false" class="headerlink" title="currentUrlFullReload (Boolean, default: false)"></a><code>currentUrlFullReload</code> (Boolean, default: <code>false</code>)</h3><p>When set to <code>true</code>, clicking on a link that points to the current URL will trigger a full page reload.</p>
-<p>When set to <code>false</code>, clicking on such a link will cause Pjax to load the current page without a full page reload. If you want to add some custom behavior, add a click listener to the link and call <code>preventDefault()</code>. This will prevent Pjax from receiving the event.</p>
-<p><strong>Note</strong>: This must be done before Pjax is instantiated, otherwise Pjax’s event handler will be called first, and <code>preventDefault()</code> won’t have been called yet.</p>
+<h3
+id="scrollto-integer-integer-integer-false-default-0"><code>scrollTo</code>
+(Integer | [Integer, Integer] | False, default: <code>0</code>)</h3>
+<p>When set to an integer, this is the value (in px from the top of the
+page) to scroll to when a page is switched.</p>
+<p>When set to an array of 2 integers ([x, y]), this is the value to
+scroll both horizontally and vertically.</p>
+<p>Set this to <code>false</code> to disable scrolling, which will mean
+the page will stay in that same position it was before loading the new
+elements.</p>
+<h3
+id="scrollrestoration-boolean-default-true"><code>scrollRestoration</code>
+(Boolean, default: <code>true</code>)</h3>
+<p>When set to <code>true</code>, Pjax will attempt to restore the
+scroll position when navigating backwards or forwards.</p>
+<h3 id="cachebust-boolean-default-true"><code>cacheBust</code> (Boolean,
+default: <code>true</code>)</h3>
+<p>When set to <code>true</code>, Pjax appends a timestamp query string
+segment to the requested URL in order to skip the browser cache.</p>
+<h3 id="debug-boolean-default-false"><code>debug</code> (Boolean,
+default: <code>false</code>)</h3>
+<p>Enables verbose mode. Useful to debug page layout differences.</p>
+<h3
+id="currenturlfullreload-boolean-default-false"><code>currentUrlFullReload</code>
+(Boolean, default: <code>false</code>)</h3>
+<p>When set to <code>true</code>, clicking on a link that points to the
+current URL will trigger a full page reload.</p>
+<p>When set to <code>false</code>, clicking on such a link will cause
+Pjax to load the current page without a full page reload. If you want to
+add some custom behavior, add a click listener to the link and call
+<code>preventDefault()</code>. This will prevent Pjax from receiving the
+event.</p>
+<p><strong>Note</strong>: This must be done before Pjax is instantiated,
+otherwise Pjax’s event handler will be called first, and
+<code>preventDefault()</code> won’t have been called yet.</p>
 <p>Here is some sample code:</p>
-<pre><code class="language-js">  var links = document.querySelectorAll(&quot;.js-Pjax&quot;);
-
-  for (var i = 0; i &lt; links.length; i++) {
-    var el = links[i]
-
-    el.addEventListener(&quot;click&quot;, function(e) {
-      if (el.href === window.location.href.split(&quot;#&quot;)[0]) {
-        e.preventDefault();
-
-        console.log(&quot;Link to current page clicked&quot;);
-        // Custom code goes here.
-      }
-    })
-  }
-
-  var pjax = new Pjax()
-</code></pre>
-<p>(Note that if <code>cacheBust</code> is set to <code>true</code>, the code that checks if the href is the same as the current page’s URL will not work, due to the query string appended to force a cache bust).</p>
-<h3 id="timeout-Integer-default-0"><a href="#timeout-Integer-default-0" class="headerlink" title="timeout (Integer, default: 0)"></a><code>timeout</code> (Integer, default: <code>0</code>)</h3><p>The timeout in <em>milliseconds</em> for the XHR requests. Set to <code>0</code> to disable the timeout.</p>
-<h2 id="Events"><a href="#Events" class="headerlink" title="Events"></a>Events</h2><p>Pjax fires a number of events regardless of how it’s invoked.</p>
-<p>All events are fired from the <em>document</em>, not the link that was clicked.</p>
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode js"><code class="sourceCode javascript"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> links <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelectorAll</span>(<span class="st">&quot;.js-Pjax&quot;</span>)<span class="op">;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">var</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> links<span class="op">.</span><span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) {</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> el <span class="op">=</span> links[i]</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    el<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&quot;click&quot;</span><span class="op">,</span> <span class="kw">function</span>(e) {</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (el<span class="op">.</span><span class="at">href</span> <span class="op">===</span> <span class="bu">window</span><span class="op">.</span><span class="at">location</span><span class="op">.</span><span class="at">href</span><span class="op">.</span><span class="fu">split</span>(<span class="st">&quot;#&quot;</span>)[<span class="dv">0</span>]) {</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>        e<span class="op">.</span><span class="fu">preventDefault</span>()<span class="op">;</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;Link to current page clicked&quot;</span>)<span class="op">;</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Custom code goes here.</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> pjax <span class="op">=</span> <span class="kw">new</span> <span class="fu">Pjax</span>()</span></code></pre></div>
+<p>(Note that if <code>cacheBust</code> is set to <code>true</code>, the
+code that checks if the href is the same as the current page’s URL will
+not work, due to the query string appended to force a cache bust).</p>
+<h3 id="timeout-integer-default-0"><code>timeout</code> (Integer,
+default: <code>0</code>)</h3>
+<p>The timeout in <em>milliseconds</em> for the XHR requests. Set to
+<code>0</code> to disable the timeout.</p>
+<h2 id="events">Events</h2>
+<p>Pjax fires a number of events regardless of how it’s invoked.</p>
+<p>All events are fired from the <em>document</em>, not the link that
+was clicked.</p>
 <ul>
 <li><code>pjax:send</code> - Fired after the Pjax request begins.</li>
-<li><code>pjax:complete</code> - Fired after the Pjax request finishes.</li>
-<li><code>pjax:success</code> - Fired after the Pjax request succeeds.</li>
-<li><code>pjax:error</code> - Fired after the Pjax request fails. The request object will be passed along as <code>event.options.request</code>.</li>
+<li><code>pjax:complete</code> - Fired after the Pjax request
+finishes.</li>
+<li><code>pjax:success</code> - Fired after the Pjax request
+succeeds.</li>
+<li><code>pjax:error</code> - Fired after the Pjax request fails. The
+request object will be passed along as
+<code>event.options.request</code>.</li>
 </ul>
-<p><code>send</code> and <code>complete</code> are a good pair of events to use if you are implementing a loading indicator (eg: <a href="http://buunguyen.github.io/topbar/">topbar</a>)</p>
-<pre><code class="language-js">document.addEventListener(&#39;pjax:send&#39;, topbar.show)
-document.addEventListener(&#39;pjax:complete&#39;, topbar.hide)
-</code></pre>
-<h2 id="HTTP-Headers"><a href="#HTTP-Headers" class="headerlink" title="HTTP Headers"></a>HTTP Headers</h2><p>Pjax uses several custom headers when it makes and receives HTTP requests. If the requests are going to your server, you can use those headers for some meta information about the response.</p>
-<h3 id="Request-Headers"><a href="#Request-Headers" class="headerlink" title="Request Headers"></a>Request Headers</h3><p>Pjax sends the following headers with every request:</p>
+<p><code>send</code> and <code>complete</code> are a good pair of events
+to use if you are implementing a loading indicator (eg: <a
+href="http://buunguyen.github.io/topbar/">topbar</a>)</p>
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode js"><code class="sourceCode javascript"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">document</span><span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;pjax:send&#39;</span><span class="op">,</span> topbar<span class="op">.</span><span class="at">show</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="bu">document</span><span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;pjax:complete&#39;</span><span class="op">,</span> topbar<span class="op">.</span><span class="at">hide</span>)</span></code></pre></div>
+<h2 id="http-headers">HTTP Headers</h2>
+<p>Pjax uses several custom headers when it makes and receives HTTP
+requests. If the requests are going to your server, you can use those
+headers for some meta information about the response.</p>
+<h3 id="request-headers">Request Headers</h3>
+<p>Pjax sends the following headers with every request:</p>
 <ul>
-<li><code>X-Requested-With: &quot;XMLHttpRequest&quot;</code></li>
-<li><code>X-PJAX: &quot;true&quot;</code></li>
-<li><code>X-PJAX-Selectors</code>:<br>  A serialized JSON array of selectors, taken from <code>options.selectors</code>. You can use this to send back only the elements that Pjax will use to switch, instead of sending the whole page. Note that you’ll need to deserialize this on the server (Such as by using <code>JSON.parse()</code>)</li>
+<li><code>X-Requested-With: "XMLHttpRequest"</code></li>
+<li><code>X-PJAX: "true"</code></li>
+<li><code>X-PJAX-Selectors</code>: A serialized JSON array of selectors,
+taken from <code>options.selectors</code>. You can use this to send back
+only the elements that Pjax will use to switch, instead of sending the
+whole page. Note that you’ll need to deserialize this on the server
+(Such as by using <code>JSON.parse()</code>)</li>
 </ul>
-<h3 id="Response-Headers"><a href="#Response-Headers" class="headerlink" title="Response Headers"></a>Response Headers</h3><p>Pjax looks for the following headers on the response:</p>
+<h3 id="response-headers">Response Headers</h3>
+<p>Pjax looks for the following headers on the response:</p>
 <ul>
 <li><code>X-PJAX-URL</code> or <code>X-XHR-Redirected-To</code></li>
 </ul>
-<p>Pjax first checks the <code>responseURL</code> property on the XHR object to see if the request was redirected by the server. Most browsers support this, but not all. To ensure Pjax will be able to tell when the request is redirected, you can include one of these headers with the response, set to the final URL.</p>
-<h2 id="DOM-Ready-State"><a href="#DOM-Ready-State" class="headerlink" title="DOM Ready State"></a>DOM Ready State</h2><p>Most of the time, you will have code related to the current DOM that you only execute when the DOM is ready.</p>
-<p>Since Pjax doesn’t automatically re-execute your previous code each time you load a page, you’ll need to add code to re-trigger the DOM ready code. Here’s a simple example:</p>
-<pre><code class="language-js">function whenDOMReady() {
-  // do your stuff
-}
-
-whenDOMReady()
-
-var pjax = new Pjax()
-
-document.addEventListener(&quot;pjax:success&quot;, whenDOMReady)
-</code></pre>
-<p><em>Note: Don’t create the Pjax instance in the <code>whenDOMReady</code> function.</em></p>
-<p>If you want to just update a specific part (which is a good idea), you can add the DOM-related code in a function and re-execute this function when the <code>pjax:success</code> event is fired.</p>
-<pre><code class="language-js">// do your global stuff
-//... DOM ready code
-
-function whenContainerReady() {
-  // do your container related stuff
-}
-
-whenContainerReady()
-
-var pjax = new Pjax()
-
-document.addEventListener(&quot;pjax:success&quot;, whenContainerReady)
-</code></pre>
-<h2 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h2><h3 id="Q-Disqus-doesn’t-work-anymore-how-can-I-fix-that"><a href="#Q-Disqus-doesn’t-work-anymore-how-can-I-fix-that" class="headerlink" title="Q: Disqus doesn’t work anymore, how can I fix that ?"></a>Q: Disqus doesn’t work anymore, how can I fix that ?</h3><h4 id="A-There-are-a-few-things-you-need-to-do"><a href="#A-There-are-a-few-things-you-need-to-do" class="headerlink" title="A: There are a few things you need to do:"></a>A: There are a few things you need to do:</h4><ul>
-<li><p>Wrap your Disqus snippet into a DOM element that you will add to the <code>selector</code> property (or just wrap it with <code>class=&quot;js-Pjax&quot;</code>) and be sure to have at least an empty wrapper on each page (to avoid differences of DOM between pages).</p>
-</li>
-<li><p>Edit your Disqus snippet like the one below.</p>
-</li>
+<p>Pjax first checks the <code>responseURL</code> property on the XHR
+object to see if the request was redirected by the server. Most browsers
+support this, but not all. To ensure Pjax will be able to tell when the
+request is redirected, you can include one of these headers with the
+response, set to the final URL.</p>
+<h2 id="dom-ready-state">DOM Ready State</h2>
+<p>Most of the time, you will have code related to the current DOM that
+you only execute when the DOM is ready.</p>
+<p>Since Pjax doesn’t automatically re-execute your previous code each
+time you load a page, you’ll need to add code to re-trigger the DOM
+ready code. Here’s a simple example:</p>
+<div class="sourceCode" id="cb32"><pre
+class="sourceCode js"><code class="sourceCode javascript"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">whenDOMReady</span>() {</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do your stuff</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">whenDOMReady</span>()</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> pjax <span class="op">=</span> <span class="kw">new</span> <span class="fu">Pjax</span>()</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="bu">document</span><span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&quot;pjax:success&quot;</span><span class="op">,</span> whenDOMReady)</span></code></pre></div>
+<p><em>Note: Don’t create the Pjax instance in the
+<code>whenDOMReady</code> function.</em></p>
+<p>If you want to just update a specific part (which is a good idea),
+you can add the DOM-related code in a function and re-execute this
+function when the <code>pjax:success</code> event is fired.</p>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode js"><code class="sourceCode javascript"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">// do your global stuff</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co">//... DOM ready code</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">whenContainerReady</span>() {</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do your container related stuff</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="fu">whenContainerReady</span>()</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> pjax <span class="op">=</span> <span class="kw">new</span> <span class="fu">Pjax</span>()</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="bu">document</span><span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&quot;pjax:success&quot;</span><span class="op">,</span> whenContainerReady)</span></code></pre></div>
+<h2 id="faq">FAQ</h2>
+<h3 id="q-disqus-doesnt-work-anymore-how-can-i-fix-that">Q: Disqus
+doesn’t work anymore, how can I fix that ?</h3>
+<h4 id="a-there-are-a-few-things-you-need-to-do">A: There are a few
+things you need to do:</h4>
+<ul>
+<li><p>Wrap your Disqus snippet into a DOM element that you will add to
+the <code>selector</code> property (or just wrap it with
+<code>class="js-Pjax"</code>) and be sure to have at least an empty
+wrapper on each page (to avoid differences of DOM between
+pages).</p></li>
+<li><p>Edit your Disqus snippet like the one below.</p></li>
 </ul>
-<h4 id="Disqus-snippet-before-Pjax-integration"><a href="#Disqus-snippet-before-Pjax-integration" class="headerlink" title="Disqus snippet before Pjax integration"></a>Disqus snippet <em>before</em> Pjax integration</h4><pre><code class="language-html">&lt;script&gt;
-  var disqus_shortname = &#39;YOURSHORTNAME&#39;
-  var disqus_identifier = &#39;PAGEID&#39;
-  var disqus_url = &#39;PAGEURL&#39;
-  var disqus_script = &#39;embed.js&#39;
-
-  (function(d,s) {
-  s = d.createElement(&#39;script&#39;);s.async=1;s.src = &#39;//&#39; + disqus_shortname + &#39;.disqus.com/&#39;+disqus_script;
-  (d.getElementsByTagName(&#39;head&#39;)[0]).appendChild(s);
-  })(document)
-&lt;/script&gt;
-</code></pre>
-<h4 id="Disqus-snippet-after-Pjax-integration"><a href="#Disqus-snippet-after-Pjax-integration" class="headerlink" title="Disqus snippet after Pjax integration"></a>Disqus snippet <em>after</em> Pjax integration</h4><pre><code class="language-html">&lt;div class=&quot;js-Pjax&quot;&gt;&lt;!-- needs to be here on every Pjax-ified page, even if empty --&gt;
-&lt;!-- if (some condition) { // eventual server-side test to know whether or not you include this script --&gt;
-  &lt;script&gt;
-    var disqus_shortname = &#39;YOURSHORTNAME&#39;
-    var disqus_identifier = &#39;PAGEID&#39;
-    var disqus_url = &#39;PAGEURL&#39;
-    var disqus_script = &#39;embed.js&#39;
-
-    // here we will only load the disqus &lt;script&gt; if not already loaded
-    if (!window.DISQUS) {
-      (function(d,s) {
-      s = d.createElement(&#39;script&#39;);s.async=1;s.src = &#39;//&#39; + disqus_shortname + &#39;.disqus.com/&#39;+disqus_script;
-      (d.getElementsByTagName(&#39;head&#39;)[0]).appendChild(s);
-      })(document)
-    }
-    // if disqus &lt;script&gt; is already loaded, we just reset disqus the right way
-    // see https://help.disqus.com/developer/using-disqus-on-ajax-sites
-    else {
-      DISQUS.reset({
-        reload: true,
-        config: function () {
-          this.page.identifier = disqus_identifier
-          this.page.url = disqus_url
-        }
-      })
-    }
-  &lt;/script&gt;
-&lt;!-- } --&gt;
-&lt;/div&gt;
-</code></pre>
-<p><strong>Note: Pjax only handles inline <code>&lt;script&gt;</code> blocks for the container you are switching.</strong></p>
-<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><p>Clone this repository and run <code>npm run example</code>, which will open the example app in your browser.</p>
-<h2 id="CONTRIBUTING"><a href="#CONTRIBUTING" class="headerlink" title="CONTRIBUTING"></a>CONTRIBUTING</h2><ul>
+<h4 id="disqus-snippet-before-pjax-integration">Disqus snippet
+<em>before</em> Pjax integration</h4>
+<div class="sourceCode" id="cb34"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> disqus_shortname <span class="op">=</span> <span class="st">&#39;YOURSHORTNAME&#39;</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> disqus_identifier <span class="op">=</span> <span class="st">&#39;PAGEID&#39;</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> disqus_url <span class="op">=</span> <span class="st">&#39;PAGEURL&#39;</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> disqus_script <span class="op">=</span> <span class="st">&#39;embed.js&#39;</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">function</span>(d<span class="op">,</span>s) {</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  s <span class="op">=</span> d<span class="op">.</span><span class="fu">createElement</span>(<span class="st">&#39;script&#39;</span>)<span class="op">;</span>s<span class="op">.</span><span class="at">async</span><span class="op">=</span><span class="dv">1</span><span class="op">;</span>s<span class="op">.</span><span class="at">src</span> <span class="op">=</span> <span class="st">&#39;//&#39;</span> <span class="op">+</span> disqus_shortname <span class="op">+</span> <span class="st">&#39;.disqus.com/&#39;</span><span class="op">+</span>disqus_script<span class="op">;</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  (d<span class="op">.</span><span class="fu">getElementsByTagName</span>(<span class="st">&#39;head&#39;</span>)[<span class="dv">0</span>])<span class="op">.</span><span class="fu">appendChild</span>(s)<span class="op">;</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>  })(<span class="bu">document</span>)</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span></code></pre></div>
+<h4 id="disqus-snippet-after-pjax-integration">Disqus snippet
+<em>after</em> Pjax integration</h4>
+<div class="sourceCode" id="cb35"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;js-Pjax&quot;</span><span class="dt">&gt;</span><span class="co">&lt;!-- needs to be here on every Pjax-ified page, even if empty --&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- if (some condition) { // eventual server-side test to know whether or not you include this script --&gt;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> disqus_shortname <span class="op">=</span> <span class="st">&#39;YOURSHORTNAME&#39;</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> disqus_identifier <span class="op">=</span> <span class="st">&#39;PAGEID&#39;</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> disqus_url <span class="op">=</span> <span class="st">&#39;PAGEURL&#39;</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> disqus_script <span class="op">=</span> <span class="st">&#39;embed.js&#39;</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// here we will only load the disqus &lt;script&gt; if not already loaded</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="op">!</span><span class="bu">window</span><span class="op">.</span><span class="at">DISQUS</span>) {</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>      (<span class="kw">function</span>(d<span class="op">,</span>s) {</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>      s <span class="op">=</span> d<span class="op">.</span><span class="fu">createElement</span>(<span class="st">&#39;script&#39;</span>)<span class="op">;</span>s<span class="op">.</span><span class="at">async</span><span class="op">=</span><span class="dv">1</span><span class="op">;</span>s<span class="op">.</span><span class="at">src</span> <span class="op">=</span> <span class="st">&#39;//&#39;</span> <span class="op">+</span> disqus_shortname <span class="op">+</span> <span class="st">&#39;.disqus.com/&#39;</span><span class="op">+</span>disqus_script<span class="op">;</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>      (d<span class="op">.</span><span class="fu">getElementsByTagName</span>(<span class="st">&#39;head&#39;</span>)[<span class="dv">0</span>])<span class="op">.</span><span class="fu">appendChild</span>(s)<span class="op">;</span></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>      })(<span class="bu">document</span>)</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// if disqus &lt;script&gt; is already loaded, we just reset disqus the right way</span></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// see https://help.disqus.com/developer/using-disqus-on-ajax-sites</span></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> {</span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>      DISQUS<span class="op">.</span><span class="fu">reset</span>({</span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>        <span class="dt">reload</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>        <span class="dt">config</span><span class="op">:</span> <span class="kw">function</span> () {</span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>          <span class="kw">this</span><span class="op">.</span><span class="at">page</span><span class="op">.</span><span class="at">identifier</span> <span class="op">=</span> disqus_identifier</span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>          <span class="kw">this</span><span class="op">.</span><span class="at">page</span><span class="op">.</span><span class="at">url</span> <span class="op">=</span> disqus_url</span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- } --&gt;</span></span>
+<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div>
+<p><strong>Note: Pjax only handles inline <code>&lt;script&gt;</code>
+blocks for the container you are switching.</strong></p>
+<h2 id="examples">Examples</h2>
+<p>Clone this repository and run <code>npm run example</code>, which
+will open the example app in your browser.</p>
+<h2 id="contributing">CONTRIBUTING</h2>
+<ul>
 <li>⇄ Pull requests and ★ Stars are always welcome.</li>
 <li>For bugs and feature requests, please create an issue.</li>
-<li>Pull requests must be accompanied by passing automated tests (<code>npm test</code>). If the API is changed, please update the Typescript definitions as well (<code>pjax.d.ts</code>).</li>
+<li>Pull requests must be accompanied by passing automated tests
+(<code>npm test</code>). If the API is changed, please update the
+Typescript definitions as well (<code>pjax.d.ts</code>).</li>
 </ul>
-<h2 id="CHANGELOG"><a href="#CHANGELOG" class="headerlink" title="CHANGELOG"></a><a href="CHANGELOG.md">CHANGELOG</a></h2><h2 id="LICENSE"><a href="#LICENSE" class="headerlink" title="LICENSE"></a><a href="LICENSE">LICENSE</a></h2>
+<h2 id="changelog"><a href="CHANGELOG.md">CHANGELOG</a></h2>
+<h2 id="license"><a href="LICENSE">LICENSE</a></h2>
