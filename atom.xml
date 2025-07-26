@@ -33,11 +33,11 @@
     <category term="cmd" scheme="http://example.com/categories/cmd/"/>
     
     
-    <category term="learn" scheme="http://example.com/tags/learn/"/>
-    
     <category term="cmd" scheme="http://example.com/tags/cmd/"/>
     
     <category term="curl" scheme="http://example.com/tags/curl/"/>
+    
+    <category term="learn" scheme="http://example.com/tags/learn/"/>
     
   </entry>
   
@@ -87,11 +87,11 @@
     <category term="code" scheme="http://example.com/categories/code/"/>
     
     
+    <category term="learn" scheme="http://example.com/tags/learn/"/>
+    
     <category term="repo" scheme="http://example.com/tags/repo/"/>
     
     <category term="git" scheme="http://example.com/tags/git/"/>
-    
-    <category term="learn" scheme="http://example.com/tags/learn/"/>
     
   </entry>
   
