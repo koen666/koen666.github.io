@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2025-07-26T03:16:34.840Z</updated>
+  <updated>2025-07-26T04:34:19.334Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>curl使用教学</title>
+    <link href="http://example.com/2025/07/26/curl/"/>
+    <id>http://example.com/2025/07/26/curl/</id>
+    <published>2025-07-26T04:00:00.000Z</published>
+    <updated>2025-07-26T04:34:19.334Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>curl 是一个强大的命令行工具，用于在命令行或脚本中发送 HTTP 请求，与服务器通信。它可以用来下载网页、调用 API 接口、上传文件、发送表单等。几乎所有支持网络通信的协议 curl 都能处理，包括 HTTP、HTTPS、FTP、SFTP、SMTP 等</p></blockquote><hr><h2 id="一、所以curl能干啥"><a href="#一、所以curl能干啥" class="headerlink" title="一、所以curl能干啥"></a>一、所以curl能干啥</h2><table><thead><tr><th>功能</th><th>示例</th></tr></thead><tbody><tr><td>获取网页内容</td><td><code>curl https://example.com</code></td></tr><tr><td>下载文件</td><td><code>curl -O https://example.com/file.zip</code></td></tr><tr><td>发送 POST 请求</td><td><code>curl -X POST -d &quot;name=Koen&amp;age=20&quot; https://example.com/api</code></td></tr><tr><td>添加请求头</td><td><code>curl -H &quot;Authorization: Bearer TOKEN&quot; https://api.example.com/data</code></td></tr><tr><td>上传文件</td><td><code>curl -F &quot;file=@test.png&quot; https://example.com/upload</code></td></tr><tr><td>保存输出到文件</td><td><code>curl https://example.com -o saved.html</code></td></tr></tbody></table><p>以下将对其功能进行详细解释</p><hr><h2 id="二、利用curl获取网页内容"><a href="#二、利用curl获取网页内容" class="headerlink" title="二、利用curl获取网页内容"></a>二、利用curl获取网页内容</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl url</span><br></pre></td></tr></table></figure><p>会将get请求返回结果直接输出在命令行中</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://example.com -o index.html</span><br></pre></td></tr></table></figure><p>保存指定内容到文件，地址为cmd当前地址</p><hr><h3 id="三、发送post请求"><a href="#三、发送post请求" class="headerlink" title="三、发送post请求"></a>三、发送post请求</h3><p>一般用于测试接口是否正常</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST -d <span class="string">&quot;name=Koen&amp;age=20&quot;</span> https://example.com/api</span><br></pre></td></tr></table></figure><p>带上请求头和请求体：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST https://api.example.com/data \</span><br><span class="line">  -H <span class="string">&quot;Authorization: Bearer abc123&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;&quot;key&quot;:&quot;value&quot;&#125;&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">     -d <span class="string">&#x27;&#123;&quot;username&quot;:&quot;koen&quot;,&quot;password&quot;:&quot;123456&quot;&#125;&#x27;</span> \</span><br><span class="line">     https://example.com/api</span><br></pre></td></tr></table></figure><hr><h3 id="四、利用curl进行文件上传"><a href="#四、利用curl进行文件上传" class="headerlink" title="四、利用curl进行文件上传"></a>四、利用curl进行文件上传</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -F <span class="string">&quot;file=@test.png&quot;</span> https://example.com/upload</span><br></pre></td></tr></table></figure><p>-F就是指定用表单的方式进行字段的上传</p><table><thead><tr><th>部分</th><th>含义</th></tr></thead><tbody><tr><td><code>file</code></td><td>表单字段的名字。就像网页表单中 <code>&lt;input type=&quot;file&quot; name=&quot;file&quot;&gt;</code>。</td></tr><tr><td><code>=</code></td><td>分隔字段名与数据（文件）</td></tr><tr><td><code>@test.png</code></td><td>表示上传当前目录下名为 <code>test.png</code> 的文件</td></tr></tbody></table><p>其实就是post请求上传文件的方式</p><hr>]]></content>
+    
+    
+    <summary type="html">本文用于介绍curl命令行工具的基本操作和使用，全程干货，放心食用</summary>
+    
+    
+    
+    <category term="cmd" scheme="http://example.com/categories/cmd/"/>
+    
+    
+    <category term="learn" scheme="http://example.com/tags/learn/"/>
+    
+    <category term="cmd" scheme="http://example.com/tags/cmd/"/>
+    
+    <category term="curl" scheme="http://example.com/tags/curl/"/>
+    
+  </entry>
   
   <entry>
     <title>Docker 基本使用教程</title>
@@ -33,11 +58,11 @@
     <category term="code" scheme="http://example.com/categories/code/"/>
     
     
+    <category term="learn" scheme="http://example.com/tags/learn/"/>
+    
     <category term="container" scheme="http://example.com/tags/container/"/>
     
     <category term="docker" scheme="http://example.com/tags/docker/"/>
-    
-    <category term="learn" scheme="http://example.com/tags/learn/"/>
     
     <category term="linux" scheme="http://example.com/tags/linux/"/>
     
@@ -62,11 +87,11 @@
     <category term="code" scheme="http://example.com/categories/code/"/>
     
     
-    <category term="learn" scheme="http://example.com/tags/learn/"/>
-    
     <category term="repo" scheme="http://example.com/tags/repo/"/>
     
     <category term="git" scheme="http://example.com/tags/git/"/>
+    
+    <category term="learn" scheme="http://example.com/tags/learn/"/>
     
   </entry>
   

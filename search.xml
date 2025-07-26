@@ -1,56 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Docker 基本使用教程</title>
-    <url>/2025/07/26/docker-basic-usage/</url>
-    <content><![CDATA[<blockquote>
-<p>Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。</p>
-</blockquote>
-<hr>
-<h2 id="一、Docker的用途"><a href="#一、Docker的用途" class="headerlink" title="一、Docker的用途"></a>一、Docker的用途</h2><p>Docker 的主要用途，目前有三大类。</p>
-<ol>
-<li><p>提供一次性的环境。比如，本地测试他人的软件、持续集成的时候提供单元测试和构建的环境。</p>
-</li>
-<li><p>提供弹性的云服务。因为 Docker 容器可以随开随关，很适合动态扩容和缩容。</p>
-</li>
-<li><p>组建微服务架构。通过多个容器，一台机器可以跑多个服务，因此在本机就可以模拟出微服务架构。</p>
-</li>
-</ol>
-<hr>
-<h2 id="二、验证是否安装成功"><a href="#二、验证是否安装成功" class="headerlink" title="二、验证是否安装成功"></a>二、验证是否安装成功</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="三、Image文件"><a href="#三、Image文件" class="headerlink" title="三、Image文件"></a>三、Image文件</h2><p>Docker 把应用程序及其依赖，打包在 <strong>image 文件</strong>里面。只有通过这个文件，才能生成 Docker 容器。<br>image 文件可以看作是容器的模板，Docker 根据 image 文件生成容器的实例。<br>同一个 image 文件，可以生成多个同时运行的容器实例。</p>
-<p>image 是一个 <strong>二进制文件</strong>。实际开发中，一个 image 文件往往通过继承另一个 image 文件，加上一些个性化设置而生成。<br>举例来说，你可以在 Ubuntu 的 image 基础上，往里面加入 Apache 服务器，形成你自己的 image。</p>
-<h4 id="📋-列出本机的所有-image-文件"><a href="#📋-列出本机的所有-image-文件" class="headerlink" title="📋 列出本机的所有 image 文件"></a>📋 列出本机的所有 image 文件</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker image <span class="built_in">ls</span></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 🗑️ 删除 image 文件</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">$ docker image <span class="built_in">rm</span> [imageName]</span><br></pre></td></tr></table></figure>
-
-<p>image 文件是通用的，一台机器的 image 文件拷贝到另一台机器，照样可以使用。</p>
-<p>一般来说，为了节省时间，我们应该尽量使用别人制作好的 image 文件，而不是自己制作。<br>即使要定制，也应该基于别人的 image 文件进行加工，而不是从零开始制作。</p>
-<h3 id="🗂️-镜像仓库（Image-Repository）"><a href="#🗂️-镜像仓库（Image-Repository）" class="headerlink" title="🗂️ 镜像仓库（Image Repository）"></a>🗂️ 镜像仓库（Image Repository）</h3><p>为了方便共享，image 文件制作完成后，可以上传到网上的仓库。</p>
-<ul>
-<li>Docker 的官方仓库 <strong>Docker Hub</strong> 是最重要、最常用的 image 仓库。</li>
-<li>此外，你也可以使用国内的镜像仓库（如阿里云、腾讯云）或者搭建私有仓库。</li>
-<li>出售自己制作的 image 文件也是可以的。</li>
-</ul>
-<h3 id="image-container"><a href="#image-container" class="headerlink" title="image&amp;&amp;container"></a>image&amp;&amp;container</h3><p>容器是镜像跑起来的实例，一个镜像可以有多个容器</p>
-<hr>
-<h2 id="四、如何跑起来呢"><a href="#四、如何跑起来呢" class="headerlink" title="四、如何跑起来呢"></a>四、如何跑起来呢</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker image pull &lt;project&gt;       <span class="comment">#将image文件从仓库抓取到本地</span></span><br><span class="line">docker container run &lt;project&gt;    <span class="comment">#将image文件在你的电脑上跑起来，新建容器</span></span><br><span class="line">docker container start [ID]       <span class="comment">#将已有的容器跑起来</span></span><br><span class="line">docker container <span class="built_in">kill</span> [ID]        <span class="comment">#手动终止容器的运行</span></span><br><span class="line">docker container <span class="built_in">ls</span>               <span class="comment">#在你电脑上正在跑起来的容器</span></span><br><span class="line">docker container <span class="built_in">ls</span> -all          <span class="comment">#列出本机所有容器，包括终止运行的容器</span></span><br><span class="line">docker container <span class="built_in">rm</span> [containerID] <span class="comment">#删除停止运行的容器，防止占用硬盘空间</span></span><br></pre></td></tr></table></figure>
-
-<p>注意，docker container run命令具有自动抓取 image 文件的功能。如果发现本地没有指定的 image 文件，就会从仓库自动抓取。因此，前面的docker image pull命令并不是必需的步骤。</p>
-<hr>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>container</tag>
-        <tag>docker</tag>
-        <tag>learn</tag>
-        <tag>linux</tag>
-        <tag>virtual</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Git 基本使用教程</title>
     <url>/2025/07/25/git-basic-usage/</url>
     <content><![CDATA[<blockquote>
@@ -121,9 +71,148 @@
         <category>code</category>
       </categories>
       <tags>
-        <tag>learn</tag>
         <tag>repo</tag>
         <tag>git</tag>
+        <tag>learn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker 基本使用教程</title>
+    <url>/2025/07/26/docker-basic-usage/</url>
+    <content><![CDATA[<blockquote>
+<p>Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。</p>
+</blockquote>
+<hr>
+<h2 id="一、Docker的用途"><a href="#一、Docker的用途" class="headerlink" title="一、Docker的用途"></a>一、Docker的用途</h2><p>Docker 的主要用途，目前有三大类。</p>
+<ol>
+<li><p>提供一次性的环境。比如，本地测试他人的软件、持续集成的时候提供单元测试和构建的环境。</p>
+</li>
+<li><p>提供弹性的云服务。因为 Docker 容器可以随开随关，很适合动态扩容和缩容。</p>
+</li>
+<li><p>组建微服务架构。通过多个容器，一台机器可以跑多个服务，因此在本机就可以模拟出微服务架构。</p>
+</li>
+</ol>
+<hr>
+<h2 id="二、验证是否安装成功"><a href="#二、验证是否安装成功" class="headerlink" title="二、验证是否安装成功"></a>二、验证是否安装成功</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="三、Image文件"><a href="#三、Image文件" class="headerlink" title="三、Image文件"></a>三、Image文件</h2><p>Docker 把应用程序及其依赖，打包在 <strong>image 文件</strong>里面。只有通过这个文件，才能生成 Docker 容器。<br>image 文件可以看作是容器的模板，Docker 根据 image 文件生成容器的实例。<br>同一个 image 文件，可以生成多个同时运行的容器实例。</p>
+<p>image 是一个 <strong>二进制文件</strong>。实际开发中，一个 image 文件往往通过继承另一个 image 文件，加上一些个性化设置而生成。<br>举例来说，你可以在 Ubuntu 的 image 基础上，往里面加入 Apache 服务器，形成你自己的 image。</p>
+<h4 id="📋-列出本机的所有-image-文件"><a href="#📋-列出本机的所有-image-文件" class="headerlink" title="📋 列出本机的所有 image 文件"></a>📋 列出本机的所有 image 文件</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker image <span class="built_in">ls</span></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 🗑️ 删除 image 文件</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">$ docker image <span class="built_in">rm</span> [imageName]</span><br></pre></td></tr></table></figure>
+
+<p>image 文件是通用的，一台机器的 image 文件拷贝到另一台机器，照样可以使用。</p>
+<p>一般来说，为了节省时间，我们应该尽量使用别人制作好的 image 文件，而不是自己制作。<br>即使要定制，也应该基于别人的 image 文件进行加工，而不是从零开始制作。</p>
+<h3 id="🗂️-镜像仓库（Image-Repository）"><a href="#🗂️-镜像仓库（Image-Repository）" class="headerlink" title="🗂️ 镜像仓库（Image Repository）"></a>🗂️ 镜像仓库（Image Repository）</h3><p>为了方便共享，image 文件制作完成后，可以上传到网上的仓库。</p>
+<ul>
+<li>Docker 的官方仓库 <strong>Docker Hub</strong> 是最重要、最常用的 image 仓库。</li>
+<li>此外，你也可以使用国内的镜像仓库（如阿里云、腾讯云）或者搭建私有仓库。</li>
+<li>出售自己制作的 image 文件也是可以的。</li>
+</ul>
+<h3 id="image-container"><a href="#image-container" class="headerlink" title="image&amp;&amp;container"></a>image&amp;&amp;container</h3><p>容器是镜像跑起来的实例，一个镜像可以有多个容器</p>
+<hr>
+<h2 id="四、如何跑起来呢"><a href="#四、如何跑起来呢" class="headerlink" title="四、如何跑起来呢"></a>四、如何跑起来呢</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker image pull &lt;project&gt;       <span class="comment">#将image文件从仓库抓取到本地</span></span><br><span class="line">docker container run &lt;project&gt;    <span class="comment">#将image文件在你的电脑上跑起来，新建容器</span></span><br><span class="line">docker container start [ID]       <span class="comment">#将已有的容器跑起来</span></span><br><span class="line">docker container <span class="built_in">kill</span> [ID]        <span class="comment">#手动终止容器的运行</span></span><br><span class="line">docker container <span class="built_in">ls</span>               <span class="comment">#在你电脑上正在跑起来的容器</span></span><br><span class="line">docker container <span class="built_in">ls</span> -all          <span class="comment">#列出本机所有容器，包括终止运行的容器</span></span><br><span class="line">docker container <span class="built_in">rm</span> [containerID] <span class="comment">#删除停止运行的容器，防止占用硬盘空间</span></span><br></pre></td></tr></table></figure>
+
+<p>注意，docker container run命令具有自动抓取 image 文件的功能。如果发现本地没有指定的 image 文件，就会从仓库自动抓取。因此，前面的docker image pull命令并不是必需的步骤。</p>
+<hr>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>learn</tag>
+        <tag>container</tag>
+        <tag>docker</tag>
+        <tag>linux</tag>
+        <tag>virtual</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>curl使用教学</title>
+    <url>/2025/07/26/curl/</url>
+    <content><![CDATA[<blockquote>
+<p>curl 是一个强大的命令行工具，用于在命令行或脚本中发送 HTTP 请求，与服务器通信。它可以用来下载网页、调用 API 接口、上传文件、发送表单等。几乎所有支持网络通信的协议 curl 都能处理，包括 HTTP、HTTPS、FTP、SFTP、SMTP 等</p>
+</blockquote>
+<hr>
+<h2 id="一、所以curl能干啥"><a href="#一、所以curl能干啥" class="headerlink" title="一、所以curl能干啥"></a>一、所以curl能干啥</h2><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>获取网页内容</td>
+<td><code>curl https://example.com</code></td>
+</tr>
+<tr>
+<td>下载文件</td>
+<td><code>curl -O https://example.com/file.zip</code></td>
+</tr>
+<tr>
+<td>发送 POST 请求</td>
+<td><code>curl -X POST -d &quot;name=Koen&amp;age=20&quot; https://example.com/api</code></td>
+</tr>
+<tr>
+<td>添加请求头</td>
+<td><code>curl -H &quot;Authorization: Bearer TOKEN&quot; https://api.example.com/data</code></td>
+</tr>
+<tr>
+<td>上传文件</td>
+<td><code>curl -F &quot;file=@test.png&quot; https://example.com/upload</code></td>
+</tr>
+<tr>
+<td>保存输出到文件</td>
+<td><code>curl https://example.com -o saved.html</code></td>
+</tr>
+</tbody></table>
+<p>以下将对其功能进行详细解释</p>
+<hr>
+<h2 id="二、利用curl获取网页内容"><a href="#二、利用curl获取网页内容" class="headerlink" title="二、利用curl获取网页内容"></a>二、利用curl获取网页内容</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl url</span><br></pre></td></tr></table></figure>
+
+<p>会将get请求返回结果直接输出在命令行中</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://example.com -o index.html</span><br></pre></td></tr></table></figure>
+
+<p>保存指定内容到文件，地址为cmd当前地址</p>
+<hr>
+<h3 id="三、发送post请求"><a href="#三、发送post请求" class="headerlink" title="三、发送post请求"></a>三、发送post请求</h3><p>一般用于测试接口是否正常</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -d <span class="string">&quot;name=Koen&amp;age=20&quot;</span> https://example.com/api</span><br></pre></td></tr></table></figure>
+<p>带上请求头和请求体：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST https://api.example.com/data \</span><br><span class="line">  -H <span class="string">&quot;Authorization: Bearer abc123&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;&quot;key&quot;:&quot;value&quot;&#125;&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">     -d <span class="string">&#x27;&#123;&quot;username&quot;:&quot;koen&quot;,&quot;password&quot;:&quot;123456&quot;&#125;&#x27;</span> \</span><br><span class="line">     https://example.com/api</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="四、利用curl进行文件上传"><a href="#四、利用curl进行文件上传" class="headerlink" title="四、利用curl进行文件上传"></a>四、利用curl进行文件上传</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -F <span class="string">&quot;file=@test.png&quot;</span> https://example.com/upload</span><br></pre></td></tr></table></figure>
+<p>-F就是指定用表单的方式进行字段的上传</p>
+<table>
+<thead>
+<tr>
+<th>部分</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>file</code></td>
+<td>表单字段的名字。就像网页表单中 <code>&lt;input type=&quot;file&quot; name=&quot;file&quot;&gt;</code>。</td>
+</tr>
+<tr>
+<td><code>=</code></td>
+<td>分隔字段名与数据（文件）</td>
+</tr>
+<tr>
+<td><code>@test.png</code></td>
+<td>表示上传当前目录下名为 <code>test.png</code> 的文件</td>
+</tr>
+</tbody></table>
+<p>其实就是post请求上传文件的方式</p>
+<hr>
+]]></content>
+      <categories>
+        <category>cmd</category>
+      </categories>
+      <tags>
+        <tag>learn</tag>
+        <tag>cmd</tag>
+        <tag>curl</tag>
       </tags>
   </entry>
 </search>
