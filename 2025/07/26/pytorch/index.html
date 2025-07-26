@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/autograd.png">
 <meta property="article:published_time" content="2025-07-26T08:06:04.469Z">
-<meta property="article:modified_time" content="2025-07-26T15:07:56.953Z">
+<meta property="article:modified_time" content="2025-07-26T15:10:13.286Z">
 <meta property="article:author" content="koen">
 <meta property="article:tag" content="deeplearning">
 <meta property="article:tag" content="pytorch">
@@ -328,7 +328,7 @@ mjx-container[display="true"] + br {
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-07-26 16:06:04 / Modified: 23:07:56" itemprop="dateCreated datePublished" datetime="2025-07-26T16:06:04+08:00">2025-07-26</time>
+              <time title="Created: 2025-07-26 16:06:04 / Modified: 23:10:13" itemprop="dateCreated datePublished" datetime="2025-07-26T16:06:04+08:00">2025-07-26</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -353,14 +353,14 @@ mjx-container[display="true"] + br {
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>2.9k</span>
+              <span>2.5k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>3 mins.</span>
+              <span>2 mins.</span>
             </span>
             <div class="post-description">本文介绍pytorch的基本使用，深度学习基础算法和神经网络的构建知识</div>
 
@@ -568,108 +568,7 @@ autograd 软件包为 Tensors
 </table>
 <p>作用：激活函数让隐藏层拥有表达复杂模式的能力，是神经网络“聪明起来”的关键。</p>
 <h3 id="损失函数">2.4损失函数</h3>
-<table>
-<colgroup>
-<col style="width: 16%">
-<col style="width: 20%">
-<col style="width: 16%">
-<col style="width: 36%">
-<col style="width: 9%">
-<col style="width: 0%">
-</colgroup>
-<thead>
-<tr>
-<th>损失函数名称</th>
-<th>PyTorch 名称</th>
-<th>适用任务</th>
-<th>数学表达式（简略）</th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>均方误差</strong>（MSE）</td>
-<td><code>nn.MSELoss()</code></td>
-<td>回归</td>
-<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.798ex;" xmlns="http://www.w3.org/2000/svg" width="12.452ex" height="2.755ex" role="img" focusable="false" viewBox="0 -864.9 5503.9 1217.7"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mn" transform="translate(255.4,394) scale(0.707)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mi" transform="translate(220,-345) scale(0.707)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><rect width="624.3" height="60" x="120" y="220"></rect></g><g data-mml-node="mo" transform="translate(1030.9,0)"><path data-c="2211" d="M61 748Q64 750 489 750H913L954 640Q965 609 976 579T993 533T999 516H979L959 517Q936 579 886 621T777 682Q724 700 655 705T436 710H319Q183 710 183 709Q186 706 348 484T511 259Q517 250 513 244L490 216Q466 188 420 134T330 27L149 -187Q149 -188 362 -188Q388 -188 436 -188T506 -189Q679 -189 778 -162T936 -43Q946 -27 959 6H999L913 -249L489 -250Q65 -250 62 -248Q56 -246 56 -239Q56 -234 118 -161Q186 -81 245 -11L428 206Q428 207 242 462L57 717L56 728Q56 744 61 748Z"></path></g><g data-mml-node="mo" transform="translate(2086.9,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(2475.9,0)"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(3188.2,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(4188.4,0)"><g data-mml-node="mover"><g data-mml-node="mi"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(300.6,16) translate(-250 0)"><path data-c="5E" d="M112 560L249 694L257 686Q387 562 387 560L361 531Q359 532 303 581L250 627L195 580Q182 569 169 557T148 538L140 532Q138 530 125 546L112 560Z"></path></g></g></g><g data-mml-node="msup" transform="translate(4678.4,0)"><g data-mml-node="mo"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mn" transform="translate(422,363) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g></g></svg></mjx-container></span></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>平均绝对误差</strong>（MAE）</td>
-<td><code>nn.L1Loss()</code></td>
-<td>回归</td>
-<td>( </td>
-<td>y - </td>
-<td>)</td>
-</tr>
-<tr>
-<td><strong>Huber损失</strong></td>
-<td><code>nn.SmoothL1Loss()</code></td>
-<td>回归（鲁棒）</td>
-<td>对异常值不敏感</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>二元交叉熵</strong></td>
-<td><code>nn.BCELoss()</code></td>
-<td>二分类</td>
-<td><span class="math inline">−[<em>y</em>log <em>ŷ</em> + (1 − <em>y</em>)log (1 − <em>ŷ</em>)]</span></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>带 Logits 的二元交叉熵</strong></td>
-<td><code>nn.BCEWithLogitsLoss()</code></td>
-<td>二分类</td>
-<td>将 Sigmoid + BCE 合并，提高数值稳定性</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>多分类交叉熵</strong></td>
-<td><code>nn.CrossEntropyLoss()</code></td>
-<td>多分类</td>
-<td>Softmax + Log-Loss 合并</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>KL散度损失</strong></td>
-<td><code>nn.KLDivLoss()</code></td>
-<td>分布拟合</td>
-<td>衡量两个概率分布的差异</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>负对数似然</strong></td>
-<td><code>nn.NLLLoss()</code></td>
-<td>多分类（配合 <code>LogSoftmax</code>）</td>
-<td>( -P(y</td>
-<td>) )</td>
-<td></td>
-</tr>
-<tr>
-<td><strong>CTC 损失</strong></td>
-<td><code>nn.CTCLoss()</code></td>
-<td>语音/序列对齐</td>
-<td>用于无对齐标签的序列预测</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>Triplet Loss</strong></td>
-<td><code>nn.TripletMarginLoss()</code></td>
-<td>人脸识别/度量学习</td>
-<td>距离学习，正样本比负样本更近</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<pre><code>                    |             |   |</code></pre>
 <h3 id="优化器">2.5优化器</h3>
 <table>
 <colgroup>
@@ -956,7 +855,7 @@ autograd 软件包为 Tensors
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">5k</span>
+    <span title="Symbols count total">4k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
