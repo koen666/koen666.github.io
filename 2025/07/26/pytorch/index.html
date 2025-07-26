@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/autograd.png">
 <meta property="article:published_time" content="2025-07-26T08:06:04.469Z">
-<meta property="article:modified_time" content="2025-07-26T15:04:58.642Z">
+<meta property="article:modified_time" content="2025-07-26T15:07:56.953Z">
 <meta property="article:author" content="koen">
 <meta property="article:tag" content="deeplearning">
 <meta property="article:tag" content="pytorch">
@@ -328,7 +328,7 @@ mjx-container[display="true"] + br {
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-07-26 16:06:04 / Modified: 23:04:58" itemprop="dateCreated datePublished" datetime="2025-07-26T16:06:04+08:00">2025-07-26</time>
+              <time title="Created: 2025-07-26 16:06:04 / Modified: 23:07:56" itemprop="dateCreated datePublished" datetime="2025-07-26T16:06:04+08:00">2025-07-26</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -353,7 +353,7 @@ mjx-container[display="true"] + br {
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>3k</span>
+              <span>2.9k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -459,16 +459,44 @@ autograd 软件包为 Tensors
 <code>__init__</code>函数 — 网络结构的“搭建工厂”</p>
 <p>作用：
 初始化神经网络的层和组件,相当于在这里定义好网络的“骨架”和“零件”。</p>
-<p>一般<code>_init_</code>内包含如下内容 | 类型 | 内容 | 说明 | |
-———————– | ————————————- | —————————– | | 🔷 网络层 |
-<code>nn.Linear</code>, <code>nn.Conv2d</code>, <code>nn.LSTM</code> 等
-| 定义输入层、隐藏层、输出层结构 | | 🔶 激活函数 |
-<code>nn.ReLU()</code>, <code>nn.Sigmoid()</code> 等 |
-可以作为类成员，也可以直接在 <code>forward()</code> 里用 | | 🔸 Dropout
-/ BatchNorm | <code>nn.Dropout</code>, <code>nn.BatchNorm1d</code> 等 |
-用于正则化、加速收敛 | | 🔻 有时会放优化器 / 损失函数（但不推荐） |
-<code>optim.SGD</code>, <code>nn.CrossEntropyLoss</code> |
-一般在模型外单独写更清晰 |</p>
+<p>一般<code>_init_</code>内包含如下内容:</p>
+<table>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 41%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr>
+<th>类型</th>
+<th>内容</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🔷 网络层</td>
+<td><code>nn.Linear</code>, <code>nn.Conv2d</code>, <code>nn.LSTM</code>
+等</td>
+<td>定义输入层、隐藏层、输出层结构</td>
+</tr>
+<tr>
+<td>🔶 激活函数</td>
+<td><code>nn.ReLU()</code>, <code>nn.Sigmoid()</code> 等</td>
+<td>可以作为类成员，也可以直接在 <code>forward()</code> 里用</td>
+</tr>
+<tr>
+<td>🔸 Dropout / BatchNorm</td>
+<td><code>nn.Dropout</code>, <code>nn.BatchNorm1d</code> 等</td>
+<td>用于正则化、加速收敛</td>
+</tr>
+<tr>
+<td>🔻 有时会放优化器 / 损失函数（但不推荐）</td>
+<td><code>optim.SGD</code>, <code>nn.CrossEntropyLoss</code></td>
+<td>一般在模型外单独写更清晰</td>
+</tr>
+</tbody>
+</table>
 <p>比如在上述示例代码中的具体内容： -
 <code>super(SimpleFNN, self).__init__()</code> 调用父类 nn.Module
 的初始化方法，确保网络能正常工作和注册所有子模块。</p>
