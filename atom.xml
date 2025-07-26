@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2025-07-25T17:15:49.962Z</updated>
+  <updated>2025-07-26T01:01:24.022Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Doker 基本使用教程</title>
+    <link href="http://example.com/2025/07/26/docker-basic-usage/"/>
+    <id>http://example.com/2025/07/26/docker-basic-usage/</id>
+    <published>2025-07-26T00:53:34.303Z</published>
+    <updated>2025-07-26T01:01:24.022Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。</p></blockquote><hr><h2 id="一、Docker的用途"><a href="#一、Docker的用途" class="headerlink" title="一、Docker的用途"></a>一、Docker的用途</h2><p>Docker 的主要用途，目前有三大类。</p><ol><li><p>提供一次性的环境。比如，本地测试他人的软件、持续集成的时候提供单元测试和构建的环境。</p></li><li><p>提供弹性的云服务。因为 Docker 容器可以随开随关，很适合动态扩容和缩容。</p></li><li><p>组建微服务架构。通过多个容器，一台机器可以跑多个服务，因此在本机就可以模拟出微服务架构。</p></li></ol><h2 id="二、"><a href="#二、" class="headerlink" title="二、"></a>二、</h2>]]></content>
+    
+    
+    <summary type="html">本文介绍和更新Docker的基本使用方法。</summary>
+    
+    
+    
+    <category term="code" scheme="http://example.com/categories/code/"/>
+    
+    
+    <category term="container" scheme="http://example.com/tags/container/"/>
+    
+    <category term="docker" scheme="http://example.com/tags/docker/"/>
+    
+    <category term="learn" scheme="http://example.com/tags/learn/"/>
+    
+    <category term="linux" scheme="http://example.com/tags/linux/"/>
+    
+    <category term="virtual" scheme="http://example.com/tags/virtual/"/>
+    
+  </entry>
   
   <entry>
     <title>Git 基本使用教程</title>

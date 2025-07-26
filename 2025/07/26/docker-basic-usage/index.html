@@ -20,15 +20,24 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"text":"评论","order":-2}},"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="木语">
-<meta property="og:url" content="http://example.com/tags/git/index.html">
+  <meta name="description" content="本文介绍和更新Docker的基本使用方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Doker 基本使用教程">
+<meta property="og:url" content="http://example.com/2025/07/26/docker-basic-usage/index.html">
 <meta property="og:site_name" content="木语">
+<meta property="og:description" content="本文介绍和更新Docker的基本使用方法。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-26T00:53:34.303Z">
+<meta property="article:modified_time" content="2025-07-26T01:01:24.022Z">
 <meta property="article:author" content="koen">
+<meta property="article:tag" content="container">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="learn">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="virtual">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/tags/git/">
+<link rel="canonical" href="http://example.com/2025/07/26/docker-basic-usage/">
 
 
 <script id="page-configurations">
@@ -36,12 +45,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Tag: git | 木语</title>
+  <title>Doker 基本使用教程 | 木语</title>
   
 
 
@@ -176,57 +185,154 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">git
-          <small>Tag</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/07/26/docker-basic-usage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/./images/head.jpg">
+      <meta itemprop="name" content="koen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木语">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Doker 基本使用教程
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-07-26 08:53:34 / Modified: 09:01:24" itemprop="dateCreated datePublished" datetime="2025-07-26T08:53:34+08:00">2025-07-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index"><span itemprop="name">code</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>222</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+            <div class="post-description">本文介绍和更新Docker的基本使用方法。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2025</span>
+        <blockquote>
+<p>Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。</p>
+</blockquote>
+<hr>
+<h2 id="一、Docker的用途"><a href="#一、Docker的用途" class="headerlink" title="一、Docker的用途"></a>一、Docker的用途</h2><p>Docker 的主要用途，目前有三大类。</p>
+<ol>
+<li><p>提供一次性的环境。比如，本地测试他人的软件、持续集成的时候提供单元测试和构建的环境。</p>
+</li>
+<li><p>提供弹性的云服务。因为 Docker 容器可以随开随关，很适合动态扩容和缩容。</p>
+</li>
+<li><p>组建微服务架构。通过多个容器，一台机器可以跑多个服务，因此在本机就可以模拟出微服务架构。</p>
+</li>
+</ol>
+<h2 id="二、"><a href="#二、" class="headerlink" title="二、"></a>二、</h2>
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2025-07-25T23:00:00+08:00"
-              content="2025-07-25">
-          07-25
-        </time>
+    
+    
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">~~~~~~~~~~~~~~ 本文结束 <i class="fa fa-paw"></i> 感谢您的阅读 ~~~~~~~~~~~~~~</div>
+    
+</div>
       </div>
+    
+        <div class="reward-container">
+  <div>在线要饭~</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2025/07/25/git-basic-usage/" itemprop="url">
-            <span itemprop="name">Git 基本使用教程</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-    </div>
   </div>
-  
-  
-  
+</div>
 
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/container/" rel="tag"><i class="fa fa-tag"></i> container</a>
+              <a href="/tags/docker/" rel="tag"><i class="fa fa-tag"></i> docker</a>
+              <a href="/tags/learn/" rel="tag"><i class="fa fa-tag"></i> learn</a>
+              <a href="/tags/linux/" rel="tag"><i class="fa fa-tag"></i> linux</a>
+              <a href="/tags/virtual/" rel="tag"><i class="fa fa-tag"></i> virtual</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/07/25/git-basic-usage/" rel="prev" title="Git 基本使用教程">
+      <i class="fa fa-chevron-left"></i> Git 基本使用教程
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -273,6 +379,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81Docker%E7%9A%84%E7%94%A8%E9%80%94"><span class="nav-text">一、Docker的用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81"><span class="nav-text">二、</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -586,6 +693,25 @@ window.addEventListener('pjax:success', () => {
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'Ov23liWNrNurmdCCSe44',
+      clientSecret: 'e99bd9bd840b672d12d0c6ce1824f8bcaa26ee9d',
+      repo        : 'koen666.github.io',
+      owner       : 'koen666',
+      admin       : ['koen666'],
+      id          : 'f0efe87bc2dfe6d676e4c8a5e5277dce',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
     </div>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
