@@ -28,7 +28,7 @@
 <meta property="og:description" content="本文介绍和更新Docker的基本使用方法。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-07-26T00:53:34.303Z">
-<meta property="article:modified_time" content="2025-07-26T03:16:34.840Z">
+<meta property="article:modified_time" content="2025-07-26T06:22:45.447Z">
 <meta property="article:author" content="koen">
 <meta property="article:tag" content="learn">
 <meta property="article:tag" content="container">
@@ -216,7 +216,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-07-26 08:53:34 / Modified: 11:16:34" itemprop="dateCreated datePublished" datetime="2025-07-26T08:53:34+08:00">2025-07-26</time>
+              <time title="Created: 2025-07-26 08:53:34 / Modified: 14:22:45" itemprop="dateCreated datePublished" datetime="2025-07-26T08:53:34+08:00">2025-07-26</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -280,7 +280,7 @@
 <hr>
 <h2 id="三、Image文件"><a href="#三、Image文件" class="headerlink" title="三、Image文件"></a>三、Image文件</h2><p>Docker 把应用程序及其依赖，打包在 <strong>image 文件</strong>里面。只有通过这个文件，才能生成 Docker 容器。<br>image 文件可以看作是容器的模板，Docker 根据 image 文件生成容器的实例。<br>同一个 image 文件，可以生成多个同时运行的容器实例。</p>
 <p>image 是一个 <strong>二进制文件</strong>。实际开发中，一个 image 文件往往通过继承另一个 image 文件，加上一些个性化设置而生成。<br>举例来说，你可以在 Ubuntu 的 image 基础上，往里面加入 Apache 服务器，形成你自己的 image。</p>
-<h4 id="📋-列出本机的所有-image-文件"><a href="#📋-列出本机的所有-image-文件" class="headerlink" title="📋 列出本机的所有 image 文件"></a>📋 列出本机的所有 image 文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ docker image <span class="built_in">ls</span></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 🗑️ 删除 image 文件</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">$ docker image <span class="built_in">rm</span> [imageName]</span><br></pre></td></tr></table></figure>
+<h3 id="📋-列出本机的所有-image-文件"><a href="#📋-列出本机的所有-image-文件" class="headerlink" title="📋 列出本机的所有 image 文件"></a>📋 列出本机的所有 image 文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ docker image <span class="built_in">ls</span></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 🗑️ 删除 image 文件</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">$ docker image <span class="built_in">rm</span> [imageName]</span><br></pre></td></tr></table></figure>
 
 <p>image 文件是通用的，一台机器的 image 文件拷贝到另一台机器，照样可以使用。</p>
 <p>一般来说，为了节省时间，我们应该尽量使用别人制作好的 image 文件，而不是自己制作。<br>即使要定制，也应该基于别人的 image 文件进行加工，而不是从零开始制作。</p>
@@ -404,7 +404,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81Docker%E7%9A%84%E7%94%A8%E9%80%94"><span class="nav-text">一、Docker的用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%AA%8C%E8%AF%81%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F"><span class="nav-text">二、验证是否安装成功</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81Image%E6%96%87%E4%BB%B6"><span class="nav-text">三、Image文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%F0%9F%93%8B-%E5%88%97%E5%87%BA%E6%9C%AC%E6%9C%BA%E7%9A%84%E6%89%80%E6%9C%89-image-%E6%96%87%E4%BB%B6"><span class="nav-text">📋 列出本机的所有 image 文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%97%82%EF%B8%8F-%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93%EF%BC%88Image-Repository%EF%BC%89"><span class="nav-text">🗂️ 镜像仓库（Image Repository）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#image-container"><span class="nav-text">image&amp;&amp;container</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%A6%82%E4%BD%95%E8%B7%91%E8%B5%B7%E6%9D%A5%E5%91%A2"><span class="nav-text">四、如何跑起来呢</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81Docker%E7%9A%84%E7%94%A8%E9%80%94"><span class="nav-text">一、Docker的用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%AA%8C%E8%AF%81%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F"><span class="nav-text">二、验证是否安装成功</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81Image%E6%96%87%E4%BB%B6"><span class="nav-text">三、Image文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%8B-%E5%88%97%E5%87%BA%E6%9C%AC%E6%9C%BA%E7%9A%84%E6%89%80%E6%9C%89-image-%E6%96%87%E4%BB%B6"><span class="nav-text">📋 列出本机的所有 image 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%97%82%EF%B8%8F-%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93%EF%BC%88Image-Repository%EF%BC%89"><span class="nav-text">🗂️ 镜像仓库（Image Repository）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#image-container"><span class="nav-text">image&amp;&amp;container</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%A6%82%E4%BD%95%E8%B7%91%E8%B5%B7%E6%9D%A5%E5%91%A2"><span class="nav-text">四、如何跑起来呢</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -421,7 +421,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -434,7 +434,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -461,7 +461,7 @@
             <h5 class="widget-title">标签云</h5>
             <div id="myCanvasContainer" class="widget tagcloud">
                 <canvas width="250" height="250" id="resCanvas" style="width:100%">
-                    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/container/" rel="tag">container</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/curl/" rel="tag">curl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/learn/" rel="tag">learn</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/repo/" rel="tag">repo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtual/" rel="tag">virtual</a><span class="tag-list-count">1</span></li></ul>
+                    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Transformer/" rel="tag">Transformer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/container/" rel="tag">container</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/curl/" rel="tag">curl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deeplearning/" rel="tag">deeplearning</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/learn/" rel="tag">learn</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/repo/" rel="tag">repo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtual/" rel="tag">virtual</a><span class="tag-list-count">1</span></li></ul>
                 </canvas>
             </div>
         </div>

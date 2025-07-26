@@ -48,14 +48,14 @@
 
 <p>保存指定内容到文件，地址为cmd当前地址</p>
 <hr>
-<h3 id="三、发送post请求"><a href="#三、发送post请求" class="headerlink" title="三、发送post请求"></a>三、发送post请求</h3><p>一般用于测试接口是否正常</p>
+<h2 id="三、发送post请求"><a href="#三、发送post请求" class="headerlink" title="三、发送post请求"></a>三、发送post请求</h2><p>一般用于测试接口是否正常</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -d <span class="string">&quot;name=Koen&amp;age=20&quot;</span> https://example.com/api</span><br></pre></td></tr></table></figure>
 <p>带上请求头和请求体：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST https://api.example.com/data \</span><br><span class="line">  -H <span class="string">&quot;Authorization: Bearer abc123&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;&quot;key&quot;:&quot;value&quot;&#125;&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">     -d <span class="string">&#x27;&#123;&quot;username&quot;:&quot;koen&quot;,&quot;password&quot;:&quot;123456&quot;&#125;&#x27;</span> \</span><br><span class="line">     https://example.com/api</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="四、利用curl进行文件上传"><a href="#四、利用curl进行文件上传" class="headerlink" title="四、利用curl进行文件上传"></a>四、利用curl进行文件上传</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -F <span class="string">&quot;file=@test.png&quot;</span> https://example.com/upload</span><br></pre></td></tr></table></figure>
+<h2 id="四、利用curl进行文件上传"><a href="#四、利用curl进行文件上传" class="headerlink" title="四、利用curl进行文件上传"></a>四、利用curl进行文件上传</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -F <span class="string">&quot;file=@test.png&quot;</span> https://example.com/upload</span><br></pre></td></tr></table></figure>
 <p>-F就是指定用表单的方式进行字段的上传</p>
 <table>
 <thead>
@@ -111,7 +111,7 @@
 <hr>
 <h2 id="三、Image文件"><a href="#三、Image文件" class="headerlink" title="三、Image文件"></a>三、Image文件</h2><p>Docker 把应用程序及其依赖，打包在 <strong>image 文件</strong>里面。只有通过这个文件，才能生成 Docker 容器。<br>image 文件可以看作是容器的模板，Docker 根据 image 文件生成容器的实例。<br>同一个 image 文件，可以生成多个同时运行的容器实例。</p>
 <p>image 是一个 <strong>二进制文件</strong>。实际开发中，一个 image 文件往往通过继承另一个 image 文件，加上一些个性化设置而生成。<br>举例来说，你可以在 Ubuntu 的 image 基础上，往里面加入 Apache 服务器，形成你自己的 image。</p>
-<h4 id="📋-列出本机的所有-image-文件"><a href="#📋-列出本机的所有-image-文件" class="headerlink" title="📋 列出本机的所有 image 文件"></a>📋 列出本机的所有 image 文件</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker image <span class="built_in">ls</span></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 🗑️ 删除 image 文件</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">$ docker image <span class="built_in">rm</span> [imageName]</span><br></pre></td></tr></table></figure>
+<h3 id="📋-列出本机的所有-image-文件"><a href="#📋-列出本机的所有-image-文件" class="headerlink" title="📋 列出本机的所有 image 文件"></a>📋 列出本机的所有 image 文件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker image <span class="built_in">ls</span></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 🗑️ 删除 image 文件</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">$ docker image <span class="built_in">rm</span> [imageName]</span><br></pre></td></tr></table></figure>
 
 <p>image 文件是通用的，一台机器的 image 文件拷贝到另一台机器，照样可以使用。</p>
 <p>一般来说，为了节省时间，我们应该尽量使用别人制作好的 image 文件，而不是自己制作。<br>即使要定制，也应该基于别人的 image 文件进行加工，而不是从零开始制作。</p>
@@ -137,6 +137,30 @@
         <tag>docker</tag>
         <tag>linux</tag>
         <tag>virtual</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pytorch，深度学习与神经网络篇</title>
+    <url>/2025/07/26/pytorch/</url>
+    <content><![CDATA[<h2 id="一、AutoGrad"><a href="#一、AutoGrad" class="headerlink" title="一、AutoGrad"></a>一、AutoGrad</h2><p>autograd 包是 PyTorch 中所有神经网络的核心。首先让我们简要地介绍它，然后我们将会去训练我们的第一个神经网络。该 autograd 软件包为 Tensors 上的所有操作提供自动微分。它是一个由运行定义的框架，这意味着以代码运行方式定义你的后向传播，并且每次迭代都可以不同</p>
+<p>先丢张思维导图叭：<br><img src="/../../themes/next/source/images/autograd.png" alt="autograd"></p>
+<p>首先要给x定义 <code>requires_grad=True</code> 属性</p>
+<p>其次要注意被<code>backward()</code>的张量需要是张量标量，即需要被<code>mean()</code>或者是<code>sum()</code></p>
+<p>最后x的梯度就是$\frac{dz}{dx}$</p>
+<p>将代码块包裹在 <code>with torch.no_grad()：</code> 中以停止自动微分</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(x.requires_grad)</span><br><span class="line"><span class="built_in">print</span>((x ** <span class="number">2</span>).requires_grad)</span><br><span class="line"></span><br><span class="line">with torch.no_grad():</span><br><span class="line">    print((x ** <span class="number">2</span>).requires_grad)</span><br></pre></td></tr></table></figure>
+<p>output:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">True</span><br><span class="line">True</span><br><span class="line">False</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>deeplearning</tag>
+        <tag>pytorch</tag>
+        <tag>Transformer</tag>
       </tags>
   </entry>
   <entry>

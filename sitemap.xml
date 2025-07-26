@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://example.com/2025/07/26/curl/</loc>
+    <loc>http://example.com/2025/07/26/pytorch/</loc>
     
     <lastmod>2025-07-26</lastmod>
     
@@ -12,6 +12,15 @@
   
   <url>
     <loc>http://example.com/2025/07/26/docker-basic-usage/</loc>
+    
+    <lastmod>2025-07-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/2025/07/26/curl/</loc>
     
     <lastmod>2025-07-26</lastmod>
     
@@ -99,6 +108,27 @@
   
   <url>
     <loc>http://example.com/tags/virtual/</loc>
+    <lastmod>2025-07-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/deeplearning/</loc>
+    <lastmod>2025-07-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/pytorch/</loc>
+    <lastmod>2025-07-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/Transformer/</loc>
     <lastmod>2025-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
