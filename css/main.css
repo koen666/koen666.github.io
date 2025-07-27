@@ -1227,7 +1227,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #390354;
+  background: #6f93de;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2735,9 +2735,13 @@ body {
   background-position: 50% 50%;
 }
 code {
-  color: #ff7600;
-  background: #fbf7f8;
-  margin: 2px;
+  padding: 2px 4px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  color: #c7254e;
+  background: #f9f2f4;
+  border-radius: 3px;
+  font-size: 18px;
 }
 .highlight,
 pre {
@@ -2754,10 +2758,13 @@ pre {
 }
 /*添加背景图*/
 body {
-  background: url("../themes/next/source/images/background.png"); /*自定义的图片*/
+  background: url("myBlog/themes/next/source/images/background.png"); /*自定义的图片*/
   background-size: 100% 100%; /*拉伸到全屏显示*/
+  background-color: #d5b69a;
   background-repeat: no-repeat; /*拒绝重复填充*/
   background-attachment: fixed; /*固定图层，不随鼠标滚动而滚动*/
+body
+  cursor: url("https://cdn.jsdelivr.net/gh/TRHX/CDN-for-itrhx.com@2.1.6/images/mouse.cur"), auto;
 }
 /*文章透明度*/
 .post-block {

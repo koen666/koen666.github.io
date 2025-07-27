@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://example.com/2025/07/27/latex/</loc>
+    <loc>http://example.com/2025/07/26/pytorch/</loc>
     <lastmod>2025-07-27</lastmod>
   </url>
   <url>
-    <loc>http://example.com/2025/07/26/pytorch/</loc>
-    <lastmod>2025-07-26</lastmod>
+    <loc>http://example.com/2025/07/27/latex/</loc>
+    <lastmod>2025-07-27</lastmod>
   </url>
   <url>
     <loc>http://example.com/2025/07/26/curl/</loc>
