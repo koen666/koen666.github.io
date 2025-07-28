@@ -1227,7 +1227,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ffaa9f;
+  background: #302adf;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2758,7 +2758,7 @@ pre {
 }
 /*添加背景图*/
 body {
-  background: url("myBlog/themes/next/source/images/background.png"); /*自定义的图片*/
+  background: url("/images/background.png"); /*自定义的图片*/
   background-size: 100% 100%; /*拉伸到全屏显示*/
   background-color: #d5b69a;
   background-repeat: no-repeat; /*拒绝重复填充*/

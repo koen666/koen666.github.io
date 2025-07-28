@@ -1,71 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Docker 基本使用教程</title>
-    <url>/2025/07/26/docker-basic-usage/</url>
+    <title>Git 基本使用教程</title>
+    <url>/2025/07/25/git-basic-usage/</url>
     <content><![CDATA[<blockquote>
-<p>Docker
-可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的
-Linux 机器上，也可以实现虚拟化。</p>
+<p>Git
+是一个分布式版本控制系统，适用于代码版本管理与团队协作开发。本文将简要介绍
+Git
+的一些常用操作命令，包括创建仓库、分支管理以及删除文件/分支的方法。</p>
 </blockquote>
 <hr />
-<h2 id="一docker的用途">一、Docker的用途</h2>
-<p>Docker 的主要用途，目前有三大类。</p>
-<ol type="1">
-<li><p>提供一次性的环境。比如，本地测试他人的软件、持续集成的时候提供单元测试和构建的环境。</p></li>
-<li><p>提供弹性的云服务。因为 Docker
-容器可以随开随关，很适合动态扩容和缩容。</p></li>
-<li><p>组建微服务架构。通过多个容器，一台机器可以跑多个服务，因此在本机就可以模拟出微服务架构。</p></li>
-</ol>
-<hr />
-<h2 id="二验证是否安装成功">二、验证是否安装成功</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="三image文件">三、Image文件</h2>
-<p>Docker 把应用程序及其依赖，打包在 <strong>image
-文件</strong>里面。只有通过这个文件，才能生成 Docker 容器。<br />
-image 文件可以看作是容器的模板，Docker 根据 image
-文件生成容器的实例。<br />
-同一个 image 文件，可以生成多个同时运行的容器实例。</p>
-<p>image 是一个 <strong>二进制文件</strong>。实际开发中，一个 image
-文件往往通过继承另一个 image 文件，加上一些个性化设置而生成。<br />
-举例来说，你可以在 Ubuntu 的 image 基础上，往里面加入 Apache
-服务器，形成你自己的 image。</p>
-<h3 id="列出本机的所有-image-文件">📋 列出本机的所有 image 文件</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker image <span class="built_in">ls</span></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 🗑️ 删除 image 文件</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">$ docker image <span class="built_in">rm</span> [imageName]</span><br></pre></td></tr></table></figure>
-<p>image 文件是通用的，一台机器的 image
-文件拷贝到另一台机器，照样可以使用。</p>
-<p>一般来说，为了节省时间，我们应该尽量使用别人制作好的 image
-文件，而不是自己制作。 即使要定制，也应该基于别人的 image
-文件进行加工，而不是从零开始制作。</p>
-<h3 id="镜像仓库image-repository">🗂️ 镜像仓库（Image Repository）</h3>
-<p>为了方便共享，image 文件制作完成后，可以上传到网上的仓库。</p>
+<h2 id="一初始化仓库">一、初始化仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
 <ul>
-<li>Docker 的官方仓库 <strong>Docker Hub</strong> 是最重要、最常用的
-image 仓库。</li>
-<li>此外，你也可以使用国内的镜像仓库（如阿里云、腾讯云）或者搭建私有仓库。</li>
-<li>出售自己制作的 image 文件也是可以的。</li>
+<li>在当前目录初始化一个 Git 仓库。</li>
+<li>会创建 <code>.git</code> 文件夹作为版本控制目录。</li>
 </ul>
-<h3 id="imagecontainer">image&amp;&amp;container</h3>
-<p>容器是镜像跑起来的实例，一个镜像可以有多个容器</p>
 <hr />
-<h2 id="四如何跑起来呢">四、如何跑起来呢</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker image pull &lt;project&gt;       <span class="comment">#将image文件从仓库抓取到本地</span></span><br><span class="line">docker container run &lt;project&gt;    <span class="comment">#将image文件在你的电脑上跑起来，新建容器</span></span><br><span class="line">docker container start [ID]       <span class="comment">#将已有的容器跑起来</span></span><br><span class="line">docker container <span class="built_in">kill</span> [ID]        <span class="comment">#手动终止容器的运行</span></span><br><span class="line">docker container <span class="built_in">ls</span>               <span class="comment">#在你电脑上正在跑起来的容器</span></span><br><span class="line">docker container <span class="built_in">ls</span> -all          <span class="comment">#列出本机所有容器，包括终止运行的容器</span></span><br><span class="line">docker container <span class="built_in">rm</span> [containerID] <span class="comment">#删除停止运行的容器，防止占用硬盘空间</span></span><br></pre></td></tr></table></figure>
-<p>注意，docker container run命令具有自动抓取 image
-文件的功能。如果发现本地没有指定的 image
-文件，就会从仓库自动抓取。因此，前面的docker image
-pull命令并不是必需的步骤。</p>
+<h2 id="二克隆远程仓库">二、克隆远程仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;仓库地址&gt;</span><br><span class="line">```****</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/username/repo.git</span><br></pre></td></tr></table></figure>
 <hr />
+<h2 id="三添加与提交文件">三、添加与提交文件</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add &lt;文件或目录&gt;</span><br><span class="line">git commit -m <span class="string">&quot;提交说明&quot;</span></span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;添加初始项目文件&quot;</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="四查看状态与历史">四、查看状态与历史</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status        <span class="comment"># 查看当前状态</span></span><br><span class="line">git <span class="built_in">log</span>           <span class="comment"># 查看提交历史</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="五分支操作">五、分支操作</h2>
+<h3 id="创建新分支">创建新分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="切换分支">切换分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch &lt;分支名&gt;</span><br><span class="line"><span class="comment"># 或（旧写法）</span></span><br><span class="line">git checkout &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="创建并切换新分支">创建并切换新分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch -c &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="查看所有分支">查看所有分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="六合并分支">六、合并分支</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git merge &lt;被合并的分支&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：需要先切换到目标分支，再合并。</p>
+</blockquote>
+<hr />
+<h2 id="七删除操作">七、删除操作</h2>
+<h3 id="删除文件">删除文件</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">rm</span> &lt;文件名&gt;</span><br><span class="line">git commit -m <span class="string">&quot;删除了某个文件&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="撤销删除误删恢复">撤销删除（误删恢复）</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -- &lt;文件名&gt;</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="删除本地分支">删除本地分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -d &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>-d</code> 是安全删除（合并过的才允许删）</li>
+<li><code>-D</code> 是强制删除（无论是否合并）</li>
+</ul>
+<h3 id="删除远程分支">删除远程分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin --delete &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="八推送与拉取">八、推送与拉取</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin &lt;分支名&gt;   <span class="comment"># 推送到远程</span></span><br><span class="line">git pull origin &lt;分支名&gt;   <span class="comment"># 拉取最新代码</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="九查看远程仓库">九、查看远程仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="十总结">十、总结</h2>
+<p>Git
+是开发者日常工作中不可或缺的工具，掌握它可以大大提升协作效率与版本管理能力。希望本文能帮助你快速上手
+Git 的基本操作。</p>
+<hr />
+<blockquote>
+<p>如需进一步学习，可以参考 <a href="https://git-scm.com/book/zh/v2">Pro
+Git 中文版</a>。</p>
+</blockquote>
 ]]></content>
       <categories>
         <category>code</category>
       </categories>
       <tags>
-        <tag>container</tag>
-        <tag>docker</tag>
+        <tag>repo</tag>
+        <tag>git</tag>
         <tag>learn</tag>
-        <tag>linux</tag>
-        <tag>virtual</tag>
       </tags>
   </entry>
   <entry>
@@ -169,6 +185,74 @@ pull命令并不是必需的步骤。</p>
         <tag>learn</tag>
         <tag>cmd</tag>
         <tag>curl</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker 基本使用教程</title>
+    <url>/2025/07/26/docker-basic-usage/</url>
+    <content><![CDATA[<blockquote>
+<p>Docker
+可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的
+Linux 机器上，也可以实现虚拟化。</p>
+</blockquote>
+<hr />
+<h2 id="一docker的用途">一、Docker的用途</h2>
+<p>Docker 的主要用途，目前有三大类。</p>
+<ol type="1">
+<li><p>提供一次性的环境。比如，本地测试他人的软件、持续集成的时候提供单元测试和构建的环境。</p></li>
+<li><p>提供弹性的云服务。因为 Docker
+容器可以随开随关，很适合动态扩容和缩容。</p></li>
+<li><p>组建微服务架构。通过多个容器，一台机器可以跑多个服务，因此在本机就可以模拟出微服务架构。</p></li>
+</ol>
+<hr />
+<h2 id="二验证是否安装成功">二、验证是否安装成功</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="三image文件">三、Image文件</h2>
+<p>Docker 把应用程序及其依赖，打包在 <strong>image
+文件</strong>里面。只有通过这个文件，才能生成 Docker 容器。<br />
+image 文件可以看作是容器的模板，Docker 根据 image
+文件生成容器的实例。<br />
+同一个 image 文件，可以生成多个同时运行的容器实例。</p>
+<p>image 是一个 <strong>二进制文件</strong>。实际开发中，一个 image
+文件往往通过继承另一个 image 文件，加上一些个性化设置而生成。<br />
+举例来说，你可以在 Ubuntu 的 image 基础上，往里面加入 Apache
+服务器，形成你自己的 image。</p>
+<h3 id="列出本机的所有-image-文件">📋 列出本机的所有 image 文件</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker image <span class="built_in">ls</span></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 🗑️ 删除 image 文件</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">$ docker image <span class="built_in">rm</span> [imageName]</span><br></pre></td></tr></table></figure>
+<p>image 文件是通用的，一台机器的 image
+文件拷贝到另一台机器，照样可以使用。</p>
+<p>一般来说，为了节省时间，我们应该尽量使用别人制作好的 image
+文件，而不是自己制作。 即使要定制，也应该基于别人的 image
+文件进行加工，而不是从零开始制作。</p>
+<h3 id="镜像仓库image-repository">🗂️ 镜像仓库（Image Repository）</h3>
+<p>为了方便共享，image 文件制作完成后，可以上传到网上的仓库。</p>
+<ul>
+<li>Docker 的官方仓库 <strong>Docker Hub</strong> 是最重要、最常用的
+image 仓库。</li>
+<li>此外，你也可以使用国内的镜像仓库（如阿里云、腾讯云）或者搭建私有仓库。</li>
+<li>出售自己制作的 image 文件也是可以的。</li>
+</ul>
+<h3 id="imagecontainer">image&amp;&amp;container</h3>
+<p>容器是镜像跑起来的实例，一个镜像可以有多个容器</p>
+<hr />
+<h2 id="四如何跑起来呢">四、如何跑起来呢</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker image pull &lt;project&gt;       <span class="comment">#将image文件从仓库抓取到本地</span></span><br><span class="line">docker container run &lt;project&gt;    <span class="comment">#将image文件在你的电脑上跑起来，新建容器</span></span><br><span class="line">docker container start [ID]       <span class="comment">#将已有的容器跑起来</span></span><br><span class="line">docker container <span class="built_in">kill</span> [ID]        <span class="comment">#手动终止容器的运行</span></span><br><span class="line">docker container <span class="built_in">ls</span>               <span class="comment">#在你电脑上正在跑起来的容器</span></span><br><span class="line">docker container <span class="built_in">ls</span> -all          <span class="comment">#列出本机所有容器，包括终止运行的容器</span></span><br><span class="line">docker container <span class="built_in">rm</span> [containerID] <span class="comment">#删除停止运行的容器，防止占用硬盘空间</span></span><br></pre></td></tr></table></figure>
+<p>注意，docker container run命令具有自动抓取 image
+文件的功能。如果发现本地没有指定的 image
+文件，就会从仓库自动抓取。因此，前面的docker image
+pull命令并不是必需的步骤。</p>
+<hr />
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>learn</tag>
+        <tag>container</tag>
+        <tag>docker</tag>
+        <tag>linux</tag>
+        <tag>virtual</tag>
       </tags>
   </entry>
   <entry>
@@ -514,90 +598,6 @@ pull命令并不是必需的步骤。</p>
       <tags>
         <tag>latex</tag>
         <tag>math</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git 基本使用教程</title>
-    <url>/2025/07/25/git-basic-usage/</url>
-    <content><![CDATA[<blockquote>
-<p>Git
-是一个分布式版本控制系统，适用于代码版本管理与团队协作开发。本文将简要介绍
-Git
-的一些常用操作命令，包括创建仓库、分支管理以及删除文件/分支的方法。</p>
-</blockquote>
-<hr />
-<h2 id="一初始化仓库">一、初始化仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
-<ul>
-<li>在当前目录初始化一个 Git 仓库。</li>
-<li>会创建 <code>.git</code> 文件夹作为版本控制目录。</li>
-</ul>
-<hr />
-<h2 id="二克隆远程仓库">二、克隆远程仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;仓库地址&gt;</span><br><span class="line">```****</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/username/repo.git</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="三添加与提交文件">三、添加与提交文件</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add &lt;文件或目录&gt;</span><br><span class="line">git commit -m <span class="string">&quot;提交说明&quot;</span></span><br></pre></td></tr></table></figure>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;添加初始项目文件&quot;</span></span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="四查看状态与历史">四、查看状态与历史</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status        <span class="comment"># 查看当前状态</span></span><br><span class="line">git <span class="built_in">log</span>           <span class="comment"># 查看提交历史</span></span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="五分支操作">五、分支操作</h2>
-<h3 id="创建新分支">创建新分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="切换分支">切换分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch &lt;分支名&gt;</span><br><span class="line"><span class="comment"># 或（旧写法）</span></span><br><span class="line">git checkout &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="创建并切换新分支">创建并切换新分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch -c &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="查看所有分支">查看所有分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="六合并分支">六、合并分支</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git merge &lt;被合并的分支&gt;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注意：需要先切换到目标分支，再合并。</p>
-</blockquote>
-<hr />
-<h2 id="七删除操作">七、删除操作</h2>
-<h3 id="删除文件">删除文件</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">rm</span> &lt;文件名&gt;</span><br><span class="line">git commit -m <span class="string">&quot;删除了某个文件&quot;</span></span><br></pre></td></tr></table></figure>
-<h3 id="撤销删除误删恢复">撤销删除（误删恢复）</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -- &lt;文件名&gt;</span><br></pre></td></tr></table></figure>
-<hr />
-<h3 id="删除本地分支">删除本地分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -d &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>-d</code> 是安全删除（合并过的才允许删）</li>
-<li><code>-D</code> 是强制删除（无论是否合并）</li>
-</ul>
-<h3 id="删除远程分支">删除远程分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin --delete &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="八推送与拉取">八、推送与拉取</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin &lt;分支名&gt;   <span class="comment"># 推送到远程</span></span><br><span class="line">git pull origin &lt;分支名&gt;   <span class="comment"># 拉取最新代码</span></span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="九查看远程仓库">九、查看远程仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="十总结">十、总结</h2>
-<p>Git
-是开发者日常工作中不可或缺的工具，掌握它可以大大提升协作效率与版本管理能力。希望本文能帮助你快速上手
-Git 的基本操作。</p>
-<hr />
-<blockquote>
-<p>如需进一步学习，可以参考 <a href="https://git-scm.com/book/zh/v2">Pro
-Git 中文版</a>。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>learn</tag>
-        <tag>repo</tag>
-        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -1101,6 +1101,27 @@ Classification）</strong></td>
 等）以及用于加载图像数据的工具</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import torchvision.datasets as datasets</span><br><span class="line">import torchvision.transforms as transforms</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义预处理操作</span></span><br><span class="line">transform = transforms.Compose([</span><br><span class="line">    transforms.ToTensor(),</span><br><span class="line">    transforms.Normalize((<span class="number">0.5</span>,), (<span class="number">0.5</span>,))  <span class="comment"># 对灰度图像进行标准化</span></span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载并加载 MNIST 数据集</span></span><br><span class="line">train_dataset = datasets.MNIST(root=<span class="string">'./data'</span>, train=True, download=True, transform=transform)</span><br><span class="line">test_dataset = datasets.MNIST(root=<span class="string">'./data'</span>, train=False, download=True, transform=transform)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 DataLoader</span></span><br><span class="line">train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)</span><br><span class="line">test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 迭代训练数据</span></span><br><span class="line"><span class="keyword">for</span> inputs, labels <span class="keyword">in</span> train_loader:</span><br><span class="line">    <span class="built_in">print</span>(inputs.shape)  <span class="comment"># 每个批次的输入数据形状</span></span><br><span class="line">    <span class="built_in">print</span>(labels.shape)  <span class="comment"># 每个批次的标签形状</span></span><br></pre></td></tr></table></figure>
 <hr>
+<h2 id="四线性回归">四、线性回归</h2>
+<p>首先什么是线性回归，可以说线性回归是一个没有隐藏层的前馈神经网络，非常基础的内容，对于一个简单的线性回归问题和模型通常可以表示成：</p>
+<p><span class="math display"><em>y</em> = <em>a</em><sub>1</sub> × <em>x</em> + <em>a</em><sub>2</sub> × <em>x</em> + ... + <em>b</em></span></p>
+<p>对数据集进行训练，对Y进行拟合</p>
+<p>首先我们线先定义一个数据集</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 随机种子，确保每次运行结果一致</span></span><br><span class="line">torch.manual_seed(42)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成训练数据</span></span><br><span class="line">X = torch.randn(100, 2)  <span class="comment"># 100 个样本，每个样本 2 个特征</span></span><br><span class="line">true_w = torch.tensor([2.0, 3.0])  <span class="comment"># 假设真实权重</span></span><br><span class="line">true_b = 4.0  <span class="comment"># 偏置项</span></span><br><span class="line">Y = X @ true_w + true_b + torch.randn(100) * 0.1  <span class="comment"># 加入一些噪声</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印部分数据</span></span><br><span class="line"><span class="built_in">print</span>(X[:5])</span><br><span class="line"><span class="built_in">print</span>(Y[:5])</span><br></pre></td></tr></table></figure>
+<p>之后我们再定义一个线性回归的模型类</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class LinearRegressionModel(nn.Module):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super(LinearRegressionModel,self).__init__()</span><br><span class="line">        self.linear = nn.Linear(2, 1)</span><br><span class="line"></span><br><span class="line">    def forward(self, x):</span><br><span class="line">        <span class="built_in">return</span> self.linear(x)</span><br></pre></td></tr></table></figure>
+<p>其中<code>super(LinearRegressionModel,self).__init__()</code>这点是关键：子类继承父类时，不自动调用父类的构造函数，你必须显式调用它。PyTorch
+中所有自定义模型都要继承自 nn.Module。nn.Module 提供了很多核心功能。</p>
+<p>之后我们实例化该模型，并定义后续需要的损失函数和优化器</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">model= LinearRegressionModel()</span><br><span class="line">criterion = nn.MSELoss()</span><br><span class="line">optimizer = optim.SGD(model.parameters(), lr=0.01)</span><br></pre></td></tr></table></figure>
+<p>接下来便可以对模型进行训练了</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">num_epochs = 100</span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(num_epochs):</span><br><span class="line">    model.train()</span><br><span class="line">    predictions=model(X)</span><br><span class="line">    loss=criterion(predictions.squeeze(), Y)</span><br><span class="line">        <span class="comment"># 反向传播</span></span><br><span class="line">    optimizer.zero_grad()  <span class="comment"># 清空之前的梯度</span></span><br><span class="line">    loss.backward()  <span class="comment"># 计算梯度</span></span><br><span class="line">    optimizer.step()  <span class="comment"># 更新模型参数</span></span><br></pre></td></tr></table></figure>
+<p>最后将数据可视化查看分析结果</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看训练后的权重和偏置</span></span><br><span class="line"><span class="built_in">print</span>(f<span class="string">'Predicted weight: {model.linear.weight.data.numpy()}'</span>)</span><br><span class="line"><span class="built_in">print</span>(f<span class="string">'Predicted bias: {model.linear.bias.data.numpy()}'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在新数据上做预测</span></span><br><span class="line">with torch.no_grad():  <span class="comment"># 评估时不需要计算梯度</span></span><br><span class="line">    predictions = model(X)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可视化预测与实际值</span></span><br><span class="line">plt.scatter(X[:, 0], Y, color=<span class="string">'blue'</span>, label=<span class="string">'True values'</span>)</span><br><span class="line">plt.scatter(X[:, 0], predictions, color=<span class="string">'red'</span>, label=<span class="string">'Predictions'</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/images/pytorch/linearRgression.png" alt="ex4">
+<figcaption aria-hidden="true">ex4</figcaption>
+</figure>
+<hr>
 <h2 id="番外一-pyplot">番外一 pyplot</h2>
 <h3 id="基本绘图流程">1.基本绘图流程</h3>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 准备数据</span></span><br><span class="line">x = [1, 2, 3, 4, 5]</span><br><span class="line">y = [1, 4, 9, 16, 25]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 绘图</span></span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 添加标题和标签</span></span><br><span class="line">plt.title(<span class="string">"折线图示例"</span>)</span><br><span class="line">plt.xlabel(<span class="string">"X轴"</span>)</span><br><span class="line">plt.ylabel(<span class="string">"Y轴"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 显示图像</span></span><br><span class="line">plt.show()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -1111,7 +1132,7 @@ Classification）</strong></td>
 </ol>
 <p>相关参数ex：</p>
 <figure>
-<img src="../images/pytorch/pyplot-fmt.png" alt="fmt">
+<img src="/images/pytorch/pyplot-fmt.png" alt="fmt">
 <figcaption aria-hidden="true">fmt</figcaption>
 </figure>
 <table>
@@ -1239,12 +1260,12 @@ Classification）</strong></td>
 <h3 id="网格线">2.网格线</h3>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">x = np.array([1, 2, 3, 4])</span><br><span class="line">y = np.array([1, 4, 9, 16])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">plt.title(<span class="string">"RUNOOB grid() Test"</span>)</span><br><span class="line">plt.xlabel(<span class="string">"x - label"</span>)</span><br><span class="line">plt.ylabel(<span class="string">"y - label"</span>)</span><br><span class="line"></span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line">plt.grid(color = <span class="string">'r'</span>, linestyle = <span class="string">'--'</span>, linewidth = 0.5)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 <figure>
-<img src="../images/pytorch/ex1.png" alt="ex1">
+<img src="/images/pytorch/ex1.png" alt="ex1">
 <figcaption aria-hidden="true">ex1</figcaption>
 </figure>
 <p>grid内还有axis属性，若设置axis=x则网格线就在y方向上出现</p>
 <h3 id="绘制多图">3.绘制多图</h3>
-<p>基础的用subplot方法绘图： <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line"><span class="comment">#plot 1:</span></span><br><span class="line">xpoints = np.array([0, 6])</span><br><span class="line">ypoints = np.array([0, 100])</span><br><span class="line"></span><br><span class="line">plt.subplot(1, 2, 1)</span><br><span class="line">plt.plot(xpoints,ypoints)</span><br><span class="line">plt.title(<span class="string">"plot 1"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#plot 2:</span></span><br><span class="line">x = np.array([1, 2, 3, 4])</span><br><span class="line">y = np.array([1, 4, 9, 16])</span><br><span class="line"></span><br><span class="line">plt.subplot(1, 2, 2)</span><br><span class="line">plt.plot(x,y)</span><br><span class="line">plt.title(<span class="string">"plot 2"</span>)</span><br><span class="line"></span><br><span class="line">plt.suptitle(<span class="string">"RUNOOB subplot Test"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure> <img src="../images/pytorch/ex2.png" alt="ex2"></p>
+<p>基础的用subplot方法绘图： <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line"><span class="comment">#plot 1:</span></span><br><span class="line">xpoints = np.array([0, 6])</span><br><span class="line">ypoints = np.array([0, 100])</span><br><span class="line"></span><br><span class="line">plt.subplot(1, 2, 1)</span><br><span class="line">plt.plot(xpoints,ypoints)</span><br><span class="line">plt.title(<span class="string">"plot 1"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#plot 2:</span></span><br><span class="line">x = np.array([1, 2, 3, 4])</span><br><span class="line">y = np.array([1, 4, 9, 16])</span><br><span class="line"></span><br><span class="line">plt.subplot(1, 2, 2)</span><br><span class="line">plt.plot(x,y)</span><br><span class="line">plt.title(<span class="string">"plot 2"</span>)</span><br><span class="line"></span><br><span class="line">plt.suptitle(<span class="string">"RUNOOB subplot Test"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure> <img src="/images/pytorch/ex2.png" alt="ex2"></p>
 <p>其中suplot(a,b,c)这三个参数分别说明，有a行b列个图，当前该图排在第c位</p>
 <h3 id="散点柱形直方图和饼图s">3.散点，柱形,直方图和饼图s</h3>
 <h4 id="散点图">1.散点图</h4>
@@ -1652,7 +1673,7 @@ Classification）</strong></td>
 ylabel() 函数设置了图表的标题和坐标轴标签。</p>
 <p>显示结果如下：</p>
 <figure>
-<img src="../images/pytorch/ex3.png" alt="ex3">
+<img src="/images/pytorch/ex3.png" alt="ex3">
 <figcaption aria-hidden="true">ex3</figcaption>
 </figure>
 <h3 id="imshowimsaveimread">4.imshow,imsave,imread</h3>
