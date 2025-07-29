@@ -1,109 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>curl使用教学</title>
-    <url>/2025/07/26/curl/</url>
-    <content><![CDATA[<blockquote>
-<p>curl 是一个强大的命令行工具，用于在命令行或脚本中发送 HTTP
-请求，与服务器通信。它可以用来下载网页、调用 API
-接口、上传文件、发送表单等。几乎所有支持网络通信的协议 curl
-都能处理，包括 HTTP、HTTPS、FTP、SFTP、SMTP 等</p>
-</blockquote>
-<hr />
-<h2 id="一所以curl能干啥">一、所以curl能干啥</h2>
-<table>
-<colgroup>
-<col style="width: 12%" />
-<col style="width: 87%" />
-</colgroup>
-<thead>
-<tr>
-<th>功能</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>获取网页内容</td>
-<td><code>curl https://example.com</code></td>
-</tr>
-<tr>
-<td>下载文件</td>
-<td><code>curl -O https://example.com/file.zip</code></td>
-</tr>
-<tr>
-<td>发送 POST 请求</td>
-<td><code>curl -X POST -d "name=Koen&amp;age=20" https://example.com/api</code></td>
-</tr>
-<tr>
-<td>添加请求头</td>
-<td><code>curl -H "Authorization: Bearer TOKEN" https://api.example.com/data</code></td>
-</tr>
-<tr>
-<td>上传文件</td>
-<td><code>curl -F "file=@test.png" https://example.com/upload</code></td>
-</tr>
-<tr>
-<td>保存输出到文件</td>
-<td><code>curl https://example.com -o saved.html</code></td>
-</tr>
-</tbody>
-</table>
-<p>以下将对其功能进行详细解释</p>
-<hr />
-<h2 id="二利用curl获取网页内容">二、利用curl获取网页内容</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl url</span><br></pre></td></tr></table></figure>
-<p>会将get请求返回结果直接输出在命令行中</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://example.com -o index.html</span><br></pre></td></tr></table></figure>
-<p>保存指定内容到文件，地址为cmd当前地址</p>
-<hr />
-<h2 id="三发送post请求">三、发送post请求</h2>
-<p>一般用于测试接口是否正常 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -d <span class="string">&quot;name=Koen&amp;age=20&quot;</span> https://example.com/api</span><br></pre></td></tr></table></figure> 带上请求头和请求体：
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST https://api.example.com/data \</span><br><span class="line">  -H <span class="string">&quot;Authorization: Bearer abc123&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;&quot;key&quot;:&quot;value&quot;&#125;&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">     -d <span class="string">&#x27;&#123;&quot;username&quot;:&quot;koen&quot;,&quot;password&quot;:&quot;123456&quot;&#125;&#x27;</span> \</span><br><span class="line">     https://example.com/api</span><br></pre></td></tr></table></figure></p>
-<hr />
-<h2 id="四利用curl进行文件上传">四、利用curl进行文件上传</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -F <span class="string">&quot;file=@test.png&quot;</span> https://example.com/upload</span><br></pre></td></tr></table></figure>
-<p>-F就是指定用表单的方式进行字段的上传</p>
-<table>
-<colgroup>
-<col style="width: 18%" />
-<col style="width: 81%" />
-</colgroup>
-<thead>
-<tr>
-<th>部分</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>file</code></td>
-<td>表单字段的名字。就像网页表单中
-<code>&lt;input type="file" name="file"&gt;</code>。</td>
-</tr>
-<tr>
-<td><code>=</code></td>
-<td>分隔字段名与数据（文件）</td>
-</tr>
-<tr>
-<td><code>@test.png</code></td>
-<td>表示上传当前目录下名为 <code>test.png</code> 的文件</td>
-</tr>
-</tbody>
-</table>
-<p>其实就是post请求上传文件的方式</p>
-<hr />
-]]></content>
-      <categories>
-        <category>cmd</category>
-      </categories>
-      <tags>
-        <tag>cmd</tag>
-        <tag>curl</tag>
-        <tag>learn</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Docker 基本使用教程</title>
     <url>/2025/07/26/docker-basic-usage/</url>
     <content><![CDATA[<blockquote>
@@ -164,9 +61,9 @@ pull命令并不是必需的步骤。</p>
         <category>code</category>
       </categories>
       <tags>
-        <tag>learn</tag>
         <tag>container</tag>
         <tag>docker</tag>
+        <tag>learn</tag>
         <tag>linux</tag>
         <tag>virtual</tag>
       </tags>
@@ -296,6 +193,109 @@ Git 中文版</a>。</p>
         <tag>learn</tag>
         <tag>repo</tag>
         <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>curl使用教学</title>
+    <url>/2025/07/26/curl/</url>
+    <content><![CDATA[<blockquote>
+<p>curl 是一个强大的命令行工具，用于在命令行或脚本中发送 HTTP
+请求，与服务器通信。它可以用来下载网页、调用 API
+接口、上传文件、发送表单等。几乎所有支持网络通信的协议 curl
+都能处理，包括 HTTP、HTTPS、FTP、SFTP、SMTP 等</p>
+</blockquote>
+<hr />
+<h2 id="一所以curl能干啥">一、所以curl能干啥</h2>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 87%" />
+</colgroup>
+<thead>
+<tr>
+<th>功能</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>获取网页内容</td>
+<td><code>curl https://example.com</code></td>
+</tr>
+<tr>
+<td>下载文件</td>
+<td><code>curl -O https://example.com/file.zip</code></td>
+</tr>
+<tr>
+<td>发送 POST 请求</td>
+<td><code>curl -X POST -d "name=Koen&amp;age=20" https://example.com/api</code></td>
+</tr>
+<tr>
+<td>添加请求头</td>
+<td><code>curl -H "Authorization: Bearer TOKEN" https://api.example.com/data</code></td>
+</tr>
+<tr>
+<td>上传文件</td>
+<td><code>curl -F "file=@test.png" https://example.com/upload</code></td>
+</tr>
+<tr>
+<td>保存输出到文件</td>
+<td><code>curl https://example.com -o saved.html</code></td>
+</tr>
+</tbody>
+</table>
+<p>以下将对其功能进行详细解释</p>
+<hr />
+<h2 id="二利用curl获取网页内容">二、利用curl获取网页内容</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl url</span><br></pre></td></tr></table></figure>
+<p>会将get请求返回结果直接输出在命令行中</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://example.com -o index.html</span><br></pre></td></tr></table></figure>
+<p>保存指定内容到文件，地址为cmd当前地址</p>
+<hr />
+<h2 id="三发送post请求">三、发送post请求</h2>
+<p>一般用于测试接口是否正常 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -d <span class="string">&quot;name=Koen&amp;age=20&quot;</span> https://example.com/api</span><br></pre></td></tr></table></figure> 带上请求头和请求体：
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST https://api.example.com/data \</span><br><span class="line">  -H <span class="string">&quot;Authorization: Bearer abc123&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;&quot;key&quot;:&quot;value&quot;&#125;&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">     -d <span class="string">&#x27;&#123;&quot;username&quot;:&quot;koen&quot;,&quot;password&quot;:&quot;123456&quot;&#125;&#x27;</span> \</span><br><span class="line">     https://example.com/api</span><br></pre></td></tr></table></figure></p>
+<hr />
+<h2 id="四利用curl进行文件上传">四、利用curl进行文件上传</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -F <span class="string">&quot;file=@test.png&quot;</span> https://example.com/upload</span><br></pre></td></tr></table></figure>
+<p>-F就是指定用表单的方式进行字段的上传</p>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr>
+<th>部分</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file</code></td>
+<td>表单字段的名字。就像网页表单中
+<code>&lt;input type="file" name="file"&gt;</code>。</td>
+</tr>
+<tr>
+<td><code>=</code></td>
+<td>分隔字段名与数据（文件）</td>
+</tr>
+<tr>
+<td><code>@test.png</code></td>
+<td>表示上传当前目录下名为 <code>test.png</code> 的文件</td>
+</tr>
+</tbody>
+</table>
+<p>其实就是post请求上传文件的方式</p>
+<hr />
+]]></content>
+      <categories>
+        <category>cmd</category>
+      </categories>
+      <tags>
+        <tag>learn</tag>
+        <tag>cmd</tag>
+        <tag>curl</tag>
       </tags>
   </entry>
   <entry>
@@ -2059,6 +2059,88 @@ ylabel() 函数设置了图表的标题和坐标轴标签。</p>
 </tr>
 </tbody>
 </table>
+<h3 id="pytorchtransforms">pytorch—transforms</h3>
+<table>
+<colgroup>
+<col style="width: 4%">
+<col style="width: 37%">
+<col style="width: 25%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr>
+<th>类别</th>
+<th>变换函数</th>
+<th>描述说明</th>
+<th>示例代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>预处理</strong></td>
+<td><code>transforms.ToTensor()</code></td>
+<td>将 PIL 图像或 NumPy 数组转换为张量，并将像素值归一化到
+<code>[0, 1]</code></td>
+<td><code>transforms.ToTensor()</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>transforms.Normalize(mean, std)</code></td>
+<td>对图像张量进行标准化（零均值、单位方差）</td>
+<td><code>transforms.Normalize(mean=[0.5], std=[0.5])</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>transforms.Resize(size)</code></td>
+<td>将图像缩放到指定大小（宽、高）</td>
+<td><code>transforms.Resize((128, 128))</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>transforms.CenterCrop(size)</code></td>
+<td>从图像中心裁剪指定大小区域</td>
+<td><code>transforms.CenterCrop(128)</code></td>
+</tr>
+<tr>
+<td><strong>增强</strong></td>
+<td><code>transforms.RandomHorizontalFlip(p)</code></td>
+<td>以概率 <code>p</code> 随机水平翻转图像</td>
+<td><code>transforms.RandomHorizontalFlip(p=0.5)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>transforms.RandomRotation(degrees)</code></td>
+<td>在 <code>[-degrees, +degrees]</code> 范围内随机旋转图像</td>
+<td><code>transforms.RandomRotation(30)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>transforms.ColorJitter(brightness, contrast, saturation, hue)</code></td>
+<td>随机调整图像的亮度、对比度、饱和度、色调</td>
+<td><code>transforms.ColorJitter(brightness=0.5, contrast=0.5)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>transforms.RandomCrop(size)</code></td>
+<td>随机从图像中裁剪出指定大小区域</td>
+<td><code>transforms.RandomCrop(128)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>transforms.RandomResizedCrop(size)</code></td>
+<td>随机裁剪图像的一部分并缩放到给定大小</td>
+<td><code>transforms.RandomResizedCrop(224)</code></td>
+</tr>
+<tr>
+<td><strong>组合</strong></td>
+<td><code>transforms.Compose([...])</code></td>
+<td>将多个变换按顺序组合使用</td>
+<td><code>transforms.Compose([ToTensor(), Normalize(...)])</code></td>
+</tr>
+</tbody>
+</table>
+<p>调用实例</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">transform = transforms.Compose([</span><br><span class="line">    transforms.Resize((<span class="number">128</span>, <span class="number">128</span>)),</span><br><span class="line">    transforms.RandomHorizontalFlip(p=0.5),</span><br><span class="line">    transforms.RandomRotation(degrees=15),</span><br><span class="line">    transforms.ToTensor(),</span><br><span class="line">    transforms.Normalize(mean=[0.5], std=[0.5])</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>code</category>
