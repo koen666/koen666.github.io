@@ -42,6 +42,29 @@
   </entry>
   
   <entry>
+    <title>像前端package.json那样管理python依赖</title>
+    <link href="http://example.com/2025/07/29/pipenv/"/>
+    <id>http://example.com/2025/07/29/pipenv/</id>
+    <published>2025-07-28T16:00:00.000Z</published>
+    <updated>2025-07-29T08:45:30.890Z</updated>
+    
+    <content type="html"><![CDATA[<ol type="1"><li>首先下载管理用的包</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pipenv</span><br></pre></td></tr></table></figure><ol start="2" type="1"><li>初始化pipfile</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pipenv install</span><br></pre></td></tr></table></figure><p>你的目录下就出现了pipfile和pipfile.lock，对于package.json和package-lock.json</p><ol start="3" type="1"><li>将已有的依赖存放进pipenv中</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt <span class="comment">#将已有依赖输出到requirements.txt文件下</span></span><br></pre></td></tr></table></figure><p>将txt文件转码(powershell内输入)</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$content</span> = Get-Content requirements.txt</span><br><span class="line">[System.IO.File]::WriteAllLines(<span class="string">"fixed_requirements.txt"</span>, <span class="variable">$content</span>, (New-Object System.Text.UTF8Encoding <span class="variable">$false</span>))</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">来让你的python程序像前端依赖一样优雅的管理起来</summary>
+    
+    
+    
+    <category term="code" scheme="http://example.com/categories/code/"/>
+    
+    
+    <category term="pipenv" scheme="http://example.com/tags/pipenv/"/>
+    
+    <category term="python" scheme="http://example.com/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Latex常见数学公式</title>
     <link href="http://example.com/2025/07/27/latex/"/>
     <id>http://example.com/2025/07/27/latex/</id>
