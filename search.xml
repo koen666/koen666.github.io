@@ -1,74 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Docker 基本使用教程</title>
-    <url>/2025/07/26/docker-basic-usage/</url>
-    <content><![CDATA[<blockquote>
-<p>Docker
-可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的
-Linux 机器上，也可以实现虚拟化。</p>
-</blockquote>
-<hr />
-<h2 id="一docker的用途">一、Docker的用途</h2>
-<p>Docker 的主要用途，目前有三大类。</p>
-<ol type="1">
-<li><p>提供一次性的环境。比如，本地测试他人的软件、持续集成的时候提供单元测试和构建的环境。</p></li>
-<li><p>提供弹性的云服务。因为 Docker
-容器可以随开随关，很适合动态扩容和缩容。</p></li>
-<li><p>组建微服务架构。通过多个容器，一台机器可以跑多个服务，因此在本机就可以模拟出微服务架构。</p></li>
-</ol>
-<hr />
-<h2 id="二验证是否安装成功">二、验证是否安装成功</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="三image文件">三、Image文件</h2>
-<p>Docker 把应用程序及其依赖，打包在 <strong>image
-文件</strong>里面。只有通过这个文件，才能生成 Docker 容器。<br />
-image 文件可以看作是容器的模板，Docker 根据 image
-文件生成容器的实例。<br />
-同一个 image 文件，可以生成多个同时运行的容器实例。</p>
-<p>image 是一个 <strong>二进制文件</strong>。实际开发中，一个 image
-文件往往通过继承另一个 image 文件，加上一些个性化设置而生成。<br />
-举例来说，你可以在 Ubuntu 的 image 基础上，往里面加入 Apache
-服务器，形成你自己的 image。</p>
-<h3 id="列出本机的所有-image-文件">📋 列出本机的所有 image 文件</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker image <span class="built_in">ls</span></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 🗑️ 删除 image 文件</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">$ docker image <span class="built_in">rm</span> [imageName]</span><br></pre></td></tr></table></figure>
-<p>image 文件是通用的，一台机器的 image
-文件拷贝到另一台机器，照样可以使用。</p>
-<p>一般来说，为了节省时间，我们应该尽量使用别人制作好的 image
-文件，而不是自己制作。 即使要定制，也应该基于别人的 image
-文件进行加工，而不是从零开始制作。</p>
-<h3 id="镜像仓库image-repository">🗂️ 镜像仓库（Image Repository）</h3>
-<p>为了方便共享，image 文件制作完成后，可以上传到网上的仓库。</p>
-<ul>
-<li>Docker 的官方仓库 <strong>Docker Hub</strong> 是最重要、最常用的
-image 仓库。</li>
-<li>此外，你也可以使用国内的镜像仓库（如阿里云、腾讯云）或者搭建私有仓库。</li>
-<li>出售自己制作的 image 文件也是可以的。</li>
-</ul>
-<h3 id="imagecontainer">image&amp;&amp;container</h3>
-<p>容器是镜像跑起来的实例，一个镜像可以有多个容器</p>
-<hr />
-<h2 id="四如何跑起来呢">四、如何跑起来呢</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker image pull &lt;project&gt;       <span class="comment">#将image文件从仓库抓取到本地</span></span><br><span class="line">docker container run &lt;project&gt;    <span class="comment">#将image文件在你的电脑上跑起来，新建容器</span></span><br><span class="line">docker container start [ID]       <span class="comment">#将已有的容器跑起来</span></span><br><span class="line">docker container <span class="built_in">kill</span> [ID]        <span class="comment">#手动终止容器的运行</span></span><br><span class="line">docker container <span class="built_in">ls</span>               <span class="comment">#在你电脑上正在跑起来的容器</span></span><br><span class="line">docker container <span class="built_in">ls</span> -all          <span class="comment">#列出本机所有容器，包括终止运行的容器</span></span><br><span class="line">docker container <span class="built_in">rm</span> [containerID] <span class="comment">#删除停止运行的容器，防止占用硬盘空间</span></span><br></pre></td></tr></table></figure>
-<p>注意，docker container run命令具有自动抓取 image
-文件的功能。如果发现本地没有指定的 image
-文件，就会从仓库自动抓取。因此，前面的docker image
-pull命令并不是必需的步骤。</p>
-<hr />
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>container</tag>
-        <tag>docker</tag>
-        <tag>learn</tag>
-        <tag>linux</tag>
-        <tag>virtual</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>curl使用教学</title>
     <url>/2025/07/26/curl/</url>
     <content><![CDATA[<blockquote>
@@ -166,9 +98,204 @@ pull命令并不是必需的步骤。</p>
         <category>cmd</category>
       </categories>
       <tags>
-        <tag>learn</tag>
         <tag>cmd</tag>
         <tag>curl</tag>
+        <tag>learn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker 基本使用教程</title>
+    <url>/2025/07/26/docker-basic-usage/</url>
+    <content><![CDATA[<blockquote>
+<p>Docker
+可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的
+Linux 机器上，也可以实现虚拟化。</p>
+</blockquote>
+<hr />
+<h2 id="一docker的用途">一、Docker的用途</h2>
+<p>Docker 的主要用途，目前有三大类。</p>
+<ol type="1">
+<li><p>提供一次性的环境。比如，本地测试他人的软件、持续集成的时候提供单元测试和构建的环境。</p></li>
+<li><p>提供弹性的云服务。因为 Docker
+容器可以随开随关，很适合动态扩容和缩容。</p></li>
+<li><p>组建微服务架构。通过多个容器，一台机器可以跑多个服务，因此在本机就可以模拟出微服务架构。</p></li>
+</ol>
+<hr />
+<h2 id="二验证是否安装成功">二、验证是否安装成功</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="三image文件">三、Image文件</h2>
+<p>Docker 把应用程序及其依赖，打包在 <strong>image
+文件</strong>里面。只有通过这个文件，才能生成 Docker 容器。<br />
+image 文件可以看作是容器的模板，Docker 根据 image
+文件生成容器的实例。<br />
+同一个 image 文件，可以生成多个同时运行的容器实例。</p>
+<p>image 是一个 <strong>二进制文件</strong>。实际开发中，一个 image
+文件往往通过继承另一个 image 文件，加上一些个性化设置而生成。<br />
+举例来说，你可以在 Ubuntu 的 image 基础上，往里面加入 Apache
+服务器，形成你自己的 image。</p>
+<h3 id="列出本机的所有-image-文件">📋 列出本机的所有 image 文件</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker image <span class="built_in">ls</span></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 🗑️ 删除 image 文件</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">$ docker image <span class="built_in">rm</span> [imageName]</span><br></pre></td></tr></table></figure>
+<p>image 文件是通用的，一台机器的 image
+文件拷贝到另一台机器，照样可以使用。</p>
+<p>一般来说，为了节省时间，我们应该尽量使用别人制作好的 image
+文件，而不是自己制作。 即使要定制，也应该基于别人的 image
+文件进行加工，而不是从零开始制作。</p>
+<h3 id="镜像仓库image-repository">🗂️ 镜像仓库（Image Repository）</h3>
+<p>为了方便共享，image 文件制作完成后，可以上传到网上的仓库。</p>
+<ul>
+<li>Docker 的官方仓库 <strong>Docker Hub</strong> 是最重要、最常用的
+image 仓库。</li>
+<li>此外，你也可以使用国内的镜像仓库（如阿里云、腾讯云）或者搭建私有仓库。</li>
+<li>出售自己制作的 image 文件也是可以的。</li>
+</ul>
+<h3 id="imagecontainer">image&amp;&amp;container</h3>
+<p>容器是镜像跑起来的实例，一个镜像可以有多个容器</p>
+<hr />
+<h2 id="四如何跑起来呢">四、如何跑起来呢</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker image pull &lt;project&gt;       <span class="comment">#将image文件从仓库抓取到本地</span></span><br><span class="line">docker container run &lt;project&gt;    <span class="comment">#将image文件在你的电脑上跑起来，新建容器</span></span><br><span class="line">docker container start [ID]       <span class="comment">#将已有的容器跑起来</span></span><br><span class="line">docker container <span class="built_in">kill</span> [ID]        <span class="comment">#手动终止容器的运行</span></span><br><span class="line">docker container <span class="built_in">ls</span>               <span class="comment">#在你电脑上正在跑起来的容器</span></span><br><span class="line">docker container <span class="built_in">ls</span> -all          <span class="comment">#列出本机所有容器，包括终止运行的容器</span></span><br><span class="line">docker container <span class="built_in">rm</span> [containerID] <span class="comment">#删除停止运行的容器，防止占用硬盘空间</span></span><br></pre></td></tr></table></figure>
+<p>注意，docker container run命令具有自动抓取 image
+文件的功能。如果发现本地没有指定的 image
+文件，就会从仓库自动抓取。因此，前面的docker image
+pull命令并不是必需的步骤。</p>
+<hr />
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>learn</tag>
+        <tag>container</tag>
+        <tag>docker</tag>
+        <tag>linux</tag>
+        <tag>virtual</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Electron 基本使用教程</title>
+    <url>/2025/07/29/electron/</url>
+    <content><![CDATA[<blockquote>
+<p>以下以vue3为例结合electron实现跨平台开发</p>
+</blockquote>
+<hr />
+<h2
+id="一在项目根目录安装electorn-forge">一、在项目根目录安装electorn-forge</h2>
+<p>按照如下命令安装electron-forge</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save-dev electron @electron-forge/cli</span><br><span class="line">npx electron-forge import</span><br></pre></td></tr></table></figure>
+<p>这一步会在你的项目中创建一个 electron
+的基本目录结构，并配置打包命令。</p>
+<h2 id="二新建main.js">二、新建main.js</h2>
+<p>在根目录下新建/electron/main.js</p>
+<p>在main.js下复制如下代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import &#123; app, BrowserWindow &#125; from <span class="string">&#x27;electron&#x27;</span>;</span><br><span class="line">import path from <span class="string">&#x27;path&#x27;</span>;</span><br><span class="line">import &#123; fileURLToPath &#125; from <span class="string">&#x27;url&#x27;</span>;</span><br><span class="line"></span><br><span class="line">// 解决 ES Module 中没有 __dirname 的问题</span><br><span class="line">const __filename = fileURLToPath(import.meta.url);</span><br><span class="line">const __dirname = path.dirname(__filename);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">createWindow</span></span> () &#123;</span><br><span class="line">  const win = new BrowserWindow(&#123;</span><br><span class="line">    width: 1200,</span><br><span class="line">    height: 800,</span><br><span class="line">    webPreferences: &#123;</span><br><span class="line">      preload: path.join(__dirname, <span class="string">&#x27;preload.js&#x27;</span>), // 可选，预加载脚本</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!app.isPackaged) &#123;</span><br><span class="line">    win.loadURL(<span class="string">&#x27;http://localhost:5173&#x27;</span>); // dev 模式加载 vite 前端</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>)); // prod 模式加载打包页面</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.whenReady().<span class="keyword">then</span>(() =&gt; &#123;</span><br><span class="line">  createWindow();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="三修改package.json">三、修改package.json</h2>
+<p>进入package.json文件，新增</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;main&quot;</span>: <span class="string">&quot;electron/main.js&quot;</span>,</span><br></pre></td></tr></table></figure>
+<p>注意scripts</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line"><span class="string">&quot;dev&quot;</span>: <span class="string">&quot;vite&quot;</span>,</span><br><span class="line"><span class="string">&quot;build&quot;</span>: <span class="string">&quot;vite build&quot;</span>,</span><br><span class="line"><span class="string">&quot;preview&quot;</span>: <span class="string">&quot;vite preview&quot;</span>,</span><br><span class="line"><span class="string">&quot;start&quot;</span>: <span class="string">&quot;electron-forge start&quot;</span>,</span><br><span class="line"><span class="string">&quot;package&quot;</span>: <span class="string">&quot;electron-forge package&quot;</span>,</span><br><span class="line"><span class="string">&quot;make&quot;</span>: <span class="string">&quot;electron-forge make&quot;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="四开发测试流程">四、开发测试流程</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动 Vite 前端</span></span><br><span class="line">npm run dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新开一个终端，启动 Electron</span></span><br><span class="line">npm start</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="五打包发布测试">五、打包发布测试</h2>
+<p>先构建前端项目</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+<p>修改main.js</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>));</span><br></pre></td></tr></table></figure>
+<p>打包</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run package</span><br></pre></td></tr></table></figure>
+<p>会在 out/ 目录生成你的桌面可执行程序（比如 Windows 下是 .exe
+文件）</p>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>electron</tag>
+        <tag>web</tag>
+        <tag>desk</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git 基本使用教程</title>
+    <url>/2025/07/25/git-basic-usage/</url>
+    <content><![CDATA[<blockquote>
+<p>Git
+是一个分布式版本控制系统，适用于代码版本管理与团队协作开发。本文将简要介绍
+Git
+的一些常用操作命令，包括创建仓库、分支管理以及删除文件/分支的方法。</p>
+</blockquote>
+<hr />
+<h2 id="一初始化仓库">一、初始化仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在当前目录初始化一个 Git 仓库。</li>
+<li>会创建 <code>.git</code> 文件夹作为版本控制目录。</li>
+</ul>
+<hr />
+<h2 id="二克隆远程仓库">二、克隆远程仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;仓库地址&gt;</span><br><span class="line">```****</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/username/repo.git</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="三添加与提交文件">三、添加与提交文件</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add &lt;文件或目录&gt;</span><br><span class="line">git commit -m <span class="string">&quot;提交说明&quot;</span></span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;添加初始项目文件&quot;</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="四查看状态与历史">四、查看状态与历史</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status        <span class="comment"># 查看当前状态</span></span><br><span class="line">git <span class="built_in">log</span>           <span class="comment"># 查看提交历史</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="五分支操作">五、分支操作</h2>
+<h3 id="创建新分支">创建新分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="切换分支">切换分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch &lt;分支名&gt;</span><br><span class="line"><span class="comment"># 或（旧写法）</span></span><br><span class="line">git checkout &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="创建并切换新分支">创建并切换新分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch -c &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="查看所有分支">查看所有分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="六合并分支">六、合并分支</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git merge &lt;被合并的分支&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：需要先切换到目标分支，再合并。</p>
+</blockquote>
+<hr />
+<h2 id="七删除操作">七、删除操作</h2>
+<h3 id="删除文件">删除文件</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">rm</span> &lt;文件名&gt;</span><br><span class="line">git commit -m <span class="string">&quot;删除了某个文件&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="撤销删除误删恢复">撤销删除（误删恢复）</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -- &lt;文件名&gt;</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="删除本地分支">删除本地分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -d &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>-d</code> 是安全删除（合并过的才允许删）</li>
+<li><code>-D</code> 是强制删除（无论是否合并）</li>
+</ul>
+<h3 id="删除远程分支">删除远程分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin --delete &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="八推送与拉取">八、推送与拉取</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin &lt;分支名&gt;   <span class="comment"># 推送到远程</span></span><br><span class="line">git pull origin &lt;分支名&gt;   <span class="comment"># 拉取最新代码</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="九查看远程仓库">九、查看远程仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="十总结">十、总结</h2>
+<p>Git
+是开发者日常工作中不可或缺的工具，掌握它可以大大提升协作效率与版本管理能力。希望本文能帮助你快速上手
+Git 的基本操作。</p>
+<hr />
+<blockquote>
+<p>如需进一步学习，可以参考 <a href="https://git-scm.com/book/zh/v2">Pro
+Git 中文版</a>。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>learn</tag>
+        <tag>repo</tag>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -517,133 +644,6 @@ pull命令并不是必需的步骤。</p>
       </tags>
   </entry>
   <entry>
-    <title>Electron 基本使用教程</title>
-    <url>/2025/07/29/electron/</url>
-    <content><![CDATA[<blockquote>
-<p>以下以vue3为例结合electron实现跨平台开发</p>
-</blockquote>
-<hr />
-<h2
-id="一在项目根目录安装electorn-forge">一、在项目根目录安装electorn-forge</h2>
-<p>按照如下命令安装electron-forge</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save-dev electron @electron-forge/cli</span><br><span class="line">npx electron-forge import</span><br></pre></td></tr></table></figure>
-<p>这一步会在你的项目中创建一个 electron
-的基本目录结构，并配置打包命令。</p>
-<h2 id="二新建main.js">二、新建main.js</h2>
-<p>在根目录下新建/electron/main.js</p>
-<p>在main.js下复制如下代码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import &#123; app, BrowserWindow &#125; from <span class="string">&#x27;electron&#x27;</span>;</span><br><span class="line">import path from <span class="string">&#x27;path&#x27;</span>;</span><br><span class="line">import &#123; fileURLToPath &#125; from <span class="string">&#x27;url&#x27;</span>;</span><br><span class="line"></span><br><span class="line">// 解决 ES Module 中没有 __dirname 的问题</span><br><span class="line">const __filename = fileURLToPath(import.meta.url);</span><br><span class="line">const __dirname = path.dirname(__filename);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">createWindow</span></span> () &#123;</span><br><span class="line">  const win = new BrowserWindow(&#123;</span><br><span class="line">    width: 1200,</span><br><span class="line">    height: 800,</span><br><span class="line">    webPreferences: &#123;</span><br><span class="line">      preload: path.join(__dirname, <span class="string">&#x27;preload.js&#x27;</span>), // 可选，预加载脚本</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!app.isPackaged) &#123;</span><br><span class="line">    win.loadURL(<span class="string">&#x27;http://localhost:5173&#x27;</span>); // dev 模式加载 vite 前端</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>)); // prod 模式加载打包页面</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.whenReady().<span class="keyword">then</span>(() =&gt; &#123;</span><br><span class="line">  createWindow();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="三修改package.json">三、修改package.json</h2>
-<p>进入package.json文件，新增</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;main&quot;</span>: <span class="string">&quot;electron/main.js&quot;</span>,</span><br></pre></td></tr></table></figure>
-<p>注意scripts</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line"><span class="string">&quot;dev&quot;</span>: <span class="string">&quot;vite&quot;</span>,</span><br><span class="line"><span class="string">&quot;build&quot;</span>: <span class="string">&quot;vite build&quot;</span>,</span><br><span class="line"><span class="string">&quot;preview&quot;</span>: <span class="string">&quot;vite preview&quot;</span>,</span><br><span class="line"><span class="string">&quot;start&quot;</span>: <span class="string">&quot;electron-forge start&quot;</span>,</span><br><span class="line"><span class="string">&quot;package&quot;</span>: <span class="string">&quot;electron-forge package&quot;</span>,</span><br><span class="line"><span class="string">&quot;make&quot;</span>: <span class="string">&quot;electron-forge make&quot;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<h2 id="四开发测试流程">四、开发测试流程</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动 Vite 前端</span></span><br><span class="line">npm run dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新开一个终端，启动 Electron</span></span><br><span class="line">npm start</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="五打包发布测试">五、打包发布测试</h2>
-<p>先构建前端项目</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
-<p>修改main.js</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>));</span><br></pre></td></tr></table></figure>
-<p>打包</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run package</span><br></pre></td></tr></table></figure>
-<p>会在 out/ 目录生成你的桌面可执行程序（比如 Windows 下是 .exe
-文件）</p>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>electron</tag>
-        <tag>web</tag>
-        <tag>desk</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git 基本使用教程</title>
-    <url>/2025/07/25/git-basic-usage/</url>
-    <content><![CDATA[<blockquote>
-<p>Git
-是一个分布式版本控制系统，适用于代码版本管理与团队协作开发。本文将简要介绍
-Git
-的一些常用操作命令，包括创建仓库、分支管理以及删除文件/分支的方法。</p>
-</blockquote>
-<hr />
-<h2 id="一初始化仓库">一、初始化仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
-<ul>
-<li>在当前目录初始化一个 Git 仓库。</li>
-<li>会创建 <code>.git</code> 文件夹作为版本控制目录。</li>
-</ul>
-<hr />
-<h2 id="二克隆远程仓库">二、克隆远程仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;仓库地址&gt;</span><br><span class="line">```****</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/username/repo.git</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="三添加与提交文件">三、添加与提交文件</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add &lt;文件或目录&gt;</span><br><span class="line">git commit -m <span class="string">&quot;提交说明&quot;</span></span><br></pre></td></tr></table></figure>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;添加初始项目文件&quot;</span></span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="四查看状态与历史">四、查看状态与历史</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status        <span class="comment"># 查看当前状态</span></span><br><span class="line">git <span class="built_in">log</span>           <span class="comment"># 查看提交历史</span></span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="五分支操作">五、分支操作</h2>
-<h3 id="创建新分支">创建新分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="切换分支">切换分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch &lt;分支名&gt;</span><br><span class="line"><span class="comment"># 或（旧写法）</span></span><br><span class="line">git checkout &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="创建并切换新分支">创建并切换新分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch -c &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="查看所有分支">查看所有分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="六合并分支">六、合并分支</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git merge &lt;被合并的分支&gt;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注意：需要先切换到目标分支，再合并。</p>
-</blockquote>
-<hr />
-<h2 id="七删除操作">七、删除操作</h2>
-<h3 id="删除文件">删除文件</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">rm</span> &lt;文件名&gt;</span><br><span class="line">git commit -m <span class="string">&quot;删除了某个文件&quot;</span></span><br></pre></td></tr></table></figure>
-<h3 id="撤销删除误删恢复">撤销删除（误删恢复）</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -- &lt;文件名&gt;</span><br></pre></td></tr></table></figure>
-<hr />
-<h3 id="删除本地分支">删除本地分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -d &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>-d</code> 是安全删除（合并过的才允许删）</li>
-<li><code>-D</code> 是强制删除（无论是否合并）</li>
-</ul>
-<h3 id="删除远程分支">删除远程分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin --delete &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="八推送与拉取">八、推送与拉取</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin &lt;分支名&gt;   <span class="comment"># 推送到远程</span></span><br><span class="line">git pull origin &lt;分支名&gt;   <span class="comment"># 拉取最新代码</span></span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="九查看远程仓库">九、查看远程仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="十总结">十、总结</h2>
-<p>Git
-是开发者日常工作中不可或缺的工具，掌握它可以大大提升协作效率与版本管理能力。希望本文能帮助你快速上手
-Git 的基本操作。</p>
-<hr />
-<blockquote>
-<p>如需进一步学习，可以参考 <a href="https://git-scm.com/book/zh/v2">Pro
-Git 中文版</a>。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>learn</tag>
-        <tag>repo</tag>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>像前端package.json那样管理python依赖</title>
     <url>/2025/07/29/pipenv/</url>
     <content><![CDATA[<ol type="1">
@@ -661,6 +661,19 @@ Git 中文版</a>。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt <span class="comment">#将已有依赖输出到requirements.txt文件下</span></span><br></pre></td></tr></table></figure>
 <p>将txt文件转码(powershell内输入)</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$content</span> = Get-Content requirements.txt</span><br><span class="line">[System.IO.File]::WriteAllLines(<span class="string">"fixed_requirements.txt"</span>, <span class="variable">$content</span>, (New-Object System.Text.UTF8Encoding <span class="variable">$false</span>))</span><br></pre></td></tr></table></figure>
+<p>最后丢尽pipfile</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pipenv install -r fixed_requirements.txt</span><br></pre></td></tr></table></figure>
+<ol start="4" type="1">
+<li>如何调用</li>
+</ol>
+<p>非常简单，像<code>npm i</code>一样我们只需要</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pipenv install</span><br></pre></td></tr></table></figure>
+<p>就可以一键安装python的所有依赖项</p>
+<ol start="6" type="1">
+<li>在一些小项目里直接利用requirements.txt一键安装也可以</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p>利用如上指令可以一键安装依赖</p>
 ]]></content>
       <categories>
         <category>code</category>

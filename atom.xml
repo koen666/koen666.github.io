@@ -46,9 +46,9 @@
     <link href="http://example.com/2025/07/29/pipenv/"/>
     <id>http://example.com/2025/07/29/pipenv/</id>
     <published>2025-07-28T16:00:00.000Z</published>
-    <updated>2025-07-29T08:45:30.890Z</updated>
+    <updated>2025-07-29T10:10:25.306Z</updated>
     
-    <content type="html"><![CDATA[<ol type="1"><li>首先下载管理用的包</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pipenv</span><br></pre></td></tr></table></figure><ol start="2" type="1"><li>初始化pipfile</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pipenv install</span><br></pre></td></tr></table></figure><p>你的目录下就出现了pipfile和pipfile.lock，对于package.json和package-lock.json</p><ol start="3" type="1"><li>将已有的依赖存放进pipenv中</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt <span class="comment">#将已有依赖输出到requirements.txt文件下</span></span><br></pre></td></tr></table></figure><p>将txt文件转码(powershell内输入)</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$content</span> = Get-Content requirements.txt</span><br><span class="line">[System.IO.File]::WriteAllLines(<span class="string">"fixed_requirements.txt"</span>, <span class="variable">$content</span>, (New-Object System.Text.UTF8Encoding <span class="variable">$false</span>))</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<ol type="1"><li>首先下载管理用的包</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pipenv</span><br></pre></td></tr></table></figure><ol start="2" type="1"><li>初始化pipfile</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pipenv install</span><br></pre></td></tr></table></figure><p>你的目录下就出现了pipfile和pipfile.lock，对于package.json和package-lock.json</p><ol start="3" type="1"><li>将已有的依赖存放进pipenv中</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt <span class="comment">#将已有依赖输出到requirements.txt文件下</span></span><br></pre></td></tr></table></figure><p>将txt文件转码(powershell内输入)</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$content</span> = Get-Content requirements.txt</span><br><span class="line">[System.IO.File]::WriteAllLines(<span class="string">"fixed_requirements.txt"</span>, <span class="variable">$content</span>, (New-Object System.Text.UTF8Encoding <span class="variable">$false</span>))</span><br></pre></td></tr></table></figure><p>最后丢尽pipfile</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pipenv install -r fixed_requirements.txt</span><br></pre></td></tr></table></figure><ol start="4" type="1"><li>如何调用</li></ol><p>非常简单，像<code>npm i</code>一样我们只需要</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pipenv install</span><br></pre></td></tr></table></figure><p>就可以一键安装python的所有依赖项</p><ol start="6" type="1"><li>在一些小项目里直接利用requirements.txt一键安装也可以</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure><p>利用如上指令可以一键安装依赖</p>]]></content>
     
     
     <summary type="html">来让你的python程序像前端依赖一样优雅的管理起来</summary>
@@ -129,11 +129,11 @@
     <category term="cmd" scheme="http://example.com/categories/cmd/"/>
     
     
-    <category term="learn" scheme="http://example.com/tags/learn/"/>
-    
     <category term="cmd" scheme="http://example.com/tags/cmd/"/>
     
     <category term="curl" scheme="http://example.com/tags/curl/"/>
+    
+    <category term="learn" scheme="http://example.com/tags/learn/"/>
     
   </entry>
   
@@ -154,11 +154,11 @@
     <category term="code" scheme="http://example.com/categories/code/"/>
     
     
+    <category term="learn" scheme="http://example.com/tags/learn/"/>
+    
     <category term="container" scheme="http://example.com/tags/container/"/>
     
     <category term="docker" scheme="http://example.com/tags/docker/"/>
-    
-    <category term="learn" scheme="http://example.com/tags/learn/"/>
     
     <category term="linux" scheme="http://example.com/tags/linux/"/>
     

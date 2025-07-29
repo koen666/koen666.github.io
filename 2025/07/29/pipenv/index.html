@@ -28,7 +28,7 @@
 <meta property="og:description" content="来让你的python程序像前端依赖一样优雅的管理起来">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-07-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-29T08:45:30.890Z">
+<meta property="article:modified_time" content="2025-07-29T10:10:25.306Z">
 <meta property="article:author" content="koen">
 <meta property="article:tag" content="pipenv">
 <meta property="article:tag" content="python">
@@ -325,7 +325,7 @@ mjx-container[display="true"] + br {
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-07-29 00:00:00 / Modified: 16:45:30" itemprop="dateCreated datePublished" datetime="2025-07-29T00:00:00+08:00">2025-07-29</time>
+              <time title="Created: 2025-07-29 00:00:00 / Modified: 18:10:25" itemprop="dateCreated datePublished" datetime="2025-07-29T00:00:00+08:00">2025-07-29</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -350,7 +350,7 @@ mjx-container[display="true"] + br {
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>120</span>
+              <span>219</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -385,6 +385,19 @@ mjx-container[display="true"] + br {
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt <span class="comment">#将已有依赖输出到requirements.txt文件下</span></span><br></pre></td></tr></table></figure>
 <p>将txt文件转码(powershell内输入)</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$content</span> = Get-Content requirements.txt</span><br><span class="line">[System.IO.File]::WriteAllLines(<span class="string">"fixed_requirements.txt"</span>, <span class="variable">$content</span>, (New-Object System.Text.UTF8Encoding <span class="variable">$false</span>))</span><br></pre></td></tr></table></figure>
+<p>最后丢尽pipfile</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pipenv install -r fixed_requirements.txt</span><br></pre></td></tr></table></figure>
+<ol start="4" type="1">
+<li>如何调用</li>
+</ol>
+<p>非常简单，像<code>npm i</code>一样我们只需要</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pipenv install</span><br></pre></td></tr></table></figure>
+<p>就可以一键安装python的所有依赖项</p>
+<ol start="6" type="1">
+<li>在一些小项目里直接利用requirements.txt一键安装也可以</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p>利用如上指令可以一键安装依赖</p>
 
     </div>
 
