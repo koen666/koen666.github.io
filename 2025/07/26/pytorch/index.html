@@ -30,13 +30,13 @@
 <meta property="og:image" content="http://example.com/images/autograd.png">
 <meta property="og:image" content="http://example.com/images/pytorch/linearRgression.png">
 <meta property="og:image" content="http://example.com/images/pytorch/CNN.png">
-<meta property="og:image" content="http://example.com/2025/07/26/pytorch/images/pytorch/RNN.png">
+<meta property="og:image" content="http://example.com/images/pytorch/RNN.png">
 <meta property="og:image" content="http://example.com/images/pytorch/pyplot-fmt.png">
 <meta property="og:image" content="http://example.com/images/pytorch/ex1.png">
 <meta property="og:image" content="http://example.com/images/pytorch/ex2.png">
 <meta property="og:image" content="http://example.com/images/pytorch/ex3.png">
 <meta property="article:published_time" content="2025-07-26T08:06:04.469Z">
-<meta property="article:modified_time" content="2025-07-29T05:51:10.333Z">
+<meta property="article:modified_time" content="2025-07-29T06:21:46.805Z">
 <meta property="article:author" content="koen">
 <meta property="article:tag" content="deeplearning">
 <meta property="article:tag" content="pytorch">
@@ -341,7 +341,7 @@ mjx-container[display="true"] + br {
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-29 13:51:10" itemprop="dateModified" datetime="2025-07-29T13:51:10+08:00">2025-07-29</time>
+                <time title="Modified: 2025-07-29 14:21:46" itemprop="dateModified" datetime="2025-07-29T14:21:46+08:00">2025-07-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -932,18 +932,21 @@ feature_dim]），所以必须先“展平”卷积输出。</li>
 <h3 id="理解循环rnn">6.1理解循环RNN</h3>
 <p>首先丢张RNN图方便理解什么是RNN</p>
 <figure>
-<img src="images/pytorch/RNN.png" alt="RNN">
+<img src="/images/pytorch/RNN.png" alt="RNN">
 <figcaption aria-hidden="true">RNN</figcaption>
 </figure>
 <p>从上图可以非常直观的看，在 RNN
 中，数据不仅沿着网络层级流动，还会在每个时间步骤上传播到当前的隐层状态，从而将之前的信息传递到下一个时间步骤。</p>
 <p>于是我们可以可以得到如下两个式子 <span class="math display"><em>h</em><sub><em>t</em></sub> = <em>f</em>(<em>W</em><sub><em>h</em><em>h</em></sub><em>h</em><sub><em>t</em> − 1</sub> + <em>W</em><sub><em>x</em><em>h</em></sub><em>x</em><sub><em>t</em></sub> + <em>b</em><sub><em>h</em></sub>)</span>
 <span class="math display"><em>y</em><sub><em>t</em></sub> = <em>W</em><sub><em>h</em><em>y</em></sub><em>h</em><sub><em>t</em></sub> + <em>b</em><sub><em>y</em></sub></span></p>
-<p>其中: - <span class="math inline"><em>W</em><sub><em>x</em><em>h</em></sub></span>:输入到隐藏状态的权重矩阵，用于将输入<span class="math inline"><em>X</em><sub><em>t</em></sub></span>转换为隐藏状态的一部分
-- <span class="math inline"><em>W</em><sub><em>h</em><em>h</em></sub></span>:隐藏状态到隐藏状态的权重矩阵，用于将前一时间步的隐藏状态<span class="math inline"><em>h</em><sub><em>t</em> − 1</sub></span>转换为当前时间步隐藏状态的一部分。
-- <span class="math inline"><em>W</em><sub><em>h</em><em>y</em></sub></span>:隐藏状态到输出的权重矩阵，用于将隐藏状态<span class="math inline"><em>h</em><sub><em>t</em></sub></span>转换为输出<span class="math inline"><em>y</em><sub><em>t</em></sub></span>。 -
-f:激活函数(如 Tanh 或 ReLU) - 隐藏状态 (ht,ht-1,….):
-它在每个时间步存储有关序列的信息。<span class="math inline"><em>h</em><sub><em>t</em></sub></span>是当前时间步的隐藏状态，<span class="math inline"><em>h</em><sub><em>t</em> − 1</sub></span>是前一个时间步的隐藏状态。</p>
+<p>其中:</p>
+<ul>
+<li><p><span class="math inline"><em>W</em><sub><em>x</em><em>h</em></sub></span>:输入到隐藏状态的权重矩阵，用于将输入<span class="math inline"><em>X</em><sub><em>t</em></sub></span>转换为隐藏状态的一部分</p></li>
+<li><p><span class="math inline"><em>W</em><sub><em>h</em><em>h</em></sub></span>:隐藏状态到隐藏状态的权重矩阵，用于将前一时间步的隐藏状态<span class="math inline"><em>h</em><sub><em>t</em> − 1</sub></span>转换为当前时间步隐藏状态的一部分。</p></li>
+<li><p><span class="math inline"><em>W</em><sub><em>h</em><em>y</em></sub></span>:隐藏状态到输出的权重矩阵，用于将隐藏状态<span class="math inline"><em>h</em><sub><em>t</em></sub></span>转换为输出<span class="math inline"><em>y</em><sub><em>t</em></sub></span>。</p></li>
+<li><p>f:激活函数(如 Tanh 或 ReLU)</p></li>
+<li><p>隐藏状态 (ht,ht-1,….): 它在每个时间步存储有关序列的信息。<span class="math inline"><em>h</em><sub><em>t</em></sub></span>是当前时间步的隐藏状态，<span class="math inline"><em>h</em><sub><em>t</em> − 1</sub></span>是前一个时间步的隐藏状态。</p></li>
+</ul>
 <h3 id="rnn实际实现">6.2RNN实际实现</h3>
 <p>在pytorch内有几种RNN模块</p>
 <ol type="1">
