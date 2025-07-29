@@ -30,12 +30,13 @@
 <meta property="og:image" content="http://example.com/images/autograd.png">
 <meta property="og:image" content="http://example.com/images/pytorch/linearRgression.png">
 <meta property="og:image" content="http://example.com/images/pytorch/CNN.png">
+<meta property="og:image" content="http://example.com/2025/07/26/pytorch/images/pytorch/RNN.png">
 <meta property="og:image" content="http://example.com/images/pytorch/pyplot-fmt.png">
 <meta property="og:image" content="http://example.com/images/pytorch/ex1.png">
 <meta property="og:image" content="http://example.com/images/pytorch/ex2.png">
 <meta property="og:image" content="http://example.com/images/pytorch/ex3.png">
 <meta property="article:published_time" content="2025-07-26T08:06:04.469Z">
-<meta property="article:modified_time" content="2025-07-28T06:27:54.189Z">
+<meta property="article:modified_time" content="2025-07-29T05:51:10.333Z">
 <meta property="article:author" content="koen">
 <meta property="article:tag" content="deeplearning">
 <meta property="article:tag" content="pytorch">
@@ -340,7 +341,7 @@ mjx-container[display="true"] + br {
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-28 14:27:54" itemprop="dateModified" datetime="2025-07-28T14:27:54+08:00">2025-07-28</time>
+                <time title="Modified: 2025-07-29 13:51:10" itemprop="dateModified" datetime="2025-07-29T13:51:10+08:00">2025-07-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -365,14 +366,14 @@ mjx-container[display="true"] + br {
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>8.2k</span>
+              <span>8.8k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>7 mins.</span>
+              <span>8 mins.</span>
             </span>
             <div class="post-description">本文介绍pytorch的基本使用，深度学习基础算法和神经网络的构建知识</div>
 
@@ -926,7 +927,55 @@ feature_dim]），所以必须先“展平”卷积输出。</li>
 <p>知道上面这些知识之后接下来便可以实现一个CNN
 手写数字图像识别的实例了</p>
 <p>定义一个简单的CNN模型</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class SimpleCNN(nn.Module):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super(SimpleCNN, self).__init__()</span><br><span class="line">        <span class="comment"># 定义卷积层：输入1通道，输出32通道，卷积核大小3x3</span></span><br><span class="line">        self.conv1 = nn.Conv2d(1, 32, kernel_size=3, stride=1, padding=1)</span><br><span class="line">        <span class="comment"># 定义卷积层：输入32通道，输出64通道</span></span><br><span class="line">        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1)</span><br><span class="line">        <span class="comment"># 定义全连接层</span></span><br><span class="line">        self.fc1 = nn.Linear(64 * 7 * 7, 128)  <span class="comment"># 输入大小 = 特征图大小 * 通道数</span></span><br><span class="line">        self.fc2 = nn.Linear(128, 10)  <span class="comment"># 10 个类别</span></span><br><span class="line"></span><br><span class="line">    def forward(self, x):</span><br><span class="line">        x = F.relu(self.conv1(x))  <span class="comment"># 第一层卷积 + ReLU</span></span><br><span class="line">        x = F.max_pool2d(x, 2)     <span class="comment"># 最大池化</span></span><br><span class="line">        x = F.relu(self.conv2(x))  <span class="comment"># 第二层卷积 + ReLU</span></span><br><span class="line">        x = F.max_pool2d(x, 2)     <span class="comment"># 最大池化</span></span><br><span class="line">        x = x.view(-1, 64 * 7 * 7) <span class="comment"># 展平操作</span></span><br><span class="line">        x = F.relu(self.fc1(x))    <span class="comment"># 全连接层 + ReLU</span></span><br><span class="line">        x = self.fc2(x)            <span class="comment"># 全连接层输出</span></span><br><span class="line">        <span class="built_in">return</span> x</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建模型实例</span></span><br><span class="line">model = SimpleCNN()</span><br></pre></td></tr></table></figure>
+<h2 id="section"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class SimpleCNN(nn.Module):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super(SimpleCNN, self).__init__()</span><br><span class="line">        <span class="comment"># 定义卷积层：输入1通道，输出32通道，卷积核大小3x3</span></span><br><span class="line">        self.conv1 = nn.Conv2d(1, 32, kernel_size=3, stride=1, padding=1)</span><br><span class="line">        <span class="comment"># 定义卷积层：输入32通道，输出64通道</span></span><br><span class="line">        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1)</span><br><span class="line">        <span class="comment"># 定义全连接层</span></span><br><span class="line">        self.fc1 = nn.Linear(64 * 7 * 7, 128)  <span class="comment"># 输入大小 = 特征图大小 * 通道数</span></span><br><span class="line">        self.fc2 = nn.Linear(128, 10)  <span class="comment"># 10 个类别</span></span><br><span class="line"></span><br><span class="line">    def forward(self, x):</span><br><span class="line">        x = F.relu(self.conv1(x))  <span class="comment"># 第一层卷积 + ReLU</span></span><br><span class="line">        x = F.max_pool2d(x, 2)     <span class="comment"># 最大池化</span></span><br><span class="line">        x = F.relu(self.conv2(x))  <span class="comment"># 第二层卷积 + ReLU</span></span><br><span class="line">        x = F.max_pool2d(x, 2)     <span class="comment"># 最大池化</span></span><br><span class="line">        x = x.view(-1, 64 * 7 * 7) <span class="comment"># 展平操作</span></span><br><span class="line">        x = F.relu(self.fc1(x))    <span class="comment"># 全连接层 + ReLU</span></span><br><span class="line">        x = self.fc2(x)            <span class="comment"># 全连接层输出</span></span><br><span class="line">        <span class="built_in">return</span> x</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建模型实例</span></span><br><span class="line">model = SimpleCNN()</span><br></pre></td></tr></table></figure></h2>
+<h2 id="六循环神经网络">六、循环神经网络</h2>
+<h3 id="理解循环rnn">6.1理解循环RNN</h3>
+<p>首先丢张RNN图方便理解什么是RNN</p>
+<figure>
+<img src="images/pytorch/RNN.png" alt="RNN">
+<figcaption aria-hidden="true">RNN</figcaption>
+</figure>
+<p>从上图可以非常直观的看，在 RNN
+中，数据不仅沿着网络层级流动，还会在每个时间步骤上传播到当前的隐层状态，从而将之前的信息传递到下一个时间步骤。</p>
+<p>于是我们可以可以得到如下两个式子 <span class="math display"><em>h</em><sub><em>t</em></sub> = <em>f</em>(<em>W</em><sub><em>h</em><em>h</em></sub><em>h</em><sub><em>t</em> − 1</sub> + <em>W</em><sub><em>x</em><em>h</em></sub><em>x</em><sub><em>t</em></sub> + <em>b</em><sub><em>h</em></sub>)</span>
+<span class="math display"><em>y</em><sub><em>t</em></sub> = <em>W</em><sub><em>h</em><em>y</em></sub><em>h</em><sub><em>t</em></sub> + <em>b</em><sub><em>y</em></sub></span></p>
+<p>其中: - <span class="math inline"><em>W</em><sub><em>x</em><em>h</em></sub></span>:输入到隐藏状态的权重矩阵，用于将输入<span class="math inline"><em>X</em><sub><em>t</em></sub></span>转换为隐藏状态的一部分
+- <span class="math inline"><em>W</em><sub><em>h</em><em>h</em></sub></span>:隐藏状态到隐藏状态的权重矩阵，用于将前一时间步的隐藏状态<span class="math inline"><em>h</em><sub><em>t</em> − 1</sub></span>转换为当前时间步隐藏状态的一部分。
+- <span class="math inline"><em>W</em><sub><em>h</em><em>y</em></sub></span>:隐藏状态到输出的权重矩阵，用于将隐藏状态<span class="math inline"><em>h</em><sub><em>t</em></sub></span>转换为输出<span class="math inline"><em>y</em><sub><em>t</em></sub></span>。 -
+f:激活函数(如 Tanh 或 ReLU) - 隐藏状态 (ht,ht-1,….):
+它在每个时间步存储有关序列的信息。<span class="math inline"><em>h</em><sub><em>t</em></sub></span>是当前时间步的隐藏状态，<span class="math inline"><em>h</em><sub><em>t</em> − 1</sub></span>是前一个时间步的隐藏状态。</p>
+<h3 id="rnn实际实现">6.2RNN实际实现</h3>
+<p>在pytorch内有几种RNN模块</p>
+<ol type="1">
+<li>torch.nn.RNN：基本的RNN单元</li>
+<li>torch.nn.LSTM：长短期记忆单元，能够学习长期依赖关系</li>
+<li>torch.nn.GRU：门控循环单元，是LSTM的简化版本，但通常更容易训练</li>
+</ol>
+<p>如下是一个简单的RNN模型</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class SimpleRNN(nn.Module):</span><br><span class="line">    def __init__(self, input_size, hidden_size, output_size):</span><br><span class="line">        super(SimpleRNN, self).__init__()</span><br><span class="line">        <span class="comment"># 定义 RNN 层</span></span><br><span class="line">        self.rnn = nn.RNN(input_size, hidden_size, batch_first=True)</span><br><span class="line">        <span class="comment"># 定义全连接层</span></span><br><span class="line">        self.fc = nn.Linear(hidden_size, output_size)</span><br><span class="line"></span><br><span class="line">    def forward(self, x):</span><br><span class="line">        <span class="comment"># x: (batch_size, seq_len, input_size)</span></span><br><span class="line">        out, _ = self.rnn(x)  <span class="comment"># out: (batch_size, seq_len, hidden_size)</span></span><br><span class="line">        <span class="comment"># 取序列最后一个时间步的输出作为模型的输出</span></span><br><span class="line">        out = out[:, -1, :]  <span class="comment"># (batch_size, hidden_size)</span></span><br><span class="line">        out = self.fc(out)  <span class="comment"># 全连接层</span></span><br><span class="line">        <span class="built_in">return</span> out</span><br></pre></td></tr></table></figure>
+<p>其中</p>
+<table>
+<thead>
+<tr>
+<th>维度名</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>batch_size</code></td>
+<td>一次喂给模型的样本个数（用于加速训练）</td>
+</tr>
+<tr>
+<td><code>seq_len</code></td>
+<td>每个样本有多少个时间步（即序列长度）</td>
+</tr>
+<tr>
+<td><code>input_size</code></td>
+<td>每个时间步输入的特征维度（如词向量维度）</td>
+</tr>
+</tbody>
+</table>
 <hr>
 <h2 id="番外一-pyplot">番外一 pyplot</h2>
 <h3 id="基本绘图流程">1.基本绘图流程</h3>
@@ -1673,7 +1722,7 @@ ylabel() 函数设置了图表的标题和坐标轴标签。</p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80autograd"><span class="nav-text">一、AutoGrad</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80"><span class="nav-text">二、神经网络基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-text">2.1 了解神经网络结构的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E6%95%B4%E4%B8%AA%E8%BF%87%E7%A8%8B"><span class="nav-text">2.2 了解神经网络的整个过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-text">2.3激活函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-text">2.4损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8"><span class="nav-text">2.5优化器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E4%B8%AA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%BF%87%E7%A8%8B"><span class="nav-text">2.6整个神经网络过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A4%84%E7%90%86%E5%92%8C%E5%8A%A0%E8%BD%BD"><span class="nav-text">三、数据的处理和加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dataset%E5%92%8Cdataloader"><span class="nav-text">3.1Dataset和DataLoader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E5%9B%BE%E5%83%8F%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E5%92%8C%E5%A2%9E%E5%BC%BA"><span class="nav-text">3.2对图像数据预处理和增强</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-text">四、线性回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-text">五、卷积神经网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%95%AA%E5%A4%96%E4%B8%80-pyplot"><span class="nav-text">番外一 pyplot</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%BB%98%E5%9B%BE%E6%B5%81%E7%A8%8B"><span class="nav-text">1.基本绘图流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E6%A0%BC%E7%BA%BF"><span class="nav-text">2.网格线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%A4%9A%E5%9B%BE"><span class="nav-text">3.绘制多图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%A3%E7%82%B9%E6%9F%B1%E5%BD%A2%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%92%8C%E9%A5%BC%E5%9B%BEs"><span class="nav-text">3.散点，柱形,直方图和饼图s</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="nav-text">1.散点图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%B1%E5%BD%A2%E5%9B%BE"><span class="nav-text">2.柱形图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A5%BC%E5%9B%BE"><span class="nav-text">3.饼图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="nav-text">4.直方图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#imshowimsaveimread"><span class="nav-text">4.imshow,imsave,imread</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80autograd"><span class="nav-text">一、AutoGrad</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80"><span class="nav-text">二、神经网络基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-text">2.1 了解神经网络结构的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E6%95%B4%E4%B8%AA%E8%BF%87%E7%A8%8B"><span class="nav-text">2.2 了解神经网络的整个过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-text">2.3激活函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-text">2.4损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8"><span class="nav-text">2.5优化器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E4%B8%AA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%BF%87%E7%A8%8B"><span class="nav-text">2.6整个神经网络过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A4%84%E7%90%86%E5%92%8C%E5%8A%A0%E8%BD%BD"><span class="nav-text">三、数据的处理和加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dataset%E5%92%8Cdataloader"><span class="nav-text">3.1Dataset和DataLoader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E5%9B%BE%E5%83%8F%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E5%92%8C%E5%A2%9E%E5%BC%BA"><span class="nav-text">3.2对图像数据预处理和增强</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-text">四、线性回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-text">五、卷积神经网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#section"><span class="nav-text">1234567891011121314151617181920212223class SimpleCNN(nn.Module):    def __init__(self):        super(SimpleCNN, self).__init__()        # 定义卷积层：输入1通道，输出32通道，卷积核大小3x3        self.conv1 &#x3D; nn.Conv2d(1, 32, kernel_size&#x3D;3, stride&#x3D;1, padding&#x3D;1)        # 定义卷积层：输入32通道，输出64通道        self.conv2 &#x3D; nn.Conv2d(32, 64, kernel_size&#x3D;3, stride&#x3D;1, padding&#x3D;1)        # 定义全连接层        self.fc1 &#x3D; nn.Linear(64 * 7 * 7, 128)  # 输入大小 &#x3D; 特征图大小 * 通道数        self.fc2 &#x3D; nn.Linear(128, 10)  # 10 个类别    def forward(self, x):        x &#x3D; F.relu(self.conv1(x))  # 第一层卷积 + ReLU        x &#x3D; F.max_pool2d(x, 2)     # 最大池化        x &#x3D; F.relu(self.conv2(x))  # 第二层卷积 + ReLU        x &#x3D; F.max_pool2d(x, 2)     # 最大池化        x &#x3D; x.view(-1, 64 * 7 * 7) # 展平操作        x &#x3D; F.relu(self.fc1(x))    # 全连接层 + ReLU        x &#x3D; self.fc2(x)            # 全连接层输出        return x# 创建模型实例model &#x3D; SimpleCNN()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-text">六、循环神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%86%E8%A7%A3%E5%BE%AA%E7%8E%AFrnn"><span class="nav-text">6.1理解循环RNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rnn%E5%AE%9E%E9%99%85%E5%AE%9E%E7%8E%B0"><span class="nav-text">6.2RNN实际实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%95%AA%E5%A4%96%E4%B8%80-pyplot"><span class="nav-text">番外一 pyplot</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%BB%98%E5%9B%BE%E6%B5%81%E7%A8%8B"><span class="nav-text">1.基本绘图流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E6%A0%BC%E7%BA%BF"><span class="nav-text">2.网格线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%A4%9A%E5%9B%BE"><span class="nav-text">3.绘制多图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%A3%E7%82%B9%E6%9F%B1%E5%BD%A2%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%92%8C%E9%A5%BC%E5%9B%BEs"><span class="nav-text">3.散点，柱形,直方图和饼图s</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="nav-text">1.散点图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%B1%E5%BD%A2%E5%9B%BE"><span class="nav-text">2.柱形图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A5%BC%E5%9B%BE"><span class="nav-text">3.饼图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="nav-text">4.直方图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#imshowimsaveimread"><span class="nav-text">4.imshow,imsave,imread</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -1771,12 +1820,12 @@ ylabel() 函数设置了图表的标题和坐标轴标签。</p>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">11k</span>
+    <span title="Symbols count total">12k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">10 mins.</span>
+    <span title="Reading time total">11 mins.</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div><!-- 页面点击小红心 -->
