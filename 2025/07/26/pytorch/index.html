@@ -36,7 +36,7 @@
 <meta property="og:image" content="http://example.com/images/pytorch/ex2.png">
 <meta property="og:image" content="http://example.com/images/pytorch/ex3.png">
 <meta property="article:published_time" content="2025-07-26T08:06:04.469Z">
-<meta property="article:modified_time" content="2025-07-30T03:21:37.420Z">
+<meta property="article:modified_time" content="2025-07-30T08:43:43.899Z">
 <meta property="article:author" content="koen">
 <meta property="article:tag" content="deeplearning">
 <meta property="article:tag" content="pytorch">
@@ -341,7 +341,7 @@ mjx-container[display="true"] + br {
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-30 11:21:37" itemprop="dateModified" datetime="2025-07-30T11:21:37+08:00">2025-07-30</time>
+                <time title="Modified: 2025-07-30 16:43:43" itemprop="dateModified" datetime="2025-07-30T16:43:43+08:00">2025-07-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -366,14 +366,14 @@ mjx-container[display="true"] + br {
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>12k</span>
+              <span>13k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>11 mins.</span>
+              <span>12 mins.</span>
             </span>
             <div class="post-description">本文介绍pytorch的基本使用，深度学习基础算法和神经网络的构建知识</div>
 
@@ -2085,7 +2085,7 @@ ylabel() 函数设置了图表的标题和坐标轴标签。</p>
 </table>
 <hr>
 <h2 id="番外二数据处理篇">番外二、数据处理篇</h2>
-<h3 id="pandas操作外部数据">Pandas—操作外部数据</h3>
+<h3 id="pandas操作外部数据">Pandas操作外部数据</h3>
 <ol type="1">
 <li>读取 CSV 文件：<code>pd.read_csv()</code></li>
 </ol>
@@ -2228,6 +2228,87 @@ ylabel() 函数设置了图表的标题和坐标轴标签。</p>
 </tr>
 </tbody>
 </table>
+<h3 id="pandas实现数据清洗">Pandas实现数据清洗</h3>
+<ol type="1">
+<li>清理空值</li>
+</ol>
+<p>首先可以在读取文件的时候自定义空值 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">missing_values = [<span class="string">"n/a"</span>, <span class="string">"na"</span>, <span class="string">"--"</span>]#自定义缺失值</span><br><span class="line"><span class="built_in">df</span>=pd.read_csv(<span class="string">"./data/csv/property-data.csv"</span>,na_values=missing_values)</span><br></pre></td></tr></table></figure>
+利用dropna方法清理空值 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df.dropna(axis=0,how=<span class="string">'any'</span>,thresh=None, subset=None, inplace=True) <span class="comment">#inplace=True表示在原数据上修改</span></span><br><span class="line"><span class="built_in">print</span> (<span class="built_in">df</span>[<span class="string">'NUM_BEDROOMS'</span>].isnull())</span><br><span class="line"><span class="built_in">print</span>(df.to_string())</span><br></pre></td></tr></table></figure></p>
+<ol start="2" type="1">
+<li>替换空单元格</li>
+</ol>
+<p>常用方法是计算列的均值、中位数值或众数:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">missing_values = [<span class="string">"n/a"</span>, <span class="string">"na"</span>, <span class="string">"--"</span>]#自定义缺失值</span><br><span class="line"><span class="built_in">df</span>=pd.read_csv(<span class="string">"./data/csv/property-data.csv"</span>,na_values=missing_values)</span><br><span class="line"></span><br><span class="line">x = <span class="built_in">df</span>[<span class="string">"ST_NUM"</span>].mean()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"></span><br><span class="line"><span class="built_in">df</span>[<span class="string">"ST_NUM"</span>].fillna(x, inplace = True)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(df.to_string())</span><br></pre></td></tr></table></figure>
+<ol start="3" type="1">
+<li>清洗格式错误数据</li>
+</ol>
+<p>利用to_datetime进行处理 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">data = {</span><br><span class="line">  <span class="string">"Date"</span>: [<span class="string">'2020/12/01'</span>, <span class="string">'2020/12/02'</span> , <span class="string">'20201226'</span>],</span><br><span class="line">  <span class="string">"duration"</span>: [50, 40, 45]</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="built_in">df</span> = pd.DataFrame(data, index = [<span class="string">"day1"</span>, <span class="string">"day2"</span>, <span class="string">"day3"</span>])</span><br><span class="line"><span class="built_in">df</span>[<span class="string">'Date'</span>] = pd.to_datetime(<span class="built_in">df</span>[<span class="string">'Date'</span>])</span><br><span class="line"><span class="built_in">print</span>(df.to_string())</span><br></pre></td></tr></table></figure></p>
+<ol start="4" type="1">
+<li>清洗错误数据</li>
+</ol>
+<p>利用loc(index,head)+if判断条件处理修改异常数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">person = {</span><br><span class="line">  <span class="string">"name"</span>: [<span class="string">'Google'</span>, <span class="string">'Runoob'</span> , <span class="string">'Taobao'</span>],</span><br><span class="line">  <span class="string">"age"</span>: [50, 40, 12345]    <span class="comment"># 12345 年龄数据是错误的</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="built_in">df</span> = pd.DataFrame(person)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> df.index:</span><br><span class="line">  <span class="keyword">if</span> df.loc[x, <span class="string">"age"</span>] &gt; 120:</span><br><span class="line">    df.loc[x, <span class="string">"age"</span>] = 120</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(df.to_string())</span><br></pre></td></tr></table></figure>
+<ol start="5" type="1">
+<li>清洗重复数据</li>
+</ol>
+<p>利用<code>drop_duplicates</code>方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">persons = {</span><br><span class="line">  <span class="string">"name"</span>: [<span class="string">'Google'</span>, <span class="string">'Runoob'</span>, <span class="string">'Runoob'</span>, <span class="string">'Taobao'</span>],</span><br><span class="line">  <span class="string">"age"</span>: [50, 40, 40, 23]  </span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="built_in">df</span>=pd.DataFrame(persons)</span><br><span class="line"></span><br><span class="line">df.drop_duplicates(inplace = True)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">df</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="6" type="1">
+<li>数据归一化和标准化</li>
+</ol>
+<p><code>StandardScaler()</code>标准化:将数据转换为均值为0，标准差为1的分布。</p>
+<p><code>MinMaxScaler()</code>归一化:将数据缩放到指定的范围（如 [0,
+1]）</p>
+<p><code>StandardScaler</code> 和 <code>MinMaxScaler</code> ，都是来自
+sklearn.preprocessing 模块的特征缩放器（scalers）</p>
+<p>调用实例: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from sklearn.preprocessing import MinMaxScaler</span><br><span class="line"></span><br><span class="line">scaler = MinMaxScaler()  <span class="comment"># 实例化</span></span><br><span class="line"><span class="built_in">df</span>[<span class="string">'ST_NUM'</span>] = scaler.fit_transform(<span class="built_in">df</span>[[<span class="string">'ST_NUM'</span>]])  <span class="comment"># 注意要用双中括号保持 DataFrame 结构</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(df.to_string())</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<table>
+<colgroup>
+<col style="width: 15%">
+<col style="width: 45%">
+<col style="width: 39%">
+</colgroup>
+<thead>
+<tr>
+<th>特性</th>
+<th>归一化（Normalization）</th>
+<th>标准化（Standardization）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>范围</td>
+<td>通常压缩到 <code>[0, 1]</code></td>
+<td>没有限定范围（均值为 0）</td>
+</tr>
+<tr>
+<td>公式</td>
+<td><span class="math inline">(<em>x</em> − <em>m</em><em>i</em><em>n</em>)/(<em>m</em><em>a</em><em>x</em> − <em>m</em><em>i</em><em>n</em>)</span></td>
+<td><span class="math inline">(<em>x</em> − <em>μ</em>)/<em>σ</em></span></td>
+</tr>
+<tr>
+<td>是否受异常值影响</td>
+<td>容易受影响</td>
+<td>相对不敏感</td>
+</tr>
+<tr>
+<td>适合算法</td>
+<td>KNN、SVM、距离类算法</td>
+<td>线性模型、神经网络等</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pandas求解数据的相关性">Pandas求解数据的相关性</h3>
+<ul>
+<li>皮尔逊相关系数(Pearson)：衡量两个变量之间线性关系强度和方向的指标，值域在
+[-1, 1] 之间。</li>
+<li>斯皮尔曼等级相关系数(Spearman)：衡量两个变量的单调关系（即一个变量增加，另一个是否总是增加或总是减少，不要求线性）</li>
+<li>肯德尔秩相关系数(kendall):衡量两个变量之间排名的一致性（秩的“方向一致”程度）。</li>
+<li>相关性矩阵：用来查看各个变量之间的相关性。</li>
+<li>热图：一种有效的可视化方式，可以帮助我们直观地查看变量之间的相关性。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import pandas as pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例数据</span></span><br><span class="line">data = {</span><br><span class="line">    <span class="string">'Height'</span>: [150, 160, 170, 180, 190],</span><br><span class="line">    <span class="string">'Weight'</span>: [45, 55, 65, 75, 85],</span><br><span class="line">    <span class="string">'Age'</span>: [20, 25, 30, 35, 40]</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="built_in">df</span> = pd.DataFrame(data)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算皮尔逊相关系数</span></span><br><span class="line">correlation = df.corr(method=<span class="string">'pearson'</span>)</span><br><span class="line"><span class="built_in">print</span>(correlation)</span><br></pre></td></tr></table></figure>
+<p>切换corr里面method值就是利用不同的方法求解相关系数</p>
 
     </div>
 
@@ -2339,7 +2420,7 @@ ylabel() 函数设置了图表的标题和坐标轴标签。</p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80autograd"><span class="nav-text">一、AutoGrad</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80"><span class="nav-text">二、神经网络基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-text">2.1 了解神经网络结构的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E6%95%B4%E4%B8%AA%E8%BF%87%E7%A8%8B"><span class="nav-text">2.2 了解神经网络的整个过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-text">2.3激活函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-text">2.4损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8"><span class="nav-text">2.5优化器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E4%B8%AA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%BF%87%E7%A8%8B"><span class="nav-text">2.6整个神经网络过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A4%84%E7%90%86%E5%92%8C%E5%8A%A0%E8%BD%BD"><span class="nav-text">三、数据的处理和加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dataset%E5%92%8Cdataloader"><span class="nav-text">3.1Dataset和DataLoader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E5%9B%BE%E5%83%8F%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E5%92%8C%E5%A2%9E%E5%BC%BA"><span class="nav-text">3.2对图像数据预处理和增强</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pytorchtransforms"><span class="nav-text">3.3 pytorch—transforms</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-text">四、线性回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-text">五、卷积神经网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#section"><span class="nav-text">1234567891011121314151617181920212223class SimpleCNN(nn.Module):    def __init__(self):        super(SimpleCNN, self).__init__()        # 定义卷积层：输入1通道，输出32通道，卷积核大小3x3        self.conv1 &#x3D; nn.Conv2d(1, 32, kernel_size&#x3D;3, stride&#x3D;1, padding&#x3D;1)        # 定义卷积层：输入32通道，输出64通道        self.conv2 &#x3D; nn.Conv2d(32, 64, kernel_size&#x3D;3, stride&#x3D;1, padding&#x3D;1)        # 定义全连接层        self.fc1 &#x3D; nn.Linear(64 * 7 * 7, 128)  # 输入大小 &#x3D; 特征图大小 * 通道数        self.fc2 &#x3D; nn.Linear(128, 10)  # 10 个类别    def forward(self, x):        x &#x3D; F.relu(self.conv1(x))  # 第一层卷积 + ReLU        x &#x3D; F.max_pool2d(x, 2)     # 最大池化        x &#x3D; F.relu(self.conv2(x))  # 第二层卷积 + ReLU        x &#x3D; F.max_pool2d(x, 2)     # 最大池化        x &#x3D; x.view(-1, 64 * 7 * 7) # 展平操作        x &#x3D; F.relu(self.fc1(x))    # 全连接层 + ReLU        x &#x3D; self.fc2(x)            # 全连接层输出        return x# 创建模型实例model &#x3D; SimpleCNN()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-text">六、循环神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%86%E8%A7%A3%E5%BE%AA%E7%8E%AFrnn"><span class="nav-text">6.1理解循环RNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rnn%E5%AE%9E%E9%99%85%E5%AE%9E%E7%8E%B0"><span class="nav-text">6.2RNN实际实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83torch%E5%86%85%E5%B8%B8%E8%A7%81%E5%87%BD%E6%95%B0"><span class="nav-text">七、torch内常见函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%95%AA%E5%A4%96%E4%B8%80pyplot"><span class="nav-text">番外一、pyplot</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%BB%98%E5%9B%BE%E6%B5%81%E7%A8%8B"><span class="nav-text">1.基本绘图流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E6%A0%BC%E7%BA%BF"><span class="nav-text">2.网格线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%A4%9A%E5%9B%BE"><span class="nav-text">3.绘制多图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%A3%E7%82%B9%E6%9F%B1%E5%BD%A2%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%92%8C%E9%A5%BC%E5%9B%BEs"><span class="nav-text">3.散点，柱形,直方图和饼图s</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="nav-text">1.散点图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%B1%E5%BD%A2%E5%9B%BE"><span class="nav-text">2.柱形图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A5%BC%E5%9B%BE"><span class="nav-text">3.饼图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="nav-text">4.直方图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#imshowimsaveimread"><span class="nav-text">4.imshow,imsave,imread</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%95%AA%E5%A4%96%E4%BA%8C%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%AF%87"><span class="nav-text">番外二、数据处理篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pandas%E6%93%8D%E4%BD%9C%E5%A4%96%E9%83%A8%E6%95%B0%E6%8D%AE"><span class="nav-text">Pandas—操作外部数据</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80autograd"><span class="nav-text">一、AutoGrad</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80"><span class="nav-text">二、神经网络基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-text">2.1 了解神经网络结构的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E6%95%B4%E4%B8%AA%E8%BF%87%E7%A8%8B"><span class="nav-text">2.2 了解神经网络的整个过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-text">2.3激活函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-text">2.4损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8"><span class="nav-text">2.5优化器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E4%B8%AA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%BF%87%E7%A8%8B"><span class="nav-text">2.6整个神经网络过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A4%84%E7%90%86%E5%92%8C%E5%8A%A0%E8%BD%BD"><span class="nav-text">三、数据的处理和加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dataset%E5%92%8Cdataloader"><span class="nav-text">3.1Dataset和DataLoader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E5%9B%BE%E5%83%8F%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E5%92%8C%E5%A2%9E%E5%BC%BA"><span class="nav-text">3.2对图像数据预处理和增强</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pytorchtransforms"><span class="nav-text">3.3 pytorch—transforms</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-text">四、线性回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-text">五、卷积神经网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#section"><span class="nav-text">1234567891011121314151617181920212223class SimpleCNN(nn.Module):    def __init__(self):        super(SimpleCNN, self).__init__()        # 定义卷积层：输入1通道，输出32通道，卷积核大小3x3        self.conv1 &#x3D; nn.Conv2d(1, 32, kernel_size&#x3D;3, stride&#x3D;1, padding&#x3D;1)        # 定义卷积层：输入32通道，输出64通道        self.conv2 &#x3D; nn.Conv2d(32, 64, kernel_size&#x3D;3, stride&#x3D;1, padding&#x3D;1)        # 定义全连接层        self.fc1 &#x3D; nn.Linear(64 * 7 * 7, 128)  # 输入大小 &#x3D; 特征图大小 * 通道数        self.fc2 &#x3D; nn.Linear(128, 10)  # 10 个类别    def forward(self, x):        x &#x3D; F.relu(self.conv1(x))  # 第一层卷积 + ReLU        x &#x3D; F.max_pool2d(x, 2)     # 最大池化        x &#x3D; F.relu(self.conv2(x))  # 第二层卷积 + ReLU        x &#x3D; F.max_pool2d(x, 2)     # 最大池化        x &#x3D; x.view(-1, 64 * 7 * 7) # 展平操作        x &#x3D; F.relu(self.fc1(x))    # 全连接层 + ReLU        x &#x3D; self.fc2(x)            # 全连接层输出        return x# 创建模型实例model &#x3D; SimpleCNN()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-text">六、循环神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%86%E8%A7%A3%E5%BE%AA%E7%8E%AFrnn"><span class="nav-text">6.1理解循环RNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rnn%E5%AE%9E%E9%99%85%E5%AE%9E%E7%8E%B0"><span class="nav-text">6.2RNN实际实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83torch%E5%86%85%E5%B8%B8%E8%A7%81%E5%87%BD%E6%95%B0"><span class="nav-text">七、torch内常见函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%95%AA%E5%A4%96%E4%B8%80pyplot"><span class="nav-text">番外一、pyplot</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%BB%98%E5%9B%BE%E6%B5%81%E7%A8%8B"><span class="nav-text">1.基本绘图流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E6%A0%BC%E7%BA%BF"><span class="nav-text">2.网格线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%A4%9A%E5%9B%BE"><span class="nav-text">3.绘制多图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%A3%E7%82%B9%E6%9F%B1%E5%BD%A2%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%92%8C%E9%A5%BC%E5%9B%BEs"><span class="nav-text">3.散点，柱形,直方图和饼图s</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="nav-text">1.散点图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%B1%E5%BD%A2%E5%9B%BE"><span class="nav-text">2.柱形图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A5%BC%E5%9B%BE"><span class="nav-text">3.饼图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="nav-text">4.直方图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#imshowimsaveimread"><span class="nav-text">4.imshow,imsave,imread</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%95%AA%E5%A4%96%E4%BA%8C%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%AF%87"><span class="nav-text">番外二、数据处理篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pandas%E6%93%8D%E4%BD%9C%E5%A4%96%E9%83%A8%E6%95%B0%E6%8D%AE"><span class="nav-text">Pandas操作外部数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pandas%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97"><span class="nav-text">Pandas实现数据清洗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pandas%E6%B1%82%E8%A7%A3%E6%95%B0%E6%8D%AE%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7"><span class="nav-text">Pandas求解数据的相关性</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -2437,7 +2518,7 @@ ylabel() 函数设置了图表的标题和坐标轴标签。</p>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">16k</span>
+    <span title="Symbols count total">17k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
