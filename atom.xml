@@ -65,6 +65,27 @@
   </entry>
   
   <entry>
+    <title>常见BUG汇总</title>
+    <link href="http://example.com/2025/07/27/issue/"/>
+    <id>http://example.com/2025/07/27/issue/</id>
+    <published>2025-07-27T00:29:00.000Z</published>
+    <updated>2025-08-01T06:57:37.197Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="一markdown">一、Markdown</h2><ol type="1"><li>为什么vscode编辑md文件十分卡顿</li></ol><p>解决方法:禁用cpp extension pack扩展</p>]]></content>
+    
+    
+    <summary type="html">欢迎留言提出常见BUG</summary>
+    
+    
+    
+    <category term="code" scheme="http://example.com/categories/code/"/>
+    
+    
+    <category term="markdown" scheme="http://example.com/tags/markdown/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Latex常见数学公式</title>
     <link href="http://example.com/2025/07/27/latex/"/>
     <id>http://example.com/2025/07/27/latex/</id>
