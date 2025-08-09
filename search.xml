@@ -1,122 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>curl使用教学</title>
-    <url>/2025/07/26/curl/</url>
+    <title>Electron 基本使用教程</title>
+    <url>/2025/07/29/electron/</url>
     <content><![CDATA[<blockquote>
-<p>curl 是一个强大的命令行工具，用于在命令行或脚本中发送 HTTP
-请求，与服务器通信。它可以用来下载网页、调用 API
-接口、上传文件、发送表单等。几乎所有支持网络通信的协议 curl
-都能处理，包括 HTTP、HTTPS、FTP、SFTP、SMTP 等</p>
+<p>以下以vue3为例结合electron实现跨平台开发</p>
 </blockquote>
 <hr />
-<h2 id="一所以curl能干啥">一、所以curl能干啥</h2>
-<table>
-<colgroup>
-<col style="width: 12%" />
-<col style="width: 87%" />
-</colgroup>
-<thead>
-<tr>
-<th>功能</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>获取网页内容</td>
-<td><code>curl https://example.com</code></td>
-</tr>
-<tr>
-<td>下载文件</td>
-<td><code>curl -O https://example.com/file.zip</code></td>
-</tr>
-<tr>
-<td>发送 POST 请求</td>
-<td><code>curl -X POST -d "name=Koen&amp;age=20" https://example.com/api</code></td>
-</tr>
-<tr>
-<td>添加请求头</td>
-<td><code>curl -H "Authorization: Bearer TOKEN" https://api.example.com/data</code></td>
-</tr>
-<tr>
-<td>上传文件</td>
-<td><code>curl -F "file=@test.png" https://example.com/upload</code></td>
-</tr>
-<tr>
-<td>保存输出到文件</td>
-<td><code>curl https://example.com -o saved.html</code></td>
-</tr>
-</tbody>
-</table>
-<p>以下将对其功能进行详细解释</p>
-<hr />
-<h2 id="二利用curl获取网页内容">二、利用curl获取网页内容</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl url</span><br></pre></td></tr></table></figure>
-<p>会将get请求返回结果直接输出在命令行中</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://example.com -o index.html</span><br></pre></td></tr></table></figure>
-<p>保存指定内容到文件，地址为cmd当前地址</p>
-<hr />
-<h2 id="三发送post请求">三、发送post请求</h2>
-<p>一般用于测试接口是否正常 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -d <span class="string">&quot;name=Koen&amp;age=20&quot;</span> https://example.com/api</span><br></pre></td></tr></table></figure> 带上请求头和请求体：
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST https://api.example.com/data \</span><br><span class="line">  -H <span class="string">&quot;Authorization: Bearer abc123&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;&quot;key&quot;:&quot;va</span></span><br><span class="line"><span class="string">lue&quot;&#125;&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">     -d <span class="string">&#x27;&#123;&quot;username&quot;:&quot;koen&quot;,&quot;password&quot;:&quot;123456&quot;&#125;&#x27;</span> \</span><br><span class="line">     https://example.com/api</span><br></pre></td></tr></table></figure></p>
-<hr />
-<h2 id="四利用curl进行文件上传">四、利用curl进行文件上传</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -F <span class="string">&quot;file=@test.png&quot;</span> https://example.com/upload</span><br></pre></td></tr></table></figure>
-<p>-F就是指定用表单的方式进行字段的上传</p>
-<table>
-<colgroup>
-<col style="width: 18%" />
-<col style="width: 81%" />
-</colgroup>
-<thead>
-<tr>
-<th>部分</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>file</code></td>
-<td>表单字段的名字。就像网页表单中
-<code>&lt;input type="file" name="file"&gt;</code>。</td>
-</tr>
-<tr>
-<td><code>=</code></td>
-<td>分隔字段名与数据（文件）</td>
-</tr>
-<tr>
-<td><code>@test.png</code></td>
-<td>表示上传当前目录下名为 <code>test.png</code> 的文件</td>
-</tr>
-</tbody>
-</table>
-<p>其实就是post请求上传文件的方式</p>
-<hr />
-]]></content>
-      <categories>
-        <category>cmd</category>
-      </categories>
-      <tags>
-        <tag>cmd</tag>
-        <tag>curl</tag>
-        <tag>learn</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>常见BUG汇总</title>
-    <url>/2025/07/27/issue/</url>
-    <content><![CDATA[<h2 id="一markdown">一、Markdown</h2>
-<ol type="1">
-<li>为什么vscode编辑md文件十分卡顿</li>
-</ol>
-<p>解决方法:禁用cpp extension pack扩展</p>
+<h2
+id="一在项目根目录安装electorn-forge">一、在项目根目录安装electorn-forge</h2>
+<p>按照如下命令安装electron-forge</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save-dev electron @electron-forge/cli</span><br><span class="line">npx electron-forge import</span><br></pre></td></tr></table></figure>
+<p>这一步会在你的项目中创建一个 electron
+的基本目录结构，并配置打包命令。</p>
+<h2 id="二新建main.js">二、新建main.js</h2>
+<p>在根目录下新建/electron/main.js</p>
+<p>在main.js下复制如下代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import &#123; app, BrowserWindow &#125; from <span class="string">&#x27;electron&#x27;</span>;</span><br><span class="line">import path from <span class="string">&#x27;path&#x27;</span>;</span><br><span class="line">import &#123; fileURLToPath &#125; from <span class="string">&#x27;url&#x27;</span>;</span><br><span class="line"></span><br><span class="line">// 解决 ES Module 中没有 __dirname 的问题</span><br><span class="line">const __filename = fileURLToPath(import.meta.url);</span><br><span class="line">const __dirname = path.dirname(__filename);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">createWindow</span></span> () &#123;</span><br><span class="line">  const win = new BrowserWindow(&#123;</span><br><span class="line">    width: 1200,</span><br><span class="line">    height: 800,</span><br><span class="line">    webPreferences: &#123;</span><br><span class="line">      preload: path.join(__dirname, <span class="string">&#x27;preload.js&#x27;</span>), // 可选，预加载脚本</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!app.isPackaged) &#123;</span><br><span class="line">    win.loadURL(<span class="string">&#x27;http://localhost:5173&#x27;</span>); // dev 模式加载 vite 前端</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>)); // prod 模式加载打包页面</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.whenReady().<span class="keyword">then</span>(() =&gt; &#123;</span><br><span class="line">  createWindow();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="三修改package.json">三、修改package.json</h2>
+<p>进入package.json文件，新增</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;main&quot;</span>: <span class="string">&quot;electron/main.js&quot;</span>,</span><br></pre></td></tr></table></figure>
+<p>注意scripts</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line"><span class="string">&quot;dev&quot;</span>: <span class="string">&quot;vite&quot;</span>,</span><br><span class="line"><span class="string">&quot;build&quot;</span>: <span class="string">&quot;vite build&quot;</span>,</span><br><span class="line"><span class="string">&quot;preview&quot;</span>: <span class="string">&quot;vite preview&quot;</span>,</span><br><span class="line"><span class="string">&quot;start&quot;</span>: <span class="string">&quot;electron-forge start&quot;</span>,</span><br><span class="line"><span class="string">&quot;package&quot;</span>: <span class="string">&quot;electron-forge package&quot;</span>,</span><br><span class="line"><span class="string">&quot;make&quot;</span>: <span class="string">&quot;electron-forge make&quot;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="四开发测试流程">四、开发测试流程</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动 Vite 前端</span></span><br><span class="line">npm run dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新开一个终端，启动 Electron</span></span><br><span class="line">npm start</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="五打包发布测试">五、打包发布测试</h2>
+<p>先构建前端项目</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+<p>修改main.js</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>));</span><br></pre></td></tr></table></figure>
+<p>打包</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run package</span><br></pre></td></tr></table></figure>
+<p>会在 out/ 目录生成你的桌面可执行程序（比如 Windows 下是 .exe
+文件）</p>
 ]]></content>
       <categories>
         <category>code</category>
       </categories>
       <tags>
-        <tag>markdown</tag>
+        <tag>electron</tag>
+        <tag>web</tag>
+        <tag>desk</tag>
       </tags>
   </entry>
   <entry>
@@ -180,11 +104,151 @@ pull命令并不是必需的步骤。</p>
         <category>code</category>
       </categories>
       <tags>
-        <tag>learn</tag>
         <tag>container</tag>
         <tag>docker</tag>
+        <tag>learn</tag>
         <tag>linux</tag>
         <tag>virtual</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git 基本使用教程</title>
+    <url>/2025/07/25/git-basic-usage/</url>
+    <content><![CDATA[<blockquote>
+<p>Git
+是一个分布式版本控制系统，适用于代码版本管理与团队协作开发。本文将简要介绍
+Git
+的一些常用操作命令，包括创建仓库、分支管理以及删除文件/分支的方法。</p>
+</blockquote>
+<hr />
+<h2 id="一初始化仓库">一、初始化仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在当前目录初始化一个 Git 仓库。</li>
+<li>会创建 <code>.git</code> 文件夹作为版本控制目录。</li>
+</ul>
+<hr />
+<h2 id="二克隆远程仓库">二、克隆远程仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;仓库地址&gt;</span><br><span class="line">```****</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/username/repo.git</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="三添加与提交文件">三、添加与提交文件</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add &lt;文件或目录&gt;</span><br><span class="line">git commit -m <span class="string">&quot;提交说明&quot;</span></span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;添加初始项目文件&quot;</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="四查看状态与历史">四、查看状态与历史</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status        <span class="comment"># 查看当前状态</span></span><br><span class="line">git <span class="built_in">log</span>           <span class="comment"># 查看提交历史</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="五分支操作">五、分支操作</h2>
+<h3 id="创建新分支">创建新分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="切换分支">切换分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch &lt;分支名&gt;</span><br><span class="line"><span class="comment"># 或（旧写法）</span></span><br><span class="line">git checkout &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="创建并切换新分支">创建并切换新分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch -c &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="查看所有分支">查看所有分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="六合并分支">六、合并分支</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git merge &lt;被合并的分支&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：需要先切换到目标分支，再合并。</p>
+</blockquote>
+<hr />
+<h2 id="七删除操作">七、删除操作</h2>
+<h3 id="删除文件">删除文件</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">rm</span> &lt;文件名&gt;</span><br><span class="line">git commit -m <span class="string">&quot;删除了某个文件&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="撤销删除误删恢复">撤销删除（误删恢复）</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -- &lt;文件名&gt;</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="删除本地分支">删除本地分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -d &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>-d</code> 是安全删除（合并过的才允许删）</li>
+<li><code>-D</code> 是强制删除（无论是否合并）</li>
+</ul>
+<h3 id="删除远程分支">删除远程分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin --delete &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="八推送与拉取">八、推送与拉取</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin &lt;分支名&gt;   <span class="comment"># 推送到远程</span></span><br><span class="line">git pull origin &lt;分支名&gt;   <span class="comment"># 拉取最新代码</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="九查看远程仓库">九、查看远程仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="十总结">十、总结</h2>
+<p>Git
+是开发者日常工作中不可或缺的工具，掌握它可以大大提升协作效率与版本管理能力。希望本文能帮助你快速上手
+Git 的基本操作。</p>
+<hr />
+<blockquote>
+<p>如需进一步学习，可以参考 <a href="https://git-scm.com/book/zh/v2">Pro
+Git 中文版</a>。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>learn</tag>
+        <tag>repo</tag>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常见BUG汇总</title>
+    <url>/2025/07/27/issue/</url>
+    <content><![CDATA[<h2 id="一markdown">一、Markdown</h2>
+<ol type="1">
+<li>为什么vscode编辑md文件十分卡顿</li>
+</ol>
+<p>解决方法:禁用cpp extension pack扩展</p>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>像前端package.json那样管理python依赖</title>
+    <url>/2025/07/29/pipenv/</url>
+    <content><![CDATA[<ol type="1">
+<li>首先下载管理用的包</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install pipenv</span><br></pre></td></tr></table></figure>
+<ol start="2" type="1">
+<li>初始化pipfile</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pipenv install</span><br></pre></td></tr></table></figure>
+<p>你的目录下就出现了pipfile和pipfile.lock，对于package.json和package-lock.json</p>
+<ol start="3" type="1">
+<li>将已有的依赖存放进pipenv中</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt <span class="comment">#将已有依赖输出到requirements.txt文件下</span></span><br></pre></td></tr></table></figure>
+<p>将txt文件转码(powershell内输入)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$content</span> = Get-Content requirements.txt</span><br><span class="line">[System.IO.File]::WriteAllLines(<span class="string">"fixed_requirements.txt"</span>, <span class="variable">$content</span>, (New-Object System.Text.UTF8Encoding <span class="variable">$false</span>))</span><br></pre></td></tr></table></figure>
+<p>最后丢尽pipfile</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pipenv install -r fixed_requirements.txt</span><br></pre></td></tr></table></figure>
+<ol start="4" type="1">
+<li>如何调用</li>
+</ol>
+<p>非常简单，像<code>npm i</code>一样我们只需要</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pipenv install</span><br></pre></td></tr></table></figure>
+<p>就可以一键安装python的所有依赖项</p>
+<ol start="5" type="1">
+<li>在一些小项目里直接利用requirements.txt一键安装也可以</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p>利用如上指令可以一键安装依赖</p>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>pipenv</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -530,89 +594,6 @@ pull命令并不是必需的步骤。</p>
       <tags>
         <tag>latex</tag>
         <tag>math</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>像前端package.json那样管理python依赖</title>
-    <url>/2025/07/29/pipenv/</url>
-    <content><![CDATA[<ol type="1">
-<li>首先下载管理用的包</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install pipenv</span><br></pre></td></tr></table></figure>
-<ol start="2" type="1">
-<li>初始化pipfile</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pipenv install</span><br></pre></td></tr></table></figure>
-<p>你的目录下就出现了pipfile和pipfile.lock，对于package.json和package-lock.json</p>
-<ol start="3" type="1">
-<li>将已有的依赖存放进pipenv中</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt <span class="comment">#将已有依赖输出到requirements.txt文件下</span></span><br></pre></td></tr></table></figure>
-<p>将txt文件转码(powershell内输入)</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$content</span> = Get-Content requirements.txt</span><br><span class="line">[System.IO.File]::WriteAllLines(<span class="string">"fixed_requirements.txt"</span>, <span class="variable">$content</span>, (New-Object System.Text.UTF8Encoding <span class="variable">$false</span>))</span><br></pre></td></tr></table></figure>
-<p>最后丢尽pipfile</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pipenv install -r fixed_requirements.txt</span><br></pre></td></tr></table></figure>
-<ol start="4" type="1">
-<li>如何调用</li>
-</ol>
-<p>非常简单，像<code>npm i</code>一样我们只需要</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pipenv install</span><br></pre></td></tr></table></figure>
-<p>就可以一键安装python的所有依赖项</p>
-<ol start="5" type="1">
-<li>在一些小项目里直接利用requirements.txt一键安装也可以</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
-<p>利用如上指令可以一键安装依赖</p>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>pipenv</tag>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Electron 基本使用教程</title>
-    <url>/2025/07/29/electron/</url>
-    <content><![CDATA[<blockquote>
-<p>以下以vue3为例结合electron实现跨平台开发</p>
-</blockquote>
-<hr />
-<h2
-id="一在项目根目录安装electorn-forge">一、在项目根目录安装electorn-forge</h2>
-<p>按照如下命令安装electron-forge</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save-dev electron @electron-forge/cli</span><br><span class="line">npx electron-forge import</span><br></pre></td></tr></table></figure>
-<p>这一步会在你的项目中创建一个 electron
-的基本目录结构，并配置打包命令。</p>
-<h2 id="二新建main.js">二、新建main.js</h2>
-<p>在根目录下新建/electron/main.js</p>
-<p>在main.js下复制如下代码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import &#123; app, BrowserWindow &#125; from <span class="string">&#x27;electron&#x27;</span>;</span><br><span class="line">import path from <span class="string">&#x27;path&#x27;</span>;</span><br><span class="line">import &#123; fileURLToPath &#125; from <span class="string">&#x27;url&#x27;</span>;</span><br><span class="line"></span><br><span class="line">// 解决 ES Module 中没有 __dirname 的问题</span><br><span class="line">const __filename = fileURLToPath(import.meta.url);</span><br><span class="line">const __dirname = path.dirname(__filename);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">createWindow</span></span> () &#123;</span><br><span class="line">  const win = new BrowserWindow(&#123;</span><br><span class="line">    width: 1200,</span><br><span class="line">    height: 800,</span><br><span class="line">    webPreferences: &#123;</span><br><span class="line">      preload: path.join(__dirname, <span class="string">&#x27;preload.js&#x27;</span>), // 可选，预加载脚本</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!app.isPackaged) &#123;</span><br><span class="line">    win.loadURL(<span class="string">&#x27;http://localhost:5173&#x27;</span>); // dev 模式加载 vite 前端</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>)); // prod 模式加载打包页面</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.whenReady().<span class="keyword">then</span>(() =&gt; &#123;</span><br><span class="line">  createWindow();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="三修改package.json">三、修改package.json</h2>
-<p>进入package.json文件，新增</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;main&quot;</span>: <span class="string">&quot;electron/main.js&quot;</span>,</span><br></pre></td></tr></table></figure>
-<p>注意scripts</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line"><span class="string">&quot;dev&quot;</span>: <span class="string">&quot;vite&quot;</span>,</span><br><span class="line"><span class="string">&quot;build&quot;</span>: <span class="string">&quot;vite build&quot;</span>,</span><br><span class="line"><span class="string">&quot;preview&quot;</span>: <span class="string">&quot;vite preview&quot;</span>,</span><br><span class="line"><span class="string">&quot;start&quot;</span>: <span class="string">&quot;electron-forge start&quot;</span>,</span><br><span class="line"><span class="string">&quot;package&quot;</span>: <span class="string">&quot;electron-forge package&quot;</span>,</span><br><span class="line"><span class="string">&quot;make&quot;</span>: <span class="string">&quot;electron-forge make&quot;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<h2 id="四开发测试流程">四、开发测试流程</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动 Vite 前端</span></span><br><span class="line">npm run dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新开一个终端，启动 Electron</span></span><br><span class="line">npm start</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="五打包发布测试">五、打包发布测试</h2>
-<p>先构建前端项目</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
-<p>修改main.js</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>));</span><br></pre></td></tr></table></figure>
-<p>打包</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run package</span><br></pre></td></tr></table></figure>
-<p>会在 out/ 目录生成你的桌面可执行程序（比如 Windows 下是 .exe
-文件）</p>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>electron</tag>
-        <tag>web</tag>
-        <tag>desk</tag>
       </tags>
   </entry>
   <entry>
@@ -1316,7 +1297,7 @@ feature_dim]），所以必须先“展平”卷积输出。</li>
 <tbody>
 <tr>
 <td><code>batch_size</code></td>
-<td>一次喂给模型的样本个数（用于加速训练）</td>
+<td>一次喂给模型的本个数（用于加速训练）</td>
 </tr>
 <tr>
 <td><code>seq_len</code></td>
@@ -1329,7 +1310,31 @@ feature_dim]），所以必须先“展平”卷积输出。</li>
 </tbody>
 </table>
 <hr>
-<h2 id="七torch内常见函数">七、torch内常见函数</h2>
+<h2 id="七-transformer架构">七、 Transformer架构</h2>
+<h3 id="什么是transformer架构">7.1 什么是transformer架构</h3>
+<p>如下是一张论文中的解释transformer的图</p>
+<p><img src="/images/pytorch/transformer.jpg"></p>
+<p>transformer架构就是利用注意力机制来获取序列之间联系的神经网络模型</p>
+<h3 id="注意力机制">7.2 注意力机制</h3>
+<p>可以理解为attention机制实质上就是权重的问题</p>
+<figure>
+<img src="/images/pytorch/attention.png" alt="attention">
+<figcaption aria-hidden="true">attention</figcaption>
+</figure>
+<figure>
+<img src="/images/pytorch/self-attention.png" alt="self-attention">
+<figcaption aria-hidden="true">self-attention</figcaption>
+</figure>
+<h3 id="transformer架构的实现机理">7.3 transformer架构的实现机理</h3>
+<p><img src="/imagse/pytorch/transformer1.png"></p>
+<p><img src="/images/pytorch/transformer2.png"></p>
+<ul>
+<li><p>Position
+Encoding:给每个词一个位置编码，表示该词在句子中的位置信息</p></li>
+<li><p>Multi-Head Attension:对不同模块间产生的注意力机制</p></li>
+</ul>
+<hr>
+<h2 id="八torch内常见函数">八、torch内常见函数</h2>
 <p>张量类型检查和配置：</p>
 <table>
 <thead>
@@ -2587,87 +2592,106 @@ sklearn.preprocessing 模块的特征缩放器（scalers）</p>
       </tags>
   </entry>
   <entry>
-    <title>Git 基本使用教程</title>
-    <url>/2025/07/25/git-basic-usage/</url>
+    <title>curl使用教学</title>
+    <url>/2025/07/26/curl/</url>
     <content><![CDATA[<blockquote>
-<p>Git
-是一个分布式版本控制系统，适用于代码版本管理与团队协作开发。本文将简要介绍
-Git
-的一些常用操作命令，包括创建仓库、分支管理以及删除文件/分支的方法。</p>
+<p>curl 是一个强大的命令行工具，用于在命令行或脚本中发送 HTTP
+请求，与服务器通信。它可以用来下载网页、调用 API
+接口、上传文件、发送表单等。几乎所有支持网络通信的协议 curl
+都能处理，包括 HTTP、HTTPS、FTP、SFTP、SMTP 等</p>
 </blockquote>
 <hr />
-<h2 id="一初始化仓库">一、初始化仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
-<ul>
-<li>在当前目录初始化一个 Git 仓库。</li>
-<li>会创建 <code>.git</code> 文件夹作为版本控制目录。</li>
-</ul>
+<h2 id="一所以curl能干啥">一、所以curl能干啥</h2>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 87%" />
+</colgroup>
+<thead>
+<tr>
+<th>功能</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>获取网页内容</td>
+<td><code>curl https://example.com</code></td>
+</tr>
+<tr>
+<td>下载文件</td>
+<td><code>curl -O https://example.com/file.zip</code></td>
+</tr>
+<tr>
+<td>发送 POST 请求</td>
+<td><code>curl -X POST -d "name=Koen&amp;age=20" https://example.com/api</code></td>
+</tr>
+<tr>
+<td>添加请求头</td>
+<td><code>curl -H "Authorization: Bearer TOKEN" https://api.example.com/data</code></td>
+</tr>
+<tr>
+<td>上传文件</td>
+<td><code>curl -F "file=@test.png" https://example.com/upload</code></td>
+</tr>
+<tr>
+<td>保存输出到文件</td>
+<td><code>curl https://example.com -o saved.html</code></td>
+</tr>
+</tbody>
+</table>
+<p>以下将对其功能进行详细解释</p>
 <hr />
-<h2 id="二克隆远程仓库">二、克隆远程仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;仓库地址&gt;</span><br><span class="line">```****</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/username/repo.git</span><br></pre></td></tr></table></figure>
+<h2 id="二利用curl获取网页内容">二、利用curl获取网页内容</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl url</span><br></pre></td></tr></table></figure>
+<p>会将get请求返回结果直接输出在命令行中</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://example.com -o index.html</span><br></pre></td></tr></table></figure>
+<p>保存指定内容到文件，地址为cmd当前地址</p>
 <hr />
-<h2 id="三添加与提交文件">三、添加与提交文件</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add &lt;文件或目录&gt;</span><br><span class="line">git commit -m <span class="string">&quot;提交说明&quot;</span></span><br></pre></td></tr></table></figure>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;添加初始项目文件&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="三发送post请求">三、发送post请求</h2>
+<p>一般用于测试接口是否正常 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -d <span class="string">&quot;name=Koen&amp;age=20&quot;</span> https://example.com/api</span><br></pre></td></tr></table></figure> 带上请求头和请求体：
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST https://api.example.com/data \</span><br><span class="line">  -H <span class="string">&quot;Authorization: Bearer abc123&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;&quot;key&quot;:&quot;va</span></span><br><span class="line"><span class="string">lue&quot;&#125;&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">     -d <span class="string">&#x27;&#123;&quot;username&quot;:&quot;koen&quot;,&quot;password&quot;:&quot;123456&quot;&#125;&#x27;</span> \</span><br><span class="line">     https://example.com/api</span><br></pre></td></tr></table></figure></p>
 <hr />
-<h2 id="四查看状态与历史">四、查看状态与历史</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status        <span class="comment"># 查看当前状态</span></span><br><span class="line">git <span class="built_in">log</span>           <span class="comment"># 查看提交历史</span></span><br></pre></td></tr></table></figure>
+<h2 id="四利用curl进行文件上传">四、利用curl进行文件上传</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -F <span class="string">&quot;file=@test.png&quot;</span> https://example.com/upload</span><br></pre></td></tr></table></figure>
+<p>-F就是指定用表单的方式进行字段的上传</p>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr>
+<th>部分</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file</code></td>
+<td>表单字段的名字。就像网页表单中
+<code>&lt;input type="file" name="file"&gt;</code>。</td>
+</tr>
+<tr>
+<td><code>=</code></td>
+<td>分隔字段名与数据（文件）</td>
+</tr>
+<tr>
+<td><code>@test.png</code></td>
+<td>表示上传当前目录下名为 <code>test.png</code> 的文件</td>
+</tr>
+</tbody>
+</table>
+<p>其实就是post请求上传文件的方式</p>
 <hr />
-<h2 id="五分支操作">五、分支操作</h2>
-<h3 id="创建新分支">创建新分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="切换分支">切换分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch &lt;分支名&gt;</span><br><span class="line"><span class="comment"># 或（旧写法）</span></span><br><span class="line">git checkout &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="创建并切换新分支">创建并切换新分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch -c &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="查看所有分支">查看所有分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="六合并分支">六、合并分支</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git merge &lt;被合并的分支&gt;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注意：需要先切换到目标分支，再合并。</p>
-</blockquote>
-<hr />
-<h2 id="七删除操作">七、删除操作</h2>
-<h3 id="删除文件">删除文件</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">rm</span> &lt;文件名&gt;</span><br><span class="line">git commit -m <span class="string">&quot;删除了某个文件&quot;</span></span><br></pre></td></tr></table></figure>
-<h3 id="撤销删除误删恢复">撤销删除（误删恢复）</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -- &lt;文件名&gt;</span><br></pre></td></tr></table></figure>
-<hr />
-<h3 id="删除本地分支">删除本地分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -d &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>-d</code> 是安全删除（合并过的才允许删）</li>
-<li><code>-D</code> 是强制删除（无论是否合并）</li>
-</ul>
-<h3 id="删除远程分支">删除远程分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin --delete &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="八推送与拉取">八、推送与拉取</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin &lt;分支名&gt;   <span class="comment"># 推送到远程</span></span><br><span class="line">git pull origin &lt;分支名&gt;   <span class="comment"># 拉取最新代码</span></span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="九查看远程仓库">九、查看远程仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="十总结">十、总结</h2>
-<p>Git
-是开发者日常工作中不可或缺的工具，掌握它可以大大提升协作效率与版本管理能力。希望本文能帮助你快速上手
-Git 的基本操作。</p>
-<hr />
-<blockquote>
-<p>如需进一步学习，可以参考 <a href="https://git-scm.com/book/zh/v2">Pro
-Git 中文版</a>。</p>
-</blockquote>
 ]]></content>
       <categories>
-        <category>code</category>
+        <category>cmd</category>
       </categories>
       <tags>
         <tag>learn</tag>
-        <tag>repo</tag>
-        <tag>git</tag>
+        <tag>cmd</tag>
+        <tag>curl</tag>
       </tags>
   </entry>
 </search>

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://example.com/2025/07/27/issue/</loc>
-    <lastmod>2025-08-01</lastmod>
+    <loc>http://example.com/2025/07/26/pytorch/</loc>
+    <lastmod>2025-08-08</lastmod>
   </url>
   <url>
-    <loc>http://example.com/2025/07/26/pytorch/</loc>
+    <loc>http://example.com/2025/07/26/docker-basic-usage/</loc>
+    <lastmod>2025-08-02</lastmod>
+  </url>
+  <url>
+    <loc>http://example.com/2025/07/27/issue/</loc>
     <lastmod>2025-08-01</lastmod>
   </url>
   <url>
@@ -14,10 +18,6 @@
   </url>
   <url>
     <loc>http://example.com/2025/07/26/curl/</loc>
-    <lastmod>2025-07-31</lastmod>
-  </url>
-  <url>
-    <loc>http://example.com/2025/07/26/docker-basic-usage/</loc>
     <lastmod>2025-07-31</lastmod>
   </url>
   <url>
