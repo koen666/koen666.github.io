@@ -1,6 +1,241 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Docker 基本使用教程</title>
+    <url>/2025/07/26/docker-basic-usage/</url>
+    <content><![CDATA[<blockquote>
+<p>Docker
+可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的
+Linux 机器上，也可以实现虚拟化。</p>
+</blockquote>
+<hr />
+<h2 id="一docker的用途">一、Docker的用途</h2>
+<p>Docker 的主要用途，目前有三大类。</p>
+<ol type="1">
+<li><p>提供一次性的环境。比如，本地测试他人的软件、持续集成的时候提供单元测试和构建的环境。</p></li>
+<li><p>提供弹性的云服务。因为 Docker
+容器可以随开随关，很适合动态扩容和缩容。</p></li>
+<li><p>组建微服务架构。通过多个容器，一台机器可以跑多个服务，因此在本机就可以模拟出微服务架构。</p></li>
+</ol>
+<hr />
+<h2 id="二验证是否安装成功">二、验证是否安装成功</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="三image文件">三、Image文件</h2>
+<p>Docker 把应用程序及其依赖，打包在 <strong>image
+文件</strong>里面。只有通过这个文件，才能生成 Docker 容器。<br />
+image 文件可以看作是容器的模板，Docker 根据 image
+文件生成容器的实例。<br />
+同一个 image 文件，可以生成多个同时运行的容器实例。</p>
+<p>image 是一个 <strong>二进制文件</strong>。实际开发中，一个 image
+文件往往通过继承另一个 image 文件，加上一些个性化设置而生成。<br />
+举例来说，你可以在 Ubuntu 的 image 基础上，往里面加入 Apache
+服务器，形成你自己的 image。</p>
+<h3 id="列出本机的所有-image-文件">列出本机的所有 image 文件</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker image <span class="built_in">ls</span></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 🗑️ 删除 image 文件</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">$ docker image <span class="built_in">rm</span> [imageName]</span><br></pre></td></tr></table></figure>
+<p>image 文件是通用的，一台机器的 image
+文件拷贝到另一台机器，照样可以使用。</p>
+<p>一般来说，为了节省时间，我们应该尽量使用别人制作好的 image
+文件，而不是自己制作。 即使要定制，也应该基于别人的 image
+文件进行加工，而不是从零开始制作。</p>
+<h3 id="镜像仓库image-repository">镜像仓库（Image Repository）</h3>
+<p>为了方便共享，image 文件制作完成后，可以上传到网上的仓库。</p>
+<ul>
+<li>Docker 的官方仓库 <strong>Docker Hub</strong> 是最重要、最常用的
+image 仓库。</li>
+<li>此外，你也可以使用国内的镜像仓库（如阿里云、腾讯云）或者搭建私有仓库。</li>
+<li>出售自己制作的 image 文件也是可以的。</li>
+</ul>
+<h3 id="imagecontainer">image&amp;&amp;container</h3>
+<p>容器是镜像跑起来的实例，一个镜像可以有多个容器</p>
+<hr />
+<h2 id="四如何跑起来呢">四、如何跑起来呢</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker image pull &lt;project&gt;       <span class="comment">#将image文件从仓库抓取到本地</span></span><br><span class="line">docker container run &lt;project&gt;    <span class="comment">#将image文件在你的电脑上跑起来，新建容器</span></span><br><span class="line">docker container start [ID]       <span class="comment">#将已有的容器跑起来</span></span><br><span class="line">docker container <span class="built_in">kill</span> [ID]        <span class="comment">#手动终止容器的运行</span></span><br><span class="line">docker container <span class="built_in">ls</span>               <span class="comment">#在你电脑上正在跑起来的容器</span></span><br><span class="line">docker container <span class="built_in">ls</span> -all          <span class="comment">#列出本机所有容器，包括终止运行的容器</span></span><br><span class="line">docker container <span class="built_in">rm</span> [containerID] <span class="comment">#删除停止运行的容器，防止占用硬盘空间</span></span><br><span class="line">docker <span class="built_in">exec</span> -it my-nginx bash     <span class="comment">#在叫my-nginx的容器内，开启一个bash命令终端进去操作</span></span><br></pre></td></tr></table></figure>
+<p>注意，docker container run命令具有自动抓取 image
+文件的功能。如果发现本地没有指定的 image
+文件，就会从仓库自动抓取。因此，前面的docker image
+pull命令并不是必需的步骤。</p>
+<hr />
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>container</tag>
+        <tag>docker</tag>
+        <tag>learn</tag>
+        <tag>linux</tag>
+        <tag>virtual</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git 基本使用教程</title>
+    <url>/2025/07/25/git-basic-usage/</url>
+    <content><![CDATA[<blockquote>
+<p>Git
+是一个分布式版本控制系统，适用于代码版本管理与团队协作开发。本文将简要介绍
+Git
+的一些常用操作命令，包括创建仓库、分支管理以及删除文件/分支的方法。</p>
+</blockquote>
+<hr />
+<h2 id="一初始化仓库">一、初始化仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在当前目录初始化一个 Git 仓库。</li>
+<li>会创建 <code>.git</code> 文件夹作为版本控制目录。</li>
+</ul>
+<hr />
+<h2 id="二克隆远程仓库">二、克隆远程仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;仓库地址&gt;</span><br><span class="line">```****</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/username/repo.git</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="三添加与提交文件">三、添加与提交文件</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add &lt;文件或目录&gt;</span><br><span class="line">git commit -m <span class="string">&quot;提交说明&quot;</span></span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;添加初始项目文件&quot;</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="四查看状态与历史">四、查看状态与历史</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status        <span class="comment"># 查看当前状态</span></span><br><span class="line">git <span class="built_in">log</span>           <span class="comment"># 查看提交历史</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="五分支操作">五、分支操作</h2>
+<h3 id="创建新分支">创建新分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="切换分支">切换分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch &lt;分支名&gt;</span><br><span class="line"><span class="comment"># 或（旧写法）</span></span><br><span class="line">git checkout &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="创建并切换新分支">创建并切换新分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch -c &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="查看所有分支">查看所有分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="六合并分支">六、合并分支</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git merge &lt;被合并的分支&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：需要先切换到目标分支，再合并。</p>
+</blockquote>
+<hr />
+<h2 id="七删除操作">七、删除操作</h2>
+<h3 id="删除文件">删除文件</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">rm</span> &lt;文件名&gt;</span><br><span class="line">git commit -m <span class="string">&quot;删除了某个文件&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="撤销删除误删恢复">撤销删除（误删恢复）</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -- &lt;文件名&gt;</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="删除本地分支">删除本地分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -d &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>-d</code> 是安全删除（合并过的才允许删）</li>
+<li><code>-D</code> 是强制删除（无论是否合并）</li>
+</ul>
+<h3 id="删除远程分支">删除远程分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin --delete &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="八推送与拉取">八、推送与拉取</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin &lt;分支名&gt;   <span class="comment"># 推送到远程</span></span><br><span class="line">git pull origin &lt;分支名&gt;   <span class="comment"># 拉取最新代码</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="九查看远程仓库">九、查看远程仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="十总结">十、总结</h2>
+<p>Git
+是开发者日常工作中不可或缺的工具，掌握它可以大大提升协作效率与版本管理能力。希望本文能帮助你快速上手
+Git 的基本操作。</p>
+<hr />
+<blockquote>
+<p>如需进一步学习，可以参考 <a href="https://git-scm.com/book/zh/v2">Pro
+Git 中文版</a>。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>learn</tag>
+        <tag>repo</tag>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Electron 基本使用教程</title>
+    <url>/2025/07/29/electron/</url>
+    <content><![CDATA[<blockquote>
+<p>以下以vue3为例结合electron实现跨平台开发</p>
+</blockquote>
+<hr />
+<h2
+id="一在项目根目录安装electorn-forge">一、在项目根目录安装electorn-forge</h2>
+<p>按照如下命令安装electron-forge</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save-dev electron @electron-forge/cli</span><br><span class="line">npx electron-forge import</span><br></pre></td></tr></table></figure>
+<p>这一步会在你的项目中创建一个 electron
+的基本目录结构，并配置打包命令。</p>
+<h2 id="二新建main.js">二、新建main.js</h2>
+<p>在根目录下新建/electron/main.js</p>
+<p>在main.js下复制如下代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import &#123; app, BrowserWindow &#125; from <span class="string">&#x27;electron&#x27;</span>;</span><br><span class="line">import path from <span class="string">&#x27;path&#x27;</span>;</span><br><span class="line">import &#123; fileURLToPath &#125; from <span class="string">&#x27;url&#x27;</span>;</span><br><span class="line"></span><br><span class="line">// 解决 ES Module 中没有 __dirname 的问题</span><br><span class="line">const __filename = fileURLToPath(import.meta.url);</span><br><span class="line">const __dirname = path.dirname(__filename);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">createWindow</span></span> () &#123;</span><br><span class="line">  const win = new BrowserWindow(&#123;</span><br><span class="line">    width: 1200,</span><br><span class="line">    height: 800,</span><br><span class="line">    webPreferences: &#123;</span><br><span class="line">      preload: path.join(__dirname, <span class="string">&#x27;preload.js&#x27;</span>), // 可选，预加载脚本</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!app.isPackaged) &#123;</span><br><span class="line">    win.loadURL(<span class="string">&#x27;http://localhost:5173&#x27;</span>); // dev 模式加载 vite 前端</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>)); // prod 模式加载打包页面</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.whenReady().<span class="keyword">then</span>(() =&gt; &#123;</span><br><span class="line">  createWindow();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="三修改package.json">三、修改package.json</h2>
+<p>进入package.json文件，新增</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;main&quot;</span>: <span class="string">&quot;electron/main.js&quot;</span>,</span><br></pre></td></tr></table></figure>
+<p>注意scripts</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line"><span class="string">&quot;dev&quot;</span>: <span class="string">&quot;vite&quot;</span>,</span><br><span class="line"><span class="string">&quot;build&quot;</span>: <span class="string">&quot;vite build&quot;</span>,</span><br><span class="line"><span class="string">&quot;preview&quot;</span>: <span class="string">&quot;vite preview&quot;</span>,</span><br><span class="line"><span class="string">&quot;start&quot;</span>: <span class="string">&quot;electron-forge start&quot;</span>,</span><br><span class="line"><span class="string">&quot;package&quot;</span>: <span class="string">&quot;electron-forge package&quot;</span>,</span><br><span class="line"><span class="string">&quot;make&quot;</span>: <span class="string">&quot;electron-forge make&quot;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="四开发测试流程">四、开发测试流程</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动 Vite 前端</span></span><br><span class="line">npm run dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新开一个终端，启动 Electron</span></span><br><span class="line">npm start</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="五打包发布测试">五、打包发布测试</h2>
+<p>先构建前端项目</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+<p>修改main.js</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>));</span><br></pre></td></tr></table></figure>
+<p>打包</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run package</span><br></pre></td></tr></table></figure>
+<p>会在 out/ 目录生成你的桌面可执行程序（比如 Windows 下是 .exe
+文件）</p>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>electron</tag>
+        <tag>web</tag>
+        <tag>desk</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>像前端package.json那样管理python依赖</title>
+    <url>/2025/07/29/pipenv/</url>
+    <content><![CDATA[<ol type="1">
+<li>首先下载管理用的包</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install pipenv</span><br></pre></td></tr></table></figure>
+<ol start="2" type="1">
+<li>初始化pipfile</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pipenv install</span><br></pre></td></tr></table></figure>
+<p>你的目录下就出现了pipfile和pipfile.lock，对于package.json和package-lock.json</p>
+<ol start="3" type="1">
+<li>将已有的依赖存放进pipenv中</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt <span class="comment">#将已有依赖输出到requirements.txt文件下</span></span><br></pre></td></tr></table></figure>
+<p>将txt文件转码(powershell内输入)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$content</span> = Get-Content requirements.txt</span><br><span class="line">[System.IO.File]::WriteAllLines(<span class="string">"fixed_requirements.txt"</span>, <span class="variable">$content</span>, (New-Object System.Text.UTF8Encoding <span class="variable">$false</span>))</span><br></pre></td></tr></table></figure>
+<p>最后丢尽pipfile</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pipenv install -r fixed_requirements.txt</span><br></pre></td></tr></table></figure>
+<ol start="4" type="1">
+<li>如何调用</li>
+</ol>
+<p>非常简单，像<code>npm i</code>一样我们只需要</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pipenv install</span><br></pre></td></tr></table></figure>
+<p>就可以一键安装python的所有依赖项</p>
+<ol start="5" type="1">
+<li>在一些小项目里直接利用requirements.txt一键安装也可以</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p>利用如上指令可以一键安装依赖</p>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>pipenv</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>curl使用教学</title>
     <url>/2025/07/26/curl/</url>
     <content><![CDATA[<blockquote>
@@ -98,176 +333,9 @@
         <category>cmd</category>
       </categories>
       <tags>
+        <tag>learn</tag>
         <tag>cmd</tag>
         <tag>curl</tag>
-        <tag>learn</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker 基本使用教程</title>
-    <url>/2025/07/26/docker-basic-usage/</url>
-    <content><![CDATA[<blockquote>
-<p>Docker
-可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的
-Linux 机器上，也可以实现虚拟化。</p>
-</blockquote>
-<hr />
-<h2 id="一docker的用途">一、Docker的用途</h2>
-<p>Docker 的主要用途，目前有三大类。</p>
-<ol type="1">
-<li><p>提供一次性的环境。比如，本地测试他人的软件、持续集成的时候提供单元测试和构建的环境。</p></li>
-<li><p>提供弹性的云服务。因为 Docker
-容器可以随开随关，很适合动态扩容和缩容。</p></li>
-<li><p>组建微服务架构。通过多个容器，一台机器可以跑多个服务，因此在本机就可以模拟出微服务架构。</p></li>
-</ol>
-<hr />
-<h2 id="二验证是否安装成功">二、验证是否安装成功</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="三image文件">三、Image文件</h2>
-<p>Docker 把应用程序及其依赖，打包在 <strong>image
-文件</strong>里面。只有通过这个文件，才能生成 Docker 容器。<br />
-image 文件可以看作是容器的模板，Docker 根据 image
-文件生成容器的实例。<br />
-同一个 image 文件，可以生成多个同时运行的容器实例。</p>
-<p>image 是一个 <strong>二进制文件</strong>。实际开发中，一个 image
-文件往往通过继承另一个 image 文件，加上一些个性化设置而生成。<br />
-举例来说，你可以在 Ubuntu 的 image 基础上，往里面加入 Apache
-服务器，形成你自己的 image。</p>
-<h3 id="列出本机的所有-image-文件">列出本机的所有 image 文件</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker image <span class="built_in">ls</span></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 🗑️ 删除 image 文件</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">$ docker image <span class="built_in">rm</span> [imageName]</span><br></pre></td></tr></table></figure>
-<p>image 文件是通用的，一台机器的 image
-文件拷贝到另一台机器，照样可以使用。</p>
-<p>一般来说，为了节省时间，我们应该尽量使用别人制作好的 image
-文件，而不是自己制作。 即使要定制，也应该基于别人的 image
-文件进行加工，而不是从零开始制作。</p>
-<h3 id="镜像仓库image-repository">镜像仓库（Image Repository）</h3>
-<p>为了方便共享，image 文件制作完成后，可以上传到网上的仓库。</p>
-<ul>
-<li>Docker 的官方仓库 <strong>Docker Hub</strong> 是最重要、最常用的
-image 仓库。</li>
-<li>此外，你也可以使用国内的镜像仓库（如阿里云、腾讯云）或者搭建私有仓库。</li>
-<li>出售自己制作的 image 文件也是可以的。</li>
-</ul>
-<h3 id="imagecontainer">image&amp;&amp;container</h3>
-<p>容器是镜像跑起来的实例，一个镜像可以有多个容器</p>
-<hr />
-<h2 id="四如何跑起来呢">四、如何跑起来呢</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker image pull &lt;project&gt;       <span class="comment">#将image文件从仓库抓取到本地</span></span><br><span class="line">docker container run &lt;project&gt;    <span class="comment">#将image文件在你的电脑上跑起来，新建容器</span></span><br><span class="line">docker container start [ID]       <span class="comment">#将已有的容器跑起来</span></span><br><span class="line">docker container <span class="built_in">kill</span> [ID]        <span class="comment">#手动终止容器的运行</span></span><br><span class="line">docker container <span class="built_in">ls</span>               <span class="comment">#在你电脑上正在跑起来的容器</span></span><br><span class="line">docker container <span class="built_in">ls</span> -all          <span class="comment">#列出本机所有容器，包括终止运行的容器</span></span><br><span class="line">docker container <span class="built_in">rm</span> [containerID] <span class="comment">#删除停止运行的容器，防止占用硬盘空间</span></span><br><span class="line">docker <span class="built_in">exec</span> -it my-nginx bash     <span class="comment">#在叫my-nginx的容器内，开启一个bash命令终端进去操作</span></span><br></pre></td></tr></table></figure>
-<p>注意，docker container run命令具有自动抓取 image
-文件的功能。如果发现本地没有指定的 image
-文件，就会从仓库自动抓取。因此，前面的docker image
-pull命令并不是必需的步骤。</p>
-<hr />
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>learn</tag>
-        <tag>container</tag>
-        <tag>docker</tag>
-        <tag>linux</tag>
-        <tag>virtual</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Electron 基本使用教程</title>
-    <url>/2025/07/29/electron/</url>
-    <content><![CDATA[<blockquote>
-<p>以下以vue3为例结合electron实现跨平台开发</p>
-</blockquote>
-<hr />
-<h2
-id="一在项目根目录安装electorn-forge">一、在项目根目录安装electorn-forge</h2>
-<p>按照如下命令安装electron-forge</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save-dev electron @electron-forge/cli</span><br><span class="line">npx electron-forge import</span><br></pre></td></tr></table></figure>
-<p>这一步会在你的项目中创建一个 electron
-的基本目录结构，并配置打包命令。</p>
-<h2 id="二新建main.js">二、新建main.js</h2>
-<p>在根目录下新建/electron/main.js</p>
-<p>在main.js下复制如下代码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import &#123; app, BrowserWindow &#125; from <span class="string">&#x27;electron&#x27;</span>;</span><br><span class="line">import path from <span class="string">&#x27;path&#x27;</span>;</span><br><span class="line">import &#123; fileURLToPath &#125; from <span class="string">&#x27;url&#x27;</span>;</span><br><span class="line"></span><br><span class="line">// 解决 ES Module 中没有 __dirname 的问题</span><br><span class="line">const __filename = fileURLToPath(import.meta.url);</span><br><span class="line">const __dirname = path.dirname(__filename);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">createWindow</span></span> () &#123;</span><br><span class="line">  const win = new BrowserWindow(&#123;</span><br><span class="line">    width: 1200,</span><br><span class="line">    height: 800,</span><br><span class="line">    webPreferences: &#123;</span><br><span class="line">      preload: path.join(__dirname, <span class="string">&#x27;preload.js&#x27;</span>), // 可选，预加载脚本</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!app.isPackaged) &#123;</span><br><span class="line">    win.loadURL(<span class="string">&#x27;http://localhost:5173&#x27;</span>); // dev 模式加载 vite 前端</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>)); // prod 模式加载打包页面</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.whenReady().<span class="keyword">then</span>(() =&gt; &#123;</span><br><span class="line">  createWindow();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="三修改package.json">三、修改package.json</h2>
-<p>进入package.json文件，新增</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;main&quot;</span>: <span class="string">&quot;electron/main.js&quot;</span>,</span><br></pre></td></tr></table></figure>
-<p>注意scripts</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line"><span class="string">&quot;dev&quot;</span>: <span class="string">&quot;vite&quot;</span>,</span><br><span class="line"><span class="string">&quot;build&quot;</span>: <span class="string">&quot;vite build&quot;</span>,</span><br><span class="line"><span class="string">&quot;preview&quot;</span>: <span class="string">&quot;vite preview&quot;</span>,</span><br><span class="line"><span class="string">&quot;start&quot;</span>: <span class="string">&quot;electron-forge start&quot;</span>,</span><br><span class="line"><span class="string">&quot;package&quot;</span>: <span class="string">&quot;electron-forge package&quot;</span>,</span><br><span class="line"><span class="string">&quot;make&quot;</span>: <span class="string">&quot;electron-forge make&quot;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<h2 id="四开发测试流程">四、开发测试流程</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动 Vite 前端</span></span><br><span class="line">npm run dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新开一个终端，启动 Electron</span></span><br><span class="line">npm start</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="五打包发布测试">五、打包发布测试</h2>
-<p>先构建前端项目</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
-<p>修改main.js</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>));</span><br></pre></td></tr></table></figure>
-<p>打包</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run package</span><br></pre></td></tr></table></figure>
-<p>会在 out/ 目录生成你的桌面可执行程序（比如 Windows 下是 .exe
-文件）</p>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>electron</tag>
-        <tag>web</tag>
-        <tag>desk</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>像前端package.json那样管理python依赖</title>
-    <url>/2025/07/29/pipenv/</url>
-    <content><![CDATA[<ol type="1">
-<li>首先下载管理用的包</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install pipenv</span><br></pre></td></tr></table></figure>
-<ol start="2" type="1">
-<li>初始化pipfile</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pipenv install</span><br></pre></td></tr></table></figure>
-<p>你的目录下就出现了pipfile和pipfile.lock，对于package.json和package-lock.json</p>
-<ol start="3" type="1">
-<li>将已有的依赖存放进pipenv中</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt <span class="comment">#将已有依赖输出到requirements.txt文件下</span></span><br></pre></td></tr></table></figure>
-<p>将txt文件转码(powershell内输入)</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$content</span> = Get-Content requirements.txt</span><br><span class="line">[System.IO.File]::WriteAllLines(<span class="string">"fixed_requirements.txt"</span>, <span class="variable">$content</span>, (New-Object System.Text.UTF8Encoding <span class="variable">$false</span>))</span><br></pre></td></tr></table></figure>
-<p>最后丢尽pipfile</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pipenv install -r fixed_requirements.txt</span><br></pre></td></tr></table></figure>
-<ol start="4" type="1">
-<li>如何调用</li>
-</ol>
-<p>非常简单，像<code>npm i</code>一样我们只需要</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pipenv install</span><br></pre></td></tr></table></figure>
-<p>就可以一键安装python的所有依赖项</p>
-<ol start="5" type="1">
-<li>在一些小项目里直接利用requirements.txt一键安装也可以</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
-<p>利用如上指令可以一键安装依赖</p>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>pipenv</tag>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>常见BUG汇总</title>
-    <url>/2025/07/27/issue/</url>
-    <content><![CDATA[<h2 id="一markdown">一、Markdown</h2>
-<ol type="1">
-<li>为什么vscode编辑md文件十分卡顿</li>
-</ol>
-<p>解决方法:禁用cpp extension pack扩展</p>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>markdown</tag>
       </tags>
   </entry>
   <entry>
@@ -311,432 +379,536 @@ id="一在项目根目录安装electorn-forge">一、在项目根目录安装ele
       </tags>
   </entry>
   <entry>
-    <title>Git 基本使用教程</title>
-    <url>/2025/07/25/git-basic-usage/</url>
-    <content><![CDATA[<blockquote>
-<p>Git
-是一个分布式版本控制系统，适用于代码版本管理与团队协作开发。本文将简要介绍
-Git
-的一些常用操作命令，包括创建仓库、分支管理以及删除文件/分支的方法。</p>
-</blockquote>
-<hr />
-<h2 id="一初始化仓库">一、初始化仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
-<ul>
-<li>在当前目录初始化一个 Git 仓库。</li>
-<li>会创建 <code>.git</code> 文件夹作为版本控制目录。</li>
-</ul>
-<hr />
-<h2 id="二克隆远程仓库">二、克隆远程仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;仓库地址&gt;</span><br><span class="line">```****</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/username/repo.git</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="三添加与提交文件">三、添加与提交文件</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add &lt;文件或目录&gt;</span><br><span class="line">git commit -m <span class="string">&quot;提交说明&quot;</span></span><br></pre></td></tr></table></figure>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;添加初始项目文件&quot;</span></span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="四查看状态与历史">四、查看状态与历史</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status        <span class="comment"># 查看当前状态</span></span><br><span class="line">git <span class="built_in">log</span>           <span class="comment"># 查看提交历史</span></span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="五分支操作">五、分支操作</h2>
-<h3 id="创建新分支">创建新分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="切换分支">切换分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch &lt;分支名&gt;</span><br><span class="line"><span class="comment"># 或（旧写法）</span></span><br><span class="line">git checkout &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="创建并切换新分支">创建并切换新分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch -c &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="查看所有分支">查看所有分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="六合并分支">六、合并分支</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git merge &lt;被合并的分支&gt;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注意：需要先切换到目标分支，再合并。</p>
-</blockquote>
-<hr />
-<h2 id="七删除操作">七、删除操作</h2>
-<h3 id="删除文件">删除文件</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">rm</span> &lt;文件名&gt;</span><br><span class="line">git commit -m <span class="string">&quot;删除了某个文件&quot;</span></span><br></pre></td></tr></table></figure>
-<h3 id="撤销删除误删恢复">撤销删除（误删恢复）</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -- &lt;文件名&gt;</span><br></pre></td></tr></table></figure>
-<hr />
-<h3 id="删除本地分支">删除本地分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -d &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>-d</code> 是安全删除（合并过的才允许删）</li>
-<li><code>-D</code> 是强制删除（无论是否合并）</li>
-</ul>
-<h3 id="删除远程分支">删除远程分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin --delete &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="八推送与拉取">八、推送与拉取</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin &lt;分支名&gt;   <span class="comment"># 推送到远程</span></span><br><span class="line">git pull origin &lt;分支名&gt;   <span class="comment"># 拉取最新代码</span></span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="九查看远程仓库">九、查看远程仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="十总结">十、总结</h2>
-<p>Git
-是开发者日常工作中不可或缺的工具，掌握它可以大大提升协作效率与版本管理能力。希望本文能帮助你快速上手
-Git 的基本操作。</p>
-<hr />
-<blockquote>
-<p>如需进一步学习，可以参考 <a href="https://git-scm.com/book/zh/v2">Pro
-Git 中文版</a>。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>learn</tag>
-        <tag>repo</tag>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Latex常见数学公式</title>
-    <url>/2025/07/27/latex/</url>
-    <content><![CDATA[<blockquote>
-<p>以下是常用的latex数学公式符号</p>
-</blockquote>
-<hr>
-<h2 id="一基本结构">一、基本结构</h2>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\(</span> a<span class="built_in">^</span>2 + b<span class="built_in">^</span>2 = c<span class="built_in">^</span>2 <span class="keyword">\)</span>           <span class="comment">% 行内公式</span></span><br><span class="line"><span class="keyword">\[</span> a<span class="built_in">^</span>2 + b<span class="built_in">^</span>2 = c<span class="built_in">^</span>2 <span class="keyword">\]</span>           <span class="comment">% 单独一行公式</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="二基本数学符号">二、基本数学符号</h2>
-<table>
-<thead>
-<tr>
-<th>含义</th>
-<th>LaTeX</th>
-<th>显示</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>加法</td>
-<td><code>a + b</code></td>
-<td><span class="math inline"><em>a</em> + <em>b</em></span></td>
-</tr>
-<tr>
-<td>减法</td>
-<td><code>a - b</code></td>
-<td><span class="math inline"><em>a</em> − <em>b</em></span></td>
-</tr>
-<tr>
-<td>乘法</td>
-<td><code>a \times b</code></td>
-<td><span class="math inline"><em>a</em> × <em>b</em></span></td>
-</tr>
-<tr>
-<td>除法</td>
-<td><code>a \div b</code></td>
-<td><span class="math inline"><em>a</em> ÷ <em>b</em></span></td>
-</tr>
-<tr>
-<td>分数</td>
-<td><code>\frac{a}{b}</code></td>
-<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.798ex;" xmlns="http://www.w3.org/2000/svg" width="1.842ex" height="2.395ex" role="img" focusable="false" viewBox="0 -705.8 814.1 1058.6"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mi" transform="translate(220,394) scale(0.707)"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(255.4,-345) scale(0.707)"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g><rect width="574.1" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container></span></td>
-</tr>
-<tr>
-<td>次方</td>
-<td><code>a^n</code></td>
-<td><span class="math inline"><em>a</em><sup><em>n</em></sup></span></td>
-</tr>
-<tr>
-<td>开方</td>
-<td><code>\sqrt{a}</code></td>
-<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.491ex;" xmlns="http://www.w3.org/2000/svg" width="3.127ex" height="2.398ex" role="img" focusable="false" viewBox="0 -843 1382 1060"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msqrt"><g transform="translate(853,0)"><g data-mml-node="mi"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g></g><g data-mml-node="mo" transform="translate(0,-17)"><path data-c="221A" d="M95 178Q89 178 81 186T72 200T103 230T169 280T207 309Q209 311 212 311H213Q219 311 227 294T281 177Q300 134 312 108L397 -77Q398 -77 501 136T707 565T814 786Q820 800 834 800Q841 800 846 794T853 782V776L620 293L385 -193Q381 -200 366 -200Q357 -200 354 -197Q352 -195 256 15L160 225L144 214Q129 202 113 190T95 178Z"></path></g><rect width="529" height="60" x="853" y="723"></rect></g></g></g></svg></mjx-container></span></td>
-</tr>
-<tr>
-<td>n次根</td>
-<td><code>\sqrt[n]{a}</code></td>
-<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.491ex;" xmlns="http://www.w3.org/2000/svg" width="3.127ex" height="2.398ex" role="img" focusable="false" viewBox="0 -843 1382 1060"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mroot"><g><g data-mml-node="mi" transform="translate(853,0)"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g></g><g data-mml-node="mi" transform="translate(211.8,338.5) scale(0.5)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(0,-17)"><path data-c="221A" d="M95 178Q89 178 81 186T72 200T103 230T169 280T207 309Q209 311 212 311H213Q219 311 227 294T281 177Q300 134 312 108L397 -77Q398 -77 501 136T707 565T814 786Q820 800 834 800Q841 800 846 794T853 782V776L620 293L385 -193Q381 -200 366 -200Q357 -200 354 -197Q352 -195 256 15L160 225L144 214Q129 202 113 190T95 178Z"></path></g><rect width="529" height="60" x="853" y="723"></rect></g></g></g></svg></mjx-container></span></td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="三常用函数">三、常用函数</h2>
-<table>
-<thead>
-<tr>
-<th>函数</th>
-<th>LaTeX</th>
-<th>显示</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>正弦</td>
-<td><code>\sin x</code></td>
-<td><span class="math inline">sin <em>x</em></span></td>
-</tr>
-<tr>
-<td>余弦</td>
-<td><code>\cos x</code></td>
-<td><span class="math inline">cos <em>x</em></span></td>
-</tr>
-<tr>
-<td>正切</td>
-<td><code>\tan x</code></td>
-<td><span class="math inline">tan <em>x</em></span></td>
-</tr>
-<tr>
-<td>对数</td>
-<td><code>\log x</code></td>
-<td><span class="math inline">log <em>x</em></span></td>
-</tr>
-<tr>
-<td>自然对数</td>
-<td><code>\ln x</code></td>
-<td><span class="math inline">ln <em>x</em></span></td>
-</tr>
-<tr>
-<td>指数函数</td>
-<td><code>e^x</code></td>
-<td><span class="math inline"><em>e</em><sup><em>x</em></sup></span></td>
-</tr>
-<tr>
-<td>极限</td>
-<td><code>\lim_{x\to0}</code></td>
-<td><span class="math inline">lim<sub><em>x</em> → 0</sub></span></td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="四微积分符号">四、微积分符号</h2>
+    <title>seaborn实现统计图绘制</title>
+    <url>/2025/08/10/seaborn/</url>
+    <content><![CDATA[<h2 id="一设置主题和样式">一、设置主题和样式</h2>
+<p>在进行图形绘制之前先设置好主题/样式</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 设置主题/样式（可选）</span></span><br><span class="line">sns.set_theme(style=<span class="string">&quot;darkgrid&quot;</span>)  <span class="comment"># 可选风格：darkgrid, whitegrid, dark, white, ticks</span></span><br><span class="line">sns.set_palette(<span class="string">&quot;husl&quot;</span>)          <span class="comment"># 设置调色板</span></span><br><span class="line">sns.set_context(<span class="string">&quot;paper&quot;</span>)         <span class="comment"># 设置上下文（paper, notebook, talk, poster）</span></span><br></pre></td></tr></table></figure>
+<p>以下是 <code>sns.set_theme()</code>、<code>sns.set_palette()</code>
+和 <code>sns.set_context()</code> 的可选参数整理成表格：</p>
+<h3 id="sns.set_theme-的-style-参数图表风格">1.
+<strong><code>sns.set_theme()</code> 的 <code>style</code>
+参数（图表风格）</strong></h3>
 <table>
 <colgroup>
-<col style="width: 6%">
-<col style="width: 46%">
-<col style="width: 46%">
+<col style="width: 16%" />
+<col style="width: 83%" />
 </colgroup>
 <thead>
 <tr>
-<th>含义</th>
-<th>LaTeX</th>
-<th>显示</th>
+<th>可选值</th>
+<th>描述</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>导数</td>
-<td><code>\frac{dy}{dx}</code></td>
-<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.798ex;" xmlns="http://www.w3.org/2000/svg" width="2.742ex" height="3.006ex" role="img" focusable="false" viewBox="0 -975.7 1212.2 1328.5"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mrow" transform="translate(249,485) scale(0.707)"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g><g data-mml-node="mi" transform="translate(520,0)"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g></g><g data-mml-node="mrow" transform="translate(220,-345) scale(0.707)"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g><g data-mml-node="mi" transform="translate(520,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g><rect width="972.2" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container></span></td>
+<td><code>"darkgrid"</code></td>
+<td>默认值，灰色背景 + 白色网格线（适合大多数场景）</td>
 </tr>
 <tr>
-<td>偏导数</td>
-<td><code>\frac{\partial y}{\partial x}</code></td>
-<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.817ex;" xmlns="http://www.w3.org/2000/svg" width="2.816ex" height="3.058ex" role="img" focusable="false" viewBox="0 -990.5 1244.7 1351.7"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mrow" transform="translate(249,485) scale(0.707)"><g data-mml-node="mi"><path data-c="1D715" d="M202 508Q179 508 169 520T158 547Q158 557 164 577T185 624T230 675T301 710L333 715H345Q378 715 384 714Q447 703 489 661T549 568T566 457Q566 362 519 240T402 53Q321 -22 223 -22Q123 -22 73 56Q42 102 42 148V159Q42 276 129 370T322 465Q383 465 414 434T455 367L458 378Q478 461 478 515Q478 603 437 639T344 676Q266 676 223 612Q264 606 264 572Q264 547 246 528T202 508ZM430 306Q430 372 401 400T333 428Q270 428 222 382Q197 354 183 323T150 221Q132 149 132 116Q132 21 232 21Q244 21 250 22Q327 35 374 112Q389 137 409 196T430 306Z"></path></g><g data-mml-node="mi" transform="translate(566,0)"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g></g><g data-mml-node="mrow" transform="translate(220,-345.6) scale(0.707)"><g data-mml-node="mi"><path data-c="1D715" d="M202 508Q179 508 169 520T158 547Q158 557 164 577T185 624T230 675T301 710L333 715H345Q378 715 384 714Q447 703 489 661T549 568T566 457Q566 362 519 240T402 53Q321 -22 223 -22Q123 -22 73 56Q42 102 42 148V159Q42 276 129 370T322 465Q383 465 414 434T455 367L458 378Q478 461 478 515Q478 603 437 639T344 676Q266 676 223 612Q264 606 264 572Q264 547 246 528T202 508ZM430 306Q430 372 401 400T333 428Q270 428 222 382Q197 354 183 323T150 221Q132 149 132 116Q132 21 232 21Q244 21 250 22Q327 35 374 112Q389 137 409 196T430 306Z"></path></g><g data-mml-node="mi" transform="translate(566,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g><rect width="1004.7" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container></span></td>
+<td><code>"whitegrid"</code></td>
+<td>白色背景 + 深色网格线（适合强调数据精度）</td>
 </tr>
 <tr>
-<td>积分</td>
-<td><code>\int_a^b f(x)dx</code></td>
-<td><span class="math inline">∫<sub><em>a</em></sub><sup><em>b</em></sup><em>f</em>(<em>x</em>) <em>d</em><em>x</em></span></td>
+<td><code>"dark"</code></td>
+<td>纯灰色背景，无网格线（简洁风格）</td>
 </tr>
 <tr>
-<td>多重积分</td>
-<td><code>\iint</code>、<code>\iiint</code></td>
-<td><span class="math inline">∬  ∭</span></td>
+<td><code>"white"</code></td>
+<td>纯白色背景，无网格线（极简风格）</td>
 </tr>
 <tr>
-<td>无穷积分</td>
-<td><code>\int_{-\infty}^{\infty}</code></td>
-<td><span class="math inline">∫<sub>−∞</sub><sup>∞</sup></span></td>
+<td><code>"ticks"</code></td>
+<td>白色背景 + 坐标轴刻度（无网格线，类似 <code>"white"</code>
+但更清晰的刻度）</td>
 </tr>
 </tbody>
 </table>
-<hr>
-<h2 id="五求和与乘积">五、求和与乘积</h2>
+<hr />
+<h3 id="sns.set_palette-的调色板参数">2.
+<strong><code>sns.set_palette()</code> 的调色板参数</strong></h3>
+<table>
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 77%" />
+</colgroup>
+<thead>
+<tr>
+<th>类型</th>
+<th>可选值示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Seaborn 内置名称</strong></td>
+<td><code>"husl"</code>, <code>"deep"</code>, <code>"muted"</code>,
+<code>"bright"</code>, <code>"pastel"</code>, <code>"dark"</code>,
+<code>"colorblind"</code></td>
+</tr>
+<tr>
+<td><strong>Matplotlib 色板</strong></td>
+<td><code>"viridis"</code>, <code>"plasma"</code>, <code>"magma"</code>,
+<code>"cividis"</code>（需安装 Matplotlib）</td>
+</tr>
+<tr>
+<td><strong>自定义颜色列表</strong></td>
+<td><code>["#FF5733", "#33FF57", "#3357FF"]</code>（十六进制/RGB
+颜色列表）</td>
+</tr>
+<tr>
+<td><strong>其他方法</strong></td>
+<td><code>sns.color_palette("hls", 8)</code> 或
+<code>sns.husl_palette(10)</code> 生成动态调色板</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="sns.set_context-的-context-参数图表比例">3.
+<strong><code>sns.set_context()</code> 的 <code>context</code>
+参数（图表比例）</strong></h3>
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 84%" />
+</colgroup>
+<thead>
+<tr>
+<th>可选值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"paper"</code></td>
+<td>最小比例（适合论文或小图，字体和线条较细）</td>
+</tr>
+<tr>
+<td><code>"notebook"</code></td>
+<td>默认值（适合 Jupyter Notebook 或常规屏幕显示）</td>
+</tr>
+<tr>
+<td><code>"talk"</code></td>
+<td>较大比例（适合幻灯片演示，字体和线条加粗）</td>
+</tr>
+<tr>
+<td><code>"poster"</code></td>
+<td>最大比例（适合海报或大屏展示，元素显著放大）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="附set_theme-的完整参数可选">附：<code>set_theme()</code>
+的完整参数（可选）</h3>
 <table>
 <thead>
 <tr>
-<th>含义</th>
-<th>LaTeX</th>
-<th>显示</th>
+<th>参数</th>
+<th>类型</th>
+<th>描述</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>求和</td>
-<td><code>\sum_{i=1}^n a_i</code></td>
-<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.777ex;" xmlns="http://www.w3.org/2000/svg" width="7.487ex" height="2.563ex" role="img" focusable="false" viewBox="0 -789.6 3309.3 1132.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="munderover"><g data-mml-node="mo"><path data-c="2211" d="M61 748Q64 750 489 750H913L954 640Q965 609 976 579T993 533T999 516H979L959 517Q936 579 886 621T777 682Q724 700 655 705T436 710H319Q183 710 183 709Q186 706 348 484T511 259Q517 250 513 244L490 216Q466 188 420 134T330 27L149 -187Q149 -188 362 -188Q388 -188 436 -188T506 -189Q679 -189 778 -162T936 -43Q946 -27 959 6H999L913 -249L489 -250Q65 -250 62 -248Q56 -246 56 -239Q56 -234 118 -161Q186 -81 245 -11L428 206Q428 207 242 462L57 717L56 728Q56 744 61 748Z"></path></g><g data-mml-node="mi" transform="translate(1089,477.1) scale(0.707)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="TeXAtom" transform="translate(1089,-285.4) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(345,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(1123,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g><g data-mml-node="msub" transform="translate(2453.3,0)"><g data-mml-node="mi"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(562,-150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container></span></td>
+<td><code>style</code></td>
+<td>str</td>
+<td>上述风格之一（如 <code>"darkgrid"</code>）</td>
 </tr>
 <tr>
-<td>连乘积</td>
-<td><code>\prod_{i=1}^n a_i</code></td>
-<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.777ex;" xmlns="http://www.w3.org/2000/svg" width="7.234ex" height="2.563ex" role="img" focusable="false" viewBox="0 -789.6 3197.3 1132.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="munderover"><g data-mml-node="mo"><path data-c="220F" d="M158 656Q147 684 131 694Q110 707 69 710H55V750H888V710H874Q840 708 820 698T795 678T786 656V-155Q798 -206 874 -210H888V-250H570V-210H584Q618 -208 638 -197T663 -178T673 -155V710H270V277L271 -155Q283 -206 359 -210H373V-250H55V-210H69Q103 -208 123 -197T148 -178T158 -155V656Z"></path></g><g data-mml-node="mi" transform="translate(977,477.1) scale(0.707)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="TeXAtom" transform="translate(977,-285.4) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(345,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(1123,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g><g data-mml-node="msub" transform="translate(2341.3,0)"><g data-mml-node="mi"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(562,-150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container></span></td>
+<td><code>palette</code></td>
+<td>str/list</td>
+<td>上述调色板之一</td>
 </tr>
 <tr>
-<td>上下限形式</td>
-<td><code>\lim_{x\to0}</code></td>
-<td><span class="math inline">lim<sub><em>x</em> → 0</sub></span></td>
+<td><code>context</code></td>
+<td>str/dict</td>
+<td>上述上下文之一或自定义字典</td>
+</tr>
+<tr>
+<td><code>font</code></td>
+<td>str</td>
+<td>字体（如 <code>"sans-serif"</code>）</td>
+</tr>
+<tr>
+<td><code>font_scale</code></td>
+<td>float</td>
+<td>字体缩放因子（默认 1）</td>
+</tr>
+<tr>
+<td><code>rc</code></td>
+<td>dict</td>
+<td>直接覆盖 Matplotlib 的 rcParams</td>
 </tr>
 </tbody>
 </table>
-<hr>
-<h2 id="六矩阵">六、矩阵</h2>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{bmatrix}</span><br><span class="line">a <span class="built_in">&amp;</span> b <span class="keyword">\\</span></span><br><span class="line">c <span class="built_in">&amp;</span> d</span><br><span class="line"><span class="keyword">\end</span>{bmatrix}</span><br></pre></td></tr></table></figure>
-<p>显示为：</p>
-<p><span class="math display"><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -2.149ex;" xmlns="http://www.w3.org/2000/svg" width="7.025ex" height="5.43ex" role="img" focusable="false" viewBox="0 -1450 3105 2400"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mrow"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="5B" d="M247 -949V1450H516V1388H309V-887H516V-949H247Z"></path></g><g data-mml-node="mtable" transform="translate(528,0)"><g data-mml-node="mtr" transform="translate(0,700)"><g data-mml-node="mtd"><g data-mml-node="mi"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g></g><g data-mml-node="mtd" transform="translate(1574.5,0)"><g data-mml-node="mi"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g></g></g><g data-mml-node="mtr" transform="translate(0,-700)"><g data-mml-node="mtd" transform="translate(48,0)"><g data-mml-node="mi"><path data-c="1D450" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path></g></g><g data-mml-node="mtd" transform="translate(1529,0)"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g></g></g></g><g data-mml-node="mo" transform="translate(2577,0) translate(0 -0.5)"><path data-c="5D" d="M11 1388V1450H280V-949H11V-887H218V1388H11Z"></path></g></g></g></g></svg></mjx-container></span></p>
-<hr>
-<h2 id="七逻辑与集合符号">七、逻辑与集合符号</h2>
+<hr />
+<h3 id="示例代码">示例代码：</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line"><span class="comment"># 综合设置</span></span><br><span class="line">sns.set_theme(</span><br><span class="line">    style=<span class="string">&quot;whitegrid&quot;</span>,      <span class="comment"># 风格</span></span><br><span class="line">    palette=<span class="string">&quot;husl&quot;</span>,         <span class="comment"># 调色板</span></span><br><span class="line">    context=<span class="string">&quot;talk&quot;</span>,         <span class="comment"># 上下文</span></span><br><span class="line">    font=<span class="string">&quot;Arial&quot;</span>,           <span class="comment"># 字体</span></span><br><span class="line">    font_scale=<span class="number">1.2</span>          <span class="comment"># 字体大小缩放</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 单独设置（等效于上面的 palette）</span></span><br><span class="line">sns.set_palette(<span class="string">&quot;husl&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>如果需要更详细的参数（如自定义 <code>rc</code>），可以进一步参考 <a
+href="https://seaborn.pydata.org/generated/seaborn.set_theme.html">Seaborn
+官方文档</a>。</p>
+<h2 id="二调用seaborn绘图函数">二、调用seaborn绘图函数</h2>
+<p>Seaborn
+提供了多种高级绘图函数，主要分为以下几类：<strong>关系型</strong>、<strong>分布型</strong>、<strong>分类型</strong>、<strong>回归型</strong>、<strong>矩阵型</strong>
+和 <strong>其他辅助函数</strong>。以下是详细的分类说明和示例：</p>
+<hr />
+<h3 id="关系型绘图relational-plots">1. <strong>关系型绘图（Relational
+Plots）</strong></h3>
+<p>用于展示变量之间的关系（通常用于连续数据）。</p>
 <table>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 5%" />
+<col style="width: 42%" />
+<col style="width: 41%" />
+</colgroup>
 <thead>
 <tr>
-<th>含义</th>
-<th>LaTeX</th>
-<th>显示</th>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+<th>示例图</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>属于</td>
-<td><code>\in</code></td>
-<td><span class="math inline">∈</span></td>
+<td><code>sns.scatterplot()</code></td>
+<td>散点图（基础）</td>
+<td><code>sns.scatterplot(data=tips, x="total_bill", y="tip", hue="time")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/scatterplot_3_0.png"
+alt="scatterplot" /></td>
 </tr>
 <tr>
-<td>不属于</td>
-<td><code>\notin</code></td>
-<td><span class="math inline">∉</span></td>
+<td><code>sns.lineplot()</code></td>
+<td>折线图（趋势展示）</td>
+<td><code>sns.lineplot(data=flights, x="year", y="passengers", hue="month")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/lineplot_3_0.png"
+alt="lineplot" /></td>
 </tr>
 <tr>
-<td>包含于</td>
-<td><code>\subset</code></td>
-<td><span class="math inline">⊂</span></td>
-</tr>
-<tr>
-<td>真包含</td>
-<td><code>\subsetneq</code></td>
-<td><span class="math inline">⊊</span></td>
-</tr>
-<tr>
-<td>交集</td>
-<td><code>\cap</code></td>
-<td><span class="math inline">∩</span></td>
-</tr>
-<tr>
-<td>并集</td>
-<td><code>\cup</code></td>
-<td><span class="math inline">∪</span></td>
-</tr>
-<tr>
-<td>空集</td>
-<td><code>\emptyset</code></td>
-<td><span class="math inline">∅</span></td>
-</tr>
-<tr>
-<td>全体实数</td>
-<td><code>\mathbb{R}</code></td>
-<td><span class="math inline">ℝ</span></td>
+<td><code>sns.relplot()</code></td>
+<td>分面关系图（散点）</td>
+<td><code>sns.relplot(data=tips, x="total_bill", y="tip", col="time", kind="scatter")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/scatterplot_29_0.png"
+alt="relplot scatter" /></td>
 </tr>
 </tbody>
 </table>
-<hr>
-<h2 id="八常见关系符号">八、常见关系符号</h2>
+<hr />
+<h3 id="分布型绘图distribution-plots">2.
+<strong>分布型绘图（Distribution Plots）</strong></h3>
+<p>用于展示数据的分布特征。</p>
 <table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 6%" />
+<col style="width: 36%" />
+<col style="width: 48%" />
+</colgroup>
 <thead>
 <tr>
-<th>含义</th>
-<th>LaTeX</th>
-<th>显示</th>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+<th>示例图</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>大于</td>
-<td><code>&gt;</code></td>
-<td><span class="math inline">&gt;</span></td>
+<td><code>sns.histplot()</code></td>
+<td>直方图（单变量分布）</td>
+<td><code>sns.histplot(data=tips, x="total_bill", bins=20, kde=True)</code></td>
+<td><img src="https://seaborn.pydata.org/_images/histplot_13_0.png"
+alt="histplot 示例" /> </td>
 </tr>
 <tr>
-<td>小于</td>
-<td><code>&lt;</code></td>
-<td><span class="math inline">&lt;</span></td>
+<td><code>sns.kdeplot()</code></td>
+<td>核密度估计图（光滑分布）</td>
+<td><code>sns.kdeplot(data=tips, x="total_bill", hue="time", fill=True)</code></td>
+<td><img src="https://seaborn.pydata.org/_images/kdeplot_35_0.png"
+alt="kdeplot 示例" /> </td>
 </tr>
 <tr>
-<td>大于等于</td>
-<td><code>\ge</code></td>
-<td><span class="math inline">≥</span></td>
+<td><code>sns.ecdfplot()</code></td>
+<td>经验累积分布函数图</td>
+<td><code>sns.ecdfplot(data=tips, x="total_bill", hue="time")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/ecdfplot_0_0.png"
+alt="ecdfplot 示例" /> <em>(示意)</em> </td>
 </tr>
 <tr>
-<td>小于等于</td>
-<td><code>\le</code></td>
-<td><span class="math inline">≤</span></td>
+<td><code>sns.displot()</code></td>
+<td>分面分布图（直方/KDE）</td>
+<td><code>sns.displot(data=tips, x="total_bill", col="time", kind="hist")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/distributions_31_0.png"
+alt="displot 示例" /> </td>
 </tr>
 <tr>
-<td>不等于</td>
-<td><code>\neq</code></td>
-<td><span class="math inline">≠</span></td>
+<td><code>sns.boxplot()</code></td>
+<td>箱线图（五数概括）</td>
+<td><code>sns.boxplot(data=tips, x="day", y="total_bill", hue="sex")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/boxplot_8_0.png"
+alt="boxplot 示例" /> <em>(占位)</em> (<a
+href="https://docs.kanaries.net/topics/Seaborn/sns-boxplot?utm_source=chatgpt.com"
+title="Seaborn Boxplot Tutorial: Create Custom Box Plots in Python">Kanaries
+Docs</a>)</td>
 </tr>
 <tr>
-<td>恒等于</td>
-<td><code>\equiv</code></td>
-<td><span class="math inline">≡</span></td>
-</tr>
-<tr>
-<td>约等于</td>
-<td><code>\approx</code></td>
-<td><span class="math inline">≈</span></td>
+<td><code>sns.violinplot()</code></td>
+<td>小提琴图（分布+密度）</td>
+<td><code>sns.violinplot(data=tips, x="day", y="total_bill", hue="sex", split=True)</code></td>
+<td><img src="https://seaborn.pydata.org/_images/violinplot_5_0.png"
+alt="violinplot 示例" /> <em>(占位)</em> (<a
+href="https://www.geeksforgeeks.org/python/violinplot-using-seaborn-in-python/?utm_source=chatgpt.com"
+title="Violinplot using Seaborn in Python - GeeksforGeeks">GeeksforGeeks</a>)</td>
 </tr>
 </tbody>
 </table>
-<hr>
-<h2 id="九其他符号">九、其他符号</h2>
+<hr />
+<h3 id="分类型绘图categorical-plots">3. <strong>分类型绘图（Categorical
+Plots）</strong></h3>
+<p>用于分类变量的可视化。</p>
 <table>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 7%" />
+<col style="width: 43%" />
+<col style="width: 39%" />
+</colgroup>
 <thead>
 <tr>
-<th>符号/用途</th>
-<th>LaTeX</th>
-<th>显示</th>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+<th>示例图</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>向量</td>
-<td><code>\vec{v}</code></td>
-<td><span class="math inline"><em>v⃗</em></span></td>
+<td><code>sns.barplot()</code></td>
+<td>条形图（均值/置信区间）</td>
+<td><code>sns.barplot(data=tips, x="day", y="total_bill", hue="sex")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/barplot_9_0.png"
+alt="barplot" /></td>
 </tr>
 <tr>
-<td>点积</td>
-<td><code>\cdot</code></td>
-<td><span class="math inline"><em>a</em> ⋅ <em>b</em></span></td>
+<td><code>sns.countplot()</code></td>
+<td>计数条形图（频次）</td>
+<td><code>sns.countplot(data=tips, x="day", hue="sex")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/countplot_1_0.png"
+alt="countplot" /></td>
 </tr>
 <tr>
-<td>交叉乘积</td>
-<td><code>\times</code></td>
-<td><span class="math inline"><em>a</em> × <em>b</em></span></td>
+<td><code>sns.pointplot()</code></td>
+<td>点图（均值+置信区间）</td>
+<td><code>sns.pointplot(data=tips, x="day", y="total_bill", hue="sex")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/pointplot_6_0.png"
+alt="pointplot" /></td>
 </tr>
 <tr>
-<td>垂直</td>
-<td><code>\perp</code></td>
-<td><span class="math inline">⟂</span></td>
+<td><code>sns.stripplot()</code></td>
+<td>散点图（分类+抖动）</td>
+<td><code>sns.stripplot(data=tips, x="day", y="total_bill", hue="sex", dodge=True)</code></td>
+<td><img src="https://seaborn.pydata.org/_images/stripplot_8_0.png"
+alt="stripplot" /></td>
 </tr>
 <tr>
-<td>平行</td>
-<td><code>\parallel</code></td>
-<td><span class="math inline">∥</span></td>
+<td><code>sns.swarmplot()</code></td>
+<td>蜂群图（无重叠散点）</td>
+<td><code>sns.swarmplot(data=tips, x="day", y="total_bill", hue="sex")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/swarmplot_5_0.png"
+alt="swarmplot" /></td>
 </tr>
 <tr>
-<td>推出</td>
-<td><code>\Rightarrow</code></td>
-<td><span class="math inline">⇒</span></td>
-</tr>
-<tr>
-<td>等价</td>
-<td><code>\Leftrightarrow</code></td>
-<td><span class="math inline">⇔</span></td>
+<td><code>sns.catplot()</code></td>
+<td>分面绘制分类图（多功能）</td>
+<td><code>sns.catplot(data=tips, x="day", y="total_bill", col="sex", kind="box")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/catplot_11_0.png"
+alt="catplot" /></td>
 </tr>
 </tbody>
 </table>
-<hr>
+<hr />
+<h3 id="回归型绘图regression-plots">4. <strong>回归型绘图（Regression
+Plots）</strong></h3>
+<p>用于展示变量间的统计关系（含回归线）。</p>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 7%" />
+<col style="width: 43%" />
+<col style="width: 39%" />
+</colgroup>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+<th>示例图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sns.regplot()</code></td>
+<td>回归散点图（单次拟合）</td>
+<td><code>sns.regplot(data=tips, x="total_bill", y="tip", ci=95)</code></td>
+<td><img src="https://seaborn.pydata.org/_images/regplot_5_0.png"
+alt="regplot" /></td>
+</tr>
+<tr>
+<td><code>sns.lmplot()</code></td>
+<td>分面回归图（多功能）</td>
+<td><code>sns.lmplot(data=tips, x="total_bill", y="tip", col="time", order=2)</code></td>
+<td><img src="https://seaborn.pydata.org/_images/lmplot_12_0.png"
+alt="lmplot" /></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="矩阵型绘图matrix-plots">5. <strong>矩阵型绘图（Matrix
+Plots）</strong></h3>
+<p>用于矩阵数据的可视化（如相关性、聚类）。</p>
+<table>
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 7%" />
+<col style="width: 36%" />
+<col style="width: 43%" />
+</colgroup>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+<th>示例图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sns.heatmap()</code></td>
+<td>热力图（矩阵值颜色映射）</td>
+<td><code>sns.heatmap(data.corr(), annot=True, cmap="coolwarm")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/heatmap_2_0.png"
+alt="heatmap" /></td>
+</tr>
+<tr>
+<td><code>sns.clustermap()</code></td>
+<td>聚类热力图（行列聚类）</td>
+<td><code>sns.clustermap(data.corr(), method="ward", cmap="vlag")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/clustermap_1_0.png"
+alt="clustermap" /></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="其他辅助函数">6. <strong>其他辅助函数</strong></h3>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 7%" />
+<col style="width: 46%" />
+<col style="width: 37%" />
+</colgroup>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+<th>示例图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sns.pairplot()</code></td>
+<td>变量两两关系矩阵</td>
+<td><code>sns.pairplot(data=iris, hue="species", diag_kind="kde")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/pairplot_6_0.png"
+alt="pairplot" /></td>
+</tr>
+<tr>
+<td><code>sns.jointplot()</code></td>
+<td>双变量联合分布图</td>
+<td><code>sns.jointplot(data=tips, x="total_bill", y="tip", kind="hex")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/jointplot_9_0.png"
+alt="jointplot" /></td>
+</tr>
+<tr>
+<td><code>sns.FacetGrid()</code></td>
+<td>自定义分面网格（底层控制）</td>
+<td><code>g = sns.FacetGrid(tips, col="time"); g.map(sns.scatterplot, "total_bill", "tip")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/facetgrid_3_0.png"
+alt="FacetGrid" /></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="关键区别">关键区别：</h3>
+<ul>
+<li><strong>基础函数</strong>（如 <code>scatterplot</code>） vs
+<strong>分面函数</strong>（如 <code>relplot/catplot</code>）：
+<ul>
+<li>基础函数直接绘图，分面函数通过 <code>col/row</code> 参数分面。</li>
+</ul></li>
+<li><strong>通用参数</strong>：
+<ul>
+<li><code>data</code>：DataFrame 数据源。</li>
+<li><code>x/y</code>：轴变量。</li>
+<li><code>hue</code>：颜色分组。</li>
+<li><code>style</code>：标记样式分组。</li>
+<li><code>size</code>：大小分组。</li>
+</ul></li>
+</ul>
+<hr />
+<h3 id="示例分面绘图catplot">示例：分面绘图（<code>catplot</code>）</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">tips = sns.load_dataset(<span class="string">&quot;tips&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 分面绘制箱线图（按 day 分组，按 sex 分面）</span></span><br><span class="line">sns.catplot(</span><br><span class="line">    data=tips, </span><br><span class="line">    x=<span class="string">&quot;day&quot;</span>, </span><br><span class="line">    y=<span class="string">&quot;total_bill&quot;</span>,  </span><br><span class="line">    col=<span class="string">&quot;sex&quot;</span>, </span><br><span class="line">    kind=<span class="string">&quot;box&quot;</span>,</span><br><span class="line">    height=<span class="number">4</span>, </span><br><span class="line">    aspect=<span class="number">0.7</span></span><br><span class="line">)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="三结合-matplotlib-细化">三、结合 Matplotlib 细化</h2>
+<p>Seaborn 虽然提供了简洁的高级 API，但底层仍基于 Matplotlib。通过
+<code>matplotlib.pyplot</code>（通常缩写为 <code>plt</code>）可以对
+Seaborn 生成的图表进行精细化调整。以下是详细分类说明和实用技巧：</p>
+<hr />
+<h3 id="基础调整">3.1<strong>基础调整</strong></h3>
+<h4 id="标题与坐标轴标签">3.1.1 <strong>标题与坐标轴标签</strong></h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">tips = sns.load_dataset(<span class="string">&quot;tips&quot;</span>)</span><br><span class="line">sns.boxplot(data=tips, x=<span class="string">&quot;day&quot;</span>, y=<span class="string">&quot;total_bill&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加标题和标签</span></span><br><span class="line">plt.title(<span class="string">&quot;Daily Bill Distribution&quot;</span>, fontsize=<span class="number">14</span>, pad=<span class="number">20</span>)  <span class="comment"># pad 控制标题距离</span></span><br><span class="line">plt.xlabel(<span class="string">&quot;Day of Week&quot;</span>, fontsize=<span class="number">12</span>)                    <span class="comment"># X轴标签</span></span><br><span class="line">plt.ylabel(<span class="string">&quot;Total Bill ($)&quot;</span>, fontsize=<span class="number">12</span>)                 <span class="comment"># Y轴标签</span></span><br></pre></td></tr></table></figure>
+<h4 id="刻度调整">3.1.2 <strong>刻度调整</strong></h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 旋转刻度标签（解决重叠问题）</span></span><br><span class="line">plt.xticks(rotation=<span class="number">45</span>, ha=<span class="string">&quot;right&quot;</span>)  <span class="comment"># ha: 旋转后对齐方式（right/center）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置刻度范围和密度</span></span><br><span class="line">plt.yticks(ticks=[<span class="number">0</span>, <span class="number">20</span>, <span class="number">40</span>, <span class="number">60</span>], fontsize=<span class="number">10</span>)  <span class="comment"># 自定义Y轴刻度</span></span><br><span class="line">plt.xlim(-<span class="number">0.5</span>, <span class="number">3.5</span>)                             <span class="comment"># 设置X轴范围</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="图例与颜色">3.2 <strong>图例与颜色</strong></h3>
+<h4 id="图例控制">3.2.1 <strong>图例控制</strong></h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.scatterplot(data=tips, x=<span class="string">&quot;total_bill&quot;</span>, y=<span class="string">&quot;tip&quot;</span>, hue=<span class="string">&quot;time&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调整图例</span></span><br><span class="line">plt.legend(</span><br><span class="line">    title=<span class="string">&quot;Meal Time&quot;</span>,           <span class="comment"># 修改图例标题</span></span><br><span class="line">    loc=<span class="string">&quot;upper right&quot;</span>,           <span class="comment"># 位置（best, upper right, lower left等）</span></span><br><span class="line">    bbox_to_anchor=(<span class="number">1.3</span>, <span class="number">1</span>),     <span class="comment"># 将图例移到图外（右侧）</span></span><br><span class="line">    frameon=<span class="literal">False</span>                <span class="comment"># 去掉图例边框</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4 id="颜色与样式">3.2.2 <strong>颜色与样式</strong></h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 修改单个元素的颜色（通过Matplotlib）</span></span><br><span class="line">plt.setp(plt.gca().get_xticklabels(), color=<span class="string">&quot;red&quot;</span>)  <span class="comment"># 设置X轴刻度为红色</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改所有文本颜色（全局）</span></span><br><span class="line">plt.rcParams[<span class="string">&quot;text.color&quot;</span>] = <span class="string">&quot;blue&quot;</span>  <span class="comment"># 影响标题、标签等</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="布局与子图">3.3 <strong>布局与子图</strong></h3>
+<h4 id="调整边距与布局">3.3.1 <strong>调整边距与布局</strong></h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plt.tight_layout(pad=<span class="number">2</span>)  <span class="comment"># 自动调整子图间距（防止标签重叠）</span></span><br><span class="line">plt.subplots_adjust(</span><br><span class="line">    left=<span class="number">0.1</span>,            <span class="comment"># 左边距</span></span><br><span class="line">    right=<span class="number">0.9</span>,           <span class="comment"># 右边距</span></span><br><span class="line">    top=<span class="number">0.9</span>,             <span class="comment"># 上边距</span></span><br><span class="line">    bottom=<span class="number">0.2</span>           <span class="comment"># 下边距</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4 id="与matplotlib子图结合">3.3.2
+<strong>与Matplotlib子图结合</strong></h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig, axes = plt.subplots(<span class="number">1</span>, <span class="number">2</span>, figsize=(<span class="number">12</span>, <span class="number">5</span>))  <span class="comment"># 创建1行2列的子图</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在第一个子图绘制</span></span><br><span class="line">sns.histplot(data=tips, x=<span class="string">&quot;total_bill&quot;</span>, ax=axes[<span class="number">0</span>])</span><br><span class="line">axes[<span class="number">0</span>].set_title(<span class="string">&quot;Total Bill Distribution&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在第二个子图绘制</span></span><br><span class="line">sns.boxplot(data=tips, x=<span class="string">&quot;day&quot;</span>, y=<span class="string">&quot;total_bill&quot;</span>, ax=axes[<span class="number">1</span>])</span><br><span class="line">axes[<span class="number">1</span>].set_xticklabels([<span class="string">&quot;Thu&quot;</span>, <span class="string">&quot;Fri&quot;</span>, <span class="string">&quot;Sat&quot;</span>, <span class="string">&quot;Sun&quot;</span>])  <span class="comment"># 自定义刻度标签</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="高级定制">3.4 <strong>高级定制</strong></h3>
+<h4 id="网格线与背景">3.4.1 <strong>网格线与背景</strong></h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plt.grid(<span class="literal">True</span>, linestyle=<span class="string">&quot;--&quot;</span>, alpha=<span class="number">0.6</span>)  <span class="comment"># 显示网格线（虚线，半透明）</span></span><br><span class="line">plt.gca().set_facecolor(<span class="string">&quot;#f5f5f5&quot;</span>)         <span class="comment"># 设置图表背景色（灰色）</span></span><br></pre></td></tr></table></figure>
+<h4 id="注释与箭头">3.4.2 <strong>注释与箭头</strong></h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 添加文本注释</span></span><br><span class="line">plt.text(</span><br><span class="line">    x=<span class="number">30</span>, y=<span class="number">10</span>,                           <span class="comment"># 坐标位置</span></span><br><span class="line">    s=<span class="string">&quot;Outlier Point&quot;</span>,                     <span class="comment"># 文本内容</span></span><br><span class="line">    fontsize=<span class="number">12</span>, </span><br><span class="line">    color=<span class="string">&quot;red&quot;</span>,</span><br><span class="line">    bbox=<span class="built_in">dict</span>(facecolor=<span class="string">&quot;white&quot;</span>, alpha=<span class="number">0.8</span>) <span class="comment"># 文本框样式</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加箭头</span></span><br><span class="line">plt.annotate(</span><br><span class="line">    <span class="string">&quot;High Tip&quot;</span>, </span><br><span class="line">    xy=(<span class="number">40</span>, <span class="number">10</span>),                          <span class="comment"># 箭头指向的点</span></span><br><span class="line">    xytext=(<span class="number">35</span>, <span class="number">15</span>),                      <span class="comment"># 文本起始位置</span></span><br><span class="line">    arrowprops=<span class="built_in">dict</span>(arrowstyle=<span class="string">&quot;-&gt;&quot;</span>, color=<span class="string">&quot;black&quot;</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="保存图表">3.5 <strong>保存图表</strong></h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plt.savefig(</span><br><span class="line">    <span class="string">&quot;plot.png&quot;</span>, </span><br><span class="line">    dpi=<span class="number">300</span>,                   <span class="comment"># 分辨率</span></span><br><span class="line">    bbox_inches=<span class="string">&quot;tight&quot;</span>,       <span class="comment"># 去除白边</span></span><br><span class="line">    transparent=<span class="literal">True</span>           <span class="comment"># 透明背景（适合PPT）</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="调试技巧">3.6 <strong>调试技巧</strong></h3>
+<ol type="1">
+<li><p><strong>获取当前Axes对象</strong>： <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ax = plt.gca()  <span class="comment"># 获取当前Axes</span></span><br><span class="line">ax.spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)  <span class="comment"># 隐藏顶部边框线</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>批量设置样式</strong>： <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">params = &#123;</span><br><span class="line">    <span class="string">&quot;axes.labelsize&quot;</span>: <span class="number">14</span>,</span><br><span class="line">    <span class="string">&quot;xtick.labelsize&quot;</span>: <span class="number">12</span>,</span><br><span class="line">    <span class="string">&quot;ytick.labelsize&quot;</span>: <span class="number">12</span></span><br><span class="line">&#125;</span><br><span class="line">plt.rcParams.update(params)  <span class="comment"># 全局生效</span></span><br></pre></td></tr></table></figure></p></li>
+</ol>
+<hr />
+<h3 id="完整示例">完整示例</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据准备</span></span><br><span class="line">tips = sns.load_dataset(<span class="string">&quot;tips&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 绘制基础图表</span></span><br><span class="line">sns.boxplot(data=tips, x=<span class="string">&quot;day&quot;</span>, y=<span class="string">&quot;total_bill&quot;</span>, hue=<span class="string">&quot;sex&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 使用Matplotlib调整</span></span><br><span class="line">plt.title(<span class="string">&quot;Bill Distribution by Day and Gender&quot;</span>, fontsize=<span class="number">16</span>)</span><br><span class="line">plt.xlabel(<span class="string">&quot;Day&quot;</span>, fontsize=<span class="number">14</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;Total Bill (USD)&quot;</span>, fontsize=<span class="number">14</span>)</span><br><span class="line">plt.xticks(rotation=<span class="number">15</span>)</span><br><span class="line">plt.legend(title=<span class="string">&quot;Gender&quot;</span>, bbox_to_anchor=(<span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 调整布局</span></span><br><span class="line">plt.tight_layout()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 保存或显示</span></span><br><span class="line">plt.savefig(<span class="string">&quot;boxplot.png&quot;</span>, dpi=<span class="number">200</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="四显示或者保存图表格">四、显示或者保存图表格</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">plt.show()</span><br><span class="line">plt.savefig(<span class="string">&quot;plot.png&quot;</span>, dpi=300, bbox_inches=<span class="string">&quot;tight&quot;</span>)</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>code</category>
       </categories>
       <tags>
-        <tag>latex</tag>
-        <tag>math</tag>
+        <tag>python</tag>
+        <tag>saaborn</tag>
       </tags>
   </entry>
   <entry>
@@ -2732,6 +2904,367 @@ sklearn.preprocessing 模块的特征缩放器（scalers）</p>
         <tag>deeplearning</tag>
         <tag>pytorch</tag>
         <tag>Transformer</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常见BUG汇总</title>
+    <url>/2025/07/27/issue/</url>
+    <content><![CDATA[<h2 id="一markdown">一、Markdown</h2>
+<ol type="1">
+<li>为什么vscode编辑md文件十分卡顿</li>
+</ol>
+<p>解决方法:禁用cpp extension pack扩展</p>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Latex常见数学公式</title>
+    <url>/2025/07/27/latex/</url>
+    <content><![CDATA[<blockquote>
+<p>以下是常用的latex数学公式符号</p>
+</blockquote>
+<hr>
+<h2 id="一基本结构">一、基本结构</h2>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\(</span> a<span class="built_in">^</span>2 + b<span class="built_in">^</span>2 = c<span class="built_in">^</span>2 <span class="keyword">\)</span>           <span class="comment">% 行内公式</span></span><br><span class="line"><span class="keyword">\[</span> a<span class="built_in">^</span>2 + b<span class="built_in">^</span>2 = c<span class="built_in">^</span>2 <span class="keyword">\]</span>           <span class="comment">% 单独一行公式</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="二基本数学符号">二、基本数学符号</h2>
+<table>
+<thead>
+<tr>
+<th>含义</th>
+<th>LaTeX</th>
+<th>显示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>加法</td>
+<td><code>a + b</code></td>
+<td><span class="math inline"><em>a</em> + <em>b</em></span></td>
+</tr>
+<tr>
+<td>减法</td>
+<td><code>a - b</code></td>
+<td><span class="math inline"><em>a</em> − <em>b</em></span></td>
+</tr>
+<tr>
+<td>乘法</td>
+<td><code>a \times b</code></td>
+<td><span class="math inline"><em>a</em> × <em>b</em></span></td>
+</tr>
+<tr>
+<td>除法</td>
+<td><code>a \div b</code></td>
+<td><span class="math inline"><em>a</em> ÷ <em>b</em></span></td>
+</tr>
+<tr>
+<td>分数</td>
+<td><code>\frac{a}{b}</code></td>
+<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.798ex;" xmlns="http://www.w3.org/2000/svg" width="1.842ex" height="2.395ex" role="img" focusable="false" viewBox="0 -705.8 814.1 1058.6"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mi" transform="translate(220,394) scale(0.707)"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(255.4,-345) scale(0.707)"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g><rect width="574.1" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container></span></td>
+</tr>
+<tr>
+<td>次方</td>
+<td><code>a^n</code></td>
+<td><span class="math inline"><em>a</em><sup><em>n</em></sup></span></td>
+</tr>
+<tr>
+<td>开方</td>
+<td><code>\sqrt{a}</code></td>
+<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.491ex;" xmlns="http://www.w3.org/2000/svg" width="3.127ex" height="2.398ex" role="img" focusable="false" viewBox="0 -843 1382 1060"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msqrt"><g transform="translate(853,0)"><g data-mml-node="mi"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g></g><g data-mml-node="mo" transform="translate(0,-17)"><path data-c="221A" d="M95 178Q89 178 81 186T72 200T103 230T169 280T207 309Q209 311 212 311H213Q219 311 227 294T281 177Q300 134 312 108L397 -77Q398 -77 501 136T707 565T814 786Q820 800 834 800Q841 800 846 794T853 782V776L620 293L385 -193Q381 -200 366 -200Q357 -200 354 -197Q352 -195 256 15L160 225L144 214Q129 202 113 190T95 178Z"></path></g><rect width="529" height="60" x="853" y="723"></rect></g></g></g></svg></mjx-container></span></td>
+</tr>
+<tr>
+<td>n次根</td>
+<td><code>\sqrt[n]{a}</code></td>
+<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.491ex;" xmlns="http://www.w3.org/2000/svg" width="3.127ex" height="2.398ex" role="img" focusable="false" viewBox="0 -843 1382 1060"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mroot"><g><g data-mml-node="mi" transform="translate(853,0)"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g></g><g data-mml-node="mi" transform="translate(211.8,338.5) scale(0.5)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(0,-17)"><path data-c="221A" d="M95 178Q89 178 81 186T72 200T103 230T169 280T207 309Q209 311 212 311H213Q219 311 227 294T281 177Q300 134 312 108L397 -77Q398 -77 501 136T707 565T814 786Q820 800 834 800Q841 800 846 794T853 782V776L620 293L385 -193Q381 -200 366 -200Q357 -200 354 -197Q352 -195 256 15L160 225L144 214Q129 202 113 190T95 178Z"></path></g><rect width="529" height="60" x="853" y="723"></rect></g></g></g></svg></mjx-container></span></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="三常用函数">三、常用函数</h2>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>LaTeX</th>
+<th>显示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>正弦</td>
+<td><code>\sin x</code></td>
+<td><span class="math inline">sin <em>x</em></span></td>
+</tr>
+<tr>
+<td>余弦</td>
+<td><code>\cos x</code></td>
+<td><span class="math inline">cos <em>x</em></span></td>
+</tr>
+<tr>
+<td>正切</td>
+<td><code>\tan x</code></td>
+<td><span class="math inline">tan <em>x</em></span></td>
+</tr>
+<tr>
+<td>对数</td>
+<td><code>\log x</code></td>
+<td><span class="math inline">log <em>x</em></span></td>
+</tr>
+<tr>
+<td>自然对数</td>
+<td><code>\ln x</code></td>
+<td><span class="math inline">ln <em>x</em></span></td>
+</tr>
+<tr>
+<td>指数函数</td>
+<td><code>e^x</code></td>
+<td><span class="math inline"><em>e</em><sup><em>x</em></sup></span></td>
+</tr>
+<tr>
+<td>极限</td>
+<td><code>\lim_{x\to0}</code></td>
+<td><span class="math inline">lim<sub><em>x</em> → 0</sub></span></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="四微积分符号">四、微积分符号</h2>
+<table>
+<colgroup>
+<col style="width: 6%">
+<col style="width: 46%">
+<col style="width: 46%">
+</colgroup>
+<thead>
+<tr>
+<th>含义</th>
+<th>LaTeX</th>
+<th>显示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>导数</td>
+<td><code>\frac{dy}{dx}</code></td>
+<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.798ex;" xmlns="http://www.w3.org/2000/svg" width="2.742ex" height="3.006ex" role="img" focusable="false" viewBox="0 -975.7 1212.2 1328.5"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mrow" transform="translate(249,485) scale(0.707)"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g><g data-mml-node="mi" transform="translate(520,0)"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g></g><g data-mml-node="mrow" transform="translate(220,-345) scale(0.707)"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g><g data-mml-node="mi" transform="translate(520,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g><rect width="972.2" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container></span></td>
+</tr>
+<tr>
+<td>偏导数</td>
+<td><code>\frac{\partial y}{\partial x}</code></td>
+<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.817ex;" xmlns="http://www.w3.org/2000/svg" width="2.816ex" height="3.058ex" role="img" focusable="false" viewBox="0 -990.5 1244.7 1351.7"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mrow" transform="translate(249,485) scale(0.707)"><g data-mml-node="mi"><path data-c="1D715" d="M202 508Q179 508 169 520T158 547Q158 557 164 577T185 624T230 675T301 710L333 715H345Q378 715 384 714Q447 703 489 661T549 568T566 457Q566 362 519 240T402 53Q321 -22 223 -22Q123 -22 73 56Q42 102 42 148V159Q42 276 129 370T322 465Q383 465 414 434T455 367L458 378Q478 461 478 515Q478 603 437 639T344 676Q266 676 223 612Q264 606 264 572Q264 547 246 528T202 508ZM430 306Q430 372 401 400T333 428Q270 428 222 382Q197 354 183 323T150 221Q132 149 132 116Q132 21 232 21Q244 21 250 22Q327 35 374 112Q389 137 409 196T430 306Z"></path></g><g data-mml-node="mi" transform="translate(566,0)"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g></g><g data-mml-node="mrow" transform="translate(220,-345.6) scale(0.707)"><g data-mml-node="mi"><path data-c="1D715" d="M202 508Q179 508 169 520T158 547Q158 557 164 577T185 624T230 675T301 710L333 715H345Q378 715 384 714Q447 703 489 661T549 568T566 457Q566 362 519 240T402 53Q321 -22 223 -22Q123 -22 73 56Q42 102 42 148V159Q42 276 129 370T322 465Q383 465 414 434T455 367L458 378Q478 461 478 515Q478 603 437 639T344 676Q266 676 223 612Q264 606 264 572Q264 547 246 528T202 508ZM430 306Q430 372 401 400T333 428Q270 428 222 382Q197 354 183 323T150 221Q132 149 132 116Q132 21 232 21Q244 21 250 22Q327 35 374 112Q389 137 409 196T430 306Z"></path></g><g data-mml-node="mi" transform="translate(566,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g><rect width="1004.7" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container></span></td>
+</tr>
+<tr>
+<td>积分</td>
+<td><code>\int_a^b f(x)dx</code></td>
+<td><span class="math inline">∫<sub><em>a</em></sub><sup><em>b</em></sup><em>f</em>(<em>x</em>) <em>d</em><em>x</em></span></td>
+</tr>
+<tr>
+<td>多重积分</td>
+<td><code>\iint</code>、<code>\iiint</code></td>
+<td><span class="math inline">∬  ∭</span></td>
+</tr>
+<tr>
+<td>无穷积分</td>
+<td><code>\int_{-\infty}^{\infty}</code></td>
+<td><span class="math inline">∫<sub>−∞</sub><sup>∞</sup></span></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="五求和与乘积">五、求和与乘积</h2>
+<table>
+<thead>
+<tr>
+<th>含义</th>
+<th>LaTeX</th>
+<th>显示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>求和</td>
+<td><code>\sum_{i=1}^n a_i</code></td>
+<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.777ex;" xmlns="http://www.w3.org/2000/svg" width="7.487ex" height="2.563ex" role="img" focusable="false" viewBox="0 -789.6 3309.3 1132.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="munderover"><g data-mml-node="mo"><path data-c="2211" d="M61 748Q64 750 489 750H913L954 640Q965 609 976 579T993 533T999 516H979L959 517Q936 579 886 621T777 682Q724 700 655 705T436 710H319Q183 710 183 709Q186 706 348 484T511 259Q517 250 513 244L490 216Q466 188 420 134T330 27L149 -187Q149 -188 362 -188Q388 -188 436 -188T506 -189Q679 -189 778 -162T936 -43Q946 -27 959 6H999L913 -249L489 -250Q65 -250 62 -248Q56 -246 56 -239Q56 -234 118 -161Q186 -81 245 -11L428 206Q428 207 242 462L57 717L56 728Q56 744 61 748Z"></path></g><g data-mml-node="mi" transform="translate(1089,477.1) scale(0.707)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="TeXAtom" transform="translate(1089,-285.4) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(345,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(1123,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g><g data-mml-node="msub" transform="translate(2453.3,0)"><g data-mml-node="mi"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(562,-150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container></span></td>
+</tr>
+<tr>
+<td>连乘积</td>
+<td><code>\prod_{i=1}^n a_i</code></td>
+<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.777ex;" xmlns="http://www.w3.org/2000/svg" width="7.234ex" height="2.563ex" role="img" focusable="false" viewBox="0 -789.6 3197.3 1132.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="munderover"><g data-mml-node="mo"><path data-c="220F" d="M158 656Q147 684 131 694Q110 707 69 710H55V750H888V710H874Q840 708 820 698T795 678T786 656V-155Q798 -206 874 -210H888V-250H570V-210H584Q618 -208 638 -197T663 -178T673 -155V710H270V277L271 -155Q283 -206 359 -210H373V-250H55V-210H69Q103 -208 123 -197T148 -178T158 -155V656Z"></path></g><g data-mml-node="mi" transform="translate(977,477.1) scale(0.707)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="TeXAtom" transform="translate(977,-285.4) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(345,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(1123,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g><g data-mml-node="msub" transform="translate(2341.3,0)"><g data-mml-node="mi"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(562,-150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container></span></td>
+</tr>
+<tr>
+<td>上下限形式</td>
+<td><code>\lim_{x\to0}</code></td>
+<td><span class="math inline">lim<sub><em>x</em> → 0</sub></span></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="六矩阵">六、矩阵</h2>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{bmatrix}</span><br><span class="line">a <span class="built_in">&amp;</span> b <span class="keyword">\\</span></span><br><span class="line">c <span class="built_in">&amp;</span> d</span><br><span class="line"><span class="keyword">\end</span>{bmatrix}</span><br></pre></td></tr></table></figure>
+<p>显示为：</p>
+<p><span class="math display"><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -2.149ex;" xmlns="http://www.w3.org/2000/svg" width="7.025ex" height="5.43ex" role="img" focusable="false" viewBox="0 -1450 3105 2400"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mrow"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="5B" d="M247 -949V1450H516V1388H309V-887H516V-949H247Z"></path></g><g data-mml-node="mtable" transform="translate(528,0)"><g data-mml-node="mtr" transform="translate(0,700)"><g data-mml-node="mtd"><g data-mml-node="mi"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g></g><g data-mml-node="mtd" transform="translate(1574.5,0)"><g data-mml-node="mi"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g></g></g><g data-mml-node="mtr" transform="translate(0,-700)"><g data-mml-node="mtd" transform="translate(48,0)"><g data-mml-node="mi"><path data-c="1D450" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path></g></g><g data-mml-node="mtd" transform="translate(1529,0)"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g></g></g></g><g data-mml-node="mo" transform="translate(2577,0) translate(0 -0.5)"><path data-c="5D" d="M11 1388V1450H280V-949H11V-887H218V1388H11Z"></path></g></g></g></g></svg></mjx-container></span></p>
+<hr>
+<h2 id="七逻辑与集合符号">七、逻辑与集合符号</h2>
+<table>
+<thead>
+<tr>
+<th>含义</th>
+<th>LaTeX</th>
+<th>显示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>属于</td>
+<td><code>\in</code></td>
+<td><span class="math inline">∈</span></td>
+</tr>
+<tr>
+<td>不属于</td>
+<td><code>\notin</code></td>
+<td><span class="math inline">∉</span></td>
+</tr>
+<tr>
+<td>包含于</td>
+<td><code>\subset</code></td>
+<td><span class="math inline">⊂</span></td>
+</tr>
+<tr>
+<td>真包含</td>
+<td><code>\subsetneq</code></td>
+<td><span class="math inline">⊊</span></td>
+</tr>
+<tr>
+<td>交集</td>
+<td><code>\cap</code></td>
+<td><span class="math inline">∩</span></td>
+</tr>
+<tr>
+<td>并集</td>
+<td><code>\cup</code></td>
+<td><span class="math inline">∪</span></td>
+</tr>
+<tr>
+<td>空集</td>
+<td><code>\emptyset</code></td>
+<td><span class="math inline">∅</span></td>
+</tr>
+<tr>
+<td>全体实数</td>
+<td><code>\mathbb{R}</code></td>
+<td><span class="math inline">ℝ</span></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="八常见关系符号">八、常见关系符号</h2>
+<table>
+<thead>
+<tr>
+<th>含义</th>
+<th>LaTeX</th>
+<th>显示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>大于</td>
+<td><code>&gt;</code></td>
+<td><span class="math inline">&gt;</span></td>
+</tr>
+<tr>
+<td>小于</td>
+<td><code>&lt;</code></td>
+<td><span class="math inline">&lt;</span></td>
+</tr>
+<tr>
+<td>大于等于</td>
+<td><code>\ge</code></td>
+<td><span class="math inline">≥</span></td>
+</tr>
+<tr>
+<td>小于等于</td>
+<td><code>\le</code></td>
+<td><span class="math inline">≤</span></td>
+</tr>
+<tr>
+<td>不等于</td>
+<td><code>\neq</code></td>
+<td><span class="math inline">≠</span></td>
+</tr>
+<tr>
+<td>恒等于</td>
+<td><code>\equiv</code></td>
+<td><span class="math inline">≡</span></td>
+</tr>
+<tr>
+<td>约等于</td>
+<td><code>\approx</code></td>
+<td><span class="math inline">≈</span></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="九其他符号">九、其他符号</h2>
+<table>
+<thead>
+<tr>
+<th>符号/用途</th>
+<th>LaTeX</th>
+<th>显示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>向量</td>
+<td><code>\vec{v}</code></td>
+<td><span class="math inline"><em>v⃗</em></span></td>
+</tr>
+<tr>
+<td>点积</td>
+<td><code>\cdot</code></td>
+<td><span class="math inline"><em>a</em> ⋅ <em>b</em></span></td>
+</tr>
+<tr>
+<td>交叉乘积</td>
+<td><code>\times</code></td>
+<td><span class="math inline"><em>a</em> × <em>b</em></span></td>
+</tr>
+<tr>
+<td>垂直</td>
+<td><code>\perp</code></td>
+<td><span class="math inline">⟂</span></td>
+</tr>
+<tr>
+<td>平行</td>
+<td><code>\parallel</code></td>
+<td><span class="math inline">∥</span></td>
+</tr>
+<tr>
+<td>推出</td>
+<td><code>\Rightarrow</code></td>
+<td><span class="math inline">⇒</span></td>
+</tr>
+<tr>
+<td>等价</td>
+<td><code>\Leftrightarrow</code></td>
+<td><span class="math inline">⇔</span></td>
+</tr>
+</tbody>
+</table>
+<hr>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>latex</tag>
+        <tag>math</tag>
       </tags>
   </entry>
 </search>
