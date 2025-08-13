@@ -90,9 +90,9 @@
     <link href="http://example.com/2025/08/09/yolo-dataset/"/>
     <id>http://example.com/2025/08/09/yolo-dataset/</id>
     <published>2025-08-09T15:00:00.000Z</published>
-    <updated>2025-08-09T15:20:44.650Z</updated>
+    <updated>2025-08-13T02:41:46.920Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="一环境准备">一、环境准备</h2><p>首先需要创建一个conda虚拟环境，进行yolo环境的搭建</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pip intsall yolo</span><br><span class="line"></span><br><span class="line">pip intsall ultralytics</span><br><span class="line"></span><br><span class="line">pip install ncnn</span><br><span class="line"></span><br><span class="line">pip install onnx <span class="comment">#用于格式转换</span></span><br></pre></td></tr></table></figure><p>之后创建一个空目录，目录结构如下</p><p><img src="/images/yolo-dataset/yolotraindir.png" /></p><p>准备好需要用来训练的部分图片(50-100张吧差不多，多点更好，但是就是用来标注数据的没必要那么多后面手动改改叭)，放到images文件下的三个文件夹都存放一份</p><h2 id="二数据标注">二、数据标注</h2><p>准备好环境搭建之后，新建一个<code>classes.txt</code>文件放到labels/train文件夹下，里面按顺序写好你的标签是什么比如我训练这个模型就是用来标注电池的</p><p><img src="/images/yolo-dataset/battery.png" /></p><p>那你的文件内容就是</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">battery</span><br></pre></td></tr></table></figure><p>ok，创建完成之后就开始对数据进行正常标注，然后将结果导出到labels/train文件夹下</p><h2 id="三开始训练">三、开始训练</h2><p>首先需要写入一个配置文件<code>xxx.yaml</code>写到yolotrain目录下，内容如下</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">path: D:\yolotrain       <span class="comment"># 数据集根目录</span></span><br><span class="line">train: images/train      <span class="comment"># 训练集相对路径</span></span><br><span class="line">val: images/val          <span class="comment"># 验证集相对路径</span></span><br><span class="line"><span class="built_in">test</span>: images/test        <span class="comment"># 测试集相对路径</span></span><br><span class="line"></span><br><span class="line">nc: 1                    <span class="comment"># 类别数量</span></span><br><span class="line">names: [<span class="string">&quot;battery&quot;</span>]       <span class="comment"># 类别名称列表</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 高级参数（可选）</span></span><br><span class="line">roboflow: &#123;&#125;             <span class="comment"># 兼容RoboFlow数据集</span></span><br><span class="line">download: null           <span class="comment"># 数据集下载URL</span></span><br></pre></td></tr></table></figure><p>在虚拟环境下进入yolotrain目录输入指令开始训练</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">yolo detect train </span><br><span class="line"><span class="comment">#data是你自己的yaml文件路径</span></span><br><span class="line">  data=D:/yolotrain/xxx.yaml </span><br><span class="line">  model=yolov8s.pt      <span class="comment"># 预训练模型（放在yolotrain目录下）</span></span><br><span class="line">  epochs=100            <span class="comment"># 迭代次数</span></span><br><span class="line">  imgsz=640             <span class="comment"># 输入分辨率</span></span><br><span class="line">  batch=16              <span class="comment"># 根据GPU调整</span></span><br><span class="line">  device=0              <span class="comment"># 0代表GPU练</span></span><br><span class="line"><span class="comment">#下面是参数，命令合并成一行</span></span><br></pre></td></tr></table></figure><p>若要进行验证把<code>train</code>改成<code>val</code>就行了，然后那个yolo模型我放在我的git仓库里了<a href="https://github.com/koen666/yolo">yolo模型</a></p><h2 id="四导出onnx">四、导出onnx</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yolo <span class="built_in">export</span> model=D:/yolotrain/best.pt format=onnx</span><br></pre></td></tr></table></figure><p>训练完后，可以从新得到的run文件夹下的best.pt(这个就是训练的最好的模型)文件挪到外面，在调用上面那个命令生成best.onnx文件</p><p>然后再创建一个xxx.yaml文件写入</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span>: yolov8</span><br><span class="line">name: yolov8s-r20230520</span><br><span class="line">display_name: koen</span><br><span class="line">model_path: best.onnx</span><br><span class="line">nms_threshold: 0.45</span><br><span class="line">confidence_threshold: 0.25</span><br><span class="line">classes:</span><br><span class="line">  - battery</span><br></pre></td></tr></table></figure><p>这个display_name可以换阿，这个文件就是你模型的配置文件</p><h2 id="五使用yaml操作">五、使用yaml操作</h2><p>进入<code>AnyLabeling</code>软件，左侧tab栏有AI选项，点击，选择自定义模型，选择刚刚配置的yaml文件即可</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="一环境准备">一、环境准备</h2><p>首先需要创建一个conda虚拟环境，进行yolo环境的搭建</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pip install yolo</span><br><span class="line"></span><br><span class="line">pip install ultralytics</span><br><span class="line"></span><br><span class="line">pip install ncnn</span><br><span class="line"></span><br><span class="line">pip install onnx <span class="comment">#用于格式转换</span></span><br></pre></td></tr></table></figure><p>之后创建一个空目录，目录结构如下</p><p><img src="/images/yolo-dataset/yolotraindir.png" /></p><p>准备好需要用来训练的部分图片(50-100张吧差不多，多点更好，但是就是用来标注数据的没必要那么多后面手动改改叭)，放到images文件下的三个文件夹都存放一份</p><h2 id="二数据标注">二、数据标注</h2><p>准备好环境搭建之后，新建一个<code>classes.txt</code>文件放到labels/train文件夹下，里面按顺序写好你的标签是什么比如我训练这个模型就是用来标注电池的</p><p><img src="/images/yolo-dataset/battery.png" /></p><p>那你的文件内容就是</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">battery</span><br></pre></td></tr></table></figure><p>ok，创建完成之后就开始对数据进行正常标注，然后将结果导出到labels/train文件夹下</p><h2 id="三开始训练">三、开始训练</h2><p>首先需要写入一个配置文件<code>xxx.yaml</code>写到yolotrain目录下，内容如下</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">path: D:\yolotrain       <span class="comment"># 数据集根目录</span></span><br><span class="line">train: images/train      <span class="comment"># 训练集相对路径</span></span><br><span class="line">val: images/val          <span class="comment"># 验证集相对路径</span></span><br><span class="line"><span class="built_in">test</span>: images/test        <span class="comment"># 测试集相对路径</span></span><br><span class="line"></span><br><span class="line">nc: 1                    <span class="comment"># 类别数量</span></span><br><span class="line">names: [<span class="string">&quot;battery&quot;</span>]       <span class="comment"># 类别名称列表</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 高级参数（可选）</span></span><br><span class="line">roboflow: &#123;&#125;             <span class="comment"># 兼容RoboFlow数据集</span></span><br><span class="line">download: null           <span class="comment"># 数据集下载URL</span></span><br></pre></td></tr></table></figure><p>在虚拟环境下进入yolotrain目录输入指令开始训练</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">yolo detect train </span><br><span class="line"><span class="comment">#data是你自己的yaml文件路径</span></span><br><span class="line">  data=D:/yolotrain/xxx.yaml </span><br><span class="line">  model=yolov8s.pt      <span class="comment"># 预训练模型（放在yolotrain目录下）</span></span><br><span class="line">  epochs=100            <span class="comment"># 迭代次数</span></span><br><span class="line">  imgsz=640             <span class="comment"># 输入分辨率</span></span><br><span class="line">  batch=16              <span class="comment"># 根据GPU调整</span></span><br><span class="line">  device=0              <span class="comment"># 0代表GPU练</span></span><br><span class="line"><span class="comment">#下面是参数，命令合并成一行</span></span><br></pre></td></tr></table></figure><p>若要进行验证把<code>train</code>改成<code>val</code>就行了，然后那个yolo模型我放在我的git仓库里了<a href="https://github.com/koen666/yolo">yolo模型</a></p><h2 id="四导出onnx">四、导出onnx</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yolo <span class="built_in">export</span> model=D:/yolotrain/best.pt format=onnx</span><br></pre></td></tr></table></figure><p>训练完后，可以从新得到的run文件夹下的best.pt(这个就是训练的最好的模型)文件挪到外面，在调用上面那个命令生成best.onnx文件</p><p>然后再创建一个xxx.yaml文件写入</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span>: yolov8</span><br><span class="line">name: yolov8s-r20230520</span><br><span class="line">display_name: koen</span><br><span class="line">model_path: best.onnx</span><br><span class="line">nms_threshold: 0.45</span><br><span class="line">confidence_threshold: 0.25</span><br><span class="line">classes:</span><br><span class="line">  - battery</span><br></pre></td></tr></table></figure><p>这个display_name可以换阿，这个文件就是你模型的配置文件</p><h2 id="五使用yaml操作">五、使用yaml操作</h2><p>进入<code>AnyLabeling</code>软件，左侧tab栏有AI选项，点击，选择自定义模型，选择刚刚配置的yaml文件即可</p>]]></content>
     
     
     <summary type="html">本文介绍如何利用yolo+AnyLabeling实现数据集的自动标注</summary>
@@ -159,27 +159,6 @@
   </entry>
   
   <entry>
-    <title>常见BUG汇总</title>
-    <link href="http://example.com/2025/07/27/issue/"/>
-    <id>http://example.com/2025/07/27/issue/</id>
-    <published>2025-07-27T00:29:00.000Z</published>
-    <updated>2025-08-01T06:57:37.197Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="一markdown">一、Markdown</h2><ol type="1"><li>为什么vscode编辑md文件十分卡顿</li></ol><p>解决方法:禁用cpp extension pack扩展</p>]]></content>
-    
-    
-    <summary type="html">欢迎留言提出常见BUG</summary>
-    
-    
-    
-    <category term="code" scheme="http://example.com/categories/code/"/>
-    
-    
-    <category term="markdown" scheme="http://example.com/tags/markdown/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Latex常见数学公式</title>
     <link href="http://example.com/2025/07/27/latex/"/>
     <id>http://example.com/2025/07/27/latex/</id>
@@ -199,6 +178,27 @@
     <category term="math" scheme="http://example.com/tags/math/"/>
     
     <category term="latex" scheme="http://example.com/tags/latex/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>常见BUG汇总</title>
+    <link href="http://example.com/2025/07/27/issue/"/>
+    <id>http://example.com/2025/07/27/issue/</id>
+    <published>2025-07-27T00:29:00.000Z</published>
+    <updated>2025-08-01T06:57:37.197Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="一markdown">一、Markdown</h2><ol type="1"><li>为什么vscode编辑md文件十分卡顿</li></ol><p>解决方法:禁用cpp extension pack扩展</p>]]></content>
+    
+    
+    <summary type="html">欢迎留言提出常见BUG</summary>
+    
+    
+    
+    <category term="code" scheme="http://example.com/categories/code/"/>
+    
+    
+    <category term="markdown" scheme="http://example.com/tags/markdown/"/>
     
   </entry>
   
@@ -244,11 +244,11 @@
     <category term="cmd" scheme="http://example.com/categories/cmd/"/>
     
     
+    <category term="learn" scheme="http://example.com/tags/learn/"/>
+    
     <category term="cmd" scheme="http://example.com/tags/cmd/"/>
     
     <category term="curl" scheme="http://example.com/tags/curl/"/>
-    
-    <category term="learn" scheme="http://example.com/tags/learn/"/>
     
   </entry>
   
@@ -269,11 +269,11 @@
     <category term="code" scheme="http://example.com/categories/code/"/>
     
     
-    <category term="learn" scheme="http://example.com/tags/learn/"/>
-    
     <category term="container" scheme="http://example.com/tags/container/"/>
     
     <category term="docker" scheme="http://example.com/tags/docker/"/>
+    
+    <category term="learn" scheme="http://example.com/tags/learn/"/>
     
     <category term="linux" scheme="http://example.com/tags/linux/"/>
     

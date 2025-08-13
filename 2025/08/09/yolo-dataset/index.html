@@ -30,7 +30,7 @@
 <meta property="og:image" content="http://example.com/images/yolo-dataset/yolotraindir.png">
 <meta property="og:image" content="http://example.com/images/yolo-dataset/battery.png">
 <meta property="article:published_time" content="2025-08-09T15:00:00.000Z">
-<meta property="article:modified_time" content="2025-08-09T15:20:44.650Z">
+<meta property="article:modified_time" content="2025-08-13T02:41:46.920Z">
 <meta property="article:author" content="koen">
 <meta property="article:tag" content="yolo">
 <meta property="article:tag" content="dataset">
@@ -215,10 +215,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-08-09 23:00:00 / Modified: 23:20:44" itemprop="dateCreated datePublished" datetime="2025-08-09T23:00:00+08:00">2025-08-09</time>
+              <time title="Created: 2025-08-09 23:00:00" itemprop="dateCreated datePublished" datetime="2025-08-09T23:00:00+08:00">2025-08-09</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-08-13 10:41:46" itemprop="dateModified" datetime="2025-08-13T10:41:46+08:00">2025-08-13</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -264,7 +270,7 @@
       
         <h2 id="一环境准备">一、环境准备</h2>
 <p>首先需要创建一个conda虚拟环境，进行yolo环境的搭建</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pip intsall yolo</span><br><span class="line"></span><br><span class="line">pip intsall ultralytics</span><br><span class="line"></span><br><span class="line">pip install ncnn</span><br><span class="line"></span><br><span class="line">pip install onnx <span class="comment">#用于格式转换</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pip install yolo</span><br><span class="line"></span><br><span class="line">pip install ultralytics</span><br><span class="line"></span><br><span class="line">pip install ncnn</span><br><span class="line"></span><br><span class="line">pip install onnx <span class="comment">#用于格式转换</span></span><br></pre></td></tr></table></figure>
 <p>之后创建一个空目录，目录结构如下</p>
 <p><img src="/images/yolo-dataset/yolotraindir.png" /></p>
 <p>准备好需要用来训练的部分图片(50-100张吧差不多，多点更好，但是就是用来标注数据的没必要那么多后面手动改改叭)，放到images文件下的三个文件夹都存放一份</p>
