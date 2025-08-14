@@ -28,7 +28,7 @@
 <meta property="og:description" content="本文用于介绍23年国赛C题解题思路和相关模型">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-08-12T07:00:00.000Z">
-<meta property="article:modified_time" content="2025-08-14T12:24:40.925Z">
+<meta property="article:modified_time" content="2025-08-14T12:27:46.228Z">
 <meta property="article:author" content="koen">
 <meta property="article:tag" content="math">
 <meta name="twitter:card" content="summary">
@@ -218,7 +218,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-14 20:24:40" itemprop="dateModified" datetime="2025-08-14T20:24:40+08:00">2025-08-14</time>
+                <time title="Modified: 2025-08-14 20:27:46" itemprop="dateModified" datetime="2025-08-14T20:27:46+08:00">2025-08-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -243,7 +243,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>4.3k</span>
+              <span>4.2k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -589,36 +589,140 @@ class="math inline"><em>γ</em><sub><em>i</em></sub></span>：折扣率</li>
 <li><span
 class="math inline"><em>δ</em><sub><em>i</em></sub></span>：损耗率</li>
 </ul>
-<p><strong>3. 算法实现步骤</strong> #<strong>步骤1：初始化</strong>
+<p><strong>3. 算法实现步骤</strong> <strong>步骤1：初始化</strong>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">current_p = [last_day_price] * <span class="number">7</span>  <span class="comment"># 初始价格策略（如延续昨日价格）</span></span><br><span class="line">T = <span class="number">100.0</span>        <span class="comment"># 初始温度</span></span><br><span class="line">T_min = <span class="number">1e-5</span>     <span class="comment"># 终止温度</span></span><br><span class="line">alpha = <span class="number">0.95</span>     <span class="comment"># 冷却速率</span></span><br><span class="line">k = <span class="number">0</span>            <span class="comment"># 迭代计数器</span></span><br></pre></td></tr></table></figure></p>
 <p><strong>步骤2：邻域搜索</strong> 生成新解时限制价格波动范围（±10%）：
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">neighbor</span>(<span class="params">current_p</span>):</span><br><span class="line">    new_p = [p * (<span class="number">1</span> + random.uniform(-<span class="number">0.1</span>, <span class="number">0.1</span>)) <span class="keyword">for</span> p <span class="keyword">in</span> current_p]</span><br><span class="line">    <span class="keyword">return</span> np.clip(new_p, p_min, p_max)  <span class="comment"># 确保在合理价格区间</span></span><br></pre></td></tr></table></figure></p>
 <p><strong>步骤3：收益计算</strong> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">calculate_profit</span>(<span class="params">prices</span>):</span><br><span class="line">    total_profit = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">7</span>):</span><br><span class="line">        <span class="comment"># 调用Prophet预测销量</span></span><br><span class="line">        Q = prophet.predict(prices[i])  </span><br><span class="line">        <span class="comment"># 计算当日收益</span></span><br><span class="line">        profit = prices[i] * Q * (<span class="number">1</span> - gamma[i]) - w[i] * Q / (<span class="number">1</span> - delta[i])</span><br><span class="line">        total_profit += profit</span><br><span class="line">    <span class="keyword">return</span> total_profit</span><br></pre></td></tr></table></figure></p>
 <p><strong>步骤4：Metropolis准则</strong> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">delta_profit = new_profit - current_profit</span><br><span class="line"><span class="keyword">if</span> delta_profit &gt; <span class="number">0</span> <span class="keyword">or</span> random.random() &lt; math.exp(delta_profit / T):</span><br><span class="line">    current_p = new_p</span><br><span class="line">    current_profit = new_profit</span><br></pre></td></tr></table></figure></p>
 <p><strong>步骤5：动态冷却与终止</strong> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">T = alpha * T  <span class="comment"># 指数冷却</span></span><br><span class="line"><span class="keyword">if</span> T &lt; T_min <span class="keyword">or</span> k &gt; max_iter:</span><br><span class="line">    <span class="keyword">break</span></span><br></pre></td></tr></table></figure></p>
-<p><strong>4. 参数调优建议</strong> | <strong>参数</strong> |
-<strong>推荐值</strong> | <strong>调整依据</strong> |
-|—————-|——————|———————————-| | 初始温度 $ T_0 $ | 100~1000 |
-约为目标函数变化幅度的10倍 | | 冷却速率 $ $ | 0.85~0.99 |
-越接近1搜索越充分 | | 邻域半径 | 当前解的5%~15% | 平衡搜索广度与精度 | |
-最大迭代次数 | 1000~5000 | 取决于计算资源 |</p>
+<p><strong>4. 参数调优建议</strong></p>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 26%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>推荐值</strong></th>
+<th><strong>调整依据</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>初始温度 $ T_0 $</td>
+<td>100~1000</td>
+<td>约为目标函数变化幅度的10倍</td>
+</tr>
+<tr>
+<td>冷却速率 $ $</td>
+<td>0.85~0.99</td>
+<td>越接近1搜索越充分</td>
+</tr>
+<tr>
+<td>邻域半径</td>
+<td>当前解的5%~15%</td>
+<td>平衡搜索广度与精度</td>
+</tr>
+<tr>
+<td>最大迭代次数</td>
+<td>1000~5000</td>
+<td>取决于计算资源</td>
+</tr>
+</tbody>
+</table>
 <p><strong>5. 完整算法流程图</strong> <img
 src="https://raw.githubusercontent.com/koen666/image/master/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95.png" />
-<strong>6. 实际应用示例</strong> <strong>花叶类蔬菜优化结果</strong>： |
-日期 | 最优定价（元） | 预测销量（kg） | 补货量（kg） | 日收益（元） |
-|————|—————-|—————-|————–|————–| | 2023-07-01 | 12.5 | 320 | 355 | 3840
-| | 2023-07-02 | 12.8 | 310 | 344 | 3968 | | 2023-07-03 | 12.6 | 315 |
-350 | 3906 | | … | … | … | … | … |</p>
+<strong>6. 实际应用示例</strong>
+<strong>花叶类蔬菜优化结果</strong>：</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 22%" />
+<col style="width: 22%" />
+<col style="width: 19%" />
+<col style="width: 19%" />
+</colgroup>
+<thead>
+<tr>
+<th>日期</th>
+<th>最优定价（元）</th>
+<th>预测销量（kg）</th>
+<th>补货量（kg）</th>
+<th>日收益（元）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2023-07-01</td>
+<td>12.5</td>
+<td>320</td>
+<td>355</td>
+<td>3840</td>
+</tr>
+<tr>
+<td>2023-07-02</td>
+<td>12.8</td>
+<td>310</td>
+<td>344</td>
+<td>3968</td>
+</tr>
+<tr>
+<td>2023-07-03</td>
+<td>12.6</td>
+<td>315</td>
+<td>350</td>
+<td>3906</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
 <p><strong>关键观察</strong>：</p>
 <ol type="1">
 <li>价格在12.5~13.2元区间波动，与需求弹性匹配</li>
 <li>周末（7月1-2日）定价略高，反映季节性规律</li>
 <li>补货量 = 预测销量 / (1 - 0.1)（损耗率10%）</li>
 </ol>
-<p><strong>7. 算法优势验证</strong> | <strong>对比指标</strong> |
-模拟退火算法 | 梯度下降法 | |——————–|——————–|——————| | 全局最优概率 |
-85% | 40% | | 收敛所需迭代次数 | 1200次 | 500次 | | 对噪声鲁棒性 | 强 |
-中等 | | 参数敏感性 | 低 | 高 |</p>
+<p><strong>7. 算法优势验证</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>对比指标</strong></th>
+<th>模拟退火算法</th>
+<th>梯度下降法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全局最优概率</td>
+<td>85%</td>
+<td>40%</td>
+</tr>
+<tr>
+<td>收敛所需迭代次数</td>
+<td>1200次</td>
+<td>500次</td>
+</tr>
+<tr>
+<td>对噪声鲁棒性</td>
+<td>强</td>
+<td>中等</td>
+</tr>
+<tr>
+<td>参数敏感性</td>
+<td>低</td>
+<td>高</td>
+</tr>
+</tbody>
+</table>
 <p><strong>8. 可能的改进方向</strong></p>
 <ol type="1">
 <li><p><strong>混合优化策略</strong>：</p>

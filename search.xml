@@ -1,6 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>curl使用教学</title>
+    <url>/2025/07/26/curl/</url>
+    <content><![CDATA[<blockquote>
+<p>curl 是一个强大的命令行工具，用于在命令行或脚本中发送 HTTP
+请求，与服务器通信。它可以用来下载网页、调用 API
+接口、上传文件、发送表单等。几乎所有支持网络通信的协议 curl
+都能处理，包括 HTTP、HTTPS、FTP、SFTP、SMTP 等</p>
+</blockquote>
+<hr />
+<h2 id="一所以curl能干啥">一、所以curl能干啥</h2>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 87%" />
+</colgroup>
+<thead>
+<tr>
+<th>功能</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>获取网页内容</td>
+<td><code>curl https://example.com</code></td>
+</tr>
+<tr>
+<td>下载文件</td>
+<td><code>curl -O https://example.com/file.zip</code></td>
+</tr>
+<tr>
+<td>发送 POST 请求</td>
+<td><code>curl -X POST -d "name=Koen&amp;age=20" https://example.com/api</code></td>
+</tr>
+<tr>
+<td>添加请求头</td>
+<td><code>curl -H "Authorization: Bearer TOKEN" https://api.example.com/data</code></td>
+</tr>
+<tr>
+<td>上传文件</td>
+<td><code>curl -F "file=@test.png" https://example.com/upload</code></td>
+</tr>
+<tr>
+<td>保存输出到文件</td>
+<td><code>curl https://example.com -o saved.html</code></td>
+</tr>
+</tbody>
+</table>
+<p>以下将对其功能进行详细解释</p>
+<hr />
+<h2 id="二利用curl获取网页内容">二、利用curl获取网页内容</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl url</span><br></pre></td></tr></table></figure>
+<p>会将get请求返回结果直接输出在命令行中</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://example.com -o index.html</span><br></pre></td></tr></table></figure>
+<p>保存指定内容到文件，地址为cmd当前地址</p>
+<hr />
+<h2 id="三发送post请求">三、发送post请求</h2>
+<p>一般用于测试接口是否正常 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -d <span class="string">&quot;name=Koen&amp;age=20&quot;</span> https://example.com/api</span><br></pre></td></tr></table></figure> 带上请求头和请求体：
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST https://api.example.com/data \</span><br><span class="line">  -H <span class="string">&quot;Authorization: Bearer abc123&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;&quot;key&quot;:&quot;va</span></span><br><span class="line"><span class="string">lue&quot;&#125;&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">     -d <span class="string">&#x27;&#123;&quot;username&quot;:&quot;koen&quot;,&quot;password&quot;:&quot;123456&quot;&#125;&#x27;</span> \</span><br><span class="line">     https://example.com/api</span><br></pre></td></tr></table></figure></p>
+<hr />
+<h2 id="四利用curl进行文件上传">四、利用curl进行文件上传</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -F <span class="string">&quot;file=@test.png&quot;</span> https://example.com/upload</span><br></pre></td></tr></table></figure>
+<p>-F就是指定用表单的方式进行字段的上传</p>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr>
+<th>部分</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file</code></td>
+<td>表单字段的名字。就像网页表单中
+<code>&lt;input type="file" name="file"&gt;</code>。</td>
+</tr>
+<tr>
+<td><code>=</code></td>
+<td>分隔字段名与数据（文件）</td>
+</tr>
+<tr>
+<td><code>@test.png</code></td>
+<td>表示上传当前目录下名为 <code>test.png</code> 的文件</td>
+</tr>
+</tbody>
+</table>
+<p>其实就是post请求上传文件的方式</p>
+<hr />
+]]></content>
+      <categories>
+        <category>cmd</category>
+      </categories>
+      <tags>
+        <tag>cmd</tag>
+        <tag>curl</tag>
+        <tag>learn</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Docker 基本使用教程</title>
     <url>/2025/07/26/docker-basic-usage/</url>
     <content><![CDATA[<blockquote>
@@ -61,11 +164,54 @@ pull命令并不是必需的步骤。</p>
         <category>code</category>
       </categories>
       <tags>
+        <tag>learn</tag>
         <tag>container</tag>
         <tag>docker</tag>
-        <tag>learn</tag>
         <tag>linux</tag>
         <tag>virtual</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Electron 基本使用教程</title>
+    <url>/2025/07/29/electron/</url>
+    <content><![CDATA[<blockquote>
+<p>以下以vue3为例结合electron实现跨平台开发</p>
+</blockquote>
+<hr />
+<h2
+id="一在项目根目录安装electorn-forge">一、在项目根目录安装electorn-forge</h2>
+<p>按照如下命令安装electron-forge</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save-dev electron @electron-forge/cli</span><br><span class="line">npx electron-forge import</span><br></pre></td></tr></table></figure>
+<p>这一步会在你的项目中创建一个 electron
+的基本目录结构，并配置打包命令。</p>
+<h2 id="二新建main.js">二、新建main.js</h2>
+<p>在根目录下新建/electron/main.js</p>
+<p>在main.js下复制如下代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import &#123; app, BrowserWindow &#125; from <span class="string">&#x27;electron&#x27;</span>;</span><br><span class="line">import path from <span class="string">&#x27;path&#x27;</span>;</span><br><span class="line">import &#123; fileURLToPath &#125; from <span class="string">&#x27;url&#x27;</span>;</span><br><span class="line"></span><br><span class="line">// 解决 ES Module 中没有 __dirname 的问题</span><br><span class="line">const __filename = fileURLToPath(import.meta.url);</span><br><span class="line">const __dirname = path.dirname(__filename);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">createWindow</span></span> () &#123;</span><br><span class="line">  const win = new BrowserWindow(&#123;</span><br><span class="line">    width: 1200,</span><br><span class="line">    height: 800,</span><br><span class="line">    webPreferences: &#123;</span><br><span class="line">      preload: path.join(__dirname, <span class="string">&#x27;preload.js&#x27;</span>), // 可选，预加载脚本</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!app.isPackaged) &#123;</span><br><span class="line">    win.loadURL(<span class="string">&#x27;http://localhost:5173&#x27;</span>); // dev 模式加载 vite 前端</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>)); // prod 模式加载打包页面</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.whenReady().<span class="keyword">then</span>(() =&gt; &#123;</span><br><span class="line">  createWindow();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="三修改package.json">三、修改package.json</h2>
+<p>进入package.json文件，新增</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;main&quot;</span>: <span class="string">&quot;electron/main.js&quot;</span>,</span><br></pre></td></tr></table></figure>
+<p>注意scripts</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line"><span class="string">&quot;dev&quot;</span>: <span class="string">&quot;vite&quot;</span>,</span><br><span class="line"><span class="string">&quot;build&quot;</span>: <span class="string">&quot;vite build&quot;</span>,</span><br><span class="line"><span class="string">&quot;preview&quot;</span>: <span class="string">&quot;vite preview&quot;</span>,</span><br><span class="line"><span class="string">&quot;start&quot;</span>: <span class="string">&quot;electron-forge start&quot;</span>,</span><br><span class="line"><span class="string">&quot;package&quot;</span>: <span class="string">&quot;electron-forge package&quot;</span>,</span><br><span class="line"><span class="string">&quot;make&quot;</span>: <span class="string">&quot;electron-forge make&quot;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="四开发测试流程">四、开发测试流程</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动 Vite 前端</span></span><br><span class="line">npm run dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新开一个终端，启动 Electron</span></span><br><span class="line">npm start</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="五打包发布测试">五、打包发布测试</h2>
+<p>先构建前端项目</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+<p>修改main.js</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>));</span><br></pre></td></tr></table></figure>
+<p>打包</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run package</span><br></pre></td></tr></table></figure>
+<p>会在 out/ 目录生成你的桌面可执行程序（比如 Windows 下是 .exe
+文件）</p>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>electron</tag>
+        <tag>web</tag>
+        <tag>desk</tag>
       </tags>
   </entry>
   <entry>
@@ -397,36 +543,140 @@ class="math inline"><em>γ</em><sub><em>i</em></sub></span>：折扣率</li>
 <li><span
 class="math inline"><em>δ</em><sub><em>i</em></sub></span>：损耗率</li>
 </ul>
-<p><strong>3. 算法实现步骤</strong> #<strong>步骤1：初始化</strong>
+<p><strong>3. 算法实现步骤</strong> <strong>步骤1：初始化</strong>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">current_p = [last_day_price] * <span class="number">7</span>  <span class="comment"># 初始价格策略（如延续昨日价格）</span></span><br><span class="line">T = <span class="number">100.0</span>        <span class="comment"># 初始温度</span></span><br><span class="line">T_min = <span class="number">1e-5</span>     <span class="comment"># 终止温度</span></span><br><span class="line">alpha = <span class="number">0.95</span>     <span class="comment"># 冷却速率</span></span><br><span class="line">k = <span class="number">0</span>            <span class="comment"># 迭代计数器</span></span><br></pre></td></tr></table></figure></p>
 <p><strong>步骤2：邻域搜索</strong> 生成新解时限制价格波动范围（±10%）：
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">neighbor</span>(<span class="params">current_p</span>):</span><br><span class="line">    new_p = [p * (<span class="number">1</span> + random.uniform(-<span class="number">0.1</span>, <span class="number">0.1</span>)) <span class="keyword">for</span> p <span class="keyword">in</span> current_p]</span><br><span class="line">    <span class="keyword">return</span> np.clip(new_p, p_min, p_max)  <span class="comment"># 确保在合理价格区间</span></span><br></pre></td></tr></table></figure></p>
 <p><strong>步骤3：收益计算</strong> <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">calculate_profit</span>(<span class="params">prices</span>):</span><br><span class="line">    total_profit = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">7</span>):</span><br><span class="line">        <span class="comment"># 调用Prophet预测销量</span></span><br><span class="line">        Q = prophet.predict(prices[i])  </span><br><span class="line">        <span class="comment"># 计算当日收益</span></span><br><span class="line">        profit = prices[i] * Q * (<span class="number">1</span> - gamma[i]) - w[i] * Q / (<span class="number">1</span> - delta[i])</span><br><span class="line">        total_profit += profit</span><br><span class="line">    <span class="keyword">return</span> total_profit</span><br></pre></td></tr></table></figure></p>
 <p><strong>步骤4：Metropolis准则</strong> <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">delta_profit = new_profit - current_profit</span><br><span class="line"><span class="keyword">if</span> delta_profit &gt; <span class="number">0</span> <span class="keyword">or</span> random.random() &lt; math.exp(delta_profit / T):</span><br><span class="line">    current_p = new_p</span><br><span class="line">    current_profit = new_profit</span><br></pre></td></tr></table></figure></p>
 <p><strong>步骤5：动态冷却与终止</strong> <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">T = alpha * T  <span class="comment"># 指数冷却</span></span><br><span class="line"><span class="keyword">if</span> T &lt; T_min <span class="keyword">or</span> k &gt; max_iter:</span><br><span class="line">    <span class="keyword">break</span></span><br></pre></td></tr></table></figure></p>
-<p><strong>4. 参数调优建议</strong> | <strong>参数</strong> |
-<strong>推荐值</strong> | <strong>调整依据</strong> |
-|—————-|——————|———————————-| | 初始温度 $ T_0 $ | 100~1000 |
-约为目标函数变化幅度的10倍 | | 冷却速率 $ $ | 0.85~0.99 |
-越接近1搜索越充分 | | 邻域半径 | 当前解的5%~15% | 平衡搜索广度与精度 | |
-最大迭代次数 | 1000~5000 | 取决于计算资源 |</p>
+<p><strong>4. 参数调优建议</strong></p>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 26%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>推荐值</strong></th>
+<th><strong>调整依据</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>初始温度 $ T_0 $</td>
+<td>100~1000</td>
+<td>约为目标函数变化幅度的10倍</td>
+</tr>
+<tr>
+<td>冷却速率 $ $</td>
+<td>0.85~0.99</td>
+<td>越接近1搜索越充分</td>
+</tr>
+<tr>
+<td>邻域半径</td>
+<td>当前解的5%~15%</td>
+<td>平衡搜索广度与精度</td>
+</tr>
+<tr>
+<td>最大迭代次数</td>
+<td>1000~5000</td>
+<td>取决于计算资源</td>
+</tr>
+</tbody>
+</table>
 <p><strong>5. 完整算法流程图</strong> <img
 src="https://raw.githubusercontent.com/koen666/image/master/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95.png" />
-<strong>6. 实际应用示例</strong> <strong>花叶类蔬菜优化结果</strong>： |
-日期 | 最优定价（元） | 预测销量（kg） | 补货量（kg） | 日收益（元） |
-|————|—————-|—————-|————–|————–| | 2023-07-01 | 12.5 | 320 | 355 | 3840
-| | 2023-07-02 | 12.8 | 310 | 344 | 3968 | | 2023-07-03 | 12.6 | 315 |
-350 | 3906 | | … | … | … | … | … |</p>
+<strong>6. 实际应用示例</strong>
+<strong>花叶类蔬菜优化结果</strong>：</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 22%" />
+<col style="width: 22%" />
+<col style="width: 19%" />
+<col style="width: 19%" />
+</colgroup>
+<thead>
+<tr>
+<th>日期</th>
+<th>最优定价（元）</th>
+<th>预测销量（kg）</th>
+<th>补货量（kg）</th>
+<th>日收益（元）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2023-07-01</td>
+<td>12.5</td>
+<td>320</td>
+<td>355</td>
+<td>3840</td>
+</tr>
+<tr>
+<td>2023-07-02</td>
+<td>12.8</td>
+<td>310</td>
+<td>344</td>
+<td>3968</td>
+</tr>
+<tr>
+<td>2023-07-03</td>
+<td>12.6</td>
+<td>315</td>
+<td>350</td>
+<td>3906</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
 <p><strong>关键观察</strong>：</p>
 <ol type="1">
 <li>价格在12.5~13.2元区间波动，与需求弹性匹配</li>
 <li>周末（7月1-2日）定价略高，反映季节性规律</li>
 <li>补货量 = 预测销量 / (1 - 0.1)（损耗率10%）</li>
 </ol>
-<p><strong>7. 算法优势验证</strong> | <strong>对比指标</strong> |
-模拟退火算法 | 梯度下降法 | |——————–|——————–|——————| | 全局最优概率 |
-85% | 40% | | 收敛所需迭代次数 | 1200次 | 500次 | | 对噪声鲁棒性 | 强 |
-中等 | | 参数敏感性 | 低 | 高 |</p>
+<p><strong>7. 算法优势验证</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>对比指标</strong></th>
+<th>模拟退火算法</th>
+<th>梯度下降法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全局最优概率</td>
+<td>85%</td>
+<td>40%</td>
+</tr>
+<tr>
+<td>收敛所需迭代次数</td>
+<td>1200次</td>
+<td>500次</td>
+</tr>
+<tr>
+<td>对噪声鲁棒性</td>
+<td>强</td>
+<td>中等</td>
+</tr>
+<tr>
+<td>参数敏感性</td>
+<td>低</td>
+<td>高</td>
+</tr>
+</tbody>
+</table>
 <p><strong>8. 可能的改进方向</strong></p>
 <ol type="1">
 <li><p><strong>混合优化策略</strong>：</p>
@@ -456,149 +706,19 @@ $$</span> 则算法以概率1收敛到全局最优解。</li>
       </tags>
   </entry>
   <entry>
-    <title>curl使用教学</title>
-    <url>/2025/07/26/curl/</url>
-    <content><![CDATA[<blockquote>
-<p>curl 是一个强大的命令行工具，用于在命令行或脚本中发送 HTTP
-请求，与服务器通信。它可以用来下载网页、调用 API
-接口、上传文件、发送表单等。几乎所有支持网络通信的协议 curl
-都能处理，包括 HTTP、HTTPS、FTP、SFTP、SMTP 等</p>
-</blockquote>
-<hr />
-<h2 id="一所以curl能干啥">一、所以curl能干啥</h2>
-<table>
-<colgroup>
-<col style="width: 12%" />
-<col style="width: 87%" />
-</colgroup>
-<thead>
-<tr>
-<th>功能</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>获取网页内容</td>
-<td><code>curl https://example.com</code></td>
-</tr>
-<tr>
-<td>下载文件</td>
-<td><code>curl -O https://example.com/file.zip</code></td>
-</tr>
-<tr>
-<td>发送 POST 请求</td>
-<td><code>curl -X POST -d "name=Koen&amp;age=20" https://example.com/api</code></td>
-</tr>
-<tr>
-<td>添加请求头</td>
-<td><code>curl -H "Authorization: Bearer TOKEN" https://api.example.com/data</code></td>
-</tr>
-<tr>
-<td>上传文件</td>
-<td><code>curl -F "file=@test.png" https://example.com/upload</code></td>
-</tr>
-<tr>
-<td>保存输出到文件</td>
-<td><code>curl https://example.com -o saved.html</code></td>
-</tr>
-</tbody>
-</table>
-<p>以下将对其功能进行详细解释</p>
-<hr />
-<h2 id="二利用curl获取网页内容">二、利用curl获取网页内容</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl url</span><br></pre></td></tr></table></figure>
-<p>会将get请求返回结果直接输出在命令行中</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://example.com -o index.html</span><br></pre></td></tr></table></figure>
-<p>保存指定内容到文件，地址为cmd当前地址</p>
-<hr />
-<h2 id="三发送post请求">三、发送post请求</h2>
-<p>一般用于测试接口是否正常 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -d <span class="string">&quot;name=Koen&amp;age=20&quot;</span> https://example.com/api</span><br></pre></td></tr></table></figure> 带上请求头和请求体：
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST https://api.example.com/data \</span><br><span class="line">  -H <span class="string">&quot;Authorization: Bearer abc123&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;&quot;key&quot;:&quot;va</span></span><br><span class="line"><span class="string">lue&quot;&#125;&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">     -d <span class="string">&#x27;&#123;&quot;username&quot;:&quot;koen&quot;,&quot;password&quot;:&quot;123456&quot;&#125;&#x27;</span> \</span><br><span class="line">     https://example.com/api</span><br></pre></td></tr></table></figure></p>
-<hr />
-<h2 id="四利用curl进行文件上传">四、利用curl进行文件上传</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -F <span class="string">&quot;file=@test.png&quot;</span> https://example.com/upload</span><br></pre></td></tr></table></figure>
-<p>-F就是指定用表单的方式进行字段的上传</p>
-<table>
-<colgroup>
-<col style="width: 18%" />
-<col style="width: 81%" />
-</colgroup>
-<thead>
-<tr>
-<th>部分</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>file</code></td>
-<td>表单字段的名字。就像网页表单中
-<code>&lt;input type="file" name="file"&gt;</code>。</td>
-</tr>
-<tr>
-<td><code>=</code></td>
-<td>分隔字段名与数据（文件）</td>
-</tr>
-<tr>
-<td><code>@test.png</code></td>
-<td>表示上传当前目录下名为 <code>test.png</code> 的文件</td>
-</tr>
-</tbody>
-</table>
-<p>其实就是post请求上传文件的方式</p>
-<hr />
-]]></content>
-      <categories>
-        <category>cmd</category>
-      </categories>
-      <tags>
-        <tag>learn</tag>
-        <tag>cmd</tag>
-        <tag>curl</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Electron 基本使用教程</title>
-    <url>/2025/07/29/electron/</url>
-    <content><![CDATA[<blockquote>
-<p>以下以vue3为例结合electron实现跨平台开发</p>
-</blockquote>
-<hr />
-<h2
-id="一在项目根目录安装electorn-forge">一、在项目根目录安装electorn-forge</h2>
-<p>按照如下命令安装electron-forge</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save-dev electron @electron-forge/cli</span><br><span class="line">npx electron-forge import</span><br></pre></td></tr></table></figure>
-<p>这一步会在你的项目中创建一个 electron
-的基本目录结构，并配置打包命令。</p>
-<h2 id="二新建main.js">二、新建main.js</h2>
-<p>在根目录下新建/electron/main.js</p>
-<p>在main.js下复制如下代码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import &#123; app, BrowserWindow &#125; from <span class="string">&#x27;electron&#x27;</span>;</span><br><span class="line">import path from <span class="string">&#x27;path&#x27;</span>;</span><br><span class="line">import &#123; fileURLToPath &#125; from <span class="string">&#x27;url&#x27;</span>;</span><br><span class="line"></span><br><span class="line">// 解决 ES Module 中没有 __dirname 的问题</span><br><span class="line">const __filename = fileURLToPath(import.meta.url);</span><br><span class="line">const __dirname = path.dirname(__filename);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">createWindow</span></span> () &#123;</span><br><span class="line">  const win = new BrowserWindow(&#123;</span><br><span class="line">    width: 1200,</span><br><span class="line">    height: 800,</span><br><span class="line">    webPreferences: &#123;</span><br><span class="line">      preload: path.join(__dirname, <span class="string">&#x27;preload.js&#x27;</span>), // 可选，预加载脚本</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!app.isPackaged) &#123;</span><br><span class="line">    win.loadURL(<span class="string">&#x27;http://localhost:5173&#x27;</span>); // dev 模式加载 vite 前端</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>)); // prod 模式加载打包页面</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.whenReady().<span class="keyword">then</span>(() =&gt; &#123;</span><br><span class="line">  createWindow();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="三修改package.json">三、修改package.json</h2>
-<p>进入package.json文件，新增</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;main&quot;</span>: <span class="string">&quot;electron/main.js&quot;</span>,</span><br></pre></td></tr></table></figure>
-<p>注意scripts</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line"><span class="string">&quot;dev&quot;</span>: <span class="string">&quot;vite&quot;</span>,</span><br><span class="line"><span class="string">&quot;build&quot;</span>: <span class="string">&quot;vite build&quot;</span>,</span><br><span class="line"><span class="string">&quot;preview&quot;</span>: <span class="string">&quot;vite preview&quot;</span>,</span><br><span class="line"><span class="string">&quot;start&quot;</span>: <span class="string">&quot;electron-forge start&quot;</span>,</span><br><span class="line"><span class="string">&quot;package&quot;</span>: <span class="string">&quot;electron-forge package&quot;</span>,</span><br><span class="line"><span class="string">&quot;make&quot;</span>: <span class="string">&quot;electron-forge make&quot;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<h2 id="四开发测试流程">四、开发测试流程</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动 Vite 前端</span></span><br><span class="line">npm run dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新开一个终端，启动 Electron</span></span><br><span class="line">npm start</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="五打包发布测试">五、打包发布测试</h2>
-<p>先构建前端项目</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
-<p>修改main.js</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>));</span><br></pre></td></tr></table></figure>
-<p>打包</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run package</span><br></pre></td></tr></table></figure>
-<p>会在 out/ 目录生成你的桌面可执行程序（比如 Windows 下是 .exe
-文件）</p>
+    <title>常见BUG汇总</title>
+    <url>/2025/07/27/issue/</url>
+    <content><![CDATA[<h2 id="一markdown">一、Markdown</h2>
+<ol type="1">
+<li>为什么vscode编辑md文件十分卡顿</li>
+</ol>
+<p>解决方法:禁用cpp extension pack扩展</p>
 ]]></content>
       <categories>
         <category>code</category>
       </categories>
       <tags>
-        <tag>electron</tag>
-        <tag>web</tag>
-        <tag>desk</tag>
+        <tag>markdown</tag>
       </tags>
   </entry>
   <entry>
@@ -723,22 +843,6 @@ Git 中文版</a>。</p>
       <tags>
         <tag>pipenv</tag>
         <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>常见BUG汇总</title>
-    <url>/2025/07/27/issue/</url>
-    <content><![CDATA[<h2 id="一markdown">一、Markdown</h2>
-<ol type="1">
-<li>为什么vscode编辑md文件十分卡顿</li>
-</ol>
-<p>解决方法:禁用cpp extension pack扩展</p>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>markdown</tag>
       </tags>
   </entry>
   <entry>
@@ -3091,46 +3195,6 @@ A 是约束矩阵（系统限制的编码）=&gt;不等式左侧系数 A= $
       </tags>
   </entry>
   <entry>
-    <title>yolo+AnyLabeling实现数据集的自动标注</title>
-    <url>/2025/08/09/yolo-dataset/</url>
-    <content><![CDATA[<h2 id="一环境准备">一、环境准备</h2>
-<p>首先需要创建一个conda虚拟环境，进行yolo环境的搭建</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install yolo</span><br><span class="line"></span><br><span class="line">pip install ultralytics</span><br><span class="line"></span><br><span class="line">pip install ncnn</span><br><span class="line"></span><br><span class="line">pip install onnx <span class="comment">#用于格式转换</span></span><br></pre></td></tr></table></figure>
-<p>之后创建一个空目录，目录结构如下</p>
-<p><img src="/images/yolo-dataset/yolotraindir.png" /></p>
-<p>准备好需要用来训练的部分图片(50-100张吧差不多，多点更好，但是就是用来标注数据的没必要那么多后面手动改改叭)，放到images文件下的三个文件夹都存放一份</p>
-<h2 id="二数据标注">二、数据标注</h2>
-<p>准备好环境搭建之后，新建一个<code>classes.txt</code>文件放到labels/train文件夹下，里面按顺序写好你的标签是什么比如我训练这个模型就是用来标注电池的</p>
-<p><img src="/images/yolo-dataset/battery.png" /></p>
-<p>那你的文件内容就是</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">battery</span><br></pre></td></tr></table></figure>
-<p>ok，创建完成之后就开始对数据进行正常标注，然后将结果导出到labels/train文件夹下</p>
-<h2 id="三开始训练">三、开始训练</h2>
-<p>首先需要写入一个配置文件<code>xxx.yaml</code>写到yolotrain目录下，内容如下</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">path: D:\yolotrain       <span class="comment"># 数据集根目录</span></span><br><span class="line">train: images/train      <span class="comment"># 训练集相对路径</span></span><br><span class="line">val: images/val          <span class="comment"># 验证集相对路径</span></span><br><span class="line"><span class="built_in">test</span>: images/test        <span class="comment"># 测试集相对路径</span></span><br><span class="line"></span><br><span class="line">nc: 1                    <span class="comment"># 类别数量</span></span><br><span class="line">names: [<span class="string">&quot;battery&quot;</span>]       <span class="comment"># 类别名称列表</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 高级参数（可选）</span></span><br><span class="line">roboflow: &#123;&#125;             <span class="comment"># 兼容RoboFlow数据集</span></span><br><span class="line">download: null           <span class="comment"># 数据集下载URL</span></span><br></pre></td></tr></table></figure>
-<p>在虚拟环境下进入yolotrain目录输入指令开始训练</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yolo detect train </span><br><span class="line"><span class="comment">#data是你自己的yaml文件路径</span></span><br><span class="line">  data=D:/yolotrain/xxx.yaml </span><br><span class="line">  model=yolov8s.pt      <span class="comment"># 预训练模型（放在yolotrain目录下）</span></span><br><span class="line">  epochs=100            <span class="comment"># 迭代次数</span></span><br><span class="line">  imgsz=640             <span class="comment"># 输入分辨率</span></span><br><span class="line">  batch=16              <span class="comment"># 根据GPU调整</span></span><br><span class="line">  device=0              <span class="comment"># 0代表GPU练</span></span><br><span class="line"><span class="comment">#下面是参数，命令合并成一行</span></span><br></pre></td></tr></table></figure>
-<p>若要进行验证把<code>train</code>改成<code>val</code>就行了，然后那个yolo模型我放在我的git仓库里了
-<a href="https://github.com/koen666/yolo">yolo模型</a></p>
-<h2 id="四导出onnx">四、导出onnx</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yolo <span class="built_in">export</span> model=D:/yolotrain/best.pt format=onnx</span><br></pre></td></tr></table></figure>
-<p>训练完后，可以从新得到的run文件夹下的best.pt(这个就是训练的最好的模型)文件挪到外面，在调用上面那个命令生成best.onnx文件</p>
-<p>然后再创建一个xxx.yaml文件写入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">type</span>: yolov8</span><br><span class="line">name: yolov8s-r20230520</span><br><span class="line">display_name: koen</span><br><span class="line">model_path: best.onnx</span><br><span class="line">nms_threshold: 0.45</span><br><span class="line">confidence_threshold: 0.25</span><br><span class="line">classes:</span><br><span class="line">  - battery</span><br></pre></td></tr></table></figure>
-<p>这个display_name可以换阿，这个文件就是你模型的配置文件</p>
-<h2 id="五使用yaml操作">五、使用yaml操作</h2>
-<p>进入<code>AnyLabeling</code>软件，左侧tab栏有AI选项，点击，选择自定义模型，选择刚刚配置的yaml文件即可</p>
-]]></content>
-      <categories>
-        <category>dataset</category>
-      </categories>
-      <tags>
-        <tag>yolo</tag>
-        <tag>dataset</tag>
-        <tag>AnyLabeling</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>seaborn实现统计图绘制</title>
     <url>/2025/08/10/seaborn/</url>
     <content><![CDATA[<h2 id="一设置主题和样式">一、设置主题和样式</h2>
@@ -3663,6 +3727,46 @@ Seaborn 生成的图表进行精细化调整。以下是详细分类说明和实
       <tags>
         <tag>python</tag>
         <tag>saaborn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>yolo+AnyLabeling实现数据集的自动标注</title>
+    <url>/2025/08/09/yolo-dataset/</url>
+    <content><![CDATA[<h2 id="一环境准备">一、环境准备</h2>
+<p>首先需要创建一个conda虚拟环境，进行yolo环境的搭建</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install yolo</span><br><span class="line"></span><br><span class="line">pip install ultralytics</span><br><span class="line"></span><br><span class="line">pip install ncnn</span><br><span class="line"></span><br><span class="line">pip install onnx <span class="comment">#用于格式转换</span></span><br></pre></td></tr></table></figure>
+<p>之后创建一个空目录，目录结构如下</p>
+<p><img src="/images/yolo-dataset/yolotraindir.png" /></p>
+<p>准备好需要用来训练的部分图片(50-100张吧差不多，多点更好，但是就是用来标注数据的没必要那么多后面手动改改叭)，放到images文件下的三个文件夹都存放一份</p>
+<h2 id="二数据标注">二、数据标注</h2>
+<p>准备好环境搭建之后，新建一个<code>classes.txt</code>文件放到labels/train文件夹下，里面按顺序写好你的标签是什么比如我训练这个模型就是用来标注电池的</p>
+<p><img src="/images/yolo-dataset/battery.png" /></p>
+<p>那你的文件内容就是</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">battery</span><br></pre></td></tr></table></figure>
+<p>ok，创建完成之后就开始对数据进行正常标注，然后将结果导出到labels/train文件夹下</p>
+<h2 id="三开始训练">三、开始训练</h2>
+<p>首先需要写入一个配置文件<code>xxx.yaml</code>写到yolotrain目录下，内容如下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">path: D:\yolotrain       <span class="comment"># 数据集根目录</span></span><br><span class="line">train: images/train      <span class="comment"># 训练集相对路径</span></span><br><span class="line">val: images/val          <span class="comment"># 验证集相对路径</span></span><br><span class="line"><span class="built_in">test</span>: images/test        <span class="comment"># 测试集相对路径</span></span><br><span class="line"></span><br><span class="line">nc: 1                    <span class="comment"># 类别数量</span></span><br><span class="line">names: [<span class="string">&quot;battery&quot;</span>]       <span class="comment"># 类别名称列表</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 高级参数（可选）</span></span><br><span class="line">roboflow: &#123;&#125;             <span class="comment"># 兼容RoboFlow数据集</span></span><br><span class="line">download: null           <span class="comment"># 数据集下载URL</span></span><br></pre></td></tr></table></figure>
+<p>在虚拟环境下进入yolotrain目录输入指令开始训练</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yolo detect train </span><br><span class="line"><span class="comment">#data是你自己的yaml文件路径</span></span><br><span class="line">  data=D:/yolotrain/xxx.yaml </span><br><span class="line">  model=yolov8s.pt      <span class="comment"># 预训练模型（放在yolotrain目录下）</span></span><br><span class="line">  epochs=100            <span class="comment"># 迭代次数</span></span><br><span class="line">  imgsz=640             <span class="comment"># 输入分辨率</span></span><br><span class="line">  batch=16              <span class="comment"># 根据GPU调整</span></span><br><span class="line">  device=0              <span class="comment"># 0代表GPU练</span></span><br><span class="line"><span class="comment">#下面是参数，命令合并成一行</span></span><br></pre></td></tr></table></figure>
+<p>若要进行验证把<code>train</code>改成<code>val</code>就行了，然后那个yolo模型我放在我的git仓库里了
+<a href="https://github.com/koen666/yolo">yolo模型</a></p>
+<h2 id="四导出onnx">四、导出onnx</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yolo <span class="built_in">export</span> model=D:/yolotrain/best.pt format=onnx</span><br></pre></td></tr></table></figure>
+<p>训练完后，可以从新得到的run文件夹下的best.pt(这个就是训练的最好的模型)文件挪到外面，在调用上面那个命令生成best.onnx文件</p>
+<p>然后再创建一个xxx.yaml文件写入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">type</span>: yolov8</span><br><span class="line">name: yolov8s-r20230520</span><br><span class="line">display_name: koen</span><br><span class="line">model_path: best.onnx</span><br><span class="line">nms_threshold: 0.45</span><br><span class="line">confidence_threshold: 0.25</span><br><span class="line">classes:</span><br><span class="line">  - battery</span><br></pre></td></tr></table></figure>
+<p>这个display_name可以换阿，这个文件就是你模型的配置文件</p>
+<h2 id="五使用yaml操作">五、使用yaml操作</h2>
+<p>进入<code>AnyLabeling</code>软件，左侧tab栏有AI选项，点击，选择自定义模型，选择刚刚配置的yaml文件即可</p>
+]]></content>
+      <categories>
+        <category>dataset</category>
+      </categories>
+      <tags>
+        <tag>yolo</tag>
+        <tag>dataset</tag>
+        <tag>AnyLabeling</tag>
       </tags>
   </entry>
   <entry>
