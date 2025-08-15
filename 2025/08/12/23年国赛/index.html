@@ -28,7 +28,7 @@
 <meta property="og:description" content="本文用于介绍23年国赛C题解题思路和相关模型">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-08-12T07:00:00.000Z">
-<meta property="article:modified_time" content="2025-08-14T12:27:46.228Z">
+<meta property="article:modified_time" content="2025-08-15T06:31:56.229Z">
 <meta property="article:author" content="koen">
 <meta property="article:tag" content="math">
 <meta name="twitter:card" content="summary">
@@ -218,7 +218,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-14 20:27:46" itemprop="dateModified" datetime="2025-08-14T20:27:46+08:00">2025-08-14</time>
+                <time title="Modified: 2025-08-15 14:31:56" itemprop="dateModified" datetime="2025-08-15T14:31:56+08:00">2025-08-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -243,14 +243,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>4.2k</span>
+              <span>6.2k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>4 mins.</span>
+              <span>6 mins.</span>
             </span>
             <div class="post-description">本文用于介绍23年国赛C题解题思路和相关模型</div>
 
@@ -270,6 +270,10 @@ class="math inline"><em>s</em><em>a</em><em>l</em><em>e</em> = <em>f</em>(<e
 <p>que1:菜类商品不同品类或不同单品之间可能存在一定的关联关系，请分析蔬菜各品类及单品销售量的分布规律及相互关系。</p>
 <p>que2：考虑商超以品类为单位做补货计划，请分析各蔬菜品类的销售总量与成本加成定价的关系，并给出各蔬菜品类未来一周(2023
 年 7 月 1-7 日)的日补货总量和定价策略，使得商超收益最大</p>
+<p>que3:因蔬菜类商品的销售空间有限，商超希望进一步制定单品的补货计划，要求可售单品总数控制在
+27-33 个，且各单品订购量满足最小陈列量 2.5 千克的要求。根据 2023年 6 月
+24-30 日的可售品种，给出 7 月 1
+日的单品补货量和定价策略，在尽量满足市场对各品类蔬菜商品需求的前提下，使得商超收益最大</p>
 <h2 id="que1"><strong>que1</strong></h2>
 <h3 id="自己的理解"><strong>1.1自己的理解</strong></h3>
 <blockquote>
@@ -743,6 +747,251 @@ T_k \geq \frac{c}{\log(1+k)}
 $$</span> 则算法以概率1收敛到全局最优解。</li>
 </ol></li>
 </ul>
+<h2 id="que3"><strong>que3</strong></h2>
+<h3 id="自己的理解-2"><strong>3.1 自己的理解</strong></h3>
+<p>这类问题无非就是在第二问上加入了限制条件，需要解决这类问题，应该是需要在第二问的算法中加入更多的回归项或是在计算中引入限定条件，需要建立一个针单品蔬菜补货与定价优化模型</p>
+<h3 id="相关论文-2"><strong>3.2 相关论文</strong></h3>
+<p>解决决策问题常用到线性规划的方法，可以分为如下几种</p>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 14%" />
+<col style="width: 19%" />
+<col style="width: 11%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr>
+<th>模型类型</th>
+<th>使用条件</th>
+<th>解决问题类型</th>
+<th>目标</th>
+<th>求解方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>标准线性规划（LP）</strong></td>
+<td>所有变量连续；目标函数和约束都是线性</td>
+<td>生产计划、资源分配、投资组合优化</td>
+<td>最大化利润或最小化成本</td>
+<td>单纯形法、内点法、Python库：PuLP、CVXPY、Gurobi</td>
+</tr>
+<tr>
+<td><strong>整数线性规划（ILP）</strong></td>
+<td>部分或全部变量必须为整数</td>
+<td>人员排班、设备选址、运输车辆选择</td>
+<td>同上，但变量是整数</td>
+<td>分支定界法（Branch &amp; Bound）、割平面法、Gurobi、CPLEX</td>
+</tr>
+<tr>
+<td><strong>混合整数线性规划（MILP）</strong></td>
+<td>既有连续变量，又有整数变量</td>
+<td>工厂生产调度+设备开关控制、仓库选址+运输量优化</td>
+<td>同上，同时考虑数量和开关决策</td>
+<td>分支定界法、启发式方法、Gurobi、CPLEX</td>
+</tr>
+<tr>
+<td><strong>目标规划（Goal Programming, GP）</strong></td>
+<td>有多个冲突目标，需要平衡</td>
+<td>企业利润、库存、员工调度多目标优化</td>
+<td>尽量接近各目标，同时最小化偏差</td>
+<td>单纯形法扩展、多目标优化方法</td>
+</tr>
+<tr>
+<td><strong>运输/网络线性规划</strong></td>
+<td>问题具有网络或运输结构</td>
+<td>物流配送、流量网络优化</td>
+<td>最小化运输成本或总流量损失</td>
+<td>线性规划法、最短路法、网络流算法</td>
+</tr>
+<tr>
+<td><strong>对偶线性规划（Dual LP）</strong></td>
+<td>标准 LP 已建立</td>
+<td>分析资源价值、影子价格</td>
+<td>找出资源边际价值、优化资源配置</td>
+<td>LP求解器 + 对偶关系分析</td>
+</tr>
+</tbody>
+</table>
+<p>对应建立的目标函数形式</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 53%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr>
+<th>模型类型</th>
+<th>目标函数形式</th>
+<th>说明/特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>标准线性规划（LP）</strong></td>
+<td><span class="math inline">Max/Min
+<em>z</em> = <em>c</em><sub>1</sub><em>x</em><sub>1</sub> + <em>c</em><sub>2</sub><em>x</em><sub>2</sub> + … + <em>c</em><sub><em>n</em></sub><em>x</em><sub><em>n</em></sub></span></td>
+<td>线性组合，连续变量，常用于最大利润或最小成本</td>
+</tr>
+<tr>
+<td><strong>整数线性规划（ILP）</strong></td>
+<td><span class="math inline">Max/Min
+<em>z</em> = <em>c</em><sub>1</sub><em>y</em><sub>1</sub> + <em>c</em><sub>2</sub><em>y</em><sub>2</sub> + … + <em>c</em><sub><em>m</em></sub><em>y</em><sub><em>m</em></sub></span>,
+<span
+class="math inline"><em>y</em><sub><em>i</em></sub> ∈ ℤ</span></td>
+<td>整数变量，目标仍是线性，但决策是离散的</td>
+</tr>
+<tr>
+<td><strong>混合整数线性规划（MILP）</strong></td>
+<td><span class="math inline">Max/Min
+<em>z</em> = <em>c</em><sup><em>T</em></sup><em>x</em> + <em>d</em><sup><em>T</em></sup><em>y</em></span>,
+<span class="math inline"><em>x</em> ∈ ℝ, <em>y</em> ∈ ℤ</span></td>
+<td>既有连续变量又有整数变量，目标函数是连续+离散线性组合</td>
+</tr>
+<tr>
+<td><strong>目标规划（Goal Programming, GP）</strong></td>
+<td><span class="math inline">Minimize
+∑<sub><em>k</em></sub>(<em>d</em><sub><em>k</em></sub><sup>+</sup> + <em>d</em><sub><em>k</em></sub><sup>−</sup>)</span></td>
+<td>引入偏差变量 <span
+class="math inline"><em>d</em><sub><em>k</em></sub><sup>+</sup>, <em>d</em><sub><em>k</em></sub><sup>−</sup></span>
+来衡量各目标偏离程度，最小化总体偏差</td>
+</tr>
+<tr>
+<td><strong>运输/网络线性规划</strong></td>
+<td><span class="math inline">Minimize
+<em>z</em> = ∑<sub><em>i</em>, <em>j</em></sub><em>c</em><sub><em>i</em><em>j</em></sub><em>x</em><sub><em>i</em><em>j</em></sub></span></td>
+<td>线性成本函数，目标是最小运输成本或总流量损失</td>
+</tr>
+<tr>
+<td><strong>对偶线性规划（Dual LP）</strong></td>
+<td><span class="math inline">Max/Min
+<em>w</em> = <em>b</em><sup><em>T</em></sup><em>y</em></span></td>
+<td>对应原问题的资源价值或约束边际价值，通过对偶关系求解</td>
+</tr>
+</tbody>
+</table>
+<p>在第三问中我们列举出它的变量关系可以发现</p>
+<table>
+<thead>
+<tr>
+<th>决策变量</th>
+<th>含义</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span
+class="math inline"><em>y</em><sub><em>i</em></sub> ∈ {0, 1}</span></td>
+<td>是否采购第 <span class="math inline"><em>i</em></span> 种蔬菜</td>
+<td>二进制整数</td>
+</tr>
+<tr>
+<td><span
+class="math inline"><em>R</em><sub><em>i</em></sub> ≥ 2.5</span></td>
+<td>第 <span class="math inline"><em>i</em></span>
+种蔬菜的补货量（千克）</td>
+<td>连续变量</td>
+</tr>
+<tr>
+<td><span
+class="math inline"><em>P</em><sub><em>i</em></sub></span></td>
+<td>第 <span class="math inline"><em>i</em></span> 种蔬菜售价</td>
+<td>连续变量</td>
+</tr>
+</tbody>
+</table>
+<p>明确我们使用这个模型的目的：在可售单品数量受限、每个单品补货量和售价受约束的情况下，使商超每天的总净收益最大。</p>
+<p>这道习题需要建立的是<code>混合整数非线性规划（MINLP）</code>，欸为什么不是MILP呢，因为目标函数或约束中存在非线性关系</p>
+<p>于是我们会建立出如下函数模型: <span class="math display">$$
+\max \sum_{i=1}^{49} y_i \Big[ R_i (P_i - B_i) - R_i B_i L_i \Big]
+$$</span> 建立步骤： — 在商超蔬菜经营中，有几个核心因素影响收益： 1.
+<strong>销售利润</strong></p>
+<ul>
+<li>每种蔬菜的售价 <span
+class="math inline"><em>P</em><sub><em>i</em></sub></span> 与批发成本
+<span class="math inline"><em>B</em><sub><em>i</em></sub></span>
+决定毛利润。</li>
+<li>毛利润 = <span
+class="math inline"><em>P</em><sub><em>i</em></sub> − <em>B</em><sub><em>i</em></sub></span>
+每千克利润 × 补货量 <span
+class="math inline"><em>R</em><sub><em>i</em></sub></span></li>
+</ul>
+<ol start="2" type="1">
+<li><p><strong>损耗成本</strong></p>
+<ul>
+<li>蔬菜易变质，损耗率 <span
+class="math inline"><em>L</em><sub><em>i</em></sub></span>
+表示补货量中无法售出的比例。</li>
+<li>损耗成本 = <span
+class="math inline"><em>R</em><sub><em>i</em></sub><em>B</em><sub><em>i</em></sub><em>L</em><sub><em>i</em></sub></span></li>
+</ul></li>
+<li><p><strong>采购选择</strong></p>
+<ul>
+<li>并非所有单品都需要采购，用 0-1 决策变量 <span
+class="math inline"><em>y</em><sub><em>i</em></sub></span>
+控制是否采购该单品。</li>
+</ul></li>
+</ol>
+<hr />
+<p><strong>(1) 定义决策变量</strong></p>
+<ul>
+<li><span
+class="math inline"><em>y</em><sub><em>i</em></sub> ∈ {0, 1}</span>：是否采购第
+i 种单品</li>
+<li><span
+class="math inline"><em>R</em><sub><em>i</em></sub></span>：补货量（连续变量）</li>
+<li><span
+class="math inline"><em>P</em><sub><em>i</em></sub></span>：定价（连续变量）</li>
+</ul>
+<p><strong>(2) 利润与损耗建模</strong></p>
+<ul>
+<li><strong>毛利润</strong>：每个单品总利润 = 补货量 × （售价 −
+成本）</li>
+</ul>
+<p><span
+class="math display">利润<sub><em>i</em></sub> = <em>R</em><sub><em>i</em></sub>(<em>P</em><sub><em>i</em></sub> − <em>B</em><sub><em>i</em></sub>)</span></p>
+<ul>
+<li><strong>损耗成本</strong>：因损耗导致的成本</li>
+</ul>
+<p><span
+class="math display">损耗成本<sub><em>i</em></sub> = <em>R</em><sub><em>i</em></sub><em>B</em><sub><em>i</em></sub><em>L</em><sub><em>i</em></sub></span></p>
+<ul>
+<li><strong>净收益</strong>：利润 − 损耗</li>
+</ul>
+<p><span
+class="math display">净收益<sub><em>i</em></sub> = <em>R</em><sub><em>i</em></sub>(<em>P</em><sub><em>i</em></sub> − <em>B</em><sub><em>i</em></sub>) − <em>R</em><sub><em>i</em></sub><em>B</em><sub><em>i</em></sub><em>L</em><sub><em>i</em></sub></span></p>
+<p><strong>(3) 采购决策引入 0-1 变量</strong></p>
+<ul>
+<li>只有当 <span
+class="math inline"><em>y</em><sub><em>i</em></sub> = 1</span>
+时，该单品才会被采购和计入收益。</li>
+<li>因此单品净收益乘以 <span
+class="math inline"><em>y</em><sub><em>i</em></sub></span>：</li>
+</ul>
+<p><span
+class="math display"><em>y</em><sub><em>i</em></sub> ⋅ [<em>R</em><sub><em>i</em></sub>(<em>P</em><sub><em>i</em></sub> − <em>B</em><sub><em>i</em></sub>) − <em>R</em><sub><em>i</em></sub><em>B</em><sub><em>i</em></sub><em>L</em><sub><em>i</em></sub>]</span></p>
+<p><strong>(4) 总收益</strong></p>
+<ul>
+<li>商超总收益 = 所有单品净收益之和：</li>
+</ul>
+<p><span class="math display">$$
+\text{总收益} = \sum_{i=1}^{49} y_i \big[R_i (P_i - B_i) - R_i B_i L_i
+\big]
+$$</span></p>
+<p><strong>(5) 目标函数</strong></p>
+<ul>
+<li><strong>目标</strong>：最大化总收益</li>
+</ul>
+<p><span class="math display">$$
+\max \sum_{i=1}^{49} y_i \big[R_i (P_i - B_i) - R_i B_i L_i \big]
+$$</span></p>
+<hr />
+<p>于是建立该模型之后我们可以利用模拟退火算法进行问题求解</p>
+<p>具体实现:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line"><span class="comment"># 1. 输入数据示例</span></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line">n = <span class="number">49</span>  <span class="comment"># 单品数量</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例数据，可替换为真实 49 个单品的历史成本和损耗率</span></span><br><span class="line">B = np.random.uniform(<span class="number">2</span>, <span class="number">10</span>, n)      <span class="comment"># 单位成本</span></span><br><span class="line">L = np.random.uniform(<span class="number">0</span>, <span class="number">0.3</span>, n)     <span class="comment"># 损耗率</span></span><br><span class="line">R_max = np.random.uniform(<span class="number">5</span>, <span class="number">20</span>, n)  <span class="comment"># 最大补货量</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 模拟退火参数</span></span><br><span class="line">T_init = <span class="number">100</span>      <span class="comment"># 初始温度</span></span><br><span class="line">alpha = <span class="number">0.95</span>      <span class="comment"># 温度衰减系数</span></span><br><span class="line">iter_per_temp = <span class="number">100</span>  <span class="comment"># 每温度迭代次数</span></span><br><span class="line">T_min = <span class="number">1e-3</span>         <span class="comment"># 最低温度</span></span><br><span class="line">min_total_y = <span class="number">27</span>     <span class="comment"># 最小采购品种数</span></span><br><span class="line">max_total_y = <span class="number">33</span>     <span class="comment"># 最大采购品种数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line"><span class="comment"># 2. 初始化决策变量</span></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line">y = np.random.randint(<span class="number">0</span>, <span class="number">2</span>, n)</span><br><span class="line"><span class="comment"># 保证总采购品种数在限制范围内</span></span><br><span class="line"><span class="keyword">while</span> y.<span class="built_in">sum</span>() &lt; min_total_y <span class="keyword">or</span> y.<span class="built_in">sum</span>() &gt; max_total_y:</span><br><span class="line">    y = np.random.randint(<span class="number">0</span>, <span class="number">2</span>, n)</span><br><span class="line"></span><br><span class="line">R = np.random.uniform(<span class="number">2.5</span>, R_max)</span><br><span class="line">P = np.random.uniform(<span class="number">1.1</span>*B, <span class="number">1.5</span>*B)</span><br><span class="line"></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line"><span class="comment"># 3. 目标函数</span></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">profit</span>(<span class="params">y, R, P</span>):</span><br><span class="line">    <span class="keyword">return</span> np.<span class="built_in">sum</span>(y * (R * (P - B) - R * B * L))</span><br><span class="line"></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line"><span class="comment"># 4. 随机扰动函数</span></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">perturb</span>(<span class="params">y, R, P</span>):</span><br><span class="line">    y_new = y.copy()</span><br><span class="line">    R_new = R.copy()</span><br><span class="line">    P_new = P.copy()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 随机翻转一个 y_i</span></span><br><span class="line">    idx = np.random.randint(<span class="number">0</span>, n)</span><br><span class="line">    y_new[idx] = <span class="number">1</span> - y_new[idx]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 保证总品种数在约束内</span></span><br><span class="line">    total_y = y_new.<span class="built_in">sum</span>()</span><br><span class="line">    <span class="keyword">if</span> total_y &lt; min_total_y:</span><br><span class="line">        y_new[np.random.choice(np.where(y_new==<span class="number">0</span>)[<span class="number">0</span>])] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> total_y &gt; max_total_y:</span><br><span class="line">        y_new[np.random.choice(np.where(y_new==<span class="number">1</span>)[<span class="number">0</span>])] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 对 R_i 做小扰动</span></span><br><span class="line">    R_new += np.random.uniform(-<span class="number">1</span>, <span class="number">1</span>, n)</span><br><span class="line">    R_new = np.clip(R_new, <span class="number">2.5</span>, R_max)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 对 P_i 做小扰动</span></span><br><span class="line">    P_new += np.random.uniform(-<span class="number">1</span>, <span class="number">1</span>, n)</span><br><span class="line">    P_new = np.clip(P_new, <span class="number">1.1</span>*B, <span class="number">1.5</span>*B)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> y_new, R_new, P_new</span><br><span class="line"></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line"><span class="comment"># 5. 模拟退火主循环</span></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line">T = T_init</span><br><span class="line">best_y, best_R, best_P = y.copy(), R.copy(), P.copy()</span><br><span class="line">best_profit = profit(y, R, P)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> T &gt; T_min:</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(iter_per_temp):</span><br><span class="line">        y_new, R_new, P_new = perturb(y, R, P)</span><br><span class="line">        new_profit = profit(y_new, R_new, P_new)</span><br><span class="line">        delta = new_profit - profit(y, R, P)</span><br><span class="line">        <span class="keyword">if</span> delta &gt; <span class="number">0</span> <span class="keyword">or</span> np.random.rand() &lt; np.exp(delta / T):</span><br><span class="line">            y, R, P = y_new, R_new, P_new</span><br><span class="line">            <span class="keyword">if</span> new_profit &gt; best_profit:</span><br><span class="line">                best_y, best_R, best_P = y.copy(), R.copy(), P.copy()</span><br><span class="line">                best_profit = new_profit</span><br><span class="line">    T *= alpha  <span class="comment"># 降温</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line"><span class="comment"># 6. 输出结果</span></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;最大收益: <span class="subst">&#123;best_profit:<span class="number">.2</span>f&#125;</span>&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    <span class="keyword">if</span> best_y[i] == <span class="number">1</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;Item <span class="subst">&#123;i+<span class="number">1</span>&#125;</span>: 补货量 R=<span class="subst">&#123;best_R[i]:<span class="number">.2</span>f&#125;</span>, 定价 P=<span class="subst">&#123;best_P[i]:<span class="number">.2</span>f&#125;</span>&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -849,7 +1098,7 @@ $$</span> 则算法以概率1收敛到全局最优解。</li>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E5%B9%B2%E7%90%86%E8%A7%A3%E8%A7%A3%E8%AF%BB"><span class="nav-text">题干理解解读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#que1"><span class="nav-text">que1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%B7%B1%E7%9A%84%E7%90%86%E8%A7%A3"><span class="nav-text">1.1自己的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E8%AE%BA%E6%96%87"><span class="nav-text">1.2相关论文</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#que2"><span class="nav-text">que2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%B7%B1%E7%9A%84%E7%90%86%E8%A7%A3-1"><span class="nav-text">2.1 自己的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E8%AE%BA%E6%96%87-1"><span class="nav-text">2.2 相关论文</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E5%B9%B2%E7%90%86%E8%A7%A3%E8%A7%A3%E8%AF%BB"><span class="nav-text">题干理解解读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#que1"><span class="nav-text">que1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%B7%B1%E7%9A%84%E7%90%86%E8%A7%A3"><span class="nav-text">1.1自己的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E8%AE%BA%E6%96%87"><span class="nav-text">1.2相关论文</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#que2"><span class="nav-text">que2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%B7%B1%E7%9A%84%E7%90%86%E8%A7%A3-1"><span class="nav-text">2.1 自己的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E8%AE%BA%E6%96%87-1"><span class="nav-text">2.2 相关论文</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#que3"><span class="nav-text">que3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%B7%B1%E7%9A%84%E7%90%86%E8%A7%A3-2"><span class="nav-text">3.1 自己的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E8%AE%BA%E6%96%87-2"><span class="nav-text">3.2 相关论文</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -947,12 +1196,12 @@ $$</span> 则算法以概率1收敛到全局最优解。</li>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">28k</span>
+    <span title="Symbols count total">30k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">25 mins.</span>
+    <span title="Reading time total">27 mins.</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div><!-- 页面点击小红心 -->
