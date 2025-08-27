@@ -207,6 +207,27 @@
   </entry>
   
   <entry>
+    <title>常见BUG汇总</title>
+    <link href="http://example.com/2025/07/27/issue/"/>
+    <id>http://example.com/2025/07/27/issue/</id>
+    <published>2025-07-27T00:29:00.000Z</published>
+    <updated>2025-08-27T08:27:11.826Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="一markdown">一、Markdown</h2><h3 id="为什么vscode编辑md文件十分卡顿">1.1为什么vscode编辑md文件十分卡顿</h3><p>解决方法:禁用cpp extension pack扩展</p><h2 id="二hexo">二、Hexo</h2><h3 id="出现spawn-failed报错">2.1 出现Spawn Failed报错</h3><p>首先尝试关机重启</p><p>其次删除<code>.deploy_git</code>文件夹</p><p>最后实在不行找到<code>.ssh</code>文件，先测试</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure><p>如果出现22端口连接超时，改成443端口即可 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">  HostName ssh.github.com</span><br><span class="line">  Port 443</span><br><span class="line">  User git</span><br><span class="line">  IdentityFile ~/.ssh/id_rsa</span><br><span class="line">  IdentitiesOnly <span class="built_in">yes</span></span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    
+    <summary type="html">欢迎留言提出常见BUG</summary>
+    
+    
+    
+    <category term="code" scheme="http://example.com/categories/code/"/>
+    
+    
+    <category term="markdown" scheme="http://example.com/tags/markdown/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Latex常见数学公式</title>
     <link href="http://example.com/2025/07/27/latex/"/>
     <id>http://example.com/2025/07/27/latex/</id>
@@ -226,27 +247,6 @@
     <category term="math" scheme="http://example.com/tags/math/"/>
     
     <category term="latex" scheme="http://example.com/tags/latex/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>常见BUG汇总</title>
-    <link href="http://example.com/2025/07/27/issue/"/>
-    <id>http://example.com/2025/07/27/issue/</id>
-    <published>2025-07-27T00:29:00.000Z</published>
-    <updated>2025-08-01T06:57:37.197Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="一markdown">一、Markdown</h2><ol type="1"><li>为什么vscode编辑md文件十分卡顿</li></ol><p>解决方法:禁用cpp extension pack扩展</p>]]></content>
-    
-    
-    <summary type="html">欢迎留言提出常见BUG</summary>
-    
-    
-    
-    <category term="code" scheme="http://example.com/categories/code/"/>
-    
-    
-    <category term="markdown" scheme="http://example.com/tags/markdown/"/>
     
   </entry>
   
