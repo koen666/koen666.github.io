@@ -1,0 +1,2891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"text":"评论","order":-2}},"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本文介绍pytorch的基本使用，深度学习基础算法和神经网络的构建知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pytorch，深度学习与神经网络篇">
+<meta property="og:url" content="http://example.com/2025/07/26/pytorch/index.html">
+<meta property="og:site_name" content="木语">
+<meta property="og:description" content="本文介绍pytorch的基本使用，深度学习基础算法和神经网络的构建知识">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/pytorch/GAN.png">
+<meta property="og:image" content="http://example.com/images/pytorch/Auto-encoder.png">
+<meta property="og:image" content="http://example.com/images/pytorch/autograd.png">
+<meta property="og:image" content="http://example.com/images/pytorch/linearRgression.png">
+<meta property="og:image" content="http://example.com/images/pytorch/CNN.png">
+<meta property="og:image" content="http://example.com/images/pytorch/RNN.png">
+<meta property="og:image" content="http://example.com/images/pytorch/transformer.jpg">
+<meta property="og:image" content="http://example.com/images/pytorch/attention.png">
+<meta property="og:image" content="http://example.com/images/pytorch/self-attention.png">
+<meta property="og:image" content="http://example.com/images/pytorch/transformer1.png">
+<meta property="og:image" content="http://example.com/images/pytorch/transformer2.png">
+<meta property="og:image" content="http://example.com/images/pytorch/pyplot-fmt.png">
+<meta property="og:image" content="http://example.com/images/pytorch/ex1.png">
+<meta property="og:image" content="http://example.com/images/pytorch/ex2.png">
+<meta property="og:image" content="http://example.com/images/pytorch/ex3.png">
+<meta property="article:published_time" content="2025-07-26T08:06:04.469Z">
+<meta property="article:modified_time" content="2025-08-08T01:40:39.387Z">
+<meta property="article:author" content="koen">
+<meta property="article:tag" content="deeplearning">
+<meta property="article:tag" content="pytorch">
+<meta property="article:tag" content="Transformer">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/pytorch/GAN.png">
+
+<link rel="canonical" href="http://example.com/2025/07/26/pytorch/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Pytorch，深度学习与神经网络篇 | 木语</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+   <link rel="stylesheet" href="/dist/APlayer.min.css">
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="木语" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">木语</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">技术是逻辑，木是自然，语是表达</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/07/26/pytorch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/./images/head.jpg">
+      <meta itemprop="name" content="koen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木语">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Pytorch，深度学习与神经网络篇
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-07-26 16:06:04" itemprop="dateCreated datePublished" datetime="2025-07-26T16:06:04+08:00">2025-07-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-08-08 09:40:39" itemprop="dateModified" datetime="2025-08-08T09:40:39+08:00">2025-08-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index"><span itemprop="name">code</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>14k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>13 mins.</span>
+            </span>
+            <div class="post-description">本文介绍pytorch的基本使用，深度学习基础算法和神经网络的构建知识</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>首先给大家介绍一下深度学习的基本框架</p>
+<p>深度学习是以神经网络为基础的机器学习方法，其中包括多种网络结构（如
+FNN、CNN、RNN、Transformer 等），
+这些基础结构构成了实现各种功能性模型的核心模块，例如：</p>
+<figure>
+<img src="/images/pytorch/GAN.png" alt="GAN（生成对抗网络）">
+<figcaption aria-hidden="true">GAN（生成对抗网络）</figcaption>
+</figure>
+<figure>
+<img src="/images/pytorch/Auto-encoder.png" alt="Auto-Encoder（自编码器）">
+<figcaption aria-hidden="true">Auto-Encoder（自编码器）</figcaption>
+</figure>
+<p>VAE（变分自编码器）</p>
+<p>BERT、GPT 等预训练模型</p>
+<p>基础结构（Network Architectures）</p>
+<ul>
+<li>FNN（前馈神经网络）</li>
+<li>CNN（卷积神经网络）</li>
+<li>RNN（循环神经网络）</li>
+<li>Transformer（注意力机制为核心）</li>
+</ul>
+<p>功能性模型（Functional Models / Applications）</p>
+<ul>
+<li>自编码器 Auto-Encoder（FNN/CNN）</li>
+<li>生成对抗网络 GAN（FNN/CNN）</li>
+<li>变分自编码器 VAE（FNN）</li>
+<li>强化学习策略网络（FNN/RNN）</li>
+<li>GPT、BERT 等 NLP 模型（Transformer）</li>
+<li>其他任务模型
+<ul>
+<li>UNet</li>
+<li>ResNet</li>
+<li>YOLO</li>
+</ul></li>
+</ul>
+<h2 id="一autograd">一、AutoGrad</h2>
+<p>autograd 包是 PyTorch
+中所有神经网络的核心。首先让我们简要地介绍它，然后我们将会去训练我们的第一个神经网络。该
+autograd 软件包为 Tensors
+上的所有操作提供自动微分。它是一个由运行定义的框架，这意味着以代码运行方式定义你的后向传播，并且每次迭代都可以不同</p>
+<p>先丢张思维导图叭： <img src="/images/pytorch/autograd.png" alt="autograd"></p>
+<p>首先要给x定义 <code>requires_grad=True</code> 属性</p>
+<p>其次要注意被<code>backward()</code>的张量需要是张量标量，即需要被<code>mean()</code>或者是<code>sum()</code></p>
+<p>最后x的梯度就是<span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.798ex;" xmlns="http://www.w3.org/2000/svg" width="2.742ex" height="2.8ex" role="img" focusable="false" viewBox="0 -884.7 1212.2 1237.5"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mrow" transform="translate(257.8,394) scale(0.707)"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g><g data-mml-node="mi" transform="translate(520,0)"><path data-c="1D467" d="M347 338Q337 338 294 349T231 360Q211 360 197 356T174 346T162 335T155 324L153 320Q150 317 138 317Q117 317 117 325Q117 330 120 339Q133 378 163 406T229 440Q241 442 246 442Q271 442 291 425T329 392T367 375Q389 375 411 408T434 441Q435 442 449 442H462Q468 436 468 434Q468 430 463 420T449 399T432 377T418 358L411 349Q368 298 275 214T160 106L148 94L163 93Q185 93 227 82T290 71Q328 71 360 90T402 140Q406 149 409 151T424 153Q443 153 443 143Q443 138 442 134Q425 72 376 31T278 -11Q252 -11 232 6T193 40T155 57Q111 57 76 -3Q70 -11 59 -11H54H41Q35 -5 35 -2Q35 13 93 84Q132 129 225 214T340 322Q352 338 347 338Z"></path></g></g><g data-mml-node="mrow" transform="translate(220,-345) scale(0.707)"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g><g data-mml-node="mi" transform="translate(520,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g><rect width="972.2" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container></span></p>
+<p>将代码块包裹在 <code>with torch.no_grad()：</code>
+中以停止自动微分</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(x.requires_grad)</span><br><span class="line"><span class="built_in">print</span>((x ** <span class="number">2</span>).requires_grad)</span><br><span class="line"></span><br><span class="line">with torch.no_grad():</span><br><span class="line">    print((x ** <span class="number">2</span>).requires_grad)</span><br></pre></td></tr></table></figure>
+<p>output: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">True</span><br><span class="line">True</span><br><span class="line">False</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="二神经网络基础">二、神经网络基础</h2>
+<h3 id="了解神经网络结构的分类">2.1 了解神经网络结构的分类</h3>
+<table>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 20%">
+<col style="width: 12%">
+<col style="width: 20%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr>
+<th>序号</th>
+<th>网络类型</th>
+<th>简介</th>
+<th>适用场景</th>
+<th>代表模型 / 特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>前馈神经网络（FNN）</td>
+<td>最基础的神经网络，信息单向传播，无环</td>
+<td>通用场景</td>
+<td>多层感知器（MLP）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>卷积神经网络（CNN）</td>
+<td>提取图像局部特征，参数更少</td>
+<td>图像识别、目标检测</td>
+<td>LeNet、AlexNet、VGG、ResNet、EfficientNet</td>
+</tr>
+<tr>
+<td>3</td>
+<td>循环神经网络（RNN）</td>
+<td>处理序列数据，有“记忆”结构</td>
+<td>文本、语音、时间序列</td>
+<td>RNN、LSTM、GRU</td>
+</tr>
+<tr>
+<td>4</td>
+<td>残差神经网络（ResNet）</td>
+<td>使用残差连接避免梯度消失</td>
+<td>深层网络训练</td>
+<td>ResNet、输出=F(x)+x</td>
+</tr>
+<tr>
+<td>5</td>
+<td>图神经网络（GNN）</td>
+<td>适用于图结构数据</td>
+<td>社交网络、知识图谱</td>
+<td>GCN、GAT、GraphSAGE</td>
+</tr>
+</tbody>
+</table>
+<h3 id="了解神经网络的整个过程">2.2 了解神经网络的整个过程</h3>
+<p><code>输入数据 x                    输入层有几个神经元就输入几个数据（几维）</code></p>
+<p><code>正向传播（Linear + 激活函数）  隐藏层=线性层+激活函数（模拟复杂的数据分布）</code></p>
+<p><code>输出结果（预测值）</code></p>
+<p><code>计算损失（Loss 与真实值比较）</code></p>
+<p><code>反向传播（链式法则求导）</code></p>
+<p><code>参数梯度更新（Optimizer）</code></p>
+<p><code>下一轮训练</code></p>
+<p>损失函数：计算”偏差”</p>
+<p>优化器：这个“偏差”通过损失函数计算出来，而优化器的工作，就是
+通过反向传播得到的梯度，更新参数，使损失越来越小</p>
+<p>给出一个简单的前馈神经网络作为实例进行讲解 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">import torch.nn as nn</span><br><span class="line">import torch.optim as optim</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个简单的前馈神经网络，包含一个隐藏层</span></span><br><span class="line">class SimpleFNN(nn.Module):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super(SimpleFNN, self).__init__()</span><br><span class="line">        self.fc1 = nn.Linear(4, 8)   <span class="comment"># 输入层4个特征，隐藏层8个神经元</span></span><br><span class="line">        self.relu = nn.ReLU()        <span class="comment"># 激活函数</span></span><br><span class="line">        self.fc2 = nn.Linear(8, 3)   <span class="comment"># 输出层3个类别（比如3分类问题）</span></span><br><span class="line"></span><br><span class="line">    def forward(self, x):</span><br><span class="line">        x = self.fc1(x)</span><br><span class="line">        x = self.relu(x)</span><br><span class="line">        x = self.fc2(x)</span><br><span class="line">        <span class="built_in">return</span> x</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建模型</span></span><br><span class="line">model = SimpleFNN()</span><br><span class="line"><span class="built_in">print</span>(model)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 假设输入是4维特征</span></span><br><span class="line">sample_input = torch.randn(2, 4)  <span class="comment"># batch_size=2，4个特征</span></span><br><span class="line">output = model(sample_input)</span><br><span class="line"><span class="built_in">print</span>(output)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<code>__init__</code>函数 — 网络结构的“搭建工厂”</p>
+<p>作用：
+初始化神经网络的层和组件,相当于在这里定义好网络的“骨架”和“零件”。</p>
+<p>一般<code>_init_</code>内包含如下内容:</p>
+<table>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 41%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr>
+<th>类型</th>
+<th>内容</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🔷 网络层</td>
+<td><code>nn.Linear</code>, <code>nn.Conv2d</code>, <code>nn.LSTM</code>
+等</td>
+<td>定义输入层、隐藏层、输出层结构</td>
+</tr>
+<tr>
+<td>🔶 激活函数</td>
+<td><code>nn.ReLU()</code>, <code>nn.Sigmoid()</code> 等</td>
+<td>可以作为类成员，也可以直接在 <code>forward()</code> 里用</td>
+</tr>
+<tr>
+<td>🔸 Dropout / BatchNorm</td>
+<td><code>nn.Dropout</code>, <code>nn.BatchNorm1d</code> 等</td>
+<td>用于正则化、加速收敛</td>
+</tr>
+<tr>
+<td>🔻 有时会放优化器 / 损失函数（但不推荐）</td>
+<td><code>optim.SGD</code>, <code>nn.CrossEntropyLoss</code></td>
+<td>一般在模型外单独写更清晰</td>
+</tr>
+</tbody>
+</table>
+<p>比如在上述示例代码中的具体内容： -
+<code>super(SimpleFNN, self).__init__()</code> 调用父类 nn.Module
+的初始化方法，确保网络能正常工作和注册所有子模块。</p>
+<ul>
+<li><p><code>self.fc1 = nn.Linear(4, 8)</code>
+定义第一个全连接层（线性层），它接受4维输入，输出8维数据。
+这层会学习一个 4×8 的权重矩阵和偏置向量。</p></li>
+<li><p><code>self.relu = nn.ReLU()</code>
+定义了一个激活函数ReLU，增加网络的非线性表达能力。
+这里是先定义好，可以在 forward 中调用。</p></li>
+<li><p><code>self.fc2 = nn.Linear(8, 3)</code>
+定义第二个全连接层，接受8维输入，输出3维结果。
+这常用作分类任务的输出层，输出3个类别的分数。</p></li>
+</ul>
+<p><code>forward</code> 函数 —
+数据的“运行流程”,里面定义的是从”输入到输出”的这一整条路线</p>
+<p>作用： 定义输入数据如何通过网络计算得到输出。
+相当于网络的“运行步骤”，告诉 PyTorch 具体执行什么操作。</p>
+<p>具体流程： - <code>x = self.fc1(x)</code> 输入数据 x
+先经过第一个全连接层，变成8维的向量。</p>
+<ul>
+<li><p><code>x = self.relu(x)</code> 将刚得到的8维数据通过 ReLU
+激活函数，增加非线性。 ReLU的作用是把负数变为0，正数保持不变。</p></li>
+<li><p><code>x = self.fc2(x)</code>
+再把激活后的结果输入到第二个全连接层，变成3维输出。</p></li>
+<li><p><code>return x</code>
+返回最终输出，通常是“分类分数”或“回归预测值”。</p></li>
+</ul>
+<h3 id="激活函数">2.3激活函数</h3>
+<table>
+<colgroup>
+<col style="width: 16%">
+<col style="width: 49%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr>
+<th>激活函数</th>
+<th>数学形式</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ReLU</strong></td>
+<td><span class="math inline"><em>f</em>(<em>x</em>) = max (0, <em>x</em>)</span></td>
+<td>简单高效，梯度传播好，但会有”死神经元”问题</td>
+</tr>
+<tr>
+<td><strong>Sigmoid</strong></td>
+<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.912ex;" xmlns="http://www.w3.org/2000/svg" width="12.761ex" height="2.869ex" role="img" focusable="false" viewBox="0 -864.9 5640.4 1267.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D453" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"></path></g><g data-mml-node="mo" transform="translate(550,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(939,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mo" transform="translate(1511,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mo" transform="translate(2177.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mfrac" transform="translate(3233.6,0)"><g data-mml-node="mn" transform="translate(1026.7,394) scale(0.707)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mrow" transform="translate(220,-345) scale(0.707)"><g data-mml-node="mn"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mo" transform="translate(500,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="msup" transform="translate(1278,0)"><g data-mml-node="mi"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="TeXAtom" transform="translate(499,289) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mo"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mi" transform="translate(778,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g></g></g><rect width="2166.9" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container></span></td>
+<td>输出在(0,1)，容易梯度消失</td>
+</tr>
+<tr>
+<td><strong>Tanh</strong></td>
+<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.912ex;" xmlns="http://www.w3.org/2000/svg" width="13.487ex" height="3.052ex" role="img" focusable="false" viewBox="0 -946.2 5961.1 1349.1"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D453" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"></path></g><g data-mml-node="mo" transform="translate(550,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(939,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mo" transform="translate(1511,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mo" transform="translate(2177.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mfrac" transform="translate(3233.6,0)"><g data-mml-node="mrow" transform="translate(220,398) scale(0.707)"><g data-mml-node="msup"><g data-mml-node="mi"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="mi" transform="translate(499,363) scale(0.707)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g><g data-mml-node="mo" transform="translate(953.5,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="msup" transform="translate(1731.5,0)"><g data-mml-node="mi"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="TeXAtom" transform="translate(499,363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mo"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mi" transform="translate(778,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g></g></g><g data-mml-node="mrow" transform="translate(220,-345) scale(0.707)"><g data-mml-node="msup"><g data-mml-node="mi"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="mi" transform="translate(499,289) scale(0.707)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g><g data-mml-node="mo" transform="translate(953.5,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="msup" transform="translate(1731.5,0)"><g data-mml-node="mi"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="TeXAtom" transform="translate(499,289) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mo"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mi" transform="translate(778,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g></g></g><rect width="2487.5" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container></span></td>
+<td>输出在(-1,1)，比Sigmoid对称，但也可能梯度消失</td>
+</tr>
+<tr>
+<td><strong>Leaky ReLU</strong></td>
+<td><span class="math inline"><em>f</em>(<em>x</em>) = max (0.01<em>x</em>, <em>x</em>)</span></td>
+<td>解决ReLU死区问题</td>
+</tr>
+<tr>
+<td><strong>ELU</strong></td>
+<td>指数线性单元</td>
+<td>更平滑的梯度流</td>
+</tr>
+</tbody>
+</table>
+<p>作用：激活函数让隐藏层拥有表达复杂模式的能力，是神经网络“聪明起来”的关键。</p>
+<h3 id="损失函数">2.4损失函数</h3>
+<table>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 3%">
+<col style="width: 19%">
+<col style="width: 23%">
+<col style="width: 20%">
+<col style="width: 0%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr>
+<th>名称</th>
+<th>适用任务</th>
+<th>PyTorch 对应函数</th>
+<th>公式/描述</th>
+<th>特点与使用场景</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>均方误差（MSE）</strong></td>
+<td>回归</td>
+<td><code>nn.MSELoss</code></td>
+<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.798ex;" xmlns="http://www.w3.org/2000/svg" width="13.932ex" height="2.755ex" role="img" focusable="false" viewBox="0 -864.9 6157.8 1217.7"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mn" transform="translate(255.4,394) scale(0.707)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mi" transform="translate(220,-345) scale(0.707)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><rect width="624.3" height="60" x="120" y="220"></rect></g><g data-mml-node="mo" transform="translate(1030.9,0)"><path data-c="2211" d="M61 748Q64 750 489 750H913L954 640Q965 609 976 579T993 533T999 516H979L959 517Q936 579 886 621T777 682Q724 700 655 705T436 710H319Q183 710 183 709Q186 706 348 484T511 259Q517 250 513 244L490 216Q466 188 420 134T330 27L149 -187Q149 -188 362 -188Q388 -188 436 -188T506 -189Q679 -189 778 -162T936 -43Q946 -27 959 6H999L913 -249L489 -250Q65 -250 62 -248Q56 -246 56 -239Q56 -234 118 -161Q186 -81 245 -11L428 206Q428 207 242 462L57 717L56 728Q56 744 61 748Z"></path></g><g data-mml-node="mo" transform="translate(2086.9,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="msub" transform="translate(2475.9,0)"><g data-mml-node="mi"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(523,-150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g><g data-mml-node="mo" transform="translate(3515.1,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="msub" transform="translate(4515.3,0)"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mover"><g data-mml-node="mi"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(300.6,16) translate(-250 0)"><path data-c="5E" d="M112 560L249 694L257 686Q387 562 387 560L361 531Q359 532 303 581L250 627L195 580Q182 569 169 557T148 538L140 532Q138 530 125 546L112 560Z"></path></g></g></g><g data-mml-node="mi" transform="translate(523,-150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g><g data-mml-node="msup" transform="translate(5332.3,0)"><g data-mml-node="mo"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mn" transform="translate(422,363) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g></g></svg></mjx-container></span></td>
+<td>对异常值敏感；常用于回归</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>平均绝对误差（MAE）</strong></td>
+<td>回归</td>
+<td><code>nn.L1Loss</code></td>
+<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.798ex;" xmlns="http://www.w3.org/2000/svg" width="11.561ex" height="2.755ex" role="img" focusable="false" viewBox="0 -864.9 5109.9 1217.7"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mn" transform="translate(255.4,394) scale(0.707)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mi" transform="translate(220,-345) scale(0.707)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><rect width="624.3" height="60" x="120" y="220"></rect></g><g data-mml-node="mo" transform="translate(1030.9,0)"><path data-c="2211" d="M61 748Q64 750 489 750H913L954 640Q965 609 976 579T993 533T999 516H979L959 517Q936 579 886 621T777 682Q724 700 655 705T436 710H319Q183 710 183 709Q186 706 348 484T511 259Q517 250 513 244L490 216Q466 188 420 134T330 27L149 -187Q149 -188 362 -188Q388 -188 436 -188T506 -189Q679 -189 778 -162T936 -43Q946 -27 959 6H999L913 -249L489 -250Q65 -250 62 -248Q56 -246 56 -239Q56 -234 118 -161Q186 -81 245 -11L428 206Q428 207 242 462L57 717L56 728Q56 744 61 748Z"></path></g><g data-mml-node="msub" transform="translate(2253.6,0)"><g data-mml-node="mi"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(523,-150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g><g data-mml-node="mo" transform="translate(3292.8,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="msub" transform="translate(4293,0)"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mover"><g data-mml-node="mi"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(300.6,16) translate(-250 0)"><path data-c="5E" d="M112 560L249 694L257 686Q387 562 387 560L361 531Q359 532 303 581L250 627L195 580Q182 569 169 557T148 538L140 532Q138 530 125 546L112 560Z"></path></g></g></g><g data-mml-node="mi" transform="translate(523,-150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container></span></td>
+<td>抗异常值能力强，收敛速度慢</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>交叉熵损失（Cross Entropy）</strong></td>
+<td>分类</td>
+<td><code>nn.CrossEntropyLoss</code></td>
+<td><span class="math inline">−∑<em>y</em><sub><em>i</em></sub>log (<em>ŷ</em><sub><em>i</em></sub>)</span></td>
+<td>多分类常用，内置了 <code>LogSoftmax</code> +
+<code>NLLLoss</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>二分类交叉熵（BCE）</strong></td>
+<td>二分类</td>
+<td><code>nn.BCELoss</code> or <code>nn.BCEWithLogitsLoss</code></td>
+<td><span class="math inline">−[<em>y</em>log (<em>ŷ</em>) + (1 − <em>y</em>)log (1 − <em>ŷ</em>)]</span></td>
+<td>二分类常用；<code>BCEWithLogitsLoss</code>更稳定，内部自带sigmoid</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>KL散度（KL Divergence）</strong></td>
+<td>分布匹配</td>
+<td><code>nn.KLDivLoss</code></td>
+<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -1.469ex;" xmlns="http://www.w3.org/2000/svg" width="17.265ex" height="4.07ex" role="img" focusable="false" viewBox="0 -1149.5 7631.3 1799"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="2211" d="M61 748Q64 750 489 750H913L954 640Q965 609 976 579T993 533T999 516H979L959 517Q936 579 886 621T777 682Q724 700 655 705T436 710H319Q183 710 183 709Q186 706 348 484T511 259Q517 250 513 244L490 216Q466 188 420 134T330 27L149 -187Q149 -188 362 -188Q388 -188 436 -188T506 -189Q679 -189 778 -162T936 -43Q946 -27 959 6H999L913 -249L489 -250Q65 -250 62 -248Q56 -246 56 -239Q56 -234 118 -161Q186 -81 245 -11L428 206Q428 207 242 462L57 717L56 728Q56 744 61 748Z"></path></g><g data-mml-node="mi" transform="translate(1222.7,0)"><path data-c="1D45D" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"></path></g><g data-mml-node="mo" transform="translate(1725.7,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(2114.7,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mo" transform="translate(2686.7,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mi" transform="translate(3242.3,0)"><path data-c="6C" d="M42 46H56Q95 46 103 60V68Q103 77 103 91T103 124T104 167T104 217T104 272T104 329Q104 366 104 407T104 482T104 542T103 586T103 603Q100 622 89 628T44 637H26V660Q26 683 28 683L38 684Q48 685 67 686T104 688Q121 689 141 690T171 693T182 694H185V379Q185 62 186 60Q190 52 198 49Q219 46 247 46H263V0H255L232 1Q209 2 183 2T145 3T107 3T57 1L34 0H26V46H42Z"></path><path data-c="6F" d="M28 214Q28 309 93 378T250 448Q340 448 405 380T471 215Q471 120 407 55T250 -10Q153 -10 91 57T28 214ZM250 30Q372 30 372 193V225V250Q372 272 371 288T364 326T348 362T317 390T268 410Q263 411 252 411Q222 411 195 399Q152 377 139 338T126 246V226Q126 130 145 91Q177 30 250 30Z" transform="translate(278,0)"></path><path data-c="67" d="M329 409Q373 453 429 453Q459 453 472 434T485 396Q485 382 476 371T449 360Q416 360 412 390Q410 404 415 411Q415 412 416 414V415Q388 412 363 393Q355 388 355 386Q355 385 359 381T368 369T379 351T388 325T392 292Q392 230 343 187T222 143Q172 143 123 171Q112 153 112 133Q112 98 138 81Q147 75 155 75T227 73Q311 72 335 67Q396 58 431 26Q470 -13 470 -72Q470 -139 392 -175Q332 -206 250 -206Q167 -206 107 -175Q29 -140 29 -75Q29 -39 50 -15T92 18L103 24Q67 55 67 108Q67 155 96 193Q52 237 52 292Q52 355 102 398T223 442Q274 442 318 416L329 409ZM299 343Q294 371 273 387T221 404Q192 404 171 388T145 343Q142 326 142 292Q142 248 149 227T179 192Q196 182 222 182Q244 182 260 189T283 207T294 227T299 242Q302 258 302 292T299 343ZM403 -75Q403 -50 389 -34T348 -11T299 -2T245 0H218Q151 0 138 -6Q118 -15 107 -34T95 -74Q95 -84 101 -97T122 -127T170 -155T250 -167Q319 -167 361 -139T403 -75Z" transform="translate(778,0)"></path></g><g data-mml-node="mo" transform="translate(4520.3,0)"><path data-c="2061" d=""></path></g><g data-mml-node="mrow" transform="translate(4687,0)"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="28" d="M180 96T180 250T205 541T266 770T353 944T444 1069T527 1150H555Q561 1144 561 1141Q561 1137 545 1120T504 1072T447 995T386 878T330 721T288 513T272 251Q272 133 280 56Q293 -87 326 -209T399 -405T475 -531T536 -609T561 -640Q561 -643 555 -649H527Q483 -612 443 -568T353 -443T266 -270T205 -41Z"></path></g><g data-mml-node="mfrac" transform="translate(597,0)"><g data-mml-node="mrow" transform="translate(220,516.8) scale(0.707)"><g data-mml-node="mi"><path data-c="1D45D" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"></path></g><g data-mml-node="mo" transform="translate(503,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(892,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mo" transform="translate(1464,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g><g data-mml-node="mrow" transform="translate(235.2,-370.3) scale(0.707)"><g data-mml-node="mi"><path data-c="1D45E" d="M33 157Q33 258 109 349T280 441Q340 441 372 389Q373 390 377 395T388 406T404 418Q438 442 450 442Q454 442 457 439T460 434Q460 425 391 149Q320 -135 320 -139Q320 -147 365 -148H390Q396 -156 396 -157T393 -175Q389 -188 383 -194H370Q339 -192 262 -192Q234 -192 211 -192T174 -192T157 -193Q143 -193 143 -185Q143 -182 145 -170Q149 -154 152 -151T172 -148Q220 -148 230 -141Q238 -136 258 -53T279 32Q279 33 272 29Q224 -10 172 -10Q117 -10 75 30T33 157ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g><g data-mml-node="mo" transform="translate(460,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(849,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mo" transform="translate(1421,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g><rect width="1510.3" height="60" x="120" y="220"></rect></g><g data-mml-node="mo" transform="translate(2347.3,0) translate(0 -0.5)"><path data-c="29" d="M35 1138Q35 1150 51 1150H56H69Q113 1113 153 1069T243 944T330 771T391 541T416 250T391 -40T330 -270T243 -443T152 -568T69 -649H56Q43 -649 39 -647T35 -637Q65 -607 110 -548Q283 -316 316 56Q324 133 324 251Q324 368 316 445Q278 877 48 1123Q36 1137 35 1138Z"></path></g></g></g></g></svg></mjx-container></span></td>
+<td>用于衡量两个概率分布之间的差距</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>负对数似然损失（NLL）</strong></td>
+<td>分类</td>
+<td><code>nn.NLLLoss</code></td>
+<td><span class="math inline">−log (<em>p</em><sub>true</sub>)</span></td>
+<td>通常和 <code>LogSoftmax</code> 一起用</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Huber 损失</strong></td>
+<td>回归（稳健）</td>
+<td><code>nn.SmoothL1Loss</code></td>
+<td>结合 MAE 和 MSE 的优点</td>
+<td>对离群值鲁棒，适合有噪声的回归问题</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>多标签 Soft Margin 损失</strong></td>
+<td>多标签分类</td>
+<td><code>nn.MultiLabelSoftMarginLoss</code></td>
+<td>基于每个标签的 sigmoid + binary cross-entropy</td>
+<td>多标签多分类（每个样本可以属于多个类）</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>CTC 损失（Connectionist Temporal
+Classification）</strong></td>
+<td>序列学习</td>
+<td><code>nn.CTCLoss</code></td>
+<td>解决输入输出长度不对齐的问题（如语音识别）</td>
+<td>不需要对齐的标签，适合语音、OCR等</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Triplet Loss</strong></td>
+<td>度量学习</td>
+<td><code>nn.TripletMarginLoss</code></td>
+<td>让 anchor 更接近 positive，远离 negative</td>
+<td>常用于人脸识别、图像检索等</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Cosine Embedding Loss</strong></td>
+<td>度量学习</td>
+<td><code>nn.CosineEmbeddingLoss</code></td>
+<td>基于余弦相似度的正负样本对学习</td>
+<td>学习语义相似的嵌入表示（embedding）</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="优化器">2.5优化器</h3>
+<table>
+<colgroup>
+<col style="width: 21%">
+<col style="width: 37%">
+<col style="width: 21%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr>
+<th>优化器名称</th>
+<th>PyTorch 类</th>
+<th>特点</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SGD（随机梯度下降）</strong></td>
+<td><code>torch.optim.SGD</code></td>
+<td>最基础的优化器</td>
+<td>可搭配 Momentum 使用</td>
+</tr>
+<tr>
+<td><strong>SGD + Momentum</strong></td>
+<td><code>torch.optim.SGD(momentum=0.9)</code></td>
+<td>缓冲梯度方向，减少震荡</td>
+<td>比单纯 SGD 更快收敛</td>
+</tr>
+<tr>
+<td><strong>Adagrad</strong></td>
+<td><code>torch.optim.Adagrad</code></td>
+<td>对稀疏梯度参数有优势</td>
+<td>可能学习率过早变小</td>
+</tr>
+<tr>
+<td><strong>RMSprop</strong></td>
+<td><code>torch.optim.RMSprop</code></td>
+<td>控制学习率衰减</td>
+<td>推荐用于 RNN</td>
+</tr>
+<tr>
+<td><strong>Adam</strong></td>
+<td><code>torch.optim.Adam</code></td>
+<td>自适应 + 动量</td>
+<td>最常用优化器之一</td>
+</tr>
+<tr>
+<td><strong>AdamW</strong></td>
+<td><code>torch.optim.AdamW</code></td>
+<td>改进的 Adam，加权衰减更科学</td>
+<td>推荐用于 Transformer</td>
+</tr>
+<tr>
+<td><strong>Adadelta</strong></td>
+<td><code>torch.optim.Adadelta</code></td>
+<td>改进 Adagrad，避免学习率消失</td>
+<td>少用但可选</td>
+</tr>
+<tr>
+<td><strong>NAdam</strong></td>
+<td><code>torch.optim.NAdam</code></td>
+<td>Adam + Nesterov 动量</td>
+<td>更快的收敛性</td>
+</tr>
+<tr>
+<td><strong>RAdam</strong></td>
+<td><code>torch.optim.RAdam</code></td>
+<td>修正初始训练阶段不稳定</td>
+<td>更鲁棒于训练初期</td>
+</tr>
+<tr>
+<td><strong>LAMB</strong></td>
+<td>无官方支持（用 HuggingFace 优化器）</td>
+<td>大模型（如 BERT）适用</td>
+<td>用于大 batch 训练</td>
+</tr>
+<tr>
+<td><strong>AdaBelief</strong></td>
+<td>第三方库</td>
+<td>改进 Adam，使更新更像 SGD</td>
+<td>收敛快 + 泛化强</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="整个神经网络过程">2.6整个神经网络过程</h3>
+<p>综上所述，我们得到一个神经网络的整个过程，根据上面已经定义好的前馈神经网络进行一个简单补充</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">import torch.nn as nn</span><br><span class="line">import torch.optim as optim</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个简单的前馈神经网络（输入层 → 隐藏层 → 输出层）</span></span><br><span class="line">class SimpleFNN(nn.Module):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super(SimpleFNN, self).__init__()</span><br><span class="line">        self.fc1 = nn.Linear(4, 8)   <span class="comment"># 输入层4个特征，隐藏层8个神经元</span></span><br><span class="line">        self.relu = nn.ReLU()        <span class="comment"># 激活函数</span></span><br><span class="line">        self.fc2 = nn.Linear(8, 3)   <span class="comment"># 输出层3个类别（适合做分类）</span></span><br><span class="line"></span><br><span class="line">    def forward(self, x):</span><br><span class="line">        x = self.fc1(x)</span><br><span class="line">        x = self.relu(x)</span><br><span class="line">        x = self.fc2(x)</span><br><span class="line">        <span class="built_in">return</span> x  <span class="comment"># 输出为 logits，未经过 softmax</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建模型实例</span></span><br><span class="line">model = SimpleFNN()</span><br><span class="line"><span class="built_in">print</span>(model)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个样本输入：batch_size=2，4个特征,2个样本+4个特征</span></span><br><span class="line">sample_input = torch.randn(2, 4)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"Input:\n"</span>, sample_input)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 假设真实标签（ground truth），batch 中两个样本分别是类 1 和类 2</span></span><br><span class="line">labels = torch.tensor([1, 2])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义损失函数：交叉熵损失用于多分类问题</span></span><br><span class="line">criterion = nn.CrossEntropyLoss()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义优化器：SGD优化器，学习率为0.01</span></span><br><span class="line">optimizer = optim.SGD(model.parameters(), lr=0.01)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ----------- 模拟一次训练步骤 -----------</span></span><br><span class="line"><span class="comment"># 前向传播：将输入送入模型</span></span><br><span class="line">outputs = model(sample_input)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"Model raw output (logits):\n"</span>, outputs)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算损失（CrossEntropyLoss内部包含了softmax）</span></span><br><span class="line">loss = criterion(outputs, labels)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"Loss:"</span>, loss.item())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 清空之前的梯度</span></span><br><span class="line">optimizer.zero_grad()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 反向传播：自动计算梯度</span></span><br><span class="line">loss.backward()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新权重和偏置</span></span><br><span class="line">optimizer.step()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="三数据的处理和加载">三、数据的处理和加载</h2>
+<h3 id="dataset和dataloader">3.1Dataset和DataLoader</h3>
+<p>Dataset本身是一个抽象类，允许你以它为父类定义一个自己的数据集</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">from torch.utils.data import Dataset</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自定义数据集类</span></span><br><span class="line">class MyDataset(Dataset):</span><br><span class="line">    def __init__(self, X_data, Y_data):</span><br><span class="line">        <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">        初始化数据集，X_data 和 Y_data 是两个列表或数组</span></span><br><span class="line"><span class="string">        X_data: 输入特征</span></span><br><span class="line"><span class="string">        Y_data: 目标标签</span></span><br><span class="line"><span class="string">        "</span><span class="string">""</span></span><br><span class="line">        self.X_data = X_data</span><br><span class="line">        self.Y_data = Y_data</span><br><span class="line"></span><br><span class="line">    def __len__(self):</span><br><span class="line">        <span class="string">""</span><span class="string">"返回数据集的大小"</span><span class="string">""</span></span><br><span class="line">        <span class="built_in">return</span> len(self.X_data)</span><br><span class="line"></span><br><span class="line">    def __getitem__(self, idx):</span><br><span class="line">        <span class="string">""</span><span class="string">"返回指定索引的数据"</span><span class="string">""</span></span><br><span class="line">        x = torch.tensor(self.X_data[idx], dtype=torch.float32)  <span class="comment"># 转换为 Tensor</span></span><br><span class="line">        y = torch.tensor(self.Y_data[idx], dtype=torch.float32)</span><br><span class="line">        <span class="built_in">return</span> x, y</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例数据</span></span><br><span class="line">X_data = [[1, 2], [3, 4], [5, 6], [7, 8]]  <span class="comment"># 输入特征</span></span><br><span class="line">Y_data = [1, 0, 1, 0]  <span class="comment"># 目标标签</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建数据集实例    </span></span><br><span class="line">dataset = MyDataset(X_data, Y_data)</span><br></pre></td></tr></table></figure>
+<p>DataLoader可以用于按批次(batch)从Dataset中加载数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">from torch.utils.data import DataLoader</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 DataLoader 实例，batch_size 设置每次加载的样本数量,其中shuffle表示是否对数据进行洗牌，通常训练时需要将数据打乱。</span></span><br><span class="line">dataloader = DataLoader(dataset, batch_size=2, shuffle=True)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印加载的数据</span></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(1):</span><br><span class="line">    <span class="keyword">for</span> batch_idx, (inputs, labels) <span class="keyword">in</span> enumerate(dataloader):</span><br><span class="line">        <span class="built_in">print</span>(f<span class="string">'Batch {batch_idx + 1}:'</span>)</span><br><span class="line">        <span class="built_in">print</span>(f<span class="string">'Inputs: {inputs}'</span>)</span><br><span class="line">        <span class="built_in">print</span>(f<span class="string">'Labels: {labels}'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Batch 1:</span><br><span class="line">Inputs: tensor([[3., 4.], [1., 2.]])</span><br><span class="line">Labels: tensor([0., 1.])</span><br><span class="line">Batch 2:</span><br><span class="line">Inputs: tensor([[7., 8.], [5., 6.]])</span><br><span class="line">Labels: tensor([0., 1.])</span><br></pre></td></tr></table></figure>
+<h3 id="对图像数据预处理和增强">3.2对图像数据预处理和增强</h3>
+<p>在pytorch中我们经常利用
+<code>torchvision.transforms</code>模块对图像数据进行预处理和增强</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import torchvision.transforms as transforms</span><br><span class="line">from PIL import Image</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义数据预处理的流水线</span></span><br><span class="line">transform = transforms.Compose([</span><br><span class="line">    transforms.Resize((<span class="number">128</span>, <span class="number">128</span>)),  <span class="comment"># 将图像调整为 128x128</span></span><br><span class="line">    transforms.ToTensor(),  <span class="comment"># 将图像转换为张量</span></span><br><span class="line">    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])  <span class="comment"># 标准化</span></span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载图像</span></span><br><span class="line">image = Image.open(<span class="string">'image.jpg'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 应用预处理</span></span><br><span class="line">image_tensor = transform(image)</span><br><span class="line"><span class="built_in">print</span>(image_tensor.shape)  <span class="comment"># 输出张量的形状</span></span><br></pre></td></tr></table></figure>
+<p>常见预处理方式：</p>
+<table>
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>transforms.Resize(size)</code></td>
+<td>调整图像大小为固定尺寸，例如 <code>(128, 128)</code></td>
+</tr>
+<tr>
+<td><code>transforms.CenterCrop(size)</code></td>
+<td>从中心裁剪固定大小</td>
+</tr>
+<tr>
+<td><code>transforms.ToTensor()</code></td>
+<td>将 PIL.Image 或 numpy.ndarray 转为 <code>[0, 1]</code> 的张量</td>
+</tr>
+<tr>
+<td><code>transforms.Normalize(mean, std)</code></td>
+<td>按通道标准化，常用于预训练模型输入要求</td>
+</tr>
+</tbody>
+</table>
+<p>常见数据增强方式：</p>
+<table>
+<colgroup>
+<col style="width: 78%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>transforms.RandomHorizontalFlip(p=0.5)</code></td>
+<td>以概率 <code>p</code> 水平翻转图像</td>
+</tr>
+<tr>
+<td><code>transforms.RandomVerticalFlip()</code></td>
+<td>垂直翻转</td>
+</tr>
+<tr>
+<td><code>transforms.RandomRotation(degrees)</code></td>
+<td>随机旋转图像（角度范围）</td>
+</tr>
+<tr>
+<td><code>transforms.ColorJitter()</code></td>
+<td>改变图像的亮度、对比度、饱和度等</td>
+</tr>
+<tr>
+<td><code>transforms.RandomResizedCrop(size)</code></td>
+<td>随机裁剪后缩放到固定尺寸</td>
+</tr>
+<tr>
+<td><code>transforms.RandomAffine(degrees, translate, scale, shear)</code></td>
+<td>随机仿射变换</td>
+</tr>
+</tbody>
+</table>
+<p>如何对图像数据集进行加载呢，我们常利用<code>torchvision.datasets</code>对图像数据集进行加载</p>
+<p>对于图像数据集，<code>torchvision.datasets</code>
+提供了许多常见数据集（如 CIFAR-10、ImageNet、MNIST
+等）以及用于加载图像数据的工具</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import torchvision.datasets as datasets</span><br><span class="line">import torchvision.transforms as transforms</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义预处理操作</span></span><br><span class="line">transform = transforms.Compose([</span><br><span class="line">    transforms.ToTensor(),</span><br><span class="line">    transforms.Normalize((<span class="number">0.5</span>,), (<span class="number">0.5</span>,))  <span class="comment"># 对灰度图像进行标准化</span></span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载并加载 MNIST 数据集</span></span><br><span class="line">train_dataset = datasets.MNIST(root=<span class="string">'./data'</span>, train=True, download=True, transform=transform)</span><br><span class="line">test_dataset = datasets.MNIST(root=<span class="string">'./data'</span>, train=False, download=True, transform=transform)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 DataLoader</span></span><br><span class="line">train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)</span><br><span class="line">test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 迭代训练数据</span></span><br><span class="line"><span class="keyword">for</span> inputs, labels <span class="keyword">in</span> train_loader:</span><br><span class="line">    <span class="built_in">print</span>(inputs.shape)  <span class="comment"># 每个批次的输入数据形状</span></span><br><span class="line">    <span class="built_in">print</span>(labels.shape)  <span class="comment"># 每个批次的标签形状</span></span><br></pre></td></tr></table></figure>
+<h3 id="pytorchtransforms">3.3 pytorch—transforms</h3>
+<table>
+<colgroup>
+<col style="width: 4%">
+<col style="width: 37%">
+<col style="width: 25%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr>
+<th>类别</th>
+<th>变换函数</th>
+<th>描述说明</th>
+<th>示例代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>预处理</strong></td>
+<td><code>transforms.ToTensor()</code></td>
+<td>将 PIL 图像或 NumPy 数组转换为张量，并将像素值归一化到
+<code>[0, 1]</code></td>
+<td><code>transforms.ToTensor()</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>transforms.Normalize(mean, std)</code></td>
+<td>对图像张量进行标准化（零均值、单位方差）</td>
+<td><code>transforms.Normalize(mean=[0.5], std=[0.5])</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>transforms.Resize(size)</code></td>
+<td>将图像缩放到指定大小（宽、高）</td>
+<td><code>transforms.Resize((128, 128))</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>transforms.CenterCrop(size)</code></td>
+<td>从图像中心裁剪指定大小区域</td>
+<td><code>transforms.CenterCrop(128)</code></td>
+</tr>
+<tr>
+<td><strong>增强</strong></td>
+<td><code>transforms.RandomHorizontalFlip(p)</code></td>
+<td>以概率 <code>p</code> 随机水平翻转图像</td>
+<td><code>transforms.RandomHorizontalFlip(p=0.5)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>transforms.RandomRotation(degrees)</code></td>
+<td>在 <code>[-degrees, +degrees]</code> 范围内随机旋转图像</td>
+<td><code>transforms.RandomRotation(30)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>transforms.ColorJitter(brightness, contrast, saturation, hue)</code></td>
+<td>随机调整图像的亮度、对比度、饱和度、色调</td>
+<td><code>transforms.ColorJitter(brightness=0.5, contrast=0.5)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>transforms.RandomCrop(size)</code></td>
+<td>随机从图像中裁剪出指定大小区域</td>
+<td><code>transforms.RandomCrop(128)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>transforms.RandomResizedCrop(size)</code></td>
+<td>随机裁剪图像的一部分并缩放到给定大小</td>
+<td><code>transforms.RandomResizedCrop(224)</code></td>
+</tr>
+<tr>
+<td><strong>组合</strong></td>
+<td><code>transforms.Compose([...])</code></td>
+<td>将多个变换按顺序组合使用</td>
+<td><code>transforms.Compose([ToTensor(), Normalize(...)])</code></td>
+</tr>
+</tbody>
+</table>
+<p>调用实例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">transform = transforms.Compose([</span><br><span class="line">    transforms.Resize((<span class="number">128</span>, <span class="number">128</span>)),</span><br><span class="line">    transforms.RandomHorizontalFlip(p=0.5),</span><br><span class="line">    transforms.RandomRotation(degrees=15),</span><br><span class="line">    transforms.ToTensor(),</span><br><span class="line">    transforms.Normalize(mean=[0.5], std=[0.5])</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="四线性回归">四、线性回归</h2>
+<p>首先什么是线性回归，可以说线性回归是一个没有隐藏层的前馈神经网络，非常基础的内容，对于一个简单的线性回归问题和模型通常可以表示成：</p>
+<p><span class="math display"><em>y</em> = <em>a</em><sub>1</sub> × <em>x</em> + <em>a</em><sub>2</sub> × <em>x</em> + ... + <em>b</em></span></p>
+<p>对数据集进行训练，对Y进行拟合</p>
+<p>首先我们线先定义一个数据集</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 随机种子，确保每次运行结果一致</span></span><br><span class="line">torch.manual_seed(42)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成训练数据</span></span><br><span class="line">X = torch.randn(100, 2)  <span class="comment"># 100 个样本，每个样本 2 个特征</span></span><br><span class="line">true_w = torch.tensor([2.0, 3.0])  <span class="comment"># 假设真实权重</span></span><br><span class="line">true_b = 4.0  <span class="comment"># 偏置项</span></span><br><span class="line">Y = X @ true_w + true_b + torch.randn(100) * 0.1  <span class="comment"># 加入一些噪声</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印部分数据</span></span><br><span class="line"><span class="built_in">print</span>(X[:5])</span><br><span class="line"><span class="built_in">print</span>(Y[:5])</span><br></pre></td></tr></table></figure>
+<p>之后我们再定义一个线性回归的模型类</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class LinearRegressionModel(nn.Module):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super(LinearRegressionModel,self).__init__()</span><br><span class="line">        self.linear = nn.Linear(2, 1)</span><br><span class="line"></span><br><span class="line">    def forward(self, x):</span><br><span class="line">        <span class="built_in">return</span> self.linear(x)</span><br></pre></td></tr></table></figure>
+<p>其中<code>super(LinearRegressionModel,self).__init__()</code>这点是关键：子类继承父类时，不自动调用父类的构造函数，你必须显式调用它。PyTorch
+中所有自定义模型都要继承自 nn.Module。nn.Module 提供了很多核心功能。</p>
+<p>之后我们实例化该模型，并定义后续需要的损失函数和优化器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">model= LinearRegressionModel()</span><br><span class="line">criterion = nn.MSELoss()</span><br><span class="line">optimizer = optim.SGD(model.parameters(), lr=0.01)</span><br></pre></td></tr></table></figure>
+<p>接下来便可以对模型进行训练了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">num_epochs = 100</span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(num_epochs):</span><br><span class="line">    model.train()</span><br><span class="line">    predictions=model(X)</span><br><span class="line">    loss=criterion(predictions.squeeze(), Y)</span><br><span class="line">        <span class="comment"># 反向传播</span></span><br><span class="line">    optimizer.zero_grad()  <span class="comment"># 清空之前的梯度</span></span><br><span class="line">    loss.backward()  <span class="comment"># 计算梯度</span></span><br><span class="line">    optimizer.step()  <span class="comment"># 更新模型参数</span></span><br></pre></td></tr></table></figure>
+<p>最后将数据可视化查看分析结果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看训练后的权重和偏置</span></span><br><span class="line"><span class="built_in">print</span>(f<span class="string">'Predicted weight: {model.linear.weight.data.numpy()}'</span>)</span><br><span class="line"><span class="built_in">print</span>(f<span class="string">'Predicted bias: {model.linear.bias.data.numpy()}'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在新数据上做预测</span></span><br><span class="line">with torch.no_grad():  <span class="comment"># 评估时不需要计算梯度</span></span><br><span class="line">    predictions = model(X)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可视化预测与实际值</span></span><br><span class="line">plt.scatter(X[:, 0], Y, color=<span class="string">'blue'</span>, label=<span class="string">'True values'</span>)</span><br><span class="line">plt.scatter(X[:, 0], predictions, color=<span class="string">'red'</span>, label=<span class="string">'Predictions'</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/images/pytorch/linearRgression.png" alt="ex4">
+<figcaption aria-hidden="true">ex4</figcaption>
+</figure>
+<p>训练过程，随着loss减小，模型的权重和偏置将不断和true_w和true_b相接近</p>
+<hr>
+<h2 id="五卷积神经网络">五、卷积神经网络</h2>
+<p>是用于处理具有网格状拓扑结构数据(网格状结构是一种将数据点按照行列（二维坐标）方式排列的数据结构。每个点的邻居是它上下左右的节点，类似于棋盘、图像像素排列、或地理栅格。)
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A11  A12  A13</span><br><span class="line">A21  A22  A23</span><br><span class="line">A31  A32  A33</span><br></pre></td></tr></table></figure> 这是一张整个卷积神经网络过程的思维导图 <img src="/images/pytorch/CNN.png" alt="CNN"></p>
+<p>对一些概念的解析：</p>
+<ul>
+<li>池化层：池化相当于把一个图的分辨率给降低，让图变小，减小需要处理的数据量同时不改变图的特征</li>
+<li>卷积层:
+是利用卷积核在图上进行特征提取，生成特征图像，如sobel算子就是提取图像边缘信息的卷积核</li>
+<li>展平层：将多维的特征图转换为一维向量，以便输入到全连接层
+<ul>
+<li>在 CNN
+的前面部分，通常包含多个卷积层（Conv2d）、池化层（MaxPool2d），这些操作处理的是
+3D 的张量（形状一般是 [batch_size, channels, height,
+width]）。但全连接层（nn.Linear）只能接收二维的张量（形状 [batch_size,
+feature_dim]），所以必须先“展平”卷积输出。</li>
+</ul></li>
+<li>全连接层：类似于传统的神经网络层，用于将提取的特征映射到输出类别</li>
+</ul>
+<p>知道上面这些知识之后接下来便可以实现一个CNN
+手写数字图像识别的实例了</p>
+<p>定义一个简单的CNN模型</p>
+<h2 id="section"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class SimpleCNN(nn.Module):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super(SimpleCNN, self).__init__()</span><br><span class="line">        <span class="comment"># 定义卷积层：输入1通道，输出32通道，卷积核大小3x3</span></span><br><span class="line">        self.conv1 = nn.Conv2d(1, 32, kernel_size=3, stride=1, padding=1)</span><br><span class="line">        <span class="comment"># 定义卷积层：输入32通道，输出64通道</span></span><br><span class="line">        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1)</span><br><span class="line">        <span class="comment"># 定义全连接层</span></span><br><span class="line">        self.fc1 = nn.Linear(64 * 7 * 7, 128)  <span class="comment"># 输入大小 = 特征图大小 * 通道数</span></span><br><span class="line">        self.fc2 = nn.Linear(128, 10)  <span class="comment"># 10 个类别</span></span><br><span class="line"></span><br><span class="line">    def forward(self, x):</span><br><span class="line">        x = F.relu(self.conv1(x))  <span class="comment"># 第一层卷积 + ReLU</span></span><br><span class="line">        x = F.max_pool2d(x, 2)     <span class="comment"># 最大池化</span></span><br><span class="line">        x = F.relu(self.conv2(x))  <span class="comment"># 第二层卷积 + ReLU</span></span><br><span class="line">        x = F.max_pool2d(x, 2)     <span class="comment"># 最大池化</span></span><br><span class="line">        x = x.view(-1, 64 * 7 * 7) <span class="comment"># 展平操作</span></span><br><span class="line">        x = F.relu(self.fc1(x))    <span class="comment"># 全连接层 + ReLU</span></span><br><span class="line">        x = self.fc2(x)            <span class="comment"># 全连接层输出</span></span><br><span class="line">        <span class="built_in">return</span> x</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建模型实例</span></span><br><span class="line">model = SimpleCNN()</span><br></pre></td></tr></table></figure></h2>
+<h2 id="六循环神经网络">六、循环神经网络</h2>
+<h3 id="理解循环rnn">6.1理解循环RNN</h3>
+<p>首先丢张RNN图方便理解什么是RNN</p>
+<figure>
+<img src="/images/pytorch/RNN.png" alt="RNN">
+<figcaption aria-hidden="true">RNN</figcaption>
+</figure>
+<p>从上图可以非常直观的看，在 RNN
+中，数据不仅沿着网络层级流动，还会在每个时间步骤上传播到当前的隐层状态，从而将之前的信息传递到下一个时间步骤。</p>
+<p>于是我们可以可以得到如下两个式子 <span class="math display"><em>h</em><sub><em>t</em></sub> = <em>f</em>(<em>W</em><sub><em>h</em><em>h</em></sub><em>h</em><sub><em>t</em> − 1</sub> + <em>W</em><sub><em>x</em><em>h</em></sub><em>x</em><sub><em>t</em></sub> + <em>b</em><sub><em>h</em></sub>)</span>
+<span class="math display"><em>y</em><sub><em>t</em></sub> = <em>W</em><sub><em>h</em><em>y</em></sub><em>h</em><sub><em>t</em></sub> + <em>b</em><sub><em>y</em></sub></span></p>
+<p>其中:</p>
+<ul>
+<li><p><span class="math inline"><em>W</em><sub><em>x</em><em>h</em></sub></span>:输入到隐藏状态的权重矩阵，用于将输入<span class="math inline"><em>X</em><sub><em>t</em></sub></span>转换为隐藏状态的一部分</p></li>
+<li><p><span class="math inline"><em>W</em><sub><em>h</em><em>h</em></sub></span>:隐藏状态到隐藏状态的权重矩阵，用于将前一时间步的隐藏状态<span class="math inline"><em>h</em><sub><em>t</em> − 1</sub></span>转换为当前时间步隐藏状态的一部分。</p></li>
+<li><p><span class="math inline"><em>W</em><sub><em>h</em><em>y</em></sub></span>:隐藏状态到输出的权重矩阵，用于将隐藏状态<span class="math inline"><em>h</em><sub><em>t</em></sub></span>转换为输出<span class="math inline"><em>y</em><sub><em>t</em></sub></span>。</p></li>
+<li><p>f:激活函数(如 Tanh 或 ReLU)</p></li>
+<li><p>隐藏状态 (ht,ht-1,….): 它在每个时间步存储有关序列的信息。<span class="math inline"><em>h</em><sub><em>t</em></sub></span>是当前时间步的隐藏状态，<span class="math inline"><em>h</em><sub><em>t</em> − 1</sub></span>是前一个时间步的隐藏状态。</p></li>
+</ul>
+<h3 id="rnn实际实现">6.2RNN实际实现</h3>
+<p>在pytorch内有几种RNN模块</p>
+<ol type="1">
+<li>torch.nn.RNN：基本的RNN单元</li>
+<li>torch.nn.LSTM：长短期记忆单元，能够学习长期依赖关系</li>
+<li>torch.nn.GRU：门控循环单元，是LSTM的简化版本，但通常更容易训练</li>
+</ol>
+<p>如下是一个简单的RNN模型</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class SimpleRNN(nn.Module):</span><br><span class="line">    def __init__(self, input_size, hidden_size, output_size):</span><br><span class="line">        super(SimpleRNN, self).__init__()</span><br><span class="line">        <span class="comment"># 定义 RNN 层</span></span><br><span class="line">        self.rnn = nn.RNN(input_size, hidden_size, batch_first=True)</span><br><span class="line">        <span class="comment"># 定义全连接层</span></span><br><span class="line">        self.fc = nn.Linear(hidden_size, output_size)</span><br><span class="line"></span><br><span class="line">    def forward(self, x):</span><br><span class="line">        <span class="comment"># x: (batch_size, seq_len, input_size)</span></span><br><span class="line">        out, _ = self.rnn(x)  <span class="comment"># out: (batch_size, seq_len, hidden_size)</span></span><br><span class="line">        <span class="comment"># 取序列最后一个时间步的输出作为模型的输出</span></span><br><span class="line">        out = out[:, -1, :]  <span class="comment"># (batch_size, hidden_size)</span></span><br><span class="line">        out = self.fc(out)  <span class="comment"># 全连接层</span></span><br><span class="line">        <span class="built_in">return</span> out</span><br></pre></td></tr></table></figure>
+<p>其中</p>
+<table>
+<thead>
+<tr>
+<th>维度名</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>batch_size</code></td>
+<td>一次喂给模型的本个数（用于加速训练）</td>
+</tr>
+<tr>
+<td><code>seq_len</code></td>
+<td>每个样本有多少个时间步（即序列长度）</td>
+</tr>
+<tr>
+<td><code>input_size</code></td>
+<td>每个时间步输入的特征维度（如词向量维度）</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="七-transformer架构">七、 Transformer架构</h2>
+<h3 id="什么是transformer架构">7.1 什么是transformer架构</h3>
+<p>如下是一张论文中的解释transformer的图</p>
+<p><img src="/images/pytorch/transformer.jpg"></p>
+<p>transformer架构就是利用注意力机制来获取序列之间联系的神经网络模型</p>
+<h3 id="注意力机制">7.2 注意力机制</h3>
+<p>可以理解为attention机制实质上就是权重的问题</p>
+<figure>
+<img src="/images/pytorch/attention.png" alt="attention">
+<figcaption aria-hidden="true">attention</figcaption>
+</figure>
+<figure>
+<img src="/images/pytorch/self-attention.png" alt="self-attention">
+<figcaption aria-hidden="true">self-attention</figcaption>
+</figure>
+<h3 id="transformer架构的实现机理">7.3 transformer架构的实现机理</h3>
+<p><img src="/images/pytorch/transformer1.png"></p>
+<p><img src="/images/pytorch/transformer2.png"></p>
+<ul>
+<li><p>Position
+Encoding:给每个词一个位置编码，表示该词在句子中的位置信息</p></li>
+<li><p>Multi-Head Attension:对不同模块间产生的注意力机制</p></li>
+</ul>
+<hr>
+<h2 id="八torch内常见函数">八、torch内常见函数</h2>
+<p>张量类型检查和配置：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>torch.is_tensor(obj)</code></td>
+<td>检查是否为张量</td>
+</tr>
+<tr>
+<td><code>torch.is_storage(obj)</code></td>
+<td>检查是否为存储对象</td>
+</tr>
+<tr>
+<td><code>torch.is_complex(input)</code></td>
+<td>是否为复数类型</td>
+</tr>
+<tr>
+<td><code>torch.is_conj(input)</code></td>
+<td>是否为共轭张量</td>
+</tr>
+<tr>
+<td><code>torch.is_floating_point(input)</code></td>
+<td>是否为浮点类型</td>
+</tr>
+<tr>
+<td><code>torch.is_nonzero(input)</code></td>
+<td>是否为非零单元素张量</td>
+</tr>
+<tr>
+<td><code>torch.set_default_dtype(d)</code></td>
+<td>设置默认浮点数据类型</td>
+</tr>
+<tr>
+<td><code>torch.get_default_dtype()</code></td>
+<td>获取当前默认浮点数据类型</td>
+</tr>
+<tr>
+<td><code>torch.set_default_device(device)</code></td>
+<td>设置默认张量设备</td>
+</tr>
+<tr>
+<td><code>torch.get_default_device()</code></td>
+<td>获取默认张量设备</td>
+</tr>
+<tr>
+<td><code>torch.numel(input)</code></td>
+<td>获取元素总数</td>
+</tr>
+</tbody>
+</table>
+<p>Tensor 创建：</p>
+<table>
+<colgroup>
+<col style="width: 70%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>torch.tensor(data)</code></td>
+<td>从数据创建张量</td>
+</tr>
+<tr>
+<td><code>torch.as_tensor(data)</code></td>
+<td>转换为张量，共享数据</td>
+</tr>
+<tr>
+<td><code>torch.from_numpy(ndarray)</code></td>
+<td>从 NumPy 创建张量，共享数据</td>
+</tr>
+<tr>
+<td><code>torch.zeros(size)</code></td>
+<td>创建全零张量</td>
+</tr>
+<tr>
+<td><code>torch.ones(size)</code></td>
+<td>创建全一张量</td>
+</tr>
+<tr>
+<td><code>torch.empty(size)</code></td>
+<td>创建未初始化张量</td>
+</tr>
+<tr>
+<td><code>torch.arange(start, end, step)</code></td>
+<td>创建等差序列张量</td>
+</tr>
+<tr>
+<td><code>torch.linspace(start, end, steps)</code></td>
+<td>创建线性间隔张量</td>
+</tr>
+<tr>
+<td><code>torch.logspace(start, end, steps, base)</code></td>
+<td>创建对数间隔张量</td>
+</tr>
+<tr>
+<td><code>torch.eye(n, m)</code></td>
+<td>创建单位矩阵</td>
+</tr>
+<tr>
+<td><code>torch.full(size, fill_value)</code></td>
+<td>创建填充指定值的张量</td>
+</tr>
+<tr>
+<td><code>torch.rand(size)</code></td>
+<td>均匀分布随机张量</td>
+</tr>
+<tr>
+<td><code>torch.randn(size)</code></td>
+<td>标准正态分布张量</td>
+</tr>
+<tr>
+<td><code>torch.randint(low, high, size)</code></td>
+<td>整数随机张量</td>
+</tr>
+<tr>
+<td><code>torch.randperm(n)</code></td>
+<td>0 到 n-1 的随机排列</td>
+</tr>
+</tbody>
+</table>
+<p>Tensor 操作：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>torch.cat(tensors, dim)</code></td>
+<td>沿指定维度拼接张量</td>
+</tr>
+<tr>
+<td><code>torch.stack(tensors, dim)</code></td>
+<td>沿新维度堆叠张量</td>
+</tr>
+<tr>
+<td><code>torch.split(tensor, split_size, dim)</code></td>
+<td>按大小分割张量</td>
+</tr>
+<tr>
+<td><code>torch.chunk(tensor, chunks, dim)</code></td>
+<td>按块分割张量</td>
+</tr>
+<tr>
+<td><code>torch.reshape(input, shape)</code></td>
+<td>改变形状</td>
+</tr>
+<tr>
+<td><code>torch.transpose(input, dim0, dim1)</code></td>
+<td>转置两个维度</td>
+</tr>
+<tr>
+<td><code>torch.squeeze(input, dim)</code></td>
+<td>去除 1 维度</td>
+</tr>
+<tr>
+<td><code>torch.unsqueeze(input, dim)</code></td>
+<td>添加 1 维度</td>
+</tr>
+<tr>
+<td><code>torch.expand(input, size)</code></td>
+<td>扩展维度</td>
+</tr>
+<tr>
+<td><code>torch.narrow(input, dim, start, length)</code></td>
+<td>张量切片</td>
+</tr>
+<tr>
+<td><code>torch.permute(input, dims)</code></td>
+<td>维度重排</td>
+</tr>
+<tr>
+<td><code>torch.masked_select(input, mask)</code></td>
+<td>布尔掩码选择</td>
+</tr>
+<tr>
+<td><code>torch.index_select(input, dim, index)</code></td>
+<td>索引选择元素</td>
+</tr>
+<tr>
+<td><code>torch.gather(input, dim, index)</code></td>
+<td>按索引收集数据</td>
+</tr>
+<tr>
+<td><code>torch.scatter(input, dim, index, src)</code></td>
+<td>按索引写入数据</td>
+</tr>
+<tr>
+<td><code>torch.nonzero(input)</code></td>
+<td>获取非零索引</td>
+</tr>
+</tbody>
+</table>
+<p>数学运算：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>torch.add(input, other)</code></td>
+<td>加法</td>
+</tr>
+<tr>
+<td><code>torch.sub(input, other)</code></td>
+<td>减法</td>
+</tr>
+<tr>
+<td><code>torch.mul(input, other)</code></td>
+<td>乘法</td>
+</tr>
+<tr>
+<td><code>torch.div(input, other)</code></td>
+<td>除法</td>
+</tr>
+<tr>
+<td><code>torch.pow(input, exponent)</code></td>
+<td>幂运算</td>
+</tr>
+<tr>
+<td><code>torch.sqrt(input)</code></td>
+<td>平方根</td>
+</tr>
+<tr>
+<td><code>torch.exp(input)</code></td>
+<td>指数函数</td>
+</tr>
+<tr>
+<td><code>torch.log(input)</code></td>
+<td>自然对数</td>
+</tr>
+<tr>
+<td><code>torch.sum(input, dim)</code></td>
+<td>求和</td>
+</tr>
+<tr>
+<td><code>torch.mean(input, dim)</code></td>
+<td>求均值</td>
+</tr>
+<tr>
+<td><code>torch.max(input, dim)</code></td>
+<td>最大值</td>
+</tr>
+<tr>
+<td><code>torch.min(input, dim)</code></td>
+<td>最小值</td>
+</tr>
+<tr>
+<td><code>torch.abs(input)</code></td>
+<td>绝对值</td>
+</tr>
+<tr>
+<td><code>torch.clamp(input, min, max)</code></td>
+<td>限制范围</td>
+</tr>
+<tr>
+<td><code>torch.round(input)</code></td>
+<td>四舍五入</td>
+</tr>
+<tr>
+<td><code>torch.floor(input)</code></td>
+<td>向下取整</td>
+</tr>
+<tr>
+<td><code>torch.ceil(input)</code></td>
+<td>向上取整</td>
+</tr>
+</tbody>
+</table>
+<p>随机数生成：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>torch.manual_seed(seed)</code></td>
+<td>设置随机种子</td>
+</tr>
+<tr>
+<td><code>torch.initial_seed()</code></td>
+<td>获取当前种子</td>
+</tr>
+<tr>
+<td><code>torch.rand(size)</code></td>
+<td>均匀分布张量</td>
+</tr>
+<tr>
+<td><code>torch.randn(size)</code></td>
+<td>正态分布张量</td>
+</tr>
+<tr>
+<td><code>torch.randint(low, high, size)</code></td>
+<td>整数随机张量</td>
+</tr>
+<tr>
+<td><code>torch.randperm(n)</code></td>
+<td>随机排列序列</td>
+</tr>
+</tbody>
+</table>
+<p>线性代数：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>torch.dot(input, other)</code></td>
+<td>向量点积</td>
+</tr>
+<tr>
+<td><code>torch.mm(input, mat2)</code></td>
+<td>矩阵乘法</td>
+</tr>
+<tr>
+<td><code>torch.bmm(input, mat2)</code></td>
+<td>批量矩阵乘法</td>
+</tr>
+<tr>
+<td><code>torch.eig(input)</code></td>
+<td>特征值和特征向量</td>
+</tr>
+<tr>
+<td><code>torch.svd(input)</code></td>
+<td>奇异值分解</td>
+</tr>
+<tr>
+<td><code>torch.inverse(input)</code></td>
+<td>矩阵逆</td>
+</tr>
+<tr>
+<td><code>torch.det(input)</code></td>
+<td>行列式</td>
+</tr>
+<tr>
+<td><code>torch.trace(input)</code></td>
+<td>矩阵迹</td>
+</tr>
+</tbody>
+</table>
+<p>设备管理：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>torch.cuda.is_available()</code></td>
+<td>是否支持 CUDA</td>
+</tr>
+<tr>
+<td><code>torch.device(device)</code></td>
+<td>创建设备对象</td>
+</tr>
+<tr>
+<td><code>tensor.to(device)</code></td>
+<td>张量迁移设备</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="番外一pyplot">番外一、pyplot</h2>
+<h3 id="基本绘图流程">1.基本绘图流程</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 准备数据</span></span><br><span class="line">x = [1, 2, 3, 4, 5]</span><br><span class="line">y = [1, 4, 9, 16, 25]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 绘图</span></span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 添加标题和标签</span></span><br><span class="line">plt.title(<span class="string">"折线图示例"</span>)</span><br><span class="line">plt.xlabel(<span class="string">"X轴"</span>)</span><br><span class="line">plt.ylabel(<span class="string">"Y轴"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 显示图像</span></span><br><span class="line">plt.show()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol type="1">
+<li>准备好y关于x函数关系的数据</li>
+<li>利用plot函数进行图像绘制，并对相关属性进行定义</li>
+<li>对轴进行处理</li>
+</ol>
+<p>相关参数ex：</p>
+<figure>
+<img src="/images/pytorch/pyplot-fmt.png" alt="fmt">
+<figcaption aria-hidden="true">fmt</figcaption>
+</figure>
+<table>
+<thead>
+<tr>
+<th><code>marker</code> 值</th>
+<th>含义</th>
+<th>显示效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>'o'</code></td>
+<td>圆圈</td>
+<td>●</td>
+</tr>
+<tr>
+<td><code>'s'</code></td>
+<td>方形</td>
+<td>■</td>
+</tr>
+<tr>
+<td><code>'^'</code></td>
+<td>上三角</td>
+<td>▲</td>
+</tr>
+<tr>
+<td><code>'v'</code></td>
+<td>下三角</td>
+<td>▼</td>
+</tr>
+<tr>
+<td><code>'&gt;'</code></td>
+<td>右三角</td>
+<td>▶</td>
+</tr>
+<tr>
+<td><code>'&lt;'</code></td>
+<td>左三角</td>
+<td>◀</td>
+</tr>
+<tr>
+<td><code>'x'</code></td>
+<td>十字叉</td>
+<td>✕</td>
+</tr>
+<tr>
+<td><code>'+'</code></td>
+<td>加号</td>
+<td>＋</td>
+</tr>
+<tr>
+<td><code>'*'</code></td>
+<td>星号</td>
+<td>★</td>
+</tr>
+<tr>
+<td><code>'.'</code></td>
+<td>点</td>
+<td>·</td>
+</tr>
+<tr>
+<td><code>'D'</code></td>
+<td>菱形</td>
+<td>◆</td>
+</tr>
+<tr>
+<td><code>'p'</code></td>
+<td>五边形</td>
+<td>⬟</td>
+</tr>
+<tr>
+<td><code>'h'</code></td>
+<td>六边形1</td>
+<td>⬢</td>
+</tr>
+<tr>
+<td><code>'H'</code></td>
+<td>六边形2</td>
+<td>⬣</td>
+</tr>
+<tr>
+<td><code>None</code></td>
+<td>无标记</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>linestyle</code> 值</th>
+<th>含义</th>
+<th>示例样式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>'-'</code></td>
+<td>实线</td>
+<td>──────────────</td>
+</tr>
+<tr>
+<td><code>'--'</code></td>
+<td>虚线</td>
+<td>– – – – – – – –</td>
+</tr>
+<tr>
+<td><code>'-.'</code></td>
+<td>点划线</td>
+<td>– · – · – · – ·</td>
+</tr>
+<tr>
+<td><code>':'</code></td>
+<td>点线</td>
+<td>··············</td>
+</tr>
+<tr>
+<td><code>''</code> or <code>None</code></td>
+<td>无线条</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<h3 id="网格线">2.网格线</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">x = np.array([1, 2, 3, 4])</span><br><span class="line">y = np.array([1, 4, 9, 16])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">plt.title(<span class="string">"RUNOOB grid() Test"</span>)</span><br><span class="line">plt.xlabel(<span class="string">"x - label"</span>)</span><br><span class="line">plt.ylabel(<span class="string">"y - label"</span>)</span><br><span class="line"></span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line">plt.grid(color = <span class="string">'r'</span>, linestyle = <span class="string">'--'</span>, linewidth = 0.5)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/images/pytorch/ex1.png" alt="ex1">
+<figcaption aria-hidden="true">ex1</figcaption>
+</figure>
+<p>grid内还有axis属性，若设置axis=x则网格线就在y方向上出现</p>
+<h3 id="绘制多图">3.绘制多图</h3>
+<p>基础的用subplot方法绘图： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line"><span class="comment">#plot 1:</span></span><br><span class="line">xpoints = np.array([0, 6])</span><br><span class="line">ypoints = np.array([0, 100])</span><br><span class="line"></span><br><span class="line">plt.subplot(1, 2, 1)</span><br><span class="line">plt.plot(xpoints,ypoints)</span><br><span class="line">plt.title(<span class="string">"plot 1"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#plot 2:</span></span><br><span class="line">x = np.array([1, 2, 3, 4])</span><br><span class="line">y = np.array([1, 4, 9, 16])</span><br><span class="line"></span><br><span class="line">plt.subplot(1, 2, 2)</span><br><span class="line">plt.plot(x,y)</span><br><span class="line">plt.title(<span class="string">"plot 2"</span>)</span><br><span class="line"></span><br><span class="line">plt.suptitle(<span class="string">"RUNOOB subplot Test"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure> <img src="/images/pytorch/ex2.png" alt="ex2"></p>
+<p>其中suplot(a,b,c)这三个参数分别说明，有a行b列个图，当前该图排在第c位</p>
+<h3 id="散点柱形直方图和饼图s">3.散点，柱形,直方图和饼图s</h3>
+<h4 id="散点图">1.散点图</h4>
+<p>我们可以使用 pyplot 中的 scatter() 方法来绘制散点图。</p>
+<p>基础调用方式： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line">x = np.array([1, 2, 3, 4, 5, 6, 7, 8])</span><br><span class="line">y = np.array([1, 4, 9, 16, 7, 11, 23, 18])</span><br><span class="line"></span><br><span class="line">plt.scatter(x, y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></p>
+<p>scatter() 方法语法格式如下： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">matplotlib.pyplot.scatter(x, y, s=None, c=None, marker=None, cmap=None, norm=None, vmin=None, vmax=None, alpha=None, linewidths=None, *, edgecolors=None, plotnonfinite=False, data=None, **kwargs)</span><br></pre></td></tr></table></figure></p>
+<table>
+<colgroup>
+<col style="width: 18%">
+<col style="width: 30%">
+<col style="width: 51%">
+</colgroup>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>作用说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>array-like</td>
+<td>每个点的 x 坐标（必须）</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>array-like</td>
+<td>每个点的 y 坐标（必须）</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td>float 或 array</td>
+<td>点的<strong>大小</strong>，默认为
+20；可设置为数组使每个点大小不同</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td>color 或 array</td>
+<td>点的<strong>颜色</strong>，可以是字符串如
+<code>'red'</code>，或数组映射 colormap</td>
+</tr>
+<tr>
+<td><code>marker</code></td>
+<td>str</td>
+<td>点的<strong>形状</strong>，如 <code>'o'</code>
+圆点、<code>'^'</code> 三角等</td>
+</tr>
+<tr>
+<td><code>cmap</code></td>
+<td>colormap</td>
+<td>用于将 <code>c</code>
+数组映射为颜色的<strong>颜色映射表</strong>（如
+<code>plt.cm.Blues</code>）</td>
+</tr>
+<tr>
+<td><code>norm</code></td>
+<td>Normalize 实例</td>
+<td>自定义颜色归一化方式，配合 <code>cmap</code> 使用</td>
+</tr>
+<tr>
+<td><code>vmin</code></td>
+<td>float</td>
+<td><code>cmap</code> 的最小值（可控制颜色范围）</td>
+</tr>
+<tr>
+<td><code>vmax</code></td>
+<td>float</td>
+<td><code>cmap</code> 的最大值（同上）</td>
+</tr>
+<tr>
+<td><code>alpha</code></td>
+<td>float [0, 1]</td>
+<td>点的<strong>透明度</strong>，1为不透明，0为完全透明</td>
+</tr>
+<tr>
+<td><code>linewidths</code></td>
+<td>float 或 array</td>
+<td>点的边框线宽</td>
+</tr>
+<tr>
+<td><code>edgecolors</code></td>
+<td>color or {‘face’, ‘none’}</td>
+<td>点的边框颜色，可设为 <code>'face'</code>（和点一样）或
+<code>'none'</code>（无边框）</td>
+</tr>
+<tr>
+<td><code>plotnonfinite</code></td>
+<td>bool</td>
+<td>是否绘制 NaN 或 Inf 值，默认 False</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>dict 或 DataFrame</td>
+<td>支持使用 <code>data["x"]</code> 方式传参</td>
+</tr>
+<tr>
+<td><code>**kwargs</code></td>
+<td></td>
+<td>传递给底层 <code>PathCollection</code> 的其他参数</td>
+</tr>
+</tbody>
+</table>
+<h4 id="柱形图">2.柱形图</h4>
+<p>基础绘制方式： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line">x = np.array([<span class="string">"Runoob-1"</span>, <span class="string">"Runoob-2"</span>, <span class="string">"Runoob-3"</span>, <span class="string">"C-RUNOOB"</span>])</span><br><span class="line">y = np.array([12, 22, 6, 18])</span><br><span class="line"></span><br><span class="line">plt.bar(x,y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></p>
+<table>
+<colgroup>
+<col style="width: 22%">
+<col style="width: 36%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>array-like</td>
+<td>每个条形的 x 坐标（分类变量索引或标签）</td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td>array-like</td>
+<td>每个条形的高度</td>
+</tr>
+<tr>
+<td><code>width</code></td>
+<td>float 或 array</td>
+<td>每个条形的宽度（默认 <code>0.8</code>）</td>
+</tr>
+<tr>
+<td><code>bottom</code></td>
+<td>float 或 array</td>
+<td>每个条形的底部起始位置（默认是 <code>0</code>，用于堆叠）</td>
+</tr>
+<tr>
+<td><code>align</code></td>
+<td><code>'center'</code> or <code>'edge'</code></td>
+<td>条形对齐方式，默认为 <code>'center'</code></td>
+</tr>
+<tr>
+<td><code>color</code></td>
+<td>颜色 或数组</td>
+<td>条形颜色（可为字符串或 RGB 值）</td>
+</tr>
+<tr>
+<td><code>edgecolor</code></td>
+<td>颜色或数组</td>
+<td>条形边框颜色</td>
+</tr>
+<tr>
+<td><code>linewidth</code></td>
+<td>float</td>
+<td>条形边框宽度</td>
+</tr>
+<tr>
+<td><code>tick_label</code></td>
+<td>list</td>
+<td>设置 x 轴刻度标签（如分类名称）</td>
+</tr>
+<tr>
+<td><code>xerr</code>, <code>yerr</code></td>
+<td>数组或标量</td>
+<td>设置 x/y 方向的误差条（用于误差可视化）</td>
+</tr>
+<tr>
+<td><code>ecolor</code></td>
+<td>颜色</td>
+<td>误差条的颜色</td>
+</tr>
+<tr>
+<td><code>capsize</code></td>
+<td>float</td>
+<td>误差条末端横线的长度</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>str</td>
+<td>设置用于图例的标签名</td>
+</tr>
+<tr>
+<td><code>alpha</code></td>
+<td>float</td>
+<td>设置透明度（0~1）</td>
+</tr>
+</tbody>
+</table>
+<h4 id="饼图">3.饼图</h4>
+<p>基础绘制方式 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line">y = np.array([35, 25, 25, 15])</span><br><span class="line"></span><br><span class="line">plt.pie(y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></p>
+<table>
+<colgroup>
+<col style="width: 23%">
+<col style="width: 21%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>list 或 array</td>
+<td>各个扇区的数值（自动归一化为比例）</td>
+</tr>
+<tr>
+<td><code>labels</code></td>
+<td>list[str]</td>
+<td>每个扇区的标签（显示在图上）</td>
+</tr>
+<tr>
+<td><code>explode</code></td>
+<td>list[float]</td>
+<td>控制每个扇区“弹出”的距离（例如 <code>[0, 0.1, 0, 0.2]</code>）</td>
+</tr>
+<tr>
+<td><code>colors</code></td>
+<td>list[str]</td>
+<td>扇区的颜色序列</td>
+</tr>
+<tr>
+<td><code>autopct</code></td>
+<td>str 或函数</td>
+<td>自动显示百分比格式（如 <code>"%.1f%%"</code>）</td>
+</tr>
+<tr>
+<td><code>pctdistance</code></td>
+<td>float</td>
+<td>百分比文本距离圆心的比例（默认 <code>0.6</code>）</td>
+</tr>
+<tr>
+<td><code>labeldistance</code></td>
+<td>float</td>
+<td>标签文本距离圆心的比例（默认 <code>1.1</code>）</td>
+</tr>
+<tr>
+<td><code>shadow</code></td>
+<td>bool</td>
+<td>是否显示阴影（立体效果）</td>
+</tr>
+<tr>
+<td><code>startangle</code></td>
+<td>float</td>
+<td>起始角度（默认是 0，通常设为 90 更美观）</td>
+</tr>
+<tr>
+<td><code>radius</code></td>
+<td>float</td>
+<td>饼图的半径（默认是 1）</td>
+</tr>
+<tr>
+<td><code>counterclock</code></td>
+<td>bool</td>
+<td>是否逆时针绘图（默认是 <code>True</code>）</td>
+</tr>
+<tr>
+<td><code>wedgeprops</code></td>
+<td>dict</td>
+<td>控制扇区样式，如边框：<code>{'edgecolor': 'black'}</code></td>
+</tr>
+<tr>
+<td><code>textprops</code></td>
+<td>dict</td>
+<td>设置文本样式，如字体大小、颜色</td>
+</tr>
+<tr>
+<td><code>center</code></td>
+<td>(float, float)</td>
+<td>饼图的中心坐标（默认 <code>(0, 0)</code>）</td>
+</tr>
+<tr>
+<td><code>frame</code></td>
+<td>bool</td>
+<td>是否画图框（默认 <code>False</code>）</td>
+</tr>
+<tr>
+<td><code>rotatelabels</code></td>
+<td>bool</td>
+<td>是否旋转标签使其与扇区对齐（默认 <code>False</code>）</td>
+</tr>
+<tr>
+<td><code>normalize</code></td>
+<td>bool</td>
+<td>是否归一化数据为比例（Matplotlib 3.4+）</td>
+</tr>
+</tbody>
+</table>
+<h4 id="直方图">4.直方图</h4>
+<p>基本绘制方式:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成一组随机数据</span></span><br><span class="line">data = np.random.randn(1000)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制直方图</span></span><br><span class="line">plt.hist(data, bins=30, color=<span class="string">'skyblue'</span>, alpha=0.8)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置图表属性</span></span><br><span class="line">plt.title(<span class="string">'RUNOOB hist() Test'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Value'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Frequency'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示图表</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">matplotlib.pyplot.hist(x, bins=None, range=None, density=False, weights=None, cumulative=False, bottom=None, histtype=<span class="string">'bar'</span>, align=<span class="string">'mid'</span>, orientation=<span class="string">'vertical'</span>, rwidth=None, <span class="built_in">log</span>=False, color=None, label=None, stacked=False, **kwargs)</span><br></pre></td></tr></table></figure>
+<table>
+<colgroup>
+<col style="width: 9%">
+<col style="width: 18%">
+<col style="width: 71%">
+</colgroup>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>array-like</td>
+<td>要绘制直方图的数据</td>
+</tr>
+<tr>
+<td><code>bins</code></td>
+<td>int 或序列</td>
+<td>直方图的柱数或自定义的分箱边界（如 <code>bins=10</code> 或
+<code>[0,1,2,3]</code>）</td>
+</tr>
+<tr>
+<td><code>range</code></td>
+<td>tuple(min, max)</td>
+<td>设置数据范围，仅包含此范围内的值</td>
+</tr>
+<tr>
+<td><code>density</code></td>
+<td>bool</td>
+<td>是否显示为<strong>概率密度</strong>（归一化面积为 1）</td>
+</tr>
+<tr>
+<td><code>weights</code></td>
+<td>array-like</td>
+<td>给每个样本指定权重</td>
+</tr>
+<tr>
+<td><code>cumulative</code></td>
+<td>bool</td>
+<td>是否绘制累计直方图</td>
+</tr>
+<tr>
+<td><code>bottom</code></td>
+<td>float 或 array</td>
+<td>每个柱子的底部起点位置（默认从 0 开始）</td>
+</tr>
+<tr>
+<td><code>histtype</code></td>
+<td>str</td>
+<td>直方图类型，常用有：<br><code>'bar'</code>（默认，填充柱状图）<br><code>'barstacked'</code>（堆叠柱状图）<br><code>'step'</code>（不填充，边框）<br><code>'stepfilled'</code>（填充阶梯）</td>
+</tr>
+<tr>
+<td><code>align</code></td>
+<td>{‘left’, ‘mid’, ‘right’}</td>
+<td>柱子相对于 bin 边界的对齐方式</td>
+</tr>
+<tr>
+<td><code>orientation</code></td>
+<td>{‘vertical’, ‘horizontal’}</td>
+<td>垂直 or 水平直方图</td>
+</tr>
+<tr>
+<td><code>rwidth</code></td>
+<td>float（0~1）</td>
+<td>柱宽占 bin 宽度的比例（例如 0.8）</td>
+</tr>
+<tr>
+<td><code>log</code></td>
+<td>bool</td>
+<td>y 轴是否使用对数刻度</td>
+</tr>
+<tr>
+<td><code>color</code></td>
+<td>str 或 list</td>
+<td>设置柱子的颜色</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>str</td>
+<td>图例标签</td>
+</tr>
+<tr>
+<td><code>stacked</code></td>
+<td>bool</td>
+<td>是否堆叠多组数据</td>
+</tr>
+<tr>
+<td><code>**kwargs</code></td>
+<td>-</td>
+<td>其他传入 <code>patches</code> 的参数，如透明度
+<code>alpha</code>、边框 <code>edgecolor</code> 等</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成三组随机数据</span></span><br><span class="line">data1 = np.random.normal(0, 1, 1000)</span><br><span class="line">data2 = np.random.normal(2, 1, 1000)</span><br><span class="line">data3 = np.random.normal(-2, 1, 1000)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制直方图</span></span><br><span class="line">plt.hist(data1, bins=30, alpha=0.5, label=<span class="string">'Data 1'</span>)</span><br><span class="line">plt.hist(data2, bins=30, alpha=0.5, label=<span class="string">'Data 2'</span>)</span><br><span class="line">plt.hist(data3, bins=30, alpha=0.5, label=<span class="string">'Data 3'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置图表属性</span></span><br><span class="line">plt.title(<span class="string">'RUNOOB hist() TEST'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Value'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Frequency'</span>)</span><br><span class="line">plt.legend()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示图表</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p>以上实例中我们生成了三组不同的随机数据，并使用 hist()
+函数绘制了它们的直方图。通过设置不同的均值和标准差，我们可以生成具有不同分布特征的随机数据。</p>
+<p>我们设置了 bins 参数为 30，这意味着将数据范围分成 30
+个等宽的区间，然后统计每个区间内数据的频数。</p>
+<p>我们设置了 alpha 参数为 0.5，这意味着每个直方图的颜色透明度为 50%。
+我们使用 label 参数设置了每个直方图的标签，以便在图例中显示。</p>
+<p>然后使用 legend() 函数显示图例。最后，我们使用 title()、xlabel() 和
+ylabel() 函数设置了图表的标题和坐标轴标签。</p>
+<p>显示结果如下：</p>
+<figure>
+<img src="/images/pytorch/ex3.png" alt="ex3">
+<figcaption aria-hidden="true">ex3</figcaption>
+</figure>
+<h3 id="imshowimsaveimread">4.imshow,imsave,imread</h3>
+<p>imshow用于图像显示 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个 10x10 随机图像</span></span><br><span class="line">img = np.random.rand(10, 10)</span><br><span class="line"></span><br><span class="line">plt.imshow(img, cmap=<span class="string">'viridis'</span>, interpolation=<span class="string">'nearest'</span>)</span><br><span class="line">plt.colorbar()</span><br><span class="line">plt.title(<span class="string">"随机图像"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></p>
+<table>
+<colgroup>
+<col style="width: 27%">
+<col style="width: 72%">
+</colgroup>
+<thead>
+<tr>
+<th>参数名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>X</code></td>
+<td>输入图像（2D/3D NumPy 数组）</td>
+</tr>
+<tr>
+<td><code>cmap</code></td>
+<td>颜色映射（如 <code>'gray'</code>, <code>'viridis'</code>,
+<code>'hot'</code> 等）</td>
+</tr>
+<tr>
+<td><code>interpolation</code></td>
+<td>插值方法（如 <code>'nearest'</code>,
+<code>'bilinear'</code>，用于放缩）</td>
+</tr>
+<tr>
+<td><code>vmin</code>, <code>vmax</code></td>
+<td>用于归一化图像值范围（像素值映射到颜色）</td>
+</tr>
+<tr>
+<td><code>alpha</code></td>
+<td>透明度（0 到 1）</td>
+</tr>
+<tr>
+<td><code>extent</code></td>
+<td>设置坐标轴范围，例如 <code>[xmin, xmax, ymin, ymax]</code></td>
+</tr>
+<tr>
+<td><code>origin</code></td>
+<td><code>'upper'</code> 或 <code>'lower'</code>，设置图像原点方向</td>
+</tr>
+</tbody>
+</table>
+<p>imread用于读取图像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">img = plt.imread(<span class="string">"cat.jpg"</span>)</span><br><span class="line"><span class="built_in">print</span>(img.shape)  <span class="comment"># 例如 (400, 600, 3)</span></span><br><span class="line"></span><br><span class="line">plt.imshow(img)</span><br><span class="line">plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.title(<span class="string">"猫猫图像"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p>imsave用于保存图像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存一张随机图像</span></span><br><span class="line">img = np.random.rand(100, 100)</span><br><span class="line">plt.imsave(<span class="string">"random_image.png"</span>, img, cmap=<span class="string">'gray'</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fname</code></td>
+<td>保存文件路径（字符串）</td>
+</tr>
+<tr>
+<td><code>arr</code></td>
+<td>NumPy 图像数组</td>
+</tr>
+<tr>
+<td><code>cmap</code></td>
+<td>映射颜色表（灰度图需要）</td>
+</tr>
+<tr>
+<td><code>format</code></td>
+<td>可选强制保存格式</td>
+</tr>
+<tr>
+<td><code>vmin</code>, <code>vmax</code></td>
+<td>映射像素值范围（归一化）</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="番外二数据处理篇">番外二、数据处理篇</h2>
+<h3 id="pandas操作外部数据">Pandas操作外部数据</h3>
+<ol type="1">
+<li>读取 CSV 文件：<code>pd.read_csv()</code></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">df = pd.read_csv(<span class="string">"data.csv"</span>)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sep</code></td>
+<td>分隔符，默认<code>,</code>，可以设为<code>\t</code></td>
+</tr>
+<tr>
+<td><code>header</code></td>
+<td>指定哪一行为列名</td>
+</tr>
+<tr>
+<td><code>names</code></td>
+<td>自定义列名</td>
+</tr>
+<tr>
+<td><code>index_col</code></td>
+<td>指定哪列作为索引</td>
+</tr>
+<tr>
+<td><code>usecols</code></td>
+<td>读取指定列</td>
+</tr>
+<tr>
+<td><code>encoding</code></td>
+<td>编码，避免中文乱码用<code>utf-8-sig</code> 或 <code>gbk</code></td>
+</tr>
+</tbody>
+</table>
+<ol start="2" type="1">
+<li>写入 CSV 文件：<code>df.to_csv()</code></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.to_csv(<span class="string">"output.csv"</span>, index=<span class="literal">False</span>, encoding=<span class="string">"utf-8-sig"</span>)</span><br></pre></td></tr></table></figure>
+<hr>
+<ol start="3" type="1">
+<li>读取 Excel 文件：<code>pd.read_excel()</code></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df = pd.read_excel(<span class="string">"data.xlsx"</span>, sheet_name=<span class="string">"Sheet1"</span>)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sheet_name</code></td>
+<td>工作表名称或索引</td>
+</tr>
+<tr>
+<td><code>usecols</code></td>
+<td>指定读取列</td>
+</tr>
+<tr>
+<td><code>index_col</code></td>
+<td>设置索引列</td>
+</tr>
+</tbody>
+</table>
+<ol start="4" type="1">
+<li>写入 Excel 文件：<code>df.to_excel()</code></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.to_excel(<span class="string">"output.xlsx"</span>, sheet_name=<span class="string">"结果"</span>, index=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<ol start="5" type="1">
+<li>多个 sheet 写入</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> pd.ExcelWriter(<span class="string">"multi.xlsx"</span>) <span class="keyword">as</span> writer:</span><br><span class="line">    df1.to_excel(writer, sheet_name=<span class="string">"Sheet1"</span>)</span><br><span class="line">    df2.to_excel(writer, sheet_name=<span class="string">"Sheet2"</span>)</span><br></pre></td></tr></table></figure>
+<hr>
+<ol start="6" type="1">
+<li>读取 JSON 文件：<code>pd.read_json()</code></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df = pd.read_json(<span class="string">"data.json"</span>)</span><br></pre></td></tr></table></figure>
+<p>JSON 格式要求：通常是数组对象结构，如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">[</span></span><br><span class="line">  <span class="punctuation">{</span><span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"Alice"</span><span class="punctuation">,</span> <span class="attr">"age"</span><span class="punctuation">:</span> <span class="number">25</span><span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">  <span class="punctuation">{</span><span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"Bob"</span><span class="punctuation">,</span> <span class="attr">"age"</span><span class="punctuation">:</span> <span class="number">30</span><span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+<ol start="7" type="1">
+<li>写入 JSON 文件：<code>df.to_json()</code></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.to_json(<span class="string">"output.json"</span>, orient=<span class="string">"records"</span>, force_ascii=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>orient</code></td>
+<td>结构方式，如 <code>records</code>, <code>split</code>,
+<code>index</code> 等</td>
+</tr>
+<tr>
+<td><code>force_ascii</code></td>
+<td>中文是否转义为 ASCII，设为 False 保留中文</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<table>
+<thead>
+<tr>
+<th>文件类型</th>
+<th>读取函数</th>
+<th>写入函数</th>
+<th>支持多表</th>
+<th>编码设置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CSV</td>
+<td><code>pd.read_csv()</code></td>
+<td><code>df.to_csv()</code></td>
+<td>否</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>Excel</td>
+<td><code>pd.read_excel()</code></td>
+<td><code>df.to_excel()</code></td>
+<td>是</td>
+<td>一般无需</td>
+</tr>
+<tr>
+<td>JSON</td>
+<td><code>pd.read_json()</code></td>
+<td><code>df.to_json()</code></td>
+<td>否</td>
+<td>支持</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pandas实现数据清洗">Pandas实现数据清洗</h3>
+<ol type="1">
+<li>清理空值</li>
+</ol>
+<p>首先可以在读取文件的时候自定义空值 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">missing_values = [<span class="string">"n/a"</span>, <span class="string">"na"</span>, <span class="string">"--"</span>]#自定义缺失值</span><br><span class="line"><span class="built_in">df</span>=pd.read_csv(<span class="string">"./data/csv/property-data.csv"</span>,na_values=missing_values)</span><br></pre></td></tr></table></figure>
+利用dropna方法清理空值 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df.dropna(axis=0,how=<span class="string">'any'</span>,thresh=None, subset=None, inplace=True) <span class="comment">#inplace=True表示在原数据上修改</span></span><br><span class="line"><span class="built_in">print</span> (<span class="built_in">df</span>[<span class="string">'NUM_BEDROOMS'</span>].isnull())</span><br><span class="line"><span class="built_in">print</span>(df.to_string())</span><br></pre></td></tr></table></figure></p>
+<ol start="2" type="1">
+<li>替换空单元格</li>
+</ol>
+<p>常用方法是计算列的均值、中位数值或众数:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">missing_values = [<span class="string">"n/a"</span>, <span class="string">"na"</span>, <span class="string">"--"</span>]#自定义缺失值</span><br><span class="line"><span class="built_in">df</span>=pd.read_csv(<span class="string">"./data/csv/property-data.csv"</span>,na_values=missing_values)</span><br><span class="line"></span><br><span class="line">x = <span class="built_in">df</span>[<span class="string">"ST_NUM"</span>].mean()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"></span><br><span class="line"><span class="built_in">df</span>[<span class="string">"ST_NUM"</span>].fillna(x, inplace = True)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(df.to_string())</span><br></pre></td></tr></table></figure>
+<ol start="3" type="1">
+<li>清洗格式错误数据</li>
+</ol>
+<p>利用to_datetime进行处理 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">data = {</span><br><span class="line">  <span class="string">"Date"</span>: [<span class="string">'2020/12/01'</span>, <span class="string">'2020/12/02'</span> , <span class="string">'20201226'</span>],</span><br><span class="line">  <span class="string">"duration"</span>: [50, 40, 45]</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="built_in">df</span> = pd.DataFrame(data, index = [<span class="string">"day1"</span>, <span class="string">"day2"</span>, <span class="string">"day3"</span>])</span><br><span class="line"><span class="built_in">df</span>[<span class="string">'Date'</span>] = pd.to_datetime(<span class="built_in">df</span>[<span class="string">'Date'</span>])</span><br><span class="line"><span class="built_in">print</span>(df.to_string())</span><br></pre></td></tr></table></figure></p>
+<ol start="4" type="1">
+<li>清洗错误数据</li>
+</ol>
+<p>利用loc(index,head)+if判断条件处理修改异常数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">person = {</span><br><span class="line">  <span class="string">"name"</span>: [<span class="string">'Google'</span>, <span class="string">'Runoob'</span> , <span class="string">'Taobao'</span>],</span><br><span class="line">  <span class="string">"age"</span>: [50, 40, 12345]    <span class="comment"># 12345 年龄数据是错误的</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="built_in">df</span> = pd.DataFrame(person)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> df.index:</span><br><span class="line">  <span class="keyword">if</span> df.loc[x, <span class="string">"age"</span>] &gt; 120:</span><br><span class="line">    df.loc[x, <span class="string">"age"</span>] = 120</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(df.to_string())</span><br></pre></td></tr></table></figure>
+<ol start="5" type="1">
+<li>清洗重复数据</li>
+</ol>
+<p>利用<code>drop_duplicates</code>方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">persons = {</span><br><span class="line">  <span class="string">"name"</span>: [<span class="string">'Google'</span>, <span class="string">'Runoob'</span>, <span class="string">'Runoob'</span>, <span class="string">'Taobao'</span>],</span><br><span class="line">  <span class="string">"age"</span>: [50, 40, 40, 23]  </span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="built_in">df</span>=pd.DataFrame(persons)</span><br><span class="line"></span><br><span class="line">df.drop_duplicates(inplace = True)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">df</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="6" type="1">
+<li>数据归一化和标准化</li>
+</ol>
+<p><code>StandardScaler()</code>标准化:将数据转换为均值为0，标准差为1的分布。</p>
+<p><code>MinMaxScaler()</code>归一化:将数据缩放到指定的范围（如 [0,
+1]）</p>
+<p><code>StandardScaler</code> 和 <code>MinMaxScaler</code> ，都是来自
+sklearn.preprocessing 模块的特征缩放器（scalers）</p>
+<p>调用实例: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from sklearn.preprocessing import MinMaxScaler</span><br><span class="line"></span><br><span class="line">scaler = MinMaxScaler()  <span class="comment"># 实例化</span></span><br><span class="line"><span class="built_in">df</span>[<span class="string">'ST_NUM'</span>] = scaler.fit_transform(<span class="built_in">df</span>[[<span class="string">'ST_NUM'</span>]])  <span class="comment"># 注意要用双中括号保持 DataFrame 结构</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(df.to_string())</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<table>
+<colgroup>
+<col style="width: 15%">
+<col style="width: 45%">
+<col style="width: 39%">
+</colgroup>
+<thead>
+<tr>
+<th>特性</th>
+<th>归一化（Normalization）</th>
+<th>标准化（Standardization）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>范围</td>
+<td>通常压缩到 <code>[0, 1]</code></td>
+<td>没有限定范围（均值为 0）</td>
+</tr>
+<tr>
+<td>公式</td>
+<td><span class="math inline">(<em>x</em> − <em>m</em><em>i</em><em>n</em>)/(<em>m</em><em>a</em><em>x</em> − <em>m</em><em>i</em><em>n</em>)</span></td>
+<td><span class="math inline">(<em>x</em> − <em>μ</em>)/<em>σ</em></span></td>
+</tr>
+<tr>
+<td>是否受异常值影响</td>
+<td>容易受影响</td>
+<td>相对不敏感</td>
+</tr>
+<tr>
+<td>适合算法</td>
+<td>KNN、SVM、距离类算法</td>
+<td>线性模型、神经网络等</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pandas求解数据的相关性">Pandas求解数据的相关性</h3>
+<ul>
+<li>皮尔逊相关系数(Pearson)：衡量两个变量之间线性关系强度和方向的指标，值域在
+[-1, 1] 之间。</li>
+<li>斯皮尔曼等级相关系数(Spearman)：衡量两个变量的单调关系（即一个变量增加，另一个是否总是增加或总是减少，不要求线性）</li>
+<li>肯德尔秩相关系数(kendall):衡量两个变量之间排名的一致性（秩的“方向一致”程度）。</li>
+<li>相关性矩阵：用来查看各个变量之间的相关性。</li>
+<li>热图：一种有效的可视化方式，可以帮助我们直观地查看变量之间的相关性。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import pandas as pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例数据</span></span><br><span class="line">data = {</span><br><span class="line">    <span class="string">'Height'</span>: [150, 160, 170, 180, 190],</span><br><span class="line">    <span class="string">'Weight'</span>: [45, 55, 65, 75, 85],</span><br><span class="line">    <span class="string">'Age'</span>: [20, 25, 30, 35, 40]</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="built_in">df</span> = pd.DataFrame(data)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算皮尔逊相关系数</span></span><br><span class="line">correlation = df.corr(method=<span class="string">'pearson'</span>)</span><br><span class="line"><span class="built_in">print</span>(correlation)</span><br></pre></td></tr></table></figure>
+<p>切换corr里面method值就是利用不同的方法求解相关系数</p>
+
+    </div>
+
+    
+    
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">~~~~~~~~~~~~~~ 本文结束 <i class="fa fa-paw"></i> 感谢您的阅读 ~~~~~~~~~~~~~~</div>
+    
+</div>
+      </div>
+    
+        <div class="reward-container">
+  <div>在线要饭~</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.JPG" alt="koen WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/deeplearning/" rel="tag"><i class="fa fa-tag"></i> deeplearning</a>
+              <a href="/tags/pytorch/" rel="tag"><i class="fa fa-tag"></i> pytorch</a>
+              <a href="/tags/Transformer/" rel="tag"><i class="fa fa-tag"></i> Transformer</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/07/26/curl/" rel="prev" title="curl使用教学">
+      <i class="fa fa-chevron-left"></i> curl使用教学
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/07/27/latex/" rel="next" title="Latex常见数学公式">
+      Latex常见数学公式 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80autograd"><span class="nav-text">一、AutoGrad</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80"><span class="nav-text">二、神经网络基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-text">2.1 了解神经网络结构的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E6%95%B4%E4%B8%AA%E8%BF%87%E7%A8%8B"><span class="nav-text">2.2 了解神经网络的整个过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-text">2.3激活函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-text">2.4损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8"><span class="nav-text">2.5优化器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E4%B8%AA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%BF%87%E7%A8%8B"><span class="nav-text">2.6整个神经网络过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A4%84%E7%90%86%E5%92%8C%E5%8A%A0%E8%BD%BD"><span class="nav-text">三、数据的处理和加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dataset%E5%92%8Cdataloader"><span class="nav-text">3.1Dataset和DataLoader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E5%9B%BE%E5%83%8F%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E5%92%8C%E5%A2%9E%E5%BC%BA"><span class="nav-text">3.2对图像数据预处理和增强</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pytorchtransforms"><span class="nav-text">3.3 pytorch—transforms</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-text">四、线性回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-text">五、卷积神经网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#section"><span class="nav-text">1234567891011121314151617181920212223class SimpleCNN(nn.Module):    def __init__(self):        super(SimpleCNN, self).__init__()        # 定义卷积层：输入1通道，输出32通道，卷积核大小3x3        self.conv1 &#x3D; nn.Conv2d(1, 32, kernel_size&#x3D;3, stride&#x3D;1, padding&#x3D;1)        # 定义卷积层：输入32通道，输出64通道        self.conv2 &#x3D; nn.Conv2d(32, 64, kernel_size&#x3D;3, stride&#x3D;1, padding&#x3D;1)        # 定义全连接层        self.fc1 &#x3D; nn.Linear(64 * 7 * 7, 128)  # 输入大小 &#x3D; 特征图大小 * 通道数        self.fc2 &#x3D; nn.Linear(128, 10)  # 10 个类别    def forward(self, x):        x &#x3D; F.relu(self.conv1(x))  # 第一层卷积 + ReLU        x &#x3D; F.max_pool2d(x, 2)     # 最大池化        x &#x3D; F.relu(self.conv2(x))  # 第二层卷积 + ReLU        x &#x3D; F.max_pool2d(x, 2)     # 最大池化        x &#x3D; x.view(-1, 64 * 7 * 7) # 展平操作        x &#x3D; F.relu(self.fc1(x))    # 全连接层 + ReLU        x &#x3D; self.fc2(x)            # 全连接层输出        return x# 创建模型实例model &#x3D; SimpleCNN()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-text">六、循环神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%86%E8%A7%A3%E5%BE%AA%E7%8E%AFrnn"><span class="nav-text">6.1理解循环RNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rnn%E5%AE%9E%E9%99%85%E5%AE%9E%E7%8E%B0"><span class="nav-text">6.2RNN实际实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83-transformer%E6%9E%B6%E6%9E%84"><span class="nav-text">七、 Transformer架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFtransformer%E6%9E%B6%E6%9E%84"><span class="nav-text">7.1 什么是transformer架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6"><span class="nav-text">7.2 注意力机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transformer%E6%9E%B6%E6%9E%84%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E7%90%86"><span class="nav-text">7.3 transformer架构的实现机理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%ABtorch%E5%86%85%E5%B8%B8%E8%A7%81%E5%87%BD%E6%95%B0"><span class="nav-text">八、torch内常见函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%95%AA%E5%A4%96%E4%B8%80pyplot"><span class="nav-text">番外一、pyplot</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%BB%98%E5%9B%BE%E6%B5%81%E7%A8%8B"><span class="nav-text">1.基本绘图流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E6%A0%BC%E7%BA%BF"><span class="nav-text">2.网格线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%A4%9A%E5%9B%BE"><span class="nav-text">3.绘制多图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%A3%E7%82%B9%E6%9F%B1%E5%BD%A2%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%92%8C%E9%A5%BC%E5%9B%BEs"><span class="nav-text">3.散点，柱形,直方图和饼图s</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="nav-text">1.散点图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%B1%E5%BD%A2%E5%9B%BE"><span class="nav-text">2.柱形图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A5%BC%E5%9B%BE"><span class="nav-text">3.饼图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="nav-text">4.直方图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#imshowimsaveimread"><span class="nav-text">4.imshow,imsave,imread</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%95%AA%E5%A4%96%E4%BA%8C%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%AF%87"><span class="nav-text">番外二、数据处理篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pandas%E6%93%8D%E4%BD%9C%E5%A4%96%E9%83%A8%E6%95%B0%E6%8D%AE"><span class="nav-text">Pandas操作外部数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pandas%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97"><span class="nav-text">Pandas实现数据清洗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pandas%E6%B1%82%E8%A7%A3%E6%95%B0%E6%8D%AE%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7"><span class="nav-text">Pandas求解数据的相关性</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="koen"
+      src="/./images/head.jpg">
+  <p class="site-author-name" itemprop="name">koen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/koen666" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;koen666" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:koendrunk@gmail.com" title="E-Mail → mailto:koendrunk@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+ 
+      </div>
+      
+        <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+        <div class="widget-wrap">
+            <h5 class="widget-title">标签云</h5>
+            <div id="myCanvasContainer" class="widget tagcloud">
+                <canvas width="250" height="250" id="resCanvas" style="width:100%">
+                    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AnyLabeling/" rel="tag">AnyLabeling</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/" rel="tag">Koa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Transformer/" rel="tag">Transformer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backen/" rel="tag">backen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/container/" rel="tag">container</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/curl/" rel="tag">curl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataset/" rel="tag">dataset</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deeplearning/" rel="tag">deeplearning</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/desk/" rel="tag">desk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/electron/" rel="tag">electron</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/latex/" rel="tag">latex</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/learn/" rel="tag">learn</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/" rel="tag">math</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pipenv/" rel="tag">pipenv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/repo/" rel="tag">repo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/saaborn/" rel="tag">saaborn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scipy/" rel="tag">scipy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtual/" rel="tag">virtual</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yolo/" rel="tag">yolo</a><span class="tag-list-count">1</span></li></ul>
+                </canvas>
+            </div>
+        </div>
+      
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+     <!-- aplayer -->
+    <div id="aplayer"></div>
+    <script type="text/javascript" src="/dist/APlayer.min.js"></script>
+    <script type="text/javascript" src="/dist/music.js"></script>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">koen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">34k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">31 mins.</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div><!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
+
+<!-- 引入 jQuery -->
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.8.3/jquery.js"></script>
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+
+<!-- 引入雪花脚本 -->
+<script type="text/javascript" src="/js/snow.js"></script>
+
+
+  <div id="site-runtime">
+<span class="post-meta-item-icon">
+    <i class="fa fa-clock-o"></i>
+</span>
+<span id="runtime"></span>
+</div>
+​
+<script language="javascript">
+function isPC() {
+    var userAgentInfo = navigator.userAgent;
+    var agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
+    for (var i = 0; i < agents.length; i++) {
+    if (userAgentInfo.indexOf(agents[i]) > 0) {
+        return false;
+    }
+    }
+    return true;
+}
+​
+function siteTime(openOnPC, start) {
+    window.setTimeout("siteTime(openOnPC, start)", 1000);
+    var seconds = 1000;
+    var minutes = seconds * 60;
+    var hours = minutes * 60;
+    var days = hours * 24;
+    var years = days * 365;
+​
+    start = new Date("2022-04-15 13:13:00 +0800");
+    var now = new Date();
+    var year = now.getFullYear();
+    var month = now.getMonth() + 1;
+    var date = now.getDate();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    var diff = now - start;
+​
+    var diffYears = Math.floor(diff / years);
+    var diffDays = Math.floor((diff / days) - diffYears * 365);
+    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+​
+    if (openOnPC) {
+        if (diffYears == 0){
+            document.getElementById("runtime").innerHTML = "本站已安全运行: " + diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+        }else{
+            document.getElementById("runtime").innerHTML = "本站已安全运行: " + diffYears + " 年 " + diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+        }
+    } else {
+        if (y == 0){
+            document.getElementById("runtime").innerHTML = "本站已安全运行: " + diffDays + "天 " + diffHours + "小时 " + diffMinutes + "分钟 " + diffSeconds + "秒";
+        }else{
+            document.getElementById("runtime").innerHTML = "本站已安全运行: " + diffYears + "年 " + diffDays + "天 " + diffHours + "小时 " + diffMinutes + "分钟 " + diffSeconds + "秒";
+        }
+    
+    }
+}
+​
+var showOnMobile = false;
+var openOnPC = isPC();
+var start = new Date();
+siteTime(openOnPC, start);
+​
+if (!openOnPC && !showOnMobile) {
+    document.getElementById('site-runtime').style.display = 'none';
+}
+</script>
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='1' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'Ov23liWNrNurmdCCSe44',
+      clientSecret: 'e99bd9bd840b672d12d0c6ce1824f8bcaa26ee9d',
+      repo        : 'koen666.github.io',
+      owner       : 'koen666',
+      admin       : ['koen666'],
+      id          : '6dd7f61b152ec6cd8e6f6472daa5a513',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

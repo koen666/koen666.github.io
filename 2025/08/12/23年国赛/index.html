@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"text":"评论","order":-2}},"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本文用于介绍23年国赛C题解题思路和相关模型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="23年数学建模国赛">
+<meta property="og:url" content="http://example.com/2025/08/12/23%E5%B9%B4%E5%9B%BD%E8%B5%9B/index.html">
+<meta property="og:site_name" content="木语">
+<meta property="og:description" content="本文用于介绍23年国赛C题解题思路和相关模型">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-08-12T07:00:00.000Z">
+<meta property="article:modified_time" content="2025-08-15T06:31:56.229Z">
+<meta property="article:author" content="koen">
+<meta property="article:tag" content="math">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2025/08/12/23%E5%B9%B4%E5%9B%BD%E8%B5%9B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>23年数学建模国赛 | 木语</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+   <link rel="stylesheet" href="/dist/APlayer.min.css">
+<link rel="alternate" href="/atom.xml" title="木语" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">木语</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">技术是逻辑，木是自然，语是表达</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/08/12/23%E5%B9%B4%E5%9B%BD%E8%B5%9B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/./images/head.jpg">
+      <meta itemprop="name" content="koen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木语">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          23年数学建模国赛
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-08-12 15:00:00" itemprop="dateCreated datePublished" datetime="2025-08-12T15:00:00+08:00">2025-08-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-08-15 14:31:56" itemprop="dateModified" datetime="2025-08-15T14:31:56+08:00">2025-08-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mathematical-modeling/" itemprop="url" rel="index"><span itemprop="name">mathematical modeling</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>6.2k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>6 mins.</span>
+            </span>
+            <div class="post-description">本文用于介绍23年国赛C题解题思路和相关模型</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="题干理解解读"><strong>题干理解解读</strong></h2>
+<p>(从题干出发的想法)
+存在变量，keyword：历史销售，需求情况，蔬菜品种，进货价格，“成本加成定价”，商品品相，<span
+class="math inline"><em>s</em><em>a</em><em>l</em><em>e</em> = <em>f</em>(<em>t</em>)</span>(需求侧出发)</p>
+<p>que1:菜类商品不同品类或不同单品之间可能存在一定的关联关系，请分析蔬菜各品类及单品销售量的分布规律及相互关系。</p>
+<p>que2：考虑商超以品类为单位做补货计划，请分析各蔬菜品类的销售总量与成本加成定价的关系，并给出各蔬菜品类未来一周(2023
+年 7 月 1-7 日)的日补货总量和定价策略，使得商超收益最大</p>
+<p>que3:因蔬菜类商品的销售空间有限，商超希望进一步制定单品的补货计划，要求可售单品总数控制在
+27-33 个，且各单品订购量满足最小陈列量 2.5 千克的要求。根据 2023年 6 月
+24-30 日的可售品种，给出 7 月 1
+日的单品补货量和定价策略，在尽量满足市场对各品类蔬菜商品需求的前提下，使得商超收益最大</p>
+<h2 id="que1"><strong>que1</strong></h2>
+<h3 id="自己的理解"><strong>1.1自己的理解</strong></h3>
+<blockquote>
+<p>看题目的意思应该是要去找到某个类似与矩阵的东西，里面填充各种单品之间的相关系数去得到不同单品之间的相关关系，然后写出不同单品之的分布规律</p>
+</blockquote>
+<ul>
+<li><p>分布规律:按照商品编号进行分类统计，对销售进行求和，绘制出<code>分布型绘图</code>描述销售量关系</p></li>
+<li><p>单品之间的相关关系：这里我考虑是用<code>皮尔逊相关系数矩阵</code>进行解决问题,然后需要去权衡哪些数值对他们的相关系数产生影响呢?</p></li>
+</ul>
+<h3 id="相关论文"><strong>1.2相关论文</strong></h3>
+<ul>
+<li><p>行文特点：</p>
+<ul>
+<li>摘要：首先进行XX算法，算出了XX，得到了XX，然后进行XX(图形绘制数据可视化……)操作，结论</li>
+<li>正文： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">首先进行数据预处理，剔除无效数据（如退货导致的负销量数据）；然后计算描述性统计量（偏度系数、峰度系数、均值、中位数、标准差等），从数字特征层面分析分布规律；接着通过绘制柱状图、折线图等可视化图表，直观展示销售数据的分布趋势；之后运用相关系数分析（如 Spearman 相关系数）探究品类及单品间的关联关系；最后采用聚类算法（如 K-means++）对单品进行分类，进一步分析不同类别单品的销售特征及关联。</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+<li><p>数据处理相关：
+考量分布规律可选取如下数据<code>偏度系数</code>，<code>峰度系数</code>,<code>最小值，最大值，均值，中位数，标准差等常见统计学指标</code></p>
+<p>同时分析规律可以从多角度出发，总销量/日销量等等</p></li>
+<li><p>算法使用：</p>
+<ul>
+<li><p>Spearman相关系数</p>
+<p>正如我之前的想法还挺正确，然后我找到了如下对比</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 39%" />
+<col style="width: 39%" />
+</colgroup>
+<thead>
+<tr>
+<th>特征</th>
+<th>Pearson相关系数矩阵</th>
+<th>Spearman相关系数矩阵</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>相关性类型</td>
+<td>线性相关</td>
+<td>单调相关（线性或非线性）</td>
+</tr>
+<tr>
+<td>数据要求</td>
+<td>要求数据正态分布</td>
+<td>无分布要求，非参数方法</td>
+</tr>
+<tr>
+<td>计算基础</td>
+<td>原始数据值</td>
+<td>数据的秩次</td>
+</tr>
+<tr>
+<td>异常值敏感性</td>
+<td>高度敏感</td>
+<td>相对稳健</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>线性关系明显的连续变量</td>
+<td>非线性但单调的关系或有序变量</td>
+</tr>
+</tbody>
+</table>
+<p>同时他们两个的公式:</p>
+<p><span class="math display">$$
+r_{XY} = \frac{\sum_{i=1}^n (X_i - \bar{X})(Y_i -
+\bar{Y})}{\sqrt{\sum_{i=1}^n (X_i - \bar{X})^2} \sqrt{\sum_{i=1}^n (Y_i
+- \bar{Y})^2}}
+$$</span></p>
+<p><span class="math display">$$
+\rho = 1 - \frac{6 \sum_{i=1}^n d_i^2}{n(n^2 - 1)}
+$$</span></p>
+<p>实现方法(多组数据得到spearman矩阵):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> spearmanr</span><br><span class="line"></span><br><span class="line">data = pd.DataFrame(&#123;</span><br><span class="line">    <span class="string">&#x27;A&#x27;</span>: [<span class="number">106</span>, <span class="number">86</span>, <span class="number">100</span>, <span class="number">101</span>, <span class="number">99</span>, <span class="number">103</span>, <span class="number">97</span>, <span class="number">113</span>, <span class="number">112</span>, <span class="number">110</span>],</span><br><span class="line">    <span class="string">&#x27;B&#x27;</span>: [<span class="number">7</span>, <span class="number">0</span>, <span class="number">27</span>, <span class="number">50</span>, <span class="number">28</span>, <span class="number">29</span>, <span class="number">20</span>, <span class="number">12</span>, <span class="number">6</span>, <span class="number">17</span>],</span><br><span class="line">    <span class="string">&#x27;C&#x27;</span>: [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>, <span class="number">70</span>, <span class="number">80</span>, <span class="number">90</span>, <span class="number">100</span>]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">corr_matrix, p_matrix = spearmanr(data)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Spearman 相关系数矩阵：&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(pd.DataFrame(corr_matrix, index=data.columns, columns=data.columns))</span><br></pre></td></tr></table></figure></li>
+<li><p>Kmeans++聚类算法</p>
+<p>Kmeans++算法相较于传统的Kmeans聚类算法优化了聚类中心的选取</p>
+<p>实现方法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 确定好分成几类</span><br><span class="line">2. 确定好影响变量</span><br><span class="line">3. 丢进spss即可自动聚类生成表单</span><br></pre></td></tr></table></figure></li>
+<li><p>自相关函数ACF(探究分布规律) &gt;
+通过计算不同滞后阶段的自相关系数，绘制 ACF
+图，判定销售量时间序列的周期性。例如，发现总销量存在年周期（滞后 12
+个月处相关性显著）、周周期（滞后 7 天处相关性显著）和日周期（滞后 13
+小时处相关性显著）。</p>
+<p>自相关系数计算公式: <span class="math display">$$\hat{\rho}(k) =
+\frac{\frac{1}{T-k} \sum_{t=k+1}^T (y_t - \bar{y})(y_{t-k} -
+\bar{y})}{\frac{1}{T} \sum_{t=1}^T (y_t - \bar{y})^2}$$</span></p>
+<p>实现方法 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> statsmodels.graphics.tsaplots <span class="keyword">import</span> plot_acf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成数据（示例：AR(1)过程）</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">np.random.seed(<span class="number">42</span>)</span><br><span class="line">y = np.random.normal(size=<span class="number">100</span>)</span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">100</span>):</span><br><span class="line">    y[t] = <span class="number">0.7</span> * y[t-<span class="number">1</span>] + np.random.normal(<span class="number">0</span>, <span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制ACF</span></span><br><span class="line">plot_acf(y, lags=<span class="number">20</span>, alpha=<span class="number">0.05</span>)  <span class="comment"># 95%置信区间</span></span><br><span class="line">plt.title(<span class="string">&quot;样本自相关函数（ACF）&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></p></li>
+<li><p>时间序列分解模型(探究分布规律):</p>
+<p>首先明确分解是如何分解的<span
+class="math inline"><em>Y</em><sub><em>t</em></sub> = <em>T</em><sub><em>t</em></sub> × <em>S</em><sub><em>t</em></sub> × <em>C</em><sub><em>t</em></sub> × <em>E</em><sub><em>t</em></sub></span>,其中<span
+class="math inline"><em>Y</em><sub><em>t</em></sub></span>为观测值<span
+class="math inline"><em>T</em><sub><em>t</em></sub></span>为趋势成分<span
+class="math inline"><em>S</em><sub><em>T</em></sub></span>为季节性成分<span
+class="math inline"><em>C</em><sub><em>t</em></sub></span>为周期性成分<span
+class="math inline"><em>E</em><sub><em>t</em></sub></span>为随机噪声</p>
+<p>作用:乘法时间序列分解的作用主要是挖掘蔬菜销售量在时间维度上的分布规律。通过将销售量时间序列拆解为趋势、季节性、周期性和随机噪声等成分，能够清晰呈现不同时间颗粒（如年、周、日）下销量的波动特征和变化趋势</p>
+<p>实现方法: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import pandas as pd</span><br><span class="line">from statsmodels.tsa.seasonal import seasonal_decompose</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 准备时间序列数据（索引为datetime类型，值为销量）</span></span><br><span class="line"><span class="built_in">df</span> = pd.read_csv(<span class="string">&#x27;销量数据.csv&#x27;</span>, parse_dates=[<span class="string">&#x27;销售日期&#x27;</span>], index_col=<span class="string">&#x27;销售日期&#x27;</span>)</span><br><span class="line">series = <span class="built_in">df</span>[<span class="string">&#x27;销量(千克)&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 乘法时间序列分解（以周周期为例，period=7）</span></span><br><span class="line">result = seasonal_decompose(series, model=<span class="string">&#x27;multiplicative&#x27;</span>, period=7)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取各成分</span></span><br><span class="line">trend = result.trend  <span class="comment"># 趋势成分</span></span><br><span class="line">seasonal = result.seasonal  <span class="comment"># 季节性成分</span></span><br><span class="line">residual = result.resid  <span class="comment"># 残差（随机噪声）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可视化分解结果</span></span><br><span class="line">fig = result.plot()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure> <img
+src="https://raw.githubusercontent.com/koen666/image/master/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E8%A7%A3%E6%A8%A1%E5%9E%8B.png"
+alt="实现效果图" /></p></li>
+<li><p>FP-Growth关联挖掘算法</p>
+<p>这个算法常常用来从大量交易数据中发现频繁项集</p>
+<p>ex:假设有如下交易</p>
+<table>
+<thead>
+<tr>
+<th>交易ID</th>
+<th>购买物品</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1</td>
+<td>牛奶，面包，尿布</td>
+</tr>
+<tr>
+<td>T2</td>
+<td>可乐，面包，尿布</td>
+</tr>
+<tr>
+<td>T3</td>
+<td>牛奶，尿布</td>
+</tr>
+<tr>
+<td>T4</td>
+<td>牛奶，可乐，尿布</td>
+</tr>
+<tr>
+<td>T5</td>
+<td>可乐，面包</td>
+</tr>
+</tbody>
+</table>
+<p>设置最小支持度阈值为2 FP-Growth会构建FP-tree，发现频繁项集，比如
+{尿布}、{牛奶, 尿布}、{面包, 尿布} 等。</p>
+<p>实现方法:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> mlxtend.preprocessing <span class="keyword">import</span> TransactionEncoder</span><br><span class="line"><span class="keyword">from</span> mlxtend.frequent_patterns <span class="keyword">import</span> fpgrowth, association_rules</span><br><span class="line"></span><br><span class="line"><span class="comment"># 交易数据</span></span><br><span class="line">transactions = [</span><br><span class="line">    [<span class="string">&#x27;milk&#x27;</span>, <span class="string">&#x27;bread&#x27;</span>, <span class="string">&#x27;diaper&#x27;</span>],</span><br><span class="line">    [<span class="string">&#x27;cola&#x27;</span>, <span class="string">&#x27;bread&#x27;</span>, <span class="string">&#x27;diaper&#x27;</span>],</span><br><span class="line">    [<span class="string">&#x27;milk&#x27;</span>, <span class="string">&#x27;diaper&#x27;</span>],</span><br><span class="line">    [<span class="string">&#x27;milk&#x27;</span>, <span class="string">&#x27;cola&#x27;</span>, <span class="string">&#x27;diaper&#x27;</span>],</span><br><span class="line">    [<span class="string">&#x27;cola&#x27;</span>, <span class="string">&#x27;bread&#x27;</span>]</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 编码成布尔矩阵</span></span><br><span class="line">te = TransactionEncoder()</span><br><span class="line">te_ary = te.fit(transactions).transform(transactions)</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.DataFrame(te_ary, columns=te.columns_)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 挖掘频繁项集，设最小支持度为0.4</span></span><br><span class="line">freq_itemsets = fpgrowth(df, min_support=<span class="number">0.4</span>, use_colnames=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;频繁项集：&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(freq_itemsets)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 挖掘关联规则（最小置信度0.7）</span></span><br><span class="line">rules = association_rules(freq_itemsets, metric=<span class="string">&quot;confidence&quot;</span>, min_threshold=<span class="number">0.7</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;\n关联规则：&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(rules[[<span class="string">&#x27;antecedents&#x27;</span>, <span class="string">&#x27;consequents&#x27;</span>, <span class="string">&#x27;support&#x27;</span>, <span class="string">&#x27;confidence&#x27;</span>, <span class="string">&#x27;lift&#x27;</span>]])</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul></li>
+</ul>
+<h2 id="que2"><strong>que2</strong></h2>
+<h3 id="自己的理解-1"><strong>2.1 自己的理解</strong></h3>
+<p>首先题目要求<code>求解各蔬菜品类的销售总量与成本加成定价的关系</code>，肯定是需要用归化算法去拟合出个函数关系，其次并<code>给出各蔬菜品类未来一周(2023 年 7 月 1-7 日)的日补货总量和定价策略，使得商超收益最大</code>我觉得可以联系ACF值和上述求解得到的函数关系进行定义/利用归化算法解决决策问题</p>
+<h3 id="相关论文-1"><strong>2.2 相关论文</strong></h3>
+<ul>
+<li><p>成本加成定价法</p>
+<p>首先要考虑成本加成定价法和各蔬菜品类的销售总量，我们得先知道什么是成本加成定价法
+<img
+src="https://raw.githubusercontent.com/koen666/image/master/%E6%88%90%E6%9C%AC%E5%8A%A0%E6%88%90%E5%AE%9A%E4%BB%B7.png"
+alt="成本加成定价法" /></p></li>
+<li><p>Pearson相关系数(衡量是否线性相关) <span class="math display">$$
+  r_{XY} = \frac{\sum_{i=1}^n (X_i - \bar{X})(Y_i -
+\bar{Y})}{\sqrt{\sum_{i=1}^n (X_i - \bar{X})^2} \sqrt{\sum_{i=1}^n (Y_i
+- \bar{Y})^2}}
+  $$</span></p>
+<ul>
+<li>假设有 <em>n</em>
+个数据点（如不同时间或不同批次的销售数据），每个数据点包括：
+<ul>
+<li><span
+class="math inline"><em>X</em><sub><em>i</em></sub></span>:成本加成定价</li>
+<li><span
+class="math inline"><em>Y</em><sub><em>i</em></sub></span>:对应品类销售总量</li>
+</ul></li>
+</ul></li>
+<li><p>Pearson相关系数检验方法(计算得到的相关系数r是否显著)=&gt;t检验、临界值法、p值法</p>
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 30%" />
+<col style="width: 26%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr>
+<th>检验方法</th>
+<th>t值法</th>
+<th>临界值法（查表法）</th>
+<th>p值法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>假设</strong></td>
+<td><span
+class="math inline"><em>H</em><sub>0</sub> : <em>ρ</em> = 0</span><br><span
+class="math inline"><em>H</em><sub>1</sub> : <em>ρ</em> ≠ 0</span>（双侧）</td>
+<td>同左</td>
+<td>同左</td>
+</tr>
+<tr>
+<td><strong>统计量</strong></td>
+<td><span class="math inline">$t = \frac{r
+\sqrt{n-2}}{\sqrt{1-r^2}}$</span></td>
+<td>直接使用样本相关系数 <span
+class="math inline"><em>r</em></span></td>
+<td>同t值法，但计算 <span class="math inline"><em>p</em></span> 值</td>
+</tr>
+<tr>
+<td><strong>关键值</strong></td>
+<td>查<span class="math inline"><em>t</em></span>分布表（<span
+class="math inline"><em>d</em><em>f</em> = <em>n</em> − 2</span>）得
+<span class="math inline"><em>t</em><sub><em>α</em>/2</sub></span></td>
+<td>查表得 <span
+class="math inline"><em>r</em><sub>critical</sub></span></td>
+<td>计算 <span class="math inline"><em>p</em></span>
+值（或软件输出）</td>
+</tr>
+<tr>
+<td><strong>判断标准</strong></td>
+<td><span
+class="math inline">∥<em>t</em>∥ &gt; <em>t</em><sub><em>α</em>/2</sub></span>
+⇒ 拒绝<span class="math inline"><em>H</em><sub>0</sub></span></td>
+<td><span
+class="math inline">∥<em>r</em>∥ &gt; <em>r</em><sub>critical</sub></span>
+⇒ 拒绝<span class="math inline"><em>H</em><sub>0</sub></span></td>
+<td><span class="math inline"><em>p</em> &lt; <em>α</em></span> ⇒
+拒绝<span class="math inline"><em>H</em><sub>0</sub></span></td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>需计算t统计量，适合理论推导</td>
+<td>快速查表，适合手工计算</td>
+<td>现代统计软件默认方法，结果更直观</td>
+</tr>
+<tr>
+<td><strong>优缺点</strong></td>
+<td>严格但计算稍复杂</td>
+<td>简单但需依赖临界值表</td>
+<td>直接提供概率，无需查表</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>线性回归拟合线性关系</p>
+<ul>
+<li>假定线性关系
+<ul>
+<li>cpp:成本加成定价</li>
+<li>cs:蔬菜品类销售总量 <span
+class="math display">$$cpp=\beta_{0}+\hat{\beta_{1}}cs$$</span></li>
+</ul></li>
+<li>使用最小二乘法求解系数 <span class="math display">$$\hat{\beta}_1 =
+\frac{\sum_{i=1}^n (cs_i - \bar{cs})(cpp_i - \bar{cpp})}{\sum_{i=1}^n
+(cs_i - \bar{cs})^2}$$</span></li>
+</ul></li>
+<li><p>Prophet 模型 &gt;主要用于
+单变量时间序列预测（如销量、股票价格、温度等）。它
+不直接用于变量关系预测（如回归分析），但可以间接变量关系
+该模型的基本形式 <span
+class="math display"><em>y</em>(<em>t</em>) = <em>g</em>(<em>t</em>) + <em>s</em>(<em>t</em>) + <em>h</em>(<em>t</em>) + <em>ϵ</em><sub><em>t</em></sub></span>
+<span
+class="math inline"><em>g</em>(<em>t</em>)</span>：趋势向(线性/非线性)</p>
+<p><span
+class="math inline"><em>s</em>(<em>t</em>)</span>:季节性(年/月/周)</p>
+<p><span
+class="math inline"><em>h</em>(<em>t</em>)</span>:节假日效应</p>
+<p>在本题中考虑到要分析各蔬菜品类的销售总量与成本加成定价的关系，于是引入外生回归项<span
+class="math inline"><em>β</em> · <em>P</em><em>r</em><em>i</em><em>c</em><em>e</em>(<em>t</em>)</span>,同时剔除季节性、趋势性和节假日效应，从而分离出定价对销量的净影响
+<span
+class="math display"><em>y</em>(<em>t</em>) = <em>g</em>(<em>t</em>) + <em>s</em>(<em>t</em>) + <em>h</em>(<em>t</em>) + <em>ϵ</em><sub><em>t</em></sub> + <em>β</em> · <em>P</em><em>r</em><em>i</em><em>c</em><em>e</em>(<em>t</em>)</span></p>
+<p><strong>(1) 数据预处理</strong></p>
+<ul>
+<li><strong>价格变量</strong>：将成本加成定价（公式
+(11)）作为外生变量加入模型。</li>
+<li><strong>节假日设定</strong>：定义中国节日（含无假期的节日如元宵节）及其窗口期（如春节前后7天）。</li>
+<li><strong>季节性配置</strong>：仅保留
+<strong>周度</strong>（<code>weekly_seasonality</code>）和
+<strong>年度</strong>（<code>yearly_seasonality</code>）周期，忽略日内波动以降低噪声。</li>
+</ul>
+<p><strong>(2) 模型拟合</strong> 通过 <code>add_regressor()</code>
+引入价格变量： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> prophet <span class="keyword">import</span> Prophet</span><br><span class="line"></span><br><span class="line">model = Prophet(</span><br><span class="line">    yearly_seasonality=<span class="literal">True</span>,  <span class="comment"># 年度周期</span></span><br><span class="line">    weekly_seasonality=<span class="literal">True</span>,  <span class="comment"># 周度周期</span></span><br><span class="line">    holidays=holidays_df      <span class="comment"># 自定义节假日</span></span><br><span class="line">)</span><br><span class="line">model.add_regressor(<span class="string">&#x27;price&#x27;</span>)  <span class="comment"># 添加价格作为外生变量</span></span><br><span class="line">model.fit(df)</span><br></pre></td></tr></table></figure> <strong>(3) 成分分解</strong> 拟合后，通过
+<code>plot_components()</code> 可视化各成分：</p>
+<ul>
+<li><strong>趋势项</strong> <span
+class="math inline"><em>g</em>(<em>t</em>)</span>：反映长期需求变化（如2022年1月低谷）。</li>
+<li><strong>季节性</strong> <span
+class="math inline"><em>s</em>(<em>t</em>)</span>：周度（周末销量高）和年度（7-8月旺季）模式。</li>
+<li><strong>节假日</strong> <span
+class="math inline"><em>h</em>(<em>t</em>)</span>：国庆高峰、春节下降等。</li>
+<li><strong>价格效应</strong> <span
+class="math inline"><em>β</em> ⋅ Price(<em>t</em>)</span>：回归系数
+<span class="math inline"><em>β</em></span>
+的符号和大小反映定价影响。</li>
+</ul>
+<p><strong>(4) 销量预测与关系分析</strong></p>
+<ul>
+<li><strong>预测</strong>：在已知未来价格时，可预测销量（需提供未来价格数据）。</li>
+<li><strong>关系量化</strong>：通过 <span
+class="math inline"><em>β</em></span>
+判断定价与销量的关系（如表4中花叶类 <span
+class="math inline"><em>β</em> = −21.910</span>
+表示价格每升1元，销量降约21.9单位）。</li>
+</ul></li>
+<li><p>模拟退火算法</p>
+<p><strong>1. 算法核心思想</strong> 模拟退火算法通过模拟金属退火过程中的
+<strong>温度冷却</strong> 和 <strong>能量最小化</strong>
+过程，在优化问题中实现：</p>
+<ul>
+<li><strong>全局搜索能力</strong>：通过允许暂时接受劣解，避免陷入局部最优</li>
+<li><strong>渐进收敛性</strong>：随着温度降低，逐步聚焦到高质量解区域</li>
+<li><strong>可控随机性</strong>：通过温度参数平衡探索（exploration）与利用（exploitation）</li>
+</ul>
+<p><strong>2. 在补货定价问题中的建模</strong>
+<strong>优化目标</strong>： <span class="math display">$$
+  \max_{p_i} \text{Profit} = \sum_{i=1}^{7} \left[ p_i \cdot Q_i(p_i)
+\cdot (1-\gamma_i) - w_i \cdot \frac{Q_i(p_i)}{1-\delta_i} \right]
+  $$</span> 其中：</p>
+<ul>
+<li><span
+class="math inline"><em>p</em><sub><em>i</em></sub></span>：第<span
+class="math inline"><em>i</em></span>天的定价（决策变量）</li>
+<li><span
+class="math inline"><em>Q</em><sub><em>i</em></sub>(<em>p</em><sub><em>i</em></sub>)</span>：由Prophet模型预测的销量（价格函数）</li>
+<li><span
+class="math inline"><em>w</em><sub><em>i</em></sub></span>：批发价（外生输入）</li>
+<li><span
+class="math inline"><em>γ</em><sub><em>i</em></sub></span>：折扣率</li>
+<li><span
+class="math inline"><em>δ</em><sub><em>i</em></sub></span>：损耗率</li>
+</ul>
+<p><strong>3. 算法实现步骤</strong> <strong>步骤1：初始化</strong>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">current_p = [last_day_price] * <span class="number">7</span>  <span class="comment"># 初始价格策略（如延续昨日价格）</span></span><br><span class="line">T = <span class="number">100.0</span>        <span class="comment"># 初始温度</span></span><br><span class="line">T_min = <span class="number">1e-5</span>     <span class="comment"># 终止温度</span></span><br><span class="line">alpha = <span class="number">0.95</span>     <span class="comment"># 冷却速率</span></span><br><span class="line">k = <span class="number">0</span>            <span class="comment"># 迭代计数器</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>步骤2：邻域搜索</strong> 生成新解时限制价格波动范围（±10%）：
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">neighbor</span>(<span class="params">current_p</span>):</span><br><span class="line">    new_p = [p * (<span class="number">1</span> + random.uniform(-<span class="number">0.1</span>, <span class="number">0.1</span>)) <span class="keyword">for</span> p <span class="keyword">in</span> current_p]</span><br><span class="line">    <span class="keyword">return</span> np.clip(new_p, p_min, p_max)  <span class="comment"># 确保在合理价格区间</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>步骤3：收益计算</strong> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">calculate_profit</span>(<span class="params">prices</span>):</span><br><span class="line">    total_profit = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">7</span>):</span><br><span class="line">        <span class="comment"># 调用Prophet预测销量</span></span><br><span class="line">        Q = prophet.predict(prices[i])  </span><br><span class="line">        <span class="comment"># 计算当日收益</span></span><br><span class="line">        profit = prices[i] * Q * (<span class="number">1</span> - gamma[i]) - w[i] * Q / (<span class="number">1</span> - delta[i])</span><br><span class="line">        total_profit += profit</span><br><span class="line">    <span class="keyword">return</span> total_profit</span><br></pre></td></tr></table></figure></p>
+<p><strong>步骤4：Metropolis准则</strong> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">delta_profit = new_profit - current_profit</span><br><span class="line"><span class="keyword">if</span> delta_profit &gt; <span class="number">0</span> <span class="keyword">or</span> random.random() &lt; math.exp(delta_profit / T):</span><br><span class="line">    current_p = new_p</span><br><span class="line">    current_profit = new_profit</span><br></pre></td></tr></table></figure></p>
+<p><strong>步骤5：动态冷却与终止</strong> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">T = alpha * T  <span class="comment"># 指数冷却</span></span><br><span class="line"><span class="keyword">if</span> T &lt; T_min <span class="keyword">or</span> k &gt; max_iter:</span><br><span class="line">    <span class="keyword">break</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>4. 参数调优建议</strong></p>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 26%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>推荐值</strong></th>
+<th><strong>调整依据</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>初始温度 $ T_0 $</td>
+<td>100~1000</td>
+<td>约为目标函数变化幅度的10倍</td>
+</tr>
+<tr>
+<td>冷却速率 $ $</td>
+<td>0.85~0.99</td>
+<td>越接近1搜索越充分</td>
+</tr>
+<tr>
+<td>邻域半径</td>
+<td>当前解的5%~15%</td>
+<td>平衡搜索广度与精度</td>
+</tr>
+<tr>
+<td>最大迭代次数</td>
+<td>1000~5000</td>
+<td>取决于计算资源</td>
+</tr>
+</tbody>
+</table>
+<p><strong>5. 完整算法流程图</strong> <img
+src="https://raw.githubusercontent.com/koen666/image/master/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95.png" />
+<strong>6. 实际应用示例</strong>
+<strong>花叶类蔬菜优化结果</strong>：</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 22%" />
+<col style="width: 22%" />
+<col style="width: 19%" />
+<col style="width: 19%" />
+</colgroup>
+<thead>
+<tr>
+<th>日期</th>
+<th>最优定价（元）</th>
+<th>预测销量（kg）</th>
+<th>补货量（kg）</th>
+<th>日收益（元）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2023-07-01</td>
+<td>12.5</td>
+<td>320</td>
+<td>355</td>
+<td>3840</td>
+</tr>
+<tr>
+<td>2023-07-02</td>
+<td>12.8</td>
+<td>310</td>
+<td>344</td>
+<td>3968</td>
+</tr>
+<tr>
+<td>2023-07-03</td>
+<td>12.6</td>
+<td>315</td>
+<td>350</td>
+<td>3906</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键观察</strong>：</p>
+<ol type="1">
+<li>价格在12.5~13.2元区间波动，与需求弹性匹配</li>
+<li>周末（7月1-2日）定价略高，反映季节性规律</li>
+<li>补货量 = 预测销量 / (1 - 0.1)（损耗率10%）</li>
+</ol>
+<p><strong>7. 算法优势验证</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>对比指标</strong></th>
+<th>模拟退火算法</th>
+<th>梯度下降法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全局最优概率</td>
+<td>85%</td>
+<td>40%</td>
+</tr>
+<tr>
+<td>收敛所需迭代次数</td>
+<td>1200次</td>
+<td>500次</td>
+</tr>
+<tr>
+<td>对噪声鲁棒性</td>
+<td>强</td>
+<td>中等</td>
+</tr>
+<tr>
+<td>参数敏感性</td>
+<td>低</td>
+<td>高</td>
+</tr>
+</tbody>
+</table>
+<p><strong>8. 可能的改进方向</strong></p>
+<ol type="1">
+<li><p><strong>混合优化策略</strong>：</p>
+<ul>
+<li>先用模拟退火进行粗搜索，再用Nelder-Mead simplex进行局部优化
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> minimize</span><br><span class="line">result = minimize(loss_func, x0=SA_result, method=<span class="string">&#x27;Nelder-Mead&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+<li><p><strong>并行化改进</strong>： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> joblib <span class="keyword">import</span> Parallel, delayed</span><br><span class="line">Parallel(n_jobs=<span class="number">4</span>)(delayed(evaluate)(p) <span class="keyword">for</span> p <span class="keyword">in</span> candidate_solutions)</span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>智能冷却调度</strong>： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 根据搜索进度动态调整冷却速率</span></span><br><span class="line"><span class="keyword">if</span> acceptance_rate &lt; <span class="number">0.2</span>:</span><br><span class="line">    alpha = <span class="built_in">min</span>(<span class="number">0.99</span>, alpha * <span class="number">1.05</span>)</span><br></pre></td></tr></table></figure></p></li>
+</ol>
+<p><strong>9. 数学证明补充</strong>
+<strong>收敛性证明</strong>（基于马尔可夫链）： 当满足：</p>
+<ol type="1">
+<li>转移概率满足细致平衡条件： <span
+class="math display"><em>P</em><sub><em>i</em> → <em>j</em></sub> ⋅ <em>π</em><sub><em>i</em></sub> = <em>P</em><sub><em>j</em> → <em>i</em></sub> ⋅ <em>π</em><sub><em>j</em></sub></span></li>
+<li>温度下降足够慢： <span class="math display">$$
+T_k \geq \frac{c}{\log(1+k)}
+$$</span> 则算法以概率1收敛到全局最优解。</li>
+</ol></li>
+</ul>
+<h2 id="que3"><strong>que3</strong></h2>
+<h3 id="自己的理解-2"><strong>3.1 自己的理解</strong></h3>
+<p>这类问题无非就是在第二问上加入了限制条件，需要解决这类问题，应该是需要在第二问的算法中加入更多的回归项或是在计算中引入限定条件，需要建立一个针单品蔬菜补货与定价优化模型</p>
+<h3 id="相关论文-2"><strong>3.2 相关论文</strong></h3>
+<p>解决决策问题常用到线性规划的方法，可以分为如下几种</p>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 14%" />
+<col style="width: 19%" />
+<col style="width: 11%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr>
+<th>模型类型</th>
+<th>使用条件</th>
+<th>解决问题类型</th>
+<th>目标</th>
+<th>求解方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>标准线性规划（LP）</strong></td>
+<td>所有变量连续；目标函数和约束都是线性</td>
+<td>生产计划、资源分配、投资组合优化</td>
+<td>最大化利润或最小化成本</td>
+<td>单纯形法、内点法、Python库：PuLP、CVXPY、Gurobi</td>
+</tr>
+<tr>
+<td><strong>整数线性规划（ILP）</strong></td>
+<td>部分或全部变量必须为整数</td>
+<td>人员排班、设备选址、运输车辆选择</td>
+<td>同上，但变量是整数</td>
+<td>分支定界法（Branch &amp; Bound）、割平面法、Gurobi、CPLEX</td>
+</tr>
+<tr>
+<td><strong>混合整数线性规划（MILP）</strong></td>
+<td>既有连续变量，又有整数变量</td>
+<td>工厂生产调度+设备开关控制、仓库选址+运输量优化</td>
+<td>同上，同时考虑数量和开关决策</td>
+<td>分支定界法、启发式方法、Gurobi、CPLEX</td>
+</tr>
+<tr>
+<td><strong>目标规划（Goal Programming, GP）</strong></td>
+<td>有多个冲突目标，需要平衡</td>
+<td>企业利润、库存、员工调度多目标优化</td>
+<td>尽量接近各目标，同时最小化偏差</td>
+<td>单纯形法扩展、多目标优化方法</td>
+</tr>
+<tr>
+<td><strong>运输/网络线性规划</strong></td>
+<td>问题具有网络或运输结构</td>
+<td>物流配送、流量网络优化</td>
+<td>最小化运输成本或总流量损失</td>
+<td>线性规划法、最短路法、网络流算法</td>
+</tr>
+<tr>
+<td><strong>对偶线性规划（Dual LP）</strong></td>
+<td>标准 LP 已建立</td>
+<td>分析资源价值、影子价格</td>
+<td>找出资源边际价值、优化资源配置</td>
+<td>LP求解器 + 对偶关系分析</td>
+</tr>
+</tbody>
+</table>
+<p>对应建立的目标函数形式</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 53%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr>
+<th>模型类型</th>
+<th>目标函数形式</th>
+<th>说明/特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>标准线性规划（LP）</strong></td>
+<td><span class="math inline">Max/Min
+<em>z</em> = <em>c</em><sub>1</sub><em>x</em><sub>1</sub> + <em>c</em><sub>2</sub><em>x</em><sub>2</sub> + … + <em>c</em><sub><em>n</em></sub><em>x</em><sub><em>n</em></sub></span></td>
+<td>线性组合，连续变量，常用于最大利润或最小成本</td>
+</tr>
+<tr>
+<td><strong>整数线性规划（ILP）</strong></td>
+<td><span class="math inline">Max/Min
+<em>z</em> = <em>c</em><sub>1</sub><em>y</em><sub>1</sub> + <em>c</em><sub>2</sub><em>y</em><sub>2</sub> + … + <em>c</em><sub><em>m</em></sub><em>y</em><sub><em>m</em></sub></span>,
+<span
+class="math inline"><em>y</em><sub><em>i</em></sub> ∈ ℤ</span></td>
+<td>整数变量，目标仍是线性，但决策是离散的</td>
+</tr>
+<tr>
+<td><strong>混合整数线性规划（MILP）</strong></td>
+<td><span class="math inline">Max/Min
+<em>z</em> = <em>c</em><sup><em>T</em></sup><em>x</em> + <em>d</em><sup><em>T</em></sup><em>y</em></span>,
+<span class="math inline"><em>x</em> ∈ ℝ, <em>y</em> ∈ ℤ</span></td>
+<td>既有连续变量又有整数变量，目标函数是连续+离散线性组合</td>
+</tr>
+<tr>
+<td><strong>目标规划（Goal Programming, GP）</strong></td>
+<td><span class="math inline">Minimize
+∑<sub><em>k</em></sub>(<em>d</em><sub><em>k</em></sub><sup>+</sup> + <em>d</em><sub><em>k</em></sub><sup>−</sup>)</span></td>
+<td>引入偏差变量 <span
+class="math inline"><em>d</em><sub><em>k</em></sub><sup>+</sup>, <em>d</em><sub><em>k</em></sub><sup>−</sup></span>
+来衡量各目标偏离程度，最小化总体偏差</td>
+</tr>
+<tr>
+<td><strong>运输/网络线性规划</strong></td>
+<td><span class="math inline">Minimize
+<em>z</em> = ∑<sub><em>i</em>, <em>j</em></sub><em>c</em><sub><em>i</em><em>j</em></sub><em>x</em><sub><em>i</em><em>j</em></sub></span></td>
+<td>线性成本函数，目标是最小运输成本或总流量损失</td>
+</tr>
+<tr>
+<td><strong>对偶线性规划（Dual LP）</strong></td>
+<td><span class="math inline">Max/Min
+<em>w</em> = <em>b</em><sup><em>T</em></sup><em>y</em></span></td>
+<td>对应原问题的资源价值或约束边际价值，通过对偶关系求解</td>
+</tr>
+</tbody>
+</table>
+<p>在第三问中我们列举出它的变量关系可以发现</p>
+<table>
+<thead>
+<tr>
+<th>决策变量</th>
+<th>含义</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span
+class="math inline"><em>y</em><sub><em>i</em></sub> ∈ {0, 1}</span></td>
+<td>是否采购第 <span class="math inline"><em>i</em></span> 种蔬菜</td>
+<td>二进制整数</td>
+</tr>
+<tr>
+<td><span
+class="math inline"><em>R</em><sub><em>i</em></sub> ≥ 2.5</span></td>
+<td>第 <span class="math inline"><em>i</em></span>
+种蔬菜的补货量（千克）</td>
+<td>连续变量</td>
+</tr>
+<tr>
+<td><span
+class="math inline"><em>P</em><sub><em>i</em></sub></span></td>
+<td>第 <span class="math inline"><em>i</em></span> 种蔬菜售价</td>
+<td>连续变量</td>
+</tr>
+</tbody>
+</table>
+<p>明确我们使用这个模型的目的：在可售单品数量受限、每个单品补货量和售价受约束的情况下，使商超每天的总净收益最大。</p>
+<p>这道习题需要建立的是<code>混合整数非线性规划（MINLP）</code>，欸为什么不是MILP呢，因为目标函数或约束中存在非线性关系</p>
+<p>于是我们会建立出如下函数模型: <span class="math display">$$
+\max \sum_{i=1}^{49} y_i \Big[ R_i (P_i - B_i) - R_i B_i L_i \Big]
+$$</span> 建立步骤： — 在商超蔬菜经营中，有几个核心因素影响收益： 1.
+<strong>销售利润</strong></p>
+<ul>
+<li>每种蔬菜的售价 <span
+class="math inline"><em>P</em><sub><em>i</em></sub></span> 与批发成本
+<span class="math inline"><em>B</em><sub><em>i</em></sub></span>
+决定毛利润。</li>
+<li>毛利润 = <span
+class="math inline"><em>P</em><sub><em>i</em></sub> − <em>B</em><sub><em>i</em></sub></span>
+每千克利润 × 补货量 <span
+class="math inline"><em>R</em><sub><em>i</em></sub></span></li>
+</ul>
+<ol start="2" type="1">
+<li><p><strong>损耗成本</strong></p>
+<ul>
+<li>蔬菜易变质，损耗率 <span
+class="math inline"><em>L</em><sub><em>i</em></sub></span>
+表示补货量中无法售出的比例。</li>
+<li>损耗成本 = <span
+class="math inline"><em>R</em><sub><em>i</em></sub><em>B</em><sub><em>i</em></sub><em>L</em><sub><em>i</em></sub></span></li>
+</ul></li>
+<li><p><strong>采购选择</strong></p>
+<ul>
+<li>并非所有单品都需要采购，用 0-1 决策变量 <span
+class="math inline"><em>y</em><sub><em>i</em></sub></span>
+控制是否采购该单品。</li>
+</ul></li>
+</ol>
+<hr />
+<p><strong>(1) 定义决策变量</strong></p>
+<ul>
+<li><span
+class="math inline"><em>y</em><sub><em>i</em></sub> ∈ {0, 1}</span>：是否采购第
+i 种单品</li>
+<li><span
+class="math inline"><em>R</em><sub><em>i</em></sub></span>：补货量（连续变量）</li>
+<li><span
+class="math inline"><em>P</em><sub><em>i</em></sub></span>：定价（连续变量）</li>
+</ul>
+<p><strong>(2) 利润与损耗建模</strong></p>
+<ul>
+<li><strong>毛利润</strong>：每个单品总利润 = 补货量 × （售价 −
+成本）</li>
+</ul>
+<p><span
+class="math display">利润<sub><em>i</em></sub> = <em>R</em><sub><em>i</em></sub>(<em>P</em><sub><em>i</em></sub> − <em>B</em><sub><em>i</em></sub>)</span></p>
+<ul>
+<li><strong>损耗成本</strong>：因损耗导致的成本</li>
+</ul>
+<p><span
+class="math display">损耗成本<sub><em>i</em></sub> = <em>R</em><sub><em>i</em></sub><em>B</em><sub><em>i</em></sub><em>L</em><sub><em>i</em></sub></span></p>
+<ul>
+<li><strong>净收益</strong>：利润 − 损耗</li>
+</ul>
+<p><span
+class="math display">净收益<sub><em>i</em></sub> = <em>R</em><sub><em>i</em></sub>(<em>P</em><sub><em>i</em></sub> − <em>B</em><sub><em>i</em></sub>) − <em>R</em><sub><em>i</em></sub><em>B</em><sub><em>i</em></sub><em>L</em><sub><em>i</em></sub></span></p>
+<p><strong>(3) 采购决策引入 0-1 变量</strong></p>
+<ul>
+<li>只有当 <span
+class="math inline"><em>y</em><sub><em>i</em></sub> = 1</span>
+时，该单品才会被采购和计入收益。</li>
+<li>因此单品净收益乘以 <span
+class="math inline"><em>y</em><sub><em>i</em></sub></span>：</li>
+</ul>
+<p><span
+class="math display"><em>y</em><sub><em>i</em></sub> ⋅ [<em>R</em><sub><em>i</em></sub>(<em>P</em><sub><em>i</em></sub> − <em>B</em><sub><em>i</em></sub>) − <em>R</em><sub><em>i</em></sub><em>B</em><sub><em>i</em></sub><em>L</em><sub><em>i</em></sub>]</span></p>
+<p><strong>(4) 总收益</strong></p>
+<ul>
+<li>商超总收益 = 所有单品净收益之和：</li>
+</ul>
+<p><span class="math display">$$
+\text{总收益} = \sum_{i=1}^{49} y_i \big[R_i (P_i - B_i) - R_i B_i L_i
+\big]
+$$</span></p>
+<p><strong>(5) 目标函数</strong></p>
+<ul>
+<li><strong>目标</strong>：最大化总收益</li>
+</ul>
+<p><span class="math display">$$
+\max \sum_{i=1}^{49} y_i \big[R_i (P_i - B_i) - R_i B_i L_i \big]
+$$</span></p>
+<hr />
+<p>于是建立该模型之后我们可以利用模拟退火算法进行问题求解</p>
+<p>具体实现:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line"><span class="comment"># 1. 输入数据示例</span></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line">n = <span class="number">49</span>  <span class="comment"># 单品数量</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例数据，可替换为真实 49 个单品的历史成本和损耗率</span></span><br><span class="line">B = np.random.uniform(<span class="number">2</span>, <span class="number">10</span>, n)      <span class="comment"># 单位成本</span></span><br><span class="line">L = np.random.uniform(<span class="number">0</span>, <span class="number">0.3</span>, n)     <span class="comment"># 损耗率</span></span><br><span class="line">R_max = np.random.uniform(<span class="number">5</span>, <span class="number">20</span>, n)  <span class="comment"># 最大补货量</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 模拟退火参数</span></span><br><span class="line">T_init = <span class="number">100</span>      <span class="comment"># 初始温度</span></span><br><span class="line">alpha = <span class="number">0.95</span>      <span class="comment"># 温度衰减系数</span></span><br><span class="line">iter_per_temp = <span class="number">100</span>  <span class="comment"># 每温度迭代次数</span></span><br><span class="line">T_min = <span class="number">1e-3</span>         <span class="comment"># 最低温度</span></span><br><span class="line">min_total_y = <span class="number">27</span>     <span class="comment"># 最小采购品种数</span></span><br><span class="line">max_total_y = <span class="number">33</span>     <span class="comment"># 最大采购品种数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line"><span class="comment"># 2. 初始化决策变量</span></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line">y = np.random.randint(<span class="number">0</span>, <span class="number">2</span>, n)</span><br><span class="line"><span class="comment"># 保证总采购品种数在限制范围内</span></span><br><span class="line"><span class="keyword">while</span> y.<span class="built_in">sum</span>() &lt; min_total_y <span class="keyword">or</span> y.<span class="built_in">sum</span>() &gt; max_total_y:</span><br><span class="line">    y = np.random.randint(<span class="number">0</span>, <span class="number">2</span>, n)</span><br><span class="line"></span><br><span class="line">R = np.random.uniform(<span class="number">2.5</span>, R_max)</span><br><span class="line">P = np.random.uniform(<span class="number">1.1</span>*B, <span class="number">1.5</span>*B)</span><br><span class="line"></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line"><span class="comment"># 3. 目标函数</span></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">profit</span>(<span class="params">y, R, P</span>):</span><br><span class="line">    <span class="keyword">return</span> np.<span class="built_in">sum</span>(y * (R * (P - B) - R * B * L))</span><br><span class="line"></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line"><span class="comment"># 4. 随机扰动函数</span></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">perturb</span>(<span class="params">y, R, P</span>):</span><br><span class="line">    y_new = y.copy()</span><br><span class="line">    R_new = R.copy()</span><br><span class="line">    P_new = P.copy()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 随机翻转一个 y_i</span></span><br><span class="line">    idx = np.random.randint(<span class="number">0</span>, n)</span><br><span class="line">    y_new[idx] = <span class="number">1</span> - y_new[idx]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 保证总品种数在约束内</span></span><br><span class="line">    total_y = y_new.<span class="built_in">sum</span>()</span><br><span class="line">    <span class="keyword">if</span> total_y &lt; min_total_y:</span><br><span class="line">        y_new[np.random.choice(np.where(y_new==<span class="number">0</span>)[<span class="number">0</span>])] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> total_y &gt; max_total_y:</span><br><span class="line">        y_new[np.random.choice(np.where(y_new==<span class="number">1</span>)[<span class="number">0</span>])] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 对 R_i 做小扰动</span></span><br><span class="line">    R_new += np.random.uniform(-<span class="number">1</span>, <span class="number">1</span>, n)</span><br><span class="line">    R_new = np.clip(R_new, <span class="number">2.5</span>, R_max)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 对 P_i 做小扰动</span></span><br><span class="line">    P_new += np.random.uniform(-<span class="number">1</span>, <span class="number">1</span>, n)</span><br><span class="line">    P_new = np.clip(P_new, <span class="number">1.1</span>*B, <span class="number">1.5</span>*B)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> y_new, R_new, P_new</span><br><span class="line"></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line"><span class="comment"># 5. 模拟退火主循环</span></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line">T = T_init</span><br><span class="line">best_y, best_R, best_P = y.copy(), R.copy(), P.copy()</span><br><span class="line">best_profit = profit(y, R, P)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> T &gt; T_min:</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(iter_per_temp):</span><br><span class="line">        y_new, R_new, P_new = perturb(y, R, P)</span><br><span class="line">        new_profit = profit(y_new, R_new, P_new)</span><br><span class="line">        delta = new_profit - profit(y, R, P)</span><br><span class="line">        <span class="keyword">if</span> delta &gt; <span class="number">0</span> <span class="keyword">or</span> np.random.rand() &lt; np.exp(delta / T):</span><br><span class="line">            y, R, P = y_new, R_new, P_new</span><br><span class="line">            <span class="keyword">if</span> new_profit &gt; best_profit:</span><br><span class="line">                best_y, best_R, best_P = y.copy(), R.copy(), P.copy()</span><br><span class="line">                best_profit = new_profit</span><br><span class="line">    T *= alpha  <span class="comment"># 降温</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line"><span class="comment"># 6. 输出结果</span></span><br><span class="line"><span class="comment"># -------------------------</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;最大收益: <span class="subst">&#123;best_profit:<span class="number">.2</span>f&#125;</span>&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    <span class="keyword">if</span> best_y[i] == <span class="number">1</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;Item <span class="subst">&#123;i+<span class="number">1</span>&#125;</span>: 补货量 R=<span class="subst">&#123;best_R[i]:<span class="number">.2</span>f&#125;</span>, 定价 P=<span class="subst">&#123;best_P[i]:<span class="number">.2</span>f&#125;</span>&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">~~~~~~~~~~~~~~ 本文结束 <i class="fa fa-paw"></i> 感谢您的阅读 ~~~~~~~~~~~~~~</div>
+    
+</div>
+      </div>
+    
+        <div class="reward-container">
+  <div>在线要饭~</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.JPG" alt="koen WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/math/" rel="tag"><i class="fa fa-tag"></i> math</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/08/11/scipy/" rel="prev" title="scipy基本模块及其使用">
+      <i class="fa fa-chevron-left"></i> scipy基本模块及其使用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/08/18/latex_2/" rel="next" title="Latex全语法使用">
+      Latex全语法使用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E5%B9%B2%E7%90%86%E8%A7%A3%E8%A7%A3%E8%AF%BB"><span class="nav-text">题干理解解读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#que1"><span class="nav-text">que1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%B7%B1%E7%9A%84%E7%90%86%E8%A7%A3"><span class="nav-text">1.1自己的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E8%AE%BA%E6%96%87"><span class="nav-text">1.2相关论文</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#que2"><span class="nav-text">que2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%B7%B1%E7%9A%84%E7%90%86%E8%A7%A3-1"><span class="nav-text">2.1 自己的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E8%AE%BA%E6%96%87-1"><span class="nav-text">2.2 相关论文</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#que3"><span class="nav-text">que3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%B7%B1%E7%9A%84%E7%90%86%E8%A7%A3-2"><span class="nav-text">3.1 自己的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E8%AE%BA%E6%96%87-2"><span class="nav-text">3.2 相关论文</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="koen"
+      src="/./images/head.jpg">
+  <p class="site-author-name" itemprop="name">koen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/koen666" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;koen666" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:koendrunk@gmail.com" title="E-Mail → mailto:koendrunk@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+ 
+      </div>
+      
+        <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+        <div class="widget-wrap">
+            <h5 class="widget-title">标签云</h5>
+            <div id="myCanvasContainer" class="widget tagcloud">
+                <canvas width="250" height="250" id="resCanvas" style="width:100%">
+                    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AnyLabeling/" rel="tag">AnyLabeling</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/" rel="tag">Koa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Transformer/" rel="tag">Transformer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backen/" rel="tag">backen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/container/" rel="tag">container</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/curl/" rel="tag">curl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataset/" rel="tag">dataset</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deeplearning/" rel="tag">deeplearning</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/desk/" rel="tag">desk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/electron/" rel="tag">electron</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/latex/" rel="tag">latex</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/learn/" rel="tag">learn</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/" rel="tag">math</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pipenv/" rel="tag">pipenv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/repo/" rel="tag">repo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/saaborn/" rel="tag">saaborn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scipy/" rel="tag">scipy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtual/" rel="tag">virtual</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yolo/" rel="tag">yolo</a><span class="tag-list-count">1</span></li></ul>
+                </canvas>
+            </div>
+        </div>
+      
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+     <!-- aplayer -->
+    <div id="aplayer"></div>
+    <script type="text/javascript" src="/dist/APlayer.min.js"></script>
+    <script type="text/javascript" src="/dist/music.js"></script>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">koen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">34k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">31 mins.</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div><!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
+
+<!-- 引入 jQuery -->
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.8.3/jquery.js"></script>
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+
+<!-- 引入雪花脚本 -->
+<script type="text/javascript" src="/js/snow.js"></script>
+
+
+  <div id="site-runtime">
+<span class="post-meta-item-icon">
+    <i class="fa fa-clock-o"></i>
+</span>
+<span id="runtime"></span>
+</div>
+​
+<script language="javascript">
+function isPC() {
+    var userAgentInfo = navigator.userAgent;
+    var agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
+    for (var i = 0; i < agents.length; i++) {
+    if (userAgentInfo.indexOf(agents[i]) > 0) {
+        return false;
+    }
+    }
+    return true;
+}
+​
+function siteTime(openOnPC, start) {
+    window.setTimeout("siteTime(openOnPC, start)", 1000);
+    var seconds = 1000;
+    var minutes = seconds * 60;
+    var hours = minutes * 60;
+    var days = hours * 24;
+    var years = days * 365;
+​
+    start = new Date("2022-04-15 13:13:00 +0800");
+    var now = new Date();
+    var year = now.getFullYear();
+    var month = now.getMonth() + 1;
+    var date = now.getDate();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    var diff = now - start;
+​
+    var diffYears = Math.floor(diff / years);
+    var diffDays = Math.floor((diff / days) - diffYears * 365);
+    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+​
+    if (openOnPC) {
+        if (diffYears == 0){
+            document.getElementById("runtime").innerHTML = "本站已安全运行: " + diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+        }else{
+            document.getElementById("runtime").innerHTML = "本站已安全运行: " + diffYears + " 年 " + diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+        }
+    } else {
+        if (y == 0){
+            document.getElementById("runtime").innerHTML = "本站已安全运行: " + diffDays + "天 " + diffHours + "小时 " + diffMinutes + "分钟 " + diffSeconds + "秒";
+        }else{
+            document.getElementById("runtime").innerHTML = "本站已安全运行: " + diffYears + "年 " + diffDays + "天 " + diffHours + "小时 " + diffMinutes + "分钟 " + diffSeconds + "秒";
+        }
+    
+    }
+}
+​
+var showOnMobile = false;
+var openOnPC = isPC();
+var start = new Date();
+siteTime(openOnPC, start);
+​
+if (!openOnPC && !showOnMobile) {
+    document.getElementById('site-runtime').style.display = 'none';
+}
+</script>
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='1' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'Ov23liWNrNurmdCCSe44',
+      clientSecret: 'e99bd9bd840b672d12d0c6ce1824f8bcaa26ee9d',
+      repo        : 'koen666.github.io',
+      owner       : 'koen666',
+      admin       : ['koen666'],
+      id          : '3e86ba9e56ead7b99d7e403b5ae3e7a8',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
