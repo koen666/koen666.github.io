@@ -938,7 +938,7 @@ CORS： <figure class="highlight bash"><table><tr><td class="code"><pre><span cl
 <p>首先在根目录创建<code>.env</code>文件</p>
 <figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">DB_HOST</span>=localhost</span><br><span class="line"><span class="attr">DB_USER</span>=root</span><br><span class="line"><span class="attr">DB_PASSWORD</span>=<span class="number">123456</span></span><br><span class="line"><span class="attr">DB_NAME</span>=testdb</span><br></pre></td></tr></table></figure>
 <p>创建数据库模块<code>database/mysqldb.mjs</code>:</p>
-<h2 id="section"><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> mysql <span class="keyword">from</span> <span class="string">'mysql2/promise'</span>;</span><br><span class="line"><span class="keyword">import</span> dotenv <span class="keyword">from</span> <span class="string">'dotenv'</span>;</span><br><span class="line">dotenv.<span class="title function_">config</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建连接池</span></span><br><span class="line"><span class="keyword">const</span> pool = mysql.<span class="title function_">createPool</span>({</span><br><span class="line">  <span class="attr">host</span>: process.<span class="property">env</span>.<span class="property">DB_HOST</span>,</span><br><span class="line">  <span class="attr">user</span>: process.<span class="property">env</span>.<span class="property">DB_USER</span>,</span><br><span class="line">  <span class="attr">password</span>: process.<span class="property">env</span>.<span class="property">DB_PASSWORD</span>,</span><br><span class="line">  <span class="attr">database</span>: process.<span class="property">env</span>.<span class="property">DB_NAME</span>,</span><br><span class="line">  <span class="attr">waitForConnections</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">connectionLimit</span>: <span class="number">10</span>,</span><br><span class="line">  <span class="attr">queueLimit</span>: <span class="number">0</span></span><br><span class="line">});</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通用 SQL 查询函数</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">query</span>(<span class="params">sql, params</span>) {</span><br><span class="line">  <span class="keyword">const</span> [results] = <span class="keyword">await</span> pool.<span class="title function_">execute</span>(sql, params);</span><br><span class="line">  <span class="keyword">return</span> results;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// ----------------- 用户增删改查 -----------------</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取所有用户</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">getAllUsers</span>(<span class="params"></span>) {</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">query</span>(<span class="string">'SELECT * FROM users'</span>);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据 ID 获取用户</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">getUserById</span>(<span class="params">id</span>) {</span><br><span class="line">  <span class="keyword">const</span> results = <span class="keyword">await</span> <span class="title function_">query</span>(<span class="string">'SELECT * FROM users WHERE id = ?'</span>, [id]);</span><br><span class="line">  <span class="keyword">return</span> results[<span class="number">0</span>];</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 新增用户</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">createUser</span>(<span class="params">name, age</span>) {</span><br><span class="line">  <span class="keyword">const</span> result = <span class="keyword">await</span> <span class="title function_">query</span>(<span class="string">'INSERT INTO users (name, age) VALUES (?, ?)'</span>, [name, age]);</span><br><span class="line">  <span class="keyword">return</span> { <span class="attr">id</span>: result.<span class="property">insertId</span>, name, age };</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 更新用户</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">updateUser</span>(<span class="params">id, name, age</span>) {</span><br><span class="line">  <span class="keyword">await</span> <span class="title function_">query</span>(<span class="string">'UPDATE users SET name = ?, age = ? WHERE id = ?'</span>, [name, age, id]);</span><br><span class="line">  <span class="keyword">return</span> { id, name, age };</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除用户</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">deleteUser</span>(<span class="params">id</span>) {</span><br><span class="line">  <span class="keyword">const</span> result = <span class="keyword">await</span> <span class="title function_">query</span>(<span class="string">'DELETE FROM users WHERE id = ?'</span>, [id]);</span><br><span class="line">  <span class="keyword">return</span> result.<span class="property">affectedRows</span> &gt; <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></h2>
+<h2 id="section"><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> mysql <span class="keyword">from</span> <span class="string">'mysql2/promise'</span>;</span><br><span class="line"><span class="keyword">import</span> dotenv <span class="keyword">from</span> <span class="string">'dotenv'</span>;</span><br><span class="line">dotenv.<span class="title function_">config</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建连接池</span></span><br><span class="line"><span class="keyword">const</span> pool = mysql.<span class="title function_">createPool</span>({</span><br><span class="line">  <span class="attr">host</span>: process.<span class="property">env</span>.<span class="property">DB_HOST</span>,</span><br><span class="line">  <span class="attr">user</span>: process.<span class="property">env</span>.<span class="property">DB_USER</span>,</span><br><span class="line">  <span class="attr">password</span>: process.<span class="property">env</span>.<span class="property">DB_PASSWORD</span>,</span><br><span class="line">  <span class="attr">database</span>: process.<span class="property">env</span>.<span class="property">DB_NAME</span>,</span><br><span class="line">  <span class="attr">waitForConnections</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">connectionLimit</span>: <span class="number">10</span>,</span><br><span class="line">  <span class="attr">queueLimit</span>: <span class="number">0</span></span><br><span class="line">});</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通用 SQL 查询函数</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">query</span>(<span class="params">sql, params</span>) {</span><br><span class="line">  <span class="keyword">const</span> [results] = <span class="keyword">await</span> pool.<span class="title function_">execute</span>(sql, params);</span><br><span class="line">  <span class="keyword">return</span> results;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// ----------------- 用户增删改查 -----------------</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取所有用户</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">getAllUsers</span>(<span class="params"></span>) {</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">query</span>(<span class="string">'SELECT * FROM users'</span>);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据 ID 获取用户</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">getUserById</span>(<span class="params">id</span>) {</span><br><span class="line">  <span class="keyword">const</span> results = <span class="keyword">await</span> <span class="title function_">query</span>(<span class="string">'SELECT * FROM users WHERE id = ?'</span>, [id]);</span><br><span class="line">  <span class="keyword">return</span> results[<span class="number">0</span>];</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 新增用户</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">createUser</span>(<span class="params">name, age</span>) {</span><br><span class="line">  <span class="keyword">const</span> result = <span class="keyword">await</span> <span class="title function_">query</span>(<span class="string">'INSERT INTO users (name, age) VALUES (?, ?)'</span>, [name, age]);</span><br><span class="line">  <span class="keyword">return</span> { <span class="attr">id</span>: result.<span class="property">insertId</span>, name, age };</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 更新用户</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">updateUser</span>(<span class="params">id, name, age</span>) {</span><br><span class="line">  <span class="keyword">await</span> <span class="title function_">query</span>(<span class="string">'UPDATE users SET name = ?, age = ? WHERE id = ?'</span>, [name, age, id]);</span><br><span class="line">  <span class="keyword">return</span> { id, name, age };</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除用户</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">deleteUser</span>(<span class="params">id</span>) {</span><br><span class="line">  <span class="keyword">const</span> result = <span class="keyword">await</span> <span class="title function_">query</span>(<span class="string">'DELETE FROM users WHERE id = ?'</span>, [id]);</span><br><span class="line">  <span class="keyword">return</span> result.<span class="property">affectedRows</span> &gt; <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></h2>
 <h2 id="阶段-h重构为-mvcmodel-view-controller分层">8. 阶段 H：重构为
 MVC（Model-View-Controller）分层</h2>
 <blockquote>
@@ -1070,174 +1070,404 @@ J：额外增强（可选但常用）</h2>
       </tags>
   </entry>
   <entry>
-    <title>curl使用教学</title>
-    <url>/2025/07/26/curl/</url>
+    <title>Latex常见数学公式</title>
+    <url>/2025/07/27/latex/</url>
     <content><![CDATA[<blockquote>
-<p>curl 是一个强大的命令行工具，用于在命令行或脚本中发送 HTTP
-请求，与服务器通信。它可以用来下载网页、调用 API
-接口、上传文件、发送表单等。几乎所有支持网络通信的协议 curl
-都能处理，包括 HTTP、HTTPS、FTP、SFTP、SMTP 等</p>
+<p>以下是常用的latex数学公式符号</p>
 </blockquote>
-<hr />
-<h2 id="一所以curl能干啥">一、所以curl能干啥</h2>
+<hr>
+<h2 id="一基本结构">一、基本结构</h2>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\(</span> a<span class="built_in">^</span>2 + b<span class="built_in">^</span>2 = c<span class="built_in">^</span>2 <span class="keyword">\)</span>           <span class="comment">% 行内公式</span></span><br><span class="line"><span class="keyword">\[</span> a<span class="built_in">^</span>2 + b<span class="built_in">^</span>2 = c<span class="built_in">^</span>2 <span class="keyword">\]</span>           <span class="comment">% 单独一行公式</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="二基本数学符号">二、基本数学符号</h2>
 <table>
-<colgroup>
-<col style="width: 12%" />
-<col style="width: 87%" />
-</colgroup>
 <thead>
 <tr>
-<th>功能</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>获取网页内容</td>
-<td><code>curl https://example.com</code></td>
-</tr>
-<tr>
-<td>下载文件</td>
-<td><code>curl -O https://example.com/file.zip</code></td>
-</tr>
-<tr>
-<td>发送 POST 请求</td>
-<td><code>curl -X POST -d "name=Koen&amp;age=20" https://example.com/api</code></td>
-</tr>
-<tr>
-<td>添加请求头</td>
-<td><code>curl -H "Authorization: Bearer TOKEN" https://api.example.com/data</code></td>
-</tr>
-<tr>
-<td>上传文件</td>
-<td><code>curl -F "file=@test.png" https://example.com/upload</code></td>
-</tr>
-<tr>
-<td>保存输出到文件</td>
-<td><code>curl https://example.com -o saved.html</code></td>
-</tr>
-</tbody>
-</table>
-<p>以下将对其功能进行详细解释</p>
-<hr />
-<h2 id="二利用curl获取网页内容">二、利用curl获取网页内容</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl url</span><br></pre></td></tr></table></figure>
-<p>会将get请求返回结果直接输出在命令行中</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://example.com -o index.html</span><br></pre></td></tr></table></figure>
-<p>保存指定内容到文件，地址为cmd当前地址</p>
-<hr />
-<h2 id="三发送post请求">三、发送post请求</h2>
-<p>一般用于测试接口是否正常 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -d <span class="string">&quot;name=Koen&amp;age=20&quot;</span> https://example.com/api</span><br></pre></td></tr></table></figure> 带上请求头和请求体：
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST https://api.example.com/data \</span><br><span class="line">  -H <span class="string">&quot;Authorization: Bearer abc123&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;&quot;key&quot;:&quot;va</span></span><br><span class="line"><span class="string">lue&quot;&#125;&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">     -d <span class="string">&#x27;&#123;&quot;username&quot;:&quot;koen&quot;,&quot;password&quot;:&quot;123456&quot;&#125;&#x27;</span> \</span><br><span class="line">     https://example.com/api</span><br></pre></td></tr></table></figure></p>
-<hr />
-<h2 id="四利用curl进行文件上传">四、利用curl进行文件上传</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -F <span class="string">&quot;file=@test.png&quot;</span> https://example.com/upload</span><br></pre></td></tr></table></figure>
-<p>-F就是指定用表单的方式进行字段的上传</p>
-<table>
-<colgroup>
-<col style="width: 18%" />
-<col style="width: 81%" />
-</colgroup>
-<thead>
-<tr>
-<th>部分</th>
 <th>含义</th>
+<th>LaTeX</th>
+<th>显示</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>file</code></td>
-<td>表单字段的名字。就像网页表单中
-<code>&lt;input type="file" name="file"&gt;</code>。</td>
+<td>加法</td>
+<td><code>a + b</code></td>
+<td><span class="math inline"><em>a</em> + <em>b</em></span></td>
 </tr>
 <tr>
-<td><code>=</code></td>
-<td>分隔字段名与数据（文件）</td>
+<td>减法</td>
+<td><code>a - b</code></td>
+<td><span class="math inline"><em>a</em> − <em>b</em></span></td>
 </tr>
 <tr>
-<td><code>@test.png</code></td>
-<td>表示上传当前目录下名为 <code>test.png</code> 的文件</td>
+<td>乘法</td>
+<td><code>a \times b</code></td>
+<td><span class="math inline"><em>a</em> × <em>b</em></span></td>
+</tr>
+<tr>
+<td>除法</td>
+<td><code>a \div b</code></td>
+<td><span class="math inline"><em>a</em> ÷ <em>b</em></span></td>
+</tr>
+<tr>
+<td>分数</td>
+<td><code>\frac{a}{b}</code></td>
+<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.798ex;" xmlns="http://www.w3.org/2000/svg" width="1.842ex" height="2.395ex" role="img" focusable="false" viewBox="0 -705.8 814.1 1058.6"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mi" transform="translate(220,394) scale(0.707)"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(255.4,-345) scale(0.707)"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g><rect width="574.1" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container></span></td>
+</tr>
+<tr>
+<td>次方</td>
+<td><code>a^n</code></td>
+<td><span class="math inline"><em>a</em><sup><em>n</em></sup></span></td>
+</tr>
+<tr>
+<td>开方</td>
+<td><code>\sqrt{a}</code></td>
+<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.491ex;" xmlns="http://www.w3.org/2000/svg" width="3.127ex" height="2.398ex" role="img" focusable="false" viewBox="0 -843 1382 1060"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msqrt"><g transform="translate(853,0)"><g data-mml-node="mi"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g></g><g data-mml-node="mo" transform="translate(0,-17)"><path data-c="221A" d="M95 178Q89 178 81 186T72 200T103 230T169 280T207 309Q209 311 212 311H213Q219 311 227 294T281 177Q300 134 312 108L397 -77Q398 -77 501 136T707 565T814 786Q820 800 834 800Q841 800 846 794T853 782V776L620 293L385 -193Q381 -200 366 -200Q357 -200 354 -197Q352 -195 256 15L160 225L144 214Q129 202 113 190T95 178Z"></path></g><rect width="529" height="60" x="853" y="723"></rect></g></g></g></svg></mjx-container></span></td>
+</tr>
+<tr>
+<td>n次根</td>
+<td><code>\sqrt[n]{a}</code></td>
+<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.491ex;" xmlns="http://www.w3.org/2000/svg" width="3.127ex" height="2.398ex" role="img" focusable="false" viewBox="0 -843 1382 1060"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mroot"><g><g data-mml-node="mi" transform="translate(853,0)"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g></g><g data-mml-node="mi" transform="translate(211.8,338.5) scale(0.5)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(0,-17)"><path data-c="221A" d="M95 178Q89 178 81 186T72 200T103 230T169 280T207 309Q209 311 212 311H213Q219 311 227 294T281 177Q300 134 312 108L397 -77Q398 -77 501 136T707 565T814 786Q820 800 834 800Q841 800 846 794T853 782V776L620 293L385 -193Q381 -200 366 -200Q357 -200 354 -197Q352 -195 256 15L160 225L144 214Q129 202 113 190T95 178Z"></path></g><rect width="529" height="60" x="853" y="723"></rect></g></g></g></svg></mjx-container></span></td>
 </tr>
 </tbody>
 </table>
-<p>其实就是post请求上传文件的方式</p>
-<hr />
-]]></content>
-      <categories>
-        <category>cmd</category>
-      </categories>
-      <tags>
-        <tag>cmd</tag>
-        <tag>curl</tag>
-        <tag>learn</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker 基本使用教程</title>
-    <url>/2025/07/26/docker-basic-usage/</url>
-    <content><![CDATA[<blockquote>
-<p>Docker
-可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的
-Linux 机器上，也可以实现虚拟化。</p>
-</blockquote>
-<hr />
-<h2 id="一docker的用途">一、Docker的用途</h2>
-<p>Docker 的主要用途，目前有三大类。</p>
-<ol type="1">
-<li><p>提供一次性的环境。比如，本地测试他人的软件、持续集成的时候提供单元测试和构建的环境。</p></li>
-<li><p>提供弹性的云服务。因为 Docker
-容器可以随开随关，很适合动态扩容和缩容。</p></li>
-<li><p>组建微服务架构。通过多个容器，一台机器可以跑多个服务，因此在本机就可以模拟出微服务架构。</p></li>
-</ol>
-<hr />
-<h2 id="二验证是否安装成功">二、验证是否安装成功</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="三image文件">三、Image文件</h2>
-<p>Docker 把应用程序及其依赖，打包在 <strong>image
-文件</strong>里面。只有通过这个文件，才能生成 Docker 容器。<br />
-image 文件可以看作是容器的模板，Docker 根据 image
-文件生成容器的实例。<br />
-同一个 image 文件，可以生成多个同时运行的容器实例。</p>
-<p>image 是一个 <strong>二进制文件</strong>。实际开发中，一个 image
-文件往往通过继承另一个 image 文件，加上一些个性化设置而生成。<br />
-举例来说，你可以在 Ubuntu 的 image 基础上，往里面加入 Apache
-服务器，形成你自己的 image。</p>
-<h3 id="列出本机的所有-image-文件">列出本机的所有 image 文件</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker image <span class="built_in">ls</span></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 🗑️ 删除 image 文件</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">$ docker image <span class="built_in">rm</span> [imageName]</span><br></pre></td></tr></table></figure>
-<p>image 文件是通用的，一台机器的 image
-文件拷贝到另一台机器，照样可以使用。</p>
-<p>一般来说，为了节省时间，我们应该尽量使用别人制作好的 image
-文件，而不是自己制作。 即使要定制，也应该基于别人的 image
-文件进行加工，而不是从零开始制作。</p>
-<h3 id="镜像仓库image-repository">镜像仓库（Image Repository）</h3>
-<p>为了方便共享，image 文件制作完成后，可以上传到网上的仓库。</p>
-<ul>
-<li>Docker 的官方仓库 <strong>Docker Hub</strong> 是最重要、最常用的
-image 仓库。</li>
-<li>此外，你也可以使用国内的镜像仓库（如阿里云、腾讯云）或者搭建私有仓库。</li>
-<li>出售自己制作的 image 文件也是可以的。</li>
-</ul>
-<h3 id="imagecontainer">image&amp;&amp;container</h3>
-<p>容器是镜像跑起来的实例，一个镜像可以有多个容器</p>
-<hr />
-<h2 id="四如何跑起来呢">四、如何跑起来呢</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker image pull &lt;project&gt;       <span class="comment">#将image文件从仓库抓取到本地</span></span><br><span class="line">docker container run &lt;project&gt;    <span class="comment">#将image文件在你的电脑上跑起来，新建容器</span></span><br><span class="line">docker container start [ID]       <span class="comment">#将已有的容器跑起来</span></span><br><span class="line">docker container <span class="built_in">kill</span> [ID]        <span class="comment">#手动终止容器的运行</span></span><br><span class="line">docker container <span class="built_in">ls</span>               <span class="comment">#在你电脑上正在跑起来的容器</span></span><br><span class="line">docker container <span class="built_in">ls</span> -all          <span class="comment">#列出本机所有容器，包括终止运行的容器</span></span><br><span class="line">docker container <span class="built_in">rm</span> [containerID] <span class="comment">#删除停止运行的容器，防止占用硬盘空间</span></span><br><span class="line">docker <span class="built_in">exec</span> -it my-nginx bash     <span class="comment">#在叫my-nginx的容器内，开启一个bash命令终端进去操作</span></span><br></pre></td></tr></table></figure>
-<p>注意，docker container run命令具有自动抓取 image
-文件的功能。如果发现本地没有指定的 image
-文件，就会从仓库自动抓取。因此，前面的docker image
-pull命令并不是必需的步骤。</p>
-<hr />
+<hr>
+<h2 id="三常用函数">三、常用函数</h2>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>LaTeX</th>
+<th>显示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>正弦</td>
+<td><code>\sin x</code></td>
+<td><span class="math inline">sin <em>x</em></span></td>
+</tr>
+<tr>
+<td>余弦</td>
+<td><code>\cos x</code></td>
+<td><span class="math inline">cos <em>x</em></span></td>
+</tr>
+<tr>
+<td>正切</td>
+<td><code>\tan x</code></td>
+<td><span class="math inline">tan <em>x</em></span></td>
+</tr>
+<tr>
+<td>对数</td>
+<td><code>\log x</code></td>
+<td><span class="math inline">log <em>x</em></span></td>
+</tr>
+<tr>
+<td>自然对数</td>
+<td><code>\ln x</code></td>
+<td><span class="math inline">ln <em>x</em></span></td>
+</tr>
+<tr>
+<td>指数函数</td>
+<td><code>e^x</code></td>
+<td><span class="math inline"><em>e</em><sup><em>x</em></sup></span></td>
+</tr>
+<tr>
+<td>极限</td>
+<td><code>\lim_{x\to0}</code></td>
+<td><span class="math inline">lim<sub><em>x</em> → 0</sub></span></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="四微积分符号">四、微积分符号</h2>
+<table>
+<colgroup>
+<col style="width: 6%">
+<col style="width: 46%">
+<col style="width: 46%">
+</colgroup>
+<thead>
+<tr>
+<th>含义</th>
+<th>LaTeX</th>
+<th>显示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>导数</td>
+<td><code>\frac{dy}{dx}</code></td>
+<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.798ex;" xmlns="http://www.w3.org/2000/svg" width="2.742ex" height="3.006ex" role="img" focusable="false" viewBox="0 -975.7 1212.2 1328.5"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mrow" transform="translate(249,485) scale(0.707)"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g><g data-mml-node="mi" transform="translate(520,0)"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g></g><g data-mml-node="mrow" transform="translate(220,-345) scale(0.707)"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g><g data-mml-node="mi" transform="translate(520,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g><rect width="972.2" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container></span></td>
+</tr>
+<tr>
+<td>偏导数</td>
+<td><code>\frac{\partial y}{\partial x}</code></td>
+<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.817ex;" xmlns="http://www.w3.org/2000/svg" width="2.816ex" height="3.058ex" role="img" focusable="false" viewBox="0 -990.5 1244.7 1351.7"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mrow" transform="translate(249,485) scale(0.707)"><g data-mml-node="mi"><path data-c="1D715" d="M202 508Q179 508 169 520T158 547Q158 557 164 577T185 624T230 675T301 710L333 715H345Q378 715 384 714Q447 703 489 661T549 568T566 457Q566 362 519 240T402 53Q321 -22 223 -22Q123 -22 73 56Q42 102 42 148V159Q42 276 129 370T322 465Q383 465 414 434T455 367L458 378Q478 461 478 515Q478 603 437 639T344 676Q266 676 223 612Q264 606 264 572Q264 547 246 528T202 508ZM430 306Q430 372 401 400T333 428Q270 428 222 382Q197 354 183 323T150 221Q132 149 132 116Q132 21 232 21Q244 21 250 22Q327 35 374 112Q389 137 409 196T430 306Z"></path></g><g data-mml-node="mi" transform="translate(566,0)"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g></g><g data-mml-node="mrow" transform="translate(220,-345.6) scale(0.707)"><g data-mml-node="mi"><path data-c="1D715" d="M202 508Q179 508 169 520T158 547Q158 557 164 577T185 624T230 675T301 710L333 715H345Q378 715 384 714Q447 703 489 661T549 568T566 457Q566 362 519 240T402 53Q321 -22 223 -22Q123 -22 73 56Q42 102 42 148V159Q42 276 129 370T322 465Q383 465 414 434T455 367L458 378Q478 461 478 515Q478 603 437 639T344 676Q266 676 223 612Q264 606 264 572Q264 547 246 528T202 508ZM430 306Q430 372 401 400T333 428Q270 428 222 382Q197 354 183 323T150 221Q132 149 132 116Q132 21 232 21Q244 21 250 22Q327 35 374 112Q389 137 409 196T430 306Z"></path></g><g data-mml-node="mi" transform="translate(566,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g><rect width="1004.7" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container></span></td>
+</tr>
+<tr>
+<td>积分</td>
+<td><code>\int_a^b f(x)dx</code></td>
+<td><span class="math inline">∫<sub><em>a</em></sub><sup><em>b</em></sup><em>f</em>(<em>x</em>) <em>d</em><em>x</em></span></td>
+</tr>
+<tr>
+<td>多重积分</td>
+<td><code>\iint</code>、<code>\iiint</code></td>
+<td><span class="math inline">∬  ∭</span></td>
+</tr>
+<tr>
+<td>无穷积分</td>
+<td><code>\int_{-\infty}^{\infty}</code></td>
+<td><span class="math inline">∫<sub>−∞</sub><sup>∞</sup></span></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="五求和与乘积">五、求和与乘积</h2>
+<table>
+<thead>
+<tr>
+<th>含义</th>
+<th>LaTeX</th>
+<th>显示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>求和</td>
+<td><code>\sum_{i=1}^n a_i</code></td>
+<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.777ex;" xmlns="http://www.w3.org/2000/svg" width="7.487ex" height="2.563ex" role="img" focusable="false" viewBox="0 -789.6 3309.3 1132.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="munderover"><g data-mml-node="mo"><path data-c="2211" d="M61 748Q64 750 489 750H913L954 640Q965 609 976 579T993 533T999 516H979L959 517Q936 579 886 621T777 682Q724 700 655 705T436 710H319Q183 710 183 709Q186 706 348 484T511 259Q517 250 513 244L490 216Q466 188 420 134T330 27L149 -187Q149 -188 362 -188Q388 -188 436 -188T506 -189Q679 -189 778 -162T936 -43Q946 -27 959 6H999L913 -249L489 -250Q65 -250 62 -248Q56 -246 56 -239Q56 -234 118 -161Q186 -81 245 -11L428 206Q428 207 242 462L57 717L56 728Q56 744 61 748Z"></path></g><g data-mml-node="mi" transform="translate(1089,477.1) scale(0.707)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="TeXAtom" transform="translate(1089,-285.4) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(345,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(1123,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g><g data-mml-node="msub" transform="translate(2453.3,0)"><g data-mml-node="mi"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(562,-150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container></span></td>
+</tr>
+<tr>
+<td>连乘积</td>
+<td><code>\prod_{i=1}^n a_i</code></td>
+<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.777ex;" xmlns="http://www.w3.org/2000/svg" width="7.234ex" height="2.563ex" role="img" focusable="false" viewBox="0 -789.6 3197.3 1132.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="munderover"><g data-mml-node="mo"><path data-c="220F" d="M158 656Q147 684 131 694Q110 707 69 710H55V750H888V710H874Q840 708 820 698T795 678T786 656V-155Q798 -206 874 -210H888V-250H570V-210H584Q618 -208 638 -197T663 -178T673 -155V710H270V277L271 -155Q283 -206 359 -210H373V-250H55V-210H69Q103 -208 123 -197T148 -178T158 -155V656Z"></path></g><g data-mml-node="mi" transform="translate(977,477.1) scale(0.707)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="TeXAtom" transform="translate(977,-285.4) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(345,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(1123,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g><g data-mml-node="msub" transform="translate(2341.3,0)"><g data-mml-node="mi"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(562,-150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container></span></td>
+</tr>
+<tr>
+<td>上下限形式</td>
+<td><code>\lim_{x\to0}</code></td>
+<td><span class="math inline">lim<sub><em>x</em> → 0</sub></span></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="六矩阵">六、矩阵</h2>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{bmatrix}</span><br><span class="line">a <span class="built_in">&amp;</span> b <span class="keyword">\\</span></span><br><span class="line">c <span class="built_in">&amp;</span> d</span><br><span class="line"><span class="keyword">\end</span>{bmatrix}</span><br></pre></td></tr></table></figure>
+<p>显示为：</p>
+<p><span class="math display"><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -2.149ex;" xmlns="http://www.w3.org/2000/svg" width="7.025ex" height="5.43ex" role="img" focusable="false" viewBox="0 -1450 3105 2400"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mrow"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="5B" d="M247 -949V1450H516V1388H309V-887H516V-949H247Z"></path></g><g data-mml-node="mtable" transform="translate(528,0)"><g data-mml-node="mtr" transform="translate(0,700)"><g data-mml-node="mtd"><g data-mml-node="mi"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g></g><g data-mml-node="mtd" transform="translate(1574.5,0)"><g data-mml-node="mi"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g></g></g><g data-mml-node="mtr" transform="translate(0,-700)"><g data-mml-node="mtd" transform="translate(48,0)"><g data-mml-node="mi"><path data-c="1D450" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path></g></g><g data-mml-node="mtd" transform="translate(1529,0)"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g></g></g></g><g data-mml-node="mo" transform="translate(2577,0) translate(0 -0.5)"><path data-c="5D" d="M11 1388V1450H280V-949H11V-887H218V1388H11Z"></path></g></g></g></g></svg></mjx-container></span></p>
+<hr>
+<h2 id="七逻辑与集合符号">七、逻辑与集合符号</h2>
+<table>
+<thead>
+<tr>
+<th>含义</th>
+<th>LaTeX</th>
+<th>显示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>属于</td>
+<td><code>\in</code></td>
+<td><span class="math inline">∈</span></td>
+</tr>
+<tr>
+<td>不属于</td>
+<td><code>\notin</code></td>
+<td><span class="math inline">∉</span></td>
+</tr>
+<tr>
+<td>包含于</td>
+<td><code>\subset</code></td>
+<td><span class="math inline">⊂</span></td>
+</tr>
+<tr>
+<td>真包含</td>
+<td><code>\subsetneq</code></td>
+<td><span class="math inline">⊊</span></td>
+</tr>
+<tr>
+<td>交集</td>
+<td><code>\cap</code></td>
+<td><span class="math inline">∩</span></td>
+</tr>
+<tr>
+<td>并集</td>
+<td><code>\cup</code></td>
+<td><span class="math inline">∪</span></td>
+</tr>
+<tr>
+<td>空集</td>
+<td><code>\emptyset</code></td>
+<td><span class="math inline">∅</span></td>
+</tr>
+<tr>
+<td>全体实数</td>
+<td><code>\mathbb{R}</code></td>
+<td><span class="math inline">ℝ</span></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="八常见关系符号">八、常见关系符号</h2>
+<table>
+<thead>
+<tr>
+<th>含义</th>
+<th>LaTeX</th>
+<th>显示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>大于</td>
+<td><code>&gt;</code></td>
+<td><span class="math inline">&gt;</span></td>
+</tr>
+<tr>
+<td>小于</td>
+<td><code>&lt;</code></td>
+<td><span class="math inline">&lt;</span></td>
+</tr>
+<tr>
+<td>大于等于</td>
+<td><code>\ge</code></td>
+<td><span class="math inline">≥</span></td>
+</tr>
+<tr>
+<td>小于等于</td>
+<td><code>\le</code></td>
+<td><span class="math inline">≤</span></td>
+</tr>
+<tr>
+<td>不等于</td>
+<td><code>\neq</code></td>
+<td><span class="math inline">≠</span></td>
+</tr>
+<tr>
+<td>恒等于</td>
+<td><code>\equiv</code></td>
+<td><span class="math inline">≡</span></td>
+</tr>
+<tr>
+<td>约等于</td>
+<td><code>\approx</code></td>
+<td><span class="math inline">≈</span></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="九其他符号">九、其他符号</h2>
+<table>
+<thead>
+<tr>
+<th>符号/用途</th>
+<th>LaTeX</th>
+<th>显示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>向量</td>
+<td><code>\vec{v}</code></td>
+<td><span class="math inline"><em>v⃗</em></span></td>
+</tr>
+<tr>
+<td>点积</td>
+<td><code>\cdot</code></td>
+<td><span class="math inline"><em>a</em> ⋅ <em>b</em></span></td>
+</tr>
+<tr>
+<td>交叉乘积</td>
+<td><code>\times</code></td>
+<td><span class="math inline"><em>a</em> × <em>b</em></span></td>
+</tr>
+<tr>
+<td>垂直</td>
+<td><code>\perp</code></td>
+<td><span class="math inline">⟂</span></td>
+</tr>
+<tr>
+<td>平行</td>
+<td><code>\parallel</code></td>
+<td><span class="math inline">∥</span></td>
+</tr>
+<tr>
+<td>推出</td>
+<td><code>\Rightarrow</code></td>
+<td><span class="math inline">⇒</span></td>
+</tr>
+<tr>
+<td>等价</td>
+<td><code>\Leftrightarrow</code></td>
+<td><span class="math inline">⇔</span></td>
+</tr>
+</tbody>
+</table>
+<hr>
 ]]></content>
       <categories>
         <category>code</category>
       </categories>
       <tags>
-        <tag>learn</tag>
-        <tag>container</tag>
-        <tag>docker</tag>
-        <tag>linux</tag>
-        <tag>virtual</tag>
+        <tag>math</tag>
+        <tag>latex</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常见BUG汇总</title>
+    <url>/2025/07/27/issue/</url>
+    <content><![CDATA[<h2 id="一markdown">一、Markdown</h2>
+<ol type="1">
+<li>为什么vscode编辑md文件十分卡顿</li>
+</ol>
+<p>解决方法:禁用cpp extension pack扩展</p>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>像前端package.json那样管理python依赖</title>
+    <url>/2025/07/29/pipenv/</url>
+    <content><![CDATA[<ol type="1">
+<li>首先下载管理用的包</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install pipenv</span><br></pre></td></tr></table></figure>
+<ol start="2" type="1">
+<li>初始化pipfile</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pipenv install</span><br></pre></td></tr></table></figure>
+<p>你的目录下就出现了pipfile和pipfile.lock，对于package.json和package-lock.json</p>
+<ol start="3" type="1">
+<li>将已有的依赖存放进pipenv中</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt <span class="comment">#将已有依赖输出到requirements.txt文件下</span></span><br></pre></td></tr></table></figure>
+<p>将txt文件转码(powershell内输入)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$content</span> = Get-Content requirements.txt</span><br><span class="line">[System.IO.File]::WriteAllLines(<span class="string">"fixed_requirements.txt"</span>, <span class="variable">$content</span>, (New-Object System.Text.UTF8Encoding <span class="variable">$false</span>))</span><br></pre></td></tr></table></figure>
+<p>最后丢尽pipfile</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pipenv install -r fixed_requirements.txt</span><br></pre></td></tr></table></figure>
+<ol start="4" type="1">
+<li>如何调用</li>
+</ol>
+<p>非常简单，像<code>npm i</code>一样我们只需要</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pipenv install</span><br></pre></td></tr></table></figure>
+<p>就可以一键安装python的所有依赖项</p>
+<ol start="5" type="1">
+<li>在一些小项目里直接利用requirements.txt一键安装也可以</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p>利用如上指令可以一键安装依赖</p>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>pipenv</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -1281,90 +1511,6 @@ id="一在项目根目录安装electorn-forge">一、在项目根目录安装ele
         <tag>electron</tag>
         <tag>web</tag>
         <tag>desk</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git 基本使用教程</title>
-    <url>/2025/07/25/git-basic-usage/</url>
-    <content><![CDATA[<blockquote>
-<p>Git
-是一个分布式版本控制系统，适用于代码版本管理与团队协作开发。本文将简要介绍
-Git
-的一些常用操作命令，包括创建仓库、分支管理以及删除文件/分支的方法。</p>
-</blockquote>
-<hr />
-<h2 id="一初始化仓库">一、初始化仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
-<ul>
-<li>在当前目录初始化一个 Git 仓库。</li>
-<li>会创建 <code>.git</code> 文件夹作为版本控制目录。</li>
-</ul>
-<hr />
-<h2 id="二克隆远程仓库">二、克隆远程仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;仓库地址&gt;</span><br><span class="line">```****</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/username/repo.git</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="三添加与提交文件">三、添加与提交文件</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add &lt;文件或目录&gt;</span><br><span class="line">git commit -m <span class="string">&quot;提交说明&quot;</span></span><br></pre></td></tr></table></figure>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;添加初始项目文件&quot;</span></span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="四查看状态与历史">四、查看状态与历史</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status        <span class="comment"># 查看当前状态</span></span><br><span class="line">git <span class="built_in">log</span>           <span class="comment"># 查看提交历史</span></span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="五分支操作">五、分支操作</h2>
-<h3 id="创建新分支">创建新分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="切换分支">切换分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch &lt;分支名&gt;</span><br><span class="line"><span class="comment"># 或（旧写法）</span></span><br><span class="line">git checkout &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="创建并切换新分支">创建并切换新分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch -c &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="查看所有分支">查看所有分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="六合并分支">六、合并分支</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git merge &lt;被合并的分支&gt;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注意：需要先切换到目标分支，再合并。</p>
-</blockquote>
-<hr />
-<h2 id="七删除操作">七、删除操作</h2>
-<h3 id="删除文件">删除文件</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">rm</span> &lt;文件名&gt;</span><br><span class="line">git commit -m <span class="string">&quot;删除了某个文件&quot;</span></span><br></pre></td></tr></table></figure>
-<h3 id="撤销删除误删恢复">撤销删除（误删恢复）</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -- &lt;文件名&gt;</span><br></pre></td></tr></table></figure>
-<hr />
-<h3 id="删除本地分支">删除本地分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -d &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>-d</code> 是安全删除（合并过的才允许删）</li>
-<li><code>-D</code> 是强制删除（无论是否合并）</li>
-</ul>
-<h3 id="删除远程分支">删除远程分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin --delete &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="八推送与拉取">八、推送与拉取</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin &lt;分支名&gt;   <span class="comment"># 推送到远程</span></span><br><span class="line">git pull origin &lt;分支名&gt;   <span class="comment"># 拉取最新代码</span></span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="九查看远程仓库">九、查看远程仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="十总结">十、总结</h2>
-<p>Git
-是开发者日常工作中不可或缺的工具，掌握它可以大大提升协作效率与版本管理能力。希望本文能帮助你快速上手
-Git 的基本操作。</p>
-<hr />
-<blockquote>
-<p>如需进一步学习，可以参考 <a href="https://git-scm.com/book/zh/v2">Pro
-Git 中文版</a>。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>learn</tag>
-        <tag>repo</tag>
-        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -1523,400 +1669,6 @@ snippets告等）</li>
       <tags>
         <tag>math</tag>
         <tag>latex</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>像前端package.json那样管理python依赖</title>
-    <url>/2025/07/29/pipenv/</url>
-    <content><![CDATA[<ol type="1">
-<li>首先下载管理用的包</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install pipenv</span><br></pre></td></tr></table></figure>
-<ol start="2" type="1">
-<li>初始化pipfile</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pipenv install</span><br></pre></td></tr></table></figure>
-<p>你的目录下就出现了pipfile和pipfile.lock，对于package.json和package-lock.json</p>
-<ol start="3" type="1">
-<li>将已有的依赖存放进pipenv中</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt <span class="comment">#将已有依赖输出到requirements.txt文件下</span></span><br></pre></td></tr></table></figure>
-<p>将txt文件转码(powershell内输入)</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$content</span> = Get-Content requirements.txt</span><br><span class="line">[System.IO.File]::WriteAllLines(<span class="string">"fixed_requirements.txt"</span>, <span class="variable">$content</span>, (New-Object System.Text.UTF8Encoding <span class="variable">$false</span>))</span><br></pre></td></tr></table></figure>
-<p>最后丢尽pipfile</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pipenv install -r fixed_requirements.txt</span><br></pre></td></tr></table></figure>
-<ol start="4" type="1">
-<li>如何调用</li>
-</ol>
-<p>非常简单，像<code>npm i</code>一样我们只需要</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pipenv install</span><br></pre></td></tr></table></figure>
-<p>就可以一键安装python的所有依赖项</p>
-<ol start="5" type="1">
-<li>在一些小项目里直接利用requirements.txt一键安装也可以</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
-<p>利用如上指令可以一键安装依赖</p>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>pipenv</tag>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>scipy基本模块及其使用</title>
-    <url>/2025/08/11/scipy/</url>
-    <content><![CDATA[<h2 id="一常量模块constants">一、常量模块(constants)</h2>
-<p>以下是 <code>scipy.constants</code> 模块中主要常量的分类表格：</p>
-<hr>
-<h3 id="数学常数"><strong>1.1 数学常数</strong></h3>
-<table>
-<thead>
-<tr>
-<th>常量名</th>
-<th>描述</th>
-<th>值 (近似)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>pi</code></td>
-<td>圆周率 π</td>
-<td>3.141592653589793</td>
-</tr>
-<tr>
-<td><code>golden</code></td>
-<td>黄金比例 (φ)</td>
-<td>1.618033988749895</td>
-</tr>
-<tr>
-<td><code>e</code></td>
-<td>自然对数的底 (e)</td>
-<td>2.718281828459045</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3 id="通用物理常数"><strong>1.2 通用物理常数</strong></h3>
-<table>
-<colgroup>
-<col style="width: 24%">
-<col style="width: 37%">
-<col style="width: 38%">
-</colgroup>
-<thead>
-<tr>
-<th>常量名</th>
-<th>描述</th>
-<th>值 (单位)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>c</code></td>
-<td>真空光速</td>
-<td>299792458.0 m/s</td>
-</tr>
-<tr>
-<td><code>h</code></td>
-<td>普朗克常数</td>
-<td>6.62607015e-34 J·s</td>
-</tr>
-<tr>
-<td><code>hbar</code></td>
-<td>约化普朗克常数 (h/2π)</td>
-<td>1.054571817e-34 J·s</td>
-</tr>
-<tr>
-<td><code>G</code></td>
-<td>万有引力常数</td>
-<td>6.67430e-11 m³/(kg·s²)</td>
-</tr>
-<tr>
-<td><code>g</code></td>
-<td>标准重力加速度</td>
-<td>9.80665 m/s²</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3 id="电磁学常数"><strong>1.3 电磁学常数</strong></h3>
-<table>
-<colgroup>
-<col style="width: 24%">
-<col style="width: 37%">
-<col style="width: 38%">
-</colgroup>
-<thead>
-<tr>
-<th>常量名</th>
-<th>描述</th>
-<th>值 (单位)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>mu_0</code></td>
-<td>真空磁导率</td>
-<td>1.25663706212e-6 N/A²</td>
-</tr>
-<tr>
-<td><code>epsilon_0</code></td>
-<td>真空电容率</td>
-<td>8.8541878128e-12 F/m</td>
-</tr>
-<tr>
-<td><code>e</code> (或 <code>elementary_charge</code>)</td>
-<td>元电荷</td>
-<td>1.602176634e-19 C</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3 id="原子与核物理常数"><strong>1.4 原子与核物理常数</strong></h3>
-<table>
-<thead>
-<tr>
-<th>常量名</th>
-<th>描述</th>
-<th>值 (单位)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>m_e</code></td>
-<td>电子质量</td>
-<td>9.1093837015e-31 kg</td>
-</tr>
-<tr>
-<td><code>m_p</code></td>
-<td>质子质量</td>
-<td>1.67262192369e-27 kg</td>
-</tr>
-<tr>
-<td><code>m_n</code></td>
-<td>中子质量</td>
-<td>1.67492749804e-27 kg</td>
-</tr>
-<tr>
-<td><code>Rydberg</code></td>
-<td>里德伯常数</td>
-<td>10973731.568160 1/m</td>
-</tr>
-<tr>
-<td><code>alpha</code></td>
-<td>精细结构常数</td>
-<td>0.0072973525693</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3 id="化学相关常数"><strong>1.5 化学相关常数</strong></h3>
-<table>
-<thead>
-<tr>
-<th>常量名</th>
-<th>描述</th>
-<th>值 (单位)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>N_A</code></td>
-<td>阿伏伽德罗常数</td>
-<td>6.02214076e23 1/mol</td>
-</tr>
-<tr>
-<td><code>R</code></td>
-<td>通用气体常数</td>
-<td>8.314462618 J/(mol·K)</td>
-</tr>
-<tr>
-<td><code>atomic_mass</code></td>
-<td>原子质量单位 (u)</td>
-<td>1.66053906660e-27 kg</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3 id="常用单位换算因子"><strong>1.6 常用单位换算因子</strong></h3>
-<table>
-<thead>
-<tr>
-<th>常量名</th>
-<th>描述</th>
-<th>换算关系</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>inch</code></td>
-<td>英寸 → 米</td>
-<td>0.0254 m</td>
-</tr>
-<tr>
-<td><code>foot</code></td>
-<td>英尺 → 米</td>
-<td>0.3048 m</td>
-</tr>
-<tr>
-<td><code>mile</code></td>
-<td>英里 → 米</td>
-<td>1609.344 m</td>
-</tr>
-<tr>
-<td><code>lb</code></td>
-<td>磅 → 千克</td>
-<td>0.45359237 kg</td>
-</tr>
-<tr>
-<td><code>eV</code></td>
-<td>电子伏特 → 焦耳</td>
-<td>1.602176634e-19 J</td>
-</tr>
-<tr>
-<td><code>atm</code></td>
-<td>标准大气压 → 帕斯卡</td>
-<td>101325.0 Pa</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3 id="温度相关"><strong>1.7 温度相关</strong></h3>
-<table>
-<thead>
-<tr>
-<th>常量名</th>
-<th>描述</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>zero_Celsius</code></td>
-<td>0°C 对应的开尔文温度</td>
-<td>273.15 K</td>
-</tr>
-<tr>
-<td><code>degree_Fahrenheit</code></td>
-<td>1°F 对应的开尔文间隔</td>
-<td>0.555555… K</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3 id="查找所有常量的方法"><strong>查找所有常量的方法</strong></h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> constants</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出所有常量</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">dir</span>(constants))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索包含关键词的常量（例如 'mass'）</span></span><br><span class="line"><span class="built_in">print</span>(constants.find(<span class="string">'mass'</span>))</span><br></pre></td></tr></table></figure>
-<h2 id="二优化器optimize">二、优化器(optimize)</h2>
-<p>scipy的优化器是数学建模的工具，它的核心目标是
-寻找函数的最小值（或最大值）、拟合模型、求解方程或系统，适用于传统数学问题<code>而非深度学习</code>(注意和pytorch这些的优化器函数区分开来)</p>
-<h3 id="无约束优化"><strong>2.1 无约束优化</strong></h3>
-<ul>
-<li>用途:实现查找给定区间内函数的最小值</li>
-<li>实现：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">minimize_scalar() <span class="comment">#单变量函数</span></span><br><span class="line">minimize()        <span class="comment">#多变量函数</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>查找方法：
-<ul>
-<li>单变量： <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brent: 使用Brent方法（结合抛物线插值和黄金分割法）</span><br><span class="line"></span><br><span class="line">bounded: 在有界区间内搜索</span><br><span class="line"></span><br><span class="line">golden: 黄金分割法</span><br></pre></td></tr></table></figure></li>
-<li>多变量 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Nelder-Mead: 单纯形法，不需要梯度</span><br><span class="line"></span><br><span class="line">BFGS: 拟牛顿法，需要梯度</span><br><span class="line"></span><br><span class="line">CG: 共轭梯度法</span><br><span class="line"></span><br><span class="line">L-BFGS-B: 有限内存BFGS，适用于大规模问题</span><br><span class="line"></span><br><span class="line">TNC: 截断牛顿法</span><br></pre></td></tr></table></figure></li>
-</ul></li>
-<li>实现实例： <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">from scipy.optimize import minimize</span><br><span class="line"></span><br><span class="line">def rosen(x):</span><br><span class="line">    <span class="string">""</span><span class="string">"Rosenbrock函数"</span><span class="string">""</span></span><br><span class="line">    <span class="built_in">return</span> <span class="built_in">sum</span>(100.0*(x[1:]-x[:-1]**2.0)**2.0 + (1-x[:-1])**2.0)</span><br><span class="line"></span><br><span class="line">x0 = [1.3, 0.7, 0.8, 1.9, 1.2] <span class="comment">#x0 是多维优化问题（如 minimize）的 初始猜测值（initial guess）。优化算法需要一个起点开始搜索最小值。</span></span><br><span class="line">res = minimize(rosen, x0, method=<span class="string">'BFGS'</span>, options={<span class="string">'disp'</span>: True}) <span class="comment">#res 是 minimize 或 minimize_scalar 函数的返回结果，它是一个 OptimizeResult 对象 </span></span><br><span class="line"><span class="built_in">print</span>(res.x)</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>其中res的解有如下内容</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># res 包含的重要属性：</span></span><br><span class="line">res.x       <span class="comment"># 最优解（最小值点）</span></span><br><span class="line">res.fun     <span class="comment"># 最优解处的函数值</span></span><br><span class="line">res.nfev    <span class="comment"># 函数评估次数</span></span><br><span class="line">res.nit     <span class="comment"># 迭代次数</span></span><br><span class="line">res.success <span class="comment"># 是否成功收敛</span></span><br><span class="line">res.message <span class="comment"># 状态描述（如收敛信息）</span></span><br><span class="line">res.jac     <span class="comment"># 最优解处的梯度（一阶导数）</span></span><br><span class="line">res.hess    <span class="comment"># 最优解处的Hessian矩阵（二阶导数，如果可用）</span></span><br></pre></td></tr></table></figure>
-<h3 id="全局优化"><strong>2.2 全局优化</strong></h3>
-<ul>
-<li>用途：避免传统优化算法（如 minimize）陷入局部最优解，转而寻找
-全局最优解。</li>
-<li>实现函数：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">basinhopping(): 盆地跳跃算法basinhopping(): 盆地跳跃算法</span><br><span class="line"></span><br><span class="line">shgo(): 单纯形同伦全局优化</span><br><span class="line"></span><br><span class="line">differential_evolution(): 差分进化算法</span><br></pre></td></tr></table></figure>
-<ul>
-<li>实例： <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">from scipy.optimize import basinhopping</span><br><span class="line"></span><br><span class="line">def func(x):</span><br><span class="line">    <span class="built_in">return</span> np.cos(14.5 * x - 0.3) + (x + 0.2) * x</span><br><span class="line"></span><br><span class="line">res = basinhopping(func, x0=1.0)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"全局最小值：x = %.4f, f(x) = %.4f"</span> % (res.x, res.fun))</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="最小二乘拟合"><strong>2.3 最小二乘拟合</strong></h3>
-<ul>
-<li><p>用途：解决非线性最小二乘问题，常用于曲线拟合。</p></li>
-<li><p>实现函数： <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">least_squares(): 解决非线性最小二乘问题</span><br><span class="line"></span><br><span class="line">curve_fit(): 使用最小二乘法拟合曲线</span><br></pre></td></tr></table></figure></p></li>
-<li><p>实例：</p></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">from scipy.optimize import curve_fit</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义模型函数</span></span><br><span class="line">def func(x, a, b, c):</span><br><span class="line">    <span class="built_in">return</span> a * np.exp(-b * x) + c</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成带噪声的数据</span></span><br><span class="line">xdata = np.linspace(0, 4, 50)</span><br><span class="line">y = func(xdata, 2.5, 1.3, 0.5)</span><br><span class="line">ydata = y + 0.2 * np.random.normal(size=len(xdata))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拟合数据</span></span><br><span class="line">popt, pcov = curve_fit(func, xdata, ydata)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"拟合参数："</span>, popt) <span class="comment">#返回[a,b,c]</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"协方差矩阵"</span>, pcov) <span class="comment">#评估可靠性</span></span><br></pre></td></tr></table></figure>
-<p>[a,b,c]-&gt; <span class="math inline"><em>f</em>(<em>x</em>) = <em>a</em><em>e</em><sup>−<em>b</em><em>x</em></sup> + <em>c</em></span></p>
-<h3 id="方程求根"><strong>2.4 方程求根</strong></h3>
-<ul>
-<li><p>方法： <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root_scalar(): 单变量方程求根 <span class="comment">#brentq, brenth, ridder, bisect, newton: 特定算法</span></span><br><span class="line"></span><br><span class="line">root(): 多变量方程组求根</span><br></pre></td></tr></table></figure></p></li>
-<li><p>实现： <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> root_scalar</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x**<span class="number">3</span> - <span class="number">1</span>  <span class="comment"># 寻找x^3 = 1的解</span></span><br><span class="line"></span><br><span class="line">sol = root_scalar(f, bracket=[<span class="number">0</span>, <span class="number">2</span>], method=<span class="string">'brentq'</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"方程的根："</span>, sol.root)</span><br></pre></td></tr></table></figure> <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> root</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> [x[<span class="number">0</span>] + <span class="number">0.5</span> * (x[<span class="number">0</span>] - x[<span class="number">1</span>])**<span class="number">3</span> - <span class="number">1.0</span>,</span><br><span class="line">            <span class="number">0.5</span> * (x[<span class="number">1</span>] - x[<span class="number">0</span>])**<span class="number">3</span> + x[<span class="number">1</span>]]</span><br><span class="line"></span><br><span class="line">sol = root(func, [<span class="number">0</span>, <span class="number">0</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"方程组的解："</span>, sol.x)</span><br></pre></td></tr></table></figure></p></li>
-</ul>
-<h3 id="线性规划"><strong>2.5 线性规划</strong></h3>
-<ul>
-<li>什么是线性规划：结构化决策框架，其核心是在一个由线性关系定义的几何空间中，寻找最优的”角落”解。比如如下这个问题
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">想象你是一个工厂经理，需要决定生产两种产品A和B的数量：</span><br><span class="line"></span><br><span class="line">生产A每个利润100元，B每个利润150元</span><br><span class="line"></span><br><span class="line">但受限于：</span><br><span class="line"></span><br><span class="line">原材料X：生产A消耗3kg，B消耗2kg，总共只有120kg</span><br><span class="line"></span><br><span class="line">工时：生产A需要2小时，B需要4小时，总共只有160小时</span><br><span class="line"></span><br><span class="line">线性规划就是帮你找到在资源限制下能获得最大利润的生产方案</span><br><span class="line"></span><br></pre></td></tr></table></figure> <span class="math display"><em>p</em><em>r</em><em>o</em><em>f</em><em>i</em><em>t</em> = −100<em>x</em> − 150<em>y</em></span>
-<span class="math display"><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -2.149ex;" xmlns="http://www.w3.org/2000/svg" width="19.774ex" height="5.43ex" role="img" focusable="false" viewBox="0 -1450 8740.2 2400"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mrow"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="5B" d="M247 -949V1450H516V1388H309V-887H516V-949H247Z"></path></g><g data-mml-node="mtable" transform="translate(528,0)"><g data-mml-node="mtr" transform="translate(0,700)"><g data-mml-node="mtd"><g data-mml-node="mn"><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"></path></g></g><g data-mml-node="mtd" transform="translate(1500,0)"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g><g data-mml-node="mtr" transform="translate(0,-700)"><g data-mml-node="mtd"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g><g data-mml-node="mtd" transform="translate(1500,0)"><g data-mml-node="mn"><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"></path></g></g></g></g><g data-mml-node="mo" transform="translate(2528,0) translate(0 -0.5)"><path data-c="5D" d="M11 1388V1450H280V-949H11V-887H218V1388H11Z"></path></g></g><g data-mml-node="mrow" transform="translate(3222.7,0)"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="5B" d="M247 -949V1450H516V1388H309V-887H516V-949H247Z"></path></g><g data-mml-node="mtable" transform="translate(528,0)"><g data-mml-node="mtr" transform="translate(0,700)"><g data-mml-node="mtd"><g data-mml-node="mi"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g></g><g data-mml-node="mtr" transform="translate(0,-700)"><g data-mml-node="mtd" transform="translate(41,0)"><g data-mml-node="mi"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g></g></g></g><g data-mml-node="mo" transform="translate(1100,0) translate(0 -0.5)"><path data-c="5D" d="M11 1388V1450H280V-949H11V-887H218V1388H11Z"></path></g></g><g data-mml-node="mo" transform="translate(5128.4,0)"><path data-c="2264" d="M674 636Q682 636 688 630T694 615T687 601Q686 600 417 472L151 346L399 228Q687 92 691 87Q694 81 694 76Q694 58 676 56H670L382 192Q92 329 90 331Q83 336 83 348Q84 359 96 365Q104 369 382 500T665 634Q669 636 674 636ZM84 -118Q84 -108 99 -98H678Q694 -104 694 -118Q694 -130 679 -138H98Q84 -131 84 -118Z"></path></g><g data-mml-node="mrow" transform="translate(6184.2,0)"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="5B" d="M247 -949V1450H516V1388H309V-887H516V-949H247Z"></path></g><g data-mml-node="mtable" transform="translate(528,0)"><g data-mml-node="mtr" transform="translate(0,700)"><g data-mml-node="mtd"><g data-mml-node="mn"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z" transform="translate(500,0)"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(1000,0)"></path></g></g></g><g data-mml-node="mtr" transform="translate(0,-700)"><g data-mml-node="mtd"><g data-mml-node="mn"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="36" d="M42 313Q42 476 123 571T303 666Q372 666 402 630T432 550Q432 525 418 510T379 495Q356 495 341 509T326 548Q326 592 373 601Q351 623 311 626Q240 626 194 566Q147 500 147 364L148 360Q153 366 156 373Q197 433 263 433H267Q313 433 348 414Q372 400 396 374T435 317Q456 268 456 210V192Q456 169 451 149Q440 90 387 34T253 -22Q225 -22 199 -14T143 16T92 75T56 172T42 313ZM257 397Q227 397 205 380T171 335T154 278T148 216Q148 133 160 97T198 39Q222 21 251 21Q302 21 329 59Q342 77 347 104T352 209Q352 289 347 316T329 361Q302 397 257 397Z" transform="translate(500,0)"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(1000,0)"></path></g></g></g></g><g data-mml-node="mo" transform="translate(2028,0) translate(0 -0.5)"><path data-c="5D" d="M11 1388V1450H280V-949H11V-887H218V1388H11Z"></path></g></g></g></g></svg></mjx-container></span></li>
-</ul>
-<p>抽象一下就是： 输入: (A, b, c) → 处理: 代数变换 → 输出: x*</p>
-<p>其中：</p>
-A 是约束矩阵（系统限制的编码）=&gt;不等式左侧系数 A= $
-<p>$</p>
-<p>b 是资源向量（约束条件的量化）=&gt;不等式右侧系数 b=[120,160]</p>
-<p>c 是价值向量（目标函数的权重）=&gt;利润最大化 c=[-100,-150]
-(线性规划默认求最小值问题) <span class="math inline"><em>f</em>(<em>x</em>) = −100<em>x</em> − 150<em>y</em></span></p>
-<p>x* 是最优决策（系统输出的解决方案）</p>
-<ul>
-<li>实现实例:</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> linprog</span><br><span class="line"></span><br><span class="line"><span class="comment"># 最小化 c^T x</span></span><br><span class="line"><span class="comment"># 约束条件: A_ub x &lt;= b_ub, A_eq x = b_eq</span></span><br><span class="line">c = [-<span class="number">1</span>, <span class="number">4</span>]  <span class="comment"># 目标函数系数</span></span><br><span class="line">A_ub = [[-<span class="number">3</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>]]  <span class="comment"># 不等式约束矩阵</span></span><br><span class="line">b_ub = [<span class="number">6</span>, <span class="number">4</span>]             <span class="comment"># 不等式约束右侧</span></span><br><span class="line"></span><br><span class="line">res = linprog(c, A_ub=A_ub, b_ub=b_ub, bounds=(<span class="literal">None</span>, <span class="literal">None</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"最优解："</span>, res.x)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"最优值："</span>, res.fun)</span><br></pre></td></tr></table></figure>
-<h3 id="约束优化"><strong>2.6 约束优化</strong></h3>
-<ul>
-<li>用途：在有等式或不等式约束条件下优化目标函数。</li>
-<li>方法：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">minimize() 配合约束参数</span><br><span class="line"></span><br><span class="line">SLSQP: 序列二次规划算法</span><br><span class="line"></span><br><span class="line">trust-constr: 信赖域算法</span><br></pre></td></tr></table></figure>
-<ul>
-<li>实现：</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> minimize</span><br><span class="line"></span><br><span class="line"><span class="comment"># 目标函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">objective</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x[<span class="number">0</span>]*x[<span class="number">3</span>]*(x[<span class="number">0</span>]+x[<span class="number">1</span>]+x[<span class="number">2</span>])+x[<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 约束条件</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">constraint1</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x[<span class="number">0</span>]*x[<span class="number">1</span>]*x[<span class="number">2</span>]*x[<span class="number">3</span>]-<span class="number">25.0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">constraint2</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span>(x**<span class="number">2</span>)-<span class="number">40.0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始猜测</span></span><br><span class="line">x0 = [<span class="number">1</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置约束</span></span><br><span class="line">con1 = {<span class="string">'type'</span>: <span class="string">'ineq'</span>, <span class="string">'fun'</span>: constraint1}</span><br><span class="line">con2 = {<span class="string">'type'</span>: <span class="string">'eq'</span>, <span class="string">'fun'</span>: constraint2}</span><br><span class="line">cons = [con1,con2]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 优化</span></span><br><span class="line">sol = minimize(objective,x0,method=<span class="string">'SLSQP'</span>,constraints=cons)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"最优解："</span>, sol.x)</span><br></pre></td></tr></table></figure>
-<h2 id="三稀疏矩阵sparse">三、稀疏矩阵(sparse)</h2>
-<p>专门针对那些绝大多数元素为零的矩阵数据结构</p>
-<h3 id="处理稀疏矩阵"><strong>3.1 处理稀疏矩阵</strong></h3>
-<ul>
-<li>方法:</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CSC - 压缩稀疏列（Compressed Sparse Column），按列压缩。</span><br><span class="line">CSR - 压缩稀疏行（Compressed Sparse Row），按行压缩。</span><br></pre></td></tr></table></figure>
-<ul>
-<li>实现:</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>])</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(csr_matrix(arr)) </span><br></pre></td></tr></table></figure>
-<p>输出:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">(0, 5)        1</span><br><span class="line">(0, 6)        1</span><br><span class="line">(0, 8)        2</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(csr_matrix(arr).data) <span class="comment">#输出不为零的元素[1,1,2]</span></span><br><span class="line"><span class="built_in">print</span>(csr_matrix(arr).count_nonzero()) <span class="comment">#输出非0元素总数3</span></span><br><span class="line"></span><br><span class="line">mat = csr_matrix(arr)</span><br><span class="line">mat.eliminate_zeros()</span><br><span class="line"><span class="built_in">print</span>(mat) <span class="comment">#删除矩阵中的0元素</span></span><br><span class="line"></span><br><span class="line">mat = csr_matrix(arr)</span><br><span class="line">mat.sum_duplicates()</span><br><span class="line"><span class="built_in">print</span>(mat) <span class="comment">#删除重复项</span></span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr).tocsc() <span class="comment">#将csr转为csc</span></span><br></pre></td></tr></table></figure>
-<h3 id="图结构sparse.csgraph"><strong>3.2图结构(sparse.csgraph)</strong></h3>
-<ul>
-<li><p>如何查看连接组件(连接组件是指图中所有互相连通的节点的集合)
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">connected_components()</span><br></pre></td></tr></table></figure> <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> connected_components</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(connected_components(newarr))</span><br></pre></td></tr></table></figure> 输出: <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">(1, array([0, 0, 0], dtype=int32)) <span class="comment">#1代表一个连接组件，[0,0,0]代表每个元素属于哪个连接组件</span></span><br></pre></td></tr></table></figure></p></li>
-<li><p>Dijkstra 算法调用(用于计算一个节点到其他所有节点的最短路径)
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> dijkstra</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(dijkstra(newarr, return_predecessors=<span class="literal">True</span>, indices=<span class="number">0</span>))</span><br></pre></td></tr></table></figure> 其中dijkstra的参数：</p></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">return_predecessors: 布尔值，设置 True，遍历所有路径，如果不想遍历所有路径可以设置为 False。</span><br><span class="line">indices: 元素的索引，返回该元素的所有路径。</span><br><span class="line"><span class="built_in">limit</span>: 路径的最大权重。</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>Floyd Warshall – 弗洛伊德算法(解决任意两点间的最短路径)
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> floyd_warshall</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(floyd_warshall(newarr, return_predecessors=<span class="literal">True</span>))</span><br></pre></td></tr></table></figure></p></li>
-<li><p>Bellman Ford – 贝尔曼-福特算法(任意两点间的最短路径)
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> bellman_ford</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, -<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(bellman_ford(newarr, return_predecessors=<span class="literal">True</span>, indices=<span class="number">0</span>))</span><br></pre></td></tr></table></figure></p></li>
-<li><p>dfs <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> depth_first_order</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(depth_first_order(newarr, <span class="number">1</span>)) <span class="comment">#传入邻接矩阵和起始遍历元素</span></span><br></pre></td></tr></table></figure></p></li>
-<li><p>bfs <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> breadth_first_order</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(breadth_first_order(newarr, <span class="number">1</span>))</span><br></pre></td></tr></table></figure></p></li>
-</ul>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>math</tag>
-        <tag>python</tag>
-        <tag>scipy</tag>
       </tags>
   </entry>
   <entry>
@@ -3915,19 +3667,528 @@ sklearn.preprocessing 模块的特征缩放器（scalers）</p>
       </tags>
   </entry>
   <entry>
-    <title>常见BUG汇总</title>
-    <url>/2025/07/27/issue/</url>
-    <content><![CDATA[<h2 id="一markdown">一、Markdown</h2>
-<ol type="1">
-<li>为什么vscode编辑md文件十分卡顿</li>
-</ol>
-<p>解决方法:禁用cpp extension pack扩展</p>
+    <title>curl使用教学</title>
+    <url>/2025/07/26/curl/</url>
+    <content><![CDATA[<blockquote>
+<p>curl 是一个强大的命令行工具，用于在命令行或脚本中发送 HTTP
+请求，与服务器通信。它可以用来下载网页、调用 API
+接口、上传文件、发送表单等。几乎所有支持网络通信的协议 curl
+都能处理，包括 HTTP、HTTPS、FTP、SFTP、SMTP 等</p>
+</blockquote>
+<hr />
+<h2 id="一所以curl能干啥">一、所以curl能干啥</h2>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 87%" />
+</colgroup>
+<thead>
+<tr>
+<th>功能</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>获取网页内容</td>
+<td><code>curl https://example.com</code></td>
+</tr>
+<tr>
+<td>下载文件</td>
+<td><code>curl -O https://example.com/file.zip</code></td>
+</tr>
+<tr>
+<td>发送 POST 请求</td>
+<td><code>curl -X POST -d "name=Koen&amp;age=20" https://example.com/api</code></td>
+</tr>
+<tr>
+<td>添加请求头</td>
+<td><code>curl -H "Authorization: Bearer TOKEN" https://api.example.com/data</code></td>
+</tr>
+<tr>
+<td>上传文件</td>
+<td><code>curl -F "file=@test.png" https://example.com/upload</code></td>
+</tr>
+<tr>
+<td>保存输出到文件</td>
+<td><code>curl https://example.com -o saved.html</code></td>
+</tr>
+</tbody>
+</table>
+<p>以下将对其功能进行详细解释</p>
+<hr />
+<h2 id="二利用curl获取网页内容">二、利用curl获取网页内容</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl url</span><br></pre></td></tr></table></figure>
+<p>会将get请求返回结果直接输出在命令行中</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://example.com -o index.html</span><br></pre></td></tr></table></figure>
+<p>保存指定内容到文件，地址为cmd当前地址</p>
+<hr />
+<h2 id="三发送post请求">三、发送post请求</h2>
+<p>一般用于测试接口是否正常 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -d <span class="string">&quot;name=Koen&amp;age=20&quot;</span> https://example.com/api</span><br></pre></td></tr></table></figure> 带上请求头和请求体：
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST https://api.example.com/data \</span><br><span class="line">  -H <span class="string">&quot;Authorization: Bearer abc123&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;&quot;key&quot;:&quot;va</span></span><br><span class="line"><span class="string">lue&quot;&#125;&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">     -d <span class="string">&#x27;&#123;&quot;username&quot;:&quot;koen&quot;,&quot;password&quot;:&quot;123456&quot;&#125;&#x27;</span> \</span><br><span class="line">     https://example.com/api</span><br></pre></td></tr></table></figure></p>
+<hr />
+<h2 id="四利用curl进行文件上传">四、利用curl进行文件上传</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -F <span class="string">&quot;file=@test.png&quot;</span> https://example.com/upload</span><br></pre></td></tr></table></figure>
+<p>-F就是指定用表单的方式进行字段的上传</p>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr>
+<th>部分</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file</code></td>
+<td>表单字段的名字。就像网页表单中
+<code>&lt;input type="file" name="file"&gt;</code>。</td>
+</tr>
+<tr>
+<td><code>=</code></td>
+<td>分隔字段名与数据（文件）</td>
+</tr>
+<tr>
+<td><code>@test.png</code></td>
+<td>表示上传当前目录下名为 <code>test.png</code> 的文件</td>
+</tr>
+</tbody>
+</table>
+<p>其实就是post请求上传文件的方式</p>
+<hr />
+]]></content>
+      <categories>
+        <category>cmd</category>
+      </categories>
+      <tags>
+        <tag>cmd</tag>
+        <tag>curl</tag>
+        <tag>learn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>scipy基本模块及其使用</title>
+    <url>/2025/08/11/scipy/</url>
+    <content><![CDATA[<h2 id="一常量模块constants">一、常量模块(constants)</h2>
+<p>以下是 <code>scipy.constants</code> 模块中主要常量的分类表格：</p>
+<hr>
+<h3 id="数学常数"><strong>1.1 数学常数</strong></h3>
+<table>
+<thead>
+<tr>
+<th>常量名</th>
+<th>描述</th>
+<th>值 (近似)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pi</code></td>
+<td>圆周率 π</td>
+<td>3.141592653589793</td>
+</tr>
+<tr>
+<td><code>golden</code></td>
+<td>黄金比例 (φ)</td>
+<td>1.618033988749895</td>
+</tr>
+<tr>
+<td><code>e</code></td>
+<td>自然对数的底 (e)</td>
+<td>2.718281828459045</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="通用物理常数"><strong>1.2 通用物理常数</strong></h3>
+<table>
+<colgroup>
+<col style="width: 24%">
+<col style="width: 37%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr>
+<th>常量名</th>
+<th>描述</th>
+<th>值 (单位)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>c</code></td>
+<td>真空光速</td>
+<td>299792458.0 m/s</td>
+</tr>
+<tr>
+<td><code>h</code></td>
+<td>普朗克常数</td>
+<td>6.62607015e-34 J·s</td>
+</tr>
+<tr>
+<td><code>hbar</code></td>
+<td>约化普朗克常数 (h/2π)</td>
+<td>1.054571817e-34 J·s</td>
+</tr>
+<tr>
+<td><code>G</code></td>
+<td>万有引力常数</td>
+<td>6.67430e-11 m³/(kg·s²)</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td>标准重力加速度</td>
+<td>9.80665 m/s²</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="电磁学常数"><strong>1.3 电磁学常数</strong></h3>
+<table>
+<colgroup>
+<col style="width: 24%">
+<col style="width: 37%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr>
+<th>常量名</th>
+<th>描述</th>
+<th>值 (单位)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mu_0</code></td>
+<td>真空磁导率</td>
+<td>1.25663706212e-6 N/A²</td>
+</tr>
+<tr>
+<td><code>epsilon_0</code></td>
+<td>真空电容率</td>
+<td>8.8541878128e-12 F/m</td>
+</tr>
+<tr>
+<td><code>e</code> (或 <code>elementary_charge</code>)</td>
+<td>元电荷</td>
+<td>1.602176634e-19 C</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="原子与核物理常数"><strong>1.4 原子与核物理常数</strong></h3>
+<table>
+<thead>
+<tr>
+<th>常量名</th>
+<th>描述</th>
+<th>值 (单位)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>m_e</code></td>
+<td>电子质量</td>
+<td>9.1093837015e-31 kg</td>
+</tr>
+<tr>
+<td><code>m_p</code></td>
+<td>质子质量</td>
+<td>1.67262192369e-27 kg</td>
+</tr>
+<tr>
+<td><code>m_n</code></td>
+<td>中子质量</td>
+<td>1.67492749804e-27 kg</td>
+</tr>
+<tr>
+<td><code>Rydberg</code></td>
+<td>里德伯常数</td>
+<td>10973731.568160 1/m</td>
+</tr>
+<tr>
+<td><code>alpha</code></td>
+<td>精细结构常数</td>
+<td>0.0072973525693</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="化学相关常数"><strong>1.5 化学相关常数</strong></h3>
+<table>
+<thead>
+<tr>
+<th>常量名</th>
+<th>描述</th>
+<th>值 (单位)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>N_A</code></td>
+<td>阿伏伽德罗常数</td>
+<td>6.02214076e23 1/mol</td>
+</tr>
+<tr>
+<td><code>R</code></td>
+<td>通用气体常数</td>
+<td>8.314462618 J/(mol·K)</td>
+</tr>
+<tr>
+<td><code>atomic_mass</code></td>
+<td>原子质量单位 (u)</td>
+<td>1.66053906660e-27 kg</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="常用单位换算因子"><strong>1.6 常用单位换算因子</strong></h3>
+<table>
+<thead>
+<tr>
+<th>常量名</th>
+<th>描述</th>
+<th>换算关系</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>inch</code></td>
+<td>英寸 → 米</td>
+<td>0.0254 m</td>
+</tr>
+<tr>
+<td><code>foot</code></td>
+<td>英尺 → 米</td>
+<td>0.3048 m</td>
+</tr>
+<tr>
+<td><code>mile</code></td>
+<td>英里 → 米</td>
+<td>1609.344 m</td>
+</tr>
+<tr>
+<td><code>lb</code></td>
+<td>磅 → 千克</td>
+<td>0.45359237 kg</td>
+</tr>
+<tr>
+<td><code>eV</code></td>
+<td>电子伏特 → 焦耳</td>
+<td>1.602176634e-19 J</td>
+</tr>
+<tr>
+<td><code>atm</code></td>
+<td>标准大气压 → 帕斯卡</td>
+<td>101325.0 Pa</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="温度相关"><strong>1.7 温度相关</strong></h3>
+<table>
+<thead>
+<tr>
+<th>常量名</th>
+<th>描述</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>zero_Celsius</code></td>
+<td>0°C 对应的开尔文温度</td>
+<td>273.15 K</td>
+</tr>
+<tr>
+<td><code>degree_Fahrenheit</code></td>
+<td>1°F 对应的开尔文间隔</td>
+<td>0.555555… K</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="查找所有常量的方法"><strong>查找所有常量的方法</strong></h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> constants</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出所有常量</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">dir</span>(constants))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索包含关键词的常量（例如 'mass'）</span></span><br><span class="line"><span class="built_in">print</span>(constants.find(<span class="string">'mass'</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="二优化器optimize">二、优化器(optimize)</h2>
+<p>scipy的优化器是数学建模的工具，它的核心目标是
+寻找函数的最小值（或最大值）、拟合模型、求解方程或系统，适用于传统数学问题<code>而非深度学习</code>(注意和pytorch这些的优化器函数区分开来)</p>
+<h3 id="无约束优化"><strong>2.1 无约束优化</strong></h3>
+<ul>
+<li>用途:实现查找给定区间内函数的最小值</li>
+<li>实现：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">minimize_scalar() <span class="comment">#单变量函数</span></span><br><span class="line">minimize()        <span class="comment">#多变量函数</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>查找方法：
+<ul>
+<li>单变量： <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brent: 使用Brent方法（结合抛物线插值和黄金分割法）</span><br><span class="line"></span><br><span class="line">bounded: 在有界区间内搜索</span><br><span class="line"></span><br><span class="line">golden: 黄金分割法</span><br></pre></td></tr></table></figure></li>
+<li>多变量 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Nelder-Mead: 单纯形法，不需要梯度</span><br><span class="line"></span><br><span class="line">BFGS: 拟牛顿法，需要梯度</span><br><span class="line"></span><br><span class="line">CG: 共轭梯度法</span><br><span class="line"></span><br><span class="line">L-BFGS-B: 有限内存BFGS，适用于大规模问题</span><br><span class="line"></span><br><span class="line">TNC: 截断牛顿法</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+<li>实现实例： <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">from scipy.optimize import minimize</span><br><span class="line"></span><br><span class="line">def rosen(x):</span><br><span class="line">    <span class="string">""</span><span class="string">"Rosenbrock函数"</span><span class="string">""</span></span><br><span class="line">    <span class="built_in">return</span> <span class="built_in">sum</span>(100.0*(x[1:]-x[:-1]**2.0)**2.0 + (1-x[:-1])**2.0)</span><br><span class="line"></span><br><span class="line">x0 = [1.3, 0.7, 0.8, 1.9, 1.2] <span class="comment">#x0 是多维优化问题（如 minimize）的 初始猜测值（initial guess）。优化算法需要一个起点开始搜索最小值。</span></span><br><span class="line">res = minimize(rosen, x0, method=<span class="string">'BFGS'</span>, options={<span class="string">'disp'</span>: True}) <span class="comment">#res 是 minimize 或 minimize_scalar 函数的返回结果，它是一个 OptimizeResult 对象 </span></span><br><span class="line"><span class="built_in">print</span>(res.x)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>其中res的解有如下内容</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># res 包含的重要属性：</span></span><br><span class="line">res.x       <span class="comment"># 最优解（最小值点）</span></span><br><span class="line">res.fun     <span class="comment"># 最优解处的函数值</span></span><br><span class="line">res.nfev    <span class="comment"># 函数评估次数</span></span><br><span class="line">res.nit     <span class="comment"># 迭代次数</span></span><br><span class="line">res.success <span class="comment"># 是否成功收敛</span></span><br><span class="line">res.message <span class="comment"># 状态描述（如收敛信息）</span></span><br><span class="line">res.jac     <span class="comment"># 最优解处的梯度（一阶导数）</span></span><br><span class="line">res.hess    <span class="comment"># 最优解处的Hessian矩阵（二阶导数，如果可用）</span></span><br></pre></td></tr></table></figure>
+<h3 id="全局优化"><strong>2.2 全局优化</strong></h3>
+<ul>
+<li>用途：避免传统优化算法（如 minimize）陷入局部最优解，转而寻找
+全局最优解。</li>
+<li>实现函数：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">basinhopping(): 盆地跳跃算法basinhopping(): 盆地跳跃算法</span><br><span class="line"></span><br><span class="line">shgo(): 单纯形同伦全局优化</span><br><span class="line"></span><br><span class="line">differential_evolution(): 差分进化算法</span><br></pre></td></tr></table></figure>
+<ul>
+<li>实例： <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">from scipy.optimize import basinhopping</span><br><span class="line"></span><br><span class="line">def func(x):</span><br><span class="line">    <span class="built_in">return</span> np.cos(14.5 * x - 0.3) + (x + 0.2) * x</span><br><span class="line"></span><br><span class="line">res = basinhopping(func, x0=1.0)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"全局最小值：x = %.4f, f(x) = %.4f"</span> % (res.x, res.fun))</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="最小二乘拟合"><strong>2.3 最小二乘拟合</strong></h3>
+<ul>
+<li><p>用途：解决非线性最小二乘问题，常用于曲线拟合。</p></li>
+<li><p>实现函数： <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">least_squares(): 解决非线性最小二乘问题</span><br><span class="line"></span><br><span class="line">curve_fit(): 使用最小二乘法拟合曲线</span><br></pre></td></tr></table></figure></p></li>
+<li><p>实例：</p></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">from scipy.optimize import curve_fit</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义模型函数</span></span><br><span class="line">def func(x, a, b, c):</span><br><span class="line">    <span class="built_in">return</span> a * np.exp(-b * x) + c</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成带噪声的数据</span></span><br><span class="line">xdata = np.linspace(0, 4, 50)</span><br><span class="line">y = func(xdata, 2.5, 1.3, 0.5)</span><br><span class="line">ydata = y + 0.2 * np.random.normal(size=len(xdata))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拟合数据</span></span><br><span class="line">popt, pcov = curve_fit(func, xdata, ydata)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"拟合参数："</span>, popt) <span class="comment">#返回[a,b,c]</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"协方差矩阵"</span>, pcov) <span class="comment">#评估可靠性</span></span><br></pre></td></tr></table></figure>
+<p>[a,b,c]-&gt; <span class="math inline"><em>f</em>(<em>x</em>) = <em>a</em><em>e</em><sup>−<em>b</em><em>x</em></sup> + <em>c</em></span></p>
+<h3 id="方程求根"><strong>2.4 方程求根</strong></h3>
+<ul>
+<li><p>方法： <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root_scalar(): 单变量方程求根 <span class="comment">#brentq, brenth, ridder, bisect, newton: 特定算法</span></span><br><span class="line"></span><br><span class="line">root(): 多变量方程组求根</span><br></pre></td></tr></table></figure></p></li>
+<li><p>实现： <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> root_scalar</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x**<span class="number">3</span> - <span class="number">1</span>  <span class="comment"># 寻找x^3 = 1的解</span></span><br><span class="line"></span><br><span class="line">sol = root_scalar(f, bracket=[<span class="number">0</span>, <span class="number">2</span>], method=<span class="string">'brentq'</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"方程的根："</span>, sol.root)</span><br></pre></td></tr></table></figure> <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> root</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> [x[<span class="number">0</span>] + <span class="number">0.5</span> * (x[<span class="number">0</span>] - x[<span class="number">1</span>])**<span class="number">3</span> - <span class="number">1.0</span>,</span><br><span class="line">            <span class="number">0.5</span> * (x[<span class="number">1</span>] - x[<span class="number">0</span>])**<span class="number">3</span> + x[<span class="number">1</span>]]</span><br><span class="line"></span><br><span class="line">sol = root(func, [<span class="number">0</span>, <span class="number">0</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"方程组的解："</span>, sol.x)</span><br></pre></td></tr></table></figure></p></li>
+</ul>
+<h3 id="线性规划"><strong>2.5 线性规划</strong></h3>
+<ul>
+<li>什么是线性规划：结构化决策框架，其核心是在一个由线性关系定义的几何空间中，寻找最优的”角落”解。比如如下这个问题
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">想象你是一个工厂经理，需要决定生产两种产品A和B的数量：</span><br><span class="line"></span><br><span class="line">生产A每个利润100元，B每个利润150元</span><br><span class="line"></span><br><span class="line">但受限于：</span><br><span class="line"></span><br><span class="line">原材料X：生产A消耗3kg，B消耗2kg，总共只有120kg</span><br><span class="line"></span><br><span class="line">工时：生产A需要2小时，B需要4小时，总共只有160小时</span><br><span class="line"></span><br><span class="line">线性规划就是帮你找到在资源限制下能获得最大利润的生产方案</span><br><span class="line"></span><br></pre></td></tr></table></figure> <span class="math display"><em>p</em><em>r</em><em>o</em><em>f</em><em>i</em><em>t</em> = −100<em>x</em> − 150<em>y</em></span>
+<span class="math display"><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -2.149ex;" xmlns="http://www.w3.org/2000/svg" width="19.774ex" height="5.43ex" role="img" focusable="false" viewBox="0 -1450 8740.2 2400"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mrow"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="5B" d="M247 -949V1450H516V1388H309V-887H516V-949H247Z"></path></g><g data-mml-node="mtable" transform="translate(528,0)"><g data-mml-node="mtr" transform="translate(0,700)"><g data-mml-node="mtd"><g data-mml-node="mn"><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"></path></g></g><g data-mml-node="mtd" transform="translate(1500,0)"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g><g data-mml-node="mtr" transform="translate(0,-700)"><g data-mml-node="mtd"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g><g data-mml-node="mtd" transform="translate(1500,0)"><g data-mml-node="mn"><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"></path></g></g></g></g><g data-mml-node="mo" transform="translate(2528,0) translate(0 -0.5)"><path data-c="5D" d="M11 1388V1450H280V-949H11V-887H218V1388H11Z"></path></g></g><g data-mml-node="mrow" transform="translate(3222.7,0)"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="5B" d="M247 -949V1450H516V1388H309V-887H516V-949H247Z"></path></g><g data-mml-node="mtable" transform="translate(528,0)"><g data-mml-node="mtr" transform="translate(0,700)"><g data-mml-node="mtd"><g data-mml-node="mi"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g></g><g data-mml-node="mtr" transform="translate(0,-700)"><g data-mml-node="mtd" transform="translate(41,0)"><g data-mml-node="mi"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g></g></g></g><g data-mml-node="mo" transform="translate(1100,0) translate(0 -0.5)"><path data-c="5D" d="M11 1388V1450H280V-949H11V-887H218V1388H11Z"></path></g></g><g data-mml-node="mo" transform="translate(5128.4,0)"><path data-c="2264" d="M674 636Q682 636 688 630T694 615T687 601Q686 600 417 472L151 346L399 228Q687 92 691 87Q694 81 694 76Q694 58 676 56H670L382 192Q92 329 90 331Q83 336 83 348Q84 359 96 365Q104 369 382 500T665 634Q669 636 674 636ZM84 -118Q84 -108 99 -98H678Q694 -104 694 -118Q694 -130 679 -138H98Q84 -131 84 -118Z"></path></g><g data-mml-node="mrow" transform="translate(6184.2,0)"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="5B" d="M247 -949V1450H516V1388H309V-887H516V-949H247Z"></path></g><g data-mml-node="mtable" transform="translate(528,0)"><g data-mml-node="mtr" transform="translate(0,700)"><g data-mml-node="mtd"><g data-mml-node="mn"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z" transform="translate(500,0)"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(1000,0)"></path></g></g></g><g data-mml-node="mtr" transform="translate(0,-700)"><g data-mml-node="mtd"><g data-mml-node="mn"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="36" d="M42 313Q42 476 123 571T303 666Q372 666 402 630T432 550Q432 525 418 510T379 495Q356 495 341 509T326 548Q326 592 373 601Q351 623 311 626Q240 626 194 566Q147 500 147 364L148 360Q153 366 156 373Q197 433 263 433H267Q313 433 348 414Q372 400 396 374T435 317Q456 268 456 210V192Q456 169 451 149Q440 90 387 34T253 -22Q225 -22 199 -14T143 16T92 75T56 172T42 313ZM257 397Q227 397 205 380T171 335T154 278T148 216Q148 133 160 97T198 39Q222 21 251 21Q302 21 329 59Q342 77 347 104T352 209Q352 289 347 316T329 361Q302 397 257 397Z" transform="translate(500,0)"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(1000,0)"></path></g></g></g></g><g data-mml-node="mo" transform="translate(2028,0) translate(0 -0.5)"><path data-c="5D" d="M11 1388V1450H280V-949H11V-887H218V1388H11Z"></path></g></g></g></g></svg></mjx-container></span></li>
+</ul>
+<p>抽象一下就是： 输入: (A, b, c) → 处理: 代数变换 → 输出: x*</p>
+<p>其中：</p>
+A 是约束矩阵（系统限制的编码）=&gt;不等式左侧系数 A= $
+<p>$</p>
+<p>b 是资源向量（约束条件的量化）=&gt;不等式右侧系数 b=[120,160]</p>
+<p>c 是价值向量（目标函数的权重）=&gt;利润最大化 c=[-100,-150]
+(线性规划默认求最小值问题) <span class="math inline"><em>f</em>(<em>x</em>) = −100<em>x</em> − 150<em>y</em></span></p>
+<p>x* 是最优决策（系统输出的解决方案）</p>
+<ul>
+<li>实现实例:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> linprog</span><br><span class="line"></span><br><span class="line"><span class="comment"># 最小化 c^T x</span></span><br><span class="line"><span class="comment"># 约束条件: A_ub x &lt;= b_ub, A_eq x = b_eq</span></span><br><span class="line">c = [-<span class="number">1</span>, <span class="number">4</span>]  <span class="comment"># 目标函数系数</span></span><br><span class="line">A_ub = [[-<span class="number">3</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>]]  <span class="comment"># 不等式约束矩阵</span></span><br><span class="line">b_ub = [<span class="number">6</span>, <span class="number">4</span>]             <span class="comment"># 不等式约束右侧</span></span><br><span class="line"></span><br><span class="line">res = linprog(c, A_ub=A_ub, b_ub=b_ub, bounds=(<span class="literal">None</span>, <span class="literal">None</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"最优解："</span>, res.x)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"最优值："</span>, res.fun)</span><br></pre></td></tr></table></figure>
+<h3 id="约束优化"><strong>2.6 约束优化</strong></h3>
+<ul>
+<li>用途：在有等式或不等式约束条件下优化目标函数。</li>
+<li>方法：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">minimize() 配合约束参数</span><br><span class="line"></span><br><span class="line">SLSQP: 序列二次规划算法</span><br><span class="line"></span><br><span class="line">trust-constr: 信赖域算法</span><br></pre></td></tr></table></figure>
+<ul>
+<li>实现：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> minimize</span><br><span class="line"></span><br><span class="line"><span class="comment"># 目标函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">objective</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x[<span class="number">0</span>]*x[<span class="number">3</span>]*(x[<span class="number">0</span>]+x[<span class="number">1</span>]+x[<span class="number">2</span>])+x[<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 约束条件</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">constraint1</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x[<span class="number">0</span>]*x[<span class="number">1</span>]*x[<span class="number">2</span>]*x[<span class="number">3</span>]-<span class="number">25.0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">constraint2</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span>(x**<span class="number">2</span>)-<span class="number">40.0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始猜测</span></span><br><span class="line">x0 = [<span class="number">1</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置约束</span></span><br><span class="line">con1 = {<span class="string">'type'</span>: <span class="string">'ineq'</span>, <span class="string">'fun'</span>: constraint1}</span><br><span class="line">con2 = {<span class="string">'type'</span>: <span class="string">'eq'</span>, <span class="string">'fun'</span>: constraint2}</span><br><span class="line">cons = [con1,con2]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 优化</span></span><br><span class="line">sol = minimize(objective,x0,method=<span class="string">'SLSQP'</span>,constraints=cons)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"最优解："</span>, sol.x)</span><br></pre></td></tr></table></figure>
+<h2 id="三稀疏矩阵sparse">三、稀疏矩阵(sparse)</h2>
+<p>专门针对那些绝大多数元素为零的矩阵数据结构</p>
+<h3 id="处理稀疏矩阵"><strong>3.1 处理稀疏矩阵</strong></h3>
+<ul>
+<li>方法:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CSC - 压缩稀疏列（Compressed Sparse Column），按列压缩。</span><br><span class="line">CSR - 压缩稀疏行（Compressed Sparse Row），按行压缩。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>实现:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>])</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(csr_matrix(arr)) </span><br></pre></td></tr></table></figure>
+<p>输出:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">(0, 5)        1</span><br><span class="line">(0, 6)        1</span><br><span class="line">(0, 8)        2</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(csr_matrix(arr).data) <span class="comment">#输出不为零的元素[1,1,2]</span></span><br><span class="line"><span class="built_in">print</span>(csr_matrix(arr).count_nonzero()) <span class="comment">#输出非0元素总数3</span></span><br><span class="line"></span><br><span class="line">mat = csr_matrix(arr)</span><br><span class="line">mat.eliminate_zeros()</span><br><span class="line"><span class="built_in">print</span>(mat) <span class="comment">#删除矩阵中的0元素</span></span><br><span class="line"></span><br><span class="line">mat = csr_matrix(arr)</span><br><span class="line">mat.sum_duplicates()</span><br><span class="line"><span class="built_in">print</span>(mat) <span class="comment">#删除重复项</span></span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr).tocsc() <span class="comment">#将csr转为csc</span></span><br></pre></td></tr></table></figure>
+<h3 id="图结构sparse.csgraph"><strong>3.2图结构(sparse.csgraph)</strong></h3>
+<ul>
+<li><p>如何查看连接组件(连接组件是指图中所有互相连通的节点的集合)
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">connected_components()</span><br></pre></td></tr></table></figure> <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> connected_components</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(connected_components(newarr))</span><br></pre></td></tr></table></figure> 输出: <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">(1, array([0, 0, 0], dtype=int32)) <span class="comment">#1代表一个连接组件，[0,0,0]代表每个元素属于哪个连接组件</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>Dijkstra 算法调用(用于计算一个节点到其他所有节点的最短路径)
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> dijkstra</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(dijkstra(newarr, return_predecessors=<span class="literal">True</span>, indices=<span class="number">0</span>))</span><br></pre></td></tr></table></figure> 其中dijkstra的参数：</p></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">return_predecessors: 布尔值，设置 True，遍历所有路径，如果不想遍历所有路径可以设置为 False。</span><br><span class="line">indices: 元素的索引，返回该元素的所有路径。</span><br><span class="line"><span class="built_in">limit</span>: 路径的最大权重。</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Floyd Warshall – 弗洛伊德算法(解决任意两点间的最短路径)
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> floyd_warshall</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(floyd_warshall(newarr, return_predecessors=<span class="literal">True</span>))</span><br></pre></td></tr></table></figure></p></li>
+<li><p>Bellman Ford – 贝尔曼-福特算法(任意两点间的最短路径)
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> bellman_ford</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, -<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(bellman_ford(newarr, return_predecessors=<span class="literal">True</span>, indices=<span class="number">0</span>))</span><br></pre></td></tr></table></figure></p></li>
+<li><p>dfs <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> depth_first_order</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(depth_first_order(newarr, <span class="number">1</span>)) <span class="comment">#传入邻接矩阵和起始遍历元素</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>bfs <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> breadth_first_order</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(breadth_first_order(newarr, <span class="number">1</span>))</span><br></pre></td></tr></table></figure></p></li>
+</ul>
 ]]></content>
       <categories>
         <category>code</category>
       </categories>
       <tags>
-        <tag>markdown</tag>
+        <tag>math</tag>
+        <tag>python</tag>
+        <tag>scipy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker 基本使用教程</title>
+    <url>/2025/07/26/docker-basic-usage/</url>
+    <content><![CDATA[<blockquote>
+<p>Docker
+可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的
+Linux 机器上，也可以实现虚拟化。</p>
+</blockquote>
+<hr />
+<h2 id="一docker的用途">一、Docker的用途</h2>
+<p>Docker 的主要用途，目前有三大类。</p>
+<ol type="1">
+<li><p>提供一次性的环境。比如，本地测试他人的软件、持续集成的时候提供单元测试和构建的环境。</p></li>
+<li><p>提供弹性的云服务。因为 Docker
+容器可以随开随关，很适合动态扩容和缩容。</p></li>
+<li><p>组建微服务架构。通过多个容器，一台机器可以跑多个服务，因此在本机就可以模拟出微服务架构。</p></li>
+</ol>
+<hr />
+<h2 id="二验证是否安装成功">二、验证是否安装成功</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="三image文件">三、Image文件</h2>
+<p>Docker 把应用程序及其依赖，打包在 <strong>image
+文件</strong>里面。只有通过这个文件，才能生成 Docker 容器。<br />
+image 文件可以看作是容器的模板，Docker 根据 image
+文件生成容器的实例。<br />
+同一个 image 文件，可以生成多个同时运行的容器实例。</p>
+<p>image 是一个 <strong>二进制文件</strong>。实际开发中，一个 image
+文件往往通过继承另一个 image 文件，加上一些个性化设置而生成。<br />
+举例来说，你可以在 Ubuntu 的 image 基础上，往里面加入 Apache
+服务器，形成你自己的 image。</p>
+<h3 id="列出本机的所有-image-文件">列出本机的所有 image 文件</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker image <span class="built_in">ls</span></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 🗑️ 删除 image 文件</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">$ docker image <span class="built_in">rm</span> [imageName]</span><br></pre></td></tr></table></figure>
+<p>image 文件是通用的，一台机器的 image
+文件拷贝到另一台机器，照样可以使用。</p>
+<p>一般来说，为了节省时间，我们应该尽量使用别人制作好的 image
+文件，而不是自己制作。 即使要定制，也应该基于别人的 image
+文件进行加工，而不是从零开始制作。</p>
+<h3 id="镜像仓库image-repository">镜像仓库（Image Repository）</h3>
+<p>为了方便共享，image 文件制作完成后，可以上传到网上的仓库。</p>
+<ul>
+<li>Docker 的官方仓库 <strong>Docker Hub</strong> 是最重要、最常用的
+image 仓库。</li>
+<li>此外，你也可以使用国内的镜像仓库（如阿里云、腾讯云）或者搭建私有仓库。</li>
+<li>出售自己制作的 image 文件也是可以的。</li>
+</ul>
+<h3 id="imagecontainer">image&amp;&amp;container</h3>
+<p>容器是镜像跑起来的实例，一个镜像可以有多个容器</p>
+<hr />
+<h2 id="四如何跑起来呢">四、如何跑起来呢</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker image pull &lt;project&gt;       <span class="comment">#将image文件从仓库抓取到本地</span></span><br><span class="line">docker container run &lt;project&gt;    <span class="comment">#将image文件在你的电脑上跑起来，新建容器</span></span><br><span class="line">docker container start [ID]       <span class="comment">#将已有的容器跑起来</span></span><br><span class="line">docker container <span class="built_in">kill</span> [ID]        <span class="comment">#手动终止容器的运行</span></span><br><span class="line">docker container <span class="built_in">ls</span>               <span class="comment">#在你电脑上正在跑起来的容器</span></span><br><span class="line">docker container <span class="built_in">ls</span> -all          <span class="comment">#列出本机所有容器，包括终止运行的容器</span></span><br><span class="line">docker container <span class="built_in">rm</span> [containerID] <span class="comment">#删除停止运行的容器，防止占用硬盘空间</span></span><br><span class="line">docker <span class="built_in">exec</span> -it my-nginx bash     <span class="comment">#在叫my-nginx的容器内，开启一个bash命令终端进去操作</span></span><br></pre></td></tr></table></figure>
+<p>注意，docker container run命令具有自动抓取 image
+文件的功能。如果发现本地没有指定的 image
+文件，就会从仓库自动抓取。因此，前面的docker image
+pull命令并不是必需的步骤。</p>
+<hr />
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>learn</tag>
+        <tag>container</tag>
+        <tag>docker</tag>
+        <tag>linux</tag>
+        <tag>virtual</tag>
       </tags>
   </entry>
   <entry>
@@ -4466,6 +4727,90 @@ Seaborn 生成的图表进行精细化调整。以下是详细分类说明和实
       </tags>
   </entry>
   <entry>
+    <title>Git 基本使用教程</title>
+    <url>/2025/07/25/git-basic-usage/</url>
+    <content><![CDATA[<blockquote>
+<p>Git
+是一个分布式版本控制系统，适用于代码版本管理与团队协作开发。本文将简要介绍
+Git
+的一些常用操作命令，包括创建仓库、分支管理以及删除文件/分支的方法。</p>
+</blockquote>
+<hr />
+<h2 id="一初始化仓库">一、初始化仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在当前目录初始化一个 Git 仓库。</li>
+<li>会创建 <code>.git</code> 文件夹作为版本控制目录。</li>
+</ul>
+<hr />
+<h2 id="二克隆远程仓库">二、克隆远程仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;仓库地址&gt;</span><br><span class="line">```****</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/username/repo.git</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="三添加与提交文件">三、添加与提交文件</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add &lt;文件或目录&gt;</span><br><span class="line">git commit -m <span class="string">&quot;提交说明&quot;</span></span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;添加初始项目文件&quot;</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="四查看状态与历史">四、查看状态与历史</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status        <span class="comment"># 查看当前状态</span></span><br><span class="line">git <span class="built_in">log</span>           <span class="comment"># 查看提交历史</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="五分支操作">五、分支操作</h2>
+<h3 id="创建新分支">创建新分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="切换分支">切换分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch &lt;分支名&gt;</span><br><span class="line"><span class="comment"># 或（旧写法）</span></span><br><span class="line">git checkout &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="创建并切换新分支">创建并切换新分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch -c &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="查看所有分支">查看所有分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="六合并分支">六、合并分支</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git merge &lt;被合并的分支&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：需要先切换到目标分支，再合并。</p>
+</blockquote>
+<hr />
+<h2 id="七删除操作">七、删除操作</h2>
+<h3 id="删除文件">删除文件</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">rm</span> &lt;文件名&gt;</span><br><span class="line">git commit -m <span class="string">&quot;删除了某个文件&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="撤销删除误删恢复">撤销删除（误删恢复）</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -- &lt;文件名&gt;</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="删除本地分支">删除本地分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -d &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>-d</code> 是安全删除（合并过的才允许删）</li>
+<li><code>-D</code> 是强制删除（无论是否合并）</li>
+</ul>
+<h3 id="删除远程分支">删除远程分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin --delete &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="八推送与拉取">八、推送与拉取</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin &lt;分支名&gt;   <span class="comment"># 推送到远程</span></span><br><span class="line">git pull origin &lt;分支名&gt;   <span class="comment"># 拉取最新代码</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="九查看远程仓库">九、查看远程仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="十总结">十、总结</h2>
+<p>Git
+是开发者日常工作中不可或缺的工具，掌握它可以大大提升协作效率与版本管理能力。希望本文能帮助你快速上手
+Git 的基本操作。</p>
+<hr />
+<blockquote>
+<p>如需进一步学习，可以参考 <a href="https://git-scm.com/book/zh/v2">Pro
+Git 中文版</a>。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>learn</tag>
+        <tag>repo</tag>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>yolo+AnyLabeling实现数据集的自动标注</title>
     <url>/2025/08/09/yolo-dataset/</url>
     <content><![CDATA[<h2 id="一环境准备">一、环境准备</h2>
@@ -4503,351 +4848,6 @@ Seaborn 生成的图表进行精细化调整。以下是详细分类说明和实
         <tag>yolo</tag>
         <tag>dataset</tag>
         <tag>AnyLabeling</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Latex常见数学公式</title>
-    <url>/2025/07/27/latex/</url>
-    <content><![CDATA[<blockquote>
-<p>以下是常用的latex数学公式符号</p>
-</blockquote>
-<hr>
-<h2 id="一基本结构">一、基本结构</h2>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\(</span> a<span class="built_in">^</span>2 + b<span class="built_in">^</span>2 = c<span class="built_in">^</span>2 <span class="keyword">\)</span>           <span class="comment">% 行内公式</span></span><br><span class="line"><span class="keyword">\[</span> a<span class="built_in">^</span>2 + b<span class="built_in">^</span>2 = c<span class="built_in">^</span>2 <span class="keyword">\]</span>           <span class="comment">% 单独一行公式</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="二基本数学符号">二、基本数学符号</h2>
-<table>
-<thead>
-<tr>
-<th>含义</th>
-<th>LaTeX</th>
-<th>显示</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>加法</td>
-<td><code>a + b</code></td>
-<td><span class="math inline"><em>a</em> + <em>b</em></span></td>
-</tr>
-<tr>
-<td>减法</td>
-<td><code>a - b</code></td>
-<td><span class="math inline"><em>a</em> − <em>b</em></span></td>
-</tr>
-<tr>
-<td>乘法</td>
-<td><code>a \times b</code></td>
-<td><span class="math inline"><em>a</em> × <em>b</em></span></td>
-</tr>
-<tr>
-<td>除法</td>
-<td><code>a \div b</code></td>
-<td><span class="math inline"><em>a</em> ÷ <em>b</em></span></td>
-</tr>
-<tr>
-<td>分数</td>
-<td><code>\frac{a}{b}</code></td>
-<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.798ex;" xmlns="http://www.w3.org/2000/svg" width="1.842ex" height="2.395ex" role="img" focusable="false" viewBox="0 -705.8 814.1 1058.6"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mi" transform="translate(220,394) scale(0.707)"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(255.4,-345) scale(0.707)"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g><rect width="574.1" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container></span></td>
-</tr>
-<tr>
-<td>次方</td>
-<td><code>a^n</code></td>
-<td><span class="math inline"><em>a</em><sup><em>n</em></sup></span></td>
-</tr>
-<tr>
-<td>开方</td>
-<td><code>\sqrt{a}</code></td>
-<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.491ex;" xmlns="http://www.w3.org/2000/svg" width="3.127ex" height="2.398ex" role="img" focusable="false" viewBox="0 -843 1382 1060"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msqrt"><g transform="translate(853,0)"><g data-mml-node="mi"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g></g><g data-mml-node="mo" transform="translate(0,-17)"><path data-c="221A" d="M95 178Q89 178 81 186T72 200T103 230T169 280T207 309Q209 311 212 311H213Q219 311 227 294T281 177Q300 134 312 108L397 -77Q398 -77 501 136T707 565T814 786Q820 800 834 800Q841 800 846 794T853 782V776L620 293L385 -193Q381 -200 366 -200Q357 -200 354 -197Q352 -195 256 15L160 225L144 214Q129 202 113 190T95 178Z"></path></g><rect width="529" height="60" x="853" y="723"></rect></g></g></g></svg></mjx-container></span></td>
-</tr>
-<tr>
-<td>n次根</td>
-<td><code>\sqrt[n]{a}</code></td>
-<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.491ex;" xmlns="http://www.w3.org/2000/svg" width="3.127ex" height="2.398ex" role="img" focusable="false" viewBox="0 -843 1382 1060"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mroot"><g><g data-mml-node="mi" transform="translate(853,0)"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g></g><g data-mml-node="mi" transform="translate(211.8,338.5) scale(0.5)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(0,-17)"><path data-c="221A" d="M95 178Q89 178 81 186T72 200T103 230T169 280T207 309Q209 311 212 311H213Q219 311 227 294T281 177Q300 134 312 108L397 -77Q398 -77 501 136T707 565T814 786Q820 800 834 800Q841 800 846 794T853 782V776L620 293L385 -193Q381 -200 366 -200Q357 -200 354 -197Q352 -195 256 15L160 225L144 214Q129 202 113 190T95 178Z"></path></g><rect width="529" height="60" x="853" y="723"></rect></g></g></g></svg></mjx-container></span></td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="三常用函数">三、常用函数</h2>
-<table>
-<thead>
-<tr>
-<th>函数</th>
-<th>LaTeX</th>
-<th>显示</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>正弦</td>
-<td><code>\sin x</code></td>
-<td><span class="math inline">sin <em>x</em></span></td>
-</tr>
-<tr>
-<td>余弦</td>
-<td><code>\cos x</code></td>
-<td><span class="math inline">cos <em>x</em></span></td>
-</tr>
-<tr>
-<td>正切</td>
-<td><code>\tan x</code></td>
-<td><span class="math inline">tan <em>x</em></span></td>
-</tr>
-<tr>
-<td>对数</td>
-<td><code>\log x</code></td>
-<td><span class="math inline">log <em>x</em></span></td>
-</tr>
-<tr>
-<td>自然对数</td>
-<td><code>\ln x</code></td>
-<td><span class="math inline">ln <em>x</em></span></td>
-</tr>
-<tr>
-<td>指数函数</td>
-<td><code>e^x</code></td>
-<td><span class="math inline"><em>e</em><sup><em>x</em></sup></span></td>
-</tr>
-<tr>
-<td>极限</td>
-<td><code>\lim_{x\to0}</code></td>
-<td><span class="math inline">lim<sub><em>x</em> → 0</sub></span></td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="四微积分符号">四、微积分符号</h2>
-<table>
-<colgroup>
-<col style="width: 6%">
-<col style="width: 46%">
-<col style="width: 46%">
-</colgroup>
-<thead>
-<tr>
-<th>含义</th>
-<th>LaTeX</th>
-<th>显示</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>导数</td>
-<td><code>\frac{dy}{dx}</code></td>
-<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.798ex;" xmlns="http://www.w3.org/2000/svg" width="2.742ex" height="3.006ex" role="img" focusable="false" viewBox="0 -975.7 1212.2 1328.5"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mrow" transform="translate(249,485) scale(0.707)"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g><g data-mml-node="mi" transform="translate(520,0)"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g></g><g data-mml-node="mrow" transform="translate(220,-345) scale(0.707)"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g><g data-mml-node="mi" transform="translate(520,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g><rect width="972.2" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container></span></td>
-</tr>
-<tr>
-<td>偏导数</td>
-<td><code>\frac{\partial y}{\partial x}</code></td>
-<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.817ex;" xmlns="http://www.w3.org/2000/svg" width="2.816ex" height="3.058ex" role="img" focusable="false" viewBox="0 -990.5 1244.7 1351.7"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mrow" transform="translate(249,485) scale(0.707)"><g data-mml-node="mi"><path data-c="1D715" d="M202 508Q179 508 169 520T158 547Q158 557 164 577T185 624T230 675T301 710L333 715H345Q378 715 384 714Q447 703 489 661T549 568T566 457Q566 362 519 240T402 53Q321 -22 223 -22Q123 -22 73 56Q42 102 42 148V159Q42 276 129 370T322 465Q383 465 414 434T455 367L458 378Q478 461 478 515Q478 603 437 639T344 676Q266 676 223 612Q264 606 264 572Q264 547 246 528T202 508ZM430 306Q430 372 401 400T333 428Q270 428 222 382Q197 354 183 323T150 221Q132 149 132 116Q132 21 232 21Q244 21 250 22Q327 35 374 112Q389 137 409 196T430 306Z"></path></g><g data-mml-node="mi" transform="translate(566,0)"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g></g><g data-mml-node="mrow" transform="translate(220,-345.6) scale(0.707)"><g data-mml-node="mi"><path data-c="1D715" d="M202 508Q179 508 169 520T158 547Q158 557 164 577T185 624T230 675T301 710L333 715H345Q378 715 384 714Q447 703 489 661T549 568T566 457Q566 362 519 240T402 53Q321 -22 223 -22Q123 -22 73 56Q42 102 42 148V159Q42 276 129 370T322 465Q383 465 414 434T455 367L458 378Q478 461 478 515Q478 603 437 639T344 676Q266 676 223 612Q264 606 264 572Q264 547 246 528T202 508ZM430 306Q430 372 401 400T333 428Q270 428 222 382Q197 354 183 323T150 221Q132 149 132 116Q132 21 232 21Q244 21 250 22Q327 35 374 112Q389 137 409 196T430 306Z"></path></g><g data-mml-node="mi" transform="translate(566,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g><rect width="1004.7" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container></span></td>
-</tr>
-<tr>
-<td>积分</td>
-<td><code>\int_a^b f(x)dx</code></td>
-<td><span class="math inline">∫<sub><em>a</em></sub><sup><em>b</em></sup><em>f</em>(<em>x</em>) <em>d</em><em>x</em></span></td>
-</tr>
-<tr>
-<td>多重积分</td>
-<td><code>\iint</code>、<code>\iiint</code></td>
-<td><span class="math inline">∬  ∭</span></td>
-</tr>
-<tr>
-<td>无穷积分</td>
-<td><code>\int_{-\infty}^{\infty}</code></td>
-<td><span class="math inline">∫<sub>−∞</sub><sup>∞</sup></span></td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="五求和与乘积">五、求和与乘积</h2>
-<table>
-<thead>
-<tr>
-<th>含义</th>
-<th>LaTeX</th>
-<th>显示</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>求和</td>
-<td><code>\sum_{i=1}^n a_i</code></td>
-<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.777ex;" xmlns="http://www.w3.org/2000/svg" width="7.487ex" height="2.563ex" role="img" focusable="false" viewBox="0 -789.6 3309.3 1132.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="munderover"><g data-mml-node="mo"><path data-c="2211" d="M61 748Q64 750 489 750H913L954 640Q965 609 976 579T993 533T999 516H979L959 517Q936 579 886 621T777 682Q724 700 655 705T436 710H319Q183 710 183 709Q186 706 348 484T511 259Q517 250 513 244L490 216Q466 188 420 134T330 27L149 -187Q149 -188 362 -188Q388 -188 436 -188T506 -189Q679 -189 778 -162T936 -43Q946 -27 959 6H999L913 -249L489 -250Q65 -250 62 -248Q56 -246 56 -239Q56 -234 118 -161Q186 -81 245 -11L428 206Q428 207 242 462L57 717L56 728Q56 744 61 748Z"></path></g><g data-mml-node="mi" transform="translate(1089,477.1) scale(0.707)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="TeXAtom" transform="translate(1089,-285.4) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(345,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(1123,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g><g data-mml-node="msub" transform="translate(2453.3,0)"><g data-mml-node="mi"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(562,-150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container></span></td>
-</tr>
-<tr>
-<td>连乘积</td>
-<td><code>\prod_{i=1}^n a_i</code></td>
-<td><span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.777ex;" xmlns="http://www.w3.org/2000/svg" width="7.234ex" height="2.563ex" role="img" focusable="false" viewBox="0 -789.6 3197.3 1132.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="munderover"><g data-mml-node="mo"><path data-c="220F" d="M158 656Q147 684 131 694Q110 707 69 710H55V750H888V710H874Q840 708 820 698T795 678T786 656V-155Q798 -206 874 -210H888V-250H570V-210H584Q618 -208 638 -197T663 -178T673 -155V710H270V277L271 -155Q283 -206 359 -210H373V-250H55V-210H69Q103 -208 123 -197T148 -178T158 -155V656Z"></path></g><g data-mml-node="mi" transform="translate(977,477.1) scale(0.707)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="TeXAtom" transform="translate(977,-285.4) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(345,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(1123,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g><g data-mml-node="msub" transform="translate(2341.3,0)"><g data-mml-node="mi"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(562,-150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container></span></td>
-</tr>
-<tr>
-<td>上下限形式</td>
-<td><code>\lim_{x\to0}</code></td>
-<td><span class="math inline">lim<sub><em>x</em> → 0</sub></span></td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="六矩阵">六、矩阵</h2>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{bmatrix}</span><br><span class="line">a <span class="built_in">&amp;</span> b <span class="keyword">\\</span></span><br><span class="line">c <span class="built_in">&amp;</span> d</span><br><span class="line"><span class="keyword">\end</span>{bmatrix}</span><br></pre></td></tr></table></figure>
-<p>显示为：</p>
-<p><span class="math display"><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -2.149ex;" xmlns="http://www.w3.org/2000/svg" width="7.025ex" height="5.43ex" role="img" focusable="false" viewBox="0 -1450 3105 2400"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mrow"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="5B" d="M247 -949V1450H516V1388H309V-887H516V-949H247Z"></path></g><g data-mml-node="mtable" transform="translate(528,0)"><g data-mml-node="mtr" transform="translate(0,700)"><g data-mml-node="mtd"><g data-mml-node="mi"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g></g><g data-mml-node="mtd" transform="translate(1574.5,0)"><g data-mml-node="mi"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g></g></g><g data-mml-node="mtr" transform="translate(0,-700)"><g data-mml-node="mtd" transform="translate(48,0)"><g data-mml-node="mi"><path data-c="1D450" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path></g></g><g data-mml-node="mtd" transform="translate(1529,0)"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g></g></g></g><g data-mml-node="mo" transform="translate(2577,0) translate(0 -0.5)"><path data-c="5D" d="M11 1388V1450H280V-949H11V-887H218V1388H11Z"></path></g></g></g></g></svg></mjx-container></span></p>
-<hr>
-<h2 id="七逻辑与集合符号">七、逻辑与集合符号</h2>
-<table>
-<thead>
-<tr>
-<th>含义</th>
-<th>LaTeX</th>
-<th>显示</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>属于</td>
-<td><code>\in</code></td>
-<td><span class="math inline">∈</span></td>
-</tr>
-<tr>
-<td>不属于</td>
-<td><code>\notin</code></td>
-<td><span class="math inline">∉</span></td>
-</tr>
-<tr>
-<td>包含于</td>
-<td><code>\subset</code></td>
-<td><span class="math inline">⊂</span></td>
-</tr>
-<tr>
-<td>真包含</td>
-<td><code>\subsetneq</code></td>
-<td><span class="math inline">⊊</span></td>
-</tr>
-<tr>
-<td>交集</td>
-<td><code>\cap</code></td>
-<td><span class="math inline">∩</span></td>
-</tr>
-<tr>
-<td>并集</td>
-<td><code>\cup</code></td>
-<td><span class="math inline">∪</span></td>
-</tr>
-<tr>
-<td>空集</td>
-<td><code>\emptyset</code></td>
-<td><span class="math inline">∅</span></td>
-</tr>
-<tr>
-<td>全体实数</td>
-<td><code>\mathbb{R}</code></td>
-<td><span class="math inline">ℝ</span></td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="八常见关系符号">八、常见关系符号</h2>
-<table>
-<thead>
-<tr>
-<th>含义</th>
-<th>LaTeX</th>
-<th>显示</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>大于</td>
-<td><code>&gt;</code></td>
-<td><span class="math inline">&gt;</span></td>
-</tr>
-<tr>
-<td>小于</td>
-<td><code>&lt;</code></td>
-<td><span class="math inline">&lt;</span></td>
-</tr>
-<tr>
-<td>大于等于</td>
-<td><code>\ge</code></td>
-<td><span class="math inline">≥</span></td>
-</tr>
-<tr>
-<td>小于等于</td>
-<td><code>\le</code></td>
-<td><span class="math inline">≤</span></td>
-</tr>
-<tr>
-<td>不等于</td>
-<td><code>\neq</code></td>
-<td><span class="math inline">≠</span></td>
-</tr>
-<tr>
-<td>恒等于</td>
-<td><code>\equiv</code></td>
-<td><span class="math inline">≡</span></td>
-</tr>
-<tr>
-<td>约等于</td>
-<td><code>\approx</code></td>
-<td><span class="math inline">≈</span></td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="九其他符号">九、其他符号</h2>
-<table>
-<thead>
-<tr>
-<th>符号/用途</th>
-<th>LaTeX</th>
-<th>显示</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>向量</td>
-<td><code>\vec{v}</code></td>
-<td><span class="math inline"><em>v⃗</em></span></td>
-</tr>
-<tr>
-<td>点积</td>
-<td><code>\cdot</code></td>
-<td><span class="math inline"><em>a</em> ⋅ <em>b</em></span></td>
-</tr>
-<tr>
-<td>交叉乘积</td>
-<td><code>\times</code></td>
-<td><span class="math inline"><em>a</em> × <em>b</em></span></td>
-</tr>
-<tr>
-<td>垂直</td>
-<td><code>\perp</code></td>
-<td><span class="math inline">⟂</span></td>
-</tr>
-<tr>
-<td>平行</td>
-<td><code>\parallel</code></td>
-<td><span class="math inline">∥</span></td>
-</tr>
-<tr>
-<td>推出</td>
-<td><code>\Rightarrow</code></td>
-<td><span class="math inline">⇒</span></td>
-</tr>
-<tr>
-<td>等价</td>
-<td><code>\Leftrightarrow</code></td>
-<td><span class="math inline">⇔</span></td>
-</tr>
-</tbody>
-</table>
-<hr>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>math</tag>
-        <tag>latex</tag>
       </tags>
   </entry>
 </search>
