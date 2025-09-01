@@ -1,177 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>curl使用教学</title>
-    <url>/2025/07/26/curl/</url>
-    <content><![CDATA[<blockquote>
-<p>curl 是一个强大的命令行工具，用于在命令行或脚本中发送 HTTP
-请求，与服务器通信。它可以用来下载网页、调用 API
-接口、上传文件、发送表单等。几乎所有支持网络通信的协议 curl
-都能处理，包括 HTTP、HTTPS、FTP、SFTP、SMTP 等</p>
-</blockquote>
-<hr />
-<h2 id="一所以curl能干啥">一、所以curl能干啥</h2>
-<table>
-<colgroup>
-<col style="width: 12%" />
-<col style="width: 87%" />
-</colgroup>
-<thead>
-<tr>
-<th>功能</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>获取网页内容</td>
-<td><code>curl https://example.com</code></td>
-</tr>
-<tr>
-<td>下载文件</td>
-<td><code>curl -O https://example.com/file.zip</code></td>
-</tr>
-<tr>
-<td>发送 POST 请求</td>
-<td><code>curl -X POST -d "name=Koen&amp;age=20" https://example.com/api</code></td>
-</tr>
-<tr>
-<td>添加请求头</td>
-<td><code>curl -H "Authorization: Bearer TOKEN" https://api.example.com/data</code></td>
-</tr>
-<tr>
-<td>上传文件</td>
-<td><code>curl -F "file=@test.png" https://example.com/upload</code></td>
-</tr>
-<tr>
-<td>保存输出到文件</td>
-<td><code>curl https://example.com -o saved.html</code></td>
-</tr>
-</tbody>
-</table>
-<p>以下将对其功能进行详细解释</p>
-<hr />
-<h2 id="二利用curl获取网页内容">二、利用curl获取网页内容</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl url</span><br></pre></td></tr></table></figure>
-<p>会将get请求返回结果直接输出在命令行中</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://example.com -o index.html</span><br></pre></td></tr></table></figure>
-<p>保存指定内容到文件，地址为cmd当前地址</p>
-<hr />
-<h2 id="三发送post请求">三、发送post请求</h2>
-<p>一般用于测试接口是否正常 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -d <span class="string">&quot;name=Koen&amp;age=20&quot;</span> https://example.com/api</span><br></pre></td></tr></table></figure> 带上请求头和请求体：
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST https://api.example.com/data \</span><br><span class="line">  -H <span class="string">&quot;Authorization: Bearer abc123&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;&quot;key&quot;:&quot;va</span></span><br><span class="line"><span class="string">lue&quot;&#125;&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">     -d <span class="string">&#x27;&#123;&quot;username&quot;:&quot;koen&quot;,&quot;password&quot;:&quot;123456&quot;&#125;&#x27;</span> \</span><br><span class="line">     https://example.com/api</span><br></pre></td></tr></table></figure></p>
-<hr />
-<h2 id="四利用curl进行文件上传">四、利用curl进行文件上传</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -F <span class="string">&quot;file=@test.png&quot;</span> https://example.com/upload</span><br></pre></td></tr></table></figure>
-<p>-F就是指定用表单的方式进行字段的上传</p>
-<table>
-<colgroup>
-<col style="width: 18%" />
-<col style="width: 81%" />
-</colgroup>
-<thead>
-<tr>
-<th>部分</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>file</code></td>
-<td>表单字段的名字。就像网页表单中
-<code>&lt;input type="file" name="file"&gt;</code>。</td>
-</tr>
-<tr>
-<td><code>=</code></td>
-<td>分隔字段名与数据（文件）</td>
-</tr>
-<tr>
-<td><code>@test.png</code></td>
-<td>表示上传当前目录下名为 <code>test.png</code> 的文件</td>
-</tr>
-</tbody>
-</table>
-<p>其实就是post请求上传文件的方式</p>
-<hr />
-]]></content>
-      <categories>
-        <category>cmd</category>
-      </categories>
-      <tags>
-        <tag>cmd</tag>
-        <tag>curl</tag>
-        <tag>learn</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker 基本使用教程</title>
-    <url>/2025/07/26/docker-basic-usage/</url>
-    <content><![CDATA[<blockquote>
-<p>Docker
-可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的
-Linux 机器上，也可以实现虚拟化。</p>
-</blockquote>
-<hr />
-<h2 id="一docker的用途">一、Docker的用途</h2>
-<p>Docker 的主要用途，目前有三大类。</p>
-<ol type="1">
-<li><p>提供一次性的环境。比如，本地测试他人的软件、持续集成的时候提供单元测试和构建的环境。</p></li>
-<li><p>提供弹性的云服务。因为 Docker
-容器可以随开随关，很适合动态扩容和缩容。</p></li>
-<li><p>组建微服务架构。通过多个容器，一台机器可以跑多个服务，因此在本机就可以模拟出微服务架构。</p></li>
-</ol>
-<hr />
-<h2 id="二验证是否安装成功">二、验证是否安装成功</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="三image文件">三、Image文件</h2>
-<p>Docker 把应用程序及其依赖，打包在 <strong>image
-文件</strong>里面。只有通过这个文件，才能生成 Docker 容器。<br />
-image 文件可以看作是容器的模板，Docker 根据 image
-文件生成容器的实例。<br />
-同一个 image 文件，可以生成多个同时运行的容器实例。</p>
-<p>image 是一个 <strong>二进制文件</strong>。实际开发中，一个 image
-文件往往通过继承另一个 image 文件，加上一些个性化设置而生成。<br />
-举例来说，你可以在 Ubuntu 的 image 基础上，往里面加入 Apache
-服务器，形成你自己的 image。</p>
-<h3 id="列出本机的所有-image-文件">列出本机的所有 image 文件</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker image <span class="built_in">ls</span></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 🗑️ 删除 image 文件</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">$ docker image <span class="built_in">rm</span> [imageName]</span><br></pre></td></tr></table></figure>
-<p>image 文件是通用的，一台机器的 image
-文件拷贝到另一台机器，照样可以使用。</p>
-<p>一般来说，为了节省时间，我们应该尽量使用别人制作好的 image
-文件，而不是自己制作。 即使要定制，也应该基于别人的 image
-文件进行加工，而不是从零开始制作。</p>
-<h3 id="镜像仓库image-repository">镜像仓库（Image Repository）</h3>
-<p>为了方便共享，image 文件制作完成后，可以上传到网上的仓库。</p>
-<ul>
-<li>Docker 的官方仓库 <strong>Docker Hub</strong> 是最重要、最常用的
-image 仓库。</li>
-<li>此外，你也可以使用国内的镜像仓库（如阿里云、腾讯云）或者搭建私有仓库。</li>
-<li>出售自己制作的 image 文件也是可以的。</li>
-</ul>
-<h3 id="imagecontainer">image&amp;&amp;container</h3>
-<p>容器是镜像跑起来的实例，一个镜像可以有多个容器</p>
-<hr />
-<h2 id="四如何跑起来呢">四、如何跑起来呢</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker image pull &lt;project&gt;       <span class="comment">#将image文件从仓库抓取到本地</span></span><br><span class="line">docker container run &lt;project&gt;    <span class="comment">#将image文件在你的电脑上跑起来，新建容器</span></span><br><span class="line">docker container start [ID]       <span class="comment">#将已有的容器跑起来</span></span><br><span class="line">docker container <span class="built_in">kill</span> [ID]        <span class="comment">#手动终止容器的运行</span></span><br><span class="line">docker container <span class="built_in">ls</span>               <span class="comment">#在你电脑上正在跑起来的容器</span></span><br><span class="line">docker container <span class="built_in">ls</span> -all          <span class="comment">#列出本机所有容器，包括终止运行的容器</span></span><br><span class="line">docker container <span class="built_in">rm</span> [containerID] <span class="comment">#删除停止运行的容器，防止占用硬盘空间</span></span><br><span class="line">docker <span class="built_in">exec</span> -it my-nginx bash     <span class="comment">#在叫my-nginx的容器内，开启一个bash命令终端进去操作</span></span><br></pre></td></tr></table></figure>
-<p>注意，docker container run命令具有自动抓取 image
-文件的功能。如果发现本地没有指定的 image
-文件，就会从仓库自动抓取。因此，前面的docker image
-pull命令并不是必需的步骤。</p>
-<hr />
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>learn</tag>
-        <tag>container</tag>
-        <tag>docker</tag>
-        <tag>linux</tag>
-        <tag>virtual</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Koa 框架使用</title>
     <url>/2025/08/25/Koa/</url>
     <content><![CDATA[<h2 id="准备工作">0. 准备工作</h2>
@@ -498,133 +327,6 @@ J：额外增强（可选但常用）</h2>
         <tag>Koa</tag>
         <tag>backen</tag>
         <tag>nodejs</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Electron 基本使用教程</title>
-    <url>/2025/07/29/electron/</url>
-    <content><![CDATA[<blockquote>
-<p>以下以vue3为例结合electron实现跨平台开发</p>
-</blockquote>
-<hr />
-<h2
-id="一在项目根目录安装electorn-forge">一、在项目根目录安装electorn-forge</h2>
-<p>按照如下命令安装electron-forge</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save-dev electron @electron-forge/cli</span><br><span class="line">npx electron-forge import</span><br></pre></td></tr></table></figure>
-<p>这一步会在你的项目中创建一个 electron
-的基本目录结构，并配置打包命令。</p>
-<h2 id="二新建main.js">二、新建main.js</h2>
-<p>在根目录下新建/electron/main.js</p>
-<p>在main.js下复制如下代码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import &#123; app, BrowserWindow &#125; from <span class="string">&#x27;electron&#x27;</span>;</span><br><span class="line">import path from <span class="string">&#x27;path&#x27;</span>;</span><br><span class="line">import &#123; fileURLToPath &#125; from <span class="string">&#x27;url&#x27;</span>;</span><br><span class="line"></span><br><span class="line">// 解决 ES Module 中没有 __dirname 的问题</span><br><span class="line">const __filename = fileURLToPath(import.meta.url);</span><br><span class="line">const __dirname = path.dirname(__filename);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">createWindow</span></span> () &#123;</span><br><span class="line">  const win = new BrowserWindow(&#123;</span><br><span class="line">    width: 1200,</span><br><span class="line">    height: 800,</span><br><span class="line">    webPreferences: &#123;</span><br><span class="line">      preload: path.join(__dirname, <span class="string">&#x27;preload.js&#x27;</span>), // 可选，预加载脚本</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!app.isPackaged) &#123;</span><br><span class="line">    win.loadURL(<span class="string">&#x27;http://localhost:5173&#x27;</span>); // dev 模式加载 vite 前端</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>)); // prod 模式加载打包页面</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.whenReady().<span class="keyword">then</span>(() =&gt; &#123;</span><br><span class="line">  createWindow();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="三修改package.json">三、修改package.json</h2>
-<p>进入package.json文件，新增</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;main&quot;</span>: <span class="string">&quot;electron/main.js&quot;</span>,</span><br></pre></td></tr></table></figure>
-<p>注意scripts</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line"><span class="string">&quot;dev&quot;</span>: <span class="string">&quot;vite&quot;</span>,</span><br><span class="line"><span class="string">&quot;build&quot;</span>: <span class="string">&quot;vite build&quot;</span>,</span><br><span class="line"><span class="string">&quot;preview&quot;</span>: <span class="string">&quot;vite preview&quot;</span>,</span><br><span class="line"><span class="string">&quot;start&quot;</span>: <span class="string">&quot;electron-forge start&quot;</span>,</span><br><span class="line"><span class="string">&quot;package&quot;</span>: <span class="string">&quot;electron-forge package&quot;</span>,</span><br><span class="line"><span class="string">&quot;make&quot;</span>: <span class="string">&quot;electron-forge make&quot;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<h2 id="四开发测试流程">四、开发测试流程</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动 Vite 前端</span></span><br><span class="line">npm run dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新开一个终端，启动 Electron</span></span><br><span class="line">npm start</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="五打包发布测试">五、打包发布测试</h2>
-<p>先构建前端项目</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
-<p>修改main.js</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>));</span><br></pre></td></tr></table></figure>
-<p>打包</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run package</span><br></pre></td></tr></table></figure>
-<p>会在 out/ 目录生成你的桌面可执行程序（比如 Windows 下是 .exe
-文件）</p>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>electron</tag>
-        <tag>web</tag>
-        <tag>desk</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git 基本使用教程</title>
-    <url>/2025/07/25/git-basic-usage/</url>
-    <content><![CDATA[<blockquote>
-<p>Git
-是一个分布式版本控制系统，适用于代码版本管理与团队协作开发。本文将简要介绍
-Git
-的一些常用操作命令，包括创建仓库、分支管理以及删除文件/分支的方法。</p>
-</blockquote>
-<hr />
-<h2 id="一初始化仓库">一、初始化仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
-<ul>
-<li>在当前目录初始化一个 Git 仓库。</li>
-<li>会创建 <code>.git</code> 文件夹作为版本控制目录。</li>
-</ul>
-<hr />
-<h2 id="二克隆远程仓库">二、克隆远程仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;仓库地址&gt;</span><br><span class="line">```****</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/username/repo.git</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="三添加与提交文件">三、添加与提交文件</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add &lt;文件或目录&gt;</span><br><span class="line">git commit -m <span class="string">&quot;提交说明&quot;</span></span><br></pre></td></tr></table></figure>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;添加初始项目文件&quot;</span></span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="四查看状态与历史">四、查看状态与历史</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status        <span class="comment"># 查看当前状态</span></span><br><span class="line">git <span class="built_in">log</span>           <span class="comment"># 查看提交历史</span></span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="五分支操作">五、分支操作</h2>
-<h3 id="创建新分支">创建新分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="切换分支">切换分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch &lt;分支名&gt;</span><br><span class="line"><span class="comment"># 或（旧写法）</span></span><br><span class="line">git checkout &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="创建并切换新分支">创建并切换新分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch -c &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="查看所有分支">查看所有分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="六合并分支">六、合并分支</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git merge &lt;被合并的分支&gt;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注意：需要先切换到目标分支，再合并。</p>
-</blockquote>
-<hr />
-<h2 id="七删除操作">七、删除操作</h2>
-<h3 id="删除文件">删除文件</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">rm</span> &lt;文件名&gt;</span><br><span class="line">git commit -m <span class="string">&quot;删除了某个文件&quot;</span></span><br></pre></td></tr></table></figure>
-<h3 id="撤销删除误删恢复">撤销删除（误删恢复）</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -- &lt;文件名&gt;</span><br></pre></td></tr></table></figure>
-<hr />
-<h3 id="删除本地分支">删除本地分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -d &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>-d</code> 是安全删除（合并过的才允许删）</li>
-<li><code>-D</code> 是强制删除（无论是否合并）</li>
-</ul>
-<h3 id="删除远程分支">删除远程分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin --delete &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="八推送与拉取">八、推送与拉取</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin &lt;分支名&gt;   <span class="comment"># 推送到远程</span></span><br><span class="line">git pull origin &lt;分支名&gt;   <span class="comment"># 拉取最新代码</span></span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="九查看远程仓库">九、查看远程仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="十总结">十、总结</h2>
-<p>Git
-是开发者日常工作中不可或缺的工具，掌握它可以大大提升协作效率与版本管理能力。希望本文能帮助你快速上手
-Git 的基本操作。</p>
-<hr />
-<blockquote>
-<p>如需进一步学习，可以参考 <a href="https://git-scm.com/book/zh/v2">Pro
-Git 中文版</a>。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>learn</tag>
-        <tag>repo</tag>
-        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -1368,25 +1070,114 @@ $$</span></p>
       </tags>
   </entry>
   <entry>
-    <title>常见BUG汇总</title>
-    <url>/2025/07/27/issue/</url>
-    <content><![CDATA[<h2 id="一markdown">一、Markdown</h2>
-<h3 id="为什么vscode编辑md文件十分卡顿">1.1
-为什么vscode编辑md文件十分卡顿</h3>
-<p>解决方法:禁用cpp extension pack扩展</p>
-<h2 id="二hexo">二、Hexo</h2>
-<h3 id="出现spawn-failed报错">2.1 出现Spawn Failed报错</h3>
-<p>首先尝试关机重启</p>
-<p>其次删除<code>.deploy_git</code>文件夹</p>
-<p>最后实在不行找到<code>.ssh</code>文件，先测试</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-<p>如果出现22端口连接超时，改成443端口即可 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">  HostName ssh.github.com</span><br><span class="line">  Port 443</span><br><span class="line">  User git</span><br><span class="line">  IdentityFile ~/.ssh/id_rsa</span><br><span class="line">  IdentitiesOnly <span class="built_in">yes</span></span><br></pre></td></tr></table></figure></p>
+    <title>Electron 基本使用教程</title>
+    <url>/2025/07/29/electron/</url>
+    <content><![CDATA[<blockquote>
+<p>以下以vue3为例结合electron实现跨平台开发</p>
+</blockquote>
+<hr />
+<h2
+id="一在项目根目录安装electorn-forge">一、在项目根目录安装electorn-forge</h2>
+<p>按照如下命令安装electron-forge</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save-dev electron @electron-forge/cli</span><br><span class="line">npx electron-forge import</span><br></pre></td></tr></table></figure>
+<p>这一步会在你的项目中创建一个 electron
+的基本目录结构，并配置打包命令。</p>
+<h2 id="二新建main.js">二、新建main.js</h2>
+<p>在根目录下新建/electron/main.js</p>
+<p>在main.js下复制如下代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import &#123; app, BrowserWindow &#125; from <span class="string">&#x27;electron&#x27;</span>;</span><br><span class="line">import path from <span class="string">&#x27;path&#x27;</span>;</span><br><span class="line">import &#123; fileURLToPath &#125; from <span class="string">&#x27;url&#x27;</span>;</span><br><span class="line"></span><br><span class="line">// 解决 ES Module 中没有 __dirname 的问题</span><br><span class="line">const __filename = fileURLToPath(import.meta.url);</span><br><span class="line">const __dirname = path.dirname(__filename);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">createWindow</span></span> () &#123;</span><br><span class="line">  const win = new BrowserWindow(&#123;</span><br><span class="line">    width: 1200,</span><br><span class="line">    height: 800,</span><br><span class="line">    webPreferences: &#123;</span><br><span class="line">      preload: path.join(__dirname, <span class="string">&#x27;preload.js&#x27;</span>), // 可选，预加载脚本</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!app.isPackaged) &#123;</span><br><span class="line">    win.loadURL(<span class="string">&#x27;http://localhost:5173&#x27;</span>); // dev 模式加载 vite 前端</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>)); // prod 模式加载打包页面</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.whenReady().<span class="keyword">then</span>(() =&gt; &#123;</span><br><span class="line">  createWindow();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="三修改package.json">三、修改package.json</h2>
+<p>进入package.json文件，新增</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;main&quot;</span>: <span class="string">&quot;electron/main.js&quot;</span>,</span><br></pre></td></tr></table></figure>
+<p>注意scripts</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line"><span class="string">&quot;dev&quot;</span>: <span class="string">&quot;vite&quot;</span>,</span><br><span class="line"><span class="string">&quot;build&quot;</span>: <span class="string">&quot;vite build&quot;</span>,</span><br><span class="line"><span class="string">&quot;preview&quot;</span>: <span class="string">&quot;vite preview&quot;</span>,</span><br><span class="line"><span class="string">&quot;start&quot;</span>: <span class="string">&quot;electron-forge start&quot;</span>,</span><br><span class="line"><span class="string">&quot;package&quot;</span>: <span class="string">&quot;electron-forge package&quot;</span>,</span><br><span class="line"><span class="string">&quot;make&quot;</span>: <span class="string">&quot;electron-forge make&quot;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="四开发测试流程">四、开发测试流程</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动 Vite 前端</span></span><br><span class="line">npm run dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新开一个终端，启动 Electron</span></span><br><span class="line">npm start</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="五打包发布测试">五、打包发布测试</h2>
+<p>先构建前端项目</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+<p>修改main.js</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>));</span><br></pre></td></tr></table></figure>
+<p>打包</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run package</span><br></pre></td></tr></table></figure>
+<p>会在 out/ 目录生成你的桌面可执行程序（比如 Windows 下是 .exe
+文件）</p>
 ]]></content>
       <categories>
         <category>code</category>
       </categories>
       <tags>
-        <tag>markdown</tag>
+        <tag>electron</tag>
+        <tag>web</tag>
+        <tag>desk</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker 基本使用教程</title>
+    <url>/2025/07/26/docker-basic-usage/</url>
+    <content><![CDATA[<blockquote>
+<p>Docker
+可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的
+Linux 机器上，也可以实现虚拟化。</p>
+</blockquote>
+<hr />
+<h2 id="一docker的用途">一、Docker的用途</h2>
+<p>Docker 的主要用途，目前有三大类。</p>
+<ol type="1">
+<li><p>提供一次性的环境。比如，本地测试他人的软件、持续集成的时候提供单元测试和构建的环境。</p></li>
+<li><p>提供弹性的云服务。因为 Docker
+容器可以随开随关，很适合动态扩容和缩容。</p></li>
+<li><p>组建微服务架构。通过多个容器，一台机器可以跑多个服务，因此在本机就可以模拟出微服务架构。</p></li>
+</ol>
+<hr />
+<h2 id="二验证是否安装成功">二、验证是否安装成功</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="三image文件">三、Image文件</h2>
+<p>Docker 把应用程序及其依赖，打包在 <strong>image
+文件</strong>里面。只有通过这个文件，才能生成 Docker 容器。<br />
+image 文件可以看作是容器的模板，Docker 根据 image
+文件生成容器的实例。<br />
+同一个 image 文件，可以生成多个同时运行的容器实例。</p>
+<p>image 是一个 <strong>二进制文件</strong>。实际开发中，一个 image
+文件往往通过继承另一个 image 文件，加上一些个性化设置而生成。<br />
+举例来说，你可以在 Ubuntu 的 image 基础上，往里面加入 Apache
+服务器，形成你自己的 image。</p>
+<h3 id="列出本机的所有-image-文件">列出本机的所有 image 文件</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker image <span class="built_in">ls</span></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 🗑️ 删除 image 文件</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">$ docker image <span class="built_in">rm</span> [imageName]</span><br></pre></td></tr></table></figure>
+<p>image 文件是通用的，一台机器的 image
+文件拷贝到另一台机器，照样可以使用。</p>
+<p>一般来说，为了节省时间，我们应该尽量使用别人制作好的 image
+文件，而不是自己制作。 即使要定制，也应该基于别人的 image
+文件进行加工，而不是从零开始制作。</p>
+<h3 id="镜像仓库image-repository">镜像仓库（Image Repository）</h3>
+<p>为了方便共享，image 文件制作完成后，可以上传到网上的仓库。</p>
+<ul>
+<li>Docker 的官方仓库 <strong>Docker Hub</strong> 是最重要、最常用的
+image 仓库。</li>
+<li>此外，你也可以使用国内的镜像仓库（如阿里云、腾讯云）或者搭建私有仓库。</li>
+<li>出售自己制作的 image 文件也是可以的。</li>
+</ul>
+<h3 id="imagecontainer">image&amp;&amp;container</h3>
+<p>容器是镜像跑起来的实例，一个镜像可以有多个容器</p>
+<hr />
+<h2 id="四如何跑起来呢">四、如何跑起来呢</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker image pull &lt;project&gt;       <span class="comment">#将image文件从仓库抓取到本地</span></span><br><span class="line">docker container run &lt;project&gt;    <span class="comment">#将image文件在你的电脑上跑起来，新建容器</span></span><br><span class="line">docker container start [ID]       <span class="comment">#将已有的容器跑起来</span></span><br><span class="line">docker container <span class="built_in">kill</span> [ID]        <span class="comment">#手动终止容器的运行</span></span><br><span class="line">docker container <span class="built_in">ls</span>               <span class="comment">#在你电脑上正在跑起来的容器</span></span><br><span class="line">docker container <span class="built_in">ls</span> -all          <span class="comment">#列出本机所有容器，包括终止运行的容器</span></span><br><span class="line">docker container <span class="built_in">rm</span> [containerID] <span class="comment">#删除停止运行的容器，防止占用硬盘空间</span></span><br><span class="line">docker <span class="built_in">exec</span> -it my-nginx bash     <span class="comment">#在叫my-nginx的容器内，开启一个bash命令终端进去操作</span></span><br></pre></td></tr></table></figure>
+<p>注意，docker container run命令具有自动抓取 image
+文件的功能。如果发现本地没有指定的 image
+文件，就会从仓库自动抓取。因此，前面的docker image
+pull命令并不是必需的步骤。</p>
+<hr />
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>container</tag>
+        <tag>docker</tag>
+        <tag>learn</tag>
+        <tag>linux</tag>
+        <tag>virtual</tag>
       </tags>
   </entry>
   <entry>
@@ -1735,6 +1526,109 @@ $$</span></p>
       </tags>
   </entry>
   <entry>
+    <title>curl使用教学</title>
+    <url>/2025/07/26/curl/</url>
+    <content><![CDATA[<blockquote>
+<p>curl 是一个强大的命令行工具，用于在命令行或脚本中发送 HTTP
+请求，与服务器通信。它可以用来下载网页、调用 API
+接口、上传文件、发送表单等。几乎所有支持网络通信的协议 curl
+都能处理，包括 HTTP、HTTPS、FTP、SFTP、SMTP 等</p>
+</blockquote>
+<hr />
+<h2 id="一所以curl能干啥">一、所以curl能干啥</h2>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 87%" />
+</colgroup>
+<thead>
+<tr>
+<th>功能</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>获取网页内容</td>
+<td><code>curl https://example.com</code></td>
+</tr>
+<tr>
+<td>下载文件</td>
+<td><code>curl -O https://example.com/file.zip</code></td>
+</tr>
+<tr>
+<td>发送 POST 请求</td>
+<td><code>curl -X POST -d "name=Koen&amp;age=20" https://example.com/api</code></td>
+</tr>
+<tr>
+<td>添加请求头</td>
+<td><code>curl -H "Authorization: Bearer TOKEN" https://api.example.com/data</code></td>
+</tr>
+<tr>
+<td>上传文件</td>
+<td><code>curl -F "file=@test.png" https://example.com/upload</code></td>
+</tr>
+<tr>
+<td>保存输出到文件</td>
+<td><code>curl https://example.com -o saved.html</code></td>
+</tr>
+</tbody>
+</table>
+<p>以下将对其功能进行详细解释</p>
+<hr />
+<h2 id="二利用curl获取网页内容">二、利用curl获取网页内容</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl url</span><br></pre></td></tr></table></figure>
+<p>会将get请求返回结果直接输出在命令行中</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://example.com -o index.html</span><br></pre></td></tr></table></figure>
+<p>保存指定内容到文件，地址为cmd当前地址</p>
+<hr />
+<h2 id="三发送post请求">三、发送post请求</h2>
+<p>一般用于测试接口是否正常 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -d <span class="string">&quot;name=Koen&amp;age=20&quot;</span> https://example.com/api</span><br></pre></td></tr></table></figure> 带上请求头和请求体：
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST https://api.example.com/data \</span><br><span class="line">  -H <span class="string">&quot;Authorization: Bearer abc123&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;&quot;key&quot;:&quot;va</span></span><br><span class="line"><span class="string">lue&quot;&#125;&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -X POST -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">     -d <span class="string">&#x27;&#123;&quot;username&quot;:&quot;koen&quot;,&quot;password&quot;:&quot;123456&quot;&#125;&#x27;</span> \</span><br><span class="line">     https://example.com/api</span><br></pre></td></tr></table></figure></p>
+<hr />
+<h2 id="四利用curl进行文件上传">四、利用curl进行文件上传</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -F <span class="string">&quot;file=@test.png&quot;</span> https://example.com/upload</span><br></pre></td></tr></table></figure>
+<p>-F就是指定用表单的方式进行字段的上传</p>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr>
+<th>部分</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file</code></td>
+<td>表单字段的名字。就像网页表单中
+<code>&lt;input type="file" name="file"&gt;</code>。</td>
+</tr>
+<tr>
+<td><code>=</code></td>
+<td>分隔字段名与数据（文件）</td>
+</tr>
+<tr>
+<td><code>@test.png</code></td>
+<td>表示上传当前目录下名为 <code>test.png</code> 的文件</td>
+</tr>
+</tbody>
+</table>
+<p>其实就是post请求上传文件的方式</p>
+<hr />
+]]></content>
+      <categories>
+        <category>cmd</category>
+      </categories>
+      <tags>
+        <tag>learn</tag>
+        <tag>cmd</tag>
+        <tag>curl</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>像前端package.json那样管理python依赖</title>
     <url>/2025/07/29/pipenv/</url>
     <content><![CDATA[<ol type="1">
@@ -1775,161 +1669,441 @@ $$</span></p>
       </tags>
   </entry>
   <entry>
-    <title>Latex全语法使用</title>
-    <url>/2025/08/18/latex_2/</url>
-    <content><![CDATA[<h2 id="latex-文档基本格式">1. LaTeX 文档基本格式</h2>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{article}   <span class="comment">% 文档类型：article, report, book, beamer 等</span></span><br><span class="line"><span class="keyword">\usepackage</span>[utf8]{inputenc} <span class="comment">% 支持中文时建议用 ctex 包</span></span><br><span class="line"><span class="keyword">\usepackage</span>{amsmath, amssymb} <span class="comment">% 数学符号扩展</span></span><br><span class="line"><span class="keyword">\usepackage</span>{graphicx} <span class="comment">% 插入图片</span></span><br><span class="line"><span class="keyword">\usepackage</span>{listings} <span class="comment">% 插入代码</span></span><br><span class="line"><span class="keyword">\usepackage</span>{xcolor}   <span class="comment">% 代码高亮需要颜色</span></span><br><span class="line"><span class="keyword">\usepackage</span>{hyperref} <span class="comment">% 超链接</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\title</span>{LaTeX 学习示例}</span><br><span class="line"><span class="keyword">\author</span>{你的名字}</span><br><span class="line"><span class="keyword">\date</span>{<span class="keyword">\today</span>}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{document}  <span class="comment">% 正文开始</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\maketitle</span>  <span class="comment">% 输出标题</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{引言}</span><br><span class="line">这是 LaTeX 的一个简单示例。</span><br><span class="line"></span><br><span class="line"><span class="keyword">\end</span>{document}</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>说明</strong>：</p>
-</blockquote>
-<ul>
-<li><code>\documentclass{article}</code> 定义了文档类型。</li>
-<li><code>\usepackage{}</code> 用来导入扩展包。</li>
-<li><code>\section{}</code> 表示章节。</li>
-<li><code>\maketitle</code> 会根据上面
-<code>\title</code>、<code>\author</code>、<code>\date</code>
-生成标题页。</li>
-</ul>
+    <title>scipy基本模块及其使用</title>
+    <url>/2025/08/11/scipy/</url>
+    <content><![CDATA[<h2 id="一常量模块constants">一、常量模块(constants)</h2>
+<p>以下是 <code>scipy.constants</code> 模块中主要常量的分类表格：</p>
 <hr>
-<h2 id="数学公式">2. 数学公式</h2>
-<p>LaTeX 在数学公式排版方面很强大。</p>
-<h3 id="行内公式">2.1 行内公式</h3>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line">这是一个行内公式：<span class="built_in">$</span>E=mc<span class="built_in">^</span>2<span class="built_in">$</span>。</span><br></pre></td></tr></table></figure>
-<h3 id="独立公式">2.2 独立公式</h3>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\[</span></span><br><span class="line">E = mc<span class="built_in">^</span>2</span><br><span class="line"><span class="keyword">\]</span></span><br></pre></td></tr></table></figure>
-<h3 id="多行公式-amsmath-提供">2.3 多行公式 (amsmath 提供)</h3>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{align}</span><br><span class="line">a<span class="built_in">^</span>2 + b<span class="built_in">^</span>2 <span class="built_in">&amp;</span>= c<span class="built_in">^</span>2 <span class="keyword">\\</span></span><br><span class="line">e<span class="built_in">^</span>{i<span class="keyword">\pi</span>} + 1 <span class="built_in">&amp;</span>= 0</span><br><span class="line"><span class="keyword">\end</span>{align}</span><br></pre></td></tr></table></figure>
+<h3 id="数学常数"><strong>1.1 数学常数</strong></h3>
+<table>
+<thead>
+<tr>
+<th>常量名</th>
+<th>描述</th>
+<th>值 (近似)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pi</code></td>
+<td>圆周率 π</td>
+<td>3.141592653589793</td>
+</tr>
+<tr>
+<td><code>golden</code></td>
+<td>黄金比例 (φ)</td>
+<td>1.618033988749895</td>
+</tr>
+<tr>
+<td><code>e</code></td>
+<td>自然对数的底 (e)</td>
+<td>2.718281828459045</td>
+</tr>
+</tbody>
+</table>
 <hr>
-<h2 id="插入图片">3. 插入图片</h2>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{figure}[h]</span><br><span class="line">    <span class="keyword">\centering</span></span><br><span class="line">    <span class="keyword">\includegraphics</span>[width=0.5<span class="keyword">\textwidth</span>]{example.png}</span><br><span class="line">    <span class="keyword">\caption</span>{这是一个示例图片}</span><br><span class="line">    <span class="keyword">\label</span>{fig:example}</span><br><span class="line"><span class="keyword">\end</span>{figure}</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>说明</strong>：</p>
-</blockquote>
-<ul>
-<li><code>example.png</code> 必须和 <code>.tex</code>
-文件在同一目录。</li>
-<li><code>width=0.5\textwidth</code> 控制大小。</li>
-<li><code>\caption</code> 是图注，<code>\label</code> 用来引用。</li>
-<li>之后可用 <code>见图~\ref{fig:example}</code> 来自动编号。</li>
-</ul>
+<h3 id="通用物理常数"><strong>1.2 通用物理常数</strong></h3>
+<table>
+<colgroup>
+<col style="width: 24%">
+<col style="width: 37%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr>
+<th>常量名</th>
+<th>描述</th>
+<th>值 (单位)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>c</code></td>
+<td>真空光速</td>
+<td>299792458.0 m/s</td>
+</tr>
+<tr>
+<td><code>h</code></td>
+<td>普朗克常数</td>
+<td>6.62607015e-34 J·s</td>
+</tr>
+<tr>
+<td><code>hbar</code></td>
+<td>约化普朗克常数 (h/2π)</td>
+<td>1.054571817e-34 J·s</td>
+</tr>
+<tr>
+<td><code>G</code></td>
+<td>万有引力常数</td>
+<td>6.67430e-11 m³/(kg·s²)</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td>标准重力加速度</td>
+<td>9.80665 m/s²</td>
+</tr>
+</tbody>
+</table>
 <hr>
-<h2 id="插入代码">4. 插入代码</h2>
-<p>LaTeX 用 <code>listings</code> 包来展示代码：</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{lstlisting}[language=Python, caption=Python 示例, label={lst:py}]</span><br><span class="line">def hello():</span><br><span class="line">    print("Hello, LaTeX!")</span><br><span class="line"><span class="keyword">\end</span>{lstlisting}</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>说明</strong>：</p>
-</blockquote>
-<ul>
-<li><code>language=Python</code> 可以换成 <code>C</code>,
-<code>C++</code>, <code>Java</code> 等。</li>
-<li><code>caption</code> 给代码块加标题，<code>label</code>
-方便引用。</li>
-</ul>
-<p>还可以加颜色主题：</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\lstset</span>{</span><br><span class="line">  basicstyle=<span class="keyword">\ttfamily</span><span class="keyword">\small</span>,</span><br><span class="line">  keywordstyle=<span class="keyword">\color</span>{blue},</span><br><span class="line">  commentstyle=<span class="keyword">\color</span>{green!50!black},</span><br><span class="line">  stringstyle=<span class="keyword">\color</span>{red},</span><br><span class="line">  numbers=left,</span><br><span class="line">  numberstyle=<span class="keyword">\tiny</span>,</span><br><span class="line">  frame=single,</span><br><span class="line">  breaklines=true</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h3 id="电磁学常数"><strong>1.3 电磁学常数</strong></h3>
+<table>
+<colgroup>
+<col style="width: 24%">
+<col style="width: 37%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr>
+<th>常量名</th>
+<th>描述</th>
+<th>值 (单位)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mu_0</code></td>
+<td>真空磁导率</td>
+<td>1.25663706212e-6 N/A²</td>
+</tr>
+<tr>
+<td><code>epsilon_0</code></td>
+<td>真空电容率</td>
+<td>8.8541878128e-12 F/m</td>
+</tr>
+<tr>
+<td><code>e</code> (或 <code>elementary_charge</code>)</td>
+<td>元电荷</td>
+<td>1.602176634e-19 C</td>
+</tr>
+</tbody>
+</table>
 <hr>
-<h2 id="表格">5. 表格</h2>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{table}[h]</span><br><span class="line">    <span class="keyword">\centering</span></span><br><span class="line">    <span class="keyword">\begin</span>{tabular}{|c|c|c|}</span><br><span class="line">        <span class="keyword">\hline</span></span><br><span class="line">        姓名 <span class="built_in">&amp;</span> 年龄 <span class="built_in">&amp;</span> 成绩 <span class="keyword">\\</span></span><br><span class="line">        <span class="keyword">\hline</span></span><br><span class="line">        张三 <span class="built_in">&amp;</span> 18 <span class="built_in">&amp;</span> 95 <span class="keyword">\\</span></span><br><span class="line">        李四 <span class="built_in">&amp;</span> 19 <span class="built_in">&amp;</span> 88 <span class="keyword">\\</span></span><br><span class="line">        <span class="keyword">\hline</span></span><br><span class="line">    <span class="keyword">\end</span>{tabular}</span><br><span class="line">    <span class="keyword">\caption</span>{学生信息表}</span><br><span class="line">    <span class="keyword">\label</span>{tab:student}</span><br><span class="line"><span class="keyword">\end</span>{table}</span><br></pre></td></tr></table></figure>
+<h3 id="原子与核物理常数"><strong>1.4 原子与核物理常数</strong></h3>
+<table>
+<thead>
+<tr>
+<th>常量名</th>
+<th>描述</th>
+<th>值 (单位)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>m_e</code></td>
+<td>电子质量</td>
+<td>9.1093837015e-31 kg</td>
+</tr>
+<tr>
+<td><code>m_p</code></td>
+<td>质子质量</td>
+<td>1.67262192369e-27 kg</td>
+</tr>
+<tr>
+<td><code>m_n</code></td>
+<td>中子质量</td>
+<td>1.67492749804e-27 kg</td>
+</tr>
+<tr>
+<td><code>Rydberg</code></td>
+<td>里德伯常数</td>
+<td>10973731.568160 1/m</td>
+</tr>
+<tr>
+<td><code>alpha</code></td>
+<td>精细结构常数</td>
+<td>0.0072973525693</td>
+</tr>
+</tbody>
+</table>
 <hr>
-<h2 id="超链接">6. 超链接</h2>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\href</span>{<span class="link">https://www.latex-project.org</span>}{LaTeX 官网}</span><br></pre></td></tr></table></figure>
+<h3 id="化学相关常数"><strong>1.5 化学相关常数</strong></h3>
+<table>
+<thead>
+<tr>
+<th>常量名</th>
+<th>描述</th>
+<th>值 (单位)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>N_A</code></td>
+<td>阿伏伽德罗常数</td>
+<td>6.02214076e23 1/mol</td>
+</tr>
+<tr>
+<td><code>R</code></td>
+<td>通用气体常数</td>
+<td>8.314462618 J/(mol·K)</td>
+</tr>
+<tr>
+<td><code>atomic_mass</code></td>
+<td>原子质量单位 (u)</td>
+<td>1.66053906660e-27 kg</td>
+</tr>
+</tbody>
+</table>
 <hr>
-<h2 id="中文支持">7. 中文支持</h2>
-<p>如果你写中文文档，建议用 <code>ctex</code> 包：</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{ctexart}  <span class="comment">% 代替 article，更好支持中文</span></span><br></pre></td></tr></table></figure>
-<p>这样就能直接写中文了。</p>
+<h3 id="常用单位换算因子"><strong>1.6 常用单位换算因子</strong></h3>
+<table>
+<thead>
+<tr>
+<th>常量名</th>
+<th>描述</th>
+<th>换算关系</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>inch</code></td>
+<td>英寸 → 米</td>
+<td>0.0254 m</td>
+</tr>
+<tr>
+<td><code>foot</code></td>
+<td>英尺 → 米</td>
+<td>0.3048 m</td>
+</tr>
+<tr>
+<td><code>mile</code></td>
+<td>英里 → 米</td>
+<td>1609.344 m</td>
+</tr>
+<tr>
+<td><code>lb</code></td>
+<td>磅 → 千克</td>
+<td>0.45359237 kg</td>
+</tr>
+<tr>
+<td><code>eV</code></td>
+<td>电子伏特 → 焦耳</td>
+<td>1.602176634e-19 J</td>
+</tr>
+<tr>
+<td><code>atm</code></td>
+<td>标准大气压 → 帕斯卡</td>
+<td>101325.0 Pa</td>
+</tr>
+</tbody>
+</table>
 <hr>
-<h2 id="有序列表和无序列表">8.有序列表和无序列表</h2>
-<h3 id="无序列表itemize">8.1 无序列表（itemize）</h3>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{itemize}</span><br><span class="line">    <span class="keyword">\item</span> 这是第一点</span><br><span class="line">    <span class="keyword">\item</span> 这是第二点</span><br><span class="line">    <span class="keyword">\item</span> 这是第三点</span><br><span class="line"><span class="keyword">\end</span>{itemize}</span><br></pre></td></tr></table></figure>
-<p>默认显示为黑色小圆点：</p>
+<h3 id="温度相关"><strong>1.7 温度相关</strong></h3>
+<table>
+<thead>
+<tr>
+<th>常量名</th>
+<th>描述</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>zero_Celsius</code></td>
+<td>0°C 对应的开尔文温度</td>
+<td>273.15 K</td>
+</tr>
+<tr>
+<td><code>degree_Fahrenheit</code></td>
+<td>1°F 对应的开尔文间隔</td>
+<td>0.555555… K</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="查找所有常量的方法"><strong>查找所有常量的方法</strong></h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> constants</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出所有常量</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">dir</span>(constants))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索包含关键词的常量（例如 'mass'）</span></span><br><span class="line"><span class="built_in">print</span>(constants.find(<span class="string">'mass'</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="二优化器optimize">二、优化器(optimize)</h2>
+<p>scipy的优化器是数学建模的工具，它的核心目标是
+寻找函数的最小值（或最大值）、拟合模型、求解方程或系统，适用于传统数学问题<code>而非深度学习</code>(注意和pytorch这些的优化器函数区分开来)</p>
+<h3 id="无约束优化"><strong>2.1 无约束优化</strong></h3>
 <ul>
-<li>这是第一点</li>
-<li>这是第二点</li>
-<li>这是第三点</li>
+<li>用途:实现查找给定区间内函数的最小值</li>
+<li>实现：</li>
 </ul>
-<h3 id="有序列表enumerate">8.2 有序列表（enumerate）</h3>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{enumerate}</span><br><span class="line">    <span class="keyword">\item</span> 这是第一点</span><br><span class="line">    <span class="keyword">\item</span> 这是第二点</span><br><span class="line">    <span class="keyword">\item</span> 这是第三点</span><br><span class="line"><span class="keyword">\end</span>{enumerate}</span><br></pre></td></tr></table></figure>
-<p>默认显示为数字编号：</p>
-<ol type="1">
-<li>这是第一点</li>
-<li>这是第二点</li>
-<li>这是第三点</li>
-</ol>
-<h3 id="自定义编号样式">8.3 自定义编号样式</h3>
-<p>借助 <code>enumitem</code> 包可以更灵活：</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>{enumitem}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{enumerate}[label=<span class="keyword">\roman</span>*.]  <span class="comment">% 罗马数字</span></span><br><span class="line">    <span class="keyword">\item</span> 第一条</span><br><span class="line">    <span class="keyword">\item</span> 第二条</span><br><span class="line"><span class="keyword">\end</span>{enumerate}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{enumerate}[label=(<span class="keyword">\alph</span>*)]  <span class="comment">% 小写字母</span></span><br><span class="line">    <span class="keyword">\item</span> 第一条</span><br><span class="line">    <span class="keyword">\item</span> 第二条</span><br><span class="line"><span class="keyword">\end</span>{enumerate}</span><br></pre></td></tr></table></figure>
-<p>结果会变成：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">minimize_scalar() <span class="comment">#单变量函数</span></span><br><span class="line">minimize()        <span class="comment">#多变量函数</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>(i), (ii), (iii)…</li>
-<li>(a), (b), (c)…</li>
-</ul>
-<h3 id="无编号列表只换行没有点数字">8.4
-无编号列表（只换行，没有点/数字）</h3>
-<p>如果你只是想 <strong>逐行列出</strong>，但不要前面的符号，可以用
-<code>description</code> 或者自定义环境：</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{itemize}[label={}] <span class="comment">% label={} 表示不要符号</span></span><br><span class="line">    <span class="keyword">\item</span> 第一行</span><br><span class="line">    <span class="keyword">\item</span> 第二行</span><br><span class="line">    <span class="keyword">\item</span> 第三行</span><br><span class="line"><span class="keyword">\end</span>{itemize}</span><br></pre></td></tr></table></figure>
-<p>或者更简单：</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line">第一点 <span class="keyword">\\</span></span><br><span class="line">第二点 <span class="keyword">\\</span></span><br><span class="line">第三点</span><br></pre></td></tr></table></figure>
-<p>（这里 <code>\\</code> 表示换行）</p>
-<h2 id="bibtex-使用">9. BibTeX 使用</h2>
-<p>在学术写作中，<strong>参考文献管理</strong>是必不可少的。LaTeX 提供了
-<code>BibTeX</code> 来管理参考文献，它的好处是：</p>
+<li>查找方法：
 <ul>
-<li>文献集中存放在一个 <code>.bib</code> 文件里，方便复用；</li>
-<li>可以自动格式化（APA, IEEE, GB/T 7714 等）；</li>
-<li>引用时只需 <code>\cite{}</code> 即可，省去手动编号。</li>
+<li>单变量： <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brent: 使用Brent方法（结合抛物线插值和黄金分割法）</span><br><span class="line"></span><br><span class="line">bounded: 在有界区间内搜索</span><br><span class="line"></span><br><span class="line">golden: 黄金分割法</span><br></pre></td></tr></table></figure></li>
+<li>多变量 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Nelder-Mead: 单纯形法，不需要梯度</span><br><span class="line"></span><br><span class="line">BFGS: 拟牛顿法，需要梯度</span><br><span class="line"></span><br><span class="line">CG: 共轭梯度法</span><br><span class="line"></span><br><span class="line">L-BFGS-B: 有限内存BFGS，适用于大规模问题</span><br><span class="line"></span><br><span class="line">TNC: 截断牛顿法</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+<li>实现实例： <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">from scipy.optimize import minimize</span><br><span class="line"></span><br><span class="line">def rosen(x):</span><br><span class="line">    <span class="string">""</span><span class="string">"Rosenbrock函数"</span><span class="string">""</span></span><br><span class="line">    <span class="built_in">return</span> <span class="built_in">sum</span>(100.0*(x[1:]-x[:-1]**2.0)**2.0 + (1-x[:-1])**2.0)</span><br><span class="line"></span><br><span class="line">x0 = [1.3, 0.7, 0.8, 1.9, 1.2] <span class="comment">#x0 是多维优化问题（如 minimize）的 初始猜测值（initial guess）。优化算法需要一个起点开始搜索最小值。</span></span><br><span class="line">res = minimize(rosen, x0, method=<span class="string">'BFGS'</span>, options={<span class="string">'disp'</span>: True}) <span class="comment">#res 是 minimize 或 minimize_scalar 函数的返回结果，它是一个 OptimizeResult 对象 </span></span><br><span class="line"><span class="built_in">print</span>(res.x)</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="建立-.bib-文件">9.1 建立 <code>.bib</code> 文件</h3>
-<p>新建一个 <code>refs.bib</code>
-文件，里面存放参考文献信息。常见条目类型有：</p>
+<p>其中res的解有如下内容</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># res 包含的重要属性：</span></span><br><span class="line">res.x       <span class="comment"># 最优解（最小值点）</span></span><br><span class="line">res.fun     <span class="comment"># 最优解处的函数值</span></span><br><span class="line">res.nfev    <span class="comment"># 函数评估次数</span></span><br><span class="line">res.nit     <span class="comment"># 迭代次数</span></span><br><span class="line">res.success <span class="comment"># 是否成功收敛</span></span><br><span class="line">res.message <span class="comment"># 状态描述（如收敛信息）</span></span><br><span class="line">res.jac     <span class="comment"># 最优解处的梯度（一阶导数）</span></span><br><span class="line">res.hess    <span class="comment"># 最优解处的Hessian矩阵（二阶导数，如果可用）</span></span><br></pre></td></tr></table></figure>
+<h3 id="全局优化"><strong>2.2 全局优化</strong></h3>
 <ul>
-<li><code>@article</code>：期刊文章</li>
-<li><code>@book</code>：书籍</li>
-<li><code>@inproceedings</code>：会议论文</li>
-<li><code>@misc</code>：其他（网页、报JavaScript (ES6) code
-snippets告等）</li>
+<li>用途：避免传统优化算法（如 minimize）陷入局部最优解，转而寻找
+全局最优解。</li>
+<li>实现函数：</li>
 </ul>
-<p><strong>示例：refs.bib</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@article{einstein1905,</span><br><span class="line">  author    = {Albert Einstein},</span><br><span class="line">  title     = {Zur Elektrodynamik bewegter Körper},</span><br><span class="line">  journal   = {Annalen der Physik},</span><br><span class="line">  volume    = {17},</span><br><span class="line">  number    = {10},</span><br><span class="line">  pages     = {891--921},</span><br><span class="line">  year      = {1905},</span><br><span class="line">  publisher = {Wiley}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">@book{knuth1984,</span><br><span class="line">  author    = {Donald E. Knuth},</span><br><span class="line">  title     = {The TeXbook},</span><br><span class="line">  year      = {1984},</span><br><span class="line">  publisher = {Addison-Wesley}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">@misc{latexproject,</span><br><span class="line">  author    = {LaTeX Project},</span><br><span class="line">  title     = {LaTeX Project Website},</span><br><span class="line">  year      = {2025},</span><br><span class="line">  url       = {https://www.latex-project.org/}</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-<h3 id="在主-.tex-文件中引用">9.2 在主 <code>.tex</code> 文件中引用</h3>
-<p>在你的 <code>main.tex</code> 中：</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{article}</span><br><span class="line"><span class="keyword">\usepackage</span>[utf8]{inputenc}</span><br><span class="line"><span class="keyword">\usepackage</span>{cite}   <span class="comment">% 文献引用宏包</span></span><br><span class="line"><span class="keyword">\usepackage</span>{hyperref} <span class="comment">% 让文献引用可点击</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{document}</span><br><span class="line"></span><br><span class="line">爱因斯坦的相对论论文发表于1905年~<span class="keyword">\cite</span>{einstein1905}。</span><br><span class="line"><span class="keyword">\LaTeX</span> 的官方文档在~<span class="keyword">\cite</span>{latexproject} 可以找到。</span><br><span class="line"></span><br><span class="line"><span class="comment">% 生成参考文献</span></span><br><span class="line"><span class="keyword">\bibliographystyle</span>{plain}   <span class="comment">% 参考文献格式：plain, unsrt, abbrv, ieeetr 等</span></span><br><span class="line"><span class="keyword">\bibliography</span>{refs}         <span class="comment">% refs.bib 文件名，不要写扩展名</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\end</span>{document}</span><br></pre></td></tr></table></figure>
-<h3 id="编译流程">9.3 编译流程</h3>
-<p>和普通 <code>.tex</code> 不同，使用 <code>bibtex</code>
-时要多一步：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pdflatex main.tex</span><br><span class="line">bibtex main</span><br><span class="line">pdflatex main.tex</span><br><span class="line">pdflatex main.tex</span><br></pre></td></tr></table></figure>
-<p>解释：</p>
-<ol type="1">
-<li>第一次 <code>pdflatex</code> 会扫描引用并生成 <code>.aux</code>
-文件；</li>
-<li><code>bibtex main</code> 会读取 <code>.aux</code> 文件，从
-<code>refs.bib</code> 抽取对应条目生成 <code>.bbl</code> 文件；</li>
-<li>再跑两次 <code>pdflatex</code> 让引用编号和文献列表都正确显示。</li>
-</ol>
-<h3 id="常见参考文献样式">9.4 常见参考文献样式</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">basinhopping(): 盆地跳跃算法basinhopping(): 盆地跳跃算法</span><br><span class="line"></span><br><span class="line">shgo(): 单纯形同伦全局优化</span><br><span class="line"></span><br><span class="line">differential_evolution(): 差分进化算法</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>plain</code>：作者字母顺序，数字编号</li>
-<li><code>unsrt</code>：按引用顺序编号</li>
-<li><code>abbrv</code>：作者名缩写</li>
-<li><code>ieeetr</code>：IEEE 风格</li>
-<li><code>apalike</code>：APA 风格</li>
+<li>实例： <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">from scipy.optimize import basinhopping</span><br><span class="line"></span><br><span class="line">def func(x):</span><br><span class="line">    <span class="built_in">return</span> np.cos(14.5 * x - 0.3) + (x + 0.2) * x</span><br><span class="line"></span><br><span class="line">res = basinhopping(func, x0=1.0)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"全局最小值：x = %.4f, f(x) = %.4f"</span> % (res.x, res.fun))</span><br></pre></td></tr></table></figure></li>
 </ul>
-<p>例如：</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\bibliographystyle</span>{ieeetr}</span><br></pre></td></tr></table></figure>
-<h3 id="中文参考文献">9.5 中文参考文献</h3>
-<p>中文参考文献推荐用 <strong>GB/T 7714 样式</strong>（国标）：</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>[backend=bibtex,style=gb7714-2015]{biblatex}</span><br><span class="line"><span class="keyword">\bibliography</span>{refs}</span><br></pre></td></tr></table></figure>
-<p>然后在 <code>.bib</code> 文件里可以写中文，例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@book{li2020,</span><br><span class="line">  author    = {李四 and 张三},</span><br><span class="line">  title     = {深度学习导论},</span><br><span class="line">  year      = {2020},</span><br><span class="line">  publisher = {清华大学出版社}</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-<p>这样就能自动生成符合国标的中文参考文献。</p>
+<h3 id="最小二乘拟合"><strong>2.3 最小二乘拟合</strong></h3>
+<ul>
+<li><p>用途：解决非线性最小二乘问题，常用于曲线拟合。</p></li>
+<li><p>实现函数： <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">least_squares(): 解决非线性最小二乘问题</span><br><span class="line"></span><br><span class="line">curve_fit(): 使用最小二乘法拟合曲线</span><br></pre></td></tr></table></figure></p></li>
+<li><p>实例：</p></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">from scipy.optimize import curve_fit</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义模型函数</span></span><br><span class="line">def func(x, a, b, c):</span><br><span class="line">    <span class="built_in">return</span> a * np.exp(-b * x) + c</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成带噪声的数据</span></span><br><span class="line">xdata = np.linspace(0, 4, 50)</span><br><span class="line">y = func(xdata, 2.5, 1.3, 0.5)</span><br><span class="line">ydata = y + 0.2 * np.random.normal(size=len(xdata))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拟合数据</span></span><br><span class="line">popt, pcov = curve_fit(func, xdata, ydata)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"拟合参数："</span>, popt) <span class="comment">#返回[a,b,c]</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"协方差矩阵"</span>, pcov) <span class="comment">#评估可靠性</span></span><br></pre></td></tr></table></figure>
+<p>[a,b,c]-&gt; <span class="math inline"><em>f</em>(<em>x</em>) = <em>a</em><em>e</em><sup>−<em>b</em><em>x</em></sup> + <em>c</em></span></p>
+<h3 id="方程求根"><strong>2.4 方程求根</strong></h3>
+<ul>
+<li><p>方法： <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root_scalar(): 单变量方程求根 <span class="comment">#brentq, brenth, ridder, bisect, newton: 特定算法</span></span><br><span class="line"></span><br><span class="line">root(): 多变量方程组求根</span><br></pre></td></tr></table></figure></p></li>
+<li><p>实现： <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> root_scalar</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x**<span class="number">3</span> - <span class="number">1</span>  <span class="comment"># 寻找x^3 = 1的解</span></span><br><span class="line"></span><br><span class="line">sol = root_scalar(f, bracket=[<span class="number">0</span>, <span class="number">2</span>], method=<span class="string">'brentq'</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"方程的根："</span>, sol.root)</span><br></pre></td></tr></table></figure> <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> root</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> [x[<span class="number">0</span>] + <span class="number">0.5</span> * (x[<span class="number">0</span>] - x[<span class="number">1</span>])**<span class="number">3</span> - <span class="number">1.0</span>,</span><br><span class="line">            <span class="number">0.5</span> * (x[<span class="number">1</span>] - x[<span class="number">0</span>])**<span class="number">3</span> + x[<span class="number">1</span>]]</span><br><span class="line"></span><br><span class="line">sol = root(func, [<span class="number">0</span>, <span class="number">0</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"方程组的解："</span>, sol.x)</span><br></pre></td></tr></table></figure></p></li>
+</ul>
+<h3 id="线性规划"><strong>2.5 线性规划</strong></h3>
+<ul>
+<li>什么是线性规划：结构化决策框架，其核心是在一个由线性关系定义的几何空间中，寻找最优的”角落”解。比如如下这个问题
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">想象你是一个工厂经理，需要决定生产两种产品A和B的数量：</span><br><span class="line"></span><br><span class="line">生产A每个利润100元，B每个利润150元</span><br><span class="line"></span><br><span class="line">但受限于：</span><br><span class="line"></span><br><span class="line">原材料X：生产A消耗3kg，B消耗2kg，总共只有120kg</span><br><span class="line"></span><br><span class="line">工时：生产A需要2小时，B需要4小时，总共只有160小时</span><br><span class="line"></span><br><span class="line">线性规划就是帮你找到在资源限制下能获得最大利润的生产方案</span><br><span class="line"></span><br></pre></td></tr></table></figure> <span class="math display"><em>p</em><em>r</em><em>o</em><em>f</em><em>i</em><em>t</em> = −100<em>x</em> − 150<em>y</em></span>
+<span class="math display"><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -2.149ex;" xmlns="http://www.w3.org/2000/svg" width="19.774ex" height="5.43ex" role="img" focusable="false" viewBox="0 -1450 8740.2 2400"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mrow"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="5B" d="M247 -949V1450H516V1388H309V-887H516V-949H247Z"></path></g><g data-mml-node="mtable" transform="translate(528,0)"><g data-mml-node="mtr" transform="translate(0,700)"><g data-mml-node="mtd"><g data-mml-node="mn"><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"></path></g></g><g data-mml-node="mtd" transform="translate(1500,0)"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g><g data-mml-node="mtr" transform="translate(0,-700)"><g data-mml-node="mtd"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g><g data-mml-node="mtd" transform="translate(1500,0)"><g data-mml-node="mn"><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"></path></g></g></g></g><g data-mml-node="mo" transform="translate(2528,0) translate(0 -0.5)"><path data-c="5D" d="M11 1388V1450H280V-949H11V-887H218V1388H11Z"></path></g></g><g data-mml-node="mrow" transform="translate(3222.7,0)"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="5B" d="M247 -949V1450H516V1388H309V-887H516V-949H247Z"></path></g><g data-mml-node="mtable" transform="translate(528,0)"><g data-mml-node="mtr" transform="translate(0,700)"><g data-mml-node="mtd"><g data-mml-node="mi"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g></g><g data-mml-node="mtr" transform="translate(0,-700)"><g data-mml-node="mtd" transform="translate(41,0)"><g data-mml-node="mi"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g></g></g></g><g data-mml-node="mo" transform="translate(1100,0) translate(0 -0.5)"><path data-c="5D" d="M11 1388V1450H280V-949H11V-887H218V1388H11Z"></path></g></g><g data-mml-node="mo" transform="translate(5128.4,0)"><path data-c="2264" d="M674 636Q682 636 688 630T694 615T687 601Q686 600 417 472L151 346L399 228Q687 92 691 87Q694 81 694 76Q694 58 676 56H670L382 192Q92 329 90 331Q83 336 83 348Q84 359 96 365Q104 369 382 500T665 634Q669 636 674 636ZM84 -118Q84 -108 99 -98H678Q694 -104 694 -118Q694 -130 679 -138H98Q84 -131 84 -118Z"></path></g><g data-mml-node="mrow" transform="translate(6184.2,0)"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="5B" d="M247 -949V1450H516V1388H309V-887H516V-949H247Z"></path></g><g data-mml-node="mtable" transform="translate(528,0)"><g data-mml-node="mtr" transform="translate(0,700)"><g data-mml-node="mtd"><g data-mml-node="mn"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z" transform="translate(500,0)"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(1000,0)"></path></g></g></g><g data-mml-node="mtr" transform="translate(0,-700)"><g data-mml-node="mtd"><g data-mml-node="mn"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="36" d="M42 313Q42 476 123 571T303 666Q372 666 402 630T432 550Q432 525 418 510T379 495Q356 495 341 509T326 548Q326 592 373 601Q351 623 311 626Q240 626 194 566Q147 500 147 364L148 360Q153 366 156 373Q197 433 263 433H267Q313 433 348 414Q372 400 396 374T435 317Q456 268 456 210V192Q456 169 451 149Q440 90 387 34T253 -22Q225 -22 199 -14T143 16T92 75T56 172T42 313ZM257 397Q227 397 205 380T171 335T154 278T148 216Q148 133 160 97T198 39Q222 21 251 21Q302 21 329 59Q342 77 347 104T352 209Q352 289 347 316T329 361Q302 397 257 397Z" transform="translate(500,0)"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(1000,0)"></path></g></g></g></g><g data-mml-node="mo" transform="translate(2028,0) translate(0 -0.5)"><path data-c="5D" d="M11 1388V1450H280V-949H11V-887H218V1388H11Z"></path></g></g></g></g></svg></mjx-container></span></li>
+</ul>
+<p>抽象一下就是： 输入: (A, b, c) → 处理: 代数变换 → 输出: x*</p>
+<p>其中：</p>
+A 是约束矩阵（系统限制的编码）=&gt;不等式左侧系数 A= $
+<p>$</p>
+<p>b 是资源向量（约束条件的量化）=&gt;不等式右侧系数 b=[120,160]</p>
+<p>c 是价值向量（目标函数的权重）=&gt;利润最大化 c=[-100,-150]
+(线性规划默认求最小值问题) <span class="math inline"><em>f</em>(<em>x</em>) = −100<em>x</em> − 150<em>y</em></span></p>
+<p>x* 是最优决策（系统输出的解决方案）</p>
+<ul>
+<li>实现实例:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> linprog</span><br><span class="line"></span><br><span class="line"><span class="comment"># 最小化 c^T x</span></span><br><span class="line"><span class="comment"># 约束条件: A_ub x &lt;= b_ub, A_eq x = b_eq</span></span><br><span class="line">c = [-<span class="number">1</span>, <span class="number">4</span>]  <span class="comment"># 目标函数系数</span></span><br><span class="line">A_ub = [[-<span class="number">3</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>]]  <span class="comment"># 不等式约束矩阵</span></span><br><span class="line">b_ub = [<span class="number">6</span>, <span class="number">4</span>]             <span class="comment"># 不等式约束右侧</span></span><br><span class="line"></span><br><span class="line">res = linprog(c, A_ub=A_ub, b_ub=b_ub, bounds=(<span class="literal">None</span>, <span class="literal">None</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"最优解："</span>, res.x)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"最优值："</span>, res.fun)</span><br></pre></td></tr></table></figure>
+<h3 id="约束优化"><strong>2.6 约束优化</strong></h3>
+<ul>
+<li>用途：在有等式或不等式约束条件下优化目标函数。</li>
+<li>方法：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">minimize() 配合约束参数</span><br><span class="line"></span><br><span class="line">SLSQP: 序列二次规划算法</span><br><span class="line"></span><br><span class="line">trust-constr: 信赖域算法</span><br></pre></td></tr></table></figure>
+<ul>
+<li>实现：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> minimize</span><br><span class="line"></span><br><span class="line"><span class="comment"># 目标函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">objective</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x[<span class="number">0</span>]*x[<span class="number">3</span>]*(x[<span class="number">0</span>]+x[<span class="number">1</span>]+x[<span class="number">2</span>])+x[<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 约束条件</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">constraint1</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x[<span class="number">0</span>]*x[<span class="number">1</span>]*x[<span class="number">2</span>]*x[<span class="number">3</span>]-<span class="number">25.0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">constraint2</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span>(x**<span class="number">2</span>)-<span class="number">40.0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始猜测</span></span><br><span class="line">x0 = [<span class="number">1</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置约束</span></span><br><span class="line">con1 = {<span class="string">'type'</span>: <span class="string">'ineq'</span>, <span class="string">'fun'</span>: constraint1}</span><br><span class="line">con2 = {<span class="string">'type'</span>: <span class="string">'eq'</span>, <span class="string">'fun'</span>: constraint2}</span><br><span class="line">cons = [con1,con2]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 优化</span></span><br><span class="line">sol = minimize(objective,x0,method=<span class="string">'SLSQP'</span>,constraints=cons)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"最优解："</span>, sol.x)</span><br></pre></td></tr></table></figure>
+<h2 id="三稀疏矩阵sparse">三、稀疏矩阵(sparse)</h2>
+<p>专门针对那些绝大多数元素为零的矩阵数据结构</p>
+<h3 id="处理稀疏矩阵"><strong>3.1 处理稀疏矩阵</strong></h3>
+<ul>
+<li>方法:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CSC - 压缩稀疏列（Compressed Sparse Column），按列压缩。</span><br><span class="line">CSR - 压缩稀疏行（Compressed Sparse Row），按行压缩。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>实现:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>])</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(csr_matrix(arr)) </span><br></pre></td></tr></table></figure>
+<p>输出:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">(0, 5)        1</span><br><span class="line">(0, 6)        1</span><br><span class="line">(0, 8)        2</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(csr_matrix(arr).data) <span class="comment">#输出不为零的元素[1,1,2]</span></span><br><span class="line"><span class="built_in">print</span>(csr_matrix(arr).count_nonzero()) <span class="comment">#输出非0元素总数3</span></span><br><span class="line"></span><br><span class="line">mat = csr_matrix(arr)</span><br><span class="line">mat.eliminate_zeros()</span><br><span class="line"><span class="built_in">print</span>(mat) <span class="comment">#删除矩阵中的0元素</span></span><br><span class="line"></span><br><span class="line">mat = csr_matrix(arr)</span><br><span class="line">mat.sum_duplicates()</span><br><span class="line"><span class="built_in">print</span>(mat) <span class="comment">#删除重复项</span></span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr).tocsc() <span class="comment">#将csr转为csc</span></span><br></pre></td></tr></table></figure>
+<h3 id="图结构sparse.csgraph"><strong>3.2图结构(sparse.csgraph)</strong></h3>
+<ul>
+<li><p>如何查看连接组件(连接组件是指图中所有互相连通的节点的集合)
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">connected_components()</span><br></pre></td></tr></table></figure> <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> connected_components</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(connected_components(newarr))</span><br></pre></td></tr></table></figure> 输出: <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">(1, array([0, 0, 0], dtype=int32)) <span class="comment">#1代表一个连接组件，[0,0,0]代表每个元素属于哪个连接组件</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>Dijkstra 算法调用(用于计算一个节点到其他所有节点的最短路径)
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> dijkstra</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(dijkstra(newarr, return_predecessors=<span class="literal">True</span>, indices=<span class="number">0</span>))</span><br></pre></td></tr></table></figure> 其中dijkstra的参数：</p></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">return_predecessors: 布尔值，设置 True，遍历所有路径，如果不想遍历所有路径可以设置为 False。</span><br><span class="line">indices: 元素的索引，返回该元素的所有路径。</span><br><span class="line"><span class="built_in">limit</span>: 路径的最大权重。</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Floyd Warshall – 弗洛伊德算法(解决任意两点间的最短路径)
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> floyd_warshall</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(floyd_warshall(newarr, return_predecessors=<span class="literal">True</span>))</span><br></pre></td></tr></table></figure></p></li>
+<li><p>Bellman Ford – 贝尔曼-福特算法(任意两点间的最短路径)
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> bellman_ford</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, -<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(bellman_ford(newarr, return_predecessors=<span class="literal">True</span>, indices=<span class="number">0</span>))</span><br></pre></td></tr></table></figure></p></li>
+<li><p>dfs <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> depth_first_order</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(depth_first_order(newarr, <span class="number">1</span>)) <span class="comment">#传入邻接矩阵和起始遍历元素</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>bfs <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> breadth_first_order</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(breadth_first_order(newarr, <span class="number">1</span>))</span><br></pre></td></tr></table></figure></p></li>
+</ul>
 ]]></content>
       <categories>
         <category>code</category>
       </categories>
       <tags>
         <tag>math</tag>
-        <tag>latex</tag>
+        <tag>python</tag>
+        <tag>scipy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git 基本使用教程</title>
+    <url>/2025/07/25/git-basic-usage/</url>
+    <content><![CDATA[<blockquote>
+<p>Git
+是一个分布式版本控制系统，适用于代码版本管理与团队协作开发。本文将简要介绍
+Git
+的一些常用操作命令，包括创建仓库、分支管理以及删除文件/分支的方法。</p>
+</blockquote>
+<hr />
+<h2 id="一初始化仓库">一、初始化仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在当前目录初始化一个 Git 仓库。</li>
+<li>会创建 <code>.git</code> 文件夹作为版本控制目录。</li>
+</ul>
+<hr />
+<h2 id="二克隆远程仓库">二、克隆远程仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;仓库地址&gt;</span><br><span class="line">```****</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/username/repo.git</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="三添加与提交文件">三、添加与提交文件</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add &lt;文件或目录&gt;</span><br><span class="line">git commit -m <span class="string">&quot;提交说明&quot;</span></span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;添加初始项目文件&quot;</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="四查看状态与历史">四、查看状态与历史</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status        <span class="comment"># 查看当前状态</span></span><br><span class="line">git <span class="built_in">log</span>           <span class="comment"># 查看提交历史</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="五分支操作">五、分支操作</h2>
+<h3 id="创建新分支">创建新分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="切换分支">切换分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch &lt;分支名&gt;</span><br><span class="line"><span class="comment"># 或（旧写法）</span></span><br><span class="line">git checkout &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="创建并切换新分支">创建并切换新分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch -c &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="查看所有分支">查看所有分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="六合并分支">六、合并分支</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git merge &lt;被合并的分支&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：需要先切换到目标分支，再合并。</p>
+</blockquote>
+<hr />
+<h2 id="七删除操作">七、删除操作</h2>
+<h3 id="删除文件">删除文件</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">rm</span> &lt;文件名&gt;</span><br><span class="line">git commit -m <span class="string">&quot;删除了某个文件&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="撤销删除误删恢复">撤销删除（误删恢复）</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -- &lt;文件名&gt;</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="删除本地分支">删除本地分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -d &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>-d</code> 是安全删除（合并过的才允许删）</li>
+<li><code>-D</code> 是强制删除（无论是否合并）</li>
+</ul>
+<h3 id="删除远程分支">删除远程分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin --delete &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="八推送与拉取">八、推送与拉取</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin &lt;分支名&gt;   <span class="comment"># 推送到远程</span></span><br><span class="line">git pull origin &lt;分支名&gt;   <span class="comment"># 拉取最新代码</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="九查看远程仓库">九、查看远程仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="十总结">十、总结</h2>
+<p>Git
+是开发者日常工作中不可或缺的工具，掌握它可以大大提升协作效率与版本管理能力。希望本文能帮助你快速上手
+Git 的基本操作。</p>
+<hr />
+<blockquote>
+<p>如需进一步学习，可以参考 <a href="https://git-scm.com/book/zh/v2">Pro
+Git 中文版</a>。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>learn</tag>
+        <tag>repo</tag>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -3928,357 +4102,239 @@ sklearn.preprocessing 模块的特征缩放器（scalers）</p>
       </tags>
   </entry>
   <entry>
-    <title>scipy基本模块及其使用</title>
-    <url>/2025/08/11/scipy/</url>
-    <content><![CDATA[<h2 id="一常量模块constants">一、常量模块(constants)</h2>
-<p>以下是 <code>scipy.constants</code> 模块中主要常量的分类表格：</p>
-<hr>
-<h3 id="数学常数"><strong>1.1 数学常数</strong></h3>
-<table>
-<thead>
-<tr>
-<th>常量名</th>
-<th>描述</th>
-<th>值 (近似)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>pi</code></td>
-<td>圆周率 π</td>
-<td>3.141592653589793</td>
-</tr>
-<tr>
-<td><code>golden</code></td>
-<td>黄金比例 (φ)</td>
-<td>1.618033988749895</td>
-</tr>
-<tr>
-<td><code>e</code></td>
-<td>自然对数的底 (e)</td>
-<td>2.718281828459045</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3 id="通用物理常数"><strong>1.2 通用物理常数</strong></h3>
-<table>
-<colgroup>
-<col style="width: 24%">
-<col style="width: 37%">
-<col style="width: 38%">
-</colgroup>
-<thead>
-<tr>
-<th>常量名</th>
-<th>描述</th>
-<th>值 (单位)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>c</code></td>
-<td>真空光速</td>
-<td>299792458.0 m/s</td>
-</tr>
-<tr>
-<td><code>h</code></td>
-<td>普朗克常数</td>
-<td>6.62607015e-34 J·s</td>
-</tr>
-<tr>
-<td><code>hbar</code></td>
-<td>约化普朗克常数 (h/2π)</td>
-<td>1.054571817e-34 J·s</td>
-</tr>
-<tr>
-<td><code>G</code></td>
-<td>万有引力常数</td>
-<td>6.67430e-11 m³/(kg·s²)</td>
-</tr>
-<tr>
-<td><code>g</code></td>
-<td>标准重力加速度</td>
-<td>9.80665 m/s²</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3 id="电磁学常数"><strong>1.3 电磁学常数</strong></h3>
-<table>
-<colgroup>
-<col style="width: 24%">
-<col style="width: 37%">
-<col style="width: 38%">
-</colgroup>
-<thead>
-<tr>
-<th>常量名</th>
-<th>描述</th>
-<th>值 (单位)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>mu_0</code></td>
-<td>真空磁导率</td>
-<td>1.25663706212e-6 N/A²</td>
-</tr>
-<tr>
-<td><code>epsilon_0</code></td>
-<td>真空电容率</td>
-<td>8.8541878128e-12 F/m</td>
-</tr>
-<tr>
-<td><code>e</code> (或 <code>elementary_charge</code>)</td>
-<td>元电荷</td>
-<td>1.602176634e-19 C</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3 id="原子与核物理常数"><strong>1.4 原子与核物理常数</strong></h3>
-<table>
-<thead>
-<tr>
-<th>常量名</th>
-<th>描述</th>
-<th>值 (单位)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>m_e</code></td>
-<td>电子质量</td>
-<td>9.1093837015e-31 kg</td>
-</tr>
-<tr>
-<td><code>m_p</code></td>
-<td>质子质量</td>
-<td>1.67262192369e-27 kg</td>
-</tr>
-<tr>
-<td><code>m_n</code></td>
-<td>中子质量</td>
-<td>1.67492749804e-27 kg</td>
-</tr>
-<tr>
-<td><code>Rydberg</code></td>
-<td>里德伯常数</td>
-<td>10973731.568160 1/m</td>
-</tr>
-<tr>
-<td><code>alpha</code></td>
-<td>精细结构常数</td>
-<td>0.0072973525693</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3 id="化学相关常数"><strong>1.5 化学相关常数</strong></h3>
-<table>
-<thead>
-<tr>
-<th>常量名</th>
-<th>描述</th>
-<th>值 (单位)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>N_A</code></td>
-<td>阿伏伽德罗常数</td>
-<td>6.02214076e23 1/mol</td>
-</tr>
-<tr>
-<td><code>R</code></td>
-<td>通用气体常数</td>
-<td>8.314462618 J/(mol·K)</td>
-</tr>
-<tr>
-<td><code>atomic_mass</code></td>
-<td>原子质量单位 (u)</td>
-<td>1.66053906660e-27 kg</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3 id="常用单位换算因子"><strong>1.6 常用单位换算因子</strong></h3>
-<table>
-<thead>
-<tr>
-<th>常量名</th>
-<th>描述</th>
-<th>换算关系</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>inch</code></td>
-<td>英寸 → 米</td>
-<td>0.0254 m</td>
-</tr>
-<tr>
-<td><code>foot</code></td>
-<td>英尺 → 米</td>
-<td>0.3048 m</td>
-</tr>
-<tr>
-<td><code>mile</code></td>
-<td>英里 → 米</td>
-<td>1609.344 m</td>
-</tr>
-<tr>
-<td><code>lb</code></td>
-<td>磅 → 千克</td>
-<td>0.45359237 kg</td>
-</tr>
-<tr>
-<td><code>eV</code></td>
-<td>电子伏特 → 焦耳</td>
-<td>1.602176634e-19 J</td>
-</tr>
-<tr>
-<td><code>atm</code></td>
-<td>标准大气压 → 帕斯卡</td>
-<td>101325.0 Pa</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3 id="温度相关"><strong>1.7 温度相关</strong></h3>
-<table>
-<thead>
-<tr>
-<th>常量名</th>
-<th>描述</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>zero_Celsius</code></td>
-<td>0°C 对应的开尔文温度</td>
-<td>273.15 K</td>
-</tr>
-<tr>
-<td><code>degree_Fahrenheit</code></td>
-<td>1°F 对应的开尔文间隔</td>
-<td>0.555555… K</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3 id="查找所有常量的方法"><strong>查找所有常量的方法</strong></h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> constants</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出所有常量</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">dir</span>(constants))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索包含关键词的常量（例如 'mass'）</span></span><br><span class="line"><span class="built_in">print</span>(constants.find(<span class="string">'mass'</span>))</span><br></pre></td></tr></table></figure>
-<h2 id="二优化器optimize">二、优化器(optimize)</h2>
-<p>scipy的优化器是数学建模的工具，它的核心目标是
-寻找函数的最小值（或最大值）、拟合模型、求解方程或系统，适用于传统数学问题<code>而非深度学习</code>(注意和pytorch这些的优化器函数区分开来)</p>
-<h3 id="无约束优化"><strong>2.1 无约束优化</strong></h3>
+    <title>SQL语法规则</title>
+    <url>/2025/09/01/sql/</url>
+    <content><![CDATA[<h3 id="核心概念">核心概念</h3>
+<ol type="1">
+<li><strong>数据库（Database）</strong>：一个容器，用于存储有组织的数据。你可以把它想象成一个文件柜。</li>
+<li><strong>表（Table）</strong>：数据库中的特定数据结构，用于存储同类数据。它由行和列组成，就像一个Excel表格。每个表都有一个唯一的名字（例如
+<code>users</code>, <code>products</code>, <code>orders</code>）。
 <ul>
-<li>用途:实现查找给定区间内函数的最小值</li>
-<li>实现：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">minimize_scalar() <span class="comment">#单变量函数</span></span><br><span class="line">minimize()        <span class="comment">#多变量函数</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>查找方法：
-<ul>
-<li>单变量： <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brent: 使用Brent方法（结合抛物线插值和黄金分割法）</span><br><span class="line"></span><br><span class="line">bounded: 在有界区间内搜索</span><br><span class="line"></span><br><span class="line">golden: 黄金分割法</span><br></pre></td></tr></table></figure></li>
-<li>多变量 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Nelder-Mead: 单纯形法，不需要梯度</span><br><span class="line"></span><br><span class="line">BFGS: 拟牛顿法，需要梯度</span><br><span class="line"></span><br><span class="line">CG: 共轭梯度法</span><br><span class="line"></span><br><span class="line">L-BFGS-B: 有限内存BFGS，适用于大规模问题</span><br><span class="line"></span><br><span class="line">TNC: 截断牛顿法</span><br></pre></td></tr></table></figure></li>
+<li><strong>列（Column）</strong>：表中的一个字段，代表了数据的某种属性（例如
+<code>id</code>, <code>name</code>,
+<code>email</code>）。它定义了数据的类型（数字、文本、日期等）。</li>
+<li><strong>行（Row）</strong>：表中的一个记录，代表一个具体的实体（例如一个用户、一件商品）。一行数据就是由多个列的值组成的。</li>
 </ul></li>
-<li>实现实例： <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">from scipy.optimize import minimize</span><br><span class="line"></span><br><span class="line">def rosen(x):</span><br><span class="line">    <span class="string">""</span><span class="string">"Rosenbrock函数"</span><span class="string">""</span></span><br><span class="line">    <span class="built_in">return</span> <span class="built_in">sum</span>(100.0*(x[1:]-x[:-1]**2.0)**2.0 + (1-x[:-1])**2.0)</span><br><span class="line"></span><br><span class="line">x0 = [1.3, 0.7, 0.8, 1.9, 1.2] <span class="comment">#x0 是多维优化问题（如 minimize）的 初始猜测值（initial guess）。优化算法需要一个起点开始搜索最小值。</span></span><br><span class="line">res = minimize(rosen, x0, method=<span class="string">'BFGS'</span>, options={<span class="string">'disp'</span>: True}) <span class="comment">#res 是 minimize 或 minimize_scalar 函数的返回结果，它是一个 OptimizeResult 对象 </span></span><br><span class="line"><span class="built_in">print</span>(res.x)</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>其中res的解有如下内容</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># res 包含的重要属性：</span></span><br><span class="line">res.x       <span class="comment"># 最优解（最小值点）</span></span><br><span class="line">res.fun     <span class="comment"># 最优解处的函数值</span></span><br><span class="line">res.nfev    <span class="comment"># 函数评估次数</span></span><br><span class="line">res.nit     <span class="comment"># 迭代次数</span></span><br><span class="line">res.success <span class="comment"># 是否成功收敛</span></span><br><span class="line">res.message <span class="comment"># 状态描述（如收敛信息）</span></span><br><span class="line">res.jac     <span class="comment"># 最优解处的梯度（一阶导数）</span></span><br><span class="line">res.hess    <span class="comment"># 最优解处的Hessian矩阵（二阶导数，如果可用）</span></span><br></pre></td></tr></table></figure>
-<h3 id="全局优化"><strong>2.2 全局优化</strong></h3>
+</ol>
+<hr />
+<h3 id="sql语言的分类">SQL语言的分类</h3>
+<p>SQL命令通常根据其功能分为以下几类：</p>
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 26%" />
+<col style="width: 15%" />
+<col style="width: 26%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr>
+<th>类别</th>
+<th>英文全称</th>
+<th>中文</th>
+<th>核心命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DQL</strong></td>
+<td>Data Query Language</td>
+<td>数据查询语言</td>
+<td><strong><code>SELECT</code></strong></td>
+<td>从表中检索数据，是使用最频繁的操作</td>
+</tr>
+<tr>
+<td><strong>DML</strong></td>
+<td>Data Manipulation Language</td>
+<td>数据操作语言</td>
+<td><code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code></td>
+<td>用于增、删、改表中的记录</td>
+</tr>
+<tr>
+<td><strong>DDL</strong></td>
+<td>Data Definition Language</td>
+<td>数据定义语言</td>
+<td><code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>,
+<code>RENAME</code></td>
+<td>用于创建、修改、删除数据库对象（如表、索引）</td>
+</tr>
+<tr>
+<td><strong>DCL</strong></td>
+<td>Data Control Language</td>
+<td>数据控制语言</td>
+<td><code>GRANT</code>, <code>REVOKE</code></td>
+<td>用于控制用户对数据库的访问权限</td>
+</tr>
+<tr>
+<td><strong>TCL</strong></td>
+<td>Transaction Control Language</td>
+<td>事务控制语言</td>
+<td><code>COMMIT</code>, <code>ROLLBACK</code>,
+<code>SAVEPOINT</code></td>
+<td>用于管理数据库中的事务</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="最常用的sql命令详解">最常用的SQL命令详解</h3>
+<p>我们将围绕一个简单的 <code>users</code> 表进行讲解，表结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>列名</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>INT</td>
+<td>主键，唯一标识</td>
+</tr>
+<tr>
+<td><code>username</code></td>
+<td>VARCHAR(50)</td>
+<td>用户名</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>VARCHAR(100)</td>
+<td>邮箱</td>
+</tr>
+<tr>
+<td><code>age</code></td>
+<td>INT</td>
+<td>年龄</td>
+</tr>
+<tr>
+<td><code>country</code></td>
+<td>VARCHAR(50)</td>
+<td>国家</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>DATETIME</td>
+<td>创建时间</td>
+</tr>
+</tbody>
+</table>
+<h4 id="dql---查询数据-select">1. DQL - 查询数据 (SELECT)</h4>
+<p>这是最核心的操作。</p>
 <ul>
-<li>用途：避免传统优化算法（如 minimize）陷入局部最优解，转而寻找
-全局最优解。</li>
-<li>实现函数：</li>
+<li><p><strong>查询所有列和所有行</strong>： <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users;</span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>查询特定的列</strong>： <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> username, email <span class="keyword">FROM</span> users;</span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用 <code>WHERE</code> 条件过滤</strong>：
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> country <span class="operator">=</span> <span class="string">&#x27;China&#x27;</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> age <span class="operator">&gt;</span> <span class="number">18</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">123</span>; </span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用 <code>ORDER BY</code> 排序</strong>：
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">ORDER</span> <span class="keyword">BY</span> age <span class="keyword">DESC</span>; <span class="comment">-- 按年龄降序</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">ORDER</span> <span class="keyword">BY</span> created_at <span class="keyword">ASC</span>; <span class="comment">-- 按创建时间升序</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用 <code>LIMIT</code> 限制返回数量</strong>：
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users LIMIT <span class="number">10</span>; <span class="comment">-- 返回前10条记录</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用 <code>LIKE</code> 进行模糊搜索</strong>：
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> username <span class="keyword">LIKE</span> <span class="string">&#x27;张%&#x27;</span>; <span class="comment">-- 查找姓&quot;张&quot;的用户</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用聚合函数</strong>（如 <code>COUNT</code>,
+<code>SUM</code>, <code>AVG</code>, <code>MAX</code>,
+<code>MIN</code>）： <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">FROM</span> users; <span class="comment">-- 统计用户总数</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">AVG</span>(age) <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> country <span class="operator">=</span> <span class="string">&#x27;China&#x27;</span>; <span class="comment">-- 中国用户的平均年龄</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用 <code>GROUP BY</code> 分组</strong>：
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> country, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">as</span> user_count </span><br><span class="line"><span class="keyword">FROM</span> users </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> country; <span class="comment">-- 统计每个国家的用户数量</span></span><br></pre></td></tr></table></figure></p></li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">basinhopping(): 盆地跳跃算法basinhopping(): 盆地跳跃算法</span><br><span class="line"></span><br><span class="line">shgo(): 单纯形同伦全局优化</span><br><span class="line"></span><br><span class="line">differential_evolution(): 差分进化算法</span><br></pre></td></tr></table></figure>
+<h4 id="dml---操作数据">2. DML - 操作数据</h4>
 <ul>
-<li>实例： <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">from scipy.optimize import basinhopping</span><br><span class="line"></span><br><span class="line">def func(x):</span><br><span class="line">    <span class="built_in">return</span> np.cos(14.5 * x - 0.3) + (x + 0.2) * x</span><br><span class="line"></span><br><span class="line">res = basinhopping(func, x0=1.0)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"全局最小值：x = %.4f, f(x) = %.4f"</span> % (res.x, res.fun))</span><br></pre></td></tr></table></figure></li>
+<li><p><strong><code>INSERT</code> - 插入新记录</strong>：
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 指定列名插入</span></span><br><span class="line"><span class="keyword">INSERT INTO</span> users (username, email, age, country)</span><br><span class="line"><span class="keyword">VALUES</span> (<span class="string">&#x27;john_doe&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>, <span class="number">25</span>, <span class="string">&#x27;USA&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 如果为所有列都提供值，可以省略列名</span></span><br><span class="line"><span class="keyword">INSERT INTO</span> users </span><br><span class="line"><span class="keyword">VALUES</span> (<span class="keyword">NULL</span>, <span class="string">&#x27;john_doe&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>, <span class="number">25</span>, <span class="string">&#x27;USA&#x27;</span>, NOW());</span><br><span class="line"><span class="comment">-- 注意：id 设为 NULL 或 DEFAULT 以便数据库自动生成（如果它是自增主键）</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong><code>UPDATE</code> - 更新现有记录</strong>：
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> users </span><br><span class="line"><span class="keyword">SET</span> age <span class="operator">=</span> <span class="number">26</span>, country <span class="operator">=</span> <span class="string">&#x27;Canada&#x27;</span> </span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">123</span>; <span class="comment">-- **非常重要：一定要用 WHERE，否则会更新所有行！**</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong><code>DELETE</code> - 删除记录</strong>：
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> users </span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">123</span>; <span class="comment">-- **极端重要：一定要用 WHERE，否则会删除所有行！**</span></span><br></pre></td></tr></table></figure></p></li>
 </ul>
-<h3 id="最小二乘拟合"><strong>2.3 最小二乘拟合</strong></h3>
+<h4 id="ddl---定义数据结构">3. DDL - 定义数据结构</h4>
 <ul>
-<li><p>用途：解决非线性最小二乘问题，常用于曲线拟合。</p></li>
-<li><p>实现函数： <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">least_squares(): 解决非线性最小二乘问题</span><br><span class="line"></span><br><span class="line">curve_fit(): 使用最小二乘法拟合曲线</span><br></pre></td></tr></table></figure></p></li>
-<li><p>实例：</p></li>
+<li><p><strong><code>CREATE TABLE</code> - 创建表</strong>：
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> products (</span><br><span class="line">    id <span class="type">INT</span> <span class="keyword">PRIMARY KEY</span> AUTO_INCREMENT, <span class="comment">-- 主键，自增</span></span><br><span class="line">    name <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT NULL</span>,        <span class="comment">-- 非空约束</span></span><br><span class="line">    price <span class="type">DECIMAL</span>(<span class="number">10</span>, <span class="number">2</span>) <span class="keyword">NOT NULL</span>,     <span class="comment">-- 价格，10位数含2位小数</span></span><br><span class="line">    description TEXT</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong><code>ALTER TABLE</code> - 修改表结构</strong>：
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER TABLE</span> users <span class="keyword">ADD</span> <span class="keyword">COLUMN</span> avatar <span class="type">VARCHAR</span>(<span class="number">255</span>); <span class="comment">-- 添加新列</span></span><br><span class="line"><span class="keyword">ALTER TABLE</span> users <span class="keyword">DROP</span> <span class="keyword">COLUMN</span> age; <span class="comment">-- 删除列</span></span><br><span class="line"><span class="keyword">ALTER TABLE</span> users MODIFY <span class="keyword">COLUMN</span> email <span class="type">VARCHAR</span>(<span class="number">150</span>); <span class="comment">-- 修改列数据类型</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong><code>DROP TABLE</code> - 删除表</strong>：
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> products; <span class="comment">-- **危险操作！会删除整张表和所有数据！**</span></span><br></pre></td></tr></table></figure></p></li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">from scipy.optimize import curve_fit</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义模型函数</span></span><br><span class="line">def func(x, a, b, c):</span><br><span class="line">    <span class="built_in">return</span> a * np.exp(-b * x) + c</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成带噪声的数据</span></span><br><span class="line">xdata = np.linspace(0, 4, 50)</span><br><span class="line">y = func(xdata, 2.5, 1.3, 0.5)</span><br><span class="line">ydata = y + 0.2 * np.random.normal(size=len(xdata))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拟合数据</span></span><br><span class="line">popt, pcov = curve_fit(func, xdata, ydata)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"拟合参数："</span>, popt) <span class="comment">#返回[a,b,c]</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"协方差矩阵"</span>, pcov) <span class="comment">#评估可靠性</span></span><br></pre></td></tr></table></figure>
-<p>[a,b,c]-&gt; <span class="math inline"><em>f</em>(<em>x</em>) = <em>a</em><em>e</em><sup>−<em>b</em><em>x</em></sup> + <em>c</em></span></p>
-<h3 id="方程求根"><strong>2.4 方程求根</strong></h3>
+<hr />
+<h3 id="高级主题简要介绍">高级主题（简要介绍）</h3>
+<ol type="1">
+<li><p><strong>连接（JOIN）</strong>：用于合并来自两个或多个表的行。</p>
 <ul>
-<li><p>方法： <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root_scalar(): 单变量方程求根 <span class="comment">#brentq, brenth, ridder, bisect, newton: 特定算法</span></span><br><span class="line"></span><br><span class="line">root(): 多变量方程组求根</span><br></pre></td></tr></table></figure></p></li>
-<li><p>实现： <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> root_scalar</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x**<span class="number">3</span> - <span class="number">1</span>  <span class="comment"># 寻找x^3 = 1的解</span></span><br><span class="line"></span><br><span class="line">sol = root_scalar(f, bracket=[<span class="number">0</span>, <span class="number">2</span>], method=<span class="string">'brentq'</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"方程的根："</span>, sol.root)</span><br></pre></td></tr></table></figure> <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> root</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> [x[<span class="number">0</span>] + <span class="number">0.5</span> * (x[<span class="number">0</span>] - x[<span class="number">1</span>])**<span class="number">3</span> - <span class="number">1.0</span>,</span><br><span class="line">            <span class="number">0.5</span> * (x[<span class="number">1</span>] - x[<span class="number">0</span>])**<span class="number">3</span> + x[<span class="number">1</span>]]</span><br><span class="line"></span><br><span class="line">sol = root(func, [<span class="number">0</span>, <span class="number">0</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"方程组的解："</span>, sol.x)</span><br></pre></td></tr></table></figure></p></li>
-</ul>
-<h3 id="线性规划"><strong>2.5 线性规划</strong></h3>
+<li><code>INNER JOIN</code>：返回两个表中匹配的行。</li>
+<li><code>LEFT JOIN</code>：返回左表的所有行，即使右表中没有匹配。</li>
+</ul></li>
+<li><p><strong>索引（INDEX）</strong>：类似于书的目录，可以极大地加快数据检索速度（<code>SELECT</code>
+查询），但会减慢数据写入（<code>INSERT/UPDATE/DELETE</code>）速度。通常在
+<code>WHERE</code> 或 <code>JOIN</code> 条件中频繁使用的列上创建索引。
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX idx_email <span class="keyword">ON</span> users (email);</span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>事务（Transaction）</strong>：将多个SQL操作捆绑成一个单一的工作单元。这些操作要么<strong>全部成功</strong>，要么<strong>全部失败</strong>。这是保证数据完整性的关键机制（例如银行转账）。
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">START</span> TRANSACTION;</span><br><span class="line"><span class="comment">-- 从A账户扣钱</span></span><br><span class="line"><span class="keyword">UPDATE</span> accounts <span class="keyword">SET</span> balance <span class="operator">=</span> balance <span class="operator">-</span> <span class="number">100</span> <span class="keyword">WHERE</span> user_id <span class="operator">=</span> <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line"><span class="comment">-- 向B账户加钱</span></span><br><span class="line"><span class="keyword">UPDATE</span> accounts <span class="keyword">SET</span> balance <span class="operator">=</span> balance <span class="operator">+</span> <span class="number">100</span> <span class="keyword">WHERE</span> user_id <span class="operator">=</span> <span class="string">&#x27;B&#x27;</span>;</span><br><span class="line"><span class="comment">-- 如果两条语句都成功，则提交</span></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br><span class="line"><span class="comment">-- 如果任何一条失败，则回滚，所有操作撤销</span></span><br><span class="line"><span class="comment">-- ROLLBACK;</span></span><br></pre></td></tr></table></figure></p></li>
+</ol>
+<h3 id="总结与实践建议">总结与实践建议</h3>
 <ul>
-<li>什么是线性规划：结构化决策框架，其核心是在一个由线性关系定义的几何空间中，寻找最优的”角落”解。比如如下这个问题
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">想象你是一个工厂经理，需要决定生产两种产品A和B的数量：</span><br><span class="line"></span><br><span class="line">生产A每个利润100元，B每个利润150元</span><br><span class="line"></span><br><span class="line">但受限于：</span><br><span class="line"></span><br><span class="line">原材料X：生产A消耗3kg，B消耗2kg，总共只有120kg</span><br><span class="line"></span><br><span class="line">工时：生产A需要2小时，B需要4小时，总共只有160小时</span><br><span class="line"></span><br><span class="line">线性规划就是帮你找到在资源限制下能获得最大利润的生产方案</span><br><span class="line"></span><br></pre></td></tr></table></figure> <span class="math display"><em>p</em><em>r</em><em>o</em><em>f</em><em>i</em><em>t</em> = −100<em>x</em> − 150<em>y</em></span>
-<span class="math display"><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -2.149ex;" xmlns="http://www.w3.org/2000/svg" width="19.774ex" height="5.43ex" role="img" focusable="false" viewBox="0 -1450 8740.2 2400"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mrow"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="5B" d="M247 -949V1450H516V1388H309V-887H516V-949H247Z"></path></g><g data-mml-node="mtable" transform="translate(528,0)"><g data-mml-node="mtr" transform="translate(0,700)"><g data-mml-node="mtd"><g data-mml-node="mn"><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"></path></g></g><g data-mml-node="mtd" transform="translate(1500,0)"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g><g data-mml-node="mtr" transform="translate(0,-700)"><g data-mml-node="mtd"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g><g data-mml-node="mtd" transform="translate(1500,0)"><g data-mml-node="mn"><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"></path></g></g></g></g><g data-mml-node="mo" transform="translate(2528,0) translate(0 -0.5)"><path data-c="5D" d="M11 1388V1450H280V-949H11V-887H218V1388H11Z"></path></g></g><g data-mml-node="mrow" transform="translate(3222.7,0)"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="5B" d="M247 -949V1450H516V1388H309V-887H516V-949H247Z"></path></g><g data-mml-node="mtable" transform="translate(528,0)"><g data-mml-node="mtr" transform="translate(0,700)"><g data-mml-node="mtd"><g data-mml-node="mi"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g></g><g data-mml-node="mtr" transform="translate(0,-700)"><g data-mml-node="mtd" transform="translate(41,0)"><g data-mml-node="mi"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g></g></g></g><g data-mml-node="mo" transform="translate(1100,0) translate(0 -0.5)"><path data-c="5D" d="M11 1388V1450H280V-949H11V-887H218V1388H11Z"></path></g></g><g data-mml-node="mo" transform="translate(5128.4,0)"><path data-c="2264" d="M674 636Q682 636 688 630T694 615T687 601Q686 600 417 472L151 346L399 228Q687 92 691 87Q694 81 694 76Q694 58 676 56H670L382 192Q92 329 90 331Q83 336 83 348Q84 359 96 365Q104 369 382 500T665 634Q669 636 674 636ZM84 -118Q84 -108 99 -98H678Q694 -104 694 -118Q694 -130 679 -138H98Q84 -131 84 -118Z"></path></g><g data-mml-node="mrow" transform="translate(6184.2,0)"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="5B" d="M247 -949V1450H516V1388H309V-887H516V-949H247Z"></path></g><g data-mml-node="mtable" transform="translate(528,0)"><g data-mml-node="mtr" transform="translate(0,700)"><g data-mml-node="mtd"><g data-mml-node="mn"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z" transform="translate(500,0)"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(1000,0)"></path></g></g></g><g data-mml-node="mtr" transform="translate(0,-700)"><g data-mml-node="mtd"><g data-mml-node="mn"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="36" d="M42 313Q42 476 123 571T303 666Q372 666 402 630T432 550Q432 525 418 510T379 495Q356 495 341 509T326 548Q326 592 373 601Q351 623 311 626Q240 626 194 566Q147 500 147 364L148 360Q153 366 156 373Q197 433 263 433H267Q313 433 348 414Q372 400 396 374T435 317Q456 268 456 210V192Q456 169 451 149Q440 90 387 34T253 -22Q225 -22 199 -14T143 16T92 75T56 172T42 313ZM257 397Q227 397 205 380T171 335T154 278T148 216Q148 133 160 97T198 39Q222 21 251 21Q302 21 329 59Q342 77 347 104T352 209Q352 289 347 316T329 361Q302 397 257 397Z" transform="translate(500,0)"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(1000,0)"></path></g></g></g></g><g data-mml-node="mo" transform="translate(2028,0) translate(0 -0.5)"><path data-c="5D" d="M11 1388V1450H280V-949H11V-887H218V1388H11Z"></path></g></g></g></g></svg></mjx-container></span></li>
-</ul>
-<p>抽象一下就是： 输入: (A, b, c) → 处理: 代数变换 → 输出: x*</p>
-<p>其中：</p>
-A 是约束矩阵（系统限制的编码）=&gt;不等式左侧系数 A= $
-<p>$</p>
-<p>b 是资源向量（约束条件的量化）=&gt;不等式右侧系数 b=[120,160]</p>
-<p>c 是价值向量（目标函数的权重）=&gt;利润最大化 c=[-100,-150]
-(线性规划默认求最小值问题) <span class="math inline"><em>f</em>(<em>x</em>) = −100<em>x</em> − 150<em>y</em></span></p>
-<p>x* 是最优决策（系统输出的解决方案）</p>
-<ul>
-<li>实现实例:</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> linprog</span><br><span class="line"></span><br><span class="line"><span class="comment"># 最小化 c^T x</span></span><br><span class="line"><span class="comment"># 约束条件: A_ub x &lt;= b_ub, A_eq x = b_eq</span></span><br><span class="line">c = [-<span class="number">1</span>, <span class="number">4</span>]  <span class="comment"># 目标函数系数</span></span><br><span class="line">A_ub = [[-<span class="number">3</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>]]  <span class="comment"># 不等式约束矩阵</span></span><br><span class="line">b_ub = [<span class="number">6</span>, <span class="number">4</span>]             <span class="comment"># 不等式约束右侧</span></span><br><span class="line"></span><br><span class="line">res = linprog(c, A_ub=A_ub, b_ub=b_ub, bounds=(<span class="literal">None</span>, <span class="literal">None</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"最优解："</span>, res.x)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"最优值："</span>, res.fun)</span><br></pre></td></tr></table></figure>
-<h3 id="约束优化"><strong>2.6 约束优化</strong></h3>
-<ul>
-<li>用途：在有等式或不等式约束条件下优化目标函数。</li>
-<li>方法：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">minimize() 配合约束参数</span><br><span class="line"></span><br><span class="line">SLSQP: 序列二次规划算法</span><br><span class="line"></span><br><span class="line">trust-constr: 信赖域算法</span><br></pre></td></tr></table></figure>
-<ul>
-<li>实现：</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> minimize</span><br><span class="line"></span><br><span class="line"><span class="comment"># 目标函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">objective</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x[<span class="number">0</span>]*x[<span class="number">3</span>]*(x[<span class="number">0</span>]+x[<span class="number">1</span>]+x[<span class="number">2</span>])+x[<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 约束条件</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">constraint1</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x[<span class="number">0</span>]*x[<span class="number">1</span>]*x[<span class="number">2</span>]*x[<span class="number">3</span>]-<span class="number">25.0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">constraint2</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span>(x**<span class="number">2</span>)-<span class="number">40.0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始猜测</span></span><br><span class="line">x0 = [<span class="number">1</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置约束</span></span><br><span class="line">con1 = {<span class="string">'type'</span>: <span class="string">'ineq'</span>, <span class="string">'fun'</span>: constraint1}</span><br><span class="line">con2 = {<span class="string">'type'</span>: <span class="string">'eq'</span>, <span class="string">'fun'</span>: constraint2}</span><br><span class="line">cons = [con1,con2]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 优化</span></span><br><span class="line">sol = minimize(objective,x0,method=<span class="string">'SLSQP'</span>,constraints=cons)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"最优解："</span>, sol.x)</span><br></pre></td></tr></table></figure>
-<h2 id="三稀疏矩阵sparse">三、稀疏矩阵(sparse)</h2>
-<p>专门针对那些绝大多数元素为零的矩阵数据结构</p>
-<h3 id="处理稀疏矩阵"><strong>3.1 处理稀疏矩阵</strong></h3>
-<ul>
-<li>方法:</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CSC - 压缩稀疏列（Compressed Sparse Column），按列压缩。</span><br><span class="line">CSR - 压缩稀疏行（Compressed Sparse Row），按行压缩。</span><br></pre></td></tr></table></figure>
-<ul>
-<li>实现:</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>])</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(csr_matrix(arr)) </span><br></pre></td></tr></table></figure>
-<p>输出:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">(0, 5)        1</span><br><span class="line">(0, 6)        1</span><br><span class="line">(0, 8)        2</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(csr_matrix(arr).data) <span class="comment">#输出不为零的元素[1,1,2]</span></span><br><span class="line"><span class="built_in">print</span>(csr_matrix(arr).count_nonzero()) <span class="comment">#输出非0元素总数3</span></span><br><span class="line"></span><br><span class="line">mat = csr_matrix(arr)</span><br><span class="line">mat.eliminate_zeros()</span><br><span class="line"><span class="built_in">print</span>(mat) <span class="comment">#删除矩阵中的0元素</span></span><br><span class="line"></span><br><span class="line">mat = csr_matrix(arr)</span><br><span class="line">mat.sum_duplicates()</span><br><span class="line"><span class="built_in">print</span>(mat) <span class="comment">#删除重复项</span></span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr).tocsc() <span class="comment">#将csr转为csc</span></span><br></pre></td></tr></table></figure>
-<h3 id="图结构sparse.csgraph"><strong>3.2图结构(sparse.csgraph)</strong></h3>
-<ul>
-<li><p>如何查看连接组件(连接组件是指图中所有互相连通的节点的集合)
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">connected_components()</span><br></pre></td></tr></table></figure> <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> connected_components</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(connected_components(newarr))</span><br></pre></td></tr></table></figure> 输出: <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">(1, array([0, 0, 0], dtype=int32)) <span class="comment">#1代表一个连接组件，[0,0,0]代表每个元素属于哪个连接组件</span></span><br></pre></td></tr></table></figure></p></li>
-<li><p>Dijkstra 算法调用(用于计算一个节点到其他所有节点的最短路径)
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> dijkstra</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(dijkstra(newarr, return_predecessors=<span class="literal">True</span>, indices=<span class="number">0</span>))</span><br></pre></td></tr></table></figure> 其中dijkstra的参数：</p></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">return_predecessors: 布尔值，设置 True，遍历所有路径，如果不想遍历所有路径可以设置为 False。</span><br><span class="line">indices: 元素的索引，返回该元素的所有路径。</span><br><span class="line"><span class="built_in">limit</span>: 路径的最大权重。</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>Floyd Warshall – 弗洛伊德算法(解决任意两点间的最短路径)
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> floyd_warshall</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(floyd_warshall(newarr, return_predecessors=<span class="literal">True</span>))</span><br></pre></td></tr></table></figure></p></li>
-<li><p>Bellman Ford – 贝尔曼-福特算法(任意两点间的最短路径)
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> bellman_ford</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, -<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(bellman_ford(newarr, return_predecessors=<span class="literal">True</span>, indices=<span class="number">0</span>))</span><br></pre></td></tr></table></figure></p></li>
-<li><p>dfs <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> depth_first_order</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(depth_first_order(newarr, <span class="number">1</span>)) <span class="comment">#传入邻接矩阵和起始遍历元素</span></span><br></pre></td></tr></table></figure></p></li>
-<li><p>bfs <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.csgraph <span class="keyword">import</span> breadth_first_order</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"></span><br><span class="line">arr = np.array([</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">  [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">newarr = csr_matrix(arr)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(breadth_first_order(newarr, <span class="number">1</span>))</span><br></pre></td></tr></table></figure></p></li>
+<li><strong>核心是
+<code>SELECT</code></strong>：绝大部分时间你都在写查询语句。</li>
+<li><strong>安全第一</strong>：<strong>永远使用参数化查询（<code>?</code>
+占位符）来防止 SQL 注入</strong>，不要手动拼接字符串。</li>
+<li><strong><code>WHERE</code> 子句是关键</strong>：在
+<code>UPDATE</code> 和 <code>DELETE</code> 时，忘记 <code>WHERE</code>
+子句是灾难性的。</li>
+<li><strong>先学基础</strong>：熟练掌握基本的 <code>SELECT</code>,
+<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>,
+<code>WHERE</code>, <code>ORDER BY</code>, <code>JOIN</code>
+后，再深入学索引、事务等高级主题。</li>
+<li><strong>多练习</strong>：最好的学习方式是在自己搭建的数据库环境（如
+MySQL, PostgreSQL 或在线练习平台）中实际操作。</li>
 </ul>
 ]]></content>
       <categories>
-        <category>code</category>
+        <category>database</category>
       </categories>
       <tags>
-        <tag>math</tag>
-        <tag>python</tag>
-        <tag>scipy</tag>
+        <tag>sql</tag>
+        <tag>database</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>yolo+AnyLabeling实现数据集的自动标注</title>
+    <url>/2025/08/09/yolo-dataset/</url>
+    <content><![CDATA[<h2 id="一环境准备">一、环境准备</h2>
+<p>首先需要创建一个conda虚拟环境，进行yolo环境的搭建</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install yolo</span><br><span class="line"></span><br><span class="line">pip install ultralytics</span><br><span class="line"></span><br><span class="line">pip install ncnn</span><br><span class="line"></span><br><span class="line">pip install onnx <span class="comment">#用于格式转换</span></span><br></pre></td></tr></table></figure>
+<p>之后创建一个空目录，目录结构如下</p>
+<p><img src="/images/yolo-dataset/yolotraindir.png" /></p>
+<p>准备好需要用来训练的部分图片(50-100张吧差不多，多点更好，但是就是用来标注数据的没必要那么多后面手动改改叭)，放到images文件下的三个文件夹都存放一份</p>
+<h2 id="二数据标注">二、数据标注</h2>
+<p>准备好环境搭建之后，新建一个<code>classes.txt</code>文件放到labels/train文件夹下，里面按顺序写好你的标签是什么比如我训练这个模型就是用来标注电池的</p>
+<p><img src="/images/yolo-dataset/battery.png" /></p>
+<p>那你的文件内容就是</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">battery</span><br></pre></td></tr></table></figure>
+<p>ok，创建完成之后就开始对数据进行正常标注，然后将结果导出到labels/train文件夹下</p>
+<h2 id="三开始训练">三、开始训练</h2>
+<p>首先需要写入一个配置文件<code>xxx.yaml</code>写到yolotrain目录下，内容如下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">path: D:\yolotrain       <span class="comment"># 数据集根目录</span></span><br><span class="line">train: images/train      <span class="comment"># 训练集相对路径</span></span><br><span class="line">val: images/val          <span class="comment"># 验证集相对路径</span></span><br><span class="line"><span class="built_in">test</span>: images/test        <span class="comment"># 测试集相对路径</span></span><br><span class="line"></span><br><span class="line">nc: 1                    <span class="comment"># 类别数量</span></span><br><span class="line">names: [<span class="string">&quot;battery&quot;</span>]       <span class="comment"># 类别名称列表</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 高级参数（可选）</span></span><br><span class="line">roboflow: &#123;&#125;             <span class="comment"># 兼容RoboFlow数据集</span></span><br><span class="line">download: null           <span class="comment"># 数据集下载URL</span></span><br></pre></td></tr></table></figure>
+<p>在虚拟环境下进入yolotrain目录输入指令开始训练</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yolo detect train </span><br><span class="line"><span class="comment">#data是你自己的yaml文件路径</span></span><br><span class="line">  data=D:/yolotrain/xxx.yaml </span><br><span class="line">  model=yolov8s.pt      <span class="comment"># 预训练模型（放在yolotrain目录下）</span></span><br><span class="line">  epochs=100            <span class="comment"># 迭代次数</span></span><br><span class="line">  imgsz=640             <span class="comment"># 输入分辨率</span></span><br><span class="line">  batch=16              <span class="comment"># 根据GPU调整</span></span><br><span class="line">  device=0              <span class="comment"># 0代表GPU练</span></span><br><span class="line"><span class="comment">#下面是参数，命令合并成一行</span></span><br></pre></td></tr></table></figure>
+<p>若要进行验证把<code>train</code>改成<code>val</code>就行了，然后那个yolo模型我放在我的git仓库里了
+<a href="https://github.com/koen666/yolo">yolo模型</a></p>
+<h2 id="四导出onnx">四、导出onnx</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yolo <span class="built_in">export</span> model=D:/yolotrain/best.pt format=onnx</span><br></pre></td></tr></table></figure>
+<p>训练完后，可以从新得到的run文件夹下的best.pt(这个就是训练的最好的模型)文件挪到外面，在调用上面那个命令生成best.onnx文件</p>
+<p>然后再创建一个xxx.yaml文件写入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">type</span>: yolov8</span><br><span class="line">name: yolov8s-r20230520</span><br><span class="line">display_name: koen</span><br><span class="line">model_path: best.onnx</span><br><span class="line">nms_threshold: 0.45</span><br><span class="line">confidence_threshold: 0.25</span><br><span class="line">classes:</span><br><span class="line">  - battery</span><br></pre></td></tr></table></figure>
+<p>这个display_name可以换阿，这个文件就是你模型的配置文件</p>
+<h2 id="五使用yaml操作">五、使用yaml操作</h2>
+<p>进入<code>AnyLabeling</code>软件，左侧tab栏有AI选项，点击，选择自定义模型，选择刚刚配置的yaml文件即可</p>
+]]></content>
+      <categories>
+        <category>dataset</category>
+      </categories>
+      <tags>
+        <tag>yolo</tag>
+        <tag>dataset</tag>
+        <tag>AnyLabeling</tag>
       </tags>
   </entry>
   <entry>
@@ -4817,43 +4873,183 @@ Seaborn 生成的图表进行精细化调整。以下是详细分类说明和实
       </tags>
   </entry>
   <entry>
-    <title>yolo+AnyLabeling实现数据集的自动标注</title>
-    <url>/2025/08/09/yolo-dataset/</url>
-    <content><![CDATA[<h2 id="一环境准备">一、环境准备</h2>
-<p>首先需要创建一个conda虚拟环境，进行yolo环境的搭建</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install yolo</span><br><span class="line"></span><br><span class="line">pip install ultralytics</span><br><span class="line"></span><br><span class="line">pip install ncnn</span><br><span class="line"></span><br><span class="line">pip install onnx <span class="comment">#用于格式转换</span></span><br></pre></td></tr></table></figure>
-<p>之后创建一个空目录，目录结构如下</p>
-<p><img src="/images/yolo-dataset/yolotraindir.png" /></p>
-<p>准备好需要用来训练的部分图片(50-100张吧差不多，多点更好，但是就是用来标注数据的没必要那么多后面手动改改叭)，放到images文件下的三个文件夹都存放一份</p>
-<h2 id="二数据标注">二、数据标注</h2>
-<p>准备好环境搭建之后，新建一个<code>classes.txt</code>文件放到labels/train文件夹下，里面按顺序写好你的标签是什么比如我训练这个模型就是用来标注电池的</p>
-<p><img src="/images/yolo-dataset/battery.png" /></p>
-<p>那你的文件内容就是</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">battery</span><br></pre></td></tr></table></figure>
-<p>ok，创建完成之后就开始对数据进行正常标注，然后将结果导出到labels/train文件夹下</p>
-<h2 id="三开始训练">三、开始训练</h2>
-<p>首先需要写入一个配置文件<code>xxx.yaml</code>写到yolotrain目录下，内容如下</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">path: D:\yolotrain       <span class="comment"># 数据集根目录</span></span><br><span class="line">train: images/train      <span class="comment"># 训练集相对路径</span></span><br><span class="line">val: images/val          <span class="comment"># 验证集相对路径</span></span><br><span class="line"><span class="built_in">test</span>: images/test        <span class="comment"># 测试集相对路径</span></span><br><span class="line"></span><br><span class="line">nc: 1                    <span class="comment"># 类别数量</span></span><br><span class="line">names: [<span class="string">&quot;battery&quot;</span>]       <span class="comment"># 类别名称列表</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 高级参数（可选）</span></span><br><span class="line">roboflow: &#123;&#125;             <span class="comment"># 兼容RoboFlow数据集</span></span><br><span class="line">download: null           <span class="comment"># 数据集下载URL</span></span><br></pre></td></tr></table></figure>
-<p>在虚拟环境下进入yolotrain目录输入指令开始训练</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yolo detect train </span><br><span class="line"><span class="comment">#data是你自己的yaml文件路径</span></span><br><span class="line">  data=D:/yolotrain/xxx.yaml </span><br><span class="line">  model=yolov8s.pt      <span class="comment"># 预训练模型（放在yolotrain目录下）</span></span><br><span class="line">  epochs=100            <span class="comment"># 迭代次数</span></span><br><span class="line">  imgsz=640             <span class="comment"># 输入分辨率</span></span><br><span class="line">  batch=16              <span class="comment"># 根据GPU调整</span></span><br><span class="line">  device=0              <span class="comment"># 0代表GPU练</span></span><br><span class="line"><span class="comment">#下面是参数，命令合并成一行</span></span><br></pre></td></tr></table></figure>
-<p>若要进行验证把<code>train</code>改成<code>val</code>就行了，然后那个yolo模型我放在我的git仓库里了
-<a href="https://github.com/koen666/yolo">yolo模型</a></p>
-<h2 id="四导出onnx">四、导出onnx</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yolo <span class="built_in">export</span> model=D:/yolotrain/best.pt format=onnx</span><br></pre></td></tr></table></figure>
-<p>训练完后，可以从新得到的run文件夹下的best.pt(这个就是训练的最好的模型)文件挪到外面，在调用上面那个命令生成best.onnx文件</p>
-<p>然后再创建一个xxx.yaml文件写入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">type</span>: yolov8</span><br><span class="line">name: yolov8s-r20230520</span><br><span class="line">display_name: koen</span><br><span class="line">model_path: best.onnx</span><br><span class="line">nms_threshold: 0.45</span><br><span class="line">confidence_threshold: 0.25</span><br><span class="line">classes:</span><br><span class="line">  - battery</span><br></pre></td></tr></table></figure>
-<p>这个display_name可以换阿，这个文件就是你模型的配置文件</p>
-<h2 id="五使用yaml操作">五、使用yaml操作</h2>
-<p>进入<code>AnyLabeling</code>软件，左侧tab栏有AI选项，点击，选择自定义模型，选择刚刚配置的yaml文件即可</p>
+    <title>常见BUG汇总</title>
+    <url>/2025/07/27/issue/</url>
+    <content><![CDATA[<h2 id="一markdown">一、Markdown</h2>
+<h3 id="为什么vscode编辑md文件十分卡顿">1.1
+为什么vscode编辑md文件十分卡顿</h3>
+<p>解决方法:禁用cpp extension pack扩展</p>
+<h2 id="二hexo">二、Hexo</h2>
+<h3 id="出现spawn-failed报错">2.1 出现Spawn Failed报错</h3>
+<p>首先尝试关机重启</p>
+<p>其次删除<code>.deploy_git</code>文件夹</p>
+<p>最后实在不行找到<code>.ssh</code>文件，先测试</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+<p>如果出现22端口连接超时，改成443端口即可 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">  HostName ssh.github.com</span><br><span class="line">  Port 443</span><br><span class="line">  User git</span><br><span class="line">  IdentityFile ~/.ssh/id_rsa</span><br><span class="line">  IdentitiesOnly <span class="built_in">yes</span></span><br></pre></td></tr></table></figure></p>
 ]]></content>
       <categories>
-        <category>dataset</category>
+        <category>code</category>
       </categories>
       <tags>
-        <tag>yolo</tag>
-        <tag>dataset</tag>
-        <tag>AnyLabeling</tag>
+        <tag>markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Latex全语法使用</title>
+    <url>/2025/08/18/latex_2/</url>
+    <content><![CDATA[<h2 id="latex-文档基本格式">1. LaTeX 文档基本格式</h2>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{article}   <span class="comment">% 文档类型：article, report, book, beamer 等</span></span><br><span class="line"><span class="keyword">\usepackage</span>[utf8]{inputenc} <span class="comment">% 支持中文时建议用 ctex 包</span></span><br><span class="line"><span class="keyword">\usepackage</span>{amsmath, amssymb} <span class="comment">% 数学符号扩展</span></span><br><span class="line"><span class="keyword">\usepackage</span>{graphicx} <span class="comment">% 插入图片</span></span><br><span class="line"><span class="keyword">\usepackage</span>{listings} <span class="comment">% 插入代码</span></span><br><span class="line"><span class="keyword">\usepackage</span>{xcolor}   <span class="comment">% 代码高亮需要颜色</span></span><br><span class="line"><span class="keyword">\usepackage</span>{hyperref} <span class="comment">% 超链接</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\title</span>{LaTeX 学习示例}</span><br><span class="line"><span class="keyword">\author</span>{你的名字}</span><br><span class="line"><span class="keyword">\date</span>{<span class="keyword">\today</span>}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{document}  <span class="comment">% 正文开始</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\maketitle</span>  <span class="comment">% 输出标题</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>{引言}</span><br><span class="line">这是 LaTeX 的一个简单示例。</span><br><span class="line"></span><br><span class="line"><span class="keyword">\end</span>{document}</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>说明</strong>：</p>
+</blockquote>
+<ul>
+<li><code>\documentclass{article}</code> 定义了文档类型。</li>
+<li><code>\usepackage{}</code> 用来导入扩展包。</li>
+<li><code>\section{}</code> 表示章节。</li>
+<li><code>\maketitle</code> 会根据上面
+<code>\title</code>、<code>\author</code>、<code>\date</code>
+生成标题页。</li>
+</ul>
+<hr>
+<h2 id="数学公式">2. 数学公式</h2>
+<p>LaTeX 在数学公式排版方面很强大。</p>
+<h3 id="行内公式">2.1 行内公式</h3>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line">这是一个行内公式：<span class="built_in">$</span>E=mc<span class="built_in">^</span>2<span class="built_in">$</span>。</span><br></pre></td></tr></table></figure>
+<h3 id="独立公式">2.2 独立公式</h3>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\[</span></span><br><span class="line">E = mc<span class="built_in">^</span>2</span><br><span class="line"><span class="keyword">\]</span></span><br></pre></td></tr></table></figure>
+<h3 id="多行公式-amsmath-提供">2.3 多行公式 (amsmath 提供)</h3>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{align}</span><br><span class="line">a<span class="built_in">^</span>2 + b<span class="built_in">^</span>2 <span class="built_in">&amp;</span>= c<span class="built_in">^</span>2 <span class="keyword">\\</span></span><br><span class="line">e<span class="built_in">^</span>{i<span class="keyword">\pi</span>} + 1 <span class="built_in">&amp;</span>= 0</span><br><span class="line"><span class="keyword">\end</span>{align}</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="插入图片">3. 插入图片</h2>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{figure}[h]</span><br><span class="line">    <span class="keyword">\centering</span></span><br><span class="line">    <span class="keyword">\includegraphics</span>[width=0.5<span class="keyword">\textwidth</span>]{example.png}</span><br><span class="line">    <span class="keyword">\caption</span>{这是一个示例图片}</span><br><span class="line">    <span class="keyword">\label</span>{fig:example}</span><br><span class="line"><span class="keyword">\end</span>{figure}</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>说明</strong>：</p>
+</blockquote>
+<ul>
+<li><code>example.png</code> 必须和 <code>.tex</code>
+文件在同一目录。</li>
+<li><code>width=0.5\textwidth</code> 控制大小。</li>
+<li><code>\caption</code> 是图注，<code>\label</code> 用来引用。</li>
+<li>之后可用 <code>见图~\ref{fig:example}</code> 来自动编号。</li>
+</ul>
+<hr>
+<h2 id="插入代码">4. 插入代码</h2>
+<p>LaTeX 用 <code>listings</code> 包来展示代码：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{lstlisting}[language=Python, caption=Python 示例, label={lst:py}]</span><br><span class="line">def hello():</span><br><span class="line">    print("Hello, LaTeX!")</span><br><span class="line"><span class="keyword">\end</span>{lstlisting}</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>说明</strong>：</p>
+</blockquote>
+<ul>
+<li><code>language=Python</code> 可以换成 <code>C</code>,
+<code>C++</code>, <code>Java</code> 等。</li>
+<li><code>caption</code> 给代码块加标题，<code>label</code>
+方便引用。</li>
+</ul>
+<p>还可以加颜色主题：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\lstset</span>{</span><br><span class="line">  basicstyle=<span class="keyword">\ttfamily</span><span class="keyword">\small</span>,</span><br><span class="line">  keywordstyle=<span class="keyword">\color</span>{blue},</span><br><span class="line">  commentstyle=<span class="keyword">\color</span>{green!50!black},</span><br><span class="line">  stringstyle=<span class="keyword">\color</span>{red},</span><br><span class="line">  numbers=left,</span><br><span class="line">  numberstyle=<span class="keyword">\tiny</span>,</span><br><span class="line">  frame=single,</span><br><span class="line">  breaklines=true</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="表格">5. 表格</h2>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{table}[h]</span><br><span class="line">    <span class="keyword">\centering</span></span><br><span class="line">    <span class="keyword">\begin</span>{tabular}{|c|c|c|}</span><br><span class="line">        <span class="keyword">\hline</span></span><br><span class="line">        姓名 <span class="built_in">&amp;</span> 年龄 <span class="built_in">&amp;</span> 成绩 <span class="keyword">\\</span></span><br><span class="line">        <span class="keyword">\hline</span></span><br><span class="line">        张三 <span class="built_in">&amp;</span> 18 <span class="built_in">&amp;</span> 95 <span class="keyword">\\</span></span><br><span class="line">        李四 <span class="built_in">&amp;</span> 19 <span class="built_in">&amp;</span> 88 <span class="keyword">\\</span></span><br><span class="line">        <span class="keyword">\hline</span></span><br><span class="line">    <span class="keyword">\end</span>{tabular}</span><br><span class="line">    <span class="keyword">\caption</span>{学生信息表}</span><br><span class="line">    <span class="keyword">\label</span>{tab:student}</span><br><span class="line"><span class="keyword">\end</span>{table}</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="超链接">6. 超链接</h2>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\href</span>{<span class="link">https://www.latex-project.org</span>}{LaTeX 官网}</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="中文支持">7. 中文支持</h2>
+<p>如果你写中文文档，建议用 <code>ctex</code> 包：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{ctexart}  <span class="comment">% 代替 article，更好支持中文</span></span><br></pre></td></tr></table></figure>
+<p>这样就能直接写中文了。</p>
+<hr>
+<h2 id="有序列表和无序列表">8.有序列表和无序列表</h2>
+<h3 id="无序列表itemize">8.1 无序列表（itemize）</h3>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{itemize}</span><br><span class="line">    <span class="keyword">\item</span> 这是第一点</span><br><span class="line">    <span class="keyword">\item</span> 这是第二点</span><br><span class="line">    <span class="keyword">\item</span> 这是第三点</span><br><span class="line"><span class="keyword">\end</span>{itemize}</span><br></pre></td></tr></table></figure>
+<p>默认显示为黑色小圆点：</p>
+<ul>
+<li>这是第一点</li>
+<li>这是第二点</li>
+<li>这是第三点</li>
+</ul>
+<h3 id="有序列表enumerate">8.2 有序列表（enumerate）</h3>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{enumerate}</span><br><span class="line">    <span class="keyword">\item</span> 这是第一点</span><br><span class="line">    <span class="keyword">\item</span> 这是第二点</span><br><span class="line">    <span class="keyword">\item</span> 这是第三点</span><br><span class="line"><span class="keyword">\end</span>{enumerate}</span><br></pre></td></tr></table></figure>
+<p>默认显示为数字编号：</p>
+<ol type="1">
+<li>这是第一点</li>
+<li>这是第二点</li>
+<li>这是第三点</li>
+</ol>
+<h3 id="自定义编号样式">8.3 自定义编号样式</h3>
+<p>借助 <code>enumitem</code> 包可以更灵活：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>{enumitem}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{enumerate}[label=<span class="keyword">\roman</span>*.]  <span class="comment">% 罗马数字</span></span><br><span class="line">    <span class="keyword">\item</span> 第一条</span><br><span class="line">    <span class="keyword">\item</span> 第二条</span><br><span class="line"><span class="keyword">\end</span>{enumerate}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{enumerate}[label=(<span class="keyword">\alph</span>*)]  <span class="comment">% 小写字母</span></span><br><span class="line">    <span class="keyword">\item</span> 第一条</span><br><span class="line">    <span class="keyword">\item</span> 第二条</span><br><span class="line"><span class="keyword">\end</span>{enumerate}</span><br></pre></td></tr></table></figure>
+<p>结果会变成：</p>
+<ul>
+<li>(i), (ii), (iii)…</li>
+<li>(a), (b), (c)…</li>
+</ul>
+<h3 id="无编号列表只换行没有点数字">8.4
+无编号列表（只换行，没有点/数字）</h3>
+<p>如果你只是想 <strong>逐行列出</strong>，但不要前面的符号，可以用
+<code>description</code> 或者自定义环境：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>{itemize}[label={}] <span class="comment">% label={} 表示不要符号</span></span><br><span class="line">    <span class="keyword">\item</span> 第一行</span><br><span class="line">    <span class="keyword">\item</span> 第二行</span><br><span class="line">    <span class="keyword">\item</span> 第三行</span><br><span class="line"><span class="keyword">\end</span>{itemize}</span><br></pre></td></tr></table></figure>
+<p>或者更简单：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line">第一点 <span class="keyword">\\</span></span><br><span class="line">第二点 <span class="keyword">\\</span></span><br><span class="line">第三点</span><br></pre></td></tr></table></figure>
+<p>（这里 <code>\\</code> 表示换行）</p>
+<h2 id="bibtex-使用">9. BibTeX 使用</h2>
+<p>在学术写作中，<strong>参考文献管理</strong>是必不可少的。LaTeX 提供了
+<code>BibTeX</code> 来管理参考文献，它的好处是：</p>
+<ul>
+<li>文献集中存放在一个 <code>.bib</code> 文件里，方便复用；</li>
+<li>可以自动格式化（APA, IEEE, GB/T 7714 等）；</li>
+<li>引用时只需 <code>\cite{}</code> 即可，省去手动编号。</li>
+</ul>
+<h3 id="建立-.bib-文件">9.1 建立 <code>.bib</code> 文件</h3>
+<p>新建一个 <code>refs.bib</code>
+文件，里面存放参考文献信息。常见条目类型有：</p>
+<ul>
+<li><code>@article</code>：期刊文章</li>
+<li><code>@book</code>：书籍</li>
+<li><code>@inproceedings</code>：会议论文</li>
+<li><code>@misc</code>：其他（网页、报JavaScript (ES6) code
+snippets告等）</li>
+</ul>
+<p><strong>示例：refs.bib</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@article{einstein1905,</span><br><span class="line">  author    = {Albert Einstein},</span><br><span class="line">  title     = {Zur Elektrodynamik bewegter Körper},</span><br><span class="line">  journal   = {Annalen der Physik},</span><br><span class="line">  volume    = {17},</span><br><span class="line">  number    = {10},</span><br><span class="line">  pages     = {891--921},</span><br><span class="line">  year      = {1905},</span><br><span class="line">  publisher = {Wiley}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">@book{knuth1984,</span><br><span class="line">  author    = {Donald E. Knuth},</span><br><span class="line">  title     = {The TeXbook},</span><br><span class="line">  year      = {1984},</span><br><span class="line">  publisher = {Addison-Wesley}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">@misc{latexproject,</span><br><span class="line">  author    = {LaTeX Project},</span><br><span class="line">  title     = {LaTeX Project Website},</span><br><span class="line">  year      = {2025},</span><br><span class="line">  url       = {https://www.latex-project.org/}</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h3 id="在主-.tex-文件中引用">9.2 在主 <code>.tex</code> 文件中引用</h3>
+<p>在你的 <code>main.tex</code> 中：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>{article}</span><br><span class="line"><span class="keyword">\usepackage</span>[utf8]{inputenc}</span><br><span class="line"><span class="keyword">\usepackage</span>{cite}   <span class="comment">% 文献引用宏包</span></span><br><span class="line"><span class="keyword">\usepackage</span>{hyperref} <span class="comment">% 让文献引用可点击</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>{document}</span><br><span class="line"></span><br><span class="line">爱因斯坦的相对论论文发表于1905年~<span class="keyword">\cite</span>{einstein1905}。</span><br><span class="line"><span class="keyword">\LaTeX</span> 的官方文档在~<span class="keyword">\cite</span>{latexproject} 可以找到。</span><br><span class="line"></span><br><span class="line"><span class="comment">% 生成参考文献</span></span><br><span class="line"><span class="keyword">\bibliographystyle</span>{plain}   <span class="comment">% 参考文献格式：plain, unsrt, abbrv, ieeetr 等</span></span><br><span class="line"><span class="keyword">\bibliography</span>{refs}         <span class="comment">% refs.bib 文件名，不要写扩展名</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\end</span>{document}</span><br></pre></td></tr></table></figure>
+<h3 id="编译流程">9.3 编译流程</h3>
+<p>和普通 <code>.tex</code> 不同，使用 <code>bibtex</code>
+时要多一步：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pdflatex main.tex</span><br><span class="line">bibtex main</span><br><span class="line">pdflatex main.tex</span><br><span class="line">pdflatex main.tex</span><br></pre></td></tr></table></figure>
+<p>解释：</p>
+<ol type="1">
+<li>第一次 <code>pdflatex</code> 会扫描引用并生成 <code>.aux</code>
+文件；</li>
+<li><code>bibtex main</code> 会读取 <code>.aux</code> 文件，从
+<code>refs.bib</code> 抽取对应条目生成 <code>.bbl</code> 文件；</li>
+<li>再跑两次 <code>pdflatex</code> 让引用编号和文献列表都正确显示。</li>
+</ol>
+<h3 id="常见参考文献样式">9.4 常见参考文献样式</h3>
+<ul>
+<li><code>plain</code>：作者字母顺序，数字编号</li>
+<li><code>unsrt</code>：按引用顺序编号</li>
+<li><code>abbrv</code>：作者名缩写</li>
+<li><code>ieeetr</code>：IEEE 风格</li>
+<li><code>apalike</code>：APA 风格</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\bibliographystyle</span>{ieeetr}</span><br></pre></td></tr></table></figure>
+<h3 id="中文参考文献">9.5 中文参考文献</h3>
+<p>中文参考文献推荐用 <strong>GB/T 7714 样式</strong>（国标）：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\usepackage</span>[backend=bibtex,style=gb7714-2015]{biblatex}</span><br><span class="line"><span class="keyword">\bibliography</span>{refs}</span><br></pre></td></tr></table></figure>
+<p>然后在 <code>.bib</code> 文件里可以写中文，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@book{li2020,</span><br><span class="line">  author    = {李四 and 张三},</span><br><span class="line">  title     = {深度学习导论},</span><br><span class="line">  year      = {2020},</span><br><span class="line">  publisher = {清华大学出版社}</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>这样就能自动生成符合国标的中文参考文献。</p>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>math</tag>
+        <tag>latex</tag>
       </tags>
   </entry>
 </search>

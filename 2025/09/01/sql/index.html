@@ -20,21 +20,21 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"text":"评论","order":-2}},"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="来让你的python程序像前端依赖一样优雅的管理起来">
+  <meta name="description" content="本文介绍SQL（Structured Query Language，结构化查询语言）的基本语法和核心概念">
 <meta property="og:type" content="article">
-<meta property="og:title" content="像前端package.json那样管理python依赖">
-<meta property="og:url" content="http://example.com/2025/07/29/pipenv/index.html">
+<meta property="og:title" content="SQL语法规则">
+<meta property="og:url" content="http://example.com/2025/09/01/sql/index.html">
 <meta property="og:site_name" content="木语">
-<meta property="og:description" content="来让你的python程序像前端依赖一样优雅的管理起来">
+<meta property="og:description" content="本文介绍SQL（Structured Query Language，结构化查询语言）的基本语法和核心概念">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-07-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-31T12:28:11.636Z">
+<meta property="article:published_time" content="2025-08-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-01T05:32:54.309Z">
 <meta property="article:author" content="koen">
-<meta property="article:tag" content="pipenv">
-<meta property="article:tag" content="python">
+<meta property="article:tag" content="sql">
+<meta property="article:tag" content="database">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2025/07/29/pipenv/">
+<link rel="canonical" href="http://example.com/2025/09/01/sql/">
 
 
 <script id="page-configurations">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title>像前端package.json那样管理python依赖 | 木语</title>
+  <title>SQL语法规则 | 木语</title>
   
 
 
@@ -79,119 +79,7 @@
 </noscript>
 
    <link rel="stylesheet" href="/dist/APlayer.min.css">
-<style>mjx-container[jax="SVG"] {
-  direction: ltr;
-}
-
-mjx-container[jax="SVG"] > svg {
-  overflow: visible;
-}
-
-mjx-container[jax="SVG"][display="true"] {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-mjx-container[jax="SVG"][justify="left"] {
-  text-align: left;
-}
-
-mjx-container[jax="SVG"][justify="right"] {
-  text-align: right;
-}
-
-g[data-mml-node="merror"] > g {
-  fill: red;
-  stroke: red;
-}
-
-g[data-mml-node="merror"] > rect[data-background] {
-  fill: yellow;
-  stroke: none;
-}
-
-g[data-mml-node="mtable"] > line[data-line] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > rect[data-frame] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > .mjx-dashed {
-  stroke-dasharray: 140;
-}
-
-g[data-mml-node="mtable"] > .mjx-dotted {
-  stroke-linecap: round;
-  stroke-dasharray: 0,140;
-}
-
-g[data-mml-node="mtable"] > svg {
-  overflow: visible;
-}
-
-[jax="SVG"] mjx-tool {
-  display: inline-block;
-  position: relative;
-  width: 0;
-  height: 0;
-}
-
-[jax="SVG"] mjx-tool > mjx-tip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-mjx-tool > mjx-tip {
-  display: inline-block;
-  padding: .2em;
-  border: 1px solid #888;
-  font-size: 70%;
-  background-color: #F8F8F8;
-  color: black;
-  box-shadow: 2px 2px 5px #AAAAAA;
-}
-
-g[data-mml-node="maction"][data-toggle] {
-  cursor: pointer;
-}
-
-mjx-status {
-  display: block;
-  position: fixed;
-  left: 1em;
-  bottom: 1em;
-  min-width: 25%;
-  padding: .2em .4em;
-  border: 1px solid #888;
-  font-size: 90%;
-  background-color: #F8F8F8;
-  color: black;
-}
-
-foreignObject[data-mjx-xml] {
-  font-family: initial;
-  line-height: normal;
-  overflow: visible;
-}
-
-.MathJax path {
-  stroke-width: 3;
-}
-
-mjx-container[display="true"] {
-  overflow: auto hidden;
-}
-
-mjx-container[display="true"] + br {
-  display: none;
-}
-</style><link rel="alternate" href="/atom.xml" title="木语" type="application/atom+xml">
+<link rel="alternate" href="/atom.xml" title="木语" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -301,7 +189,7 @@ mjx-container[display="true"] + br {
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/07/29/pipenv/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/01/sql/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/./images/head.jpg">
@@ -314,7 +202,7 @@ mjx-container[display="true"] + br {
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          像前端package.json那样管理python依赖
+          SQL语法规则
         </h1>
 
         <div class="post-meta">
@@ -323,23 +211,17 @@ mjx-container[display="true"] + br {
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2025-07-29 00:00:00" itemprop="dateCreated datePublished" datetime="2025-07-29T00:00:00+08:00">2025-07-29</time>
+              <time title="Created: 2025-09-01 00:00:00 / Modified: 13:32:54" itemprop="dateCreated datePublished" datetime="2025-09-01T00:00:00+08:00">2025-09-01</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-31 20:28:11" itemprop="dateModified" datetime="2025-07-31T20:28:11+08:00">2025-07-31</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index"><span itemprop="name">code</span></a>
+                  <a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a>
                 </span>
             </span>
 
@@ -356,7 +238,7 @@ mjx-container[display="true"] + br {
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>219</span>
+              <span>1.5k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -365,7 +247,7 @@ mjx-container[display="true"] + br {
                 <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
-            <div class="post-description">来让你的python程序像前端依赖一样优雅的管理起来</div>
+            <div class="post-description">本文介绍SQL（Structured Query Language，结构化查询语言）的基本语法和核心概念</div>
 
         </div>
       </header>
@@ -376,34 +258,190 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-        <ol type="1">
-<li>首先下载管理用的包</li>
+        <h3 id="核心概念">核心概念</h3>
+<ol type="1">
+<li><strong>数据库（Database）</strong>：一个容器，用于存储有组织的数据。你可以把它想象成一个文件柜。</li>
+<li><strong>表（Table）</strong>：数据库中的特定数据结构，用于存储同类数据。它由行和列组成，就像一个Excel表格。每个表都有一个唯一的名字（例如
+<code>users</code>, <code>products</code>, <code>orders</code>）。
+<ul>
+<li><strong>列（Column）</strong>：表中的一个字段，代表了数据的某种属性（例如
+<code>id</code>, <code>name</code>,
+<code>email</code>）。它定义了数据的类型（数字、文本、日期等）。</li>
+<li><strong>行（Row）</strong>：表中的一个记录，代表一个具体的实体（例如一个用户、一件商品）。一行数据就是由多个列的值组成的。</li>
+</ul></li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pipenv</span><br></pre></td></tr></table></figure>
-<ol start="2" type="1">
-<li>初始化pipfile</li>
+<hr />
+<h3 id="sql语言的分类">SQL语言的分类</h3>
+<p>SQL命令通常根据其功能分为以下几类：</p>
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 26%" />
+<col style="width: 15%" />
+<col style="width: 26%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr>
+<th>类别</th>
+<th>英文全称</th>
+<th>中文</th>
+<th>核心命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DQL</strong></td>
+<td>Data Query Language</td>
+<td>数据查询语言</td>
+<td><strong><code>SELECT</code></strong></td>
+<td>从表中检索数据，是使用最频繁的操作</td>
+</tr>
+<tr>
+<td><strong>DML</strong></td>
+<td>Data Manipulation Language</td>
+<td>数据操作语言</td>
+<td><code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code></td>
+<td>用于增、删、改表中的记录</td>
+</tr>
+<tr>
+<td><strong>DDL</strong></td>
+<td>Data Definition Language</td>
+<td>数据定义语言</td>
+<td><code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>,
+<code>RENAME</code></td>
+<td>用于创建、修改、删除数据库对象（如表、索引）</td>
+</tr>
+<tr>
+<td><strong>DCL</strong></td>
+<td>Data Control Language</td>
+<td>数据控制语言</td>
+<td><code>GRANT</code>, <code>REVOKE</code></td>
+<td>用于控制用户对数据库的访问权限</td>
+</tr>
+<tr>
+<td><strong>TCL</strong></td>
+<td>Transaction Control Language</td>
+<td>事务控制语言</td>
+<td><code>COMMIT</code>, <code>ROLLBACK</code>,
+<code>SAVEPOINT</code></td>
+<td>用于管理数据库中的事务</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="最常用的sql命令详解">最常用的SQL命令详解</h3>
+<p>我们将围绕一个简单的 <code>users</code> 表进行讲解，表结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>列名</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>INT</td>
+<td>主键，唯一标识</td>
+</tr>
+<tr>
+<td><code>username</code></td>
+<td>VARCHAR(50)</td>
+<td>用户名</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>VARCHAR(100)</td>
+<td>邮箱</td>
+</tr>
+<tr>
+<td><code>age</code></td>
+<td>INT</td>
+<td>年龄</td>
+</tr>
+<tr>
+<td><code>country</code></td>
+<td>VARCHAR(50)</td>
+<td>国家</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>DATETIME</td>
+<td>创建时间</td>
+</tr>
+</tbody>
+</table>
+<h4 id="dql---查询数据-select">1. DQL - 查询数据 (SELECT)</h4>
+<p>这是最核心的操作。</p>
+<ul>
+<li><p><strong>查询所有列和所有行</strong>： <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users;</span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>查询特定的列</strong>： <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> username, email <span class="keyword">FROM</span> users;</span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用 <code>WHERE</code> 条件过滤</strong>：
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> country <span class="operator">=</span> <span class="string">&#x27;China&#x27;</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> age <span class="operator">&gt;</span> <span class="number">18</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">123</span>; </span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用 <code>ORDER BY</code> 排序</strong>：
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">ORDER</span> <span class="keyword">BY</span> age <span class="keyword">DESC</span>; <span class="comment">-- 按年龄降序</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">ORDER</span> <span class="keyword">BY</span> created_at <span class="keyword">ASC</span>; <span class="comment">-- 按创建时间升序</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用 <code>LIMIT</code> 限制返回数量</strong>：
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users LIMIT <span class="number">10</span>; <span class="comment">-- 返回前10条记录</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用 <code>LIKE</code> 进行模糊搜索</strong>：
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> username <span class="keyword">LIKE</span> <span class="string">&#x27;张%&#x27;</span>; <span class="comment">-- 查找姓&quot;张&quot;的用户</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用聚合函数</strong>（如 <code>COUNT</code>,
+<code>SUM</code>, <code>AVG</code>, <code>MAX</code>,
+<code>MIN</code>）： <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">FROM</span> users; <span class="comment">-- 统计用户总数</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">AVG</span>(age) <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> country <span class="operator">=</span> <span class="string">&#x27;China&#x27;</span>; <span class="comment">-- 中国用户的平均年龄</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用 <code>GROUP BY</code> 分组</strong>：
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> country, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">as</span> user_count </span><br><span class="line"><span class="keyword">FROM</span> users </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> country; <span class="comment">-- 统计每个国家的用户数量</span></span><br></pre></td></tr></table></figure></p></li>
+</ul>
+<h4 id="dml---操作数据">2. DML - 操作数据</h4>
+<ul>
+<li><p><strong><code>INSERT</code> - 插入新记录</strong>：
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 指定列名插入</span></span><br><span class="line"><span class="keyword">INSERT INTO</span> users (username, email, age, country)</span><br><span class="line"><span class="keyword">VALUES</span> (<span class="string">&#x27;john_doe&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>, <span class="number">25</span>, <span class="string">&#x27;USA&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 如果为所有列都提供值，可以省略列名</span></span><br><span class="line"><span class="keyword">INSERT INTO</span> users </span><br><span class="line"><span class="keyword">VALUES</span> (<span class="keyword">NULL</span>, <span class="string">&#x27;john_doe&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>, <span class="number">25</span>, <span class="string">&#x27;USA&#x27;</span>, NOW());</span><br><span class="line"><span class="comment">-- 注意：id 设为 NULL 或 DEFAULT 以便数据库自动生成（如果它是自增主键）</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong><code>UPDATE</code> - 更新现有记录</strong>：
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> users </span><br><span class="line"><span class="keyword">SET</span> age <span class="operator">=</span> <span class="number">26</span>, country <span class="operator">=</span> <span class="string">&#x27;Canada&#x27;</span> </span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">123</span>; <span class="comment">-- **非常重要：一定要用 WHERE，否则会更新所有行！**</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong><code>DELETE</code> - 删除记录</strong>：
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> users </span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">123</span>; <span class="comment">-- **极端重要：一定要用 WHERE，否则会删除所有行！**</span></span><br></pre></td></tr></table></figure></p></li>
+</ul>
+<h4 id="ddl---定义数据结构">3. DDL - 定义数据结构</h4>
+<ul>
+<li><p><strong><code>CREATE TABLE</code> - 创建表</strong>：
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> products (</span><br><span class="line">    id <span class="type">INT</span> <span class="keyword">PRIMARY KEY</span> AUTO_INCREMENT, <span class="comment">-- 主键，自增</span></span><br><span class="line">    name <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT NULL</span>,        <span class="comment">-- 非空约束</span></span><br><span class="line">    price <span class="type">DECIMAL</span>(<span class="number">10</span>, <span class="number">2</span>) <span class="keyword">NOT NULL</span>,     <span class="comment">-- 价格，10位数含2位小数</span></span><br><span class="line">    description TEXT</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong><code>ALTER TABLE</code> - 修改表结构</strong>：
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER TABLE</span> users <span class="keyword">ADD</span> <span class="keyword">COLUMN</span> avatar <span class="type">VARCHAR</span>(<span class="number">255</span>); <span class="comment">-- 添加新列</span></span><br><span class="line"><span class="keyword">ALTER TABLE</span> users <span class="keyword">DROP</span> <span class="keyword">COLUMN</span> age; <span class="comment">-- 删除列</span></span><br><span class="line"><span class="keyword">ALTER TABLE</span> users MODIFY <span class="keyword">COLUMN</span> email <span class="type">VARCHAR</span>(<span class="number">150</span>); <span class="comment">-- 修改列数据类型</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong><code>DROP TABLE</code> - 删除表</strong>：
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> products; <span class="comment">-- **危险操作！会删除整张表和所有数据！**</span></span><br></pre></td></tr></table></figure></p></li>
+</ul>
+<hr />
+<h3 id="高级主题简要介绍">高级主题（简要介绍）</h3>
+<ol type="1">
+<li><p><strong>连接（JOIN）</strong>：用于合并来自两个或多个表的行。</p>
+<ul>
+<li><code>INNER JOIN</code>：返回两个表中匹配的行。</li>
+<li><code>LEFT JOIN</code>：返回左表的所有行，即使右表中没有匹配。</li>
+</ul></li>
+<li><p><strong>索引（INDEX）</strong>：类似于书的目录，可以极大地加快数据检索速度（<code>SELECT</code>
+查询），但会减慢数据写入（<code>INSERT/UPDATE/DELETE</code>）速度。通常在
+<code>WHERE</code> 或 <code>JOIN</code> 条件中频繁使用的列上创建索引。
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX idx_email <span class="keyword">ON</span> users (email);</span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>事务（Transaction）</strong>：将多个SQL操作捆绑成一个单一的工作单元。这些操作要么<strong>全部成功</strong>，要么<strong>全部失败</strong>。这是保证数据完整性的关键机制（例如银行转账）。
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">START</span> TRANSACTION;</span><br><span class="line"><span class="comment">-- 从A账户扣钱</span></span><br><span class="line"><span class="keyword">UPDATE</span> accounts <span class="keyword">SET</span> balance <span class="operator">=</span> balance <span class="operator">-</span> <span class="number">100</span> <span class="keyword">WHERE</span> user_id <span class="operator">=</span> <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line"><span class="comment">-- 向B账户加钱</span></span><br><span class="line"><span class="keyword">UPDATE</span> accounts <span class="keyword">SET</span> balance <span class="operator">=</span> balance <span class="operator">+</span> <span class="number">100</span> <span class="keyword">WHERE</span> user_id <span class="operator">=</span> <span class="string">&#x27;B&#x27;</span>;</span><br><span class="line"><span class="comment">-- 如果两条语句都成功，则提交</span></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br><span class="line"><span class="comment">-- 如果任何一条失败，则回滚，所有操作撤销</span></span><br><span class="line"><span class="comment">-- ROLLBACK;</span></span><br></pre></td></tr></table></figure></p></li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pipenv install</span><br></pre></td></tr></table></figure>
-<p>你的目录下就出现了pipfile和pipfile.lock，对于package.json和package-lock.json</p>
-<ol start="3" type="1">
-<li>将已有的依赖存放进pipenv中</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt <span class="comment">#将已有依赖输出到requirements.txt文件下</span></span><br></pre></td></tr></table></figure>
-<p>将txt文件转码(powershell内输入)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$content</span> = Get-Content requirements.txt</span><br><span class="line">[System.IO.File]::WriteAllLines(<span class="string">"fixed_requirements.txt"</span>, <span class="variable">$content</span>, (New-Object System.Text.UTF8Encoding <span class="variable">$false</span>))</span><br></pre></td></tr></table></figure>
-<p>最后丢尽pipfile</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pipenv install -r fixed_requirements.txt</span><br></pre></td></tr></table></figure>
-<ol start="4" type="1">
-<li>如何调用</li>
-</ol>
-<p>非常简单，像<code>npm i</code>一样我们只需要</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pipenv install</span><br></pre></td></tr></table></figure>
-<p>就可以一键安装python的所有依赖项</p>
-<ol start="5" type="1">
-<li>在一些小项目里直接利用requirements.txt一键安装也可以</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
-<p>利用如上指令可以一键安装依赖</p>
+<h3 id="总结与实践建议">总结与实践建议</h3>
+<ul>
+<li><strong>核心是
+<code>SELECT</code></strong>：绝大部分时间你都在写查询语句。</li>
+<li><strong>安全第一</strong>：<strong>永远使用参数化查询（<code>?</code>
+占位符）来防止 SQL 注入</strong>，不要手动拼接字符串。</li>
+<li><strong><code>WHERE</code> 子句是关键</strong>：在
+<code>UPDATE</code> 和 <code>DELETE</code> 时，忘记 <code>WHERE</code>
+子句是灾难性的。</li>
+<li><strong>先学基础</strong>：熟练掌握基本的 <code>SELECT</code>,
+<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>,
+<code>WHERE</code>, <code>ORDER BY</code>, <code>JOIN</code>
+后，再深入学索引、事务等高级主题。</li>
+<li><strong>多练习</strong>：最好的学习方式是在自己搭建的数据库环境（如
+MySQL, PostgreSQL 或在线练习平台）中实际操作。</li>
+</ul>
 
     </div>
 
@@ -438,8 +476,8 @@ mjx-container[display="true"] + br {
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/pipenv/" rel="tag"><i class="fa fa-tag"></i> pipenv</a>
-              <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+              <a href="/tags/sql/" rel="tag"><i class="fa fa-tag"></i> sql</a>
+              <a href="/tags/database/" rel="tag"><i class="fa fa-tag"></i> database</a>
           </div>
 
         
@@ -448,13 +486,10 @@ mjx-container[display="true"] + br {
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/07/27/latex/" rel="prev" title="Latex常见数学公式">
-      <i class="fa fa-chevron-left"></i> Latex常见数学公式
+    <a href="/2025/08/25/Koa/" rel="prev" title="Koa 框架使用">
+      <i class="fa fa-chevron-left"></i> Koa 框架使用
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/07/29/electron/" rel="next" title="Electron 基本使用教程">
-      Electron 基本使用教程 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -514,6 +549,7 @@ mjx-container[display="true"] + br {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="nav-text">核心概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql%E8%AF%AD%E8%A8%80%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-text">SQL语言的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84sql%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3"><span class="nav-text">最常用的SQL命令详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#dql---%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE-select"><span class="nav-text">1. DQL - 查询数据 (SELECT)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dml---%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE"><span class="nav-text">2. DML - 操作数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ddl---%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-text">3. DDL - 定义数据结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E7%BA%A7%E4%B8%BB%E9%A2%98%E7%AE%80%E8%A6%81%E4%BB%8B%E7%BB%8D"><span class="nav-text">高级主题（简要介绍）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E5%AE%9E%E8%B7%B5%E5%BB%BA%E8%AE%AE"><span class="nav-text">总结与实践建议</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -903,7 +939,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'koen666.github.io',
       owner       : 'koen666',
       admin       : ['koen666'],
-      id          : '24adfe998c37b02344918b8e774c4f62',
+      id          : '7ef924d2e3c50040cc9361f1436e1fcb',
         language: '',
       distractionFreeMode: true
     });

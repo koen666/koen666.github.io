@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2025-08-27T08:04:33.278Z</updated>
+  <updated>2025-09-01T05:32:54.309Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SQL语法规则</title>
+    <link href="http://example.com/2025/09/01/sql/"/>
+    <id>http://example.com/2025/09/01/sql/</id>
+    <published>2025-08-31T16:00:00.000Z</published>
+    <updated>2025-09-01T05:32:54.309Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="核心概念">核心概念</h3><ol type="1"><li><strong>数据库（Database）</strong>：一个容器，用于存储有组织的数据。你可以把它想象成一个文件柜。</li><li><strong>表（Table）</strong>：数据库中的特定数据结构，用于存储同类数据。它由行和列组成，就像一个Excel表格。每个表都有一个唯一的名字（例如<code>users</code>, <code>products</code>, <code>orders</code>）。<ul><li><strong>列（Column）</strong>：表中的一个字段，代表了数据的某种属性（例如<code>id</code>, <code>name</code>,<code>email</code>）。它定义了数据的类型（数字、文本、日期等）。</li><li><strong>行（Row）</strong>：表中的一个记录，代表一个具体的实体（例如一个用户、一件商品）。一行数据就是由多个列的值组成的。</li></ul></li></ol><hr /><h3 id="sql语言的分类">SQL语言的分类</h3><p>SQL命令通常根据其功能分为以下几类：</p><table><colgroup><col style="width: 15%" /><col style="width: 26%" /><col style="width: 15%" /><col style="width: 26%" /><col style="width: 15%" /></colgroup><thead><tr><th>类别</th><th>英文全称</th><th>中文</th><th>核心命令</th><th>功能</th></tr></thead><tbody><tr><td><strong>DQL</strong></td><td>Data Query Language</td><td>数据查询语言</td><td><strong><code>SELECT</code></strong></td><td>从表中检索数据，是使用最频繁的操作</td></tr><tr><td><strong>DML</strong></td><td>Data Manipulation Language</td><td>数据操作语言</td><td><code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code></td><td>用于增、删、改表中的记录</td></tr><tr><td><strong>DDL</strong></td><td>Data Definition Language</td><td>数据定义语言</td><td><code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>,<code>RENAME</code></td><td>用于创建、修改、删除数据库对象（如表、索引）</td></tr><tr><td><strong>DCL</strong></td><td>Data Control Language</td><td>数据控制语言</td><td><code>GRANT</code>, <code>REVOKE</code></td><td>用于控制用户对数据库的访问权限</td></tr><tr><td><strong>TCL</strong></td><td>Transaction Control Language</td><td>事务控制语言</td><td><code>COMMIT</code>, <code>ROLLBACK</code>,<code>SAVEPOINT</code></td><td>用于管理数据库中的事务</td></tr></tbody></table><hr /><h3 id="最常用的sql命令详解">最常用的SQL命令详解</h3><p>我们将围绕一个简单的 <code>users</code> 表进行讲解，表结构如下：</p><table><thead><tr><th>列名</th><th>数据类型</th><th>说明</th></tr></thead><tbody><tr><td><code>id</code></td><td>INT</td><td>主键，唯一标识</td></tr><tr><td><code>username</code></td><td>VARCHAR(50)</td><td>用户名</td></tr><tr><td><code>email</code></td><td>VARCHAR(100)</td><td>邮箱</td></tr><tr><td><code>age</code></td><td>INT</td><td>年龄</td></tr><tr><td><code>country</code></td><td>VARCHAR(50)</td><td>国家</td></tr><tr><td><code>created_at</code></td><td>DATETIME</td><td>创建时间</td></tr></tbody></table><h4 id="dql---查询数据-select">1. DQL - 查询数据 (SELECT)</h4><p>这是最核心的操作。</p><ul><li><p><strong>查询所有列和所有行</strong>： <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users;</span><br></pre></td></tr></table></figure></p></li><li><p><strong>查询特定的列</strong>： <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> username, email <span class="keyword">FROM</span> users;</span><br></pre></td></tr></table></figure></p></li><li><p><strong>使用 <code>WHERE</code> 条件过滤</strong>：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> country <span class="operator">=</span> <span class="string">&#x27;China&#x27;</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> age <span class="operator">&gt;</span> <span class="number">18</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">123</span>; </span><br></pre></td></tr></table></figure></p></li><li><p><strong>使用 <code>ORDER BY</code> 排序</strong>：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">ORDER</span> <span class="keyword">BY</span> age <span class="keyword">DESC</span>; <span class="comment">-- 按年龄降序</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">ORDER</span> <span class="keyword">BY</span> created_at <span class="keyword">ASC</span>; <span class="comment">-- 按创建时间升序</span></span><br></pre></td></tr></table></figure></p></li><li><p><strong>使用 <code>LIMIT</code> 限制返回数量</strong>：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users LIMIT <span class="number">10</span>; <span class="comment">-- 返回前10条记录</span></span><br></pre></td></tr></table></figure></p></li><li><p><strong>使用 <code>LIKE</code> 进行模糊搜索</strong>：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> username <span class="keyword">LIKE</span> <span class="string">&#x27;张%&#x27;</span>; <span class="comment">-- 查找姓&quot;张&quot;的用户</span></span><br></pre></td></tr></table></figure></p></li><li><p><strong>使用聚合函数</strong>（如 <code>COUNT</code>,<code>SUM</code>, <code>AVG</code>, <code>MAX</code>,<code>MIN</code>）： <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">FROM</span> users; <span class="comment">-- 统计用户总数</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">AVG</span>(age) <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> country <span class="operator">=</span> <span class="string">&#x27;China&#x27;</span>; <span class="comment">-- 中国用户的平均年龄</span></span><br></pre></td></tr></table></figure></p></li><li><p><strong>使用 <code>GROUP BY</code> 分组</strong>：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> country, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">as</span> user_count </span><br><span class="line"><span class="keyword">FROM</span> users </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> country; <span class="comment">-- 统计每个国家的用户数量</span></span><br></pre></td></tr></table></figure></p></li></ul><h4 id="dml---操作数据">2. DML - 操作数据</h4><ul><li><p><strong><code>INSERT</code> - 插入新记录</strong>：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 指定列名插入</span></span><br><span class="line"><span class="keyword">INSERT INTO</span> users (username, email, age, country)</span><br><span class="line"><span class="keyword">VALUES</span> (<span class="string">&#x27;john_doe&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>, <span class="number">25</span>, <span class="string">&#x27;USA&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 如果为所有列都提供值，可以省略列名</span></span><br><span class="line"><span class="keyword">INSERT INTO</span> users </span><br><span class="line"><span class="keyword">VALUES</span> (<span class="keyword">NULL</span>, <span class="string">&#x27;john_doe&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>, <span class="number">25</span>, <span class="string">&#x27;USA&#x27;</span>, NOW());</span><br><span class="line"><span class="comment">-- 注意：id 设为 NULL 或 DEFAULT 以便数据库自动生成（如果它是自增主键）</span></span><br></pre></td></tr></table></figure></p></li><li><p><strong><code>UPDATE</code> - 更新现有记录</strong>：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> users </span><br><span class="line"><span class="keyword">SET</span> age <span class="operator">=</span> <span class="number">26</span>, country <span class="operator">=</span> <span class="string">&#x27;Canada&#x27;</span> </span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">123</span>; <span class="comment">-- **非常重要：一定要用 WHERE，否则会更新所有行！**</span></span><br></pre></td></tr></table></figure></p></li><li><p><strong><code>DELETE</code> - 删除记录</strong>：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> users </span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">123</span>; <span class="comment">-- **极端重要：一定要用 WHERE，否则会删除所有行！**</span></span><br></pre></td></tr></table></figure></p></li></ul><h4 id="ddl---定义数据结构">3. DDL - 定义数据结构</h4><ul><li><p><strong><code>CREATE TABLE</code> - 创建表</strong>：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> products (</span><br><span class="line">    id <span class="type">INT</span> <span class="keyword">PRIMARY KEY</span> AUTO_INCREMENT, <span class="comment">-- 主键，自增</span></span><br><span class="line">    name <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT NULL</span>,        <span class="comment">-- 非空约束</span></span><br><span class="line">    price <span class="type">DECIMAL</span>(<span class="number">10</span>, <span class="number">2</span>) <span class="keyword">NOT NULL</span>,     <span class="comment">-- 价格，10位数含2位小数</span></span><br><span class="line">    description TEXT</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p></li><li><p><strong><code>ALTER TABLE</code> - 修改表结构</strong>：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER TABLE</span> users <span class="keyword">ADD</span> <span class="keyword">COLUMN</span> avatar <span class="type">VARCHAR</span>(<span class="number">255</span>); <span class="comment">-- 添加新列</span></span><br><span class="line"><span class="keyword">ALTER TABLE</span> users <span class="keyword">DROP</span> <span class="keyword">COLUMN</span> age; <span class="comment">-- 删除列</span></span><br><span class="line"><span class="keyword">ALTER TABLE</span> users MODIFY <span class="keyword">COLUMN</span> email <span class="type">VARCHAR</span>(<span class="number">150</span>); <span class="comment">-- 修改列数据类型</span></span><br></pre></td></tr></table></figure></p></li><li><p><strong><code>DROP TABLE</code> - 删除表</strong>：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> products; <span class="comment">-- **危险操作！会删除整张表和所有数据！**</span></span><br></pre></td></tr></table></figure></p></li></ul><hr /><h3 id="高级主题简要介绍">高级主题（简要介绍）</h3><ol type="1"><li><p><strong>连接（JOIN）</strong>：用于合并来自两个或多个表的行。</p><ul><li><code>INNER JOIN</code>：返回两个表中匹配的行。</li><li><code>LEFT JOIN</code>：返回左表的所有行，即使右表中没有匹配。</li></ul></li><li><p><strong>索引（INDEX）</strong>：类似于书的目录，可以极大地加快数据检索速度（<code>SELECT</code>查询），但会减慢数据写入（<code>INSERT/UPDATE/DELETE</code>）速度。通常在<code>WHERE</code> 或 <code>JOIN</code> 条件中频繁使用的列上创建索引。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX idx_email <span class="keyword">ON</span> users (email);</span><br></pre></td></tr></table></figure></p></li><li><p><strong>事务（Transaction）</strong>：将多个SQL操作捆绑成一个单一的工作单元。这些操作要么<strong>全部成功</strong>，要么<strong>全部失败</strong>。这是保证数据完整性的关键机制（例如银行转账）。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">START</span> TRANSACTION;</span><br><span class="line"><span class="comment">-- 从A账户扣钱</span></span><br><span class="line"><span class="keyword">UPDATE</span> accounts <span class="keyword">SET</span> balance <span class="operator">=</span> balance <span class="operator">-</span> <span class="number">100</span> <span class="keyword">WHERE</span> user_id <span class="operator">=</span> <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line"><span class="comment">-- 向B账户加钱</span></span><br><span class="line"><span class="keyword">UPDATE</span> accounts <span class="keyword">SET</span> balance <span class="operator">=</span> balance <span class="operator">+</span> <span class="number">100</span> <span class="keyword">WHERE</span> user_id <span class="operator">=</span> <span class="string">&#x27;B&#x27;</span>;</span><br><span class="line"><span class="comment">-- 如果两条语句都成功，则提交</span></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br><span class="line"><span class="comment">-- 如果任何一条失败，则回滚，所有操作撤销</span></span><br><span class="line"><span class="comment">-- ROLLBACK;</span></span><br></pre></td></tr></table></figure></p></li></ol><h3 id="总结与实践建议">总结与实践建议</h3><ul><li><strong>核心是<code>SELECT</code></strong>：绝大部分时间你都在写查询语句。</li><li><strong>安全第一</strong>：<strong>永远使用参数化查询（<code>?</code>占位符）来防止 SQL 注入</strong>，不要手动拼接字符串。</li><li><strong><code>WHERE</code> 子句是关键</strong>：在<code>UPDATE</code> 和 <code>DELETE</code> 时，忘记 <code>WHERE</code>子句是灾难性的。</li><li><strong>先学基础</strong>：熟练掌握基本的 <code>SELECT</code>,<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>,<code>WHERE</code>, <code>ORDER BY</code>, <code>JOIN</code>后，再深入学索引、事务等高级主题。</li><li><strong>多练习</strong>：最好的学习方式是在自己搭建的数据库环境（如MySQL, PostgreSQL 或在线练习平台）中实际操作。</li></ul>]]></content>
+    
+    
+    <summary type="html">本文介绍SQL（Structured Query Language，结构化查询语言）的基本语法和核心概念</summary>
+    
+    
+    
+    <category term="database" scheme="http://example.com/categories/database/"/>
+    
+    
+    <category term="sql" scheme="http://example.com/tags/sql/"/>
+    
+    <category term="database" scheme="http://example.com/tags/database/"/>
+    
+  </entry>
   
   <entry>
     <title>Koa 框架使用</title>
@@ -207,27 +230,6 @@
   </entry>
   
   <entry>
-    <title>常见BUG汇总</title>
-    <link href="http://example.com/2025/07/27/issue/"/>
-    <id>http://example.com/2025/07/27/issue/</id>
-    <published>2025-07-27T00:29:00.000Z</published>
-    <updated>2025-08-27T08:27:11.826Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="一markdown">一、Markdown</h2><h3 id="为什么vscode编辑md文件十分卡顿">1.1为什么vscode编辑md文件十分卡顿</h3><p>解决方法:禁用cpp extension pack扩展</p><h2 id="二hexo">二、Hexo</h2><h3 id="出现spawn-failed报错">2.1 出现Spawn Failed报错</h3><p>首先尝试关机重启</p><p>其次删除<code>.deploy_git</code>文件夹</p><p>最后实在不行找到<code>.ssh</code>文件，先测试</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure><p>如果出现22端口连接超时，改成443端口即可 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">  HostName ssh.github.com</span><br><span class="line">  Port 443</span><br><span class="line">  User git</span><br><span class="line">  IdentityFile ~/.ssh/id_rsa</span><br><span class="line">  IdentitiesOnly <span class="built_in">yes</span></span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    
-    <summary type="html">欢迎留言提出常见BUG</summary>
-    
-    
-    
-    <category term="code" scheme="http://example.com/categories/code/"/>
-    
-    
-    <category term="markdown" scheme="http://example.com/tags/markdown/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Latex常见数学公式</title>
     <link href="http://example.com/2025/07/27/latex/"/>
     <id>http://example.com/2025/07/27/latex/</id>
@@ -247,6 +249,27 @@
     <category term="math" scheme="http://example.com/tags/math/"/>
     
     <category term="latex" scheme="http://example.com/tags/latex/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>常见BUG汇总</title>
+    <link href="http://example.com/2025/07/27/issue/"/>
+    <id>http://example.com/2025/07/27/issue/</id>
+    <published>2025-07-27T00:29:00.000Z</published>
+    <updated>2025-08-27T08:27:11.826Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="一markdown">一、Markdown</h2><h3 id="为什么vscode编辑md文件十分卡顿">1.1为什么vscode编辑md文件十分卡顿</h3><p>解决方法:禁用cpp extension pack扩展</p><h2 id="二hexo">二、Hexo</h2><h3 id="出现spawn-failed报错">2.1 出现Spawn Failed报错</h3><p>首先尝试关机重启</p><p>其次删除<code>.deploy_git</code>文件夹</p><p>最后实在不行找到<code>.ssh</code>文件，先测试</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure><p>如果出现22端口连接超时，改成443端口即可 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">  HostName ssh.github.com</span><br><span class="line">  Port 443</span><br><span class="line">  User git</span><br><span class="line">  IdentityFile ~/.ssh/id_rsa</span><br><span class="line">  IdentitiesOnly <span class="built_in">yes</span></span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    
+    <summary type="html">欢迎留言提出常见BUG</summary>
+    
+    
+    
+    <category term="code" scheme="http://example.com/categories/code/"/>
+    
+    
+    <category term="markdown" scheme="http://example.com/tags/markdown/"/>
     
   </entry>
   
@@ -292,11 +315,11 @@
     <category term="cmd" scheme="http://example.com/categories/cmd/"/>
     
     
+    <category term="learn" scheme="http://example.com/tags/learn/"/>
+    
     <category term="cmd" scheme="http://example.com/tags/cmd/"/>
     
     <category term="curl" scheme="http://example.com/tags/curl/"/>
-    
-    <category term="learn" scheme="http://example.com/tags/learn/"/>
     
   </entry>
   
@@ -317,11 +340,11 @@
     <category term="code" scheme="http://example.com/categories/code/"/>
     
     
-    <category term="learn" scheme="http://example.com/tags/learn/"/>
-    
     <category term="container" scheme="http://example.com/tags/container/"/>
     
     <category term="docker" scheme="http://example.com/tags/docker/"/>
+    
+    <category term="learn" scheme="http://example.com/tags/learn/"/>
     
     <category term="linux" scheme="http://example.com/tags/linux/"/>
     
