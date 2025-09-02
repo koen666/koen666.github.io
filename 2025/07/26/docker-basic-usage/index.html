@@ -28,11 +28,11 @@
 <meta property="og:description" content="本文介绍和更新Docker的基本使用方法。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-07-26T00:53:34.303Z">
-<meta property="article:modified_time" content="2025-08-02T07:25:13.999Z">
+<meta property="article:modified_time" content="2025-09-02T03:38:14.716Z">
 <meta property="article:author" content="koen">
+<meta property="article:tag" content="learn">
 <meta property="article:tag" content="container">
 <meta property="article:tag" content="docker">
-<meta property="article:tag" content="learn">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="virtual">
 <meta name="twitter:card" content="summary">
@@ -222,7 +222,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-02 15:25:13" itemprop="dateModified" datetime="2025-08-02T15:25:13+08:00">2025-08-02</time>
+                <time title="Modified: 2025-09-02 11:38:14" itemprop="dateModified" datetime="2025-09-02T11:38:14+08:00">2025-09-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -247,14 +247,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>901</span>
+              <span>1.8k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
+              <span>2 mins.</span>
             </span>
             <div class="post-description">本文介绍和更新Docker的基本使用方法。</div>
 
@@ -315,11 +315,127 @@ image 仓库。</li>
 <hr />
 <h2 id="四如何跑起来呢">四、如何跑起来呢</h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker image pull &lt;project&gt;       <span class="comment">#将image文件从仓库抓取到本地</span></span><br><span class="line">docker container run &lt;project&gt;    <span class="comment">#将image文件在你的电脑上跑起来，新建容器</span></span><br><span class="line">docker container start [ID]       <span class="comment">#将已有的容器跑起来</span></span><br><span class="line">docker container <span class="built_in">kill</span> [ID]        <span class="comment">#手动终止容器的运行</span></span><br><span class="line">docker container <span class="built_in">ls</span>               <span class="comment">#在你电脑上正在跑起来的容器</span></span><br><span class="line">docker container <span class="built_in">ls</span> -all          <span class="comment">#列出本机所有容器，包括终止运行的容器</span></span><br><span class="line">docker container <span class="built_in">rm</span> [containerID] <span class="comment">#删除停止运行的容器，防止占用硬盘空间</span></span><br><span class="line">docker <span class="built_in">exec</span> -it my-nginx bash     <span class="comment">#在叫my-nginx的容器内，开启一个bash命令终端进去操作</span></span><br></pre></td></tr></table></figure>
-<p>注意，docker container run命令具有自动抓取 image
-文件的功能。如果发现本地没有指定的 image
-文件，就会从仓库自动抓取。因此，前面的docker image
-pull命令并不是必需的步骤。</p>
-<hr />
+<h2
+id="注意docker-container-run命令具有自动抓取-image-文件的功能如果发现本地没有指定的-image-文件就会从仓库自动抓取因此前面的docker-image-pull命令并不是必需的步骤">注意，docker
+container run命令具有自动抓取 image 文件的功能。如果发现本地没有指定的
+image 文件，就会从仓库自动抓取。因此，前面的docker image
+pull命令并不是必需的步骤。</h2>
+<h2 id="五常见参数">五、常见参数</h2>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">参数</th>
+<th style="text-align: left;">全称</th>
+<th style="text-align: left;">作用</th>
+<th style="text-align: left;">示例</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>-d</code></td>
+<td style="text-align: left;"><code>--detach</code></td>
+<td style="text-align: left;">后台运行容器</td>
+<td style="text-align: left;"><code>docker run -d nginx</code></td>
+<td
+style="text-align: left;">容器启动后，终端不会附加到容器的输入/输出，返回一个容器ID。这是运行后台服务（如Web服务器、数据库）的标准模式。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>-p</code></td>
+<td style="text-align: left;"><code>--publish</code></td>
+<td style="text-align: left;">映射容器端口到主机端口</td>
+<td
+style="text-align: left;"><code>docker run -p 8080:80 nginx</code></td>
+<td style="text-align: left;">格式为
+<code>-p &lt;主机端口&gt;:&lt;容器端口&gt;</code>。将容器内部的端口暴露给主机，从而可以从外部访问容器内的服务。示例中将容器的80端口映射到主机的8080端口，通过
+<code>http://localhost:8080</code> 即可访问Nginx。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>-v</code></td>
+<td style="text-align: left;"><code>--volume</code></td>
+<td style="text-align: left;">挂载数据卷</td>
+<td
+style="text-align: left;"><code>docker run -v /host/data:/container/data app</code></td>
+<td style="text-align: left;">格式为
+<code>-v &lt;主机路径&gt;:&lt;容器路径&gt;</code>。用于在主机和容器之间共享数据或持久化容器内的数据。即使容器被删除，主机上的数据仍然存在。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>-e</code></td>
+<td style="text-align: left;"><code>--env</code></td>
+<td style="text-align: left;">设置环境变量</td>
+<td
+style="text-align: left;"><code>docker run -e MY_VAR=value -e DB_HOST=db app</code></td>
+<td
+style="text-align: left;">向容器内部传递配置信息，如数据库连接字符串、密码、运行模式等。应用程序在容器内可以通过读取这些环境变量来改变其行为。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>--name</code></td>
+<td style="text-align: left;"><code>--name</code></td>
+<td style="text-align: left;">为容器指定一个名称</td>
+<td
+style="text-align: left;"><code>docker run --name my_nginx nginx</code></td>
+<td
+style="text-align: left;">为创建的容器赋予一个易读的唯一名称，方便后续的管理（如启动、停止、查看日志），而不必使用冗长且难记的容器ID。</td>
+</tr>
+</tbody>
+</table>
+<p>一个典型的 <code>docker run</code>
+命令会组合使用这些参数来定义一个功能完整的容器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行一个名为 &#x27;my-web-app&#x27; 的 WordPress 容器</span></span><br><span class="line">docker run -d \                    <span class="comment"># 在后台运行</span></span><br><span class="line">  --name my-web-app \              <span class="comment"># 容器命名为 my-web-app</span></span><br><span class="line">  -p 8080:80 \                     <span class="comment"># 将主机的8080端口映射到容器的80端口</span></span><br><span class="line">  -e WORDPRESS_DB_HOST=db:3306 \   <span class="comment"># 设置环境变量：数据库地址</span></span><br><span class="line">  -e WORDPRESS_DB_USER=root \      <span class="comment"># 设置环境变量：数据库用户</span></span><br><span class="line">  -e WORDPRESS_DB_PASSWORD=secret \# 设置环境变量：数据库密码</span><br><span class="line">  -v wordpress_data:/var/www/html \# 挂载命名卷，持久化网站数据</span><br><span class="line">  wordpress:latest                 <span class="comment"># 使用的镜像</span></span><br></pre></td></tr></table></figure>
+<h3 id="其他常用参数补充">其他常用参数补充</h3>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">参数</th>
+<th style="text-align: left;">全称</th>
+<th style="text-align: left;">作用</th>
+<th style="text-align: left;">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>-it</code></td>
+<td style="text-align: left;"><code>--interactive</code> +
+<code>--tty</code></td>
+<td style="text-align: left;">以交互模式运行容器</td>
+<td
+style="text-align: left;"><code>docker run -it ubuntu /bin/bash</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>--rm</code></td>
+<td style="text-align: left;"><code>--rm</code></td>
+<td style="text-align: left;">容器退出时自动清理</td>
+<td
+style="text-align: left;"><code>docker run --rm alpine echo "hello"</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>-u</code></td>
+<td style="text-align: left;"><code>--user</code></td>
+<td style="text-align: left;">指定运行容器的用户</td>
+<td style="text-align: left;"><code>docker run -u 1000 myapp</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>--network</code></td>
+<td style="text-align: left;"><code>--network</code></td>
+<td style="text-align: left;">将容器连接到指定网络</td>
+<td
+style="text-align: left;"><code>docker run --network my_net nginx</code></td>
+</tr>
+</tbody>
+</table>
 
     </div>
 
@@ -354,9 +470,9 @@ pull命令并不是必需的步骤。</p>
       <footer class="post-footer">
           
           <div class="post-tags">
+              <a href="/tags/learn/" rel="tag"><i class="fa fa-tag"></i> learn</a>
               <a href="/tags/container/" rel="tag"><i class="fa fa-tag"></i> container</a>
               <a href="/tags/docker/" rel="tag"><i class="fa fa-tag"></i> docker</a>
-              <a href="/tags/learn/" rel="tag"><i class="fa fa-tag"></i> learn</a>
               <a href="/tags/linux/" rel="tag"><i class="fa fa-tag"></i> linux</a>
               <a href="/tags/virtual/" rel="tag"><i class="fa fa-tag"></i> virtual</a>
           </div>
@@ -433,7 +549,10 @@ pull命令并不是必需的步骤。</p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80docker%E7%9A%84%E7%94%A8%E9%80%94"><span class="nav-text">一、Docker的用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E9%AA%8C%E8%AF%81%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F"><span class="nav-text">二、验证是否安装成功</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89image%E6%96%87%E4%BB%B6"><span class="nav-text">三、Image文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E5%87%BA%E6%9C%AC%E6%9C%BA%E7%9A%84%E6%89%80%E6%9C%89-image-%E6%96%87%E4%BB%B6"><span class="nav-text">列出本机的所有 image 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93image-repository"><span class="nav-text">镜像仓库（Image Repository）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#imagecontainer"><span class="nav-text">image&amp;&amp;container</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%A6%82%E4%BD%95%E8%B7%91%E8%B5%B7%E6%9D%A5%E5%91%A2"><span class="nav-text">四、如何跑起来呢</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80docker%E7%9A%84%E7%94%A8%E9%80%94"><span class="nav-text">一、Docker的用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E9%AA%8C%E8%AF%81%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F"><span class="nav-text">二、验证是否安装成功</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89image%E6%96%87%E4%BB%B6"><span class="nav-text">三、Image文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E5%87%BA%E6%9C%AC%E6%9C%BA%E7%9A%84%E6%89%80%E6%9C%89-image-%E6%96%87%E4%BB%B6"><span class="nav-text">列出本机的所有 image 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93image-repository"><span class="nav-text">镜像仓库（Image Repository）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#imagecontainer"><span class="nav-text">image&amp;&amp;container</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%A6%82%E4%BD%95%E8%B7%91%E8%B5%B7%E6%9D%A5%E5%91%A2"><span class="nav-text">四、如何跑起来呢</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8Fdocker-container-run%E5%91%BD%E4%BB%A4%E5%85%B7%E6%9C%89%E8%87%AA%E5%8A%A8%E6%8A%93%E5%8F%96-image-%E6%96%87%E4%BB%B6%E7%9A%84%E5%8A%9F%E8%83%BD%E5%A6%82%E6%9E%9C%E5%8F%91%E7%8E%B0%E6%9C%AC%E5%9C%B0%E6%B2%A1%E6%9C%89%E6%8C%87%E5%AE%9A%E7%9A%84-image-%E6%96%87%E4%BB%B6%E5%B0%B1%E4%BC%9A%E4%BB%8E%E4%BB%93%E5%BA%93%E8%87%AA%E5%8A%A8%E6%8A%93%E5%8F%96%E5%9B%A0%E6%AD%A4%E5%89%8D%E9%9D%A2%E7%9A%84docker-image-pull%E5%91%BD%E4%BB%A4%E5%B9%B6%E4%B8%8D%E6%98%AF%E5%BF%85%E9%9C%80%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="nav-text">注意，docker
+container run命令具有自动抓取 image 文件的功能。如果发现本地没有指定的
+image 文件，就会从仓库自动抓取。因此，前面的docker image
+pull命令并不是必需的步骤。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E5%B8%B8%E8%A7%81%E5%8F%82%E6%95%B0"><span class="nav-text">五、常见参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%E8%A1%A5%E5%85%85"><span class="nav-text">其他常用参数补充</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -531,12 +650,12 @@ pull命令并不是必需的步骤。</p>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">35k</span>
+    <span title="Symbols count total">36k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">32 mins.</span>
+    <span title="Reading time total">33 mins.</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div><!-- 页面点击小红心 -->
