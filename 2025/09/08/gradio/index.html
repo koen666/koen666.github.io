@@ -20,22 +20,22 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"text":"评论","order":-2}},"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本文用于介绍curl命令行工具的基本操作和使用，全程干货，放心食用">
+  <meta name="description" content="本文旨在介绍如何对Pytorch和Tensorflow模型实现可视化操作">
 <meta property="og:type" content="article">
-<meta property="og:title" content="curl使用教学">
-<meta property="og:url" content="http://example.com/2025/07/26/curl/index.html">
+<meta property="og:title" content="关于模型可视化---Gradio">
+<meta property="og:url" content="http://example.com/2025/09/08/gradio/index.html">
 <meta property="og:site_name" content="木语">
-<meta property="og:description" content="本文用于介绍curl命令行工具的基本操作和使用，全程干货，放心食用">
+<meta property="og:description" content="本文旨在介绍如何对Pytorch和Tensorflow模型实现可视化操作">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-07-26T04:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-31T12:27:59.709Z">
+<meta property="article:published_time" content="2025-09-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-09T10:58:44.306Z">
 <meta property="article:author" content="koen">
-<meta property="article:tag" content="learn">
-<meta property="article:tag" content="cmd">
-<meta property="article:tag" content="curl">
+<meta property="article:tag" content="gradio">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2025/07/26/curl/">
+<link rel="canonical" href="http://example.com/2025/09/08/gradio/">
 
 
 <script id="page-configurations">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>curl使用教学 | 木语</title>
+  <title>关于模型可视化---Gradio | 木语</title>
   
 
 
@@ -81,7 +81,119 @@
 
    <link rel="stylesheet" href="/dist/APlayer.min.css">
 <link rel="alternate" href="/atom.xml" title="木语" type="application/atom+xml">
-</head>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -190,7 +302,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/07/26/curl/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/08/gradio/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/./images/head.jpg">
@@ -203,7 +315,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          curl使用教学
+          关于模型可视化---Gradio
         </h1>
 
         <div class="post-meta">
@@ -213,14 +325,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2025-07-26 12:00:00" itemprop="dateCreated datePublished" datetime="2025-07-26T12:00:00+08:00">2025-07-26</time>
+              <time title="Created: 2025-09-08 00:00:00" itemprop="dateCreated datePublished" datetime="2025-09-08T00:00:00+08:00">2025-09-08</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-31 20:27:59" itemprop="dateModified" datetime="2025-07-31T20:27:59+08:00">2025-07-31</time>
+                <time title="Modified: 2025-09-09 18:58:44" itemprop="dateModified" datetime="2025-09-09T18:58:44+08:00">2025-09-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -228,7 +340,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/cmd/" itemprop="url" rel="index"><span itemprop="name">cmd</span></a>
+                  <a href="/categories/fronted/" itemprop="url" rel="index"><span itemprop="name">fronted</span></a>
                 </span>
             </span>
 
@@ -245,7 +357,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>679</span>
+              <span>635</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -254,7 +366,7 @@
                 <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
-            <div class="post-description">本文用于介绍curl命令行工具的基本操作和使用，全程干货，放心食用</div>
+            <div class="post-description">本文旨在介绍如何对Pytorch和Tensorflow模型实现可视化操作</div>
 
         </div>
       </header>
@@ -265,96 +377,88 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <blockquote>
-<p>curl 是一个强大的命令行工具，用于在命令行或脚本中发送 HTTP
-请求，与服务器通信。它可以用来下载网页、调用 API
-接口、上传文件、发送表单等。几乎所有支持网络通信的协议 curl
-都能处理，包括 HTTP、HTTPS、FTP、SFTP、SMTP 等</p>
-</blockquote>
-<hr />
-<h2 id="一所以curl能干啥">一、所以curl能干啥</h2>
-<table>
-<colgroup>
-<col style="width: 12%" />
-<col style="width: 87%" />
-</colgroup>
-<thead>
-<tr>
-<th>功能</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>获取网页内容</td>
-<td><code>curl https://example.com</code></td>
-</tr>
-<tr>
-<td>下载文件</td>
-<td><code>curl -O https://example.com/file.zip</code></td>
-</tr>
-<tr>
-<td>发送 POST 请求</td>
-<td><code>curl -X POST -d "name=Koen&amp;age=20" https://example.com/api</code></td>
-</tr>
-<tr>
-<td>添加请求头</td>
-<td><code>curl -H "Authorization: Bearer TOKEN" https://api.example.com/data</code></td>
-</tr>
-<tr>
-<td>上传文件</td>
-<td><code>curl -F "file=@test.png" https://example.com/upload</code></td>
-</tr>
-<tr>
-<td>保存输出到文件</td>
-<td><code>curl https://example.com -o saved.html</code></td>
-</tr>
-</tbody>
-</table>
-<p>以下将对其功能进行详细解释</p>
-<hr />
-<h2 id="二利用curl获取网页内容">二、利用curl获取网页内容</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl url</span><br></pre></td></tr></table></figure>
-<p>会将get请求返回结果直接输出在命令行中</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://example.com -o index.html</span><br></pre></td></tr></table></figure>
-<p>保存指定内容到文件，地址为cmd当前地址</p>
-<hr />
-<h2 id="三发送post请求">三、发送post请求</h2>
-<p>一般用于测试接口是否正常 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST -d <span class="string">&quot;name=Koen&amp;age=20&quot;</span> https://example.com/api</span><br></pre></td></tr></table></figure> 带上请求头和请求体：
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST https://api.example.com/data \</span><br><span class="line">  -H <span class="string">&quot;Authorization: Bearer abc123&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;&quot;key&quot;:&quot;va</span></span><br><span class="line"><span class="string">lue&quot;&#125;&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">     -d <span class="string">&#x27;&#123;&quot;username&quot;:&quot;koen&quot;,&quot;password&quot;:&quot;123456&quot;&#125;&#x27;</span> \</span><br><span class="line">     https://example.com/api</span><br></pre></td></tr></table></figure></p>
-<hr />
-<h2 id="四利用curl进行文件上传">四、利用curl进行文件上传</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -F <span class="string">&quot;file=@test.png&quot;</span> https://example.com/upload</span><br></pre></td></tr></table></figure>
-<p>-F就是指定用表单的方式进行字段的上传</p>
-<table>
-<colgroup>
-<col style="width: 18%" />
-<col style="width: 81%" />
-</colgroup>
-<thead>
-<tr>
-<th>部分</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>file</code></td>
-<td>表单字段的名字。就像网页表单中
-<code>&lt;input type="file" name="file"&gt;</code>。</td>
-</tr>
-<tr>
-<td><code>=</code></td>
-<td>分隔字段名与数据（文件）</td>
-</tr>
-<tr>
-<td><code>@test.png</code></td>
-<td>表示上传当前目录下名为 <code>test.png</code> 的文件</td>
-</tr>
-</tbody>
-</table>
-<p>其实就是post请求上传文件的方式</p>
-<hr />
+        <h2 id="hello-world-入门示例">1. Hello World 入门示例</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gradio <span class="keyword">as</span> gr</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个最简单的函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">greet</span>(<span class="params">name: <span class="built_in">str</span></span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="string">f"Hello, <span class="subst">{name}</span>!"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 Interface 快速构建应用</span></span><br><span class="line">demo = gr.Interface(</span><br><span class="line">    fn=greet,  <span class="comment"># 绑定函数</span></span><br><span class="line">    inputs=gr.Textbox(label=<span class="string">"请输入名字"</span>),  <span class="comment"># 输入组件：单行文本框</span></span><br><span class="line">    outputs=gr.Textbox(label=<span class="string">"问候语"</span>),    <span class="comment"># 输出组件：单行文本框</span></span><br><span class="line">    title=<span class="string">"Gradio Hello World"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">demo.launch(share=<span class="literal">True</span>)  <span class="comment"># 启动服务，并生成公网临时链接</span></span><br></pre></td></tr></table></figure>
+<h3 id="组件解释">组件解释：</h3>
+<ul>
+<li><strong>Textbox</strong>：输入或输出文本。支持 <code>lines</code>
+参数控制多行。<br>
+</li>
+<li><strong>Interface</strong>：最基础的封装方式，适合单函数输入输出。</li>
+</ul>
+<hr>
+<h2 id="加载-pytorch-.pth-模型并结合-gradio">2. 加载 PyTorch
+<code>.pth</code> 模型并结合 Gradio</h2>
+<p>这里我们以 <strong>ResNet18 二分类模型（猫 vs 狗）</strong>
+为例。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torchvision.transforms <span class="keyword">as</span> T</span><br><span class="line"><span class="keyword">from</span> torchvision.models <span class="keyword">import</span> resnet18</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> gradio <span class="keyword">as</span> gr</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 加载模型结构</span></span><br><span class="line">model = resnet18(pretrained=<span class="literal">False</span>)</span><br><span class="line">model.fc = torch.nn.Linear(model.fc.in_features, <span class="number">2</span>)  <span class="comment"># 修改输出层为二分类</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 加载训练好的权重（model.pth）</span></span><br><span class="line">model.load_state_dict(torch.load(<span class="string">"model.pth"</span>, map_location=<span class="string">"cpu"</span>))</span><br><span class="line">model.<span class="built_in">eval</span>()  <span class="comment"># 切换到推理模式</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 定义图像预处理（与训练时一致）</span></span><br><span class="line">transform = T.Compose([</span><br><span class="line">    T.Resize((<span class="number">224</span>, <span class="number">224</span>)),  <span class="comment"># 缩放图片</span></span><br><span class="line">    T.ToTensor(),          <span class="comment"># 转 Tensor</span></span><br><span class="line">    T.Normalize(mean=[<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>],</span><br><span class="line">                std=[<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>])  <span class="comment"># 标准化</span></span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 推理函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">predict</span>(<span class="params">img: Image.Image</span>):</span><br><span class="line">    x = transform(img).unsqueeze(<span class="number">0</span>)  <span class="comment"># 扩展 batch 维度 [1,3,224,224]</span></span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        logits = model(x)  <span class="comment"># 前向传播</span></span><br><span class="line">        probs = torch.softmax(logits, dim=<span class="number">1</span>).squeeze().tolist()  <span class="comment"># 转换为概率</span></span><br><span class="line">    <span class="keyword">return</span> {<span class="string">"cat"</span>: probs[<span class="number">0</span>], <span class="string">"dog"</span>: probs[<span class="number">1</span>]}  <span class="comment"># 输出字典</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. Gradio 封装</span></span><br><span class="line">demo = gr.Interface(</span><br><span class="line">    fn=predict,</span><br><span class="line">    inputs=gr.Image(<span class="built_in">type</span>=<span class="string">"pil"</span>, label=<span class="string">"上传图片"</span>),  <span class="comment"># 输入组件：图片</span></span><br><span class="line">    outputs=gr.Label(num_top_classes=<span class="number">2</span>, label=<span class="string">"预测结果"</span>),  <span class="comment"># 输出组件：标签（带概率条）</span></span><br><span class="line">    title=<span class="string">"猫狗分类器"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">demo.launch()</span><br></pre></td></tr></table></figure>
+<h3 id="组件解释-1">组件解释：</h3>
+<ul>
+<li><strong>Image</strong>：支持上传或摄像头输入，<code>type="pil"</code>
+表示输出为 PIL Image。<br>
+</li>
+<li><strong>Label</strong>：显示分类概率，自动渲染柱状图。</li>
+</ul>
+<hr>
+<h2 id="使用-blocks-构建多步骤界面">3. 使用 Blocks 构建多步骤界面</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> gr.Blocks() <span class="keyword">as</span> demo:</span><br><span class="line">    <span class="keyword">with</span> gr.Row():  <span class="comment"># 横向布局</span></span><br><span class="line">        img = gr.Image(<span class="built_in">type</span>=<span class="string">"pil"</span>, label=<span class="string">"上传图片"</span>)</span><br><span class="line">        btn = gr.Button(<span class="string">"开始分类"</span>)  <span class="comment"># 按钮</span></span><br><span class="line">    out = gr.Label(num_top_classes=<span class="number">2</span>, label=<span class="string">"预测结果"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 点击按钮时执行预测</span></span><br><span class="line">    btn.click(fn=predict, inputs=img, outputs=out)</span><br><span class="line"></span><br><span class="line">demo.launch()</span><br></pre></td></tr></table></figure>
+<h3 id="组件解释-2">组件解释：</h3>
+<ul>
+<li><strong>Blocks</strong>：更灵活的 UI 构建方式。<br>
+</li>
+<li><strong>Row / Column</strong>：布局容器。<br>
+</li>
+<li><strong>Button</strong>：可绑定点击事件。</li>
+</ul>
+<hr>
+<h2 id="扩展功能显示-top-k-原图">4. 扩展功能：显示 Top-K + 原图</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">predict_with_img</span>(<span class="params">img: Image.Image</span>):</span><br><span class="line">    x = transform(img).unsqueeze(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        logits = model(x)</span><br><span class="line">        probs = torch.softmax(logits, dim=<span class="number">1</span>).squeeze()</span><br><span class="line">    classes = [<span class="string">"cat"</span>, <span class="string">"dog"</span>]</span><br><span class="line">    result = {cls: <span class="built_in">float</span>(probs[i]) <span class="keyword">for</span> i, cls <span class="keyword">in</span> <span class="built_in">enumerate</span>(classes)}</span><br><span class="line">    <span class="keyword">return</span> result, img  <span class="comment"># 返回两个结果</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> gr.Blocks() <span class="keyword">as</span> demo:</span><br><span class="line">    <span class="keyword">with</span> gr.Row():</span><br><span class="line">        img = gr.Image(<span class="built_in">type</span>=<span class="string">"pil"</span>, label=<span class="string">"上传图片"</span>)</span><br><span class="line">        btn = gr.Button(<span class="string">"开始分类"</span>)</span><br><span class="line">    <span class="keyword">with</span> gr.Row():</span><br><span class="line">        out_probs = gr.Label(num_top_classes=<span class="number">2</span>, label=<span class="string">"预测概率"</span>)</span><br><span class="line">        out_img = gr.Image(label=<span class="string">"原始图片"</span>)</span><br><span class="line"></span><br><span class="line">    btn.click(fn=predict_with_img, inputs=img, outputs=[out_probs, out_img])</span><br><span class="line"></span><br><span class="line">demo.launch()</span><br></pre></td></tr></table></figure>
+<h3 id="解释">解释：</h3>
+<ul>
+<li>Gradio 函数可以返回多个输出 → 绑定到多个组件。<br>
+</li>
+<li><code>Label</code> 用来显示概率条，<code>Image</code>
+再显示原图，增强可解释性。</li>
+</ul>
+<hr>
+<h2 id="常用组件一览">5. 常用组件一览</h2>
+<ul>
+<li><strong>Textbox</strong>：输入文本<br>
+</li>
+<li><strong>Image</strong>：上传或拍照输入图像<br>
+</li>
+<li><strong>Label</strong>：展示分类结果与概率<br>
+</li>
+<li><strong>Button</strong>：触发事件<br>
+</li>
+<li><strong>Chatbot</strong>：用于构建对话界面（常见于 LLM Demo）<br>
+</li>
+<li><strong>File</strong>：上传或下载文件<br>
+</li>
+<li><strong>Slider / Dropdown / Checkbox</strong>：用于选择参数</li>
+</ul>
+<hr>
+<h2 id="队列与并发控制">6. 队列与并发控制</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">demo.queue(concurrency_count=<span class="number">2</span>).launch()</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>queue()</strong>：开启请求队列，避免推理时间过长导致前端超时。<br>
+</li>
+<li><strong>concurrency_count</strong>：同时处理的请求数。</li>
+</ul>
+<hr>
+<h2 id="自定义样式-鉴权-安全性">7. 自定义样式 / 鉴权 / 安全性</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> gr.Blocks(css=<span class="string">"body {background-color: #f0f8ff;}"</span>) <span class="keyword">as</span> demo:</span><br><span class="line">    img = gr.Image(<span class="built_in">type</span>=<span class="string">"pil"</span>)</span><br><span class="line">    out = gr.Label()</span><br><span class="line">    img.change(predict, inputs=img, outputs=out)</span><br><span class="line"></span><br><span class="line">demo.launch(auth=(<span class="string">"admin"</span>, <span class="string">"1234"</span>), allowed_paths=[<span class="string">"/safe_dir"</span>])</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>css=</strong>：注入自定义 CSS。<br>
+</li>
+<li><strong>auth=</strong>：开启简单的用户名/密码鉴权。<br>
+</li>
+<li><strong>allowed_paths=</strong>：限制访问目录，避免文件泄露。</li>
+</ul>
+<hr>
+<h2 id="最终完整应用整合版">8. 最终完整应用（整合版）</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gradio <span class="keyword">as</span> gr</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torchvision.transforms <span class="keyword">as</span> T</span><br><span class="line"><span class="keyword">from</span> torchvision.models <span class="keyword">import</span> resnet18</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模型加载</span></span><br><span class="line">model = resnet18(pretrained=<span class="literal">False</span>)</span><br><span class="line">model.fc = torch.nn.Linear(model.fc.in_features, <span class="number">2</span>)</span><br><span class="line">model.load_state_dict(torch.load(<span class="string">"model.pth"</span>, map_location=<span class="string">"cpu"</span>))</span><br><span class="line">model.<span class="built_in">eval</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 预处理</span></span><br><span class="line">transform = T.Compose([</span><br><span class="line">    T.Resize((<span class="number">224</span>, <span class="number">224</span>)),</span><br><span class="line">    T.ToTensor(),</span><br><span class="line">    T.Normalize(mean=[<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>],</span><br><span class="line">                std=[<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>])</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推理函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">predict</span>(<span class="params">img: Image.Image</span>):</span><br><span class="line">    x = transform(img).unsqueeze(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        logits = model(x)</span><br><span class="line">        probs = torch.softmax(logits, dim=<span class="number">1</span>).squeeze()</span><br><span class="line">    classes = [<span class="string">"cat"</span>, <span class="string">"dog"</span>]</span><br><span class="line">    <span class="keyword">return</span> {cls: <span class="built_in">float</span>(probs[i]) <span class="keyword">for</span> i, cls <span class="keyword">in</span> <span class="built_in">enumerate</span>(classes)}</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建应用</span></span><br><span class="line"><span class="keyword">with</span> gr.Blocks(css=<span class="string">"body {font-family: Arial; background:#fafafa;}"</span>) <span class="keyword">as</span> demo:</span><br><span class="line">    <span class="keyword">with</span> gr.Row():</span><br><span class="line">        img = gr.Image(<span class="built_in">type</span>=<span class="string">"pil"</span>, label=<span class="string">"上传图片"</span>)</span><br><span class="line">        btn = gr.Button(<span class="string">"开始分类"</span>)</span><br><span class="line">    <span class="keyword">with</span> gr.Row():</span><br><span class="line">        out = gr.Label(num_top_classes=<span class="number">2</span>, label=<span class="string">"预测结果"</span>)</span><br><span class="line">    btn.click(predict, inputs=img, outputs=out)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启队列 + 鉴权</span></span><br><span class="line">demo.queue(concurrency_count=<span class="number">2</span>).launch(auth=(<span class="string">"user"</span>, <span class="string">"pass"</span>))</span><br></pre></td></tr></table></figure>
+<hr>
 
     </div>
 
@@ -389,9 +493,9 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/learn/" rel="tag"><i class="fa fa-tag"></i> learn</a>
-              <a href="/tags/cmd/" rel="tag"><i class="fa fa-tag"></i> cmd</a>
-              <a href="/tags/curl/" rel="tag"><i class="fa fa-tag"></i> curl</a>
+              <a href="/tags/gradio/" rel="tag"><i class="fa fa-tag"></i> gradio</a>
+              <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+              <a href="/tags/web/" rel="tag"><i class="fa fa-tag"></i> web</a>
           </div>
 
         
@@ -400,13 +504,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/07/26/docker-basic-usage/" rel="prev" title="Docker 基本使用教程">
-      <i class="fa fa-chevron-left"></i> Docker 基本使用教程
+    <a href="/2025/09/03/network/" rel="prev" title="网络核心概念精讲">
+      <i class="fa fa-chevron-left"></i> 网络核心概念精讲
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/07/26/pytorch/" rel="next" title="Pytorch，深度学习与神经网络篇">
-      Pytorch，深度学习与神经网络篇 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -466,7 +567,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E6%89%80%E4%BB%A5curl%E8%83%BD%E5%B9%B2%E5%95%A5"><span class="nav-text">一、所以curl能干啥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%88%A9%E7%94%A8curl%E8%8E%B7%E5%8F%96%E7%BD%91%E9%A1%B5%E5%86%85%E5%AE%B9"><span class="nav-text">二、利用curl获取网页内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E5%8F%91%E9%80%81post%E8%AF%B7%E6%B1%82"><span class="nav-text">三、发送post请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%88%A9%E7%94%A8curl%E8%BF%9B%E8%A1%8C%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="nav-text">四、利用curl进行文件上传</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#hello-world-%E5%85%A5%E9%97%A8%E7%A4%BA%E4%BE%8B"><span class="nav-text">1. Hello World 入门示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E8%A7%A3%E9%87%8A"><span class="nav-text">组件解释：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD-pytorch-.pth-%E6%A8%A1%E5%9E%8B%E5%B9%B6%E7%BB%93%E5%90%88-gradio"><span class="nav-text">2. 加载 PyTorch
+.pth 模型并结合 Gradio</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E8%A7%A3%E9%87%8A-1"><span class="nav-text">组件解释：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-blocks-%E6%9E%84%E5%BB%BA%E5%A4%9A%E6%AD%A5%E9%AA%A4%E7%95%8C%E9%9D%A2"><span class="nav-text">3. 使用 Blocks 构建多步骤界面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E8%A7%A3%E9%87%8A-2"><span class="nav-text">组件解释：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E5%8A%9F%E8%83%BD%E6%98%BE%E7%A4%BA-top-k-%E5%8E%9F%E5%9B%BE"><span class="nav-text">4. 扩展功能：显示 Top-K + 原图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E9%87%8A"><span class="nav-text">解释：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6%E4%B8%80%E8%A7%88"><span class="nav-text">5. 常用组件一览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%9F%E5%88%97%E4%B8%8E%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6"><span class="nav-text">6. 队列与并发控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%B7%E5%BC%8F-%E9%89%B4%E6%9D%83-%E5%AE%89%E5%85%A8%E6%80%A7"><span class="nav-text">7. 自定义样式 &#x2F; 鉴权 &#x2F; 安全性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E5%AE%8C%E6%95%B4%E5%BA%94%E7%94%A8%E6%95%B4%E5%90%88%E7%89%88"><span class="nav-text">8. 最终完整应用（整合版）</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -856,7 +958,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'koen666.github.io',
       owner       : 'koen666',
       admin       : ['koen666'],
-      id          : 'e62df01be3c08440cda324959a212998',
+      id          : 'cdf5e958921e0d82308b4055a5bf16a1',
         language: '',
       distractionFreeMode: true
     });
