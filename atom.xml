@@ -77,11 +77,11 @@
     <category term="pytorch" scheme="http://example.com/categories/pytorch/"/>
     
     
+    <category term="dataset" scheme="http://example.com/tags/dataset/"/>
+    
     <category term="deeplearning" scheme="http://example.com/tags/deeplearning/"/>
     
     <category term="pytorch" scheme="http://example.com/tags/pytorch/"/>
-    
-    <category term="dataset" scheme="http://example.com/tags/dataset/"/>
     
     <category term="dataloader" scheme="http://example.com/tags/dataloader/"/>
     
@@ -104,11 +104,11 @@
     <category term="fronted" scheme="http://example.com/categories/fronted/"/>
     
     
-    <category term="web" scheme="http://example.com/tags/web/"/>
-    
     <category term="gradio" scheme="http://example.com/tags/gradio/"/>
     
     <category term="python" scheme="http://example.com/tags/python/"/>
+    
+    <category term="web" scheme="http://example.com/tags/web/"/>
     
   </entry>
   
@@ -294,9 +294,9 @@
     <category term="dataset" scheme="http://example.com/categories/dataset/"/>
     
     
-    <category term="dataset" scheme="http://example.com/tags/dataset/"/>
-    
     <category term="yolo" scheme="http://example.com/tags/yolo/"/>
+    
+    <category term="dataset" scheme="http://example.com/tags/dataset/"/>
     
     <category term="AnyLabeling" scheme="http://example.com/tags/AnyLabeling/"/>
     
@@ -319,9 +319,9 @@
     <category term="code" scheme="http://example.com/categories/code/"/>
     
     
-    <category term="electron" scheme="http://example.com/tags/electron/"/>
-    
     <category term="web" scheme="http://example.com/tags/web/"/>
+    
+    <category term="electron" scheme="http://example.com/tags/electron/"/>
     
     <category term="desk" scheme="http://example.com/tags/desk/"/>
     
@@ -436,11 +436,11 @@
     <category term="cmd" scheme="http://example.com/categories/cmd/"/>
     
     
+    <category term="learn" scheme="http://example.com/tags/learn/"/>
+    
     <category term="cmd" scheme="http://example.com/tags/cmd/"/>
     
     <category term="curl" scheme="http://example.com/tags/curl/"/>
-    
-    <category term="learn" scheme="http://example.com/tags/learn/"/>
     
   </entry>
   
@@ -461,11 +461,11 @@
     <category term="code" scheme="http://example.com/categories/code/"/>
     
     
-    <category term="learn" scheme="http://example.com/tags/learn/"/>
-    
     <category term="container" scheme="http://example.com/tags/container/"/>
     
     <category term="docker" scheme="http://example.com/tags/docker/"/>
+    
+    <category term="learn" scheme="http://example.com/tags/learn/"/>
     
     <category term="linux" scheme="http://example.com/tags/linux/"/>
     
