@@ -20,22 +20,23 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"text":"评论","order":-2}},"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本文用于介绍curl命令行工具的基本操作和使用，全程干货，放心食用">
+  <meta name="description" content="本文介绍pytorch内从dataset到dataloader的实现,并给出一个简单线性层实例">
 <meta property="og:type" content="article">
-<meta property="og:title" content="curl使用教学">
-<meta property="og:url" content="http://example.com/2025/07/26/curl/index.html">
+<meta property="og:title" content="从dataset-&gt;dataloader">
+<meta property="og:url" content="http://example.com/2025/09/15/%E4%BB%8Edataset%E5%88%B0dataloader/index.html">
 <meta property="og:site_name" content="木语">
-<meta property="og:description" content="本文用于介绍curl命令行工具的基本操作和使用，全程干货，放心食用">
+<meta property="og:description" content="本文介绍pytorch内从dataset到dataloader的实现,并给出一个简单线性层实例">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-07-26T04:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-31T12:27:59.709Z">
+<meta property="article:published_time" content="2025-09-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-15T13:59:38.111Z">
 <meta property="article:author" content="koen">
-<meta property="article:tag" content="learn">
-<meta property="article:tag" content="cmd">
-<meta property="article:tag" content="curl">
+<meta property="article:tag" content="deeplearning">
+<meta property="article:tag" content="pytorch">
+<meta property="article:tag" content="dataset">
+<meta property="article:tag" content="dataloader">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2025/07/26/curl/">
+<link rel="canonical" href="http://example.com/2025/09/15/%E4%BB%8Edataset%E5%88%B0dataloader/">
 
 
 <script id="page-configurations">
@@ -48,7 +49,7 @@
   };
 </script>
 
-  <title>curl使用教学 | 木语</title>
+  <title>从dataset->dataloader | 木语</title>
   
 
 
@@ -80,7 +81,119 @@
 </noscript>
 
    <link rel="stylesheet" href="/dist/APlayer.min.css">
-<link rel="alternate" href="/atom.xml" title="木语" type="application/atom+xml">
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="木语" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -190,7 +303,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/07/26/curl/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/15/%E4%BB%8Edataset%E5%88%B0dataloader/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/./images/head.jpg">
@@ -203,7 +316,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          curl使用教学
+          从dataset->dataloader
         </h1>
 
         <div class="post-meta">
@@ -212,23 +325,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2025-07-26 12:00:00" itemprop="dateCreated datePublished" datetime="2025-07-26T12:00:00+08:00">2025-07-26</time>
+              <time title="Created: 2025-09-15 00:00:00 / Modified: 21:59:38" itemprop="dateCreated datePublished" datetime="2025-09-15T00:00:00+08:00">2025-09-15</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-31 20:27:59" itemprop="dateModified" datetime="2025-07-31T20:27:59+08:00">2025-07-31</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/cmd/" itemprop="url" rel="index"><span itemprop="name">cmd</span></a>
+                  <a href="/categories/pytorch/" itemprop="url" rel="index"><span itemprop="name">pytorch</span></a>
                 </span>
             </span>
 
@@ -245,7 +352,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>679</span>
+              <span>1.5k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -254,7 +361,7 @@
                 <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
-            <div class="post-description">本文用于介绍curl命令行工具的基本操作和使用，全程干货，放心食用</div>
+            <div class="post-description">本文介绍pytorch内从dataset到dataloader的实现,并给出一个简单线性层实例</div>
 
         </div>
       </header>
@@ -265,96 +372,169 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <blockquote>
-<p>curl 是一个强大的命令行工具，用于在命令行或脚本中发送 HTTP
-请求，与服务器通信。它可以用来下载网页、调用 API
-接口、上传文件、发送表单等。几乎所有支持网络通信的协议 curl
-都能处理，包括 HTTP、HTTPS、FTP、SFTP、SMTP 等</p>
-</blockquote>
-<hr />
-<h2 id="一所以curl能干啥">一、所以curl能干啥</h2>
-<table>
-<colgroup>
-<col style="width: 12%" />
-<col style="width: 87%" />
-</colgroup>
-<thead>
-<tr>
-<th>功能</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>获取网页内容</td>
-<td><code>curl https://example.com</code></td>
-</tr>
-<tr>
-<td>下载文件</td>
-<td><code>curl -O https://example.com/file.zip</code></td>
-</tr>
-<tr>
-<td>发送 POST 请求</td>
-<td><code>curl -X POST -d "name=Koen&amp;age=20" https://example.com/api</code></td>
-</tr>
-<tr>
-<td>添加请求头</td>
-<td><code>curl -H "Authorization: Bearer TOKEN" https://api.example.com/data</code></td>
-</tr>
-<tr>
-<td>上传文件</td>
-<td><code>curl -F "file=@test.png" https://example.com/upload</code></td>
-</tr>
-<tr>
-<td>保存输出到文件</td>
-<td><code>curl https://example.com -o saved.html</code></td>
-</tr>
-</tbody>
-</table>
-<p>以下将对其功能进行详细解释</p>
-<hr />
-<h2 id="二利用curl获取网页内容">二、利用curl获取网页内容</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl url</span><br></pre></td></tr></table></figure>
-<p>会将get请求返回结果直接输出在命令行中</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://example.com -o index.html</span><br></pre></td></tr></table></figure>
-<p>保存指定内容到文件，地址为cmd当前地址</p>
-<hr />
-<h2 id="三发送post请求">三、发送post请求</h2>
-<p>一般用于测试接口是否正常 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST -d <span class="string">&quot;name=Koen&amp;age=20&quot;</span> https://example.com/api</span><br></pre></td></tr></table></figure> 带上请求头和请求体：
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST https://api.example.com/data \</span><br><span class="line">  -H <span class="string">&quot;Authorization: Bearer abc123&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;&quot;key&quot;:&quot;va</span></span><br><span class="line"><span class="string">lue&quot;&#125;&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">     -d <span class="string">&#x27;&#123;&quot;username&quot;:&quot;koen&quot;,&quot;password&quot;:&quot;123456&quot;&#125;&#x27;</span> \</span><br><span class="line">     https://example.com/api</span><br></pre></td></tr></table></figure></p>
-<hr />
-<h2 id="四利用curl进行文件上传">四、利用curl进行文件上传</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -F <span class="string">&quot;file=@test.png&quot;</span> https://example.com/upload</span><br></pre></td></tr></table></figure>
-<p>-F就是指定用表单的方式进行字段的上传</p>
-<table>
-<colgroup>
-<col style="width: 18%" />
-<col style="width: 81%" />
-</colgroup>
-<thead>
-<tr>
-<th>部分</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>file</code></td>
-<td>表单字段的名字。就像网页表单中
-<code>&lt;input type="file" name="file"&gt;</code>。</td>
-</tr>
-<tr>
-<td><code>=</code></td>
-<td>分隔字段名与数据（文件）</td>
-</tr>
-<tr>
-<td><code>@test.png</code></td>
-<td>表示上传当前目录下名为 <code>test.png</code> 的文件</td>
-</tr>
-</tbody>
-</table>
-<p>其实就是post请求上传文件的方式</p>
-<hr />
+        <h2 id="完整代码示例"><strong>完整代码示例</strong></h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset, DataLoader, Sampler</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim</span><br></pre></td></tr></table></figure>
+<p><strong>解析</strong>：</p>
+<ul>
+<li><code>torch</code>：PyTorch 主库，用于张量操作。</li>
+<li><code>Dataset</code>：数据集基类。</li>
+<li><code>DataLoader</code>：批次生成器。</li>
+<li><code>Sampler</code>：索引生成器。</li>
+<li><code>nn</code>：神经网络模块。</li>
+<li><code>optim</code>：优化器。</li>
+</ul>
+<hr>
+<h3 id="定义-dataset"><strong>1️⃣ 定义 Dataset</strong></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyDataset</span>(<span class="title class_ inherited__">Dataset</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, data, labels</span>):</span><br><span class="line">        <span class="variable language_">self</span>.data = data       <span class="comment"># 存储特征列表</span></span><br><span class="line">        <span class="variable language_">self</span>.labels = labels   <span class="comment"># 存储标签列表</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(<span class="variable language_">self</span>.data)  <span class="comment"># 返回样本总数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self, index</span>):</span><br><span class="line">        x = <span class="variable language_">self</span>.data[index]  <span class="comment"># 取第 index 个特征</span></span><br><span class="line">        y = <span class="variable language_">self</span>.labels[index]  <span class="comment"># 取第 index 个标签</span></span><br><span class="line">        <span class="comment"># 转为 tensor 并指定数据类型</span></span><br><span class="line">        <span class="keyword">return</span> torch.tensor(x, dtype=torch.float32), torch.tensor(y, dtype=torch.long)</span><br></pre></td></tr></table></figure>
+<p><strong>详细解析</strong>：</p>
+<ol type="1">
+<li><p><code>__init__</code>：初始化 Dataset
+对象，存储数据和标签。</p></li>
+<li><p><code>__len__</code>：Dataset 的长度（样本数），DataLoader
+内部会用它来计算 batch 数量。</p></li>
+<li><p><code>__getitem__</code>：</p>
+<ul>
+<li><p>接收一个整数 <code>index</code>。</p></li>
+<li><p>从列表中取数据和标签。</p></li>
+<li><p>转为 PyTorch 张量：</p>
+<ul>
+<li><code>x</code> → float32，用于计算。</li>
+<li><code>y</code> → long，用于分类任务的 CrossEntropyLoss。</li>
+</ul></li>
+<li><p>返回 <code>(x, y)</code> 元组。</p></li>
+</ul></li>
+<li><p><strong>关键点</strong>：Dataset 本身不处理
+batch，也不决定顺序，它只知道如何根据索引取单个样本。</p></li>
+</ol>
+<hr>
+<h3 id="定义-sampler"><strong>2️⃣ 定义 Sampler</strong></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ReverseSampler</span>(<span class="title class_ inherited__">Sampler</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, data_source</span>):</span><br><span class="line">        <span class="variable language_">self</span>.data_source = data_source  <span class="comment"># Dataset 对象</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__iter__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># 返回索引迭代器：倒序取样</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">iter</span>(<span class="built_in">range</span>(<span class="built_in">len</span>(<span class="variable language_">self</span>.data_source)-<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(<span class="variable language_">self</span>.data_source)  <span class="comment"># 样本总数</span></span><br></pre></td></tr></table></figure>
+<p><strong>详细解析</strong>：</p>
+<ol type="1">
+<li><p><code>__iter__</code>：</p>
+<ul>
+<li><p>返回一个迭代器，用于生成索引序列。</p></li>
+<li><p><code>range(len(self.data_source)-1, -1, -1)</code>：</p>
+<ul>
+<li>从最大索引到 0</li>
+<li>例如数据有 5 个样本，索引顺序是 <code>[4,3,2,1,0]</code></li>
+</ul></li>
+</ul></li>
+<li><p><code>__len__</code>：</p>
+<ul>
+<li>返回 Dataset 长度</li>
+<li>DataLoader 内部可能用它计算 batch 总数或进度条。</li>
+</ul></li>
+<li><p><strong>关键点</strong>：</p>
+<ul>
+<li>Sampler 只负责“索引顺序”，不涉及数据本身。</li>
+<li>可以用它实现顺序、随机或自定义采样策略。</li>
+</ul></li>
+</ol>
+<hr>
+<h3 id="初始化-dataset-和-sampler"><strong>3️⃣ 初始化 Dataset 和
+Sampler</strong></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data = [[<span class="number">1</span>,<span class="number">2</span>], [<span class="number">3</span>,<span class="number">4</span>], [<span class="number">5</span>,<span class="number">6</span>], [<span class="number">7</span>,<span class="number">8</span>], [<span class="number">9</span>,<span class="number">10</span>]]</span><br><span class="line">labels = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">dataset = MyDataset(data, labels)</span><br><span class="line">sampler = ReverseSampler(dataset)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Dataset 保存原始数据。</p></li>
+<li><p>Sampler 定义索引顺序（倒序）。</p></li>
+<li><p>此时数据和索引是分开的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Dataset: [ [1,2], [3,4], [5,6], [7,8], [9,10] ]</span><br><span class="line">Sampler: [4,3,2,1,0]</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h3 id="定义-dataloader"><strong>4️⃣ 定义 DataLoader</strong></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">batch_size = <span class="number">2</span></span><br><span class="line">dataloader = DataLoader(dataset, batch_size=batch_size, sampler=sampler)</span><br></pre></td></tr></table></figure>
+<p><strong>详细解析</strong>：</p>
+<ul>
+<li><p>DataLoader 接收 Dataset 对象。</p></li>
+<li><p><code>batch_size=2</code> → 每个 batch 2 个样本。</p></li>
+<li><p><code>sampler=sampler</code> →
+使用我们自定义的倒序索引。</p></li>
+<li><p><strong>内部流程</strong>：</p>
+<ol type="1">
+<li><p>DataLoader 调用 <code>sampler.__iter__()</code> → 得到索引迭代器
+<code>[4,3,2,1,0]</code></p></li>
+<li><p>按 <code>batch_size=2</code> 将索引分批：</p>
+<ul>
+<li>Batch 0 → <code>[4,3]</code></li>
+<li>Batch 1 → <code>[2,1]</code></li>
+<li>Batch 2 → <code>[0]</code></li>
+</ul></li>
+<li><p>对每个 batch 调用 <code>dataset.__getitem__</code>，获取
+<code>(x, y)</code> 张量。</p></li>
+<li><p>返回 batch 张量：</p>
+<ul>
+<li><code>x_batch.shape = [batch_size, feature_dim]</code></li>
+<li><code>y_batch.shape = [batch_size]</code></li>
+</ul></li>
+</ol></li>
+<li><p>DataLoader 可以多线程加载数据（通过
+<code>num_workers</code>），提升效率。</p></li>
+</ul>
+<hr>
+<h3 id="定义模型和优化器"><strong>5️⃣ 定义模型和优化器</strong></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">model = nn.Linear(<span class="number">2</span>, <span class="number">2</span>)  <span class="comment"># 输入2维，输出2类</span></span><br><span class="line">criterion = nn.CrossEntropyLoss()  <span class="comment"># 分类损失</span></span><br><span class="line">optimizer = optim.SGD(model.parameters(), lr=<span class="number">0.01</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>nn.Linear(2,2)</code>：</p>
+<ul>
+<li>输入 2 维特征 <code>[x1,x2]</code></li>
+<li>输出 2 类的 logits</li>
+</ul></li>
+<li><p><code>CrossEntropyLoss</code>：</p>
+<ul>
+<li>用于分类任务</li>
+<li>内部会自动做 softmax</li>
+</ul></li>
+<li><p><code>SGD</code>：</p>
+<ul>
+<li>随机梯度下降优化器</li>
+<li>更新模型参数</li>
+</ul></li>
+</ul>
+<hr>
+<h3 id="模拟训练循环"><strong>6️⃣ 模拟训练循环</strong></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> x_batch, y_batch <span class="keyword">in</span> dataloader:</span><br><span class="line">        <span class="comment"># 前向传播</span></span><br><span class="line">        outputs = model(x_batch)   <span class="comment"># [batch_size, num_classes]</span></span><br><span class="line">        loss = criterion(outputs, y_batch)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 反向传播</span></span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer.step()</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Batch x:"</span>, x_batch)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Batch y:"</span>, y_batch)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Loss:"</span>, loss.item())</span><br></pre></td></tr></table></figure>
+<p><strong>详细解析</strong>：</p>
+<ol type="1">
+<li><p><code>for x_batch, y_batch in dataloader</code>：</p>
+<ul>
+<li>DataLoader 迭代 batch</li>
+<li>每个 batch 是 <code>(x_batch, y_batch)</code> 张量</li>
+</ul></li>
+<li><p><code>outputs = model(x_batch)</code>：</p>
+<ul>
+<li>前向传播，输出 <code>[batch_size, num_classes]</code> 张量</li>
+</ul></li>
+<li><p><code>loss = criterion(outputs, y_batch)</code>：</p>
+<ul>
+<li>计算 loss</li>
+</ul></li>
+<li><p><code>optimizer.zero_grad()</code>：</p>
+<ul>
+<li>清空梯度，否则梯度会累加</li>
+</ul></li>
+<li><p><code>loss.backward()</code>：</p>
+<ul>
+<li>自动计算梯度</li>
+</ul></li>
+<li><p><code>optimizer.step()</code>：</p>
+<ul>
+<li>更新模型参数</li>
+</ul></li>
+<li><p>打印 batch 信息，观察训练数据流和 loss</p></li>
+</ol>
+<p><strong>示例输出</strong>（倒序 batch）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Batch x: tensor([[ 9., 10.],</span><br><span class="line">                 [ 7.,  8.]])</span><br><span class="line">Batch y: tensor([0,1])</span><br><span class="line">Loss: 0.7378</span><br><span class="line">Batch x: tensor([[5.,6.],</span><br><span class="line">                 [3.,4.]])</span><br><span class="line">Batch y: tensor([0,1])</span><br><span class="line">Loss: 0.6923</span><br><span class="line">Batch x: tensor([[1.,2.]])</span><br><span class="line">Batch y: tensor([0])</span><br><span class="line">Loss: 0.6789</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="数据流可视化"><strong>7️⃣ 数据流可视化</strong></h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">原始数据</span><br><span class="line">data = [[1,2],[3,4],[5,6],[7,8],[9,10]]</span><br><span class="line">labels = [0,1,0,1,0]</span><br><span class="line">        │</span><br><span class="line">        ▼</span><br><span class="line">Dataset (MyDataset)</span><br><span class="line">  - __getitem__ 返回单个样本</span><br><span class="line">        │</span><br><span class="line">        ▼</span><br><span class="line">Sampler (ReverseSampler)</span><br><span class="line">  - 返回索引序列 [4,3,2,1,0]</span><br><span class="line">        │</span><br><span class="line">        ▼</span><br><span class="line">DataLoader (batch_size=2)</span><br><span class="line">  - Batch 0: idx=[4,3] → x=[[9,10],[7,8]], y=[0,1]</span><br><span class="line">  - Batch 1: idx=[2,1] → x=[[5,6],[3,4]], y=[0,1]</span><br><span class="line">  - Batch 2: idx=[0]   → x=[[1,2]], y=[0]</span><br><span class="line">        │</span><br><span class="line">        ▼</span><br><span class="line">模型训练</span><br><span class="line">  - 前向传播: y_pred = model(x_batch)</span><br><span class="line">  - 计算 loss</span><br><span class="line">  - 反向传播: loss.backward()</span><br><span class="line">  - 参数更新: optimizer.step()</span><br></pre></td></tr></table></figure>
+<p>💡 <strong>关键点</strong>：</p>
+<ol type="1">
+<li>Dataset → 管理原始数据和取样方法</li>
+<li>Sampler → 决定索引顺序</li>
+<li>DataLoader → 按 batch 聚合数据</li>
+<li>模型训练 → 接收 batch，计算梯度，更新参数</li>
+</ol>
 
     </div>
 
@@ -389,9 +569,10 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/learn/" rel="tag"><i class="fa fa-tag"></i> learn</a>
-              <a href="/tags/cmd/" rel="tag"><i class="fa fa-tag"></i> cmd</a>
-              <a href="/tags/curl/" rel="tag"><i class="fa fa-tag"></i> curl</a>
+              <a href="/tags/deeplearning/" rel="tag"><i class="fa fa-tag"></i> deeplearning</a>
+              <a href="/tags/pytorch/" rel="tag"><i class="fa fa-tag"></i> pytorch</a>
+              <a href="/tags/dataset/" rel="tag"><i class="fa fa-tag"></i> dataset</a>
+              <a href="/tags/dataloader/" rel="tag"><i class="fa fa-tag"></i> dataloader</a>
           </div>
 
         
@@ -400,12 +581,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/07/26/docker-basic-usage/" rel="prev" title="Docker 基本使用教程">
-      <i class="fa fa-chevron-left"></i> Docker 基本使用教程
+    <a href="/2025/09/08/gradio/" rel="prev" title="关于模型可视化---Gradio">
+      <i class="fa fa-chevron-left"></i> 关于模型可视化---Gradio
     </a></div>
       <div class="post-nav-item">
-    <a href="/2025/07/26/pytorch/" rel="next" title="Pytorch，深度学习与神经网络篇">
-      Pytorch，深度学习与神经网络篇 <i class="fa fa-chevron-right"></i>
+    <a href="/2025/09/15/py_collections/" rel="next" title="collections">
+      collections <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -466,7 +647,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E6%89%80%E4%BB%A5curl%E8%83%BD%E5%B9%B2%E5%95%A5"><span class="nav-text">一、所以curl能干啥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%88%A9%E7%94%A8curl%E8%8E%B7%E5%8F%96%E7%BD%91%E9%A1%B5%E5%86%85%E5%AE%B9"><span class="nav-text">二、利用curl获取网页内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E5%8F%91%E9%80%81post%E8%AF%B7%E6%B1%82"><span class="nav-text">三、发送post请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%88%A9%E7%94%A8curl%E8%BF%9B%E8%A1%8C%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="nav-text">四、利用curl进行文件上传</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="nav-text">完整代码示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-dataset"><span class="nav-text">1️⃣ 定义 Dataset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-sampler"><span class="nav-text">2️⃣ 定义 Sampler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96-dataset-%E5%92%8C-sampler"><span class="nav-text">3️⃣ 初始化 Dataset 和
+Sampler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-dataloader"><span class="nav-text">4️⃣ 定义 DataLoader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BC%98%E5%8C%96%E5%99%A8"><span class="nav-text">5️⃣ 定义模型和优化器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E8%AE%AD%E7%BB%83%E5%BE%AA%E7%8E%AF"><span class="nav-text">6️⃣ 模拟训练循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%B5%81%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-text">7️⃣ 数据流可视化</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -856,7 +1038,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'koen666.github.io',
       owner       : 'koen666',
       admin       : ['koen666'],
-      id          : 'e62df01be3c08440cda324959a212998',
+      id          : '59d1e26c7a5a439adc3574fb0b883ef7',
         language: '',
       distractionFreeMode: true
     });

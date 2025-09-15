@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://example.com/2025/09/15/%E4%BB%8Edataset%E5%88%B0dataloader/</loc>
+    <lastmod>2025-09-15</lastmod>
+  </url>
+  <url>
+    <loc>http://example.com/2025/07/26/pytorch/</loc>
+    <lastmod>2025-09-15</lastmod>
+  </url>
+  <url>
     <loc>http://example.com/2025/09/15/py_collections/</loc>
     <lastmod>2025-09-15</lastmod>
   </url>
@@ -51,10 +59,6 @@
   <url>
     <loc>http://example.com/2025/08/10/seaborn/</loc>
     <lastmod>2025-08-10</lastmod>
-  </url>
-  <url>
-    <loc>http://example.com/2025/07/26/pytorch/</loc>
-    <lastmod>2025-08-08</lastmod>
   </url>
   <url>
     <loc>http://example.com/2025/07/29/pipenv/</loc>
