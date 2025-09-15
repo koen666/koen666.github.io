@@ -1,35 +1,348 @@
-extends includes/layout.pug
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>SQL语法规则 | 木语</title><meta name="author" content="koen"><meta name="copyright" content="koen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本文介绍SQL（Structured Query Language，结构化查询语言）的基本语法和核心概念">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL语法规则">
+<meta property="og:url" content="http://example.com/2025/09/01/sql/index.html">
+<meta property="og:site_name" content="木语">
+<meta property="og:description" content="本文介绍SQL（Structured Query Language，结构化查询语言）的基本语法和核心概念">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-08-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-01T05:32:54.309Z">
+<meta property="article:author" content="koen">
+<meta property="article:tag" content="sql">
+<meta property="article:tag" content="database">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "SQL语法规则",
+  "url": "http://example.com/2025/09/01/sql/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2025-08-31T16:00:00.000Z",
+  "dateModified": "2025-09-01T05:32:54.309Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "koen",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/09/01/sql/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
 
-block content
-  #post
-    if top_img === false
-      include includes/header/post-info.pug
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
 
-    article#article-container.container.post-content
-      if theme.noticeOutdate.enable && page.noticeOutdate !== false
-        include includes/post/outdate-notice.pug
-      else
-        !=page.content
-    include includes/post/post-copyright.pug
-    .tag_share
-      if (page.tags.length > 0 && theme.post_meta.post.tags)
-        .post-meta__tag-list
-          each item, index in page.tags.data
-            a(href=url_for(item.path)).post-meta__tags #[=item.name]
-      include includes/third-party/share/index.pug
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
 
-    if theme.reward.enable && theme.reward.QR_code
-      !=partial('includes/post/reward', {}, {cache: true})
-
-    //- ad
-    if theme.ad && theme.ad.post
-      .ads-wrap!=theme.ad.post
-
-    if theme.post_pagination
-      include includes/pagination.pug
-    if theme.related_post && theme.related_post.enable
-      != related_posts(page,site.posts)
-
-    if page.comments !== false && theme.comments.use
-      - var commentsJsLoad = true
-      !=partial('includes/third-party/comments/index', {}, {cache: true})
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'SQL语法规则',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="木语" type="application/atom+xml">
+</head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">木语</span></a><a class="nav-page-title" href="/"><span class="site-name">SQL语法规则</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">SQL语法规则</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-08-31T16:00:00.000Z" title="Created 2025-09-01 00:00:00">2025-09-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-09-01T05:32:54.309Z" title="Updated 2025-09-01 13:32:54">2025-09-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/database/">database</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h3 id="核心概念">核心概念</h3>
+<ol type="1">
+<li><strong>数据库（Database）</strong>：一个容器，用于存储有组织的数据。你可以把它想象成一个文件柜。</li>
+<li><strong>表（Table）</strong>：数据库中的特定数据结构，用于存储同类数据。它由行和列组成，就像一个Excel表格。每个表都有一个唯一的名字（例如
+<code>users</code>, <code>products</code>, <code>orders</code>）。
+<ul>
+<li><strong>列（Column）</strong>：表中的一个字段，代表了数据的某种属性（例如
+<code>id</code>, <code>name</code>,
+<code>email</code>）。它定义了数据的类型（数字、文本、日期等）。</li>
+<li><strong>行（Row）</strong>：表中的一个记录，代表一个具体的实体（例如一个用户、一件商品）。一行数据就是由多个列的值组成的。</li>
+</ul></li>
+</ol>
+<hr />
+<h3 id="sql语言的分类">SQL语言的分类</h3>
+<p>SQL命令通常根据其功能分为以下几类：</p>
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 26%" />
+<col style="width: 15%" />
+<col style="width: 26%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr>
+<th>类别</th>
+<th>英文全称</th>
+<th>中文</th>
+<th>核心命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DQL</strong></td>
+<td>Data Query Language</td>
+<td>数据查询语言</td>
+<td><strong><code>SELECT</code></strong></td>
+<td>从表中检索数据，是使用最频繁的操作</td>
+</tr>
+<tr>
+<td><strong>DML</strong></td>
+<td>Data Manipulation Language</td>
+<td>数据操作语言</td>
+<td><code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code></td>
+<td>用于增、删、改表中的记录</td>
+</tr>
+<tr>
+<td><strong>DDL</strong></td>
+<td>Data Definition Language</td>
+<td>数据定义语言</td>
+<td><code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>,
+<code>RENAME</code></td>
+<td>用于创建、修改、删除数据库对象（如表、索引）</td>
+</tr>
+<tr>
+<td><strong>DCL</strong></td>
+<td>Data Control Language</td>
+<td>数据控制语言</td>
+<td><code>GRANT</code>, <code>REVOKE</code></td>
+<td>用于控制用户对数据库的访问权限</td>
+</tr>
+<tr>
+<td><strong>TCL</strong></td>
+<td>Transaction Control Language</td>
+<td>事务控制语言</td>
+<td><code>COMMIT</code>, <code>ROLLBACK</code>,
+<code>SAVEPOINT</code></td>
+<td>用于管理数据库中的事务</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="最常用的sql命令详解">最常用的SQL命令详解</h3>
+<p>我们将围绕一个简单的 <code>users</code> 表进行讲解，表结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>列名</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>INT</td>
+<td>主键，唯一标识</td>
+</tr>
+<tr>
+<td><code>username</code></td>
+<td>VARCHAR(50)</td>
+<td>用户名</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>VARCHAR(100)</td>
+<td>邮箱</td>
+</tr>
+<tr>
+<td><code>age</code></td>
+<td>INT</td>
+<td>年龄</td>
+</tr>
+<tr>
+<td><code>country</code></td>
+<td>VARCHAR(50)</td>
+<td>国家</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>DATETIME</td>
+<td>创建时间</td>
+</tr>
+</tbody>
+</table>
+<h4 id="dql---查询数据-select">1. DQL - 查询数据 (SELECT)</h4>
+<p>这是最核心的操作。</p>
+<ul>
+<li><p><strong>查询所有列和所有行</strong>： <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users;</span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>查询特定的列</strong>： <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> username, email <span class="keyword">FROM</span> users;</span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用 <code>WHERE</code> 条件过滤</strong>：
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> country <span class="operator">=</span> <span class="string">&#x27;China&#x27;</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> age <span class="operator">&gt;</span> <span class="number">18</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">123</span>; </span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用 <code>ORDER BY</code> 排序</strong>：
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">ORDER</span> <span class="keyword">BY</span> age <span class="keyword">DESC</span>; <span class="comment">-- 按年龄降序</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">ORDER</span> <span class="keyword">BY</span> created_at <span class="keyword">ASC</span>; <span class="comment">-- 按创建时间升序</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用 <code>LIMIT</code> 限制返回数量</strong>：
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users LIMIT <span class="number">10</span>; <span class="comment">-- 返回前10条记录</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用 <code>LIKE</code> 进行模糊搜索</strong>：
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> username <span class="keyword">LIKE</span> <span class="string">&#x27;张%&#x27;</span>; <span class="comment">-- 查找姓&quot;张&quot;的用户</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用聚合函数</strong>（如 <code>COUNT</code>,
+<code>SUM</code>, <code>AVG</code>, <code>MAX</code>,
+<code>MIN</code>）： <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">FROM</span> users; <span class="comment">-- 统计用户总数</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">AVG</span>(age) <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> country <span class="operator">=</span> <span class="string">&#x27;China&#x27;</span>; <span class="comment">-- 中国用户的平均年龄</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用 <code>GROUP BY</code> 分组</strong>：
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> country, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">as</span> user_count </span><br><span class="line"><span class="keyword">FROM</span> users </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> country; <span class="comment">-- 统计每个国家的用户数量</span></span><br></pre></td></tr></table></figure></p></li>
+</ul>
+<h4 id="dml---操作数据">2. DML - 操作数据</h4>
+<ul>
+<li><p><strong><code>INSERT</code> - 插入新记录</strong>：
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 指定列名插入</span></span><br><span class="line"><span class="keyword">INSERT INTO</span> users (username, email, age, country)</span><br><span class="line"><span class="keyword">VALUES</span> (<span class="string">&#x27;john_doe&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>, <span class="number">25</span>, <span class="string">&#x27;USA&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 如果为所有列都提供值，可以省略列名</span></span><br><span class="line"><span class="keyword">INSERT INTO</span> users </span><br><span class="line"><span class="keyword">VALUES</span> (<span class="keyword">NULL</span>, <span class="string">&#x27;john_doe&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>, <span class="number">25</span>, <span class="string">&#x27;USA&#x27;</span>, NOW());</span><br><span class="line"><span class="comment">-- 注意：id 设为 NULL 或 DEFAULT 以便数据库自动生成（如果它是自增主键）</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong><code>UPDATE</code> - 更新现有记录</strong>：
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> users </span><br><span class="line"><span class="keyword">SET</span> age <span class="operator">=</span> <span class="number">26</span>, country <span class="operator">=</span> <span class="string">&#x27;Canada&#x27;</span> </span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">123</span>; <span class="comment">-- **非常重要：一定要用 WHERE，否则会更新所有行！**</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong><code>DELETE</code> - 删除记录</strong>：
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> users </span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">123</span>; <span class="comment">-- **极端重要：一定要用 WHERE，否则会删除所有行！**</span></span><br></pre></td></tr></table></figure></p></li>
+</ul>
+<h4 id="ddl---定义数据结构">3. DDL - 定义数据结构</h4>
+<ul>
+<li><p><strong><code>CREATE TABLE</code> - 创建表</strong>：
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> products (</span><br><span class="line">    id <span class="type">INT</span> <span class="keyword">PRIMARY KEY</span> AUTO_INCREMENT, <span class="comment">-- 主键，自增</span></span><br><span class="line">    name <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT NULL</span>,        <span class="comment">-- 非空约束</span></span><br><span class="line">    price <span class="type">DECIMAL</span>(<span class="number">10</span>, <span class="number">2</span>) <span class="keyword">NOT NULL</span>,     <span class="comment">-- 价格，10位数含2位小数</span></span><br><span class="line">    description TEXT</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong><code>ALTER TABLE</code> - 修改表结构</strong>：
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER TABLE</span> users <span class="keyword">ADD</span> <span class="keyword">COLUMN</span> avatar <span class="type">VARCHAR</span>(<span class="number">255</span>); <span class="comment">-- 添加新列</span></span><br><span class="line"><span class="keyword">ALTER TABLE</span> users <span class="keyword">DROP</span> <span class="keyword">COLUMN</span> age; <span class="comment">-- 删除列</span></span><br><span class="line"><span class="keyword">ALTER TABLE</span> users MODIFY <span class="keyword">COLUMN</span> email <span class="type">VARCHAR</span>(<span class="number">150</span>); <span class="comment">-- 修改列数据类型</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong><code>DROP TABLE</code> - 删除表</strong>：
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> products; <span class="comment">-- **危险操作！会删除整张表和所有数据！**</span></span><br></pre></td></tr></table></figure></p></li>
+</ul>
+<hr />
+<h3 id="高级主题简要介绍">高级主题（简要介绍）</h3>
+<ol type="1">
+<li><p><strong>连接（JOIN）</strong>：用于合并来自两个或多个表的行。</p>
+<ul>
+<li><code>INNER JOIN</code>：返回两个表中匹配的行。</li>
+<li><code>LEFT JOIN</code>：返回左表的所有行，即使右表中没有匹配。</li>
+</ul></li>
+<li><p><strong>索引（INDEX）</strong>：类似于书的目录，可以极大地加快数据检索速度（<code>SELECT</code>
+查询），但会减慢数据写入（<code>INSERT/UPDATE/DELETE</code>）速度。通常在
+<code>WHERE</code> 或 <code>JOIN</code> 条件中频繁使用的列上创建索引。
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX idx_email <span class="keyword">ON</span> users (email);</span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>事务（Transaction）</strong>：将多个SQL操作捆绑成一个单一的工作单元。这些操作要么<strong>全部成功</strong>，要么<strong>全部失败</strong>。这是保证数据完整性的关键机制（例如银行转账）。
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">START</span> TRANSACTION;</span><br><span class="line"><span class="comment">-- 从A账户扣钱</span></span><br><span class="line"><span class="keyword">UPDATE</span> accounts <span class="keyword">SET</span> balance <span class="operator">=</span> balance <span class="operator">-</span> <span class="number">100</span> <span class="keyword">WHERE</span> user_id <span class="operator">=</span> <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line"><span class="comment">-- 向B账户加钱</span></span><br><span class="line"><span class="keyword">UPDATE</span> accounts <span class="keyword">SET</span> balance <span class="operator">=</span> balance <span class="operator">+</span> <span class="number">100</span> <span class="keyword">WHERE</span> user_id <span class="operator">=</span> <span class="string">&#x27;B&#x27;</span>;</span><br><span class="line"><span class="comment">-- 如果两条语句都成功，则提交</span></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br><span class="line"><span class="comment">-- 如果任何一条失败，则回滚，所有操作撤销</span></span><br><span class="line"><span class="comment">-- ROLLBACK;</span></span><br></pre></td></tr></table></figure></p></li>
+</ol>
+<h3 id="总结与实践建议">总结与实践建议</h3>
+<ul>
+<li><strong>核心是
+<code>SELECT</code></strong>：绝大部分时间你都在写查询语句。</li>
+<li><strong>安全第一</strong>：<strong>永远使用参数化查询（<code>?</code>
+占位符）来防止 SQL 注入</strong>，不要手动拼接字符串。</li>
+<li><strong><code>WHERE</code> 子句是关键</strong>：在
+<code>UPDATE</code> 和 <code>DELETE</code> 时，忘记 <code>WHERE</code>
+子句是灾难性的。</li>
+<li><strong>先学基础</strong>：熟练掌握基本的 <code>SELECT</code>,
+<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>,
+<code>WHERE</code>, <code>ORDER BY</code>, <code>JOIN</code>
+后，再深入学索引、事务等高级主题。</li>
+<li><strong>多练习</strong>：最好的学习方式是在自己搭建的数据库环境（如
+MySQL, PostgreSQL 或在线练习平台）中实际操作。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">koen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2025/09/01/sql/">http://example.com/2025/09/01/sql/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/sql/">sql</a><a class="post-meta__tags" href="/tags/database/">database</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/09/03/network/" title="网络核心概念精讲"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">网络核心概念精讲</div></div><div class="info-2"><div class="info-item-1">网络核心概念精讲：从 IP 地址到 MAC 地址  本文旨在系统性地讲解计算机网络的核心概念，包括 IP 地址、子网、路由器、DNS 等，力求用通俗易懂的语言和比喻解释复杂的技术原理。  1. 网络层级模型：互联网的交通规则 理解网络，首先要理解它的分层模型。最著名的 OSI 七层模型和 TCP/IP 五层模型将复杂的网络通信过程分解为多个层次，每一层只专注于自己的任务。 一个经典的比喻是发送快递： - 应用层：你要寄的东西本身（比如一封信），决定了通信的内容（HTTP, FTP）。 - 传输层：将东西打包，贴上“顺丰”或“EMS”的标签，并确保包裹完整送达（TCP, UDP）。 - 网络层：填写收件人地址和发件人地址（IP 地址），负责在不同网络间选择路径（IP, 路由器）。 - 数据链路层：快递员在包裹上盖“下一站”的印章，负责在同一条路上把包裹送到下一个中转站（MAC 地址，交换机）。 - 物理层：包裹本身和运送的卡车、公路，负责最终的比特流传输（网线、光纤、无线电波）。 2. IP 地址：互联网上的“门牌号” 2.1 什么是 I...</div></div></div></a><a class="pagination-related" href="/2025/08/25/Koa/" title="Koa 框架使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">Koa 框架使用</div></div><div class="info-2"><div class="info-item-1">0. 准备工作 0.1 安装 Node.js（建议 Node 18+） 12node -v# v18.x 或更高 0.2 新建项目目录并初始化 123mkdir koa-step-by-stepcd koa-step-by-stepnpm init -y 0.3 ESM 设置（强烈建议） 在 package.json 顶层加入： 123{  "type": "module"} &gt; 作用：让 Node 默认使用 ES 模块语法（import/export），并支持 .mjs 文件。 0.4 推荐本地开发脚本（可热重载） 1npm i -D nodemon 在 package.json 里加入： 123456{  "scripts": {    "dev": "nodemon --ext mjs,js,json --watch . app.mjs",    "start": "node app.mjs"  }} &gt; 以后 npm run dev 就会自动重启，开发体验更好。  1. 阶段 A：最小可运行的 Koa（无路由、无中间件栈） 1...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">koen</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">20</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">38</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">10</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">核心概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sql%E8%AF%AD%E8%A8%80%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">2.</span> <span class="toc-text">SQL语言的分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84sql%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3"><span class="toc-number">3.</span> <span class="toc-text">最常用的SQL命令详解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#dql---%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE-select"><span class="toc-number">3.1.</span> <span class="toc-text">1. DQL - 查询数据 (SELECT)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dml---%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE"><span class="toc-number">3.2.</span> <span class="toc-text">2. DML - 操作数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ddl---%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">3.3.</span> <span class="toc-text">3. DDL - 定义数据结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E4%B8%BB%E9%A2%98%E7%AE%80%E8%A6%81%E4%BB%8B%E7%BB%8D"><span class="toc-number">4.</span> <span class="toc-text">高级主题（简要介绍）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E5%AE%9E%E8%B7%B5%E5%BB%BA%E8%AE%AE"><span class="toc-number">5.</span> <span class="toc-text">总结与实践建议</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/15/KL/" title="KL散度">KL散度</a><time datetime="2025-09-14T16:00:00.000Z" title="Created 2025-09-15 00:00:00">2025-09-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/15/py_collections/" title="collections">collections</a><time datetime="2025-09-14T16:00:00.000Z" title="Created 2025-09-15 00:00:00">2025-09-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/15/%E4%BB%8Edataset%E5%88%B0dataloader/" title="从dataset-&gt;dataloader">从dataset-&gt;dataloader</a><time datetime="2025-09-14T16:00:00.000Z" title="Created 2025-09-15 00:00:00">2025-09-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/08/gradio/" title="关于模型可视化---Gradio">关于模型可视化---Gradio</a><time datetime="2025-09-07T16:00:00.000Z" title="Created 2025-09-08 00:00:00">2025-09-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/03/network/" title="网络核心概念精讲">网络核心概念精讲</a><time datetime="2025-09-02T16:00:00.000Z" title="Created 2025-09-03 00:00:00">2025-09-03</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By koen</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.0</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

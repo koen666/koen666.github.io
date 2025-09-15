@@ -1,35 +1,699 @@
-extends includes/layout.pug
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>seaborn实现统计图绘制 | 木语</title><meta name="author" content="koen"><meta name="copyright" content="koen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本文介绍如何利用seaborn库实现统计图的绘制功能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="seaborn实现统计图绘制">
+<meta property="og:url" content="http://example.com/2025/08/10/seaborn/index.html">
+<meta property="og:site_name" content="木语">
+<meta property="og:description" content="本文介绍如何利用seaborn库实现统计图的绘制功能">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-08-10T06:50:00.000Z">
+<meta property="article:modified_time" content="2025-08-10T11:17:16.599Z">
+<meta property="article:author" content="koen">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="saaborn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "seaborn实现统计图绘制",
+  "url": "http://example.com/2025/08/10/seaborn/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2025-08-10T06:50:00.000Z",
+  "dateModified": "2025-08-10T11:17:16.599Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "koen",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/08/10/seaborn/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
 
-block content
-  #post
-    if top_img === false
-      include includes/header/post-info.pug
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
 
-    article#article-container.container.post-content
-      if theme.noticeOutdate.enable && page.noticeOutdate !== false
-        include includes/post/outdate-notice.pug
-      else
-        !=page.content
-    include includes/post/post-copyright.pug
-    .tag_share
-      if (page.tags.length > 0 && theme.post_meta.post.tags)
-        .post-meta__tag-list
-          each item, index in page.tags.data
-            a(href=url_for(item.path)).post-meta__tags #[=item.name]
-      include includes/third-party/share/index.pug
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
 
-    if theme.reward.enable && theme.reward.QR_code
-      !=partial('includes/post/reward', {}, {cache: true})
-
-    //- ad
-    if theme.ad && theme.ad.post
-      .ads-wrap!=theme.ad.post
-
-    if theme.post_pagination
-      include includes/pagination.pug
-    if theme.related_post && theme.related_post.enable
-      != related_posts(page,site.posts)
-
-    if page.comments !== false && theme.comments.use
-      - var commentsJsLoad = true
-      !=partial('includes/third-party/comments/index', {}, {cache: true})
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'seaborn实现统计图绘制',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="木语" type="application/atom+xml">
+</head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">木语</span></a><a class="nav-page-title" href="/"><span class="site-name">seaborn实现统计图绘制</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">seaborn实现统计图绘制</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-08-10T06:50:00.000Z" title="Created 2025-08-10 14:50:00">2025-08-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-08-10T11:17:16.599Z" title="Updated 2025-08-10 19:17:16">2025-08-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/code/">code</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="一设置主题和样式">一、设置主题和样式</h2>
+<p>在进行图形绘制之前先设置好主题/样式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置主题/样式（可选）</span></span><br><span class="line">sns.set_theme(style=<span class="string">&quot;darkgrid&quot;</span>)  <span class="comment"># 可选风格：darkgrid, whitegrid, dark, white, ticks</span></span><br><span class="line">sns.set_palette(<span class="string">&quot;husl&quot;</span>)          <span class="comment"># 设置调色板</span></span><br><span class="line">sns.set_context(<span class="string">&quot;paper&quot;</span>)         <span class="comment"># 设置上下文（paper, notebook, talk, poster）</span></span><br></pre></td></tr></table></figure>
+<p>以下是 <code>sns.set_theme()</code>、<code>sns.set_palette()</code>
+和 <code>sns.set_context()</code> 的可选参数整理成表格：</p>
+<h3 id="sns.set_theme-的-style-参数图表风格">1.
+<strong><code>sns.set_theme()</code> 的 <code>style</code>
+参数（图表风格）</strong></h3>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 83%" />
+</colgroup>
+<thead>
+<tr>
+<th>可选值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"darkgrid"</code></td>
+<td>默认值，灰色背景 + 白色网格线（适合大多数场景）</td>
+</tr>
+<tr>
+<td><code>"whitegrid"</code></td>
+<td>白色背景 + 深色网格线（适合强调数据精度）</td>
+</tr>
+<tr>
+<td><code>"dark"</code></td>
+<td>纯灰色背景，无网格线（简洁风格）</td>
+</tr>
+<tr>
+<td><code>"white"</code></td>
+<td>纯白色背景，无网格线（极简风格）</td>
+</tr>
+<tr>
+<td><code>"ticks"</code></td>
+<td>白色背景 + 坐标轴刻度（无网格线，类似 <code>"white"</code>
+但更清晰的刻度）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="sns.set_palette-的调色板参数">2.
+<strong><code>sns.set_palette()</code> 的调色板参数</strong></h3>
+<table>
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 77%" />
+</colgroup>
+<thead>
+<tr>
+<th>类型</th>
+<th>可选值示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Seaborn 内置名称</strong></td>
+<td><code>"husl"</code>, <code>"deep"</code>, <code>"muted"</code>,
+<code>"bright"</code>, <code>"pastel"</code>, <code>"dark"</code>,
+<code>"colorblind"</code></td>
+</tr>
+<tr>
+<td><strong>Matplotlib 色板</strong></td>
+<td><code>"viridis"</code>, <code>"plasma"</code>, <code>"magma"</code>,
+<code>"cividis"</code>（需安装 Matplotlib）</td>
+</tr>
+<tr>
+<td><strong>自定义颜色列表</strong></td>
+<td><code>["#FF5733", "#33FF57", "#3357FF"]</code>（十六进制/RGB
+颜色列表）</td>
+</tr>
+<tr>
+<td><strong>其他方法</strong></td>
+<td><code>sns.color_palette("hls", 8)</code> 或
+<code>sns.husl_palette(10)</code> 生成动态调色板</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="sns.set_context-的-context-参数图表比例">3.
+<strong><code>sns.set_context()</code> 的 <code>context</code>
+参数（图表比例）</strong></h3>
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 84%" />
+</colgroup>
+<thead>
+<tr>
+<th>可选值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"paper"</code></td>
+<td>最小比例（适合论文或小图，字体和线条较细）</td>
+</tr>
+<tr>
+<td><code>"notebook"</code></td>
+<td>默认值（适合 Jupyter Notebook 或常规屏幕显示）</td>
+</tr>
+<tr>
+<td><code>"talk"</code></td>
+<td>较大比例（适合幻灯片演示，字体和线条加粗）</td>
+</tr>
+<tr>
+<td><code>"poster"</code></td>
+<td>最大比例（适合海报或大屏展示，元素显著放大）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="附set_theme-的完整参数可选">附：<code>set_theme()</code>
+的完整参数（可选）</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>style</code></td>
+<td>str</td>
+<td>上述风格之一（如 <code>"darkgrid"</code>）</td>
+</tr>
+<tr>
+<td><code>palette</code></td>
+<td>str/list</td>
+<td>上述调色板之一</td>
+</tr>
+<tr>
+<td><code>context</code></td>
+<td>str/dict</td>
+<td>上述上下文之一或自定义字典</td>
+</tr>
+<tr>
+<td><code>font</code></td>
+<td>str</td>
+<td>字体（如 <code>"sans-serif"</code>）</td>
+</tr>
+<tr>
+<td><code>font_scale</code></td>
+<td>float</td>
+<td>字体缩放因子（默认 1）</td>
+</tr>
+<tr>
+<td><code>rc</code></td>
+<td>dict</td>
+<td>直接覆盖 Matplotlib 的 rcParams</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="示例代码">示例代码：</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line"><span class="comment"># 综合设置</span></span><br><span class="line">sns.set_theme(</span><br><span class="line">    style=<span class="string">&quot;whitegrid&quot;</span>,      <span class="comment"># 风格</span></span><br><span class="line">    palette=<span class="string">&quot;husl&quot;</span>,         <span class="comment"># 调色板</span></span><br><span class="line">    context=<span class="string">&quot;talk&quot;</span>,         <span class="comment"># 上下文</span></span><br><span class="line">    font=<span class="string">&quot;Arial&quot;</span>,           <span class="comment"># 字体</span></span><br><span class="line">    font_scale=<span class="number">1.2</span>          <span class="comment"># 字体大小缩放</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 单独设置（等效于上面的 palette）</span></span><br><span class="line">sns.set_palette(<span class="string">&quot;husl&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>如果需要更详细的参数（如自定义 <code>rc</code>），可以进一步参考 <a
+target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.set_theme.html">Seaborn
+官方文档</a>。</p>
+<h2 id="二调用seaborn绘图函数">二、调用seaborn绘图函数</h2>
+<p>Seaborn
+提供了多种高级绘图函数，主要分为以下几类：<strong>关系型</strong>、<strong>分布型</strong>、<strong>分类型</strong>、<strong>回归型</strong>、<strong>矩阵型</strong>
+和 <strong>其他辅助函数</strong>。以下是详细的分类说明和示例：</p>
+<hr />
+<h3 id="关系型绘图relational-plots">1. <strong>关系型绘图（Relational
+Plots）</strong></h3>
+<p>用于展示变量之间的关系（通常用于连续数据）。</p>
+<table>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 5%" />
+<col style="width: 42%" />
+<col style="width: 41%" />
+</colgroup>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+<th>示例图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sns.scatterplot()</code></td>
+<td>散点图（基础）</td>
+<td><code>sns.scatterplot(data=tips, x="total_bill", y="tip", hue="time")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/scatterplot_3_0.png"
+alt="scatterplot" /></td>
+</tr>
+<tr>
+<td><code>sns.lineplot()</code></td>
+<td>折线图（趋势展示）</td>
+<td><code>sns.lineplot(data=flights, x="year", y="passengers", hue="month")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/lineplot_3_0.png"
+alt="lineplot" /></td>
+</tr>
+<tr>
+<td><code>sns.relplot()</code></td>
+<td>分面关系图（散点）</td>
+<td><code>sns.relplot(data=tips, x="total_bill", y="tip", col="time", kind="scatter")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/scatterplot_29_0.png"
+alt="relplot scatter" /></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="分布型绘图distribution-plots">2.
+<strong>分布型绘图（Distribution Plots）</strong></h3>
+<p>用于展示数据的分布特征。</p>
+<table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 6%" />
+<col style="width: 36%" />
+<col style="width: 48%" />
+</colgroup>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+<th>示例图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sns.histplot()</code></td>
+<td>直方图（单变量分布）</td>
+<td><code>sns.histplot(data=tips, x="total_bill", bins=20, kde=True)</code></td>
+<td><img src="https://seaborn.pydata.org/_images/histplot_13_0.png"
+alt="histplot 示例" /> </td>
+</tr>
+<tr>
+<td><code>sns.kdeplot()</code></td>
+<td>核密度估计图（光滑分布）</td>
+<td><code>sns.kdeplot(data=tips, x="total_bill", hue="time", fill=True)</code></td>
+<td><img src="https://seaborn.pydata.org/_images/kdeplot_35_0.png"
+alt="kdeplot 示例" /> </td>
+</tr>
+<tr>
+<td><code>sns.ecdfplot()</code></td>
+<td>经验累积分布函数图</td>
+<td><code>sns.ecdfplot(data=tips, x="total_bill", hue="time")</code></td>
+<td><img
+src="https://raw.githubusercontent.com/koen666/image/master/exp.png"
+alt="ecdfplot 示例" /> <em>(示意)</em> </td>
+</tr>
+<tr>
+<td><code>sns.displot()</code></td>
+<td>分面分布图（直方/KDE）</td>
+<td><code>sns.displot(data=tips, x="total_bill", col="time", kind="hist")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/distributions_31_0.png"
+alt="displot 示例" /> </td>
+</tr>
+<tr>
+<td><code>sns.boxplot()</code></td>
+<td>箱线图（五数概括）</td>
+<td><code>sns.boxplot(data=tips, x="day", y="total_bill", hue="sex")</code></td>
+<td><img
+src="https://raw.githubusercontent.com/koen666/image/master/boxplot.png"
+alt="boxplot 示例" /> <em>(占位)</em> (<a
+target="_blank" rel="noopener" href="https://docs.kanaries.net/topics/Seaborn/sns-boxplot?utm_source=chatgpt.com"
+title="Seaborn Boxplot Tutorial: Create Custom Box Plots in Python">Kanaries
+Docs</a>)</td>
+</tr>
+<tr>
+<td><code>sns.violinplot()</code></td>
+<td>小提琴图（分布+密度）</td>
+<td><code>sns.violinplot(data=tips, x="day", y="total_bill", hue="sex", split=True)</code></td>
+<td><img src="https://seaborn.pydata.org/_images/violinplot_5_0.png"
+alt="violinplot 示例" /> <em>(占位)</em> (<a
+target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/python/violinplot-using-seaborn-in-python/?utm_source=chatgpt.com"
+title="Violinplot using Seaborn in Python - GeeksforGeeks">GeeksforGeeks</a>)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="分类型绘图categorical-plots">3. <strong>分类型绘图（Categorical
+Plots）</strong></h3>
+<p>用于分类变量的可视化。</p>
+<table>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 7%" />
+<col style="width: 43%" />
+<col style="width: 39%" />
+</colgroup>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+<th>示例图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sns.barplot()</code></td>
+<td>条形图（均值/置信区间）</td>
+<td><code>sns.barplot(data=tips, x="day", y="total_bill", hue="sex")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/barplot_9_0.png"
+alt="barplot" /></td>
+</tr>
+<tr>
+<td><code>sns.countplot()</code></td>
+<td>计数条形图（频次）</td>
+<td><code>sns.countplot(data=tips, x="day", hue="sex")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/countplot_1_0.png"
+alt="countplot" /></td>
+</tr>
+<tr>
+<td><code>sns.pointplot()</code></td>
+<td>点图（均值+置信区间）</td>
+<td><code>sns.pointplot(data=tips, x="day", y="total_bill", hue="sex")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/pointplot_6_0.png"
+alt="pointplot" /></td>
+</tr>
+<tr>
+<td><code>sns.stripplot()</code></td>
+<td>散点图（分类+抖动）</td>
+<td><code>sns.stripplot(data=tips, x="day", y="total_bill", hue="sex", dodge=True)</code></td>
+<td><img src="https://seaborn.pydata.org/_images/stripplot_8_0.png"
+alt="stripplot" /></td>
+</tr>
+<tr>
+<td><code>sns.swarmplot()</code></td>
+<td>蜂群图（无重叠散点）</td>
+<td><code>sns.swarmplot(data=tips, x="day", y="total_bill", hue="sex")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/swarmplot_5_0.png"
+alt="swarmplot" /></td>
+</tr>
+<tr>
+<td><code>sns.catplot()</code></td>
+<td>分面绘制分类图（多功能）</td>
+<td><code>sns.catplot(data=tips, x="day", y="total_bill", col="sex", kind="box")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/catplot_11_0.png"
+alt="catplot" /></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="回归型绘图regression-plots">4. <strong>回归型绘图（Regression
+Plots）</strong></h3>
+<p>用于展示变量间的统计关系（含回归线）。</p>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 7%" />
+<col style="width: 43%" />
+<col style="width: 39%" />
+</colgroup>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+<th>示例图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sns.regplot()</code></td>
+<td>回归散点图（单次拟合）</td>
+<td><code>sns.regplot(data=tips, x="total_bill", y="tip", ci=95)</code></td>
+<td><img src="https://seaborn.pydata.org/_images/regplot_5_0.png"
+alt="regplot" /></td>
+</tr>
+<tr>
+<td><code>sns.lmplot()</code></td>
+<td>分面回归图（多功能）</td>
+<td><code>sns.lmplot(data=tips, x="total_bill", y="tip", col="time", order=2)</code></td>
+<td><img src="https://seaborn.pydata.org/_images/lmplot_12_0.png"
+alt="lmplot" /></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="矩阵型绘图matrix-plots">5. <strong>矩阵型绘图（Matrix
+Plots）</strong></h3>
+<p>用于矩阵数据的可视化（如相关性、聚类）。</p>
+<table>
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 7%" />
+<col style="width: 36%" />
+<col style="width: 43%" />
+</colgroup>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+<th>示例图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sns.heatmap()</code></td>
+<td>热力图（矩阵值颜色映射）</td>
+<td><code>sns.heatmap(data.corr(), annot=True, cmap="coolwarm")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/heatmap_2_0.png"
+alt="heatmap" /></td>
+</tr>
+<tr>
+<td><code>sns.clustermap()</code></td>
+<td>聚类热力图（行列聚类）</td>
+<td><code>sns.clustermap(data.corr(), method="ward", cmap="vlag")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/clustermap_1_0.png"
+alt="clustermap" /></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="其他辅助函数">6. <strong>其他辅助函数</strong></h3>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 7%" />
+<col style="width: 46%" />
+<col style="width: 37%" />
+</colgroup>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+<th>示例图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sns.pairplot()</code></td>
+<td>变量两两关系矩阵</td>
+<td><code>sns.pairplot(data=iris, hue="species", diag_kind="kde")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/pairplot_6_0.png"
+alt="pairplot" /></td>
+</tr>
+<tr>
+<td><code>sns.jointplot()</code></td>
+<td>双变量联合分布图</td>
+<td><code>sns.jointplot(data=tips, x="total_bill", y="tip", kind="hex")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/jointplot_9_0.png"
+alt="jointplot" /></td>
+</tr>
+<tr>
+<td><code>sns.FacetGrid()</code></td>
+<td>自定义分面网格（底层控制）</td>
+<td><code>g = sns.FacetGrid(tips, col="time"); g.map(sns.scatterplot, "total_bill", "tip")</code></td>
+<td><img src="https://seaborn.pydata.org/_images/facetgrid_3_0.png"
+alt="FacetGrid" /></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="关键区别">关键区别：</h3>
+<ul>
+<li><strong>基础函数</strong>（如 <code>scatterplot</code>） vs
+<strong>分面函数</strong>（如 <code>relplot/catplot</code>）：
+<ul>
+<li>基础函数直接绘图，分面函数通过 <code>col/row</code> 参数分面。</li>
+</ul></li>
+<li><strong>通用参数</strong>：
+<ul>
+<li><code>data</code>：DataFrame 数据源。</li>
+<li><code>x/y</code>：轴变量。</li>
+<li><code>hue</code>：颜色分组。</li>
+<li><code>style</code>：标记样式分组。</li>
+<li><code>size</code>：大小分组。</li>
+</ul></li>
+</ul>
+<hr />
+<h3 id="示例分面绘图catplot">示例：分面绘图（<code>catplot</code>）</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">tips = sns.load_dataset(<span class="string">&quot;tips&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 分面绘制箱线图（按 day 分组，按 sex 分面）</span></span><br><span class="line">sns.catplot(</span><br><span class="line">    data=tips, </span><br><span class="line">    x=<span class="string">&quot;day&quot;</span>, </span><br><span class="line">    y=<span class="string">&quot;total_bill&quot;</span>,  </span><br><span class="line">    col=<span class="string">&quot;sex&quot;</span>, </span><br><span class="line">    kind=<span class="string">&quot;box&quot;</span>,</span><br><span class="line">    height=<span class="number">4</span>, </span><br><span class="line">    aspect=<span class="number">0.7</span></span><br><span class="line">)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="三结合-matplotlib-细化">三、结合 Matplotlib 细化</h2>
+<p>Seaborn 虽然提供了简洁的高级 API，但底层仍基于 Matplotlib。通过
+<code>matplotlib.pyplot</code>（通常缩写为 <code>plt</code>）可以对
+Seaborn 生成的图表进行精细化调整。以下是详细分类说明和实用技巧：</p>
+<hr />
+<h3 id="基础调整">3.1<strong>基础调整</strong></h3>
+<h4 id="标题与坐标轴标签">3.1.1 <strong>标题与坐标轴标签</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">tips = sns.load_dataset(<span class="string">&quot;tips&quot;</span>)</span><br><span class="line">sns.boxplot(data=tips, x=<span class="string">&quot;day&quot;</span>, y=<span class="string">&quot;total_bill&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加标题和标签</span></span><br><span class="line">plt.title(<span class="string">&quot;Daily Bill Distribution&quot;</span>, fontsize=<span class="number">14</span>, pad=<span class="number">20</span>)  <span class="comment"># pad 控制标题距离</span></span><br><span class="line">plt.xlabel(<span class="string">&quot;Day of Week&quot;</span>, fontsize=<span class="number">12</span>)                    <span class="comment"># X轴标签</span></span><br><span class="line">plt.ylabel(<span class="string">&quot;Total Bill ($)&quot;</span>, fontsize=<span class="number">12</span>)                 <span class="comment"># Y轴标签</span></span><br></pre></td></tr></table></figure>
+<h4 id="刻度调整">3.1.2 <strong>刻度调整</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 旋转刻度标签（解决重叠问题）</span></span><br><span class="line">plt.xticks(rotation=<span class="number">45</span>, ha=<span class="string">&quot;right&quot;</span>)  <span class="comment"># ha: 旋转后对齐方式（right/center）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置刻度范围和密度</span></span><br><span class="line">plt.yticks(ticks=[<span class="number">0</span>, <span class="number">20</span>, <span class="number">40</span>, <span class="number">60</span>], fontsize=<span class="number">10</span>)  <span class="comment"># 自定义Y轴刻度</span></span><br><span class="line">plt.xlim(-<span class="number">0.5</span>, <span class="number">3.5</span>)                             <span class="comment"># 设置X轴范围</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="图例与颜色">3.2 <strong>图例与颜色</strong></h3>
+<h4 id="图例控制">3.2.1 <strong>图例控制</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sns.scatterplot(data=tips, x=<span class="string">&quot;total_bill&quot;</span>, y=<span class="string">&quot;tip&quot;</span>, hue=<span class="string">&quot;time&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调整图例</span></span><br><span class="line">plt.legend(</span><br><span class="line">    title=<span class="string">&quot;Meal Time&quot;</span>,           <span class="comment"># 修改图例标题</span></span><br><span class="line">    loc=<span class="string">&quot;upper right&quot;</span>,           <span class="comment"># 位置（best, upper right, lower left等）</span></span><br><span class="line">    bbox_to_anchor=(<span class="number">1.3</span>, <span class="number">1</span>),     <span class="comment"># 将图例移到图外（右侧）</span></span><br><span class="line">    frameon=<span class="literal">False</span>                <span class="comment"># 去掉图例边框</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4 id="颜色与样式">3.2.2 <strong>颜色与样式</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改单个元素的颜色（通过Matplotlib）</span></span><br><span class="line">plt.setp(plt.gca().get_xticklabels(), color=<span class="string">&quot;red&quot;</span>)  <span class="comment"># 设置X轴刻度为红色</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改所有文本颜色（全局）</span></span><br><span class="line">plt.rcParams[<span class="string">&quot;text.color&quot;</span>] = <span class="string">&quot;blue&quot;</span>  <span class="comment"># 影响标题、标签等</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="布局与子图">3.3 <strong>布局与子图</strong></h3>
+<h4 id="调整边距与布局">3.3.1 <strong>调整边距与布局</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">plt.tight_layout(pad=<span class="number">2</span>)  <span class="comment"># 自动调整子图间距（防止标签重叠）</span></span><br><span class="line">plt.subplots_adjust(</span><br><span class="line">    left=<span class="number">0.1</span>,            <span class="comment"># 左边距</span></span><br><span class="line">    right=<span class="number">0.9</span>,           <span class="comment"># 右边距</span></span><br><span class="line">    top=<span class="number">0.9</span>,             <span class="comment"># 上边距</span></span><br><span class="line">    bottom=<span class="number">0.2</span>           <span class="comment"># 下边距</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4 id="与matplotlib子图结合">3.3.2
+<strong>与Matplotlib子图结合</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(<span class="number">1</span>, <span class="number">2</span>, figsize=(<span class="number">12</span>, <span class="number">5</span>))  <span class="comment"># 创建1行2列的子图</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在第一个子图绘制</span></span><br><span class="line">sns.histplot(data=tips, x=<span class="string">&quot;total_bill&quot;</span>, ax=axes[<span class="number">0</span>])</span><br><span class="line">axes[<span class="number">0</span>].set_title(<span class="string">&quot;Total Bill Distribution&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在第二个子图绘制</span></span><br><span class="line">sns.boxplot(data=tips, x=<span class="string">&quot;day&quot;</span>, y=<span class="string">&quot;total_bill&quot;</span>, ax=axes[<span class="number">1</span>])</span><br><span class="line">axes[<span class="number">1</span>].set_xticklabels([<span class="string">&quot;Thu&quot;</span>, <span class="string">&quot;Fri&quot;</span>, <span class="string">&quot;Sat&quot;</span>, <span class="string">&quot;Sun&quot;</span>])  <span class="comment"># 自定义刻度标签</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="高级定制">3.4 <strong>高级定制</strong></h3>
+<h4 id="网格线与背景">3.4.1 <strong>网格线与背景</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.grid(<span class="literal">True</span>, linestyle=<span class="string">&quot;--&quot;</span>, alpha=<span class="number">0.6</span>)  <span class="comment"># 显示网格线（虚线，半透明）</span></span><br><span class="line">plt.gca().set_facecolor(<span class="string">&quot;#f5f5f5&quot;</span>)         <span class="comment"># 设置图表背景色（灰色）</span></span><br></pre></td></tr></table></figure>
+<h4 id="注释与箭头">3.4.2 <strong>注释与箭头</strong></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加文本注释</span></span><br><span class="line">plt.text(</span><br><span class="line">    x=<span class="number">30</span>, y=<span class="number">10</span>,                           <span class="comment"># 坐标位置</span></span><br><span class="line">    s=<span class="string">&quot;Outlier Point&quot;</span>,                     <span class="comment"># 文本内容</span></span><br><span class="line">    fontsize=<span class="number">12</span>, </span><br><span class="line">    color=<span class="string">&quot;red&quot;</span>,</span><br><span class="line">    bbox=<span class="built_in">dict</span>(facecolor=<span class="string">&quot;white&quot;</span>, alpha=<span class="number">0.8</span>) <span class="comment"># 文本框样式</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加箭头</span></span><br><span class="line">plt.annotate(</span><br><span class="line">    <span class="string">&quot;High Tip&quot;</span>, </span><br><span class="line">    xy=(<span class="number">40</span>, <span class="number">10</span>),                          <span class="comment"># 箭头指向的点</span></span><br><span class="line">    xytext=(<span class="number">35</span>, <span class="number">15</span>),                      <span class="comment"># 文本起始位置</span></span><br><span class="line">    arrowprops=<span class="built_in">dict</span>(arrowstyle=<span class="string">&quot;-&gt;&quot;</span>, color=<span class="string">&quot;black&quot;</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="保存图表">3.5 <strong>保存图表</strong></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plt.savefig(</span><br><span class="line">    <span class="string">&quot;plot.png&quot;</span>, </span><br><span class="line">    dpi=<span class="number">300</span>,                   <span class="comment"># 分辨率</span></span><br><span class="line">    bbox_inches=<span class="string">&quot;tight&quot;</span>,       <span class="comment"># 去除白边</span></span><br><span class="line">    transparent=<span class="literal">True</span>           <span class="comment"># 透明背景（适合PPT）</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="调试技巧">3.6 <strong>调试技巧</strong></h3>
+<ol type="1">
+<li><p><strong>获取当前Axes对象</strong>： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ax = plt.gca()  <span class="comment"># 获取当前Axes</span></span><br><span class="line">ax.spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)  <span class="comment"># 隐藏顶部边框线</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>批量设置样式</strong>： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">params = &#123;</span><br><span class="line">    <span class="string">&quot;axes.labelsize&quot;</span>: <span class="number">14</span>,</span><br><span class="line">    <span class="string">&quot;xtick.labelsize&quot;</span>: <span class="number">12</span>,</span><br><span class="line">    <span class="string">&quot;ytick.labelsize&quot;</span>: <span class="number">12</span></span><br><span class="line">&#125;</span><br><span class="line">plt.rcParams.update(params)  <span class="comment"># 全局生效</span></span><br></pre></td></tr></table></figure></p></li>
+</ol>
+<hr />
+<h3 id="完整示例">完整示例</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据准备</span></span><br><span class="line">tips = sns.load_dataset(<span class="string">&quot;tips&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 绘制基础图表</span></span><br><span class="line">sns.boxplot(data=tips, x=<span class="string">&quot;day&quot;</span>, y=<span class="string">&quot;total_bill&quot;</span>, hue=<span class="string">&quot;sex&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 使用Matplotlib调整</span></span><br><span class="line">plt.title(<span class="string">&quot;Bill Distribution by Day and Gender&quot;</span>, fontsize=<span class="number">16</span>)</span><br><span class="line">plt.xlabel(<span class="string">&quot;Day&quot;</span>, fontsize=<span class="number">14</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;Total Bill (USD)&quot;</span>, fontsize=<span class="number">14</span>)</span><br><span class="line">plt.xticks(rotation=<span class="number">15</span>)</span><br><span class="line">plt.legend(title=<span class="string">&quot;Gender&quot;</span>, bbox_to_anchor=(<span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 调整布局</span></span><br><span class="line">plt.tight_layout()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 保存或显示</span></span><br><span class="line">plt.savefig(<span class="string">&quot;boxplot.png&quot;</span>, dpi=<span class="number">200</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="四显示或者保存图表格">四、显示或者保存图表格</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.show()</span><br><span class="line">plt.savefig(<span class="string">&quot;plot.png&quot;</span>, dpi=300, bbox_inches=<span class="string">&quot;tight&quot;</span>)</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">koen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2025/08/10/seaborn/">http://example.com/2025/08/10/seaborn/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/python/">python</a><a class="post-meta__tags" href="/tags/saaborn/">saaborn</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/08/11/scipy/" title="scipy基本模块及其使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">scipy基本模块及其使用</div></div><div class="info-2"><div class="info-item-1">一、常量模块(constants) 以下是 scipy.constants 模块中主要常量的分类表格：  1.1 数学常数    常量名 描述 值 (近似)     pi 圆周率 π 3.141592653589793   golden 黄金比例 (φ) 1.618033988749895   e 自然对数的底 (e) 2.718281828459045     1.2 通用物理常数         常量名 描述 值 (单位)     c 真空光速 299792458.0 m/s   h 普朗克常数 6.62607015e-34 J·s   hbar 约化普朗克常数 (h/2π) 1.054571817e-34 J·s   G 万有引力常数 6.67430e-11 m³/(kg·s²)   g 标准重力加速度 9.80665 m/s²     1.3 电磁学常数         常量名 描述 值 (单位)  ...</div></div></div></a><a class="pagination-related" href="/2025/08/09/yolo-dataset/" title="yolo+AnyLabeling实现数据集的自动标注"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">yolo+AnyLabeling实现数据集的自动标注</div></div><div class="info-2"><div class="info-item-1">一、环境准备 首先需要创建一个conda虚拟环境，进行yolo环境的搭建 1234567pip install yolopip install ultralyticspip install ncnnpip install onnx #用于格式转换 之后创建一个空目录，目录结构如下  准备好需要用来训练的部分图片(50-100张吧差不多，多点更好，但是就是用来标注数据的没必要那么多后面手动改改叭)，放到images文件下的三个文件夹都存放一份 二、数据标注 准备好环境搭建之后，新建一个classes.txt文件放到labels/train文件夹下，里面按顺序写好你的标签是什么比如我训练这个模型就是用来标注电池的  那你的文件内容就是 1battery ok，创建完成之后就开始对数据进行正常标注，然后将结果导出到labels/train文件夹下 三、开始训练 首先需要写入一个配置文件xxx.yaml写到yolotrain目录下，内容如下 1234567891011path: D:\yolotrain       # 数据集根目录train: images/...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/09/08/gradio/" title="关于模型可视化---Gradio"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-08</div><div class="info-item-2">关于模型可视化---Gradio</div></div><div class="info-2"><div class="info-item-1">1. Hello World 入门示例 123456789101112131415import gradio as gr# 定义一个最简单的函数def greet(name: str):    return f"Hello, {name}!"# 使用 Interface 快速构建应用demo = gr.Interface(    fn=greet,  # 绑定函数    inputs=gr.Textbox(label="请输入名字"),  # 输入组件：单行文本框    outputs=gr.Textbox(label="问候语"),    # 输出组件：单行文本框    title="Gradio Hello World")demo.launch(share=True)  # 启动服务，并生成公网临时链接 组件解释：  Textbox：输入或输出文本。支持 lines 参数控制多行。  Interface：最基础的封装方式，适合单函数输入输出。   2. 加载 PyTorch .pth 模型并结合 Gradio 这里我们以 ResNet18 二分类模型（...</div></div></div></a><a class="pagination-related" href="/2025/07/29/pipenv/" title="像前端package.json那样管理python依赖"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-07-29</div><div class="info-item-2">像前端package.json那样管理python依赖</div></div><div class="info-2"><div class="info-item-1"> 首先下载管理用的包  1pip install pipenv  初始化pipfile  1pipenv install 你的目录下就出现了pipfile和pipfile.lock，对于package.json和package-lock.json  将已有的依赖存放进pipenv中  1pip freeze &gt; requirements.txt #将已有依赖输出到requirements.txt文件下 将txt文件转码(powershell内输入) 12$content = Get-Content requirements.txt[System.IO.File]::WriteAllLines("fixed_requirements.txt", $content, (New-Object System.Text.UTF8Encoding $false)) 最后丢尽pipfile 1pipenv install -r fixed_requirements.txt  如何调用  非常简单，像npm i一样我们只需要 1pipenv ins...</div></div></div></a><a class="pagination-related" href="/2025/08/11/scipy/" title="scipy基本模块及其使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-11</div><div class="info-item-2">scipy基本模块及其使用</div></div><div class="info-2"><div class="info-item-1">一、常量模块(constants) 以下是 scipy.constants 模块中主要常量的分类表格：  1.1 数学常数    常量名 描述 值 (近似)     pi 圆周率 π 3.141592653589793   golden 黄金比例 (φ) 1.618033988749895   e 自然对数的底 (e) 2.718281828459045     1.2 通用物理常数         常量名 描述 值 (单位)     c 真空光速 299792458.0 m/s   h 普朗克常数 6.62607015e-34 J·s   hbar 约化普朗克常数 (h/2π) 1.054571817e-34 J·s   G 万有引力常数 6.67430e-11 m³/(kg·s²)   g 标准重力加速度 9.80665 m/s²     1.3 电磁学常数         常量名 描述 值 (单位)  ...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">koen</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">20</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">38</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">10</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E8%AE%BE%E7%BD%AE%E4%B8%BB%E9%A2%98%E5%92%8C%E6%A0%B7%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">一、设置主题和样式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sns.set_theme-%E7%9A%84-style-%E5%8F%82%E6%95%B0%E5%9B%BE%E8%A1%A8%E9%A3%8E%E6%A0%BC"><span class="toc-number">1.1.</span> <span class="toc-text">1.
+sns.set_theme() 的 style
+参数（图表风格）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sns.set_palette-%E7%9A%84%E8%B0%83%E8%89%B2%E6%9D%BF%E5%8F%82%E6%95%B0"><span class="toc-number">1.2.</span> <span class="toc-text">2.
+sns.set_palette() 的调色板参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sns.set_context-%E7%9A%84-context-%E5%8F%82%E6%95%B0%E5%9B%BE%E8%A1%A8%E6%AF%94%E4%BE%8B"><span class="toc-number">1.3.</span> <span class="toc-text">3.
+sns.set_context() 的 context
+参数（图表比例）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%99%84set_theme-%E7%9A%84%E5%AE%8C%E6%95%B4%E5%8F%82%E6%95%B0%E5%8F%AF%E9%80%89"><span class="toc-number">1.4.</span> <span class="toc-text">附：set_theme()
+的完整参数（可选）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="toc-number">1.5.</span> <span class="toc-text">示例代码：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E8%B0%83%E7%94%A8seaborn%E7%BB%98%E5%9B%BE%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">二、调用seaborn绘图函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB%E5%9E%8B%E7%BB%98%E5%9B%BErelational-plots"><span class="toc-number">2.1.</span> <span class="toc-text">1. 关系型绘图（Relational
+Plots）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%9E%8B%E7%BB%98%E5%9B%BEdistribution-plots"><span class="toc-number">2.2.</span> <span class="toc-text">2.
+分布型绘图（Distribution Plots）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%B1%BB%E5%9E%8B%E7%BB%98%E5%9B%BEcategorical-plots"><span class="toc-number">2.3.</span> <span class="toc-text">3. 分类型绘图（Categorical
+Plots）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E5%BD%92%E5%9E%8B%E7%BB%98%E5%9B%BEregression-plots"><span class="toc-number">2.4.</span> <span class="toc-text">4. 回归型绘图（Regression
+Plots）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E5%9E%8B%E7%BB%98%E5%9B%BEmatrix-plots"><span class="toc-number">2.5.</span> <span class="toc-text">5. 矩阵型绘图（Matrix
+Plots）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E8%BE%85%E5%8A%A9%E5%87%BD%E6%95%B0"><span class="toc-number">2.6.</span> <span class="toc-text">6. 其他辅助函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%8C%BA%E5%88%AB"><span class="toc-number">2.7.</span> <span class="toc-text">关键区别：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E5%88%86%E9%9D%A2%E7%BB%98%E5%9B%BEcatplot"><span class="toc-number">2.8.</span> <span class="toc-text">示例：分面绘图（catplot）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E7%BB%93%E5%90%88-matplotlib-%E7%BB%86%E5%8C%96"><span class="toc-number">3.</span> <span class="toc-text">三、结合 Matplotlib 细化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E8%B0%83%E6%95%B4"><span class="toc-number">3.1.</span> <span class="toc-text">3.1基础调整</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%87%E9%A2%98%E4%B8%8E%E5%9D%90%E6%A0%87%E8%BD%B4%E6%A0%87%E7%AD%BE"><span class="toc-number">3.1.1.</span> <span class="toc-text">3.1.1 标题与坐标轴标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%BB%E5%BA%A6%E8%B0%83%E6%95%B4"><span class="toc-number">3.1.2.</span> <span class="toc-text">3.1.2 刻度调整</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E4%BE%8B%E4%B8%8E%E9%A2%9C%E8%89%B2"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 图例与颜色</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E4%BE%8B%E6%8E%A7%E5%88%B6"><span class="toc-number">3.2.1.</span> <span class="toc-text">3.2.1 图例控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%9C%E8%89%B2%E4%B8%8E%E6%A0%B7%E5%BC%8F"><span class="toc-number">3.2.2.</span> <span class="toc-text">3.2.2 颜色与样式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%83%E5%B1%80%E4%B8%8E%E5%AD%90%E5%9B%BE"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 布局与子图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E6%95%B4%E8%BE%B9%E8%B7%9D%E4%B8%8E%E5%B8%83%E5%B1%80"><span class="toc-number">3.3.1.</span> <span class="toc-text">3.3.1 调整边距与布局</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8Ematplotlib%E5%AD%90%E5%9B%BE%E7%BB%93%E5%90%88"><span class="toc-number">3.3.2.</span> <span class="toc-text">3.3.2
+与Matplotlib子图结合</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E5%AE%9A%E5%88%B6"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 高级定制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E6%A0%BC%E7%BA%BF%E4%B8%8E%E8%83%8C%E6%99%AF"><span class="toc-number">3.4.1.</span> <span class="toc-text">3.4.1 网格线与背景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A%E4%B8%8E%E7%AE%AD%E5%A4%B4"><span class="toc-number">3.4.2.</span> <span class="toc-text">3.4.2 注释与箭头</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%9D%E5%AD%98%E5%9B%BE%E8%A1%A8"><span class="toc-number">3.5.</span> <span class="toc-text">3.5 保存图表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7"><span class="toc-number">3.6.</span> <span class="toc-text">3.6 调试技巧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%A4%BA%E4%BE%8B"><span class="toc-number">3.7.</span> <span class="toc-text">完整示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E6%98%BE%E7%A4%BA%E6%88%96%E8%80%85%E4%BF%9D%E5%AD%98%E5%9B%BE%E8%A1%A8%E6%A0%BC"><span class="toc-number">4.</span> <span class="toc-text">四、显示或者保存图表格</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/15/KL/" title="KL散度">KL散度</a><time datetime="2025-09-14T16:00:00.000Z" title="Created 2025-09-15 00:00:00">2025-09-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/15/py_collections/" title="collections">collections</a><time datetime="2025-09-14T16:00:00.000Z" title="Created 2025-09-15 00:00:00">2025-09-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/15/%E4%BB%8Edataset%E5%88%B0dataloader/" title="从dataset-&gt;dataloader">从dataset-&gt;dataloader</a><time datetime="2025-09-14T16:00:00.000Z" title="Created 2025-09-15 00:00:00">2025-09-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/08/gradio/" title="关于模型可视化---Gradio">关于模型可视化---Gradio</a><time datetime="2025-09-07T16:00:00.000Z" title="Created 2025-09-08 00:00:00">2025-09-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/03/network/" title="网络核心概念精讲">网络核心概念精讲</a><time datetime="2025-09-02T16:00:00.000Z" title="Created 2025-09-03 00:00:00">2025-09-03</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By koen</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.0</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
