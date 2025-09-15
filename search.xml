@@ -811,71 +811,6 @@ $$</span></p>
       </tags>
   </entry>
   <entry>
-    <title>Electron 基本使用教程</title>
-    <url>/2025/07/29/electron/</url>
-    <content><![CDATA[<blockquote>
-<p>以下以vue3为例结合electron实现跨平台开发</p>
-</blockquote>
-<hr />
-<h2
-id="一在项目根目录安装electorn-forge">一、在项目根目录安装electorn-forge</h2>
-<p>按照如下命令安装electron-forge</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save-dev electron @electron-forge/cli</span><br><span class="line">npx electron-forge import</span><br></pre></td></tr></table></figure>
-<p>这一步会在你的项目中创建一个 electron
-的基本目录结构，并配置打包命令。</p>
-<h2 id="二新建main.js">二、新建main.js</h2>
-<p>在根目录下新建/electron/main.js</p>
-<p>在main.js下复制如下代码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import &#123; app, BrowserWindow &#125; from <span class="string">&#x27;electron&#x27;</span>;</span><br><span class="line">import path from <span class="string">&#x27;path&#x27;</span>;</span><br><span class="line">import &#123; fileURLToPath &#125; from <span class="string">&#x27;url&#x27;</span>;</span><br><span class="line"></span><br><span class="line">// 解决 ES Module 中没有 __dirname 的问题</span><br><span class="line">const __filename = fileURLToPath(import.meta.url);</span><br><span class="line">const __dirname = path.dirname(__filename);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">createWindow</span></span> () &#123;</span><br><span class="line">  const win = new BrowserWindow(&#123;</span><br><span class="line">    width: 1200,</span><br><span class="line">    height: 800,</span><br><span class="line">    webPreferences: &#123;</span><br><span class="line">      preload: path.join(__dirname, <span class="string">&#x27;preload.js&#x27;</span>), // 可选，预加载脚本</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!app.isPackaged) &#123;</span><br><span class="line">    win.loadURL(<span class="string">&#x27;http://localhost:5173&#x27;</span>); // dev 模式加载 vite 前端</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>)); // prod 模式加载打包页面</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.whenReady().<span class="keyword">then</span>(() =&gt; &#123;</span><br><span class="line">  createWindow();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="三修改package.json">三、修改package.json</h2>
-<p>进入package.json文件，新增</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;main&quot;</span>: <span class="string">&quot;electron/main.js&quot;</span>,</span><br></pre></td></tr></table></figure>
-<p>注意scripts</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line"><span class="string">&quot;dev&quot;</span>: <span class="string">&quot;vite&quot;</span>,</span><br><span class="line"><span class="string">&quot;build&quot;</span>: <span class="string">&quot;vite build&quot;</span>,</span><br><span class="line"><span class="string">&quot;preview&quot;</span>: <span class="string">&quot;vite preview&quot;</span>,</span><br><span class="line"><span class="string">&quot;start&quot;</span>: <span class="string">&quot;electron-forge start&quot;</span>,</span><br><span class="line"><span class="string">&quot;package&quot;</span>: <span class="string">&quot;electron-forge package&quot;</span>,</span><br><span class="line"><span class="string">&quot;make&quot;</span>: <span class="string">&quot;electron-forge make&quot;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<h2 id="四开发测试流程">四、开发测试流程</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动 Vite 前端</span></span><br><span class="line">npm run dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新开一个终端，启动 Electron</span></span><br><span class="line">npm start</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="五打包发布测试">五、打包发布测试</h2>
-<p>先构建前端项目</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
-<p>修改main.js</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>));</span><br></pre></td></tr></table></figure>
-<p>打包</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run package</span><br></pre></td></tr></table></figure>
-<p>会在 out/ 目录生成你的桌面可执行程序（比如 Windows 下是 .exe
-文件）</p>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>electron</tag>
-        <tag>web</tag>
-        <tag>desk</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>常见BUG汇总</title>
-    <url>/2025/07/27/issue/</url>
-    <content><![CDATA[<h2 id="一markdown">一、Markdown</h2>
-<h3 id="为什么vscode编辑md文件十分卡顿">1.1
-为什么vscode编辑md文件十分卡顿</h3>
-<p>解决方法:禁用cpp extension pack扩展</p>
-<h2 id="二hexo">二、Hexo</h2>
-<h3 id="出现spawn-failed报错">2.1 出现Spawn Failed报错</h3>
-<p>首先尝试关机重启</p>
-<p>其次删除<code>.deploy_git</code>文件夹</p>
-<p>最后实在不行找到<code>.ssh</code>文件，先测试</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-<p>如果出现22端口连接超时，改成443端口即可 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">  HostName ssh.github.com</span><br><span class="line">  Port 443</span><br><span class="line">  User git</span><br><span class="line">  IdentityFile ~/.ssh/id_rsa</span><br><span class="line">  IdentitiesOnly <span class="built_in">yes</span></span><br></pre></td></tr></table></figure></p>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>markdown</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Docker 基本使用教程</title>
     <url>/2025/07/26/docker-basic-usage/</url>
     <content><![CDATA[<blockquote>
@@ -1057,101 +992,6 @@ style="text-align: left;"><code>docker run --network my_net nginx</code></td>
         <tag>learn</tag>
         <tag>linux</tag>
         <tag>virtual</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于模型可视化---Gradio</title>
-    <url>/2025/09/08/gradio/</url>
-    <content><![CDATA[<h2 id="hello-world-入门示例">1. Hello World 入门示例</h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> gradio <span class="keyword">as</span> gr</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个最简单的函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">greet</span>(<span class="params">name: <span class="built_in">str</span></span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="string">f"Hello, <span class="subst">{name}</span>!"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 Interface 快速构建应用</span></span><br><span class="line">demo = gr.Interface(</span><br><span class="line">    fn=greet,  <span class="comment"># 绑定函数</span></span><br><span class="line">    inputs=gr.Textbox(label=<span class="string">"请输入名字"</span>),  <span class="comment"># 输入组件：单行文本框</span></span><br><span class="line">    outputs=gr.Textbox(label=<span class="string">"问候语"</span>),    <span class="comment"># 输出组件：单行文本框</span></span><br><span class="line">    title=<span class="string">"Gradio Hello World"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">demo.launch(share=<span class="literal">True</span>)  <span class="comment"># 启动服务，并生成公网临时链接</span></span><br></pre></td></tr></table></figure>
-<h3 id="组件解释">组件解释：</h3>
-<ul>
-<li><strong>Textbox</strong>：输入或输出文本。支持 <code>lines</code>
-参数控制多行。<br>
-</li>
-<li><strong>Interface</strong>：最基础的封装方式，适合单函数输入输出。</li>
-</ul>
-<hr>
-<h2 id="加载-pytorch-.pth-模型并结合-gradio">2. 加载 PyTorch
-<code>.pth</code> 模型并结合 Gradio</h2>
-<p>这里我们以 <strong>ResNet18 二分类模型（猫 vs 狗）</strong>
-为例。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torchvision.transforms <span class="keyword">as</span> T</span><br><span class="line"><span class="keyword">from</span> torchvision.models <span class="keyword">import</span> resnet18</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> gradio <span class="keyword">as</span> gr</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 加载模型结构</span></span><br><span class="line">model = resnet18(pretrained=<span class="literal">False</span>)</span><br><span class="line">model.fc = torch.nn.Linear(model.fc.in_features, <span class="number">2</span>)  <span class="comment"># 修改输出层为二分类</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 加载训练好的权重（model.pth）</span></span><br><span class="line">model.load_state_dict(torch.load(<span class="string">"model.pth"</span>, map_location=<span class="string">"cpu"</span>))</span><br><span class="line">model.<span class="built_in">eval</span>()  <span class="comment"># 切换到推理模式</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 定义图像预处理（与训练时一致）</span></span><br><span class="line">transform = T.Compose([</span><br><span class="line">    T.Resize((<span class="number">224</span>, <span class="number">224</span>)),  <span class="comment"># 缩放图片</span></span><br><span class="line">    T.ToTensor(),          <span class="comment"># 转 Tensor</span></span><br><span class="line">    T.Normalize(mean=[<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>],</span><br><span class="line">                std=[<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>])  <span class="comment"># 标准化</span></span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 推理函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">predict</span>(<span class="params">img: Image.Image</span>):</span><br><span class="line">    x = transform(img).unsqueeze(<span class="number">0</span>)  <span class="comment"># 扩展 batch 维度 [1,3,224,224]</span></span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        logits = model(x)  <span class="comment"># 前向传播</span></span><br><span class="line">        probs = torch.softmax(logits, dim=<span class="number">1</span>).squeeze().tolist()  <span class="comment"># 转换为概率</span></span><br><span class="line">    <span class="keyword">return</span> {<span class="string">"cat"</span>: probs[<span class="number">0</span>], <span class="string">"dog"</span>: probs[<span class="number">1</span>]}  <span class="comment"># 输出字典</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. Gradio 封装</span></span><br><span class="line">demo = gr.Interface(</span><br><span class="line">    fn=predict,</span><br><span class="line">    inputs=gr.Image(<span class="built_in">type</span>=<span class="string">"pil"</span>, label=<span class="string">"上传图片"</span>),  <span class="comment"># 输入组件：图片</span></span><br><span class="line">    outputs=gr.Label(num_top_classes=<span class="number">2</span>, label=<span class="string">"预测结果"</span>),  <span class="comment"># 输出组件：标签（带概率条）</span></span><br><span class="line">    title=<span class="string">"猫狗分类器"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">demo.launch()</span><br></pre></td></tr></table></figure>
-<h3 id="组件解释-1">组件解释：</h3>
-<ul>
-<li><strong>Image</strong>：支持上传或摄像头输入，<code>type="pil"</code>
-表示输出为 PIL Image。<br>
-</li>
-<li><strong>Label</strong>：显示分类概率，自动渲染柱状图。</li>
-</ul>
-<hr>
-<h2 id="使用-blocks-构建多步骤界面">3. 使用 Blocks 构建多步骤界面</h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> gr.Blocks() <span class="keyword">as</span> demo:</span><br><span class="line">    <span class="keyword">with</span> gr.Row():  <span class="comment"># 横向布局</span></span><br><span class="line">        img = gr.Image(<span class="built_in">type</span>=<span class="string">"pil"</span>, label=<span class="string">"上传图片"</span>)</span><br><span class="line">        btn = gr.Button(<span class="string">"开始分类"</span>)  <span class="comment"># 按钮</span></span><br><span class="line">    out = gr.Label(num_top_classes=<span class="number">2</span>, label=<span class="string">"预测结果"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 点击按钮时执行预测</span></span><br><span class="line">    btn.click(fn=predict, inputs=img, outputs=out)</span><br><span class="line"></span><br><span class="line">demo.launch()</span><br></pre></td></tr></table></figure>
-<h3 id="组件解释-2">组件解释：</h3>
-<ul>
-<li><strong>Blocks</strong>：更灵活的 UI 构建方式。<br>
-</li>
-<li><strong>Row / Column</strong>：布局容器。<br>
-</li>
-<li><strong>Button</strong>：可绑定点击事件。</li>
-</ul>
-<hr>
-<h2 id="扩展功能显示-top-k-原图">4. 扩展功能：显示 Top-K + 原图</h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">predict_with_img</span>(<span class="params">img: Image.Image</span>):</span><br><span class="line">    x = transform(img).unsqueeze(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        logits = model(x)</span><br><span class="line">        probs = torch.softmax(logits, dim=<span class="number">1</span>).squeeze()</span><br><span class="line">    classes = [<span class="string">"cat"</span>, <span class="string">"dog"</span>]</span><br><span class="line">    result = {cls: <span class="built_in">float</span>(probs[i]) <span class="keyword">for</span> i, cls <span class="keyword">in</span> <span class="built_in">enumerate</span>(classes)}</span><br><span class="line">    <span class="keyword">return</span> result, img  <span class="comment"># 返回两个结果</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> gr.Blocks() <span class="keyword">as</span> demo:</span><br><span class="line">    <span class="keyword">with</span> gr.Row():</span><br><span class="line">        img = gr.Image(<span class="built_in">type</span>=<span class="string">"pil"</span>, label=<span class="string">"上传图片"</span>)</span><br><span class="line">        btn = gr.Button(<span class="string">"开始分类"</span>)</span><br><span class="line">    <span class="keyword">with</span> gr.Row():</span><br><span class="line">        out_probs = gr.Label(num_top_classes=<span class="number">2</span>, label=<span class="string">"预测概率"</span>)</span><br><span class="line">        out_img = gr.Image(label=<span class="string">"原始图片"</span>)</span><br><span class="line"></span><br><span class="line">    btn.click(fn=predict_with_img, inputs=img, outputs=[out_probs, out_img])</span><br><span class="line"></span><br><span class="line">demo.launch()</span><br></pre></td></tr></table></figure>
-<h3 id="解释">解释：</h3>
-<ul>
-<li>Gradio 函数可以返回多个输出 → 绑定到多个组件。<br>
-</li>
-<li><code>Label</code> 用来显示概率条，<code>Image</code>
-再显示原图，增强可解释性。</li>
-</ul>
-<hr>
-<h2 id="常用组件一览">5. 常用组件一览</h2>
-<ul>
-<li><strong>Textbox</strong>：输入文本<br>
-</li>
-<li><strong>Image</strong>：上传或拍照输入图像<br>
-</li>
-<li><strong>Label</strong>：展示分类结果与概率<br>
-</li>
-<li><strong>Button</strong>：触发事件<br>
-</li>
-<li><strong>Chatbot</strong>：用于构建对话界面（常见于 LLM Demo）<br>
-</li>
-<li><strong>File</strong>：上传或下载文件<br>
-</li>
-<li><strong>Slider / Dropdown / Checkbox</strong>：用于选择参数</li>
-</ul>
-<hr>
-<h2 id="队列与并发控制">6. 队列与并发控制</h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">demo.queue(concurrency_count=<span class="number">2</span>).launch()</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>queue()</strong>：开启请求队列，避免推理时间过长导致前端超时。<br>
-</li>
-<li><strong>concurrency_count</strong>：同时处理的请求数。</li>
-</ul>
-<hr>
-<h2 id="自定义样式-鉴权-安全性">7. 自定义样式 / 鉴权 / 安全性</h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> gr.Blocks(css=<span class="string">"body {background-color: #f0f8ff;}"</span>) <span class="keyword">as</span> demo:</span><br><span class="line">    img = gr.Image(<span class="built_in">type</span>=<span class="string">"pil"</span>)</span><br><span class="line">    out = gr.Label()</span><br><span class="line">    img.change(predict, inputs=img, outputs=out)</span><br><span class="line"></span><br><span class="line">demo.launch(auth=(<span class="string">"admin"</span>, <span class="string">"1234"</span>), allowed_paths=[<span class="string">"/safe_dir"</span>])</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>css=</strong>：注入自定义 CSS。<br>
-</li>
-<li><strong>auth=</strong>：开启简单的用户名/密码鉴权。<br>
-</li>
-<li><strong>allowed_paths=</strong>：限制访问目录，避免文件泄露。</li>
-</ul>
-<hr>
-<h2 id="最终完整应用整合版">8. 最终完整应用（整合版）</h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> gradio <span class="keyword">as</span> gr</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torchvision.transforms <span class="keyword">as</span> T</span><br><span class="line"><span class="keyword">from</span> torchvision.models <span class="keyword">import</span> resnet18</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模型加载</span></span><br><span class="line">model = resnet18(pretrained=<span class="literal">False</span>)</span><br><span class="line">model.fc = torch.nn.Linear(model.fc.in_features, <span class="number">2</span>)</span><br><span class="line">model.load_state_dict(torch.load(<span class="string">"model.pth"</span>, map_location=<span class="string">"cpu"</span>))</span><br><span class="line">model.<span class="built_in">eval</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 预处理</span></span><br><span class="line">transform = T.Compose([</span><br><span class="line">    T.Resize((<span class="number">224</span>, <span class="number">224</span>)),</span><br><span class="line">    T.ToTensor(),</span><br><span class="line">    T.Normalize(mean=[<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>],</span><br><span class="line">                std=[<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>])</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推理函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">predict</span>(<span class="params">img: Image.Image</span>):</span><br><span class="line">    x = transform(img).unsqueeze(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        logits = model(x)</span><br><span class="line">        probs = torch.softmax(logits, dim=<span class="number">1</span>).squeeze()</span><br><span class="line">    classes = [<span class="string">"cat"</span>, <span class="string">"dog"</span>]</span><br><span class="line">    <span class="keyword">return</span> {cls: <span class="built_in">float</span>(probs[i]) <span class="keyword">for</span> i, cls <span class="keyword">in</span> <span class="built_in">enumerate</span>(classes)}</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建应用</span></span><br><span class="line"><span class="keyword">with</span> gr.Blocks(css=<span class="string">"body {font-family: Arial; background:#fafafa;}"</span>) <span class="keyword">as</span> demo:</span><br><span class="line">    <span class="keyword">with</span> gr.Row():</span><br><span class="line">        img = gr.Image(<span class="built_in">type</span>=<span class="string">"pil"</span>, label=<span class="string">"上传图片"</span>)</span><br><span class="line">        btn = gr.Button(<span class="string">"开始分类"</span>)</span><br><span class="line">    <span class="keyword">with</span> gr.Row():</span><br><span class="line">        out = gr.Label(num_top_classes=<span class="number">2</span>, label=<span class="string">"预测结果"</span>)</span><br><span class="line">    btn.click(predict, inputs=img, outputs=out)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启队列 + 鉴权</span></span><br><span class="line">demo.queue(concurrency_count=<span class="number">2</span>).launch(auth=(<span class="string">"user"</span>, <span class="string">"pass"</span>))</span><br></pre></td></tr></table></figure>
-<hr>
-]]></content>
-      <categories>
-        <category>fronted</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>gradio</tag>
-        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -1481,6 +1321,228 @@ J：额外增强（可选但常用）</h2>
         <tag>Koa</tag>
         <tag>backen</tag>
         <tag>nodejs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git 基本使用教程</title>
+    <url>/2025/07/25/git-basic-usage/</url>
+    <content><![CDATA[<blockquote>
+<p>Git
+是一个分布式版本控制系统，适用于代码版本管理与团队协作开发。本文将简要介绍
+Git
+的一些常用操作命令，包括创建仓库、分支管理以及删除文件/分支的方法。</p>
+</blockquote>
+<hr />
+<h2 id="一初始化仓库">一、初始化仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在当前目录初始化一个 Git 仓库。</li>
+<li>会创建 <code>.git</code> 文件夹作为版本控制目录。</li>
+</ul>
+<hr />
+<h2 id="二克隆远程仓库">二、克隆远程仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;仓库地址&gt;</span><br><span class="line">```****</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/username/repo.git</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="三添加与提交文件">三、添加与提交文件</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add &lt;文件或目录&gt;</span><br><span class="line">git commit -m <span class="string">&quot;提交说明&quot;</span></span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;添加初始项目文件&quot;</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="四查看状态与历史">四、查看状态与历史</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status        <span class="comment"># 查看当前状态</span></span><br><span class="line">git <span class="built_in">log</span>           <span class="comment"># 查看提交历史</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="五分支操作">五、分支操作</h2>
+<h3 id="创建新分支">创建新分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="切换分支">切换分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch &lt;分支名&gt;</span><br><span class="line"><span class="comment"># 或（旧写法）</span></span><br><span class="line">git checkout &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="创建并切换新分支">创建并切换新分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch -c &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="查看所有分支">查看所有分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="六合并分支">六、合并分支</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git merge &lt;被合并的分支&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：需要先切换到目标分支，再合并。</p>
+</blockquote>
+<hr />
+<h2 id="七删除操作">七、删除操作</h2>
+<h3 id="删除文件">删除文件</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">rm</span> &lt;文件名&gt;</span><br><span class="line">git commit -m <span class="string">&quot;删除了某个文件&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="撤销删除误删恢复">撤销删除（误删恢复）</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -- &lt;文件名&gt;</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="删除本地分支">删除本地分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -d &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>-d</code> 是安全删除（合并过的才允许删）</li>
+<li><code>-D</code> 是强制删除（无论是否合并）</li>
+</ul>
+<h3 id="删除远程分支">删除远程分支</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin --delete &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="八推送与拉取">八、推送与拉取</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin &lt;分支名&gt;   <span class="comment"># 推送到远程</span></span><br><span class="line">git pull origin &lt;分支名&gt;   <span class="comment"># 拉取最新代码</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="九查看远程仓库">九、查看远程仓库</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="十总结">十、总结</h2>
+<p>Git
+是开发者日常工作中不可或缺的工具，掌握它可以大大提升协作效率与版本管理能力。希望本文能帮助你快速上手
+Git 的基本操作。</p>
+<hr />
+<blockquote>
+<p>如需进一步学习，可以参考 <a href="https://git-scm.com/book/zh/v2">Pro
+Git 中文版</a>。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>learn</tag>
+        <tag>repo</tag>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Electron 基本使用教程</title>
+    <url>/2025/07/29/electron/</url>
+    <content><![CDATA[<blockquote>
+<p>以下以vue3为例结合electron实现跨平台开发</p>
+</blockquote>
+<hr />
+<h2
+id="一在项目根目录安装electorn-forge">一、在项目根目录安装electorn-forge</h2>
+<p>按照如下命令安装electron-forge</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save-dev electron @electron-forge/cli</span><br><span class="line">npx electron-forge import</span><br></pre></td></tr></table></figure>
+<p>这一步会在你的项目中创建一个 electron
+的基本目录结构，并配置打包命令。</p>
+<h2 id="二新建main.js">二、新建main.js</h2>
+<p>在根目录下新建/electron/main.js</p>
+<p>在main.js下复制如下代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import &#123; app, BrowserWindow &#125; from <span class="string">&#x27;electron&#x27;</span>;</span><br><span class="line">import path from <span class="string">&#x27;path&#x27;</span>;</span><br><span class="line">import &#123; fileURLToPath &#125; from <span class="string">&#x27;url&#x27;</span>;</span><br><span class="line"></span><br><span class="line">// 解决 ES Module 中没有 __dirname 的问题</span><br><span class="line">const __filename = fileURLToPath(import.meta.url);</span><br><span class="line">const __dirname = path.dirname(__filename);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">createWindow</span></span> () &#123;</span><br><span class="line">  const win = new BrowserWindow(&#123;</span><br><span class="line">    width: 1200,</span><br><span class="line">    height: 800,</span><br><span class="line">    webPreferences: &#123;</span><br><span class="line">      preload: path.join(__dirname, <span class="string">&#x27;preload.js&#x27;</span>), // 可选，预加载脚本</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!app.isPackaged) &#123;</span><br><span class="line">    win.loadURL(<span class="string">&#x27;http://localhost:5173&#x27;</span>); // dev 模式加载 vite 前端</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>)); // prod 模式加载打包页面</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.whenReady().<span class="keyword">then</span>(() =&gt; &#123;</span><br><span class="line">  createWindow();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="三修改package.json">三、修改package.json</h2>
+<p>进入package.json文件，新增</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;main&quot;</span>: <span class="string">&quot;electron/main.js&quot;</span>,</span><br></pre></td></tr></table></figure>
+<p>注意scripts</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line"><span class="string">&quot;dev&quot;</span>: <span class="string">&quot;vite&quot;</span>,</span><br><span class="line"><span class="string">&quot;build&quot;</span>: <span class="string">&quot;vite build&quot;</span>,</span><br><span class="line"><span class="string">&quot;preview&quot;</span>: <span class="string">&quot;vite preview&quot;</span>,</span><br><span class="line"><span class="string">&quot;start&quot;</span>: <span class="string">&quot;electron-forge start&quot;</span>,</span><br><span class="line"><span class="string">&quot;package&quot;</span>: <span class="string">&quot;electron-forge package&quot;</span>,</span><br><span class="line"><span class="string">&quot;make&quot;</span>: <span class="string">&quot;electron-forge make&quot;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="四开发测试流程">四、开发测试流程</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动 Vite 前端</span></span><br><span class="line">npm run dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新开一个终端，启动 Electron</span></span><br><span class="line">npm start</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="五打包发布测试">五、打包发布测试</h2>
+<p>先构建前端项目</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+<p>修改main.js</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>));</span><br></pre></td></tr></table></figure>
+<p>打包</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run package</span><br></pre></td></tr></table></figure>
+<p>会在 out/ 目录生成你的桌面可执行程序（比如 Windows 下是 .exe
+文件）</p>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>electron</tag>
+        <tag>web</tag>
+        <tag>desk</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于模型可视化---Gradio</title>
+    <url>/2025/09/08/gradio/</url>
+    <content><![CDATA[<h2 id="hello-world-入门示例">1. Hello World 入门示例</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> gradio <span class="keyword">as</span> gr</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个最简单的函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">greet</span>(<span class="params">name: <span class="built_in">str</span></span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="string">f"Hello, <span class="subst">{name}</span>!"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 Interface 快速构建应用</span></span><br><span class="line">demo = gr.Interface(</span><br><span class="line">    fn=greet,  <span class="comment"># 绑定函数</span></span><br><span class="line">    inputs=gr.Textbox(label=<span class="string">"请输入名字"</span>),  <span class="comment"># 输入组件：单行文本框</span></span><br><span class="line">    outputs=gr.Textbox(label=<span class="string">"问候语"</span>),    <span class="comment"># 输出组件：单行文本框</span></span><br><span class="line">    title=<span class="string">"Gradio Hello World"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">demo.launch(share=<span class="literal">True</span>)  <span class="comment"># 启动服务，并生成公网临时链接</span></span><br></pre></td></tr></table></figure>
+<h3 id="组件解释">组件解释：</h3>
+<ul>
+<li><strong>Textbox</strong>：输入或输出文本。支持 <code>lines</code>
+参数控制多行。<br>
+</li>
+<li><strong>Interface</strong>：最基础的封装方式，适合单函数输入输出。</li>
+</ul>
+<hr>
+<h2 id="加载-pytorch-.pth-模型并结合-gradio">2. 加载 PyTorch
+<code>.pth</code> 模型并结合 Gradio</h2>
+<p>这里我们以 <strong>ResNet18 二分类模型（猫 vs 狗）</strong>
+为例。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torchvision.transforms <span class="keyword">as</span> T</span><br><span class="line"><span class="keyword">from</span> torchvision.models <span class="keyword">import</span> resnet18</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> gradio <span class="keyword">as</span> gr</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 加载模型结构</span></span><br><span class="line">model = resnet18(pretrained=<span class="literal">False</span>)</span><br><span class="line">model.fc = torch.nn.Linear(model.fc.in_features, <span class="number">2</span>)  <span class="comment"># 修改输出层为二分类</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 加载训练好的权重（model.pth）</span></span><br><span class="line">model.load_state_dict(torch.load(<span class="string">"model.pth"</span>, map_location=<span class="string">"cpu"</span>))</span><br><span class="line">model.<span class="built_in">eval</span>()  <span class="comment"># 切换到推理模式</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 定义图像预处理（与训练时一致）</span></span><br><span class="line">transform = T.Compose([</span><br><span class="line">    T.Resize((<span class="number">224</span>, <span class="number">224</span>)),  <span class="comment"># 缩放图片</span></span><br><span class="line">    T.ToTensor(),          <span class="comment"># 转 Tensor</span></span><br><span class="line">    T.Normalize(mean=[<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>],</span><br><span class="line">                std=[<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>])  <span class="comment"># 标准化</span></span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 推理函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">predict</span>(<span class="params">img: Image.Image</span>):</span><br><span class="line">    x = transform(img).unsqueeze(<span class="number">0</span>)  <span class="comment"># 扩展 batch 维度 [1,3,224,224]</span></span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        logits = model(x)  <span class="comment"># 前向传播</span></span><br><span class="line">        probs = torch.softmax(logits, dim=<span class="number">1</span>).squeeze().tolist()  <span class="comment"># 转换为概率</span></span><br><span class="line">    <span class="keyword">return</span> {<span class="string">"cat"</span>: probs[<span class="number">0</span>], <span class="string">"dog"</span>: probs[<span class="number">1</span>]}  <span class="comment"># 输出字典</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. Gradio 封装</span></span><br><span class="line">demo = gr.Interface(</span><br><span class="line">    fn=predict,</span><br><span class="line">    inputs=gr.Image(<span class="built_in">type</span>=<span class="string">"pil"</span>, label=<span class="string">"上传图片"</span>),  <span class="comment"># 输入组件：图片</span></span><br><span class="line">    outputs=gr.Label(num_top_classes=<span class="number">2</span>, label=<span class="string">"预测结果"</span>),  <span class="comment"># 输出组件：标签（带概率条）</span></span><br><span class="line">    title=<span class="string">"猫狗分类器"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">demo.launch()</span><br></pre></td></tr></table></figure>
+<h3 id="组件解释-1">组件解释：</h3>
+<ul>
+<li><strong>Image</strong>：支持上传或摄像头输入，<code>type="pil"</code>
+表示输出为 PIL Image。<br>
+</li>
+<li><strong>Label</strong>：显示分类概率，自动渲染柱状图。</li>
+</ul>
+<hr>
+<h2 id="使用-blocks-构建多步骤界面">3. 使用 Blocks 构建多步骤界面</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> gr.Blocks() <span class="keyword">as</span> demo:</span><br><span class="line">    <span class="keyword">with</span> gr.Row():  <span class="comment"># 横向布局</span></span><br><span class="line">        img = gr.Image(<span class="built_in">type</span>=<span class="string">"pil"</span>, label=<span class="string">"上传图片"</span>)</span><br><span class="line">        btn = gr.Button(<span class="string">"开始分类"</span>)  <span class="comment"># 按钮</span></span><br><span class="line">    out = gr.Label(num_top_classes=<span class="number">2</span>, label=<span class="string">"预测结果"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 点击按钮时执行预测</span></span><br><span class="line">    btn.click(fn=predict, inputs=img, outputs=out)</span><br><span class="line"></span><br><span class="line">demo.launch()</span><br></pre></td></tr></table></figure>
+<h3 id="组件解释-2">组件解释：</h3>
+<ul>
+<li><strong>Blocks</strong>：更灵活的 UI 构建方式。<br>
+</li>
+<li><strong>Row / Column</strong>：布局容器。<br>
+</li>
+<li><strong>Button</strong>：可绑定点击事件。</li>
+</ul>
+<hr>
+<h2 id="扩展功能显示-top-k-原图">4. 扩展功能：显示 Top-K + 原图</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">predict_with_img</span>(<span class="params">img: Image.Image</span>):</span><br><span class="line">    x = transform(img).unsqueeze(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        logits = model(x)</span><br><span class="line">        probs = torch.softmax(logits, dim=<span class="number">1</span>).squeeze()</span><br><span class="line">    classes = [<span class="string">"cat"</span>, <span class="string">"dog"</span>]</span><br><span class="line">    result = {cls: <span class="built_in">float</span>(probs[i]) <span class="keyword">for</span> i, cls <span class="keyword">in</span> <span class="built_in">enumerate</span>(classes)}</span><br><span class="line">    <span class="keyword">return</span> result, img  <span class="comment"># 返回两个结果</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> gr.Blocks() <span class="keyword">as</span> demo:</span><br><span class="line">    <span class="keyword">with</span> gr.Row():</span><br><span class="line">        img = gr.Image(<span class="built_in">type</span>=<span class="string">"pil"</span>, label=<span class="string">"上传图片"</span>)</span><br><span class="line">        btn = gr.Button(<span class="string">"开始分类"</span>)</span><br><span class="line">    <span class="keyword">with</span> gr.Row():</span><br><span class="line">        out_probs = gr.Label(num_top_classes=<span class="number">2</span>, label=<span class="string">"预测概率"</span>)</span><br><span class="line">        out_img = gr.Image(label=<span class="string">"原始图片"</span>)</span><br><span class="line"></span><br><span class="line">    btn.click(fn=predict_with_img, inputs=img, outputs=[out_probs, out_img])</span><br><span class="line"></span><br><span class="line">demo.launch()</span><br></pre></td></tr></table></figure>
+<h3 id="解释">解释：</h3>
+<ul>
+<li>Gradio 函数可以返回多个输出 → 绑定到多个组件。<br>
+</li>
+<li><code>Label</code> 用来显示概率条，<code>Image</code>
+再显示原图，增强可解释性。</li>
+</ul>
+<hr>
+<h2 id="常用组件一览">5. 常用组件一览</h2>
+<ul>
+<li><strong>Textbox</strong>：输入文本<br>
+</li>
+<li><strong>Image</strong>：上传或拍照输入图像<br>
+</li>
+<li><strong>Label</strong>：展示分类结果与概率<br>
+</li>
+<li><strong>Button</strong>：触发事件<br>
+</li>
+<li><strong>Chatbot</strong>：用于构建对话界面（常见于 LLM Demo）<br>
+</li>
+<li><strong>File</strong>：上传或下载文件<br>
+</li>
+<li><strong>Slider / Dropdown / Checkbox</strong>：用于选择参数</li>
+</ul>
+<hr>
+<h2 id="队列与并发控制">6. 队列与并发控制</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">demo.queue(concurrency_count=<span class="number">2</span>).launch()</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>queue()</strong>：开启请求队列，避免推理时间过长导致前端超时。<br>
+</li>
+<li><strong>concurrency_count</strong>：同时处理的请求数。</li>
+</ul>
+<hr>
+<h2 id="自定义样式-鉴权-安全性">7. 自定义样式 / 鉴权 / 安全性</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> gr.Blocks(css=<span class="string">"body {background-color: #f0f8ff;}"</span>) <span class="keyword">as</span> demo:</span><br><span class="line">    img = gr.Image(<span class="built_in">type</span>=<span class="string">"pil"</span>)</span><br><span class="line">    out = gr.Label()</span><br><span class="line">    img.change(predict, inputs=img, outputs=out)</span><br><span class="line"></span><br><span class="line">demo.launch(auth=(<span class="string">"admin"</span>, <span class="string">"1234"</span>), allowed_paths=[<span class="string">"/safe_dir"</span>])</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>css=</strong>：注入自定义 CSS。<br>
+</li>
+<li><strong>auth=</strong>：开启简单的用户名/密码鉴权。<br>
+</li>
+<li><strong>allowed_paths=</strong>：限制访问目录，避免文件泄露。</li>
+</ul>
+<hr>
+<h2 id="最终完整应用整合版">8. 最终完整应用（整合版）</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> gradio <span class="keyword">as</span> gr</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torchvision.transforms <span class="keyword">as</span> T</span><br><span class="line"><span class="keyword">from</span> torchvision.models <span class="keyword">import</span> resnet18</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模型加载</span></span><br><span class="line">model = resnet18(pretrained=<span class="literal">False</span>)</span><br><span class="line">model.fc = torch.nn.Linear(model.fc.in_features, <span class="number">2</span>)</span><br><span class="line">model.load_state_dict(torch.load(<span class="string">"model.pth"</span>, map_location=<span class="string">"cpu"</span>))</span><br><span class="line">model.<span class="built_in">eval</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 预处理</span></span><br><span class="line">transform = T.Compose([</span><br><span class="line">    T.Resize((<span class="number">224</span>, <span class="number">224</span>)),</span><br><span class="line">    T.ToTensor(),</span><br><span class="line">    T.Normalize(mean=[<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>],</span><br><span class="line">                std=[<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>])</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推理函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">predict</span>(<span class="params">img: Image.Image</span>):</span><br><span class="line">    x = transform(img).unsqueeze(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        logits = model(x)</span><br><span class="line">        probs = torch.softmax(logits, dim=<span class="number">1</span>).squeeze()</span><br><span class="line">    classes = [<span class="string">"cat"</span>, <span class="string">"dog"</span>]</span><br><span class="line">    <span class="keyword">return</span> {cls: <span class="built_in">float</span>(probs[i]) <span class="keyword">for</span> i, cls <span class="keyword">in</span> <span class="built_in">enumerate</span>(classes)}</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建应用</span></span><br><span class="line"><span class="keyword">with</span> gr.Blocks(css=<span class="string">"body {font-family: Arial; background:#fafafa;}"</span>) <span class="keyword">as</span> demo:</span><br><span class="line">    <span class="keyword">with</span> gr.Row():</span><br><span class="line">        img = gr.Image(<span class="built_in">type</span>=<span class="string">"pil"</span>, label=<span class="string">"上传图片"</span>)</span><br><span class="line">        btn = gr.Button(<span class="string">"开始分类"</span>)</span><br><span class="line">    <span class="keyword">with</span> gr.Row():</span><br><span class="line">        out = gr.Label(num_top_classes=<span class="number">2</span>, label=<span class="string">"预测结果"</span>)</span><br><span class="line">    btn.click(predict, inputs=img, outputs=out)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启队列 + 鉴权</span></span><br><span class="line">demo.queue(concurrency_count=<span class="number">2</span>).launch(auth=(<span class="string">"user"</span>, <span class="string">"pass"</span>))</span><br></pre></td></tr></table></figure>
+<hr>
+]]></content>
+      <categories>
+        <category>fronted</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>gradio</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -2494,90 +2556,6 @@ IP，并根据路由表将数据包发往互联网的下一跳。 4. 在每一�
       </tags>
   </entry>
   <entry>
-    <title>Git 基本使用教程</title>
-    <url>/2025/07/25/git-basic-usage/</url>
-    <content><![CDATA[<blockquote>
-<p>Git
-是一个分布式版本控制系统，适用于代码版本管理与团队协作开发。本文将简要介绍
-Git
-的一些常用操作命令，包括创建仓库、分支管理以及删除文件/分支的方法。</p>
-</blockquote>
-<hr />
-<h2 id="一初始化仓库">一、初始化仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
-<ul>
-<li>在当前目录初始化一个 Git 仓库。</li>
-<li>会创建 <code>.git</code> 文件夹作为版本控制目录。</li>
-</ul>
-<hr />
-<h2 id="二克隆远程仓库">二、克隆远程仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;仓库地址&gt;</span><br><span class="line">```****</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/username/repo.git</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="三添加与提交文件">三、添加与提交文件</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add &lt;文件或目录&gt;</span><br><span class="line">git commit -m <span class="string">&quot;提交说明&quot;</span></span><br></pre></td></tr></table></figure>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;添加初始项目文件&quot;</span></span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="四查看状态与历史">四、查看状态与历史</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git status        <span class="comment"># 查看当前状态</span></span><br><span class="line">git <span class="built_in">log</span>           <span class="comment"># 查看提交历史</span></span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="五分支操作">五、分支操作</h2>
-<h3 id="创建新分支">创建新分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="切换分支">切换分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch &lt;分支名&gt;</span><br><span class="line"><span class="comment"># 或（旧写法）</span></span><br><span class="line">git checkout &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="创建并切换新分支">创建并切换新分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git switch -c &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="查看所有分支">查看所有分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="六合并分支">六、合并分支</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git merge &lt;被合并的分支&gt;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注意：需要先切换到目标分支，再合并。</p>
-</blockquote>
-<hr />
-<h2 id="七删除操作">七、删除操作</h2>
-<h3 id="删除文件">删除文件</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">rm</span> &lt;文件名&gt;</span><br><span class="line">git commit -m <span class="string">&quot;删除了某个文件&quot;</span></span><br></pre></td></tr></table></figure>
-<h3 id="撤销删除误删恢复">撤销删除（误删恢复）</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout -- &lt;文件名&gt;</span><br></pre></td></tr></table></figure>
-<hr />
-<h3 id="删除本地分支">删除本地分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -d &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>-d</code> 是安全删除（合并过的才允许删）</li>
-<li><code>-D</code> 是强制删除（无论是否合并）</li>
-</ul>
-<h3 id="删除远程分支">删除远程分支</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin --delete &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="八推送与拉取">八、推送与拉取</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin &lt;分支名&gt;   <span class="comment"># 推送到远程</span></span><br><span class="line">git pull origin &lt;分支名&gt;   <span class="comment"># 拉取最新代码</span></span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="九查看远程仓库">九、查看远程仓库</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
-<hr />
-<h2 id="十总结">十、总结</h2>
-<p>Git
-是开发者日常工作中不可或缺的工具，掌握它可以大大提升协作效率与版本管理能力。希望本文能帮助你快速上手
-Git 的基本操作。</p>
-<hr />
-<blockquote>
-<p>如需进一步学习，可以参考 <a href="https://git-scm.com/book/zh/v2">Pro
-Git 中文版</a>。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>learn</tag>
-        <tag>repo</tag>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>scipy基本模块及其使用</title>
     <url>/2025/08/11/scipy/</url>
     <content><![CDATA[<h2 id="一常量模块constants">一、常量模块(constants)</h2>
@@ -2929,242 +2907,6 @@ A 是约束矩阵（系统限制的编码）=&gt;不等式左侧系数 A= $
         <tag>math</tag>
         <tag>python</tag>
         <tag>scipy</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>yolo+AnyLabeling实现数据集的自动标注</title>
-    <url>/2025/08/09/yolo-dataset/</url>
-    <content><![CDATA[<h2 id="一环境准备">一、环境准备</h2>
-<p>首先需要创建一个conda虚拟环境，进行yolo环境的搭建</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install yolo</span><br><span class="line"></span><br><span class="line">pip install ultralytics</span><br><span class="line"></span><br><span class="line">pip install ncnn</span><br><span class="line"></span><br><span class="line">pip install onnx <span class="comment">#用于格式转换</span></span><br></pre></td></tr></table></figure>
-<p>之后创建一个空目录，目录结构如下</p>
-<p><img src="/images/yolo-dataset/yolotraindir.png" /></p>
-<p>准备好需要用来训练的部分图片(50-100张吧差不多，多点更好，但是就是用来标注数据的没必要那么多后面手动改改叭)，放到images文件下的三个文件夹都存放一份</p>
-<h2 id="二数据标注">二、数据标注</h2>
-<p>准备好环境搭建之后，新建一个<code>classes.txt</code>文件放到labels/train文件夹下，里面按顺序写好你的标签是什么比如我训练这个模型就是用来标注电池的</p>
-<p><img src="/images/yolo-dataset/battery.png" /></p>
-<p>那你的文件内容就是</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">battery</span><br></pre></td></tr></table></figure>
-<p>ok，创建完成之后就开始对数据进行正常标注，然后将结果导出到labels/train文件夹下</p>
-<h2 id="三开始训练">三、开始训练</h2>
-<p>首先需要写入一个配置文件<code>xxx.yaml</code>写到yolotrain目录下，内容如下</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">path: D:\yolotrain       <span class="comment"># 数据集根目录</span></span><br><span class="line">train: images/train      <span class="comment"># 训练集相对路径</span></span><br><span class="line">val: images/val          <span class="comment"># 验证集相对路径</span></span><br><span class="line"><span class="built_in">test</span>: images/test        <span class="comment"># 测试集相对路径</span></span><br><span class="line"></span><br><span class="line">nc: 1                    <span class="comment"># 类别数量</span></span><br><span class="line">names: [<span class="string">&quot;battery&quot;</span>]       <span class="comment"># 类别名称列表</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 高级参数（可选）</span></span><br><span class="line">roboflow: &#123;&#125;             <span class="comment"># 兼容RoboFlow数据集</span></span><br><span class="line">download: null           <span class="comment"># 数据集下载URL</span></span><br></pre></td></tr></table></figure>
-<p>在虚拟环境下进入yolotrain目录输入指令开始训练</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yolo detect train </span><br><span class="line"><span class="comment">#data是你自己的yaml文件路径</span></span><br><span class="line">  data=D:/yolotrain/xxx.yaml </span><br><span class="line">  model=yolov8s.pt      <span class="comment"># 预训练模型（放在yolotrain目录下）</span></span><br><span class="line">  epochs=100            <span class="comment"># 迭代次数</span></span><br><span class="line">  imgsz=640             <span class="comment"># 输入分辨率</span></span><br><span class="line">  batch=16              <span class="comment"># 根据GPU调整</span></span><br><span class="line">  device=0              <span class="comment"># 0代表GPU练</span></span><br><span class="line"><span class="comment">#下面是参数，命令合并成一行</span></span><br></pre></td></tr></table></figure>
-<p>若要进行验证把<code>train</code>改成<code>val</code>就行了，然后那个yolo模型我放在我的git仓库里了
-<a href="https://github.com/koen666/yolo">yolo模型</a></p>
-<h2 id="四导出onnx">四、导出onnx</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yolo <span class="built_in">export</span> model=D:/yolotrain/best.pt format=onnx</span><br></pre></td></tr></table></figure>
-<p>训练完后，可以从新得到的run文件夹下的best.pt(这个就是训练的最好的模型)文件挪到外面，在调用上面那个命令生成best.onnx文件</p>
-<p>然后再创建一个xxx.yaml文件写入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">type</span>: yolov8</span><br><span class="line">name: yolov8s-r20230520</span><br><span class="line">display_name: koen</span><br><span class="line">model_path: best.onnx</span><br><span class="line">nms_threshold: 0.45</span><br><span class="line">confidence_threshold: 0.25</span><br><span class="line">classes:</span><br><span class="line">  - battery</span><br></pre></td></tr></table></figure>
-<p>这个display_name可以换阿，这个文件就是你模型的配置文件</p>
-<h2 id="五使用yaml操作">五、使用yaml操作</h2>
-<p>进入<code>AnyLabeling</code>软件，左侧tab栏有AI选项，点击，选择自定义模型，选择刚刚配置的yaml文件即可</p>
-]]></content>
-      <categories>
-        <category>dataset</category>
-      </categories>
-      <tags>
-        <tag>yolo</tag>
-        <tag>dataset</tag>
-        <tag>AnyLabeling</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SQL语法规则</title>
-    <url>/2025/09/01/sql/</url>
-    <content><![CDATA[<h3 id="核心概念">核心概念</h3>
-<ol type="1">
-<li><strong>数据库（Database）</strong>：一个容器，用于存储有组织的数据。你可以把它想象成一个文件柜。</li>
-<li><strong>表（Table）</strong>：数据库中的特定数据结构，用于存储同类数据。它由行和列组成，就像一个Excel表格。每个表都有一个唯一的名字（例如
-<code>users</code>, <code>products</code>, <code>orders</code>）。
-<ul>
-<li><strong>列（Column）</strong>：表中的一个字段，代表了数据的某种属性（例如
-<code>id</code>, <code>name</code>,
-<code>email</code>）。它定义了数据的类型（数字、文本、日期等）。</li>
-<li><strong>行（Row）</strong>：表中的一个记录，代表一个具体的实体（例如一个用户、一件商品）。一行数据就是由多个列的值组成的。</li>
-</ul></li>
-</ol>
-<hr />
-<h3 id="sql语言的分类">SQL语言的分类</h3>
-<p>SQL命令通常根据其功能分为以下几类：</p>
-<table>
-<colgroup>
-<col style="width: 15%" />
-<col style="width: 26%" />
-<col style="width: 15%" />
-<col style="width: 26%" />
-<col style="width: 15%" />
-</colgroup>
-<thead>
-<tr>
-<th>类别</th>
-<th>英文全称</th>
-<th>中文</th>
-<th>核心命令</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>DQL</strong></td>
-<td>Data Query Language</td>
-<td>数据查询语言</td>
-<td><strong><code>SELECT</code></strong></td>
-<td>从表中检索数据，是使用最频繁的操作</td>
-</tr>
-<tr>
-<td><strong>DML</strong></td>
-<td>Data Manipulation Language</td>
-<td>数据操作语言</td>
-<td><code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code></td>
-<td>用于增、删、改表中的记录</td>
-</tr>
-<tr>
-<td><strong>DDL</strong></td>
-<td>Data Definition Language</td>
-<td>数据定义语言</td>
-<td><code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>,
-<code>RENAME</code></td>
-<td>用于创建、修改、删除数据库对象（如表、索引）</td>
-</tr>
-<tr>
-<td><strong>DCL</strong></td>
-<td>Data Control Language</td>
-<td>数据控制语言</td>
-<td><code>GRANT</code>, <code>REVOKE</code></td>
-<td>用于控制用户对数据库的访问权限</td>
-</tr>
-<tr>
-<td><strong>TCL</strong></td>
-<td>Transaction Control Language</td>
-<td>事务控制语言</td>
-<td><code>COMMIT</code>, <code>ROLLBACK</code>,
-<code>SAVEPOINT</code></td>
-<td>用于管理数据库中的事务</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h3 id="最常用的sql命令详解">最常用的SQL命令详解</h3>
-<p>我们将围绕一个简单的 <code>users</code> 表进行讲解，表结构如下：</p>
-<table>
-<thead>
-<tr>
-<th>列名</th>
-<th>数据类型</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>id</code></td>
-<td>INT</td>
-<td>主键，唯一标识</td>
-</tr>
-<tr>
-<td><code>username</code></td>
-<td>VARCHAR(50)</td>
-<td>用户名</td>
-</tr>
-<tr>
-<td><code>email</code></td>
-<td>VARCHAR(100)</td>
-<td>邮箱</td>
-</tr>
-<tr>
-<td><code>age</code></td>
-<td>INT</td>
-<td>年龄</td>
-</tr>
-<tr>
-<td><code>country</code></td>
-<td>VARCHAR(50)</td>
-<td>国家</td>
-</tr>
-<tr>
-<td><code>created_at</code></td>
-<td>DATETIME</td>
-<td>创建时间</td>
-</tr>
-</tbody>
-</table>
-<h4 id="dql---查询数据-select">1. DQL - 查询数据 (SELECT)</h4>
-<p>这是最核心的操作。</p>
-<ul>
-<li><p><strong>查询所有列和所有行</strong>： <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users;</span><br></pre></td></tr></table></figure></p></li>
-<li><p><strong>查询特定的列</strong>： <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> username, email <span class="keyword">FROM</span> users;</span><br></pre></td></tr></table></figure></p></li>
-<li><p><strong>使用 <code>WHERE</code> 条件过滤</strong>：
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> country <span class="operator">=</span> <span class="string">&#x27;China&#x27;</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> age <span class="operator">&gt;</span> <span class="number">18</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">123</span>; </span><br></pre></td></tr></table></figure></p></li>
-<li><p><strong>使用 <code>ORDER BY</code> 排序</strong>：
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">ORDER</span> <span class="keyword">BY</span> age <span class="keyword">DESC</span>; <span class="comment">-- 按年龄降序</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">ORDER</span> <span class="keyword">BY</span> created_at <span class="keyword">ASC</span>; <span class="comment">-- 按创建时间升序</span></span><br></pre></td></tr></table></figure></p></li>
-<li><p><strong>使用 <code>LIMIT</code> 限制返回数量</strong>：
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users LIMIT <span class="number">10</span>; <span class="comment">-- 返回前10条记录</span></span><br></pre></td></tr></table></figure></p></li>
-<li><p><strong>使用 <code>LIKE</code> 进行模糊搜索</strong>：
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> username <span class="keyword">LIKE</span> <span class="string">&#x27;张%&#x27;</span>; <span class="comment">-- 查找姓&quot;张&quot;的用户</span></span><br></pre></td></tr></table></figure></p></li>
-<li><p><strong>使用聚合函数</strong>（如 <code>COUNT</code>,
-<code>SUM</code>, <code>AVG</code>, <code>MAX</code>,
-<code>MIN</code>）： <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">FROM</span> users; <span class="comment">-- 统计用户总数</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">AVG</span>(age) <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> country <span class="operator">=</span> <span class="string">&#x27;China&#x27;</span>; <span class="comment">-- 中国用户的平均年龄</span></span><br></pre></td></tr></table></figure></p></li>
-<li><p><strong>使用 <code>GROUP BY</code> 分组</strong>：
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> country, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">as</span> user_count </span><br><span class="line"><span class="keyword">FROM</span> users </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> country; <span class="comment">-- 统计每个国家的用户数量</span></span><br></pre></td></tr></table></figure></p></li>
-</ul>
-<h4 id="dml---操作数据">2. DML - 操作数据</h4>
-<ul>
-<li><p><strong><code>INSERT</code> - 插入新记录</strong>：
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 指定列名插入</span></span><br><span class="line"><span class="keyword">INSERT INTO</span> users (username, email, age, country)</span><br><span class="line"><span class="keyword">VALUES</span> (<span class="string">&#x27;john_doe&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>, <span class="number">25</span>, <span class="string">&#x27;USA&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 如果为所有列都提供值，可以省略列名</span></span><br><span class="line"><span class="keyword">INSERT INTO</span> users </span><br><span class="line"><span class="keyword">VALUES</span> (<span class="keyword">NULL</span>, <span class="string">&#x27;john_doe&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>, <span class="number">25</span>, <span class="string">&#x27;USA&#x27;</span>, NOW());</span><br><span class="line"><span class="comment">-- 注意：id 设为 NULL 或 DEFAULT 以便数据库自动生成（如果它是自增主键）</span></span><br></pre></td></tr></table></figure></p></li>
-<li><p><strong><code>UPDATE</code> - 更新现有记录</strong>：
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> users </span><br><span class="line"><span class="keyword">SET</span> age <span class="operator">=</span> <span class="number">26</span>, country <span class="operator">=</span> <span class="string">&#x27;Canada&#x27;</span> </span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">123</span>; <span class="comment">-- **非常重要：一定要用 WHERE，否则会更新所有行！**</span></span><br></pre></td></tr></table></figure></p></li>
-<li><p><strong><code>DELETE</code> - 删除记录</strong>：
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> users </span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">123</span>; <span class="comment">-- **极端重要：一定要用 WHERE，否则会删除所有行！**</span></span><br></pre></td></tr></table></figure></p></li>
-</ul>
-<h4 id="ddl---定义数据结构">3. DDL - 定义数据结构</h4>
-<ul>
-<li><p><strong><code>CREATE TABLE</code> - 创建表</strong>：
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> products (</span><br><span class="line">    id <span class="type">INT</span> <span class="keyword">PRIMARY KEY</span> AUTO_INCREMENT, <span class="comment">-- 主键，自增</span></span><br><span class="line">    name <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT NULL</span>,        <span class="comment">-- 非空约束</span></span><br><span class="line">    price <span class="type">DECIMAL</span>(<span class="number">10</span>, <span class="number">2</span>) <span class="keyword">NOT NULL</span>,     <span class="comment">-- 价格，10位数含2位小数</span></span><br><span class="line">    description TEXT</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p></li>
-<li><p><strong><code>ALTER TABLE</code> - 修改表结构</strong>：
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER TABLE</span> users <span class="keyword">ADD</span> <span class="keyword">COLUMN</span> avatar <span class="type">VARCHAR</span>(<span class="number">255</span>); <span class="comment">-- 添加新列</span></span><br><span class="line"><span class="keyword">ALTER TABLE</span> users <span class="keyword">DROP</span> <span class="keyword">COLUMN</span> age; <span class="comment">-- 删除列</span></span><br><span class="line"><span class="keyword">ALTER TABLE</span> users MODIFY <span class="keyword">COLUMN</span> email <span class="type">VARCHAR</span>(<span class="number">150</span>); <span class="comment">-- 修改列数据类型</span></span><br></pre></td></tr></table></figure></p></li>
-<li><p><strong><code>DROP TABLE</code> - 删除表</strong>：
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> products; <span class="comment">-- **危险操作！会删除整张表和所有数据！**</span></span><br></pre></td></tr></table></figure></p></li>
-</ul>
-<hr />
-<h3 id="高级主题简要介绍">高级主题（简要介绍）</h3>
-<ol type="1">
-<li><p><strong>连接（JOIN）</strong>：用于合并来自两个或多个表的行。</p>
-<ul>
-<li><code>INNER JOIN</code>：返回两个表中匹配的行。</li>
-<li><code>LEFT JOIN</code>：返回左表的所有行，即使右表中没有匹配。</li>
-</ul></li>
-<li><p><strong>索引（INDEX）</strong>：类似于书的目录，可以极大地加快数据检索速度（<code>SELECT</code>
-查询），但会减慢数据写入（<code>INSERT/UPDATE/DELETE</code>）速度。通常在
-<code>WHERE</code> 或 <code>JOIN</code> 条件中频繁使用的列上创建索引。
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX idx_email <span class="keyword">ON</span> users (email);</span><br></pre></td></tr></table></figure></p></li>
-<li><p><strong>事务（Transaction）</strong>：将多个SQL操作捆绑成一个单一的工作单元。这些操作要么<strong>全部成功</strong>，要么<strong>全部失败</strong>。这是保证数据完整性的关键机制（例如银行转账）。
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">START</span> TRANSACTION;</span><br><span class="line"><span class="comment">-- 从A账户扣钱</span></span><br><span class="line"><span class="keyword">UPDATE</span> accounts <span class="keyword">SET</span> balance <span class="operator">=</span> balance <span class="operator">-</span> <span class="number">100</span> <span class="keyword">WHERE</span> user_id <span class="operator">=</span> <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line"><span class="comment">-- 向B账户加钱</span></span><br><span class="line"><span class="keyword">UPDATE</span> accounts <span class="keyword">SET</span> balance <span class="operator">=</span> balance <span class="operator">+</span> <span class="number">100</span> <span class="keyword">WHERE</span> user_id <span class="operator">=</span> <span class="string">&#x27;B&#x27;</span>;</span><br><span class="line"><span class="comment">-- 如果两条语句都成功，则提交</span></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br><span class="line"><span class="comment">-- 如果任何一条失败，则回滚，所有操作撤销</span></span><br><span class="line"><span class="comment">-- ROLLBACK;</span></span><br></pre></td></tr></table></figure></p></li>
-</ol>
-<h3 id="总结与实践建议">总结与实践建议</h3>
-<ul>
-<li><strong>核心是
-<code>SELECT</code></strong>：绝大部分时间你都在写查询语句。</li>
-<li><strong>安全第一</strong>：<strong>永远使用参数化查询（<code>?</code>
-占位符）来防止 SQL 注入</strong>，不要手动拼接字符串。</li>
-<li><strong><code>WHERE</code> 子句是关键</strong>：在
-<code>UPDATE</code> 和 <code>DELETE</code> 时，忘记 <code>WHERE</code>
-子句是灾难性的。</li>
-<li><strong>先学基础</strong>：熟练掌握基本的 <code>SELECT</code>,
-<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>,
-<code>WHERE</code>, <code>ORDER BY</code>, <code>JOIN</code>
-后，再深入学索引、事务等高级主题。</li>
-<li><strong>多练习</strong>：最好的学习方式是在自己搭建的数据库环境（如
-MySQL, PostgreSQL 或在线练习平台）中实际操作。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>database</category>
-      </categories>
-      <tags>
-        <tag>sql</tag>
-        <tag>database</tag>
       </tags>
   </entry>
   <entry>
@@ -3700,183 +3442,6 @@ Seaborn 生成的图表进行精细化调整。以下是详细分类说明和实
       <tags>
         <tag>python</tag>
         <tag>saaborn</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>从dataset-&gt;dataloader</title>
-    <url>/2025/09/15/%E4%BB%8Edataset%E5%88%B0dataloader/</url>
-    <content><![CDATA[<h2 id="dataset-dataloader"><strong>dataset-&gt;dataloader</strong></h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset, DataLoader, Sampler</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim</span><br></pre></td></tr></table></figure>
-<p><strong>解析</strong>：</p>
-<ul>
-<li><code>torch</code>：PyTorch 主库，用于张量操作。</li>
-<li><code>Dataset</code>：数据集基类。</li>
-<li><code>DataLoader</code>：批次生成器。</li>
-<li><code>Sampler</code>：索引生成器。</li>
-<li><code>nn</code>：神经网络模块。</li>
-<li><code>optim</code>：优化器。</li>
-</ul>
-<hr>
-<h3 id="定义-dataset"><strong>1️⃣ 定义 Dataset</strong></h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyDataset</span>(<span class="title class_ inherited__">Dataset</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, data, labels</span>):</span><br><span class="line">        <span class="variable language_">self</span>.data = data       <span class="comment"># 存储特征列表</span></span><br><span class="line">        <span class="variable language_">self</span>.labels = labels   <span class="comment"># 存储标签列表</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(<span class="variable language_">self</span>.data)  <span class="comment"># 返回样本总数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self, index</span>):</span><br><span class="line">        x = <span class="variable language_">self</span>.data[index]  <span class="comment"># 取第 index 个特征</span></span><br><span class="line">        y = <span class="variable language_">self</span>.labels[index]  <span class="comment"># 取第 index 个标签</span></span><br><span class="line">        <span class="comment"># 转为 tensor 并指定数据类型</span></span><br><span class="line">        <span class="keyword">return</span> torch.tensor(x, dtype=torch.float32), torch.tensor(y, dtype=torch.long)</span><br></pre></td></tr></table></figure>
-<p><strong>详细解析</strong>：</p>
-<ol type="1">
-<li><p><code>__init__</code>：初始化 Dataset
-对象，存储数据和标签。</p></li>
-<li><p><code>__len__</code>：Dataset 的长度（样本数），DataLoader
-内部会用它来计算 batch 数量。</p></li>
-<li><p><code>__getitem__</code>：</p>
-<ul>
-<li><p>接收一个整数 <code>index</code>。</p></li>
-<li><p>从列表中取数据和标签。</p></li>
-<li><p>转为 PyTorch 张量：</p>
-<ul>
-<li><code>x</code> → float32，用于计算。</li>
-<li><code>y</code> → long，用于分类任务的 CrossEntropyLoss。</li>
-</ul></li>
-<li><p>返回 <code>(x, y)</code> 元组。</p></li>
-</ul></li>
-<li><p><strong>关键点</strong>：Dataset 本身不处理
-batch，也不决定顺序，它只知道如何根据索引取单个样本。</p></li>
-</ol>
-<hr>
-<h3 id="定义-sampler"><strong>2️⃣ 定义 Sampler</strong></h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ReverseSampler</span>(<span class="title class_ inherited__">Sampler</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, data_source</span>):</span><br><span class="line">        <span class="variable language_">self</span>.data_source = data_source  <span class="comment"># Dataset 对象</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__iter__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># 返回索引迭代器：倒序取样</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">iter</span>(<span class="built_in">range</span>(<span class="built_in">len</span>(<span class="variable language_">self</span>.data_source)-<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(<span class="variable language_">self</span>.data_source)  <span class="comment"># 样本总数</span></span><br></pre></td></tr></table></figure>
-<p><strong>详细解析</strong>：</p>
-<ol type="1">
-<li><p><code>__iter__</code>：</p>
-<ul>
-<li><p>返回一个迭代器，用于生成索引序列。</p></li>
-<li><p><code>range(len(self.data_source)-1, -1, -1)</code>：</p>
-<ul>
-<li>从最大索引到 0</li>
-<li>例如数据有 5 个样本，索引顺序是 <code>[4,3,2,1,0]</code></li>
-</ul></li>
-</ul></li>
-<li><p><code>__len__</code>：</p>
-<ul>
-<li>返回 Dataset 长度</li>
-<li>DataLoader 内部可能用它计算 batch 总数或进度条。</li>
-</ul></li>
-<li><p><strong>关键点</strong>：</p>
-<ul>
-<li>Sampler 只负责“索引顺序”，不涉及数据本身。</li>
-<li>可以用它实现顺序、随机或自定义采样策略。</li>
-</ul></li>
-</ol>
-<hr>
-<h3 id="初始化-dataset-和-sampler"><strong>3️⃣ 初始化 Dataset 和
-Sampler</strong></h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data = [[<span class="number">1</span>,<span class="number">2</span>], [<span class="number">3</span>,<span class="number">4</span>], [<span class="number">5</span>,<span class="number">6</span>], [<span class="number">7</span>,<span class="number">8</span>], [<span class="number">9</span>,<span class="number">10</span>]]</span><br><span class="line">labels = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">dataset = MyDataset(data, labels)</span><br><span class="line">sampler = ReverseSampler(dataset)</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>Dataset 保存原始数据。</p></li>
-<li><p>Sampler 定义索引顺序（倒序）。</p></li>
-<li><p>此时数据和索引是分开的：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Dataset: [ [1,2], [3,4], [5,6], [7,8], [9,10] ]</span><br><span class="line">Sampler: [4,3,2,1,0]</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<h3 id="定义-dataloader"><strong>4️⃣ 定义 DataLoader</strong></h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">batch_size = <span class="number">2</span></span><br><span class="line">dataloader = DataLoader(dataset, batch_size=batch_size, sampler=sampler)</span><br></pre></td></tr></table></figure>
-<p><strong>详细解析</strong>：</p>
-<ul>
-<li><p>DataLoader 接收 Dataset 对象。</p></li>
-<li><p><code>batch_size=2</code> → 每个 batch 2 个样本。</p></li>
-<li><p><code>sampler=sampler</code> →
-使用我们自定义的倒序索引。</p></li>
-<li><p><strong>内部流程</strong>：</p>
-<ol type="1">
-<li><p>DataLoader 调用 <code>sampler.__iter__()</code> → 得到索引迭代器
-<code>[4,3,2,1,0]</code></p></li>
-<li><p>按 <code>batch_size=2</code> 将索引分批：</p>
-<ul>
-<li>Batch 0 → <code>[4,3]</code></li>
-<li>Batch 1 → <code>[2,1]</code></li>
-<li>Batch 2 → <code>[0]</code></li>
-</ul></li>
-<li><p>对每个 batch 调用 <code>dataset.__getitem__</code>，获取
-<code>(x, y)</code> 张量。</p></li>
-<li><p>返回 batch 张量：</p>
-<ul>
-<li><code>x_batch.shape = [batch_size, feature_dim]</code></li>
-<li><code>y_batch.shape = [batch_size]</code></li>
-</ul></li>
-</ol></li>
-<li><p>DataLoader 可以多线程加载数据（通过
-<code>num_workers</code>），提升效率。</p></li>
-</ul>
-<hr>
-<h3 id="定义模型和优化器"><strong>5️⃣ 定义模型和优化器</strong></h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">model = nn.Linear(<span class="number">2</span>, <span class="number">2</span>)  <span class="comment"># 输入2维，输出2类</span></span><br><span class="line">criterion = nn.CrossEntropyLoss()  <span class="comment"># 分类损失</span></span><br><span class="line">optimizer = optim.SGD(model.parameters(), lr=<span class="number">0.01</span>)</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p><code>nn.Linear(2,2)</code>：</p>
-<ul>
-<li>输入 2 维特征 <code>[x1,x2]</code></li>
-<li>输出 2 类的 logits</li>
-</ul></li>
-<li><p><code>CrossEntropyLoss</code>：</p>
-<ul>
-<li>用于分类任务</li>
-<li>内部会自动做 softmax</li>
-</ul></li>
-<li><p><code>SGD</code>：</p>
-<ul>
-<li>随机梯度下降优化器</li>
-<li>更新模型参数</li>
-</ul></li>
-</ul>
-<hr>
-<h3 id="模拟训练循环"><strong>6️⃣ 模拟训练循环</strong></h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> x_batch, y_batch <span class="keyword">in</span> dataloader:</span><br><span class="line">        <span class="comment"># 前向传播</span></span><br><span class="line">        outputs = model(x_batch)   <span class="comment"># [batch_size, num_classes]</span></span><br><span class="line">        loss = criterion(outputs, y_batch)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 反向传播</span></span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer.step()</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Batch x:"</span>, x_batch)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Batch y:"</span>, y_batch)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Loss:"</span>, loss.item())</span><br></pre></td></tr></table></figure>
-<p><strong>详细解析</strong>：</p>
-<ol type="1">
-<li><p><code>for x_batch, y_batch in dataloader</code>：</p>
-<ul>
-<li>DataLoader 迭代 batch</li>
-<li>每个 batch 是 <code>(x_batch, y_batch)</code> 张量</li>
-</ul></li>
-<li><p><code>outputs = model(x_batch)</code>：</p>
-<ul>
-<li>前向传播，输出 <code>[batch_size, num_classes]</code> 张量</li>
-</ul></li>
-<li><p><code>loss = criterion(outputs, y_batch)</code>：</p>
-<ul>
-<li>计算 loss</li>
-</ul></li>
-<li><p><code>optimizer.zero_grad()</code>：</p>
-<ul>
-<li>清空梯度，否则梯度会累加</li>
-</ul></li>
-<li><p><code>loss.backward()</code>：</p>
-<ul>
-<li>自动计算梯度</li>
-</ul></li>
-<li><p><code>optimizer.step()</code>：</p>
-<ul>
-<li>更新模型参数</li>
-</ul></li>
-<li><p>打印 batch 信息，观察训练数据流和 loss</p></li>
-</ol>
-<p><strong>示例输出</strong>（倒序 batch）：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Batch x: tensor([[ 9., 10.],</span><br><span class="line">                 [ 7.,  8.]])</span><br><span class="line">Batch y: tensor([0,1])</span><br><span class="line">Loss: 0.7378</span><br><span class="line">Batch x: tensor([[5.,6.],</span><br><span class="line">                 [3.,4.]])</span><br><span class="line">Batch y: tensor([0,1])</span><br><span class="line">Loss: 0.6923</span><br><span class="line">Batch x: tensor([[1.,2.]])</span><br><span class="line">Batch y: tensor([0])</span><br><span class="line">Loss: 0.6789</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="数据流可视化"><strong>7️⃣ 数据流可视化</strong></h3>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">原始数据</span><br><span class="line">data = [[1,2],[3,4],[5,6],[7,8],[9,10]]</span><br><span class="line">labels = [0,1,0,1,0]</span><br><span class="line">        │</span><br><span class="line">        ▼</span><br><span class="line">Dataset (MyDataset)</span><br><span class="line">  - __getitem__ 返回单个样本</span><br><span class="line">        │</span><br><span class="line">        ▼</span><br><span class="line">Sampler (ReverseSampler)</span><br><span class="line">  - 返回索引序列 [4,3,2,1,0]</span><br><span class="line">        │</span><br><span class="line">        ▼</span><br><span class="line">DataLoader (batch_size=2)</span><br><span class="line">  - Batch 0: idx=[4,3] → x=[[9,10],[7,8]], y=[0,1]</span><br><span class="line">  - Batch 1: idx=[2,1] → x=[[5,6],[3,4]], y=[0,1]</span><br><span class="line">  - Batch 2: idx=[0]   → x=[[1,2]], y=[0]</span><br><span class="line">        │</span><br><span class="line">        ▼</span><br><span class="line">模型训练</span><br><span class="line">  - 前向传播: y_pred = model(x_batch)</span><br><span class="line">  - 计算 loss</span><br><span class="line">  - 反向传播: loss.backward()</span><br><span class="line">  - 参数更新: optimizer.step()</span><br></pre></td></tr></table></figure>
-<p>💡 <strong>关键点</strong>：</p>
-<ol type="1">
-<li>Dataset → 管理原始数据和取样方法</li>
-<li>Sampler → 决定索引顺序</li>
-<li>DataLoader → 按 batch 聚合数据</li>
-<li>模型训练 → 接收 batch，计算梯度，更新参数</li>
-</ol>
-]]></content>
-      <categories>
-        <category>pytorch</category>
-      </categories>
-      <tags>
-        <tag>dataset</tag>
-        <tag>deeplearning</tag>
-        <tag>pytorch</tag>
-        <tag>dataloader</tag>
       </tags>
   </entry>
   <entry>
@@ -5872,6 +5437,441 @@ sklearn.preprocessing 模块的特征缩放器（scalers）</p>
         <tag>deeplearning</tag>
         <tag>pytorch</tag>
         <tag>Transformer</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL语法规则</title>
+    <url>/2025/09/01/sql/</url>
+    <content><![CDATA[<h3 id="核心概念">核心概念</h3>
+<ol type="1">
+<li><strong>数据库（Database）</strong>：一个容器，用于存储有组织的数据。你可以把它想象成一个文件柜。</li>
+<li><strong>表（Table）</strong>：数据库中的特定数据结构，用于存储同类数据。它由行和列组成，就像一个Excel表格。每个表都有一个唯一的名字（例如
+<code>users</code>, <code>products</code>, <code>orders</code>）。
+<ul>
+<li><strong>列（Column）</strong>：表中的一个字段，代表了数据的某种属性（例如
+<code>id</code>, <code>name</code>,
+<code>email</code>）。它定义了数据的类型（数字、文本、日期等）。</li>
+<li><strong>行（Row）</strong>：表中的一个记录，代表一个具体的实体（例如一个用户、一件商品）。一行数据就是由多个列的值组成的。</li>
+</ul></li>
+</ol>
+<hr />
+<h3 id="sql语言的分类">SQL语言的分类</h3>
+<p>SQL命令通常根据其功能分为以下几类：</p>
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 26%" />
+<col style="width: 15%" />
+<col style="width: 26%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr>
+<th>类别</th>
+<th>英文全称</th>
+<th>中文</th>
+<th>核心命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DQL</strong></td>
+<td>Data Query Language</td>
+<td>数据查询语言</td>
+<td><strong><code>SELECT</code></strong></td>
+<td>从表中检索数据，是使用最频繁的操作</td>
+</tr>
+<tr>
+<td><strong>DML</strong></td>
+<td>Data Manipulation Language</td>
+<td>数据操作语言</td>
+<td><code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code></td>
+<td>用于增、删、改表中的记录</td>
+</tr>
+<tr>
+<td><strong>DDL</strong></td>
+<td>Data Definition Language</td>
+<td>数据定义语言</td>
+<td><code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>,
+<code>RENAME</code></td>
+<td>用于创建、修改、删除数据库对象（如表、索引）</td>
+</tr>
+<tr>
+<td><strong>DCL</strong></td>
+<td>Data Control Language</td>
+<td>数据控制语言</td>
+<td><code>GRANT</code>, <code>REVOKE</code></td>
+<td>用于控制用户对数据库的访问权限</td>
+</tr>
+<tr>
+<td><strong>TCL</strong></td>
+<td>Transaction Control Language</td>
+<td>事务控制语言</td>
+<td><code>COMMIT</code>, <code>ROLLBACK</code>,
+<code>SAVEPOINT</code></td>
+<td>用于管理数据库中的事务</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="最常用的sql命令详解">最常用的SQL命令详解</h3>
+<p>我们将围绕一个简单的 <code>users</code> 表进行讲解，表结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>列名</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>INT</td>
+<td>主键，唯一标识</td>
+</tr>
+<tr>
+<td><code>username</code></td>
+<td>VARCHAR(50)</td>
+<td>用户名</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>VARCHAR(100)</td>
+<td>邮箱</td>
+</tr>
+<tr>
+<td><code>age</code></td>
+<td>INT</td>
+<td>年龄</td>
+</tr>
+<tr>
+<td><code>country</code></td>
+<td>VARCHAR(50)</td>
+<td>国家</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>DATETIME</td>
+<td>创建时间</td>
+</tr>
+</tbody>
+</table>
+<h4 id="dql---查询数据-select">1. DQL - 查询数据 (SELECT)</h4>
+<p>这是最核心的操作。</p>
+<ul>
+<li><p><strong>查询所有列和所有行</strong>： <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users;</span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>查询特定的列</strong>： <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> username, email <span class="keyword">FROM</span> users;</span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用 <code>WHERE</code> 条件过滤</strong>：
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> country <span class="operator">=</span> <span class="string">&#x27;China&#x27;</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> age <span class="operator">&gt;</span> <span class="number">18</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">123</span>; </span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用 <code>ORDER BY</code> 排序</strong>：
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">ORDER</span> <span class="keyword">BY</span> age <span class="keyword">DESC</span>; <span class="comment">-- 按年龄降序</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">ORDER</span> <span class="keyword">BY</span> created_at <span class="keyword">ASC</span>; <span class="comment">-- 按创建时间升序</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用 <code>LIMIT</code> 限制返回数量</strong>：
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users LIMIT <span class="number">10</span>; <span class="comment">-- 返回前10条记录</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用 <code>LIKE</code> 进行模糊搜索</strong>：
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> username <span class="keyword">LIKE</span> <span class="string">&#x27;张%&#x27;</span>; <span class="comment">-- 查找姓&quot;张&quot;的用户</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用聚合函数</strong>（如 <code>COUNT</code>,
+<code>SUM</code>, <code>AVG</code>, <code>MAX</code>,
+<code>MIN</code>）： <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">FROM</span> users; <span class="comment">-- 统计用户总数</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">AVG</span>(age) <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> country <span class="operator">=</span> <span class="string">&#x27;China&#x27;</span>; <span class="comment">-- 中国用户的平均年龄</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>使用 <code>GROUP BY</code> 分组</strong>：
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> country, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">as</span> user_count </span><br><span class="line"><span class="keyword">FROM</span> users </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> country; <span class="comment">-- 统计每个国家的用户数量</span></span><br></pre></td></tr></table></figure></p></li>
+</ul>
+<h4 id="dml---操作数据">2. DML - 操作数据</h4>
+<ul>
+<li><p><strong><code>INSERT</code> - 插入新记录</strong>：
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 指定列名插入</span></span><br><span class="line"><span class="keyword">INSERT INTO</span> users (username, email, age, country)</span><br><span class="line"><span class="keyword">VALUES</span> (<span class="string">&#x27;john_doe&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>, <span class="number">25</span>, <span class="string">&#x27;USA&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 如果为所有列都提供值，可以省略列名</span></span><br><span class="line"><span class="keyword">INSERT INTO</span> users </span><br><span class="line"><span class="keyword">VALUES</span> (<span class="keyword">NULL</span>, <span class="string">&#x27;john_doe&#x27;</span>, <span class="string">&#x27;john@example.com&#x27;</span>, <span class="number">25</span>, <span class="string">&#x27;USA&#x27;</span>, NOW());</span><br><span class="line"><span class="comment">-- 注意：id 设为 NULL 或 DEFAULT 以便数据库自动生成（如果它是自增主键）</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong><code>UPDATE</code> - 更新现有记录</strong>：
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> users </span><br><span class="line"><span class="keyword">SET</span> age <span class="operator">=</span> <span class="number">26</span>, country <span class="operator">=</span> <span class="string">&#x27;Canada&#x27;</span> </span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">123</span>; <span class="comment">-- **非常重要：一定要用 WHERE，否则会更新所有行！**</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong><code>DELETE</code> - 删除记录</strong>：
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> users </span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">123</span>; <span class="comment">-- **极端重要：一定要用 WHERE，否则会删除所有行！**</span></span><br></pre></td></tr></table></figure></p></li>
+</ul>
+<h4 id="ddl---定义数据结构">3. DDL - 定义数据结构</h4>
+<ul>
+<li><p><strong><code>CREATE TABLE</code> - 创建表</strong>：
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> products (</span><br><span class="line">    id <span class="type">INT</span> <span class="keyword">PRIMARY KEY</span> AUTO_INCREMENT, <span class="comment">-- 主键，自增</span></span><br><span class="line">    name <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT NULL</span>,        <span class="comment">-- 非空约束</span></span><br><span class="line">    price <span class="type">DECIMAL</span>(<span class="number">10</span>, <span class="number">2</span>) <span class="keyword">NOT NULL</span>,     <span class="comment">-- 价格，10位数含2位小数</span></span><br><span class="line">    description TEXT</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong><code>ALTER TABLE</code> - 修改表结构</strong>：
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER TABLE</span> users <span class="keyword">ADD</span> <span class="keyword">COLUMN</span> avatar <span class="type">VARCHAR</span>(<span class="number">255</span>); <span class="comment">-- 添加新列</span></span><br><span class="line"><span class="keyword">ALTER TABLE</span> users <span class="keyword">DROP</span> <span class="keyword">COLUMN</span> age; <span class="comment">-- 删除列</span></span><br><span class="line"><span class="keyword">ALTER TABLE</span> users MODIFY <span class="keyword">COLUMN</span> email <span class="type">VARCHAR</span>(<span class="number">150</span>); <span class="comment">-- 修改列数据类型</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong><code>DROP TABLE</code> - 删除表</strong>：
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> products; <span class="comment">-- **危险操作！会删除整张表和所有数据！**</span></span><br></pre></td></tr></table></figure></p></li>
+</ul>
+<hr />
+<h3 id="高级主题简要介绍">高级主题（简要介绍）</h3>
+<ol type="1">
+<li><p><strong>连接（JOIN）</strong>：用于合并来自两个或多个表的行。</p>
+<ul>
+<li><code>INNER JOIN</code>：返回两个表中匹配的行。</li>
+<li><code>LEFT JOIN</code>：返回左表的所有行，即使右表中没有匹配。</li>
+</ul></li>
+<li><p><strong>索引（INDEX）</strong>：类似于书的目录，可以极大地加快数据检索速度（<code>SELECT</code>
+查询），但会减慢数据写入（<code>INSERT/UPDATE/DELETE</code>）速度。通常在
+<code>WHERE</code> 或 <code>JOIN</code> 条件中频繁使用的列上创建索引。
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX idx_email <span class="keyword">ON</span> users (email);</span><br></pre></td></tr></table></figure></p></li>
+<li><p><strong>事务（Transaction）</strong>：将多个SQL操作捆绑成一个单一的工作单元。这些操作要么<strong>全部成功</strong>，要么<strong>全部失败</strong>。这是保证数据完整性的关键机制（例如银行转账）。
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">START</span> TRANSACTION;</span><br><span class="line"><span class="comment">-- 从A账户扣钱</span></span><br><span class="line"><span class="keyword">UPDATE</span> accounts <span class="keyword">SET</span> balance <span class="operator">=</span> balance <span class="operator">-</span> <span class="number">100</span> <span class="keyword">WHERE</span> user_id <span class="operator">=</span> <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line"><span class="comment">-- 向B账户加钱</span></span><br><span class="line"><span class="keyword">UPDATE</span> accounts <span class="keyword">SET</span> balance <span class="operator">=</span> balance <span class="operator">+</span> <span class="number">100</span> <span class="keyword">WHERE</span> user_id <span class="operator">=</span> <span class="string">&#x27;B&#x27;</span>;</span><br><span class="line"><span class="comment">-- 如果两条语句都成功，则提交</span></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br><span class="line"><span class="comment">-- 如果任何一条失败，则回滚，所有操作撤销</span></span><br><span class="line"><span class="comment">-- ROLLBACK;</span></span><br></pre></td></tr></table></figure></p></li>
+</ol>
+<h3 id="总结与实践建议">总结与实践建议</h3>
+<ul>
+<li><strong>核心是
+<code>SELECT</code></strong>：绝大部分时间你都在写查询语句。</li>
+<li><strong>安全第一</strong>：<strong>永远使用参数化查询（<code>?</code>
+占位符）来防止 SQL 注入</strong>，不要手动拼接字符串。</li>
+<li><strong><code>WHERE</code> 子句是关键</strong>：在
+<code>UPDATE</code> 和 <code>DELETE</code> 时，忘记 <code>WHERE</code>
+子句是灾难性的。</li>
+<li><strong>先学基础</strong>：熟练掌握基本的 <code>SELECT</code>,
+<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>,
+<code>WHERE</code>, <code>ORDER BY</code>, <code>JOIN</code>
+后，再深入学索引、事务等高级主题。</li>
+<li><strong>多练习</strong>：最好的学习方式是在自己搭建的数据库环境（如
+MySQL, PostgreSQL 或在线练习平台）中实际操作。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>database</category>
+      </categories>
+      <tags>
+        <tag>sql</tag>
+        <tag>database</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>yolo+AnyLabeling实现数据集的自动标注</title>
+    <url>/2025/08/09/yolo-dataset/</url>
+    <content><![CDATA[<h2 id="一环境准备">一、环境准备</h2>
+<p>首先需要创建一个conda虚拟环境，进行yolo环境的搭建</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install yolo</span><br><span class="line"></span><br><span class="line">pip install ultralytics</span><br><span class="line"></span><br><span class="line">pip install ncnn</span><br><span class="line"></span><br><span class="line">pip install onnx <span class="comment">#用于格式转换</span></span><br></pre></td></tr></table></figure>
+<p>之后创建一个空目录，目录结构如下</p>
+<p><img src="/images/yolo-dataset/yolotraindir.png" /></p>
+<p>准备好需要用来训练的部分图片(50-100张吧差不多，多点更好，但是就是用来标注数据的没必要那么多后面手动改改叭)，放到images文件下的三个文件夹都存放一份</p>
+<h2 id="二数据标注">二、数据标注</h2>
+<p>准备好环境搭建之后，新建一个<code>classes.txt</code>文件放到labels/train文件夹下，里面按顺序写好你的标签是什么比如我训练这个模型就是用来标注电池的</p>
+<p><img src="/images/yolo-dataset/battery.png" /></p>
+<p>那你的文件内容就是</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">battery</span><br></pre></td></tr></table></figure>
+<p>ok，创建完成之后就开始对数据进行正常标注，然后将结果导出到labels/train文件夹下</p>
+<h2 id="三开始训练">三、开始训练</h2>
+<p>首先需要写入一个配置文件<code>xxx.yaml</code>写到yolotrain目录下，内容如下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">path: D:\yolotrain       <span class="comment"># 数据集根目录</span></span><br><span class="line">train: images/train      <span class="comment"># 训练集相对路径</span></span><br><span class="line">val: images/val          <span class="comment"># 验证集相对路径</span></span><br><span class="line"><span class="built_in">test</span>: images/test        <span class="comment"># 测试集相对路径</span></span><br><span class="line"></span><br><span class="line">nc: 1                    <span class="comment"># 类别数量</span></span><br><span class="line">names: [<span class="string">&quot;battery&quot;</span>]       <span class="comment"># 类别名称列表</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 高级参数（可选）</span></span><br><span class="line">roboflow: &#123;&#125;             <span class="comment"># 兼容RoboFlow数据集</span></span><br><span class="line">download: null           <span class="comment"># 数据集下载URL</span></span><br></pre></td></tr></table></figure>
+<p>在虚拟环境下进入yolotrain目录输入指令开始训练</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yolo detect train </span><br><span class="line"><span class="comment">#data是你自己的yaml文件路径</span></span><br><span class="line">  data=D:/yolotrain/xxx.yaml </span><br><span class="line">  model=yolov8s.pt      <span class="comment"># 预训练模型（放在yolotrain目录下）</span></span><br><span class="line">  epochs=100            <span class="comment"># 迭代次数</span></span><br><span class="line">  imgsz=640             <span class="comment"># 输入分辨率</span></span><br><span class="line">  batch=16              <span class="comment"># 根据GPU调整</span></span><br><span class="line">  device=0              <span class="comment"># 0代表GPU练</span></span><br><span class="line"><span class="comment">#下面是参数，命令合并成一行</span></span><br></pre></td></tr></table></figure>
+<p>若要进行验证把<code>train</code>改成<code>val</code>就行了，然后那个yolo模型我放在我的git仓库里了
+<a href="https://github.com/koen666/yolo">yolo模型</a></p>
+<h2 id="四导出onnx">四、导出onnx</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yolo <span class="built_in">export</span> model=D:/yolotrain/best.pt format=onnx</span><br></pre></td></tr></table></figure>
+<p>训练完后，可以从新得到的run文件夹下的best.pt(这个就是训练的最好的模型)文件挪到外面，在调用上面那个命令生成best.onnx文件</p>
+<p>然后再创建一个xxx.yaml文件写入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">type</span>: yolov8</span><br><span class="line">name: yolov8s-r20230520</span><br><span class="line">display_name: koen</span><br><span class="line">model_path: best.onnx</span><br><span class="line">nms_threshold: 0.45</span><br><span class="line">confidence_threshold: 0.25</span><br><span class="line">classes:</span><br><span class="line">  - battery</span><br></pre></td></tr></table></figure>
+<p>这个display_name可以换阿，这个文件就是你模型的配置文件</p>
+<h2 id="五使用yaml操作">五、使用yaml操作</h2>
+<p>进入<code>AnyLabeling</code>软件，左侧tab栏有AI选项，点击，选择自定义模型，选择刚刚配置的yaml文件即可</p>
+]]></content>
+      <categories>
+        <category>dataset</category>
+      </categories>
+      <tags>
+        <tag>yolo</tag>
+        <tag>dataset</tag>
+        <tag>AnyLabeling</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>从dataset-&gt;dataloader</title>
+    <url>/2025/09/15/%E4%BB%8Edataset%E5%88%B0dataloader/</url>
+    <content><![CDATA[<h2 id="dataset-dataloader"><strong>dataset-&gt;dataloader</strong></h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset, DataLoader, Sampler</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim</span><br></pre></td></tr></table></figure>
+<p><strong>解析</strong>：</p>
+<ul>
+<li><code>torch</code>：PyTorch 主库，用于张量操作。</li>
+<li><code>Dataset</code>：数据集基类。</li>
+<li><code>DataLoader</code>：批次生成器。</li>
+<li><code>Sampler</code>：索引生成器。</li>
+<li><code>nn</code>：神经网络模块。</li>
+<li><code>optim</code>：优化器。</li>
+</ul>
+<hr>
+<h3 id="定义-dataset"><strong>1️⃣ 定义 Dataset</strong></h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyDataset</span>(<span class="title class_ inherited__">Dataset</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, data, labels</span>):</span><br><span class="line">        <span class="variable language_">self</span>.data = data       <span class="comment"># 存储特征列表</span></span><br><span class="line">        <span class="variable language_">self</span>.labels = labels   <span class="comment"># 存储标签列表</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(<span class="variable language_">self</span>.data)  <span class="comment"># 返回样本总数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self, index</span>):</span><br><span class="line">        x = <span class="variable language_">self</span>.data[index]  <span class="comment"># 取第 index 个特征</span></span><br><span class="line">        y = <span class="variable language_">self</span>.labels[index]  <span class="comment"># 取第 index 个标签</span></span><br><span class="line">        <span class="comment"># 转为 tensor 并指定数据类型</span></span><br><span class="line">        <span class="keyword">return</span> torch.tensor(x, dtype=torch.float32), torch.tensor(y, dtype=torch.long)</span><br></pre></td></tr></table></figure>
+<p><strong>详细解析</strong>：</p>
+<ol type="1">
+<li><p><code>__init__</code>：初始化 Dataset
+对象，存储数据和标签。</p></li>
+<li><p><code>__len__</code>：Dataset 的长度（样本数），DataLoader
+内部会用它来计算 batch 数量。</p></li>
+<li><p><code>__getitem__</code>：</p>
+<ul>
+<li><p>接收一个整数 <code>index</code>。</p></li>
+<li><p>从列表中取数据和标签。</p></li>
+<li><p>转为 PyTorch 张量：</p>
+<ul>
+<li><code>x</code> → float32，用于计算。</li>
+<li><code>y</code> → long，用于分类任务的 CrossEntropyLoss。</li>
+</ul></li>
+<li><p>返回 <code>(x, y)</code> 元组。</p></li>
+</ul></li>
+<li><p><strong>关键点</strong>：Dataset 本身不处理
+batch，也不决定顺序，它只知道如何根据索引取单个样本。</p></li>
+</ol>
+<hr>
+<h3 id="定义-sampler"><strong>2️⃣ 定义 Sampler</strong></h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ReverseSampler</span>(<span class="title class_ inherited__">Sampler</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, data_source</span>):</span><br><span class="line">        <span class="variable language_">self</span>.data_source = data_source  <span class="comment"># Dataset 对象</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__iter__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># 返回索引迭代器：倒序取样</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">iter</span>(<span class="built_in">range</span>(<span class="built_in">len</span>(<span class="variable language_">self</span>.data_source)-<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(<span class="variable language_">self</span>.data_source)  <span class="comment"># 样本总数</span></span><br></pre></td></tr></table></figure>
+<p><strong>详细解析</strong>：</p>
+<ol type="1">
+<li><p><code>__iter__</code>：</p>
+<ul>
+<li><p>返回一个迭代器，用于生成索引序列。</p></li>
+<li><p><code>range(len(self.data_source)-1, -1, -1)</code>：</p>
+<ul>
+<li>从最大索引到 0</li>
+<li>例如数据有 5 个样本，索引顺序是 <code>[4,3,2,1,0]</code></li>
+</ul></li>
+</ul></li>
+<li><p><code>__len__</code>：</p>
+<ul>
+<li>返回 Dataset 长度</li>
+<li>DataLoader 内部可能用它计算 batch 总数或进度条。</li>
+</ul></li>
+<li><p><strong>关键点</strong>：</p>
+<ul>
+<li>Sampler 只负责“索引顺序”，不涉及数据本身。</li>
+<li>可以用它实现顺序、随机或自定义采样策略。</li>
+</ul></li>
+</ol>
+<hr>
+<h3 id="初始化-dataset-和-sampler"><strong>3️⃣ 初始化 Dataset 和
+Sampler</strong></h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data = [[<span class="number">1</span>,<span class="number">2</span>], [<span class="number">3</span>,<span class="number">4</span>], [<span class="number">5</span>,<span class="number">6</span>], [<span class="number">7</span>,<span class="number">8</span>], [<span class="number">9</span>,<span class="number">10</span>]]</span><br><span class="line">labels = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">dataset = MyDataset(data, labels)</span><br><span class="line">sampler = ReverseSampler(dataset)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Dataset 保存原始数据。</p></li>
+<li><p>Sampler 定义索引顺序（倒序）。</p></li>
+<li><p>此时数据和索引是分开的：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Dataset: [ [1,2], [3,4], [5,6], [7,8], [9,10] ]</span><br><span class="line">Sampler: [4,3,2,1,0]</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h3 id="定义-dataloader"><strong>4️⃣ 定义 DataLoader</strong></h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">batch_size = <span class="number">2</span></span><br><span class="line">dataloader = DataLoader(dataset, batch_size=batch_size, sampler=sampler)</span><br></pre></td></tr></table></figure>
+<p><strong>详细解析</strong>：</p>
+<ul>
+<li><p>DataLoader 接收 Dataset 对象。</p></li>
+<li><p><code>batch_size=2</code> → 每个 batch 2 个样本。</p></li>
+<li><p><code>sampler=sampler</code> →
+使用我们自定义的倒序索引。</p></li>
+<li><p><strong>内部流程</strong>：</p>
+<ol type="1">
+<li><p>DataLoader 调用 <code>sampler.__iter__()</code> → 得到索引迭代器
+<code>[4,3,2,1,0]</code></p></li>
+<li><p>按 <code>batch_size=2</code> 将索引分批：</p>
+<ul>
+<li>Batch 0 → <code>[4,3]</code></li>
+<li>Batch 1 → <code>[2,1]</code></li>
+<li>Batch 2 → <code>[0]</code></li>
+</ul></li>
+<li><p>对每个 batch 调用 <code>dataset.__getitem__</code>，获取
+<code>(x, y)</code> 张量。</p></li>
+<li><p>返回 batch 张量：</p>
+<ul>
+<li><code>x_batch.shape = [batch_size, feature_dim]</code></li>
+<li><code>y_batch.shape = [batch_size]</code></li>
+</ul></li>
+</ol></li>
+<li><p>DataLoader 可以多线程加载数据（通过
+<code>num_workers</code>），提升效率。</p></li>
+</ul>
+<hr>
+<h3 id="定义模型和优化器"><strong>5️⃣ 定义模型和优化器</strong></h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">model = nn.Linear(<span class="number">2</span>, <span class="number">2</span>)  <span class="comment"># 输入2维，输出2类</span></span><br><span class="line">criterion = nn.CrossEntropyLoss()  <span class="comment"># 分类损失</span></span><br><span class="line">optimizer = optim.SGD(model.parameters(), lr=<span class="number">0.01</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>nn.Linear(2,2)</code>：</p>
+<ul>
+<li>输入 2 维特征 <code>[x1,x2]</code></li>
+<li>输出 2 类的 logits</li>
+</ul></li>
+<li><p><code>CrossEntropyLoss</code>：</p>
+<ul>
+<li>用于分类任务</li>
+<li>内部会自动做 softmax</li>
+</ul></li>
+<li><p><code>SGD</code>：</p>
+<ul>
+<li>随机梯度下降优化器</li>
+<li>更新模型参数</li>
+</ul></li>
+</ul>
+<hr>
+<h3 id="模拟训练循环"><strong>6️⃣ 模拟训练循环</strong></h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> x_batch, y_batch <span class="keyword">in</span> dataloader:</span><br><span class="line">        <span class="comment"># 前向传播</span></span><br><span class="line">        outputs = model(x_batch)   <span class="comment"># [batch_size, num_classes]</span></span><br><span class="line">        loss = criterion(outputs, y_batch)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 反向传播</span></span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer.step()</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Batch x:"</span>, x_batch)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Batch y:"</span>, y_batch)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Loss:"</span>, loss.item())</span><br></pre></td></tr></table></figure>
+<p><strong>详细解析</strong>：</p>
+<ol type="1">
+<li><p><code>for x_batch, y_batch in dataloader</code>：</p>
+<ul>
+<li>DataLoader 迭代 batch</li>
+<li>每个 batch 是 <code>(x_batch, y_batch)</code> 张量</li>
+</ul></li>
+<li><p><code>outputs = model(x_batch)</code>：</p>
+<ul>
+<li>前向传播，输出 <code>[batch_size, num_classes]</code> 张量</li>
+</ul></li>
+<li><p><code>loss = criterion(outputs, y_batch)</code>：</p>
+<ul>
+<li>计算 loss</li>
+</ul></li>
+<li><p><code>optimizer.zero_grad()</code>：</p>
+<ul>
+<li>清空梯度，否则梯度会累加</li>
+</ul></li>
+<li><p><code>loss.backward()</code>：</p>
+<ul>
+<li>自动计算梯度</li>
+</ul></li>
+<li><p><code>optimizer.step()</code>：</p>
+<ul>
+<li>更新模型参数</li>
+</ul></li>
+<li><p>打印 batch 信息，观察训练数据流和 loss</p></li>
+</ol>
+<p><strong>示例输出</strong>（倒序 batch）：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Batch x: tensor([[ 9., 10.],</span><br><span class="line">                 [ 7.,  8.]])</span><br><span class="line">Batch y: tensor([0,1])</span><br><span class="line">Loss: 0.7378</span><br><span class="line">Batch x: tensor([[5.,6.],</span><br><span class="line">                 [3.,4.]])</span><br><span class="line">Batch y: tensor([0,1])</span><br><span class="line">Loss: 0.6923</span><br><span class="line">Batch x: tensor([[1.,2.]])</span><br><span class="line">Batch y: tensor([0])</span><br><span class="line">Loss: 0.6789</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="数据流可视化"><strong>7️⃣ 数据流可视化</strong></h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">原始数据</span><br><span class="line">data = [[1,2],[3,4],[5,6],[7,8],[9,10]]</span><br><span class="line">labels = [0,1,0,1,0]</span><br><span class="line">        │</span><br><span class="line">        ▼</span><br><span class="line">Dataset (MyDataset)</span><br><span class="line">  - __getitem__ 返回单个样本</span><br><span class="line">        │</span><br><span class="line">        ▼</span><br><span class="line">Sampler (ReverseSampler)</span><br><span class="line">  - 返回索引序列 [4,3,2,1,0]</span><br><span class="line">        │</span><br><span class="line">        ▼</span><br><span class="line">DataLoader (batch_size=2)</span><br><span class="line">  - Batch 0: idx=[4,3] → x=[[9,10],[7,8]], y=[0,1]</span><br><span class="line">  - Batch 1: idx=[2,1] → x=[[5,6],[3,4]], y=[0,1]</span><br><span class="line">  - Batch 2: idx=[0]   → x=[[1,2]], y=[0]</span><br><span class="line">        │</span><br><span class="line">        ▼</span><br><span class="line">模型训练</span><br><span class="line">  - 前向传播: y_pred = model(x_batch)</span><br><span class="line">  - 计算 loss</span><br><span class="line">  - 反向传播: loss.backward()</span><br><span class="line">  - 参数更新: optimizer.step()</span><br></pre></td></tr></table></figure>
+<p>💡 <strong>关键点</strong>：</p>
+<ol type="1">
+<li>Dataset → 管理原始数据和取样方法</li>
+<li>Sampler → 决定索引顺序</li>
+<li>DataLoader → 按 batch 聚合数据</li>
+<li>模型训练 → 接收 batch，计算梯度，更新参数</li>
+</ol>
+]]></content>
+      <categories>
+        <category>pytorch</category>
+      </categories>
+      <tags>
+        <tag>deeplearning</tag>
+        <tag>pytorch</tag>
+        <tag>dataset</tag>
+        <tag>dataloader</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常见BUG汇总</title>
+    <url>/2025/07/27/issue/</url>
+    <content><![CDATA[<h2 id="一markdown">一、Markdown</h2>
+<h3 id="为什么vscode编辑md文件十分卡顿">1.1
+为什么vscode编辑md文件十分卡顿</h3>
+<p>解决方法:禁用cpp extension pack扩展</p>
+<h2 id="二hexo">二、Hexo</h2>
+<h3 id="出现spawn-failed报错">2.1 出现Spawn Failed报错</h3>
+<p>首先尝试关机重启</p>
+<p>其次删除<code>.deploy_git</code>文件夹</p>
+<p>最后实在不行找到<code>.ssh</code>文件，先测试</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+<p>如果出现22端口连接超时，改成443端口即可 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">  HostName ssh.github.com</span><br><span class="line">  Port 443</span><br><span class="line">  User git</span><br><span class="line">  IdentityFile ~/.ssh/id_rsa</span><br><span class="line">  IdentitiesOnly <span class="built_in">yes</span></span><br></pre></td></tr></table></figure></p>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>markdown</tag>
       </tags>
   </entry>
 </search>
