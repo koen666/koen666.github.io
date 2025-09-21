@@ -20,20 +20,21 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"text":"评论","order":-2}},"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本文介绍collections库带来方便好用的数据结构">
+  <meta name="description" content="本文介绍使用argparse + yaml两库的结合在训练脚本中的使用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="collections">
-<meta property="og:url" content="http://example.com/2025/09/15/py_collections/index.html">
+<meta property="og:title" content="argparse + yaml 在训练脚本中的使用">
+<meta property="og:url" content="http://example.com/2025/09/21/yaml+argparse/index.html">
 <meta property="og:site_name" content="木语">
-<meta property="og:description" content="本文介绍collections库带来方便好用的数据结构">
+<meta property="og:description" content="本文介绍使用argparse + yaml两库的结合在训练脚本中的使用">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-09-14T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-09-15T12:25:48.748Z">
+<meta property="article:published_time" content="2025-09-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-21T06:27:16.994Z">
 <meta property="article:author" content="koen">
-<meta property="article:tag" content="collections">
+<meta property="article:tag" content="yaml">
+<meta property="article:tag" content="argparse">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2025/09/15/py_collections/">
+<link rel="canonical" href="http://example.com/2025/09/21/yaml+argparse/">
 
 
 <script id="page-configurations">
@@ -46,7 +47,7 @@
   };
 </script>
 
-  <title>collections | 木语</title>
+  <title>argparse + yaml 在训练脚本中的使用 | 木语</title>
   
 
 
@@ -78,119 +79,7 @@
 </noscript>
 
    <link rel="stylesheet" href="/dist/APlayer.min.css">
-<style>mjx-container[jax="SVG"] {
-  direction: ltr;
-}
-
-mjx-container[jax="SVG"] > svg {
-  overflow: visible;
-}
-
-mjx-container[jax="SVG"][display="true"] {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-mjx-container[jax="SVG"][justify="left"] {
-  text-align: left;
-}
-
-mjx-container[jax="SVG"][justify="right"] {
-  text-align: right;
-}
-
-g[data-mml-node="merror"] > g {
-  fill: red;
-  stroke: red;
-}
-
-g[data-mml-node="merror"] > rect[data-background] {
-  fill: yellow;
-  stroke: none;
-}
-
-g[data-mml-node="mtable"] > line[data-line] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > rect[data-frame] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > .mjx-dashed {
-  stroke-dasharray: 140;
-}
-
-g[data-mml-node="mtable"] > .mjx-dotted {
-  stroke-linecap: round;
-  stroke-dasharray: 0,140;
-}
-
-g[data-mml-node="mtable"] > svg {
-  overflow: visible;
-}
-
-[jax="SVG"] mjx-tool {
-  display: inline-block;
-  position: relative;
-  width: 0;
-  height: 0;
-}
-
-[jax="SVG"] mjx-tool > mjx-tip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-mjx-tool > mjx-tip {
-  display: inline-block;
-  padding: .2em;
-  border: 1px solid #888;
-  font-size: 70%;
-  background-color: #F8F8F8;
-  color: black;
-  box-shadow: 2px 2px 5px #AAAAAA;
-}
-
-g[data-mml-node="maction"][data-toggle] {
-  cursor: pointer;
-}
-
-mjx-status {
-  display: block;
-  position: fixed;
-  left: 1em;
-  bottom: 1em;
-  min-width: 25%;
-  padding: .2em .4em;
-  border: 1px solid #888;
-  font-size: 90%;
-  background-color: #F8F8F8;
-  color: black;
-}
-
-foreignObject[data-mjx-xml] {
-  font-family: initial;
-  line-height: normal;
-  overflow: visible;
-}
-
-.MathJax path {
-  stroke-width: 3;
-}
-
-mjx-container[display="true"] {
-  overflow: auto hidden;
-}
-
-mjx-container[display="true"] + br {
-  display: none;
-}
-</style><link rel="alternate" href="/atom.xml" title="木语" type="application/atom+xml">
+<link rel="alternate" href="/atom.xml" title="木语" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -300,7 +189,7 @@ mjx-container[display="true"] + br {
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/15/py_collections/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/21/yaml+argparse/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/./images/head.jpg">
@@ -313,7 +202,7 @@ mjx-container[display="true"] + br {
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          collections
+          argparse + yaml 在训练脚本中的使用
         </h1>
 
         <div class="post-meta">
@@ -324,7 +213,7 @@ mjx-container[display="true"] + br {
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-09-15 00:00:00 / Modified: 20:25:48" itemprop="dateCreated datePublished" datetime="2025-09-15T00:00:00+08:00">2025-09-15</time>
+              <time title="Created: 2025-09-21 00:00:00 / Modified: 14:27:16" itemprop="dateCreated datePublished" datetime="2025-09-21T00:00:00+08:00">2025-09-21</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -332,7 +221,7 @@ mjx-container[display="true"] + br {
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                  <a href="/categories/deeplearning/" itemprop="url" rel="index"><span itemprop="name">deeplearning</span></a>
                 </span>
             </span>
 
@@ -349,7 +238,7 @@ mjx-container[display="true"] + br {
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>525</span>
+              <span>950</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -358,7 +247,7 @@ mjx-container[display="true"] + br {
                 <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
-            <div class="post-description">本文介绍collections库带来方便好用的数据结构</div>
+            <div class="post-description">本文介绍使用argparse + yaml两库的结合在训练脚本中的使用</div>
 
         </div>
       </header>
@@ -369,94 +258,155 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="导入方式">1️⃣ 导入方式</h2>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> collections</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="常用数据结构">2️⃣ 常用数据结构</h2>
-<h3 id="counter-计数器">1. <code>Counter</code> —— 计数器</h3>
+        <p>在深度学习训练中，我们常用很多超参数。Python
+提供两个工具帮助管理：</p>
+<ol type="1">
+<li><strong>argparse</strong>：从命令行传参</li>
+<li><strong>yaml</strong>：写配置文件</li>
+</ol>
+<p>结合它们，就能灵活地管理训练参数。</p>
+<h2 id="命令行是怎么调用-python-脚本的">1. 命令行是怎么调用 Python
+脚本的？</h2>
+<p>假设你有一个脚本 <code>train.py</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># train.py</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hello&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>在命令行里：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train.py</span><br></pre></td></tr></table></figure>
 <ul>
-<li>功能：统计元素出现的次数。</li>
-<li>类似于 <code>dict</code>，但是专门用于计数。</li>
+<li><code>python</code> → 调用 Python 解释器</li>
+<li><code>train.py</code> → 要运行的脚本</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"></span><br><span class="line">lst = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'a'</span>, <span class="string">'c'</span>, <span class="string">'b'</span>, <span class="string">'a'</span>]</span><br><span class="line">cnt = Counter(lst)</span><br><span class="line"><span class="built_in">print</span>(cnt)  <span class="comment"># Counter({'a': 3, 'b': 2, 'c': 1})</span></span><br><span class="line"><span class="built_in">print</span>(cnt.most_common(<span class="number">2</span>))  <span class="comment"># [('a', 3), ('b', 2)]</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="defaultdict-带默认值的字典">2. <code>defaultdict</code> ——
-带默认值的字典</h3>
+<p>如果你想给脚本传参：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train.py --batch_size 64 --lr 0.01</span><br></pre></td></tr></table></figure>
+<p>这里 <code>--batch_size 64</code>、<code>--lr 0.01</code> 就是
+<strong>命令行参数</strong>，Python 默认不会解析它们，需要用
+<strong>argparse</strong>。</p>
+<h2 id="argparse-详解">2. argparse 详解</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line">parser = argparse.ArgumentParser(description=<span class="string">&quot;训练脚本示例&quot;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>功能：<strong>访问不存在的 key
-不会报错</strong>，会返回默认值。</li>
-<li>构造时传入一个函数（如
-<code>int</code>、<code>list</code>、<code>set</code>）作为默认值。</li>
+<li>创建解析器</li>
+<li><code>description</code> 会显示在 <code>--help</code> 中</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"></span><br><span class="line">d = defaultdict(<span class="built_in">int</span>)  <span class="comment"># 默认值是 0</span></span><br><span class="line">d[<span class="string">'a'</span>] += <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(d[<span class="string">'a'</span>])  <span class="comment"># 1</span></span><br><span class="line"><span class="built_in">print</span>(d[<span class="string">'b'</span>])  <span class="comment"># 0</span></span><br><span class="line"></span><br><span class="line">d2 = defaultdict(<span class="built_in">list</span>)</span><br><span class="line">d2[<span class="string">'x'</span>].append(<span class="number">10</span>)</span><br><span class="line"><span class="built_in">print</span>(d2[<span class="string">'x'</span>])  <span class="comment"># [10]</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>在你之前的 <code>mask_outlier</code> 代码里：</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index2label = collections.defaultdict(<span class="built_in">int</span>)</span><br></pre></td></tr></table></figure>
-<p>就是用 <code>int</code> 作为默认值 0，统计每个标签出现的次数。</p>
-<hr>
-<h3 id="ordereddict-有序字典">3. <code>OrderedDict</code> ——
-有序字典</h3>
-<ul>
-<li>功能：<strong>保持 key 的插入顺序</strong>。</li>
-<li>Python 3.7+ 的普通 dict
-已经默认保持顺序，所以用途不如以前重要，但有些方法如
-<code>move_to_end</code> 仍很有用。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> OrderedDict</span><br><span class="line"></span><br><span class="line">od = OrderedDict()</span><br><span class="line">od[<span class="string">'a'</span>] = <span class="number">1</span></span><br><span class="line">od[<span class="string">'b'</span>] = <span class="number">2</span></span><br><span class="line">od[<span class="string">'c'</span>] = <span class="number">3</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(od.keys()))  <span class="comment"># ['a', 'b', 'c']</span></span><br><span class="line">od.move_to_end(<span class="string">'b'</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(od.keys()))  <span class="comment"># ['a', 'c', 'b']</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="deque-双端队列">4. <code>deque</code> —— 双端队列</h3>
-<ul>
-<li>功能：可以 <strong>高效地从两端插入和删除元素</strong>。</li>
-<li>操作复杂度 O(1)，比 list 从左端插入快。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line"></span><br><span class="line">q = deque([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">q.append(<span class="number">4</span>)      <span class="comment"># 右端添加</span></span><br><span class="line">q.appendleft(<span class="number">0</span>)  <span class="comment"># 左端添加</span></span><br><span class="line"><span class="built_in">print</span>(q)         <span class="comment"># deque([0, 1, 2, 3, 4])</span></span><br><span class="line">q.pop()          <span class="comment"># 右端删除</span></span><br><span class="line">q.popleft()      <span class="comment"># 左端删除</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="namedtuple-命名元组">5. <code>namedtuple</code> —— 命名元组</h3>
-<ul>
-<li>功能：<strong>给元组的每个元素命名</strong>，既可以像元组一样索引，也可以用属性名访问。</li>
-<li>用于存储轻量对象。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> namedtuple</span><br><span class="line"></span><br><span class="line">Point = namedtuple(<span class="string">'Point'</span>, [<span class="string">'x'</span>, <span class="string">'y'</span>])</span><br><span class="line">p = Point(<span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line"><span class="built_in">print</span>(p.x)  <span class="comment"># 10</span></span><br><span class="line"><span class="built_in">print</span>(p[<span class="number">1</span>]) <span class="comment"># 20</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="小结">3️⃣ 小结</h2>
+<h3 id="添加参数">2.1 添加参数</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">parser.add_argument(<span class="string">&quot;--batch_size&quot;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, default=<span class="number">32</span>, <span class="built_in">help</span>=<span class="string">&quot;训练批大小&quot;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&quot;--lr&quot;</span>, <span class="built_in">type</span>=<span class="built_in">float</span>, default=<span class="number">0.001</span>, <span class="built_in">help</span>=<span class="string">&quot;学习率&quot;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&quot;--use_gpu&quot;</span>, action=<span class="string">&quot;store_true&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;是否使用 GPU&quot;</span>)</span><br><span class="line">args = parser.parse_args()</span><br></pre></td></tr></table></figure>
+<h4 id="参数讲解">参数讲解：</h4>
 <table>
+<colgroup>
+<col style="width: 41%" />
+<col style="width: 58%" />
+</colgroup>
 <thead>
 <tr>
-<th>数据结构</th>
-<th>特点</th>
-<th>典型用途</th>
+<th>参数</th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Counter</td>
-<td>计数</td>
-<td>元素频率统计</td>
+<td><code>--batch_size</code></td>
+<td>参数名（命令行用 <code>--batch_size 64</code>）</td>
 </tr>
 <tr>
-<td>defaultdict</td>
-<td>key 不存在返回默认值</td>
-<td>聚合统计、累加</td>
+<td><code>type=int</code></td>
+<td>自动转换类型，如果传入非 int 会报错</td>
 </tr>
 <tr>
-<td>OrderedDict</td>
-<td>保持插入顺序</td>
-<td>需要顺序字典</td>
+<td><code>default=32</code></td>
+<td>如果命令行没传这个参数，就用默认值 32</td>
 </tr>
 <tr>
-<td>deque</td>
-<td>双端队列，高效两端操作</td>
-<td>队列、滑动窗口</td>
+<td><code>help="..."</code></td>
+<td>这个会显示在 <code>python train.py -h</code> 中</td>
 </tr>
 <tr>
-<td>namedtuple</td>
-<td>命名元组，访问像对象又像元组</td>
-<td>简单对象存储</td>
+<td><code>action="store_true"</code></td>
+<td>布尔开关，不传就是 False，传了就 True（适合开关）</td>
 </tr>
 </tbody>
 </table>
-<hr>
+<h4 id="运行示例">运行示例</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train.py --batch_size 64 --use_gpu</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(args.batch_size)  <span class="comment"># 64</span></span><br><span class="line"><span class="built_in">print</span>(args.use_gpu)     <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>不写 <code>--use_gpu</code> → <code>False</code></li>
+<li>写了 <code>--use_gpu</code> → <code>True</code></li>
+</ul>
+<h3 id="其他常用-action">2.2 其他常用 action</h3>
+<ul>
+<li><code>store_true</code> / <code>store_false</code> → 布尔开关</li>
+<li><code>append</code> → 可以多次传参，把值收集成列表</li>
+<li><code>count</code> → 统计参数出现次数（例如 <code>-v</code>
+打印更详细日志）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parser.add_argument(<span class="string">&quot;-v&quot;</span>, <span class="string">&quot;--verbose&quot;</span>, action=<span class="string">&quot;count&quot;</span>, default=<span class="number">0</span>, <span class="built_in">help</span>=<span class="string">&quot;增加日志详细级别&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python train.py -vvv</span><br><span class="line"><span class="built_in">print</span>(args.verbose)  <span class="comment"># 3</span></span><br></pre></td></tr></table></figure>
+<h3 id="位置参数必填">2.3 位置参数（必填）</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parser.add_argument(<span class="string">&quot;dataset_path&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;数据集路径&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>命令行必须写：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python train.py ./data</span><br><span class="line"><span class="built_in">print</span>(args.dataset_path)  <span class="comment"># ./data</span></span><br></pre></td></tr></table></figure>
+<h3 id="限定选项-choices">2.4 限定选项 choices</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parser.add_argument(<span class="string">&quot;--optimizer&quot;</span>, choices=[<span class="string">&quot;sgd&quot;</span>, <span class="string">&quot;adam&quot;</span>], default=<span class="string">&quot;adam&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;优化器类型&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>只能传 <code>"sgd"</code> 或 <code>"adam"</code></li>
+<li>传其他 → argparse 会报错</li>
+</ul>
+<h3 id="多值参数-nargs">2.5 多值参数 nargs</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parser.add_argument(<span class="string">&quot;--layers&quot;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, nargs=<span class="string">&quot;+&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;每层神经元数量&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python train.py --layers 64 128 256</span><br><span class="line"><span class="built_in">print</span>(args.layers)  <span class="comment"># [64, 128, 256]</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>nargs='+'</code> → 一个或多个</li>
+<li><code>nargs='*'</code> → 零个或多个</li>
+</ul>
+<h3 id="查看帮助">2.6 查看帮助</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train.py -h</span><br></pre></td></tr></table></figure>
+<p>会打印：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">usage: train.py [-h] [--batch_size BATCH_SIZE] [--lr LR] [--use_gpu] ...</span><br><span class="line"></span><br><span class="line">训练脚本示例</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  -h, --help            show this help message and exit</span><br><span class="line">  --batch_size BATCH_SIZE</span><br><span class="line">                        训练批大小 (default: 32)</span><br><span class="line">  --lr LR               学习率 (default: 0.001)</span><br><span class="line">  --use_gpu             是否使用 GPU</span><br></pre></td></tr></table></figure>
+<h2 id="yaml-讲解">3. yaml 讲解</h2>
+<p><strong>YAML</strong>
+是一种人类可读的配置文件格式，常用于存储训练参数。</p>
+<h3 id="示例-config.yaml">3.1 示例 <code>config.yaml</code></h3>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">train:</span></span><br><span class="line">  <span class="attr">batch_size:</span> <span class="number">64</span></span><br><span class="line">  <span class="attr">learning_rate:</span> <span class="number">0.001</span></span><br><span class="line">  <span class="attr">num_epochs:</span> <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="attr">model:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">&quot;resnet18&quot;</span></span><br><span class="line">  <span class="attr">num_classes:</span> <span class="number">100</span></span><br></pre></td></tr></table></figure>
+<h3 id="python-读取">3.2 Python 读取</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> yaml</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;config.yaml&quot;</span>, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    config = yaml.safe_load(f)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(config[<span class="string">&quot;train&quot;</span>][<span class="string">&quot;batch_size&quot;</span>])  <span class="comment"># 64</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>推荐使用 <code>safe_load</code>，防止执行不安全代码</p>
+</blockquote>
+<h2 id="argparse-yaml-结合">4. argparse + yaml 结合</h2>
+<p>思路：</p>
+<ol type="1">
+<li>argparse 解析命令行参数</li>
+<li>先读取 yaml 配置</li>
+<li>用命令行参数覆盖 yaml 配置</li>
+</ol>
+<p>示例代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> yaml</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_config</span>():</span><br><span class="line">    parser = argparse.ArgumentParser(description=<span class="string">&quot;训练脚本&quot;</span>)</span><br><span class="line">    parser.add_argument(<span class="string">&quot;--config&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, default=<span class="string">&quot;config.yaml&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;配置文件路径&quot;</span>)</span><br><span class="line">    parser.add_argument(<span class="string">&quot;--batch_size&quot;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, <span class="built_in">help</span>=<span class="string">&quot;覆盖 YAML 的批大小&quot;</span>)</span><br><span class="line">    parser.add_argument(<span class="string">&quot;--learning_rate&quot;</span>, <span class="built_in">type</span>=<span class="built_in">float</span>, <span class="built_in">help</span>=<span class="string">&quot;覆盖 YAML 的学习率&quot;</span>)</span><br><span class="line">    parser.add_argument(<span class="string">&quot;--num_epochs&quot;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, <span class="built_in">help</span>=<span class="string">&quot;覆盖 YAML 的训练轮数&quot;</span>)</span><br><span class="line">    parser.add_argument(<span class="string">&quot;--use_gpu&quot;</span>, action=<span class="string">&quot;store_true&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;是否使用 GPU&quot;</span>)</span><br><span class="line">    args = parser.parse_args()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 读取 YAML</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(args.config, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        config = yaml.safe_load(f)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 覆盖</span></span><br><span class="line">    <span class="keyword">if</span> args.batch_size <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        config[<span class="string">&quot;train&quot;</span>][<span class="string">&quot;batch_size&quot;</span>] = args.batch_size</span><br><span class="line">    <span class="keyword">if</span> args.learning_rate <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        config[<span class="string">&quot;train&quot;</span>][<span class="string">&quot;learning_rate&quot;</span>] = args.learning_rate</span><br><span class="line">    <span class="keyword">if</span> args.num_epochs <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        config[<span class="string">&quot;train&quot;</span>][<span class="string">&quot;num_epochs&quot;</span>] = args.num_epochs</span><br><span class="line">    config[<span class="string">&quot;train&quot;</span>][<span class="string">&quot;use_gpu&quot;</span>] = args.use_gpu</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> config</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    cfg = get_config()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;最终训练配置：&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(cfg)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h3 id="使用方法">4.1 使用方法</h3>
+<ol type="1">
+<li><strong>默认 YAML 配置</strong>：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train.py</span><br></pre></td></tr></table></figure>
+<ol start="2" type="1">
+<li><strong>指定 YAML 文件</strong>：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train.py --config configs/exp1.yaml</span><br></pre></td></tr></table></figure>
+<ol start="3" type="1">
+<li><strong>命令行覆盖</strong>：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train.py --batch_size 128 --learning_rate 0.0005 --use_gpu</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">&#x27;train&#x27;</span>: &#123;<span class="string">&#x27;batch_size&#x27;</span>: <span class="number">128</span>, <span class="string">&#x27;learning_rate&#x27;</span>: <span class="number">0.0005</span>, <span class="string">&#x27;num_epochs&#x27;</span>: <span class="number">10</span>, <span class="string">&#x27;use_gpu&#x27;</span>: <span class="literal">True</span>&#125;, ...&#125;</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="总结">5. 总结</h2>
+<ul>
+<li><strong>命令行参数</strong>：灵活修改、临时覆盖配置</li>
+<li><strong>YAML 配置</strong>：记录实验参数、复现实验</li>
+<li><strong>结合使用</strong>：用 YAML 保存默认参数，用 argparse
+覆盖临时修改</li>
+</ul>
+<hr />
 
     </div>
 
@@ -491,7 +441,8 @@ mjx-container[display="true"] + br {
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/collections/" rel="tag"><i class="fa fa-tag"></i> collections</a>
+              <a href="/tags/yaml/" rel="tag"><i class="fa fa-tag"></i> yaml</a>
+              <a href="/tags/argparse/" rel="tag"><i class="fa fa-tag"></i> argparse</a>
           </div>
 
         
@@ -500,13 +451,10 @@ mjx-container[display="true"] + br {
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/09/15/%E4%BB%8Edataset%E5%88%B0dataloader/" rel="prev" title="从dataset->dataloader">
-      <i class="fa fa-chevron-left"></i> 从dataset->dataloader
+    <a href="/2025/09/16/vue-router/" rel="prev" title="vue-router">
+      <i class="fa fa-chevron-left"></i> vue-router
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/09/15/KL/" rel="next" title="KL散度">
-      KL散度 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -566,9 +514,8 @@ mjx-container[display="true"] + br {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E6%96%B9%E5%BC%8F"><span class="nav-text">1️⃣ 导入方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-text">2️⃣ 常用数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#counter-%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="nav-text">1. Counter —— 计数器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#defaultdict-%E5%B8%A6%E9%BB%98%E8%AE%A4%E5%80%BC%E7%9A%84%E5%AD%97%E5%85%B8"><span class="nav-text">2. defaultdict ——
-带默认值的字典</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ordereddict-%E6%9C%89%E5%BA%8F%E5%AD%97%E5%85%B8"><span class="nav-text">3. OrderedDict ——
-有序字典</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deque-%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97"><span class="nav-text">4. deque —— 双端队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#namedtuple-%E5%91%BD%E5%90%8D%E5%85%83%E7%BB%84"><span class="nav-text">5. namedtuple —— 命名元组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-text">3️⃣ 小结</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%98%AF%E6%80%8E%E4%B9%88%E8%B0%83%E7%94%A8-python-%E8%84%9A%E6%9C%AC%E7%9A%84"><span class="nav-text">1. 命令行是怎么调用 Python
+脚本的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#argparse-%E8%AF%A6%E8%A7%A3"><span class="nav-text">2. argparse 详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%8F%82%E6%95%B0"><span class="nav-text">2.1 添加参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E8%AE%B2%E8%A7%A3"><span class="nav-text">参数讲解：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%A4%BA%E4%BE%8B"><span class="nav-text">运行示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%B8%B8%E7%94%A8-action"><span class="nav-text">2.2 其他常用 action</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%8D%E7%BD%AE%E5%8F%82%E6%95%B0%E5%BF%85%E5%A1%AB"><span class="nav-text">2.3 位置参数（必填）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%90%E5%AE%9A%E9%80%89%E9%A1%B9-choices"><span class="nav-text">2.4 限定选项 choices</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%80%BC%E5%8F%82%E6%95%B0-nargs"><span class="nav-text">2.5 多值参数 nargs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%B8%AE%E5%8A%A9"><span class="nav-text">2.6 查看帮助</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yaml-%E8%AE%B2%E8%A7%A3"><span class="nav-text">3. yaml 讲解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B-config.yaml"><span class="nav-text">3.1 示例 config.yaml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python-%E8%AF%BB%E5%8F%96"><span class="nav-text">3.2 Python 读取</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#argparse-yaml-%E7%BB%93%E5%90%88"><span class="nav-text">4. argparse + yaml 结合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-text">4.1 使用方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">5. 总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -958,7 +905,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'koen666.github.io',
       owner       : 'koen666',
       admin       : ['koen666'],
-      id          : '02d8890a9fe376a6a60960750756f4a1',
+      id          : 'de99b0a8f9bec0c781900f0fdf0557df',
         language: '',
       distractionFreeMode: true
     });
