@@ -20,22 +20,21 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"text":"评论","order":-2}},"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本文用于介绍curl命令行工具的基本操作和使用，全程干货，放心食用">
+  <meta name="description" content="本文介绍MLC及其局限性">
 <meta property="og:type" content="article">
-<meta property="og:title" content="curl使用教学">
-<meta property="og:url" content="http://example.com/2025/07/26/curl/index.html">
+<meta property="og:title" content="MLC 多层感知机制">
+<meta property="og:url" content="http://example.com/2025/09/29/MLC/index.html">
 <meta property="og:site_name" content="木语">
-<meta property="og:description" content="本文用于介绍curl命令行工具的基本操作和使用，全程干货，放心食用">
+<meta property="og:description" content="本文介绍MLC及其局限性">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-07-26T04:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-31T12:27:59.709Z">
+<meta property="article:published_time" content="2025-09-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-29T10:48:05.375Z">
 <meta property="article:author" content="koen">
-<meta property="article:tag" content="learn">
-<meta property="article:tag" content="cmd">
-<meta property="article:tag" content="curl">
+<meta property="article:tag" content="math">
+<meta property="article:tag" content="MLC">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2025/07/26/curl/">
+<link rel="canonical" href="http://example.com/2025/09/29/MLC/">
 
 
 <script id="page-configurations">
@@ -48,7 +47,7 @@
   };
 </script>
 
-  <title>curl使用教学 | 木语</title>
+  <title>MLC 多层感知机制 | 木语</title>
   
 
 
@@ -80,7 +79,119 @@
 </noscript>
 
    <link rel="stylesheet" href="/dist/APlayer.min.css">
-<link rel="alternate" href="/atom.xml" title="木语" type="application/atom+xml">
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="木语" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -190,7 +301,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/07/26/curl/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/29/MLC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/./images/head.jpg">
@@ -203,7 +314,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          curl使用教学
+          MLC 多层感知机制
         </h1>
 
         <div class="post-meta">
@@ -212,23 +323,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2025-07-26 12:00:00" itemprop="dateCreated datePublished" datetime="2025-07-26T12:00:00+08:00">2025-07-26</time>
+              <time title="Created: 2025-09-29 00:00:00 / Modified: 18:48:05" itemprop="dateCreated datePublished" datetime="2025-09-29T00:00:00+08:00">2025-09-29</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-31 20:27:59" itemprop="dateModified" datetime="2025-07-31T20:27:59+08:00">2025-07-31</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/cmd/" itemprop="url" rel="index"><span itemprop="name">cmd</span></a>
+                  <a href="/categories/deeplearning/" itemprop="url" rel="index"><span itemprop="name">deeplearning</span></a>
                 </span>
             </span>
 
@@ -245,7 +350,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>679</span>
+              <span>978</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -254,7 +359,7 @@
                 <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
-            <div class="post-description">本文用于介绍curl命令行工具的基本操作和使用，全程干货，放心食用</div>
+            <div class="post-description">本文介绍MLC及其局限性</div>
 
         </div>
       </header>
@@ -265,96 +370,75 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <blockquote>
-<p>curl 是一个强大的命令行工具，用于在命令行或脚本中发送 HTTP
-请求，与服务器通信。它可以用来下载网页、调用 API
-接口、上传文件、发送表单等。几乎所有支持网络通信的协议 curl
-都能处理，包括 HTTP、HTTPS、FTP、SFTP、SMTP 等</p>
-</blockquote>
-<hr />
-<h2 id="一所以curl能干啥">一、所以curl能干啥</h2>
-<table>
-<colgroup>
-<col style="width: 12%" />
-<col style="width: 87%" />
-</colgroup>
-<thead>
-<tr>
-<th>功能</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>获取网页内容</td>
-<td><code>curl https://example.com</code></td>
-</tr>
-<tr>
-<td>下载文件</td>
-<td><code>curl -O https://example.com/file.zip</code></td>
-</tr>
-<tr>
-<td>发送 POST 请求</td>
-<td><code>curl -X POST -d "name=Koen&amp;age=20" https://example.com/api</code></td>
-</tr>
-<tr>
-<td>添加请求头</td>
-<td><code>curl -H "Authorization: Bearer TOKEN" https://api.example.com/data</code></td>
-</tr>
-<tr>
-<td>上传文件</td>
-<td><code>curl -F "file=@test.png" https://example.com/upload</code></td>
-</tr>
-<tr>
-<td>保存输出到文件</td>
-<td><code>curl https://example.com -o saved.html</code></td>
-</tr>
-</tbody>
-</table>
-<p>以下将对其功能进行详细解释</p>
-<hr />
-<h2 id="二利用curl获取网页内容">二、利用curl获取网页内容</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl url</span><br></pre></td></tr></table></figure>
-<p>会将get请求返回结果直接输出在命令行中</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://example.com -o index.html</span><br></pre></td></tr></table></figure>
-<p>保存指定内容到文件，地址为cmd当前地址</p>
-<hr />
-<h2 id="三发送post请求">三、发送post请求</h2>
-<p>一般用于测试接口是否正常 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST -d <span class="string">&quot;name=Koen&amp;age=20&quot;</span> https://example.com/api</span><br></pre></td></tr></table></figure> 带上请求头和请求体：
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST https://api.example.com/data \</span><br><span class="line">  -H <span class="string">&quot;Authorization: Bearer abc123&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;&quot;key&quot;:&quot;va</span></span><br><span class="line"><span class="string">lue&quot;&#125;&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">     -d <span class="string">&#x27;&#123;&quot;username&quot;:&quot;koen&quot;,&quot;password&quot;:&quot;123456&quot;&#125;&#x27;</span> \</span><br><span class="line">     https://example.com/api</span><br></pre></td></tr></table></figure></p>
-<hr />
-<h2 id="四利用curl进行文件上传">四、利用curl进行文件上传</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -F <span class="string">&quot;file=@test.png&quot;</span> https://example.com/upload</span><br></pre></td></tr></table></figure>
-<p>-F就是指定用表单的方式进行字段的上传</p>
-<table>
-<colgroup>
-<col style="width: 18%" />
-<col style="width: 81%" />
-</colgroup>
-<thead>
-<tr>
-<th>部分</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>file</code></td>
-<td>表单字段的名字。就像网页表单中
-<code>&lt;input type="file" name="file"&gt;</code>。</td>
-</tr>
-<tr>
-<td><code>=</code></td>
-<td>分隔字段名与数据（文件）</td>
-</tr>
-<tr>
-<td><code>@test.png</code></td>
-<td>表示上传当前目录下名为 <code>test.png</code> 的文件</td>
-</tr>
-</tbody>
-</table>
-<p>其实就是post请求上传文件的方式</p>
-<hr />
+        <h2 id="什么是-mlp">1️⃣ <strong>什么是 MLP</strong></h2>
+<p><strong>MLP（多层感知机）</strong> 本质上就是：</p>
+<ul>
+<li>输入是一个 <strong>向量</strong>（1D）</li>
+<li>输出也是一个 <strong>向量</strong>（1D）</li>
+<li>每一层就是 <strong>矩阵乘法 + 非线性激活</strong></li>
+</ul>
+<p>数学上，一层 MLP 可以写成： <span class="math display"><em>h</em> = <em>W</em><em>x</em> + <em>b</em></span></p>
+<ul>
+<li>(x)：输入向量（比如长度是 784）</li>
+<li>(W)：权重矩阵</li>
+<li>(h)：输出向量（比如长度是 256）</li>
+</ul>
+<p>关键点：<strong>MLP
+不关心输入有没有二维结构，它只把输入当作一堆数字（向量）</strong>。</p>
+<hr>
+<h2 id="图像输入-mlp-的问题">2️⃣ 图像输入 MLP 的问题</h2>
+<p>比如我们有一张 <strong>28×28 的图片</strong>，像素矩阵是： <span class="math display"><em>X</em>[<em>i</em>, <em>j</em>],  <em>i</em>, <em>j</em> = 1, ..., 28</span></p>
+<p>在 MLP 里，通常要先把它 <strong>拉平</strong>（flatten）： <span class="math display"><em>x</em> = vec(<em>X</em>)</span> 于是它变成一个
+<strong>784 维的向量</strong>。 MLP 就直接做： <span class="math display"><em>h</em> = <em>W</em><em>x</em> + <em>b</em></span></p>
+<p>这样一来：原本的空间结构（像素的上下左右关系）就丢了。
+它只知道“这是第 123 个输入值”，而不知道这个像素在图片的哪儿。</p>
+<hr>
+<h2 id="如果想保留二维结构">3️⃣ 如果想保留二维结构</h2>
+<p>假设我们不要拉直，而是直接保持：</p>
+<ul>
+<li>输入是二维矩阵 (X[i,j])</li>
+<li>输出（隐藏层）也是二维矩阵 (H[a,b])</li>
+</ul>
+<p>那每个输出位置 (H[a,b]) 都要从整个输入图像里“吸收信息”。 于是需要一个
+<strong>四维权重张量</strong>： <span class="math display"><em>W</em>[<em>a</em>, <em>b</em>, <em>i</em>, <em>j</em>]</span></p>
+<p>公式就变成： <span class="math display"><em>H</em>[<em>a</em>, <em>b</em>] = ∑<sub><em>i</em>, <em>j</em></sub><em>W</em>[<em>a</em>, <em>b</em>, <em>i</em>, <em>j</em>] ⋅ <em>X</em>[<em>i</em>, <em>j</em>] + <em>b</em>[<em>a</em>, <em>b</em>]</span></p>
+<h3 id="对比">对比：</h3>
+<ul>
+<li><strong>普通 MLP：</strong> 用的是矩阵（2D
+权重），输入输出都是向量。</li>
+<li><strong>二维输入+二维输出：</strong> 用的是四阶张量（4D
+权重），输入输出都是矩阵。</li>
+</ul>
+<hr>
+<h2 id="举个例子">4️⃣ 举个例子</h2>
+<p>假设输入图像 (X) 是 <strong>2×2</strong>： <span class="math display"><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="23.62ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 10440 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D44B" d="M42 0H40Q26 0 26 11Q26 15 29 27Q33 41 36 43T55 46Q141 49 190 98Q200 108 306 224T411 342Q302 620 297 625Q288 636 234 637H206Q200 643 200 645T202 664Q206 677 212 683H226Q260 681 347 681Q380 681 408 681T453 682T473 682Q490 682 490 671Q490 670 488 658Q484 643 481 640T465 637Q434 634 411 620L488 426L541 485Q646 598 646 610Q646 628 622 635Q617 635 609 637Q594 637 594 648Q594 650 596 664Q600 677 606 683H618Q619 683 643 683T697 681T738 680Q828 680 837 683H845Q852 676 852 672Q850 647 840 637H824Q790 636 763 628T722 611T698 593L687 584Q687 585 592 480L505 384Q505 383 536 304T601 142T638 56Q648 47 699 46Q734 46 734 37Q734 35 732 23Q728 7 725 4T711 1Q708 1 678 1T589 2Q528 2 496 2T461 1Q444 1 444 10Q444 11 446 25Q448 35 450 39T455 44T464 46T480 47T506 54Q523 62 523 64Q522 64 476 181L429 299Q241 95 236 84Q232 76 232 72Q232 53 261 47Q262 47 267 47T273 46Q276 46 277 46T280 45T283 42T284 35Q284 26 282 19Q279 6 276 4T261 1Q258 1 243 1T201 2T142 2Q64 2 42 0Z"></path></g><g data-mml-node="mo" transform="translate(1129.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mrow" transform="translate(2185.6,0)"><g data-mml-node="mo"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path></g><g data-mml-node="mtable" transform="translate(278,0)"><g data-mml-node="mtr"><g data-mml-node="mtd"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="TeXAtom" transform="translate(605,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mn"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z" transform="translate(500,0)"></path></g></g></g></g><g data-mml-node="mtd" transform="translate(2362.1,0)"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="TeXAtom" transform="translate(605,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mn"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z" transform="translate(500,0)"></path></g></g></g><g data-mml-node="mtext" transform="translate(1362.1,0)"><path data-c="A0" d=""></path></g><g data-mml-node="msub" transform="translate(1612.1,0)"><g data-mml-node="mi"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="TeXAtom" transform="translate(605,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z" transform="translate(500,0)"></path></g></g></g></g><g data-mml-node="mtd" transform="translate(6336.3,0)"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="TeXAtom" transform="translate(605,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z" transform="translate(500,0)"></path></g></g></g></g></g></g><g data-mml-node="mo" transform="translate(7976.4,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path></g></g></g></g></svg></mjx-container></span></p>
+<h3 id="普通-mlp-做法">（1）普通 MLP 做法：</h3>
+<ul>
+<li><p>拉平：(<span class="math inline"><em>x</em> = [<em>x</em><sub>11</sub>, <em>x</em><sub>12</sub>, <em>x</em><sub>21</sub>, <em>x</em><sub>22</sub>]</span>)，是长度
+4 的向量。</p></li>
+<li><p>设隐藏层也是 4 个神经元：</p>
+<ul>
+<li>权重矩阵 (W) 就是 4×4（16 个参数）。</li>
+<li>输出是向量 (h)。</li>
+</ul></li>
+</ul>
+<h3 id="二维保留做法">（2）二维保留做法：</h3>
+<ul>
+<li>输入还是 2×2，输出也想要 2×2。</li>
+<li>每个输出位置 (H[a,b]) 都要看输入所有 4 个像素。</li>
+<li>权重变成 (W[a,b,i,j])，一共 (2×2×2×2 = 16) 个参数。</li>
+<li>输出是矩阵 (H)。</li>
+</ul>
+<hr>
+<h2 id="总结">5️⃣ 总结</h2>
+<ul>
+<li><strong>MLP 的本质：</strong> 向量输入 → 矩阵乘法 → 向量输出。</li>
+<li><strong>为什么会出现“四维权重”：</strong>
+因为我们把输入/输出都看作二维矩阵，而不是向量。数学上需要一个四维权重张量来描述“矩阵到矩阵”的映射。</li>
+<li><strong>核心问题：</strong> MLP 不利用图像的空间结构 →
+参数多、效率低。 这正是 CNN
+出现的原因（卷积核只看局部，参数大幅减少）。</li>
+</ul>
 
     </div>
 
@@ -389,9 +473,8 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/learn/" rel="tag"><i class="fa fa-tag"></i> learn</a>
-              <a href="/tags/cmd/" rel="tag"><i class="fa fa-tag"></i> cmd</a>
-              <a href="/tags/curl/" rel="tag"><i class="fa fa-tag"></i> curl</a>
+              <a href="/tags/math/" rel="tag"><i class="fa fa-tag"></i> math</a>
+              <a href="/tags/MLC/" rel="tag"><i class="fa fa-tag"></i> MLC</a>
           </div>
 
         
@@ -400,13 +483,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/07/26/docker-basic-usage/" rel="prev" title="Docker 基本使用教程">
-      <i class="fa fa-chevron-left"></i> Docker 基本使用教程
+    <a href="/2025/09/24/flask/" rel="prev" title="Flask框架 基本使用教程">
+      <i class="fa fa-chevron-left"></i> Flask框架 基本使用教程
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/07/26/pytorch/" rel="next" title="Pytorch，深度学习与神经网络篇">
-      Pytorch，深度学习与神经网络篇 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -466,7 +546,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E6%89%80%E4%BB%A5curl%E8%83%BD%E5%B9%B2%E5%95%A5"><span class="nav-text">一、所以curl能干啥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%88%A9%E7%94%A8curl%E8%8E%B7%E5%8F%96%E7%BD%91%E9%A1%B5%E5%86%85%E5%AE%B9"><span class="nav-text">二、利用curl获取网页内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E5%8F%91%E9%80%81post%E8%AF%B7%E6%B1%82"><span class="nav-text">三、发送post请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%88%A9%E7%94%A8curl%E8%BF%9B%E8%A1%8C%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="nav-text">四、利用curl进行文件上传</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-mlp"><span class="nav-text">1️⃣ 什么是 MLP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E8%BE%93%E5%85%A5-mlp-%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-text">2️⃣ 图像输入 MLP 的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E6%83%B3%E4%BF%9D%E7%95%99%E4%BA%8C%E7%BB%B4%E7%BB%93%E6%9E%84"><span class="nav-text">3️⃣ 如果想保留二维结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94"><span class="nav-text">对比：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BE%E4%B8%AA%E4%BE%8B%E5%AD%90"><span class="nav-text">4️⃣ 举个例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%AE%E9%80%9A-mlp-%E5%81%9A%E6%B3%95"><span class="nav-text">（1）普通 MLP 做法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E4%BF%9D%E7%95%99%E5%81%9A%E6%B3%95"><span class="nav-text">（2）二维保留做法：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">5️⃣ 总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -856,7 +936,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'koen666.github.io',
       owner       : 'koen666',
       admin       : ['koen666'],
-      id          : 'e62df01be3c08440cda324959a212998',
+      id          : '81db4f32df465fd903652a969e6c5faf',
         language: '',
       distractionFreeMode: true
     });
