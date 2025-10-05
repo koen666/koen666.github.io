@@ -28,7 +28,7 @@
 <meta property="og:description" content="本文介绍了多种gpu深度学习训练的方式">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-10-04T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-10-05T12:19:02.790Z">
+<meta property="article:modified_time" content="2025-10-05T12:25:07.934Z">
 <meta property="article:author" content="koen">
 <meta property="article:tag" content="gpu">
 <meta property="article:tag" content="data">
@@ -325,7 +325,7 @@ mjx-container[display="true"] + br {
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-10-05 00:00:00 / Modified: 20:19:02" itemprop="dateCreated datePublished" datetime="2025-10-05T00:00:00+08:00">2025-10-05</time>
+              <time title="Created: 2025-10-05 00:00:00 / Modified: 20:25:07" itemprop="dateCreated datePublished" datetime="2025-10-05T00:00:00+08:00">2025-10-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -676,13 +676,6 @@ allreduce / gather</h2>
 <li>下一轮所有人继续。</li>
 </ul>
 <p>这，就是数据并行和 DDP 的本质。</p>
-<hr>
-<h2 id="十总结一句话">十、总结一句话</h2>
-<blockquote>
-<p>多 GPU 训练 = 把工作拆给多张显卡 + 同步结果。</p>
-</blockquote>
-<p>而三种方式的关系：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">模型并行 ——&gt; 数据并行 ——&gt; 分布式数据并行(DDP)</span><br><span class="line">      （从简单到高效的演化过程）</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -793,7 +786,7 @@ allreduce / gather</h2>
           <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%A4%9A-gpu"><span class="nav-text">一、为什么需要多 GPU？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%A4%9A-gpu-%E7%9A%84%E4%B8%89%E7%A7%8D%E4%B8%BB%E8%A6%81%E6%96%B9%E5%BC%8F"><span class="nav-text">二、多 GPU 的三种主要方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%A1%8C"><span class="nav-text">三、核心思想：数据并行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%85%B3%E9%94%AE%E6%A6%82%E5%BF%B5%E8%AF%A6%E8%A7%A3"><span class="nav-text">四、关键概念详解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E4%B8%89%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F%E8%AF%A6%E8%A7%A3"><span class="nav-text">五、三种实现方式详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E5%B9%B6%E8%A1%8Cmodel-parallel"><span class="nav-text">1️⃣ 模型并行（Model Parallel）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%A1%8Cdata-paralleldp"><span class="nav-text">2️⃣ 数据并行（Data Parallel，DP）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%A1%8Cdistributed-data-parallelddp"><span class="nav-text">3️⃣
 分布式数据并行（Distributed Data Parallel，DDP）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E5%BA%95%E5%B1%82%E6%9C%BA%E5%88%B6%E7%90%86%E8%A7%A3scatter-allreduce-gather"><span class="nav-text">六、底层机制理解：scatter &#x2F;
 allreduce &#x2F; gather</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E5%9C%A8-ddp-%E4%B8%AD%E8%AE%AD%E7%BB%83%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BB%80%E4%B9%88"><span class="nav-text">七、在 DDP 中训练需要注意什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E4%B8%89%E4%B8%AA%E9%98%B6%E6%AE%B5%E7%9A%84%E6%80%BB%E7%BB%93%E5%AF%B9%E6%AF%94%E8%A1%A8"><span class="nav-text">八、三个阶段的总结对比表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%9D%E7%B1%BB%E6%AF%94%E7%90%86%E8%A7%A3%E5%A4%9A-gpu-%E5%83%8F%E5%B7%A5%E5%8E%82%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="nav-text">九、类比理解：多 GPU
-像工厂流水线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E6%80%BB%E7%BB%93%E4%B8%80%E5%8F%A5%E8%AF%9D"><span class="nav-text">十、总结一句话</span></a></li></ol></div>
+像工厂流水线</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
