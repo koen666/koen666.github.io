@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2025-10-05T01:14:00.177Z</updated>
+  <updated>2025-10-05T12:19:02.790Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>多gpu训练方式</title>
+    <link href="http://example.com/2025/10/05/%E5%A4%9Agpu/"/>
+    <id>http://example.com/2025/10/05/%E5%A4%9Agpu/</id>
+    <published>2025-10-04T16:00:00.000Z</published>
+    <updated>2025-10-05T12:19:02.790Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="一为什么需要多-gpu">一、为什么需要多 GPU？</h2><p>当我们训练深度学习模型（特别是大模型）时，单张 GPU 往往不够：</p><ul><li>数据太大，单卡放不下；</li><li>模型太复杂，训练太慢；</li><li>想更快训练完成。</li></ul><p>于是就有了「<strong>多 GPU 训练</strong>」这个想法：<strong>让多张显卡一起干活，分担计算任务。</strong></p><hr><h2 id="二多-gpu-的三种主要方式">二、多 GPU 的三种主要方式</h2><p>多 GPU 的实现方式有很多，但核心分为三类</p><table><colgroup><col style="width: 46%"><col style="width: 6%"><col style="width: 22%"><col style="width: 23%"></colgroup><thead><tr><th>方式</th><th>中文名称</th><th>思路</th><th>优缺点</th></tr></thead><tbody><tr><td>1️⃣ 模型并行（Model Parallel）</td><td>模型拆开</td><td>把模型的不同层分给不同 GPU</td><td>适合模型太大放不下一张卡；通信频繁，实现复杂</td></tr><tr><td>2️⃣ 数据并行（Data Parallel）</td><td>数据拆开</td><td>模型每张卡都复制一份，每张卡训练一部分数据</td><td>通用、最常见</td></tr><tr><td>3️⃣ 分布式数据并行（Distributed Data Parallel, DDP）</td><td>高效数据并行</td><td>每张卡独立进程，自动同步梯度</td><td>工业级方案，最快、最稳定</td></tr></tbody></table><hr><h2 id="三核心思想数据并行">三、核心思想：数据并行</h2><p>多 GPU 训练中，<strong>数据并行</strong>是最常用的方式。</p><p>其思想非常简单：</p><blockquote><p><strong>模型每张卡都有一份副本；每张卡训练不同部分的数据；最后汇总结果。</strong></p></blockquote><p>假设你有 2 张 GPU，每次 batch 有 4 张图片：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">批次数据： [1, 2, 3, 4]</span><br><span class="line"></span><br><span class="line">GPU0 ← [1, 2]</span><br><span class="line">GPU1 ← [3, 4]</span><br></pre></td></tr></table></figure><p>训练流程 1️⃣ 每张 GPU 都有一份相同的模型副本。 2️⃣ 各 GPU 前向计算 →得到自己的 loss。 3️⃣ 各 GPU 反向传播 → 得到自己的梯度。 4️⃣<strong>梯度同步（allreduce）</strong> → 求平均。 5️⃣ 各 GPU同步更新参数。</p><p>这样每张 GPU 的参数始终保持一致。</p><hr><h2 id="四关键概念详解">四、关键概念详解</h2><p>下面是训练中会出现的一些关键术语</p><table><colgroup><col style="width: 50%"><col style="width: 50%"></colgroup><thead><tr><th>概念</th><th>说明</th></tr></thead><tbody><tr><td><strong>train</strong></td><td>训练集，用于更新模型参数。</td></tr><tr><td><strong>val (validation)</strong></td><td>验证集，用于评估模型是否过拟合，不参与训练。</td></tr><tr><td><strong>test</strong></td><td>测试集，用于最终测试模型效果。</td></tr><tr><td><strong>query</strong></td><td>查询集，常见于检索任务，用来搜索匹配结果。</td></tr><tr><td><strong>gallery / bounding_box</strong></td><td>检索任务中的数据库部分（比如人脸库、行人库）。</td></tr><tr><td><strong>batch（批次）</strong></td><td>一次喂给模型的数据量。</td></tr><tr><td><strong>split_batch</strong></td><td>把一个 batch 的数据拆成几份给不同 GPU。</td></tr><tr><td><strong>allreduce</strong></td><td>把多 GPU 的梯度相加、平均，让模型参数保持一致。</td></tr><tr><td><strong>scatter</strong></td><td>把数据分发到多个 GPU。</td></tr><tr><td><strong>gather / concat</strong></td><td>把多个 GPU 的结果合并回来。</td></tr></tbody></table><hr><h2 id="五三种实现方式详解">五、三种实现方式详解</h2><h3 id="模型并行model-parallel">1️⃣ 模型并行（Model Parallel）</h3><p><strong>思想：</strong></p><blockquote><p>模型太大，一张卡放不下，就把不同层放到不同 GPU 上。</p></blockquote><p>示意：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GPU0: 负责模型前半部分</span><br><span class="line">GPU1: 负责模型后半部分</span><br></pre></td></tr></table></figure><p><strong>特点：</strong></p><ul><li>模型能变得更大；</li><li>但通信频繁，效率不高；</li><li>实现较复杂。</li></ul><p>适用：GPT、BERT 这类超大模型。</p><hr><h3 id="数据并行data-paralleldp">2️⃣ 数据并行（Data Parallel，DP）</h3><p><strong>思想：</strong></p><blockquote><p>每张卡都有一份完整模型副本，但处理不同部分的数据。</p></blockquote><p>PyTorch 用法：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model = torch.nn.DataParallel(model)</span><br></pre></td></tr></table></figure><p><strong>流程：</strong></p><ol type="1"><li>数据被平均分配给每张 GPU（scatter）。</li><li>各 GPU 前向 &amp; 反向传播。</li><li>主 GPU（GPU0）收集所有梯度，求平均。</li><li>GPU0 更新参数，再广播回所有 GPU。</li></ol><p><strong>缺点：</strong></p><ul><li>GPU0 负担过重（通信瓶颈）；</li><li>不能多机训练。</li></ul><p>适用：快速实验、小模型。</p><hr><h3 id="分布式数据并行distributed-data-parallelddp">3️⃣分布式数据并行（Distributed Data Parallel，DDP）</h3><p><strong>思想：</strong></p><blockquote><p>数据并行的改进版，每张 GPU 独立进程，自动通信同步。</p></blockquote><p>PyTorch 用法：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.nn.parallel <span class="keyword">import</span> DistributedDataParallel <span class="keyword">as</span> DDP</span><br><span class="line">model = DDP(model)</span><br></pre></td></tr></table></figure><p><strong>流程图示（假设2张GPU）</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Step 1: 复制模型</span><br><span class="line">GPU0: 模型A</span><br><span class="line">GPU1: 模型A</span><br><span class="line"></span><br><span class="line">Step 2: 拆分数据</span><br><span class="line">GPU0: batch[0:2]</span><br><span class="line">GPU1: batch[2:4]</span><br><span class="line"></span><br><span class="line">Step 3: 前向+反向</span><br><span class="line">各GPU独立算梯度</span><br><span class="line"></span><br><span class="line">Step 4: allreduce同步</span><br><span class="line">梯度平均后广播到每张卡</span><br><span class="line"></span><br><span class="line">Step 5: 更新参数（同步）</span><br></pre></td></tr></table></figure><p><strong>一句话总结：</strong></p><blockquote><p>DDP 是 PyTorch 官方推荐的多 GPU 训练标准方案。</p></blockquote><hr><h2 id="六底层机制理解scatter-allreduce-gather">六、底层机制理解：scatter /allreduce / gather</h2><table><colgroup><col style="width: 38%"><col style="width: 8%"><col style="width: 54%"></colgroup><thead><tr><th>操作</th><th>作用</th><th>举例</th></tr></thead><tbody><tr><td><strong>scatter</strong></td><td>拆数据</td><td>把 100 张图片分成两份发到 GPU0、GPU1</td></tr><tr><td><strong>allreduce</strong></td><td>同步梯度</td><td>GPU0 的梯度 + GPU1 的梯度 → 平均后广播</td></tr><tr><td><strong>gather / concat</strong></td><td>合并结果</td><td>把每个 GPU 的预测拼起来做整体评估</td></tr></tbody></table><p>这些操作是 <strong>数据并行的核心通信机制</strong>。 在 DDP中，它们是由 PyTorch 自动完成的。</p><hr><h2 id="七在-ddp-中训练需要注意什么">七、在 DDP 中训练需要注意什么</h2><table><thead><tr><th>事项</th><th>原因</th></tr></thead><tbody><tr><td>每个 GPU 独立进程</td><td>保证同步和效率</td></tr><tr><td>使用 <code>DistributedSampler</code></td><td>自动分配数据给不同 GPU</td></tr><tr><td>设置环境变量（rank, world_size）</td><td>标识 GPU 编号和总数</td></tr><tr><td>初始化通信（init_process_group）</td><td>建立 NCCL 通信通道</td></tr><tr><td>每个进程保存日志、模型</td><td>避免覆盖</td></tr></tbody></table><hr><h2 id="八三个阶段的总结对比表">八、三个阶段的总结对比表</h2><table><colgroup><col style="width: 20%"><col style="width: 18%"><col style="width: 17%"><col style="width: 43%"></colgroup><thead><tr><th>阶段</th><th>干的事</th><th>特点</th><th>示例</th></tr></thead><tbody><tr><td>模型并行</td><td>模型拆分</td><td>各 GPU 存不同层</td><td>GPT、BERT</td></tr><tr><td>数据并行（DP）</td><td>数据拆分 + 主卡同步</td><td>简单但低效</td><td><code>nn.DataParallel</code></td></tr><tr><td>分布式数据并行（DDP）</td><td>数据拆分 + 自动同步</td><td>高效工业级</td><td><code>DistributedDataParallel</code></td></tr></tbody></table><hr><h2 id="九类比理解多-gpu-像工厂流水线">九、类比理解：多 GPU像工厂流水线</h2><table><thead><tr><th>工人</th><th>工作</th></tr></thead><tbody><tr><td>GPU0</td><td>处理样本1-50</td></tr><tr><td>GPU1</td><td>处理样本51-100</td></tr></tbody></table><ul><li>每个工人有同样的手册（模型）；</li><li>干完活后汇报经验（梯度）；</li><li>经理平均总结经验（allreduce）；</li><li>更新手册；</li><li>下一轮所有人继续。</li></ul><p>这，就是数据并行和 DDP 的本质。</p><hr><h2 id="十总结一句话">十、总结一句话</h2><blockquote><p>多 GPU 训练 = 把工作拆给多张显卡 + 同步结果。</p></blockquote><p>而三种方式的关系：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">模型并行 ——&gt; 数据并行 ——&gt; 分布式数据并行(DDP)</span><br><span class="line">      （从简单到高效的演化过程）</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">本文介绍了多种gpu深度学习训练的方式</summary>
+    
+    
+    
+    <category term="deeplearning" scheme="http://example.com/categories/deeplearning/"/>
+    
+    
+    <category term="gpu" scheme="http://example.com/tags/gpu/"/>
+    
+    <category term="data" scheme="http://example.com/tags/data/"/>
+    
+  </entry>
   
   <entry>
     <title>Imperative，Symbolic and Hybrid Programming</title>
@@ -79,9 +102,9 @@
     
     <category term="web" scheme="http://example.com/tags/web/"/>
     
-    <category term="flask" scheme="http://example.com/tags/flask/"/>
-    
     <category term="python" scheme="http://example.com/tags/python/"/>
+    
+    <category term="flask" scheme="http://example.com/tags/flask/"/>
     
   </entry>
   
@@ -194,11 +217,11 @@
     <category term="pytorch" scheme="http://example.com/categories/pytorch/"/>
     
     
-    <category term="dataset" scheme="http://example.com/tags/dataset/"/>
-    
     <category term="deeplearning" scheme="http://example.com/tags/deeplearning/"/>
     
     <category term="pytorch" scheme="http://example.com/tags/pytorch/"/>
+    
+    <category term="dataset" scheme="http://example.com/tags/dataset/"/>
     
     <category term="dataloader" scheme="http://example.com/tags/dataloader/"/>
     
@@ -223,9 +246,9 @@
     
     <category term="web" scheme="http://example.com/tags/web/"/>
     
-    <category term="python" scheme="http://example.com/tags/python/"/>
-    
     <category term="gradio" scheme="http://example.com/tags/gradio/"/>
+    
+    <category term="python" scheme="http://example.com/tags/python/"/>
     
   </entry>
   
@@ -411,9 +434,9 @@
     <category term="dataset" scheme="http://example.com/categories/dataset/"/>
     
     
-    <category term="yolo" scheme="http://example.com/tags/yolo/"/>
-    
     <category term="dataset" scheme="http://example.com/tags/dataset/"/>
+    
+    <category term="yolo" scheme="http://example.com/tags/yolo/"/>
     
     <category term="AnyLabeling" scheme="http://example.com/tags/AnyLabeling/"/>
     
@@ -464,27 +487,6 @@
     <category term="python" scheme="http://example.com/tags/python/"/>
     
     <category term="pipenv" scheme="http://example.com/tags/pipenv/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>常见BUG汇总</title>
-    <link href="http://example.com/2025/07/27/issue/"/>
-    <id>http://example.com/2025/07/27/issue/</id>
-    <published>2025-07-27T00:29:00.000Z</published>
-    <updated>2025-08-27T08:27:11.826Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="一markdown">一、Markdown</h2><h3 id="为什么vscode编辑md文件十分卡顿">1.1为什么vscode编辑md文件十分卡顿</h3><p>解决方法:禁用cpp extension pack扩展</p><h2 id="二hexo">二、Hexo</h2><h3 id="出现spawn-failed报错">2.1 出现Spawn Failed报错</h3><p>首先尝试关机重启</p><p>其次删除<code>.deploy_git</code>文件夹</p><p>最后实在不行找到<code>.ssh</code>文件，先测试</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure><p>如果出现22端口连接超时，改成443端口即可 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">  HostName ssh.github.com</span><br><span class="line">  Port 443</span><br><span class="line">  User git</span><br><span class="line">  IdentityFile ~/.ssh/id_rsa</span><br><span class="line">  IdentitiesOnly <span class="built_in">yes</span></span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    
-    <summary type="html">欢迎留言提出常见BUG</summary>
-    
-    
-    
-    <category term="code" scheme="http://example.com/categories/code/"/>
-    
-    
-    <category term="markdown" scheme="http://example.com/tags/markdown/"/>
     
   </entry>
   
