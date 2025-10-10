@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2025-10-06T00:50:14.443Z</updated>
+  <updated>2025-10-10T12:19:36.026Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ssh-agent</title>
+    <link href="http://example.com/2025/10/10/ssh-agent/"/>
+    <id>http://example.com/2025/10/10/ssh-agent/</id>
+    <published>2025-10-09T16:00:00.000Z</published>
+    <updated>2025-10-10T12:19:36.026Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="ssh-agent-的工作原理">ssh-agent 的工作原理</h2><p>简化流程：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[用户] → ssh 命令 → [ssh-agent] → [私钥] → [服务器]</span><br></pre></td></tr></table></figure><ol type="1"><li>用户运行 <code>ssh user@host</code>。</li><li>SSH 客户端向 ssh-agent 请求签名（用私钥解密挑战）。</li><li>ssh-agent 返回签名，完成认证。</li><li>私钥从来不会被写入磁盘或发送到服务器。</li></ol><h2 id="ssh-agent-的主要命令">ssh-agent 的主要命令</h2><h3 id="启动服务">启动服务</h3><ul><li>Linux/macOS：</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(ssh-agent -s)</span>&quot;</span></span><br></pre></td></tr></table></figure><ul><li>Windows（PowerShell）：</li></ul><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Start-Service</span> ssh<span class="literal">-agent</span></span><br></pre></td></tr></table></figure><h3 id="添加私钥">添加私钥</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-add ~/.ssh/id_rsa        <span class="comment"># Linux/macOS</span></span><br><span class="line">ssh-add C:\Users\28058\.ssh\id_rsa   <span class="comment"># Windows</span></span><br></pre></td></tr></table></figure><ul><li>第一次添加会要求输入私钥密码（passphrase）</li><li>添加后 session 内就无需再次输入密码</li></ul><h3 id="查看已加载密钥">查看已加载密钥</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-add -l</span><br></pre></td></tr></table></figure><ul><li>显示 agent 中已缓存的公钥指纹</li></ul><h3 id="删除密钥">删除密钥</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-add -D   <span class="comment"># 删除 agent 中的所有密钥</span></span><br><span class="line">ssh-add -d ~/.ssh/id_rsa  <span class="comment"># 删除指定密钥</span></span><br></pre></td></tr></table></figure><h2 id="windows-上-ssh-agent-服务">Windows 上 ssh-agent 服务</h2><h3 id="服务特点">4.1 服务特点</h3><ul><li>Windows 上 ssh-agent 是一个 <strong>系统服务（OpenSSH AuthenticationAgent）</strong></li><li>可以设置为 <strong>自动启动</strong>：</li></ul><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Set-Service</span> <span class="literal">-Name</span> ssh<span class="literal">-agent</span> <span class="literal">-StartupType</span> Automatic</span><br></pre></td></tr></table></figure><ul><li>启动后在后台运行，不用每次手动开启</li></ul><h3 id="常见命令">4.2 常见命令</h3><ul><li>启动服务：</li></ul><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Start-Service</span> ssh<span class="literal">-agent</span></span><br></pre></td></tr></table></figure><ul><li>查看服务状态：</li></ul><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-Service</span> ssh<span class="literal">-agent</span></span><br></pre></td></tr></table></figure><ul><li>添加私钥：</li></ul><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh<span class="literal">-add</span> C:\Users\<span class="number">28058</span>\.ssh\id_rsa</span><br></pre></td></tr></table></figure><ul><li>查看已加载密钥：</li></ul><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh<span class="literal">-add</span> <span class="literal">-l</span></span><br></pre></td></tr></table></figure><h2 id="优势">优势</h2><ol type="1"><li><p><strong>免密码登录</strong></p><ul><li>解锁一次私钥后，整个 session 或服务周期内都无需再输入passphrase。</li></ul></li><li><p><strong>安全</strong></p><ul><li>私钥只存在内存中，不会被写到磁盘或传输到服务器。</li></ul></li><li><p><strong>支持多密钥</strong></p><ul><li>可以同时缓存多把私钥，适合管理多个服务器或 GitHub、GitLab等不同账号。</li></ul></li><li><p><strong>与 SSH 配置结合</strong></p><ul><li>配合 <code>~/.ssh/config</code> 可以针对不同 host自动选择对应私钥。</li></ul></li></ol>]]></content>
+    
+    
+    <summary type="html">本文介绍ssh-agent的使用，以及使用之后的服务器ssh免密登录</summary>
+    
+    
+    
+    <category term="ssh" scheme="http://example.com/categories/ssh/"/>
+    
+    
+    <category term="ssh" scheme="http://example.com/tags/ssh/"/>
+    
+  </entry>
   
   <entry>
     <title>screen---virtual termux</title>
@@ -40,27 +61,6 @@
   </entry>
   
   <entry>
-    <title>Imperative，Symbolic and Hybrid Programming</title>
-    <link href="http://example.com/2025/10/05/%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F/"/>
-    <id>http://example.com/2025/10/05/%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F/</id>
-    <published>2025-10-04T16:00:00.000Z</published>
-    <updated>2025-10-05T01:14:00.177Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="命令式编程imperative-programming">1️⃣ 命令式编程（ImperativeProgramming）</h2><h3 id="核心思想">核心思想</h3><ul><li><strong>按顺序执行每条语句</strong>，每执行一步就会改变程序的状态。</li><li>Python 就是典型的解释型语言，执行代码时会<strong>逐行运行</strong>。</li></ul><h3 id="示例">示例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">a, b</span>):</span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fancy_func</span>(<span class="params">a, b, c, d</span>):</span><br><span class="line">    e = add(a, b)</span><br><span class="line">    f = add(c, d)</span><br><span class="line">    g = add(e, f)</span><br><span class="line">    <span class="keyword">return</span> g</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(fancy_func(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>))</span><br></pre></td></tr></table></figure><p>执行过程：</p><ol type="1"><li><code>e = add(a, b)</code> → 计算 1+2 = 3，并存到变量<code>e</code></li><li><code>f = add(c, d)</code> → 计算 3+4 = 7，并存到变量<code>f</code></li><li><code>g = add(e, f)</code> → 计算 3+7 = 10</li><li>返回并打印结果 <code>10</code></li></ol><p>特点：</p><ul><li><strong>直观易懂</strong>，方便调试</li><li>每次函数调用都需要解释器处理，效率不高（尤其在 GPU上运行大批量计算时）</li></ul><hr /><h2 id="符号式编程symbolic-programming">2️⃣ 符号式编程（SymbolicProgramming）</h2><h3 id="核心思想-1">核心思想</h3><ul><li><p><strong>先定义整个计算图/计算流程，再一次性执行</strong></p></li><li><p>可以让编译器提前做优化，例如：</p><ul><li>合并重复计算</li><li>直接生成最优机器指令</li><li>提前释放不再需要的内存</li></ul></li></ul><h3 id="示例模拟">示例（模拟）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">prog = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">def add(a, b):</span></span><br><span class="line"><span class="string">    return a + b</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">def fancy_func(a, b, c, d):</span></span><br><span class="line"><span class="string">    e = add(a, b)</span></span><br><span class="line"><span class="string">    f = add(c, d)</span></span><br><span class="line"><span class="string">    g = add(e, f)</span></span><br><span class="line"><span class="string">    return g</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">print(fancy_func(1, 2, 3, 4))</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">y = <span class="built_in">compile</span>(prog, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;exec&#x27;</span>)  <span class="comment"># 编译成可执行代码</span></span><br><span class="line"><span class="built_in">exec</span>(y)                        <span class="comment"># 一次性运行</span></span><br></pre></td></tr></table></figure><p>特点：</p><ul><li><strong>运行更快</strong>，可以做优化</li><li>可以生成与 Python 无关的可执行代码，更容易移植</li><li>调试不如命令式方便</li></ul><hr /><h2 id="混合式编程hybrid-programming">3️⃣ 混合式编程（HybridProgramming）</h2><h3 id="背景">背景</h3><ul><li><p>很多深度学习框架历史上在命令式和符号式之间选择：</p><ul><li>TensorFlow 1.x：符号式</li><li>PyTorch：命令式</li></ul></li><li><p>混合式编程的出现是为了 <strong>兼顾易用性和性能</strong></p><ul><li>开发时用命令式调试方便</li><li>部署时用符号式优化和移植方便</li></ul></li></ul><h3 id="pytorch-示例torch.jit">PyTorch 示例：<code>torch.jit</code></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义网络</span></span><br><span class="line">net = nn.Sequential(</span><br><span class="line">    nn.Linear(<span class="number">512</span>, <span class="number">256</span>),</span><br><span class="line">    nn.ReLU(),</span><br><span class="line">    nn.Linear(<span class="number">256</span>, <span class="number">128</span>),</span><br><span class="line">    nn.ReLU(),</span><br><span class="line">    nn.Linear(<span class="number">128</span>, <span class="number">2</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">x = torch.randn(<span class="number">1</span>, <span class="number">512</span>)</span><br><span class="line">net(x)  <span class="comment"># 命令式执行</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 转换为符号式/优化版本</span></span><br><span class="line">net = torch.jit.script(net)</span><br><span class="line">net(x)  <span class="comment"># 编译后的网络，效率更高</span></span><br></pre></td></tr></table></figure><ul><li><p><code>torch.jit.script</code> 会把命令式网络转换成<strong>静态计算图</strong>，实现：</p><ol type="1"><li>编译优化</li><li>多 GPU 高效运行</li><li>可导出为非 Python 环境使用</li></ol></li></ul><hr /><h2 id="总结对比">4️⃣ 总结对比</h2><table><colgroup><col style="width: 7%" /><col style="width: 17%" /><col style="width: 14%" /><col style="width: 61%" /></colgroup><thead><tr><th>编程方式</th><th>优点</th><th>缺点</th><th>示例框架</th></tr></thead><tbody><tr><td>命令式</td><td>易懂、易调试</td><td>运行慢，难优化</td><td>PyTorch</td></tr><tr><td>符号式</td><td>高效，可优化，易移植</td><td>调试不方便</td><td>TensorFlow 1.x, Theano</td></tr><tr><td>混合式</td><td>易调试 + 高效部署</td><td>需要额外转换步骤</td><td>PyTorch + torch.jit, TensorFlow 2.x</td></tr></tbody></table><hr /><p><strong>理解</strong>：</p><ul><li>命令式：边写边运行</li><li>符号式：先写完整程序再运行</li><li>混合式：平时用命令式调试，部署用符号式加速</li></ul>]]></content>
-    
-    
-    <summary type="html">本文介绍三种编程方式</summary>
-    
-    
-    
-    <category term="deeplearning" scheme="http://example.com/categories/deeplearning/"/>
-    
-    
-    <category term="code" scheme="http://example.com/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
     <title>多gpu训练方式</title>
     <link href="http://example.com/2025/10/05/%E5%A4%9Agpu/"/>
     <id>http://example.com/2025/10/05/%E5%A4%9Agpu/</id>
@@ -80,6 +80,27 @@
     <category term="gpu" scheme="http://example.com/tags/gpu/"/>
     
     <category term="data" scheme="http://example.com/tags/data/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Imperative，Symbolic and Hybrid Programming</title>
+    <link href="http://example.com/2025/10/05/%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F/"/>
+    <id>http://example.com/2025/10/05/%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F/</id>
+    <published>2025-10-04T16:00:00.000Z</published>
+    <updated>2025-10-05T01:14:00.177Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="命令式编程imperative-programming">1️⃣ 命令式编程（ImperativeProgramming）</h2><h3 id="核心思想">核心思想</h3><ul><li><strong>按顺序执行每条语句</strong>，每执行一步就会改变程序的状态。</li><li>Python 就是典型的解释型语言，执行代码时会<strong>逐行运行</strong>。</li></ul><h3 id="示例">示例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">a, b</span>):</span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fancy_func</span>(<span class="params">a, b, c, d</span>):</span><br><span class="line">    e = add(a, b)</span><br><span class="line">    f = add(c, d)</span><br><span class="line">    g = add(e, f)</span><br><span class="line">    <span class="keyword">return</span> g</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(fancy_func(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>))</span><br></pre></td></tr></table></figure><p>执行过程：</p><ol type="1"><li><code>e = add(a, b)</code> → 计算 1+2 = 3，并存到变量<code>e</code></li><li><code>f = add(c, d)</code> → 计算 3+4 = 7，并存到变量<code>f</code></li><li><code>g = add(e, f)</code> → 计算 3+7 = 10</li><li>返回并打印结果 <code>10</code></li></ol><p>特点：</p><ul><li><strong>直观易懂</strong>，方便调试</li><li>每次函数调用都需要解释器处理，效率不高（尤其在 GPU上运行大批量计算时）</li></ul><hr /><h2 id="符号式编程symbolic-programming">2️⃣ 符号式编程（SymbolicProgramming）</h2><h3 id="核心思想-1">核心思想</h3><ul><li><p><strong>先定义整个计算图/计算流程，再一次性执行</strong></p></li><li><p>可以让编译器提前做优化，例如：</p><ul><li>合并重复计算</li><li>直接生成最优机器指令</li><li>提前释放不再需要的内存</li></ul></li></ul><h3 id="示例模拟">示例（模拟）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">prog = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">def add(a, b):</span></span><br><span class="line"><span class="string">    return a + b</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">def fancy_func(a, b, c, d):</span></span><br><span class="line"><span class="string">    e = add(a, b)</span></span><br><span class="line"><span class="string">    f = add(c, d)</span></span><br><span class="line"><span class="string">    g = add(e, f)</span></span><br><span class="line"><span class="string">    return g</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">print(fancy_func(1, 2, 3, 4))</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">y = <span class="built_in">compile</span>(prog, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;exec&#x27;</span>)  <span class="comment"># 编译成可执行代码</span></span><br><span class="line"><span class="built_in">exec</span>(y)                        <span class="comment"># 一次性运行</span></span><br></pre></td></tr></table></figure><p>特点：</p><ul><li><strong>运行更快</strong>，可以做优化</li><li>可以生成与 Python 无关的可执行代码，更容易移植</li><li>调试不如命令式方便</li></ul><hr /><h2 id="混合式编程hybrid-programming">3️⃣ 混合式编程（HybridProgramming）</h2><h3 id="背景">背景</h3><ul><li><p>很多深度学习框架历史上在命令式和符号式之间选择：</p><ul><li>TensorFlow 1.x：符号式</li><li>PyTorch：命令式</li></ul></li><li><p>混合式编程的出现是为了 <strong>兼顾易用性和性能</strong></p><ul><li>开发时用命令式调试方便</li><li>部署时用符号式优化和移植方便</li></ul></li></ul><h3 id="pytorch-示例torch.jit">PyTorch 示例：<code>torch.jit</code></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义网络</span></span><br><span class="line">net = nn.Sequential(</span><br><span class="line">    nn.Linear(<span class="number">512</span>, <span class="number">256</span>),</span><br><span class="line">    nn.ReLU(),</span><br><span class="line">    nn.Linear(<span class="number">256</span>, <span class="number">128</span>),</span><br><span class="line">    nn.ReLU(),</span><br><span class="line">    nn.Linear(<span class="number">128</span>, <span class="number">2</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">x = torch.randn(<span class="number">1</span>, <span class="number">512</span>)</span><br><span class="line">net(x)  <span class="comment"># 命令式执行</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 转换为符号式/优化版本</span></span><br><span class="line">net = torch.jit.script(net)</span><br><span class="line">net(x)  <span class="comment"># 编译后的网络，效率更高</span></span><br></pre></td></tr></table></figure><ul><li><p><code>torch.jit.script</code> 会把命令式网络转换成<strong>静态计算图</strong>，实现：</p><ol type="1"><li>编译优化</li><li>多 GPU 高效运行</li><li>可导出为非 Python 环境使用</li></ol></li></ul><hr /><h2 id="总结对比">4️⃣ 总结对比</h2><table><colgroup><col style="width: 7%" /><col style="width: 17%" /><col style="width: 14%" /><col style="width: 61%" /></colgroup><thead><tr><th>编程方式</th><th>优点</th><th>缺点</th><th>示例框架</th></tr></thead><tbody><tr><td>命令式</td><td>易懂、易调试</td><td>运行慢，难优化</td><td>PyTorch</td></tr><tr><td>符号式</td><td>高效，可优化，易移植</td><td>调试不方便</td><td>TensorFlow 1.x, Theano</td></tr><tr><td>混合式</td><td>易调试 + 高效部署</td><td>需要额外转换步骤</td><td>PyTorch + torch.jit, TensorFlow 2.x</td></tr></tbody></table><hr /><p><strong>理解</strong>：</p><ul><li>命令式：边写边运行</li><li>符号式：先写完整程序再运行</li><li>混合式：平时用命令式调试，部署用符号式加速</li></ul>]]></content>
+    
+    
+    <summary type="html">本文介绍三种编程方式</summary>
+    
+    
+    
+    <category term="deeplearning" scheme="http://example.com/categories/deeplearning/"/>
+    
+    
+    <category term="code" scheme="http://example.com/tags/code/"/>
     
   </entry>
   
@@ -123,11 +144,11 @@
     <category term="backen" scheme="http://example.com/categories/backen/"/>
     
     
-    <category term="web" scheme="http://example.com/tags/web/"/>
+    <category term="flask" scheme="http://example.com/tags/flask/"/>
     
     <category term="python" scheme="http://example.com/tags/python/"/>
     
-    <category term="flask" scheme="http://example.com/tags/flask/"/>
+    <category term="web" scheme="http://example.com/tags/web/"/>
     
   </entry>
   
@@ -267,11 +288,11 @@
     <category term="fronted" scheme="http://example.com/categories/fronted/"/>
     
     
+    <category term="python" scheme="http://example.com/tags/python/"/>
+    
     <category term="web" scheme="http://example.com/tags/web/"/>
     
     <category term="gradio" scheme="http://example.com/tags/gradio/"/>
-    
-    <category term="python" scheme="http://example.com/tags/python/"/>
     
   </entry>
   
@@ -457,36 +478,11 @@
     <category term="dataset" scheme="http://example.com/categories/dataset/"/>
     
     
-    <category term="dataset" scheme="http://example.com/tags/dataset/"/>
-    
     <category term="yolo" scheme="http://example.com/tags/yolo/"/>
     
+    <category term="dataset" scheme="http://example.com/tags/dataset/"/>
+    
     <category term="AnyLabeling" scheme="http://example.com/tags/AnyLabeling/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Electron 基本使用教程</title>
-    <link href="http://example.com/2025/07/29/electron/"/>
-    <id>http://example.com/2025/07/29/electron/</id>
-    <published>2025-07-29T01:20:04.426Z</published>
-    <updated>2025-07-29T01:34:37.934Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>以下以vue3为例结合electron实现跨平台开发</p></blockquote><hr /><h2id="一在项目根目录安装electorn-forge">一、在项目根目录安装electorn-forge</h2><p>按照如下命令安装electron-forge</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev electron @electron-forge/cli</span><br><span class="line">npx electron-forge import</span><br></pre></td></tr></table></figure><p>这一步会在你的项目中创建一个 electron的基本目录结构，并配置打包命令。</p><h2 id="二新建main.js">二、新建main.js</h2><p>在根目录下新建/electron/main.js</p><p>在main.js下复制如下代码</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import &#123; app, BrowserWindow &#125; from <span class="string">&#x27;electron&#x27;</span>;</span><br><span class="line">import path from <span class="string">&#x27;path&#x27;</span>;</span><br><span class="line">import &#123; fileURLToPath &#125; from <span class="string">&#x27;url&#x27;</span>;</span><br><span class="line"></span><br><span class="line">// 解决 ES Module 中没有 __dirname 的问题</span><br><span class="line">const __filename = fileURLToPath(import.meta.url);</span><br><span class="line">const __dirname = path.dirname(__filename);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">createWindow</span></span> () &#123;</span><br><span class="line">  const win = new BrowserWindow(&#123;</span><br><span class="line">    width: 1200,</span><br><span class="line">    height: 800,</span><br><span class="line">    webPreferences: &#123;</span><br><span class="line">      preload: path.join(__dirname, <span class="string">&#x27;preload.js&#x27;</span>), // 可选，预加载脚本</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!app.isPackaged) &#123;</span><br><span class="line">    win.loadURL(<span class="string">&#x27;http://localhost:5173&#x27;</span>); // dev 模式加载 vite 前端</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>)); // prod 模式加载打包页面</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.whenReady().<span class="keyword">then</span>(() =&gt; &#123;</span><br><span class="line">  createWindow();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="三修改package.json">三、修改package.json</h2><p>进入package.json文件，新增</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;main&quot;</span>: <span class="string">&quot;electron/main.js&quot;</span>,</span><br></pre></td></tr></table></figure><p>注意scripts</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line"><span class="string">&quot;dev&quot;</span>: <span class="string">&quot;vite&quot;</span>,</span><br><span class="line"><span class="string">&quot;build&quot;</span>: <span class="string">&quot;vite build&quot;</span>,</span><br><span class="line"><span class="string">&quot;preview&quot;</span>: <span class="string">&quot;vite preview&quot;</span>,</span><br><span class="line"><span class="string">&quot;start&quot;</span>: <span class="string">&quot;electron-forge start&quot;</span>,</span><br><span class="line"><span class="string">&quot;package&quot;</span>: <span class="string">&quot;electron-forge package&quot;</span>,</span><br><span class="line"><span class="string">&quot;make&quot;</span>: <span class="string">&quot;electron-forge make&quot;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure><h2 id="四开发测试流程">四、开发测试流程</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动 Vite 前端</span></span><br><span class="line">npm run dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新开一个终端，启动 Electron</span></span><br><span class="line">npm start</span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="五打包发布测试">五、打包发布测试</h2><p>先构建前端项目</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure><p>修改main.js</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">win.loadFile(path.join(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>));</span><br></pre></td></tr></table></figure><p>打包</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run package</span><br></pre></td></tr></table></figure><p>会在 out/ 目录生成你的桌面可执行程序（比如 Windows 下是 .exe文件）</p>]]></content>
-    
-    
-    <summary type="html">本文介绍Web程序如何快速打包成桌面端应用进行跨平台开发</summary>
-    
-    
-    
-    <category term="code" scheme="http://example.com/categories/code/"/>
-    
-    
-    <category term="electron" scheme="http://example.com/tags/electron/"/>
-    
-    <category term="web" scheme="http://example.com/tags/web/"/>
-    
-    <category term="desk" scheme="http://example.com/tags/desk/"/>
     
   </entry>
   
