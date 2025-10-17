@@ -20,17 +20,22 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"text":"评论","order":-2}},"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Spark!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="木语">
-<meta property="og:url" content="http://example.com/tags/curl/index.html">
+  <meta name="description" content="本文用于介绍cypher语法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cypher与neo4j">
+<meta property="og:url" content="http://example.com/2025/10/17/cypher/index.html">
 <meta property="og:site_name" content="木语">
-<meta property="og:description" content="Spark!">
+<meta property="og:description" content="本文用于介绍cypher语法">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-10-17T04:00:00.000Z">
+<meta property="article:modified_time" content="2025-10-17T14:30:56.057Z">
 <meta property="article:author" content="koen">
+<meta property="article:tag" content="cypher">
+<meta property="article:tag" content="neo4j">
+<meta property="article:tag" content="database">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/tags/curl/">
+<link rel="canonical" href="http://example.com/2025/10/17/cypher/">
 
 
 <script id="page-configurations">
@@ -38,12 +43,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Tag: curl | 木语</title>
+  <title>cypher与neo4j | 木语</title>
   
 
 
@@ -178,57 +183,222 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">curl
-          <small>Tag</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/10/17/cypher/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/./images/head.jpg">
+      <meta itemprop="name" content="koen">
+      <meta itemprop="description" content="Spark!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木语">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          cypher与neo4j
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-10-17 12:00:00 / Modified: 22:30:56" itemprop="dateCreated datePublished" datetime="2025-10-17T12:00:00+08:00">2025-10-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+            <div class="post-description">本文用于介绍cypher语法</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2025</span>
+        <h3 id="一cypher是什么">一、Cypher是什么</h3>
+<p>Cypher是操作<strong>图数据库（Neo4j）</strong> 的语言。<br />
+图数据库里的数据不是表格（像MySQL的表），而是像“地图”一样的结构：<br />
+-
+有很多“点”（比如“人”“病”“药”），这些“点”叫<strong>节点（Node）</strong>。<br />
+-
+点和点之间有“线”连接（比如“人患病”“药治人”），这些“线”叫<strong>关系（Relationship）</strong>。</p>
+<p>Cypher的作用就是：<strong>描述“点和线”的样子，让数据库找到你要的数据</strong>。</p>
+<h3
+id="二最基础节点node怎么表示">二、最基础：节点（Node）怎么表示？</h3>
+<p>节点是图里的“实体”（比如“张三”“感冒”），写法是：<br />
+<code>(变量名:标签 &#123;属性&#125;)</code></p>
+<h4 id="拆解每个部分">拆解每个部分：</h4>
+<ul>
+<li><code>()</code>：必须用圆括号把节点包起来，相当于“这是一个节点”。<br />
+</li>
+<li><code>变量名</code>：给节点起个临时小名（比如用<code>p</code>代表“人”，<code>d</code>代表“病”），方便后面引用。<br />
+</li>
+<li><code>:标签</code>：节点的“类别”（比如<code>:Person</code>表示“人”，<code>:Disease</code>表示“疾病”），一个节点可以有多个标签（比如<code>:Person:Patient</code>表示“人且是患者”）。<br />
+</li>
+<li><code>&#123;属性&#125;</code>：描述节点的特征，是键值对（比如<code>name: "张三"</code>，<code>age: 30</code>），用大括号包起来。</li>
+</ul>
+<h4 id="例子">例子：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 一个“人”节点：变量p，标签Person，属性name和age</span><br><span class="line">(p:Person &#123;name: &quot;张三&quot;, age: 30&#125;)</span><br><span class="line"></span><br><span class="line">// 一个“疾病”节点：变量d，标签Disease，属性name</span><br><span class="line">(d:Disease &#123;name: &quot;感冒&quot;&#125;)</span><br></pre></td></tr></table></figure>
+<p>你可以理解为：<br />
+<code>(p:Person &#123;name: "张三"&#125;)</code> →
+“有个叫p的东西，它是‘人’，名字叫张三”。</p>
+<h3
+id="三关键关系relationship怎么表示">三、关键：关系（Relationship）怎么表示？</h3>
+<p>关系是节点之间的“连接”（比如“张三患感冒”），写法是：<br />
+<code>-[变量名:类型 &#123;属性&#125;]-&gt;</code></p>
+<h4 id="拆解每个部分-1">拆解每个部分：</h4>
+<ul>
+<li><code>-[ ]-</code>：中括号代表“这是一个关系”，横线连接两个节点。<br />
+</li>
+<li><code>-&gt;</code>：箭头表示方向（比如<code>A-&gt;B</code>表示“A到B的关系”，无方向可以写成<code>--</code>）。<br />
+</li>
+<li><code>变量名</code>：给关系起个临时小名（比如<code>r</code>），方便引用。<br />
+</li>
+<li><code>:类型</code>：关系的“类别”（比如<code>:患</code>表示“患病”，<code>:治疗</code>表示“可以治疗”），每个关系只能有一个类型。<br />
+</li>
+<li><code>&#123;属性&#125;</code>：描述关系的特征（比如<code>:患</code>的关系可以有<code>时间: "2023-10-01"</code>）。</li>
+</ul>
+<h4 id="例子-1">例子：</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// “张三患感冒”的关系：p（张三）通过r（患）指向d（感冒）</span><br><span class="line">(p:Person &#123;name: &quot;张三&quot;&#125;)-[r:患 &#123;时间: &quot;2023-10-01&quot;&#125;]-&gt;(d:Disease &#123;name: &quot;感冒&quot;&#125;)</span><br></pre></td></tr></table></figure>
+<p>可以理解为：<br />
+<code>(p)-[r:患]-&gt;(d)</code> →
+“p和d之间有个叫r的关系，类型是‘患’，意思是p患了d”。</p>
+<h3 id="四核心操作查数据match-return">四、核心操作：查数据（MATCH +
+RETURN）</h3>
+<p>最常用的操作是“找数据”，用<code>MATCH</code>描述你要找的“点和线的模式”，用<code>RETURN</code>返回结果。</p>
+<h4 id="只查节点">1. 只查节点</h4>
+<p>比如：“找所有叫‘张三’的人”<br />
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 步骤1：用MATCH描述模式（找标签是Person，name是张三的节点，变量叫p）</span><br><span class="line">MATCH (p:Person &#123;name: &quot;张三&quot;&#125;)</span><br><span class="line">// 步骤2：用RETURN返回结果（返回p的所有信息）</span><br><span class="line">RETURN p</span><br></pre></td></tr></table></figure></p>
+<p>再比如：“找所有年龄大于30的人，只返回他们的名字”<br />
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MATCH (p:Person)  // 找所有标签是Person的节点</span><br><span class="line">WHERE p.age &gt; 30  // 加条件：年龄大于30（WHERE是过滤条件）</span><br><span class="line">RETURN p.name     // 只返回名字</span><br></pre></td></tr></table></figure></p>
+<h4 id="查关系节点关系">2. 查关系（节点+关系）</h4>
+<p>比如：“找‘感冒’这种病有哪些伴随的症状”<br />
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 模式：疾病d（名字是感冒）通过关系r（类型是伴随症状）指向症状s</span><br><span class="line">MATCH (d:Disease &#123;name: &quot;感冒&quot;&#125;)-[r:伴随症状]-&gt;(s:Symptom)</span><br><span class="line">// 返回疾病名、关系的程度（比如“常见”）、症状名</span><br><span class="line">RETURN d.name, r.degree, s.name</span><br></pre></td></tr></table></figure></p>
+<p>如果数据库里有“感冒伴随发烧、咳嗽”，结果会是：<br />
+| d.name | r.degree | s.name | |——–|———-|——–| | 感冒 | 常见 | 发烧 | |
+感冒 | 较常见 | 咳嗽 |</p>
+<h4 id="查路径多个关系连起来">3. 查路径（多个关系连起来）</h4>
+<p>比如：“找张三患的病有哪些症状”（路径：人→患→病→伴随→症状）<br />
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 模式：p（张三）-患→d（病）-伴随→s（症状）</span><br><span class="line">MATCH (p:Person &#123;name: &quot;张三&quot;&#125;)-[r1:患]-&gt;(d:Disease)-[r2:伴随]-&gt;(s:Symptom)</span><br><span class="line">RETURN p.name, d.name, s.name  // 返回张三、病名、症状名</span><br></pre></td></tr></table></figure></p>
+<h3 id="五其他常用操作增删改">五、其他常用操作：增删改</h3>
+<h4 id="创建create">1. 创建（CREATE）</h4>
+<p>比如：“新增一个叫‘李四’的人，年龄25”<br />
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE (p:Person &#123;name: &quot;李四&quot;, age: 25&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>比如：“给‘李四’和‘感冒’加一个‘患’的关系，时间是今天”<br />
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 步骤1：先找到李四和感冒这两个节点</span><br><span class="line">MATCH (p:Person &#123;name: &quot;李四&quot;&#125;), (d:Disease &#123;name: &quot;感冒&quot;&#125;)</span><br><span class="line">// 步骤2：创建他们之间的关系</span><br><span class="line">CREATE (p)-[r:患 &#123;时间: &quot;2023-10-02&quot;&#125;]-&gt;(d)</span><br></pre></td></tr></table></figure></p>
+<h4 id="修改set">2. 修改（SET）</h4>
+<p>比如：“把张三的年龄改成31，再加上性别‘男’”<br />
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 先找到张三</span><br><span class="line">MATCH (p:Person &#123;name: &quot;张三&quot;&#125;)</span><br><span class="line">// 用SET修改/新增属性</span><br><span class="line">SET p.age = 31, p.gender = &quot;男&quot;</span><br></pre></td></tr></table></figure></p>
+<h4 id="删除delete">3. 删除（DELETE）</h4>
+<p>删除节点前，必须先删除它的所有关系（不然“线”断了会报错）。<br />
+比如：“删除‘发烧’这个症状节点”<br />
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// DETACH DELETE会自动删除该节点的所有关系，再删节点</span><br><span class="line">MATCH (s:Symptom &#123;name: &quot;发烧&quot;&#125;)</span><br><span class="line">DETACH DELETE s</span><br></pre></td></tr></table></figure></p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2025-07-26T12:00:00+08:00"
-              content="2025-07-26">
-          07-26
-        </time>
+    
+    
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">~~~~~~~~~~~~~~ 本文结束 <i class="fa fa-paw"></i> 感谢您的阅读 ~~~~~~~~~~~~~~</div>
+    
+</div>
+      </div>
+    
+        <div class="reward-container">
+  <div>在线要饭~</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.JPG" alt="koen WeChat Pay">
+        <p>WeChat Pay</p>
       </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2025/07/26/curl/" itemprop="url">
-            <span itemprop="name">curl使用教学</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-    </div>
   </div>
-  
-  
-  
+</div>
 
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/cypher/" rel="tag"><i class="fa fa-tag"></i> cypher</a>
+              <a href="/tags/neo4j/" rel="tag"><i class="fa fa-tag"></i> neo4j</a>
+              <a href="/tags/database/" rel="tag"><i class="fa fa-tag"></i> database</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/10/10/ssh-agent/" rel="prev" title="ssh-agent">
+      <i class="fa fa-chevron-left"></i> ssh-agent
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -275,6 +445,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80cypher%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-text">一、Cypher是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E6%9C%80%E5%9F%BA%E7%A1%80%E8%8A%82%E7%82%B9node%E6%80%8E%E4%B9%88%E8%A1%A8%E7%A4%BA"><span class="nav-text">二、最基础：节点（Node）怎么表示？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%86%E8%A7%A3%E6%AF%8F%E4%B8%AA%E9%83%A8%E5%88%86"><span class="nav-text">拆解每个部分：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-text">例子：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E5%85%B3%E9%94%AE%E5%85%B3%E7%B3%BBrelationship%E6%80%8E%E4%B9%88%E8%A1%A8%E7%A4%BA"><span class="nav-text">三、关键：关系（Relationship）怎么表示？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%86%E8%A7%A3%E6%AF%8F%E4%B8%AA%E9%83%A8%E5%88%86-1"><span class="nav-text">拆解每个部分：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90-1"><span class="nav-text">例子：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E6%A0%B8%E5%BF%83%E6%93%8D%E4%BD%9C%E6%9F%A5%E6%95%B0%E6%8D%AEmatch-return"><span class="nav-text">四、核心操作：查数据（MATCH +
+RETURN）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AA%E6%9F%A5%E8%8A%82%E7%82%B9"><span class="nav-text">1. 只查节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E5%85%B3%E7%B3%BB%E8%8A%82%E7%82%B9%E5%85%B3%E7%B3%BB"><span class="nav-text">2. 查关系（节点+关系）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%B7%AF%E5%BE%84%E5%A4%9A%E4%B8%AA%E5%85%B3%E7%B3%BB%E8%BF%9E%E8%B5%B7%E6%9D%A5"><span class="nav-text">3. 查路径（多个关系连起来）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E5%85%B6%E4%BB%96%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E5%A2%9E%E5%88%A0%E6%94%B9"><span class="nav-text">五、其他常用操作：增删改</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAcreate"><span class="nav-text">1. 创建（CREATE）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9set"><span class="nav-text">2. 修改（SET）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4delete"><span class="nav-text">3. 删除（DELETE）</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -653,6 +825,25 @@ window.addEventListener('pjax:success', () => {
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'Ov23liWNrNurmdCCSe44',
+      clientSecret: 'e99bd9bd840b672d12d0c6ce1824f8bcaa26ee9d',
+      repo        : 'koen666.github.io',
+      owner       : 'koen666',
+      admin       : ['koen666'],
+      id          : 'fc7b54b44c9c7e3c02ce1307baca2f8a',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 
     </div>

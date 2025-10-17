@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2025-10-10T12:19:36.026Z</updated>
+  <updated>2025-10-17T14:30:56.057Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>cypher与neo4j</title>
+    <link href="http://example.com/2025/10/17/cypher/"/>
+    <id>http://example.com/2025/10/17/cypher/</id>
+    <published>2025-10-17T04:00:00.000Z</published>
+    <updated>2025-10-17T14:30:56.057Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="一cypher是什么">一、Cypher是什么</h3><p>Cypher是操作<strong>图数据库（Neo4j）</strong> 的语言。<br />图数据库里的数据不是表格（像MySQL的表），而是像“地图”一样的结构：<br />-有很多“点”（比如“人”“病”“药”），这些“点”叫<strong>节点（Node）</strong>。<br />-点和点之间有“线”连接（比如“人患病”“药治人”），这些“线”叫<strong>关系（Relationship）</strong>。</p><p>Cypher的作用就是：<strong>描述“点和线”的样子，让数据库找到你要的数据</strong>。</p><h3id="二最基础节点node怎么表示">二、最基础：节点（Node）怎么表示？</h3><p>节点是图里的“实体”（比如“张三”“感冒”），写法是：<br /><code>(变量名:标签 &#123;属性&#125;)</code></p><h4 id="拆解每个部分">拆解每个部分：</h4><ul><li><code>()</code>：必须用圆括号把节点包起来，相当于“这是一个节点”。<br /></li><li><code>变量名</code>：给节点起个临时小名（比如用<code>p</code>代表“人”，<code>d</code>代表“病”），方便后面引用。<br /></li><li><code>:标签</code>：节点的“类别”（比如<code>:Person</code>表示“人”，<code>:Disease</code>表示“疾病”），一个节点可以有多个标签（比如<code>:Person:Patient</code>表示“人且是患者”）。<br /></li><li><code>&#123;属性&#125;</code>：描述节点的特征，是键值对（比如<code>name: "张三"</code>，<code>age: 30</code>），用大括号包起来。</li></ul><h4 id="例子">例子：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 一个“人”节点：变量p，标签Person，属性name和age</span><br><span class="line">(p:Person &#123;name: &quot;张三&quot;, age: 30&#125;)</span><br><span class="line"></span><br><span class="line">// 一个“疾病”节点：变量d，标签Disease，属性name</span><br><span class="line">(d:Disease &#123;name: &quot;感冒&quot;&#125;)</span><br></pre></td></tr></table></figure><p>你可以理解为：<br /><code>(p:Person &#123;name: "张三"&#125;)</code> →“有个叫p的东西，它是‘人’，名字叫张三”。</p><h3id="三关键关系relationship怎么表示">三、关键：关系（Relationship）怎么表示？</h3><p>关系是节点之间的“连接”（比如“张三患感冒”），写法是：<br /><code>-[变量名:类型 &#123;属性&#125;]-&gt;</code></p><h4 id="拆解每个部分-1">拆解每个部分：</h4><ul><li><code>-[ ]-</code>：中括号代表“这是一个关系”，横线连接两个节点。<br /></li><li><code>-&gt;</code>：箭头表示方向（比如<code>A-&gt;B</code>表示“A到B的关系”，无方向可以写成<code>--</code>）。<br /></li><li><code>变量名</code>：给关系起个临时小名（比如<code>r</code>），方便引用。<br /></li><li><code>:类型</code>：关系的“类别”（比如<code>:患</code>表示“患病”，<code>:治疗</code>表示“可以治疗”），每个关系只能有一个类型。<br /></li><li><code>&#123;属性&#125;</code>：描述关系的特征（比如<code>:患</code>的关系可以有<code>时间: "2023-10-01"</code>）。</li></ul><h4 id="例子-1">例子：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// “张三患感冒”的关系：p（张三）通过r（患）指向d（感冒）</span><br><span class="line">(p:Person &#123;name: &quot;张三&quot;&#125;)-[r:患 &#123;时间: &quot;2023-10-01&quot;&#125;]-&gt;(d:Disease &#123;name: &quot;感冒&quot;&#125;)</span><br></pre></td></tr></table></figure><p>可以理解为：<br /><code>(p)-[r:患]-&gt;(d)</code> →“p和d之间有个叫r的关系，类型是‘患’，意思是p患了d”。</p><h3 id="四核心操作查数据match-return">四、核心操作：查数据（MATCH +RETURN）</h3><p>最常用的操作是“找数据”，用<code>MATCH</code>描述你要找的“点和线的模式”，用<code>RETURN</code>返回结果。</p><h4 id="只查节点">1. 只查节点</h4><p>比如：“找所有叫‘张三’的人”<br /><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 步骤1：用MATCH描述模式（找标签是Person，name是张三的节点，变量叫p）</span><br><span class="line">MATCH (p:Person &#123;name: &quot;张三&quot;&#125;)</span><br><span class="line">// 步骤2：用RETURN返回结果（返回p的所有信息）</span><br><span class="line">RETURN p</span><br></pre></td></tr></table></figure></p><p>再比如：“找所有年龄大于30的人，只返回他们的名字”<br /><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MATCH (p:Person)  // 找所有标签是Person的节点</span><br><span class="line">WHERE p.age &gt; 30  // 加条件：年龄大于30（WHERE是过滤条件）</span><br><span class="line">RETURN p.name     // 只返回名字</span><br></pre></td></tr></table></figure></p><h4 id="查关系节点关系">2. 查关系（节点+关系）</h4><p>比如：“找‘感冒’这种病有哪些伴随的症状”<br /><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 模式：疾病d（名字是感冒）通过关系r（类型是伴随症状）指向症状s</span><br><span class="line">MATCH (d:Disease &#123;name: &quot;感冒&quot;&#125;)-[r:伴随症状]-&gt;(s:Symptom)</span><br><span class="line">// 返回疾病名、关系的程度（比如“常见”）、症状名</span><br><span class="line">RETURN d.name, r.degree, s.name</span><br></pre></td></tr></table></figure></p><p>如果数据库里有“感冒伴随发烧、咳嗽”，结果会是：<br />| d.name | r.degree | s.name | |——–|———-|——–| | 感冒 | 常见 | 发烧 | |感冒 | 较常见 | 咳嗽 |</p><h4 id="查路径多个关系连起来">3. 查路径（多个关系连起来）</h4><p>比如：“找张三患的病有哪些症状”（路径：人→患→病→伴随→症状）<br /><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 模式：p（张三）-患→d（病）-伴随→s（症状）</span><br><span class="line">MATCH (p:Person &#123;name: &quot;张三&quot;&#125;)-[r1:患]-&gt;(d:Disease)-[r2:伴随]-&gt;(s:Symptom)</span><br><span class="line">RETURN p.name, d.name, s.name  // 返回张三、病名、症状名</span><br></pre></td></tr></table></figure></p><h3 id="五其他常用操作增删改">五、其他常用操作：增删改</h3><h4 id="创建create">1. 创建（CREATE）</h4><p>比如：“新增一个叫‘李四’的人，年龄25”<br /><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE (p:Person &#123;name: &quot;李四&quot;, age: 25&#125;)</span><br></pre></td></tr></table></figure></p><p>比如：“给‘李四’和‘感冒’加一个‘患’的关系，时间是今天”<br /><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 步骤1：先找到李四和感冒这两个节点</span><br><span class="line">MATCH (p:Person &#123;name: &quot;李四&quot;&#125;), (d:Disease &#123;name: &quot;感冒&quot;&#125;)</span><br><span class="line">// 步骤2：创建他们之间的关系</span><br><span class="line">CREATE (p)-[r:患 &#123;时间: &quot;2023-10-02&quot;&#125;]-&gt;(d)</span><br></pre></td></tr></table></figure></p><h4 id="修改set">2. 修改（SET）</h4><p>比如：“把张三的年龄改成31，再加上性别‘男’”<br /><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 先找到张三</span><br><span class="line">MATCH (p:Person &#123;name: &quot;张三&quot;&#125;)</span><br><span class="line">// 用SET修改/新增属性</span><br><span class="line">SET p.age = 31, p.gender = &quot;男&quot;</span><br></pre></td></tr></table></figure></p><h4 id="删除delete">3. 删除（DELETE）</h4><p>删除节点前，必须先删除它的所有关系（不然“线”断了会报错）。<br />比如：“删除‘发烧’这个症状节点”<br /><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// DETACH DELETE会自动删除该节点的所有关系，再删节点</span><br><span class="line">MATCH (s:Symptom &#123;name: &quot;发烧&quot;&#125;)</span><br><span class="line">DETACH DELETE s</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    
+    <summary type="html">本文用于介绍cypher语法</summary>
+    
+    
+    
+    <category term="database" scheme="http://example.com/categories/database/"/>
+    
+    
+    <category term="cypher" scheme="http://example.com/tags/cypher/"/>
+    
+    <category term="neo4j" scheme="http://example.com/tags/neo4j/"/>
+    
+    <category term="database" scheme="http://example.com/tags/database/"/>
+    
+  </entry>
   
   <entry>
     <title>ssh-agent</title>
@@ -121,9 +146,9 @@
     <category term="deeplearning" scheme="http://example.com/categories/deeplearning/"/>
     
     
-    <category term="MLC" scheme="http://example.com/tags/MLC/"/>
-    
     <category term="math" scheme="http://example.com/tags/math/"/>
+    
+    <category term="MLC" scheme="http://example.com/tags/MLC/"/>
     
   </entry>
   
@@ -217,9 +242,9 @@
     <category term="fronted" scheme="http://example.com/categories/fronted/"/>
     
     
-    <category term="router" scheme="http://example.com/tags/router/"/>
-    
     <category term="vue" scheme="http://example.com/tags/vue/"/>
+    
+    <category term="router" scheme="http://example.com/tags/router/"/>
     
   </entry>
   
@@ -338,9 +363,9 @@
     <category term="database" scheme="http://example.com/categories/database/"/>
     
     
-    <category term="sql" scheme="http://example.com/tags/sql/"/>
-    
     <category term="database" scheme="http://example.com/tags/database/"/>
+    
+    <category term="sql" scheme="http://example.com/tags/sql/"/>
     
   </entry>
   
@@ -458,31 +483,6 @@
     <category term="python" scheme="http://example.com/tags/python/"/>
     
     <category term="saaborn" scheme="http://example.com/tags/saaborn/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>yolo+AnyLabeling实现数据集的自动标注</title>
-    <link href="http://example.com/2025/08/09/yolo-dataset/"/>
-    <id>http://example.com/2025/08/09/yolo-dataset/</id>
-    <published>2025-08-09T15:00:00.000Z</published>
-    <updated>2025-08-13T02:41:46.920Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="一环境准备">一、环境准备</h2><p>首先需要创建一个conda虚拟环境，进行yolo环境的搭建</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pip install yolo</span><br><span class="line"></span><br><span class="line">pip install ultralytics</span><br><span class="line"></span><br><span class="line">pip install ncnn</span><br><span class="line"></span><br><span class="line">pip install onnx <span class="comment">#用于格式转换</span></span><br></pre></td></tr></table></figure><p>之后创建一个空目录，目录结构如下</p><p><img src="/images/yolo-dataset/yolotraindir.png" /></p><p>准备好需要用来训练的部分图片(50-100张吧差不多，多点更好，但是就是用来标注数据的没必要那么多后面手动改改叭)，放到images文件下的三个文件夹都存放一份</p><h2 id="二数据标注">二、数据标注</h2><p>准备好环境搭建之后，新建一个<code>classes.txt</code>文件放到labels/train文件夹下，里面按顺序写好你的标签是什么比如我训练这个模型就是用来标注电池的</p><p><img src="/images/yolo-dataset/battery.png" /></p><p>那你的文件内容就是</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">battery</span><br></pre></td></tr></table></figure><p>ok，创建完成之后就开始对数据进行正常标注，然后将结果导出到labels/train文件夹下</p><h2 id="三开始训练">三、开始训练</h2><p>首先需要写入一个配置文件<code>xxx.yaml</code>写到yolotrain目录下，内容如下</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">path: D:\yolotrain       <span class="comment"># 数据集根目录</span></span><br><span class="line">train: images/train      <span class="comment"># 训练集相对路径</span></span><br><span class="line">val: images/val          <span class="comment"># 验证集相对路径</span></span><br><span class="line"><span class="built_in">test</span>: images/test        <span class="comment"># 测试集相对路径</span></span><br><span class="line"></span><br><span class="line">nc: 1                    <span class="comment"># 类别数量</span></span><br><span class="line">names: [<span class="string">&quot;battery&quot;</span>]       <span class="comment"># 类别名称列表</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 高级参数（可选）</span></span><br><span class="line">roboflow: &#123;&#125;             <span class="comment"># 兼容RoboFlow数据集</span></span><br><span class="line">download: null           <span class="comment"># 数据集下载URL</span></span><br></pre></td></tr></table></figure><p>在虚拟环境下进入yolotrain目录输入指令开始训练</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">yolo detect train </span><br><span class="line"><span class="comment">#data是你自己的yaml文件路径</span></span><br><span class="line">  data=D:/yolotrain/xxx.yaml </span><br><span class="line">  model=yolov8s.pt      <span class="comment"># 预训练模型（放在yolotrain目录下）</span></span><br><span class="line">  epochs=100            <span class="comment"># 迭代次数</span></span><br><span class="line">  imgsz=640             <span class="comment"># 输入分辨率</span></span><br><span class="line">  batch=16              <span class="comment"># 根据GPU调整</span></span><br><span class="line">  device=0              <span class="comment"># 0代表GPU练</span></span><br><span class="line"><span class="comment">#下面是参数，命令合并成一行</span></span><br></pre></td></tr></table></figure><p>若要进行验证把<code>train</code>改成<code>val</code>就行了，然后那个yolo模型我放在我的git仓库里了<a href="https://github.com/koen666/yolo">yolo模型</a></p><h2 id="四导出onnx">四、导出onnx</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yolo <span class="built_in">export</span> model=D:/yolotrain/best.pt format=onnx</span><br></pre></td></tr></table></figure><p>训练完后，可以从新得到的run文件夹下的best.pt(这个就是训练的最好的模型)文件挪到外面，在调用上面那个命令生成best.onnx文件</p><p>然后再创建一个xxx.yaml文件写入</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span>: yolov8</span><br><span class="line">name: yolov8s-r20230520</span><br><span class="line">display_name: koen</span><br><span class="line">model_path: best.onnx</span><br><span class="line">nms_threshold: 0.45</span><br><span class="line">confidence_threshold: 0.25</span><br><span class="line">classes:</span><br><span class="line">  - battery</span><br></pre></td></tr></table></figure><p>这个display_name可以换阿，这个文件就是你模型的配置文件</p><h2 id="五使用yaml操作">五、使用yaml操作</h2><p>进入<code>AnyLabeling</code>软件，左侧tab栏有AI选项，点击，选择自定义模型，选择刚刚配置的yaml文件即可</p>]]></content>
-    
-    
-    <summary type="html">本文介绍如何利用yolo+AnyLabeling实现数据集的自动标注</summary>
-    
-    
-    
-    <category term="dataset" scheme="http://example.com/categories/dataset/"/>
-    
-    
-    <category term="yolo" scheme="http://example.com/tags/yolo/"/>
-    
-    <category term="dataset" scheme="http://example.com/tags/dataset/"/>
-    
-    <category term="AnyLabeling" scheme="http://example.com/tags/AnyLabeling/"/>
     
   </entry>
   
