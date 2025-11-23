@@ -28,7 +28,7 @@
 <meta property="og:description" content="本文介绍最简单的遗传算法，后续还会继续在这里更新更多的遗传算法内容">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-11-23T02:58:59.514Z">
-<meta property="article:modified_time" content="2025-11-23T03:04:25.429Z">
+<meta property="article:modified_time" content="2025-11-23T03:35:03.910Z">
 <meta property="article:author" content="koen">
 <meta property="article:tag" content="GA">
 <meta property="article:tag" content="python">
@@ -213,7 +213,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-11-23 10:58:59 / Modified: 11:04:25" itemprop="dateCreated datePublished" datetime="2025-11-23T10:58:59+08:00">2025-11-23</time>
+              <time title="Created: 2025-11-23 10:58:59 / Modified: 11:35:03" itemprop="dateCreated datePublished" datetime="2025-11-23T10:58:59+08:00">2025-11-23</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,14 +238,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>940</span>
+              <span>1.7k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
+              <span>2 mins.</span>
             </span>
             <div class="post-description">本文介绍最简单的遗传算法，后续还会继续在这里更新更多的遗传算法内容</div>
 
@@ -259,20 +259,166 @@
 
       
         <h1 id="遗传算法ga">遗传算法（GA）</h1>
-<h2 id="问题目标"><strong>问题目标</strong></h2>
+<p>遗传算法如今已经发展出来了很多家族</p>
+<h2 id="一.简介">一.简介</h2>
+<p>遗传算法大致可以分为 <strong>单目标 GA、多目标 GA、改进型
+GA、特殊结构 GA</strong> 四类。</p>
+<h3 id="单目标-ga基础">1. <strong>单目标 GA（基础）</strong></h3>
+<p>最普通的，用来优化一个函数。</p>
+<p>代表算法：</p>
+<table>
+<colgroup>
+<col style="width: 56%" />
+<col style="width: 43%" />
+</colgroup>
+<thead>
+<tr>
+<th>算法名称</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Basic GA（经典遗传算法）</strong></td>
+<td>最普通的版本，用选择+交叉+变异进行进化</td>
+</tr>
+<tr>
+<td><strong>Real-coded GA（实数编码 GA）</strong></td>
+<td>个体不是二进制，而是连续变量（更适合工程优化）</td>
+</tr>
+<tr>
+<td><strong>微分进化 DE（Differential Evolution）</strong></td>
+<td>本质是遗传算法的变种，性能很强，进化方式是“差分变异”</td>
+</tr>
+</tbody>
+</table>
+<h3 id="多目标遗传算法moea">2.
+<strong>多目标遗传算法（MOEA）</strong></h3>
+<p>多目标问题不是一个目标，而是多个：</p>
+<p><span
+class="math display">min (<em>f</em><sub>1</sub>(<em>x</em>), <em>f</em><sub>2</sub>(<em>x</em>), …, <em>f</em><sub><em>k</em></sub>(<em>x</em>))</span></p>
+<p>比如：</p>
+<ul>
+<li>减少温度</li>
+<li>增加效率</li>
+<li>降低成本</li>
+</ul>
+<p>这些目标互相冲突，所以一个“最优解”不存在，只能得到
+<strong>一条帕累托前沿（Pareto Front）</strong>。</p>
+<p>代表算法：</p>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>特点</th>
+<th>是否常用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>NSGA-II（最经典）</strong></td>
+<td>用“非支配排序 + 拥挤距离”来进化</td>
+<td>✔✔✔ 超常用</td>
+</tr>
+<tr>
+<td><strong>NSGA-III</strong></td>
+<td>适用于高维多目标（10个目标以上）</td>
+<td>✔✔</td>
+</tr>
+<tr>
+<td><strong>SPEA2</strong></td>
+<td>强度值 + 密度估计</td>
+<td>✔</td>
+</tr>
+<tr>
+<td><strong>MOEA/D</strong></td>
+<td>把多目标拆成多个单目标子问题</td>
+<td>✔✔</td>
+</tr>
+</tbody>
+</table>
+<h3 id="改进型-ga智能-ga-高级-ga">3. <strong>改进型 GA（智能 GA, 高级
+GA）</strong></h3>
+<p>主流改进版：</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 33%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr>
+<th>算法</th>
+<th>思想</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>精英策略 GA（Elitism GA）</strong></td>
+<td>每代保留最优个体</td>
+<td>防止退化</td>
+</tr>
+<tr>
+<td><strong>自适应遗传算法 AGA</strong></td>
+<td>自动调整变异率、交叉率</td>
+<td>不用固定参数</td>
+</tr>
+<tr>
+<td><strong>免疫遗传算法 IGA</strong></td>
+<td>加入免疫算子（抗体、亲和度）</td>
+<td>维持多样性，避免早熟</td>
+</tr>
+<tr>
+<td><strong>混合 GA（Hybrid GA）</strong></td>
+<td>GA + 梯度下降 / 粒子群 / 模拟退火</td>
+<td>提升收敛速度</td>
+</tr>
+<tr>
+<td><strong>星火遗传算法（Spark GA / Firefly-GA）</strong></td>
+<td>“亮度吸引”机制（受萤火虫算法启发）</td>
+<td>强化局部搜索</td>
+</tr>
+</tbody>
+</table>
+<h3 id="特殊结构-ga编码方式进化">4. <strong>特殊结构
+GA（编码方式进化）</strong></h3>
+<p>为特殊问题设计的遗传算法。</p>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>应用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Permutation GA</strong></td>
+<td>旅行商 TSP、排序优化</td>
+</tr>
+<tr>
+<td><strong>Binary GA</strong></td>
+<td>0-1 组合优化（选与不选）</td>
+</tr>
+<tr>
+<td><strong>Tree GA（遗传规划 GP）</strong></td>
+<td>用树结构进化程序</td>
+</tr>
+</tbody>
+</table>
+<h2 id="二.传统ga">二.传统GA</h2>
+<h3 id="问题目标"><strong>问题目标</strong></h3>
 <p>假设你要优化一个函数：</p>
 <p><span
 class="math display">min<sub><em>x</em></sub><em>f</em>(<em>x</em>)</span></p>
 <p>遗传算法的目标是找到让 $ f(x) $ 最小的 $ x $。</p>
-<hr />
-<h2 id="种群表示population"><strong>种群表示（Population）</strong></h2>
+<h3 id="种群表示population"><strong>种群表示（Population）</strong></h3>
 <p>一个解 $ x $ 被称为 “个体”（Individual）。<br />
 N 个解组成一代种群：</p>
 <p><span
 class="math display"><em>P</em><sup>(<em>t</em>)</sup> = {<em>x</em><sub>1</sub><sup>(<em>t</em>)</sup>, <em>x</em><sub>2</sub><sup>(<em>t</em>)</sup>, …, <em>x</em><sub><em>N</em></sub><sup>(<em>t</em>)</sup>}</span></p>
 <p>t 表示当前是第几代。</p>
-<hr />
-<h2 id="适应度函数fitness"><strong>适应度函数（Fitness）</strong></h2>
+<h3 id="适应度函数fitness"><strong>适应度函数（Fitness）</strong></h3>
 <p>遗传算法不直接用 $ f(x) $ ，而是把它转成 “适应度”。<br />
 最常见的适应度（越大越好）：</p>
 <p><span class="math display">$$
@@ -281,23 +427,21 @@ $$</span></p>
 <p>或者最大化问题直接用：</p>
 <p><span
 class="math display"><em>F</em>(<em>x</em>) = <em>f</em>(<em>x</em>)</span></p>
-<hr />
-<h2 id="选择selection"><strong>选择（Selection）</strong></h2>
+<h3 id="选择selection"><strong>选择（Selection）</strong></h3>
 <p>让适应度更高的更容易被选中。</p>
-<h3 id="轮盘赌选择roulette-wheel">轮盘赌选择（Roulette Wheel）</h3>
+<h4 id="轮盘赌选择roulette-wheel">轮盘赌选择（Roulette Wheel）</h4>
 <p>每个个体被选中的概率：</p>
 <p><span class="math display">$$
 p_i = \frac{F(x_i)}{\sum_{j=1}^{N} F(x_j)}
 $$</span></p>
 <p>即：越优秀的个体，概率越大。</p>
-<hr />
-<h2 id="交叉crossover"><strong>交叉（Crossover）</strong></h2>
+<h3 id="交叉crossover"><strong>交叉（Crossover）</strong></h3>
 <p>假设随机选出两个父代：</p>
 <p><span
 class="math display"><em>x</em><sub><em>a</em></sub> = (<em>x</em><sub><em>a</em>1</sub>, <em>x</em><sub><em>a</em>2</sub>, …, <em>x</em><sub><em>a</em><em>d</em></sub>)</span></p>
 <p><span
 class="math display"><em>x</em><sub><em>b</em></sub> = (<em>x</em><sub><em>b</em>1</sub>, <em>x</em><sub><em>b</em>2</sub>, …, <em>x</em><sub><em>b</em><em>d</em></sub>)</span></p>
-<h3 id="单点交叉公式">单点交叉公式</h3>
+<p>单点交叉公式:</p>
 <p>选择一个位置 $ k $，生成新子代：</p>
 <p><span
 class="math display">Child<sub>1</sub> = (<em>x</em><sub><em>a</em>1</sub>, …, <em>x</em><sub><em>a</em><em>k</em></sub>, <em>x</em><sub><em>b</em>(<em>k</em> + 1)</sub>, …, <em>x</em><sub><em>b</em><em>d</em></sub>)</span></p>
@@ -306,8 +450,7 @@ class="math display">Child<sub>2</sub> = (<em>x</em><sub><em>b</em>1</sub>,�
 <p>交叉概率 <span
 class="math inline"><em>P</em><sub><em>c</em></sub></span> 通常
 0.6–0.9。</p>
-<hr />
-<h2 id="变异mutation"><strong>变异（Mutation）</strong></h2>
+<h3 id="变异mutation"><strong>变异（Mutation）</strong></h3>
 <p>对某些位置加一个小扰动（保持探索性）。</p>
 <p>实数编码常用：</p>
 <p><span
@@ -320,28 +463,23 @@ class="math display"><em>ϵ</em> ∼ 𝒩(0, <em>σ</em><sup>2</sup>)</spa
 <p>变异概率：</p>
 <p><span
 class="math display"><em>P</em><sub><em>m</em></sub> = 0.01 ∼ 0.1</span></p>
-<hr />
-<h2
-id="生成下一代reproduction"><strong>生成下一代（Reproduction）</strong></h2>
+<h3
+id="生成下一代reproduction"><strong>生成下一代（Reproduction）</strong></h3>
 <p>把选择 + 交叉 + 变异生成的新个体组成：</p>
 <p><span
 class="math display"><em>P</em><sup>(<em>t</em> + 1)</sup> = {<em>x</em><sub>1</sub><sup>(<em>t</em> + 1)</sup>, <em>x</em><sub>2</sub><sup>(<em>t</em> + 1)</sup>, …, <em>x</em><sub><em>N</em></sub><sup>(<em>t</em> + 1)</sup>}</span></p>
-<hr />
-<h2 id="算法停止条件"><strong>算法停止条件</strong></h2>
+<h3 id="算法停止条件"><strong>算法停止条件</strong></h3>
 <p>重复迭代直到：</p>
 <p><span
 class="math display"><em>t</em> = <em>t</em><sub>max</sub></span></p>
 <p>或者适应度不再提升（收敛）。</p>
-<hr />
-<h2
-id="遗传算法整体公式流程最核心"><strong>遗传算法整体公式流程（最核心）</strong></h2>
+<h3 id="遗传算法整体公式流程"><strong>遗传算法整体公式流程</strong></h3>
 <p><span
 class="math display"><em>P</em><sup>(<em>t</em> + 1)</sup> = Mutation(Crossover(Selection(<em>P</em><sup>(<em>t</em>)</sup>)))</span></p>
 <p>一句话：</p>
 <p><strong>下一代 = 用选择选出优秀父代 → 交叉组合 →
 再随机变异</strong></p>
-<hr />
-<h2 id="例子最简单可理解"><strong>例子（最简单可理解）</strong></h2>
+<h3 id="例子"><strong>例子</strong></h3>
 <p>优化函数：</p>
 <p><span
 class="math display"><em>f</em>(<em>x</em>) = <em>x</em><sup>2</sup></span></p>
@@ -358,7 +496,6 @@ class="math display"><em>x</em><sub><em>n</em><em>e</em><em>w</em></sub> = <
 <p><span
 class="math display"><em>x</em><sub><em>n</em><em>e</em><em>w</em></sub> = <em>x</em><sub><em>n</em><em>e</em><em>w</em></sub> + <em>ϵ</em></span></p>
 <p>每代都会让 $ x $ 更接近 0（最优点）。</p>
-<hr />
 
     </div>
 
@@ -466,7 +603,10 @@ class="math display"><em>x</em><sub><em>n</em><em>e</em><em>w</em></sub> = <
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95ga"><span class="nav-text">遗传算法（GA）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E7%9B%AE%E6%A0%87"><span class="nav-text">问题目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%8D%E7%BE%A4%E8%A1%A8%E7%A4%BApopulation"><span class="nav-text">种群表示（Population）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%82%E5%BA%94%E5%BA%A6%E5%87%BD%E6%95%B0fitness"><span class="nav-text">适应度函数（Fitness）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9selection"><span class="nav-text">选择（Selection）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AE%E7%9B%98%E8%B5%8C%E9%80%89%E6%8B%A9roulette-wheel"><span class="nav-text">轮盘赌选择（Roulette Wheel）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E5%8F%89crossover"><span class="nav-text">交叉（Crossover）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E7%82%B9%E4%BA%A4%E5%8F%89%E5%85%AC%E5%BC%8F"><span class="nav-text">单点交叉公式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E5%BC%82mutation"><span class="nav-text">变异（Mutation）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E4%B8%8B%E4%B8%80%E4%BB%A3reproduction"><span class="nav-text">生成下一代（Reproduction）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%81%9C%E6%AD%A2%E6%9D%A1%E4%BB%B6"><span class="nav-text">算法停止条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95%E6%95%B4%E4%BD%93%E5%85%AC%E5%BC%8F%E6%B5%81%E7%A8%8B%E6%9C%80%E6%A0%B8%E5%BF%83"><span class="nav-text">遗传算法整体公式流程（最核心）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90%E6%9C%80%E7%AE%80%E5%8D%95%E5%8F%AF%E7%90%86%E8%A7%A3"><span class="nav-text">例子（最简单可理解）</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95ga"><span class="nav-text">遗传算法（GA）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80.%E7%AE%80%E4%BB%8B"><span class="nav-text">一.简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E7%9B%AE%E6%A0%87-ga%E5%9F%BA%E7%A1%80"><span class="nav-text">1. 单目标 GA（基础）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%9B%AE%E6%A0%87%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95moea"><span class="nav-text">2.
+多目标遗传算法（MOEA）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B9%E8%BF%9B%E5%9E%8B-ga%E6%99%BA%E8%83%BD-ga-%E9%AB%98%E7%BA%A7-ga"><span class="nav-text">3. 改进型 GA（智能 GA, 高级
+GA）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E7%BB%93%E6%9E%84-ga%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F%E8%BF%9B%E5%8C%96"><span class="nav-text">4. 特殊结构
+GA（编码方式进化）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C.%E4%BC%A0%E7%BB%9Fga"><span class="nav-text">二.传统GA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E7%9B%AE%E6%A0%87"><span class="nav-text">问题目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%8D%E7%BE%A4%E8%A1%A8%E7%A4%BApopulation"><span class="nav-text">种群表示（Population）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%82%E5%BA%94%E5%BA%A6%E5%87%BD%E6%95%B0fitness"><span class="nav-text">适应度函数（Fitness）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9selection"><span class="nav-text">选择（Selection）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AE%E7%9B%98%E8%B5%8C%E9%80%89%E6%8B%A9roulette-wheel"><span class="nav-text">轮盘赌选择（Roulette Wheel）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A4%E5%8F%89crossover"><span class="nav-text">交叉（Crossover）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E5%BC%82mutation"><span class="nav-text">变异（Mutation）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E4%B8%8B%E4%B8%80%E4%BB%A3reproduction"><span class="nav-text">生成下一代（Reproduction）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%81%9C%E6%AD%A2%E6%9D%A1%E4%BB%B6"><span class="nav-text">算法停止条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95%E6%95%B4%E4%BD%93%E5%85%AC%E5%BC%8F%E6%B5%81%E7%A8%8B"><span class="nav-text">遗传算法整体公式流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-text">例子</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
