@@ -288,9 +288,9 @@
     
     <category term="python" scheme="https://koen666.github.io/tags/python/"/>
     
-    <category term="web" scheme="https://koen666.github.io/tags/web/"/>
-    
     <category term="flask" scheme="https://koen666.github.io/tags/flask/"/>
+    
+    <category term="web" scheme="https://koen666.github.io/tags/web/"/>
     
   </entry>
   
