@@ -7,66 +7,66 @@
         <language>zh-CN</language>
         <pubDate>Mon, 15 Sep 2025 00:00:00 +0800</pubDate>
         <lastBuildDate>Mon, 15 Sep 2025 00:00:00 +0800</lastBuildDate>
-        <category>GA</category>
-        <category>python</category>
-        <category>math</category>
         <category>KL</category>
         <category>RE-ID</category>
-        <category>MLC</category>
-        <category>cmd</category>
-        <category>curl</category>
-        <category>learn</category>
+        <category>GA</category>
+        <category>python</category>
         <category>cypher</category>
         <category>neo4j</category>
         <category>database</category>
+        <category>Koa</category>
+        <category>backen</category>
+        <category>nodejs</category>
+        <category>math</category>
+        <category>cmd</category>
+        <category>curl</category>
+        <category>learn</category>
+        <category>MLC</category>
+        <category>flask</category>
+        <category>web</category>
+        <category>gradio</category>
         <category>container</category>
         <category>docker</category>
         <category>linux</category>
         <category>virtual</category>
         <category>electron</category>
-        <category>web</category>
         <category>desk</category>
-        <category>Koa</category>
-        <category>backen</category>
-        <category>nodejs</category>
-        <category>flask</category>
-        <category>gradio</category>
+        <category>markdown</category>
         <category>repo</category>
         <category>git</category>
         <category>latex</category>
-        <category>markdown</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
+        <category>collections</category>
         <category>uv</category>
         <category>environment</category>
-        <category>collections</category>
-        <category>saaborn</category>
-        <category>screen</category>
-        <category>termux</category>
-        <category>sql</category>
         <category>deeplearning</category>
         <category>pytorch</category>
         <category>Transformer</category>
+        <category>screen</category>
+        <category>termux</category>
+        <category>sql</category>
+        <category>saaborn</category>
         <category>ssh</category>
         <category>cv</category>
         <category>transforer</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
-        <category>yolo</category>
-        <category>dataset</category>
-        <category>AnyLabeling</category>
-        <category>scipy</category>
-        <category>dataloader</category>
         <category>vue</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
-        <category>agent</category>
-        <category>code</category>
+        <category>yolo</category>
+        <category>dataset</category>
+        <category>AnyLabeling</category>
         <category>gpu</category>
         <category>data</category>
+        <category>dataloader</category>
+        <category>agent</category>
+        <category>code</category>
+        <category>scipy</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2025/09/15/%E4%BB%8Edataset%E5%88%B0dataloader/</guid>
             <title>从dataset-&gt;dataloader</title>
