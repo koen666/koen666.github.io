@@ -19,6 +19,9 @@
         <category>cmd</category>
         <category>curl</category>
         <category>learn</category>
+        <category>cypher</category>
+        <category>neo4j</category>
+        <category>database</category>
         <category>electron</category>
         <category>web</category>
         <category>desk</category>
@@ -26,47 +29,44 @@
         <category>docker</category>
         <category>linux</category>
         <category>virtual</category>
-        <category>flask</category>
         <category>gradio</category>
+        <category>flask</category>
         <category>markdown</category>
-        <category>cypher</category>
-        <category>neo4j</category>
-        <category>database</category>
         <category>latex</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
-        <category>uv</category>
-        <category>environment</category>
         <category>repo</category>
         <category>git</category>
         <category>collections</category>
-        <category>scipy</category>
+        <category>uv</category>
+        <category>environment</category>
         <category>deeplearning</category>
         <category>pytorch</category>
         <category>Transformer</category>
+        <category>saaborn</category>
         <category>screen</category>
         <category>termux</category>
-        <category>saaborn</category>
-        <category>sql</category>
         <category>ssh</category>
+        <category>sql</category>
+        <category>cv</category>
+        <category>transforer</category>
+        <category>scipy</category>
+        <category>vue</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
-        <category>cv</category>
-        <category>transforer</category>
-        <category>vue</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
         <category>yolo</category>
         <category>dataset</category>
         <category>AnyLabeling</category>
-        <category>dataloader</category>
         <category>gpu</category>
         <category>data</category>
-        <category>code</category>
         <category>agent</category>
+        <category>dataloader</category>
+        <category>code</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2025/09/16/vue-router/</guid>
             <title>vue-router</title>
