@@ -1,0 +1,399 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"/><meta name="theme-color" content="#222"/><meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1"/><meta name="renderer" content="webkit"/><link rel="icon" type="image/ico" sizes="32x32" href="/assets/favicon.ico"/><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/><link rel="alternate" href="/rss.xml" title="木语" type="application/rss+xml"><link rel="alternate" href="/atom.xml" title="木语" type="application/atom+xml"><link rel="alternate" type="application/json" title="木语" href="http://example.com/feed.json"/><link rel="preconnect" href="https://s4.zstatic.net"/><link rel="preconnect" href="https://at.alicdn.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CFredericka%20the%20Great:400,400italic,700,700italic%7CNoto%20Serif%20JP:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CInconsolata:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="none" onload="this.media&#x3D;&#39;all&#39;"><link rel="modulepreload" href="/js/siteInit.js"></link><link rel="modulepreload" href="/js/nyx-player-XQO4656G.js"></link><link rel="modulepreload" href="/js/copy-tex-DSIH3K5D.js"></link><link rel="modulepreload" href="/js/post-MISE4AQZ.js"></link><link rel="modulepreload" href="/js/chunk-QP4NXAPX.js"></link><link rel="modulepreload" href="/js/index.esm-AEKIGOYH.js"></link><link rel="modulepreload" href="/js/chunk-RK7HQRIO.js"></link><link rel="modulepreload" href="/js/chunk-SK7HHSJC.js"></link><link rel="stylesheet" href="/css/siteInit.css" media="none" onload="this.media&#x3D;&#39;all&#39;"></link><link rel="preload" href="/images/pytorch/transformer.jpg" as="image" fetchpriority="high"><link rel="preload" href="/images/pytorch/CNN.png" as="image" fetchpriority="high"><link rel="preload" href="/images/background.png" as="image" fetchpriority="high"><link rel="preload" href="/images/pytorch/RNN.png" as="image" fetchpriority="high"><link rel="preload" href="/images/pytorch/CNN.png" as="image" fetchpriority="high"><link rel="preload" href="/images/pytorch/attention.png" as="image" fetchpriority="high"><meta name="keywords" content="math,"/><meta name="description" content="本文介绍常见的Latex基本语法使用"/><link rel="canonical" href="http://example.com/2025/08/18/latex_2/"><link rel="stylesheet" href="/css/post.css?v=0.5.4"><link rel="stylesheet" href="/css/mermaid.css?v=0.5.4"><!-- 临时处理--><link rel="stylesheet" media="none" onload="this.media='all'" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css"><title>Latex全语法使用</title><meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="pagefind_mount"></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">Latex全语法使用</h1><div class="meta"><span class="item" title="创建时间：2025-08-18 17:20:00"><span class="icon"><i class="ic i-calendar"></i></span><span class="text">发表于</span><time itemprop="dateCreated datePublished" datetime="2025-08-18T17:20:00+08:00">2025-08-18</time></span><span class="item" title="本文字数"><span class="icon"><i class="ic i-pen"></i></span><span class="text">本文字数</span><span>5.1k</span><span class="text">字</span></span><span class="item" title="阅读时长"><span class="icon"><i class="ic i-clock"></i></span><span class="text">阅读时长</span><span>5 分钟</span></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="切换导航栏"><span class="line"></span><span class="line"></span><span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">testName</a></li></ul><ul class="right" id="rightNav"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div class="pjax" id="imgs"><ul><li class="item" style="background-image: url(&quot;/images/pytorch/transformer.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;/images/pytorch/CNN.png&quot;);"></li><li class="item" style="background-image: url(&quot;/images/background.png&quot;);"></li><li class="item" style="background-image: url(&quot;/images/pytorch/RNN.png&quot;);"></li><li class="item" style="background-image: url(&quot;/images/pytorch/CNN.png&quot;);"></li><li class="item" style="background-image: url(&quot;/images/pytorch/attention.png&quot;);"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><main><div class="inner"><div class="pjax" id="main"><div class="article wrap"><div class="breadcrumb" itemListElement itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i><span><a href="/">首页</a></span><i class="ic i-angle-right"></i><span class="current" itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><a href="/categories/code/" itemprop="item" rel="index" title="分类于code"><span itemprop="name">code<meta itemprop="position" content="0"/></span></a></span></div><article class="post block" itemscope="itemscope" itemtype="http://schema.org/Article" data-pagefind-body="data-pagefind-body" lang="zh-CN"><link itemprop="mainEntityOfPage" href="http://example.com/2025/08/18/latex_2/"/><span hidden="hidden" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><meta itemprop="image" content="/assets/avatar.jpg"/><meta itemprop="name" content="koen"/><meta itemprop="description" content="技术是逻辑，木是自然，语是表达, Spark!"/></span><span hidden="hidden" itemprop="publisher" itemscope="itemscope" itemtype="http://schema.org/Organization"><meta itemprop="name" content="木语"/></span><div class="body md" itemprop="articleBody"><h2 id="1-latex-文档基本格式"><a class="anchor" href="#1-latex-文档基本格式">#</a> 1. LaTeX 文档基本格式</h2>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-latex"><span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#1E754F;--shiki-dark:#4D9375">documentclass</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#998418;--shiki-dark:#B8A965">article</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">   % 文档类型：article, report, book, beamer 等</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#1E754F;--shiki-dark:#4D9375">usepackage</span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">utf8</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#998418;--shiki-dark:#B8A965">inputenc</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> % 支持中文时建议用 ctex 包</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#1E754F;--shiki-dark:#4D9375">usepackage</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#998418;--shiki-dark:#B8A965">amsmath, amssymb</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> % 数学符号扩展</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#1E754F;--shiki-dark:#4D9375">usepackage</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#998418;--shiki-dark:#B8A965">graphicx</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> % 插入图片</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#1E754F;--shiki-dark:#4D9375">usepackage</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#998418;--shiki-dark:#B8A965">listings</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> % 插入代码</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#1E754F;--shiki-dark:#4D9375">usepackage</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#998418;--shiki-dark:#B8A965">xcolor</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">   % 代码高亮需要颜色</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#1E754F;--shiki-dark:#4D9375">usepackage</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#998418;--shiki-dark:#B8A965">hyperref</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> % 超链接</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">title</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">LaTeX 学习示例</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">author</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">你的名字</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">date</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">today</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">begin</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">document</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  % 正文开始</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">maketitle</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  % 输出标题</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">section</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#59873A;--shiki-dark:#80A665">引言</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">这是 LaTeX 的一个简单示例。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">end</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">document</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span></code></pre>
+<blockquote>
+<p><strong>说明</strong>：</p>
+</blockquote>
+<ul>
+<li><code>\documentclass{article}</code> 定义了文档类型。</li>
+<li><code>\usepackage{}</code> 用来导入扩展包。</li>
+<li><code>\section{}</code> 表示章节。</li>
+<li><code>\maketitle</code> 会根据上面 <code>\title</code>、<code>\author</code>、<code>\date</code> 生成标题页。</li>
+</ul>
+<hr>
+<h2 id="2-数学公式"><a class="anchor" href="#2-数学公式">#</a> 2. 数学公式</h2>
+<p>LaTeX 在数学公式排版方面很强大。</p>
+<h3 id="21-行内公式"><a class="anchor" href="#21-行内公式">#</a> 2.1 行内公式</h3>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-latex"><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">这是一个行内公式：</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">$</span><span style="color:#998418;--shiki-dark:#B8A965">E=mc</span><span style="color:#999999;--shiki-dark:#666666">^</span><span style="color:#2F798A;--shiki-dark:#4C9A91">2</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">$</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">。</span></span></code></pre>
+<h3 id="22-独立公式"><a class="anchor" href="#22-独立公式">#</a> 2.2 独立公式</h3>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-latex"><span class="line"><span style="color:#B5695977;--shiki-dark:#C98A7D77">\</span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">E = mc</span><span style="color:#999999;--shiki-dark:#666666">^</span><span style="color:#2F798A;--shiki-dark:#4C9A91">2</span></span>
+<span class="line"><span style="color:#B5695977;--shiki-dark:#C98A7D77">\</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span></span></code></pre>
+<h3 id="23-多行公式-amsmath-提供"><a class="anchor" href="#23-多行公式-amsmath-提供">#</a> 2.3 多行公式 (amsmath 提供)</h3>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-latex"><span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">begin</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">align</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">a</span><span style="color:#999999;--shiki-dark:#666666">^</span><span style="color:#2F798A;--shiki-dark:#4C9A91">2</span><span style="color:#999999;--shiki-dark:#666666"> +</span><span style="color:#998418;--shiki-dark:#B8A965"> b</span><span style="color:#999999;--shiki-dark:#666666">^</span><span style="color:#2F798A;--shiki-dark:#4C9A91">2</span><span style="color:#1E754F;--shiki-dark:#4D9375"> &amp;</span><span style="color:#998418;--shiki-dark:#B8A965">= c</span><span style="color:#999999;--shiki-dark:#666666">^</span><span style="color:#2F798A;--shiki-dark:#4C9A91">2</span><span style="color:#1E754F;--shiki-dark:#4D9375"> \\</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">e</span><span style="color:#999999;--shiki-dark:#666666">^</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#998418;--shiki-dark:#B8A965">i</span><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#A65E2B;--shiki-dark:#C99076">pi</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#999999;--shiki-dark:#666666"> +</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#1E754F;--shiki-dark:#4D9375"> &amp;</span><span style="color:#998418;--shiki-dark:#B8A965">= </span><span style="color:#2F798A;--shiki-dark:#4C9A91">0</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">end</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">align</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span></code></pre>
+<hr>
+<h2 id="3-插入图片"><a class="anchor" href="#3-插入图片">#</a> 3. 插入图片</h2>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-latex"><span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">begin</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">figure</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">h</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    \</span><span style="color:#998418;--shiki-dark:#B8A965">centering</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    \</span><span style="color:#998418;--shiki-dark:#B8A965">includegraphics</span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">width=0.5</span><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">textwidth</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">example.png</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    \</span><span style="color:#998418;--shiki-dark:#B8A965">caption</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">这是一个示例图片</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    \</span><span style="color:#1E754F;--shiki-dark:#4D9375">label</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#B07D48;--shiki-dark:#BD976A">fig:example</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">end</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">figure</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span></code></pre>
+<blockquote>
+<p><strong>说明</strong>：</p>
+</blockquote>
+<ul>
+<li><code>example.png</code> 必须和 <code>.tex</code> 文件在同一目录。</li>
+<li><code>width=0.5\textwidth</code> 控制大小。</li>
+<li><code>\caption</code> 是图注，<code>\label</code> 用来引用。</li>
+<li>之后可用 <code>见图~\ref{fig:example}</code> 来自动编号。</li>
+</ul>
+<hr>
+<h2 id="4-插入代码"><a class="anchor" href="#4-插入代码">#</a> 4. 插入代码</h2>
+<p>LaTeX 用 <code>listings</code> 包来展示代码：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-latex"><span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">begin</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">lstlisting</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">language=Python, caption=Python 示例, label=</span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">lst:py</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">def hello</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">:</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">    print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">"Hello, LaTeX!"</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">end</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">lstlisting</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span></code></pre>
+<blockquote>
+<p><strong>说明</strong>：</p>
+</blockquote>
+<ul>
+<li><code>language=Python</code> 可以换成 <code>C</code>, <code>C++</code>, <code>Java</code> 等。</li>
+<li><code>caption</code> 给代码块加标题，<code>label</code> 方便引用。</li>
+</ul>
+<p>还可以加颜色主题：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-latex"><span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">lstset</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">  basicstyle=</span><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">ttfamily</span><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">small</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">  keywordstyle=</span><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">color</span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">blue</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">  commentstyle=</span><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">color</span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">green!50!black</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">  stringstyle=</span><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">color</span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">red</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">  numbers=left,</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">  numberstyle=</span><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">tiny</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">  frame=single,</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">  breaklines=true</span></span>
+<span class="line"><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span></code></pre>
+<hr>
+<h2 id="5-表格"><a class="anchor" href="#5-表格">#</a> 5. 表格</h2>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-latex"><span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">begin</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">table</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">h</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    \</span><span style="color:#998418;--shiki-dark:#B8A965">centering</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    \</span><span style="color:#998418;--shiki-dark:#B8A965">begin</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">tabular</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">|c|c|c|</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">        \</span><span style="color:#998418;--shiki-dark:#B8A965">hline</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">        姓名 </span><span style="color:#1E754F;--shiki-dark:#4D9375">&amp;</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> 年龄 </span><span style="color:#1E754F;--shiki-dark:#4D9375">&amp;</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> 成绩 </span><span style="color:#1E754F;--shiki-dark:#4D9375">\\</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">        \</span><span style="color:#998418;--shiki-dark:#B8A965">hline</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">        张三 </span><span style="color:#1E754F;--shiki-dark:#4D9375">&amp;</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> 18 </span><span style="color:#1E754F;--shiki-dark:#4D9375">&amp;</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> 95 </span><span style="color:#1E754F;--shiki-dark:#4D9375">\\</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">        李四 </span><span style="color:#1E754F;--shiki-dark:#4D9375">&amp;</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> 19 </span><span style="color:#1E754F;--shiki-dark:#4D9375">&amp;</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> 88 </span><span style="color:#1E754F;--shiki-dark:#4D9375">\\</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">        \</span><span style="color:#998418;--shiki-dark:#B8A965">hline</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    \</span><span style="color:#998418;--shiki-dark:#B8A965">end</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">tabular</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    \</span><span style="color:#998418;--shiki-dark:#B8A965">caption</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">学生信息表</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    \</span><span style="color:#1E754F;--shiki-dark:#4D9375">label</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#B07D48;--shiki-dark:#BD976A">tab:student</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">end</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">table</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span></code></pre>
+<hr>
+<h2 id="6-超链接"><a class="anchor" href="#6-超链接">#</a> 6. 超链接</h2>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-latex"><span class="line"><span style="color:#998418;--shiki-dark:#B8A965">\href</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">https://www.latex-project.org</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">LaTeX 官网</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span></code></pre>
+<hr>
+<h2 id="7-中文支持"><a class="anchor" href="#7-中文支持">#</a> 7. 中文支持</h2>
+<p>如果你写中文文档，建议用 <code>ctex</code> 包：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-latex"><span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#1E754F;--shiki-dark:#4D9375">documentclass</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#998418;--shiki-dark:#B8A965">ctexart</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  % 代替 article，更好支持中文</span></span></code></pre>
+<p>这样就能直接写中文了。</p>
+<hr>
+<h2 id="8有序列表和无序列表"><a class="anchor" href="#8有序列表和无序列表">#</a> 8.有序列表和无序列表</h2>
+<h3 id="81-无序列表itemize"><a class="anchor" href="#81-无序列表itemize">#</a> 8.1 无序列表（itemize）</h3>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-latex"><span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">begin</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">itemize</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    \</span><span style="color:#1E754F;--shiki-dark:#4D9375">item</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> 这是第一点</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    \</span><span style="color:#1E754F;--shiki-dark:#4D9375">item</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> 这是第二点</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    \</span><span style="color:#1E754F;--shiki-dark:#4D9375">item</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> 这是第三点</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">end</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">itemize</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span></code></pre>
+<p>默认显示为黑色小圆点：</p>
+<ul>
+<li>这是第一点</li>
+<li>这是第二点</li>
+<li>这是第三点</li>
+</ul>
+<h3 id="82-有序列表enumerate"><a class="anchor" href="#82-有序列表enumerate">#</a> 8.2 有序列表（enumerate）</h3>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-latex"><span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">begin</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">enumerate</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    \</span><span style="color:#1E754F;--shiki-dark:#4D9375">item</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> 这是第一点</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    \</span><span style="color:#1E754F;--shiki-dark:#4D9375">item</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> 这是第二点</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    \</span><span style="color:#1E754F;--shiki-dark:#4D9375">item</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> 这是第三点</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">end</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">enumerate</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span></code></pre>
+<p>默认显示为数字编号：</p>
+<ol>
+<li>这是第一点</li>
+<li>这是第二点</li>
+<li>这是第三点</li>
+</ol>
+<h3 id="83-自定义编号样式"><a class="anchor" href="#83-自定义编号样式">#</a> 8.3 自定义编号样式</h3>
+<p>借助 <code>enumitem</code> 包可以更灵活：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-latex"><span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#1E754F;--shiki-dark:#4D9375">usepackage</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#998418;--shiki-dark:#B8A965">enumitem</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">begin</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">enumerate</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">label=</span><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">roman</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">*.</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  % 罗马数字</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    \</span><span style="color:#1E754F;--shiki-dark:#4D9375">item</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> 第一条</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    \</span><span style="color:#1E754F;--shiki-dark:#4D9375">item</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> 第二条</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">end</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">enumerate</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">begin</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">enumerate</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">label=</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">alph</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">*</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  % 小写字母</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    \</span><span style="color:#1E754F;--shiki-dark:#4D9375">item</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> 第一条</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    \</span><span style="color:#1E754F;--shiki-dark:#4D9375">item</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> 第二条</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">end</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">enumerate</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span></code></pre>
+<p>结果会变成：</p>
+<ul>
+<li>(i), (ii), (iii)...</li>
+<li>(a), (b), (c)...</li>
+</ul>
+<h3 id="84-无编号列表只换行没有点数字"><a class="anchor" href="#84-无编号列表只换行没有点数字">#</a> 8.4 无编号列表（只换行，没有点/数字）</h3>
+<p>如果你只是想 <strong>逐行列出</strong>，但不要前面的符号，可以用 <code>description</code> 或者自定义环境：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-latex"><span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">begin</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">itemize</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">label=</span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> % label={} 表示不要符号</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    \</span><span style="color:#1E754F;--shiki-dark:#4D9375">item</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> 第一行</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    \</span><span style="color:#1E754F;--shiki-dark:#4D9375">item</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> 第二行</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    \</span><span style="color:#1E754F;--shiki-dark:#4D9375">item</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> 第三行</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">end</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">itemize</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span></code></pre>
+<p>或者更简单：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-latex"><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">第一点 </span><span style="color:#1E754F;--shiki-dark:#4D9375">\\</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">第二点 </span><span style="color:#1E754F;--shiki-dark:#4D9375">\\</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">第三点</span></span></code></pre>
+<p>（这里 <code>\\</code> 表示换行）</p>
+<h2 id="9-bibtex-使用"><a class="anchor" href="#9-bibtex-使用">#</a> 9. BibTeX 使用</h2>
+<p>在学术写作中，<strong>参考文献管理</strong>是必不可少的。LaTeX 提供了 <code>BibTeX</code> 来管理参考文献，它的好处是：</p>
+<ul>
+<li>文献集中存放在一个 <code>.bib</code> 文件里，方便复用；</li>
+<li>可以自动格式化（APA, IEEE, GB/T 7714 等）；</li>
+<li>引用时只需 <code>\cite{}</code> 即可，省去手动编号。</li>
+</ul>
+<h3 id="91-建立-bib-文件"><a class="anchor" href="#91-建立-bib-文件">#</a> 9.1 建立 <code>.bib</code> 文件</h3>
+<p>新建一个 <code>refs.bib</code> 文件，里面存放参考文献信息。常见条目类型有：</p>
+<ul>
+<li><code>@article</code>：期刊文章</li>
+<li><code>@book</code>：书籍</li>
+<li><code>@inproceedings</code>：会议论文</li>
+<li><code>@misc</code>：其他（网页、报JavaScript (ES6) code snippets告等）</li>
+</ul>
+<p><strong>示例：refs.bib</strong></p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bibtex"><span class="line"><span style="color:#999999;--shiki-dark:#666666">@</span><span style="color:#1E754F;--shiki-dark:#4D9375">article</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#2E8F82;--shiki-dark:#5DA994">einstein1905</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">  author</span><span style="color:#999999;--shiki-dark:#666666">    =</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">Albert Einstein</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">  title</span><span style="color:#999999;--shiki-dark:#666666">     =</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">Zur Elektrodynamik bewegter Körper</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">  journal</span><span style="color:#999999;--shiki-dark:#666666">   =</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">Annalen der Physik</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">  volume</span><span style="color:#999999;--shiki-dark:#666666">    =</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">17</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">  number</span><span style="color:#999999;--shiki-dark:#666666">    =</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">10</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">  pages</span><span style="color:#999999;--shiki-dark:#666666">     =</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">891--921</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">  year</span><span style="color:#999999;--shiki-dark:#666666">      =</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">1905</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">  publisher</span><span style="color:#999999;--shiki-dark:#666666"> =</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">Wiley</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span></span>
+<span class="line"><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">@</span><span style="color:#1E754F;--shiki-dark:#4D9375">book</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#2E8F82;--shiki-dark:#5DA994">knuth1984</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">  author</span><span style="color:#999999;--shiki-dark:#666666">    =</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">Donald E. Knuth</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">  title</span><span style="color:#999999;--shiki-dark:#666666">     =</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">The TeXbook</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">  year</span><span style="color:#999999;--shiki-dark:#666666">      =</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">1984</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">  publisher</span><span style="color:#999999;--shiki-dark:#666666"> =</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">Addison-Wesley</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span></span>
+<span class="line"><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">@</span><span style="color:#1E754F;--shiki-dark:#4D9375">misc</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#2E8F82;--shiki-dark:#5DA994">latexproject</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">  author</span><span style="color:#999999;--shiki-dark:#666666">    =</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">LaTeX Project</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">  title</span><span style="color:#999999;--shiki-dark:#666666">     =</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">LaTeX Project Website</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">  year</span><span style="color:#999999;--shiki-dark:#666666">      =</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">2025</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">  url</span><span style="color:#999999;--shiki-dark:#666666">       =</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">https://www.latex-project.org/</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span></span>
+<span class="line"><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span></code></pre>
+<h3 id="92-在主-tex-文件中引用"><a class="anchor" href="#92-在主-tex-文件中引用">#</a> 9.2 在主 <code>.tex</code> 文件中引用</h3>
+<p>在你的 <code>main.tex</code> 中：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-latex"><span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#1E754F;--shiki-dark:#4D9375">documentclass</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#998418;--shiki-dark:#B8A965">article</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#1E754F;--shiki-dark:#4D9375">usepackage</span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">utf8</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#998418;--shiki-dark:#B8A965">inputenc</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#1E754F;--shiki-dark:#4D9375">usepackage</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#998418;--shiki-dark:#B8A965">cite</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">   % 文献引用宏包</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#1E754F;--shiki-dark:#4D9375">usepackage</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#998418;--shiki-dark:#B8A965">hyperref</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> % 让文献引用可点击</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">begin</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">document</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">爱因斯坦的相对论论文发表于1905年~</span><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#1E754F;--shiki-dark:#4D9375">cite</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#A65E2B;--shiki-dark:#C99076">einstein1905</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">。</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">LaTeX</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> 的官方文档在~</span><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#1E754F;--shiki-dark:#4D9375">cite</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#A65E2B;--shiki-dark:#C99076">latexproject</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> 可以找到。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD">% 生成参考文献</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">bibliographystyle</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plain</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">   </span><span style="color:#A0ADA0;--shiki-dark:#758575DD">% 参考文献格式：plain, unsrt, abbrv, ieeetr 等</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">bibliography</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">refs</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">         </span><span style="color:#A0ADA0;--shiki-dark:#758575DD">% refs.bib 文件名，不要写扩展名</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">end</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">document</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span></code></pre>
+<h3 id="93-编译流程"><a class="anchor" href="#93-编译流程">#</a> 9.3 编译流程</h3>
+<p>和普通 <code>.tex</code> 不同，使用 <code>bibtex</code> 时要多一步：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bash"><span class="line"><span style="color:#59873A;--shiki-dark:#80A665">pdflatex</span><span style="color:#B56959;--shiki-dark:#C98A7D"> main.tex</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">bibtex</span><span style="color:#B56959;--shiki-dark:#C98A7D"> main</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">pdflatex</span><span style="color:#B56959;--shiki-dark:#C98A7D"> main.tex</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">pdflatex</span><span style="color:#B56959;--shiki-dark:#C98A7D"> main.tex</span></span></code></pre>
+<p>解释：</p>
+<ol>
+<li>第一次 <code>pdflatex</code> 会扫描引用并生成 <code>.aux</code> 文件；</li>
+<li><code>bibtex main</code> 会读取 <code>.aux</code> 文件，从 <code>refs.bib</code> 抽取对应条目生成 <code>.bbl</code> 文件；</li>
+<li>再跑两次 <code>pdflatex</code> 让引用编号和文献列表都正确显示。</li>
+</ol>
+<h3 id="94-常见参考文献样式"><a class="anchor" href="#94-常见参考文献样式">#</a> 9.4 常见参考文献样式</h3>
+<ul>
+<li><code>plain</code>：作者字母顺序，数字编号</li>
+<li><code>unsrt</code>：按引用顺序编号</li>
+<li><code>abbrv</code>：作者名缩写</li>
+<li><code>ieeetr</code>：IEEE 风格</li>
+<li><code>apalike</code>：APA 风格</li>
+</ul>
+<p>例如：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-latex"><span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">bibliographystyle</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">ieeetr</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span></code></pre>
+<h3 id="95-中文参考文献"><a class="anchor" href="#95-中文参考文献">#</a> 9.5 中文参考文献</h3>
+<p>中文参考文献推荐用 <strong>GB/T 7714 样式</strong>（国标）：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-latex"><span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#1E754F;--shiki-dark:#4D9375">usepackage</span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">backend=bibtex,style=gb7714-2015</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#998418;--shiki-dark:#B8A965">biblatex</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">\</span><span style="color:#998418;--shiki-dark:#B8A965">bibliography</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">refs</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span></code></pre>
+<p>然后在 <code>.bib</code> 文件里可以写中文，例如：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bibtex"><span class="line"><span style="color:#999999;--shiki-dark:#666666">@</span><span style="color:#1E754F;--shiki-dark:#4D9375">book</span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#2E8F82;--shiki-dark:#5DA994">li2020</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">  author</span><span style="color:#999999;--shiki-dark:#666666">    =</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">李四 and 张三</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">  title</span><span style="color:#999999;--shiki-dark:#666666">     =</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">深度学习导论</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">  year</span><span style="color:#999999;--shiki-dark:#666666">      =</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">2020</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">,</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">  publisher</span><span style="color:#999999;--shiki-dark:#666666"> =</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">清华大学出版社</span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span></span>
+<span class="line"><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span></code></pre>
+<p>这样就能自动生成符合国标的中文参考文献。</p>
+<div class="tags"><a href="/tags/math/" rel="tag"><i class="ic i-tag"></i>math</a><a href="/tags/latex/" rel="tag"><i class="ic i-tag"></i>latex</a></div></div><footer><div class="meta"><span class="item"><span class="icon"><i class="ic i-calendar-check"></i></span><span class="text">更新于 </span><time title="修改时间：2025-08-25 12:58:28" itemprop="dateModified" datetime="2025-08-25T12:58:28+08:00">2025-08-25</time></span></div><div class="reward"><button><i class="ic i-heartbeat"></i>赞赏</button><p>请我喝[茶]~(￣▽￣)~*</p><div id="qr"><div><img loading="lazy" src="/assets/wechatpay.png" alt="koen 微信支付"/><p>微信支付</p></div><div><img loading="lazy" src="/assets/alipay.png" alt="koen 支付宝"/><p>支付宝</p></div></div></div><div id="copyright"><ul><li class="author"><strong>本文作者：</strong>koen<i class="ic i-at"><em>@</em></i>木语</li><li class="link"><strong>本文链接：</strong><a href="http://example.com/2025/08/18/latex_2/" title="Latex全语法使用">http://example.com/2025/08/18/latex_2/</a></li><li class="license"><strong>版权声明：</strong>本站所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/2025/08/12/23%E5%B9%B4%E5%9B%BD%E8%B5%9B/" rel="prev" itemprop="url" data-background-image="&#x2F;images&#x2F;pytorch&#x2F;RNN.png" title="23年数学建模国赛"><span class="type">上一篇</span><span class="category"><i class="ic i-flag"></i>mathematical modeling</span><h3>23年数学建模国赛</h3></a></div><div class="item right"><a href="/2025/08/25/Koa/" rel="next" itemprop="url" data-background-image="&#x2F;images&#x2F;pytorch&#x2F;GAN.png" title="Koa 框架使用"><span class="type">下一篇</span><span class="category"><i class="ic i-flag"></i>code</span><h3>Koa 框架使用</h3></a></div></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="文章目录"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-latex-%E6%96%87%E6%A1%A3%E5%9F%BA%E6%9C%AC%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text"> 1. LaTeX 文档基本格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text"> 2. 数学公式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-%E8%A1%8C%E5%86%85%E5%85%AC%E5%BC%8F"><span class="toc-number">2.1.</span> <span class="toc-text"> 2.1 行内公式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-%E7%8B%AC%E7%AB%8B%E5%85%AC%E5%BC%8F"><span class="toc-number">2.2.</span> <span class="toc-text"> 2.2 独立公式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-%E5%A4%9A%E8%A1%8C%E5%85%AC%E5%BC%8F-amsmath-%E6%8F%90%E4%BE%9B"><span class="toc-number">2.3.</span> <span class="toc-text"> 2.3 多行公式 (amsmath 提供)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87"><span class="toc-number">3.</span> <span class="toc-text"> 3. 插入图片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%8F%92%E5%85%A5%E4%BB%A3%E7%A0%81"><span class="toc-number">4.</span> <span class="toc-text"> 4. 插入代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E8%A1%A8%E6%A0%BC"><span class="toc-number">5.</span> <span class="toc-text"> 5. 表格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E8%B6%85%E9%93%BE%E6%8E%A5"><span class="toc-number">6.</span> <span class="toc-text"> 6. 超链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E4%B8%AD%E6%96%87%E6%94%AF%E6%8C%81"><span class="toc-number">7.</span> <span class="toc-text"> 7. 中文支持</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A8%E5%92%8C%E6%97%A0%E5%BA%8F%E5%88%97%E8%A1%A8"><span class="toc-number">8.</span> <span class="toc-text"> 8.有序列表和无序列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#81-%E6%97%A0%E5%BA%8F%E5%88%97%E8%A1%A8itemize"><span class="toc-number">8.1.</span> <span class="toc-text"> 8.1 无序列表（itemize）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#82-%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A8enumerate"><span class="toc-number">8.2.</span> <span class="toc-text"> 8.2 有序列表（enumerate）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#83-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BC%96%E5%8F%B7%E6%A0%B7%E5%BC%8F"><span class="toc-number">8.3.</span> <span class="toc-text"> 8.3 自定义编号样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#84-%E6%97%A0%E7%BC%96%E5%8F%B7%E5%88%97%E8%A1%A8%E5%8F%AA%E6%8D%A2%E8%A1%8C%E6%B2%A1%E6%9C%89%E7%82%B9%E6%95%B0%E5%AD%97"><span class="toc-number">8.4.</span> <span class="toc-text"> 8.4 无编号列表（只换行，没有点&#x2F;数字）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-bibtex-%E4%BD%BF%E7%94%A8"><span class="toc-number">9.</span> <span class="toc-text"> 9. BibTeX 使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#91-%E5%BB%BA%E7%AB%8B-bib-%E6%96%87%E4%BB%B6"><span class="toc-number">9.1.</span> <span class="toc-text"> 9.1 建立 .bib 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#92-%E5%9C%A8%E4%B8%BB-tex-%E6%96%87%E4%BB%B6%E4%B8%AD%E5%BC%95%E7%94%A8"><span class="toc-number">9.2.</span> <span class="toc-text"> 9.2 在主 .tex 文件中引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#93-%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B"><span class="toc-number">9.3.</span> <span class="toc-text"> 9.3 编译流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#94-%E5%B8%B8%E8%A7%81%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E6%A0%B7%E5%BC%8F"><span class="toc-number">9.4.</span> <span class="toc-text"> 9.4 常见参考文献样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#95-%E4%B8%AD%E6%96%87%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">9.5.</span> <span class="toc-text"> 9.5 中文参考文献</span></a></li></ol></li></ol></div><div class="related panel pjax" data-title="系列文章"><ul><li ><a href="/2025/07/25/git-basic-usage/" rel="bookmark" title="Git 基本使用教程">Git 基本使用教程</a></li><li ><a href="/2025/07/26/docker-basic-usage/" rel="bookmark" title="Docker 基本使用教程">Docker 基本使用教程</a></li><li ><a href="/2025/07/27/latex/" rel="bookmark" title="Latex常见数学公式">Latex常见数学公式</a></li><li ><a href="/2025/07/27/issue/" rel="bookmark" title="常见BUG汇总">常见BUG汇总</a></li><li ><a href="/2025/07/29/electron/" rel="bookmark" title="Electron 基本使用教程">Electron 基本使用教程</a></li><li ><a href="/2025/08/10/seaborn/" rel="bookmark" title="seaborn实现统计图绘制">seaborn实现统计图绘制</a></li><li ><a href="/2025/08/11/scipy/" rel="bookmark" title="scipy基本模块及其使用">scipy基本模块及其使用</a></li><li  class="active"><a href="/2025/08/18/latex_2/" rel="bookmark" title="Latex全语法使用">Latex全语法使用</a></li><li ><a href="/2025/08/25/Koa/" rel="bookmark" title="Koa 框架使用">Koa 框架使用</a></li><li ><a href="/2025/11/28/pipenv/" rel="bookmark" title="像前端package.json那样管理python依赖 (uv篇)">像前端package.json那样管理python依赖 (uv篇)</a></li></ul></div><div class="overview panel" data-title="站点概览"><div class="author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><img class="image" loading="lazy" decoding="async" itemprop="image" alt="koen" src="/assets/avatar.jpg"/><p class="name" itemprop="name">koen</p><div class="description" itemprop="description">Spark!</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">33</span><span class="name">文章</span></a></div><div class="item categories"><a href="/categories/"><span class="count">16</span><span class="name">分类</span></a></div><div class="item tags"><a href="/tags/"><span class="count">60</span><span class="name">标签</span></a></div></nav><div class="social"><a target="_blank" rel="noopener" href="https://github.com/yourname" class="item github" title="https:&#x2F;&#x2F;github.com&#x2F;yourname"><i class="ic i-github"></i></a></div><div class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>首页</a></li></div></div></div></div><ul id="quick"><li class="prev pjax"><a href="/2025/08/25/Koa/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"><a href="/2025/08/12/23%E5%B9%B4%E5%9B%BD%E8%B5%9B/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div><div id="player"></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>随机文章</h2><ul><li class="item"><div class="breadcrumb"><a href="/categories/cmd/" title="分类于cmd">cmd</a></div><span><a href="/2025/07/26/curl/">curl使用教学</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/deeplearning/" title="分类于deeplearning">deeplearning</a></div><span><a href="/2025/10/05/%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F/">Imperative，Symbolic and Hybrid Programming</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/docker/" title="分类于docker">docker</a></div><span><a href="/2026/01/15/udocker/">让你在没有 root 权限的机子上跑镜像</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/database/" title="分类于database">database</a></div><span><a href="/2025/09/01/sql/">SQL语法规则</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/deeplearning/" title="分类于deeplearning">deeplearning</a></div><span><a href="/2025/09/21/yaml+argparse/">argparse + yaml 在训练脚本中的使用</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/code/" title="分类于code">code</a></div><span><a href="/2025/07/26/docker-basic-usage/">Docker 基本使用教程</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/code/" title="分类于code">code</a></div><span><a href="/2025/07/29/electron/">Electron 基本使用教程</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/code/" title="分类于code">code</a></div><span><a href="/2025/07/27/issue/">常见BUG汇总</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/agent/" title="分类于agent">agent</a></div><span><a href="/2025/12/02/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%BC%96%E6%8E%92/">五种多agent编排方式</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/deeplearning/" title="分类于deeplearning">deeplearning</a></div><span><a href="/2025/09/29/MLC/">MLP 多层感知机制</a></span></li></ul></div><div class="rpost pjax"><h2>最新评论</h2></div></div><div class="status"><div class="copyright">&copy; 2022 -<span itemprop="copyrightYear">2026</span><span class="with-love"><i class="ic i-sakura rotate"></i></span><span class="author" itemprop="copyrightHolder">koen @ testName</span></div><div class="count"><span class="post-meta-item-icon"><i class="ic i-chart-area"></i></span><span title="站点总字数">198k 字</span><span class="post-meta-divider"> | </span><span class="post-meta-item-icon"><i class="ic i-coffee"></i></span><span title="站点阅读时长">3:01</span></div><div class="powered-by">基于 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & Theme.<a target="_blank" rel="noopener" href="https://github.com/theme-shoka-x/hexo-theme-shokaX/">ShokaX</a></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL = {
+    ispost: true,
+    path: `2025/08/18/latex_2/`,
+    favicon: {
+        show: `（●´3｀●）やれやれだぜ`,
+        hide: `(´Д｀)大変だ！`
+    },
+    search: {
+        placeholder: "文章搜索",
+        empty: "关于 「 ${query} 」，什么也没搜到",
+        stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    nocopy: "false",
+    copyright: `复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。`,
+    copy_tex: false,
+    katex: false,
+    mermaid: false,
+    audio: undefined,
+    nocopy: false,
+    outime: true,
+    template: `<div class="note warning"><p><span class="label warning">文章时效性提示</span><br>这是一篇发布于 {{publish}} 天前，最后一次更新在 {{updated}} 天前的文章，部分信息可能已经发生改变，请注意甄别。</p></div>`,
+    quiz: {
+        choice: `单选题`,
+        multiple: `多选题`,
+        true_false: `判断题`,
+        essay: `问答题`,
+        gap_fill: `填空题`,
+        mistake: `错题备注`
+    }
+};
+</script><script src="/js/siteInit.js?v=0.5.4" type="module" fetchpriority="high" defer></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

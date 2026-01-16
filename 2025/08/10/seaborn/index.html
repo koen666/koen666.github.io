@@ -1,0 +1,576 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"/><meta name="theme-color" content="#222"/><meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1"/><meta name="renderer" content="webkit"/><link rel="icon" type="image/ico" sizes="32x32" href="/assets/favicon.ico"/><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/><link rel="alternate" href="/rss.xml" title="木语" type="application/rss+xml"><link rel="alternate" href="/atom.xml" title="木语" type="application/atom+xml"><link rel="alternate" type="application/json" title="木语" href="http://example.com/feed.json"/><link rel="preconnect" href="https://s4.zstatic.net"/><link rel="preconnect" href="https://at.alicdn.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CFredericka%20the%20Great:400,400italic,700,700italic%7CNoto%20Serif%20JP:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CInconsolata:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="none" onload="this.media&#x3D;&#39;all&#39;"><link rel="modulepreload" href="/js/siteInit.js"></link><link rel="modulepreload" href="/js/nyx-player-XQO4656G.js"></link><link rel="modulepreload" href="/js/copy-tex-DSIH3K5D.js"></link><link rel="modulepreload" href="/js/post-MISE4AQZ.js"></link><link rel="modulepreload" href="/js/chunk-QP4NXAPX.js"></link><link rel="modulepreload" href="/js/index.esm-AEKIGOYH.js"></link><link rel="modulepreload" href="/js/chunk-RK7HQRIO.js"></link><link rel="modulepreload" href="/js/chunk-SK7HHSJC.js"></link><link rel="stylesheet" href="/css/siteInit.css" media="none" onload="this.media&#x3D;&#39;all&#39;"></link><link rel="preload" href="/images/pytorch/RNN.png" as="image" fetchpriority="high"><link rel="preload" href="/images/pytorch/RNN.png" as="image" fetchpriority="high"><link rel="preload" href="/images/pytorch/CNN.png" as="image" fetchpriority="high"><link rel="preload" href="/images/background.png" as="image" fetchpriority="high"><link rel="preload" href="/images/pytorch/GAN.png" as="image" fetchpriority="high"><link rel="preload" href="/images/pytorch/transformer.jpg" as="image" fetchpriority="high"><meta name="keywords" content="python,"/><meta name="description" content="本文介绍如何利用seaborn库实现统计图的绘制功能"/><link rel="canonical" href="http://example.com/2025/08/10/seaborn/"><link rel="stylesheet" href="/css/post.css?v=0.5.4"><link rel="stylesheet" href="/css/mermaid.css?v=0.5.4"><!-- 临时处理--><link rel="stylesheet" media="none" onload="this.media='all'" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css"><title>seaborn实现统计图绘制</title><meta name="generator" content="Hexo 7.3.0"></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="pagefind_mount"></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">seaborn实现统计图绘制</h1><div class="meta"><span class="item" title="创建时间：2025-08-10 14:50:00"><span class="icon"><i class="ic i-calendar"></i></span><span class="text">发表于</span><time itemprop="dateCreated datePublished" datetime="2025-08-10T14:50:00+08:00">2025-08-10</time></span><span class="item" title="本文字数"><span class="icon"><i class="ic i-pen"></i></span><span class="text">本文字数</span><span>14k</span><span class="text">字</span></span><span class="item" title="阅读时长"><span class="icon"><i class="ic i-clock"></i></span><span class="text">阅读时长</span><span>13 分钟</span></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="切换导航栏"><span class="line"></span><span class="line"></span><span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">testName</a></li></ul><ul class="right" id="rightNav"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div class="pjax" id="imgs"><ul><li class="item" style="background-image: url(&quot;/images/pytorch/RNN.png&quot;);"></li><li class="item" style="background-image: url(&quot;/images/pytorch/RNN.png&quot;);"></li><li class="item" style="background-image: url(&quot;/images/pytorch/CNN.png&quot;);"></li><li class="item" style="background-image: url(&quot;/images/background.png&quot;);"></li><li class="item" style="background-image: url(&quot;/images/pytorch/GAN.png&quot;);"></li><li class="item" style="background-image: url(&quot;/images/pytorch/transformer.jpg&quot;);"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><main><div class="inner"><div class="pjax" id="main"><div class="article wrap"><div class="breadcrumb" itemListElement itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i><span><a href="/">首页</a></span><i class="ic i-angle-right"></i><span class="current" itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><a href="/categories/code/" itemprop="item" rel="index" title="分类于code"><span itemprop="name">code<meta itemprop="position" content="0"/></span></a></span></div><article class="post block" itemscope="itemscope" itemtype="http://schema.org/Article" data-pagefind-body="data-pagefind-body" lang="zh-CN"><link itemprop="mainEntityOfPage" href="http://example.com/2025/08/10/seaborn/"/><span hidden="hidden" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><meta itemprop="image" content="/assets/avatar.jpg"/><meta itemprop="name" content="koen"/><meta itemprop="description" content="技术是逻辑，木是自然，语是表达, Spark!"/></span><span hidden="hidden" itemprop="publisher" itemscope="itemscope" itemtype="http://schema.org/Organization"><meta itemprop="name" content="木语"/></span><div class="body md" itemprop="articleBody"><h2 id="一-设置主题和样式"><a class="anchor" href="#一-设置主题和样式">#</a> 一、设置主题和样式</h2>
+<p>在进行图形绘制之前先设置好主题/样式</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bash"><span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 设置主题/样式（可选）</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">sns.set_theme</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#59873A;--shiki-dark:#80A665">style</span><span style="color:#B56959;--shiki-dark:#C98A7D">=</span><span style="color:#59873A;--shiki-dark:#80A665">"darkgrid"</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">  </span><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 可选风格：darkgrid, whitegrid, dark, white, ticks</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">sns.set_palette</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#59873A;--shiki-dark:#80A665">"husl"</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">          </span><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 设置调色板</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">sns.set_context</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#59873A;--shiki-dark:#80A665">"paper"</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">         </span><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 设置上下文（paper, notebook, talk, poster）</span></span></code></pre>
+<p>以下是 <code>sns.set_theme()</code>、<code>sns.set_palette()</code> 和 <code>sns.set_context()</code> 的可选参数整理成表格：</p>
+<h3 id="1-snsset_theme-的-style-参数图表风格"><a class="anchor" href="#1-snsset_theme-的-style-参数图表风格">#</a> 1. <strong><code>sns.set_theme()</code> 的 <code>style</code> 参数（图表风格）</strong></h3>
+<table>
+<thead>
+<tr>
+<th>可选值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&quot;darkgrid&quot;</code></td>
+<td>默认值，灰色背景 + 白色网格线（适合大多数场景）</td>
+</tr>
+<tr>
+<td><code>&quot;whitegrid&quot;</code></td>
+<td>白色背景 + 深色网格线（适合强调数据精度）</td>
+</tr>
+<tr>
+<td><code>&quot;dark&quot;</code></td>
+<td>纯灰色背景，无网格线（简洁风格）</td>
+</tr>
+<tr>
+<td><code>&quot;white&quot;</code></td>
+<td>纯白色背景，无网格线（极简风格）</td>
+</tr>
+<tr>
+<td><code>&quot;ticks&quot;</code></td>
+<td>白色背景 + 坐标轴刻度（无网格线，类似 <code>&quot;white&quot;</code> 但更清晰的刻度）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="2-snsset_palette-的调色板参数"><a class="anchor" href="#2-snsset_palette-的调色板参数">#</a> 2. <strong><code>sns.set_palette()</code> 的调色板参数</strong></h3>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>可选值示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Seaborn 内置名称</strong></td>
+<td><code>&quot;husl&quot;</code>, <code>&quot;deep&quot;</code>, <code>&quot;muted&quot;</code>, <code>&quot;bright&quot;</code>, <code>&quot;pastel&quot;</code>, <code>&quot;dark&quot;</code>, <code>&quot;colorblind&quot;</code></td>
+</tr>
+<tr>
+<td><strong>Matplotlib 色板</strong></td>
+<td><code>&quot;viridis&quot;</code>, <code>&quot;plasma&quot;</code>, <code>&quot;magma&quot;</code>, <code>&quot;cividis&quot;</code>（需安装 Matplotlib）</td>
+</tr>
+<tr>
+<td><strong>自定义颜色列表</strong></td>
+<td><code>[&quot;#FF5733&quot;, &quot;#33FF57&quot;, &quot;#3357FF&quot;]</code>（十六进制/RGB 颜色列表）</td>
+</tr>
+<tr>
+<td><strong>其他方法</strong></td>
+<td><code>sns.color_palette(&quot;hls&quot;, 8)</code> 或 <code>sns.husl_palette(10)</code> 生成动态调色板</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="3-snsset_context-的-context-参数图表比例"><a class="anchor" href="#3-snsset_context-的-context-参数图表比例">#</a> 3. <strong><code>sns.set_context()</code> 的 <code>context</code> 参数（图表比例）</strong></h3>
+<table>
+<thead>
+<tr>
+<th>可选值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&quot;paper&quot;</code></td>
+<td>最小比例（适合论文或小图，字体和线条较细）</td>
+</tr>
+<tr>
+<td><code>&quot;notebook&quot;</code></td>
+<td>默认值（适合 Jupyter Notebook 或常规屏幕显示）</td>
+</tr>
+<tr>
+<td><code>&quot;talk&quot;</code></td>
+<td>较大比例（适合幻灯片演示，字体和线条加粗）</td>
+</tr>
+<tr>
+<td><code>&quot;poster&quot;</code></td>
+<td>最大比例（适合海报或大屏展示，元素显著放大）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="附set_theme-的完整参数可选"><a class="anchor" href="#附set_theme-的完整参数可选">#</a> 附：<code>set_theme()</code> 的完整参数（可选）</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>style</code></td>
+<td>str</td>
+<td>上述风格之一（如 <code>&quot;darkgrid&quot;</code>）</td>
+</tr>
+<tr>
+<td><code>palette</code></td>
+<td>str/list</td>
+<td>上述调色板之一</td>
+</tr>
+<tr>
+<td><code>context</code></td>
+<td>str/dict</td>
+<td>上述上下文之一或自定义字典</td>
+</tr>
+<tr>
+<td><code>font</code></td>
+<td>str</td>
+<td>字体（如 <code>&quot;sans-serif&quot;</code>）</td>
+</tr>
+<tr>
+<td><code>font_scale</code></td>
+<td>float</td>
+<td>字体缩放因子（默认 1）</td>
+</tr>
+<tr>
+<td><code>rc</code></td>
+<td>dict</td>
+<td>直接覆盖 Matplotlib 的 rcParams</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="示例代码"><a class="anchor" href="#示例代码">#</a> 示例代码：</h3>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> seaborn </span><span style="color:#1E754F;--shiki-dark:#4D9375">as</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> sns</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 综合设置</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sns</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">set_theme</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    style</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">whitegrid</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">      # 风格</span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    palette</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">husl</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">         # 调色板</span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    context</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">talk</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">         # 上下文</span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    font</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">Arial</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">           # 字体</span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    font_scale</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1.2</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">          # 字体大小缩放</span></span>
+<span class="line"><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 单独设置（等效于上面的 palette）</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sns</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">set_palette</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">husl</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre>
+<p>如果需要更详细的参数（如自定义 <code>rc</code>），可以进一步参考 <a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.set_theme.html">Seaborn 官方文档</a>。</p>
+<h2 id="二-调用seaborn绘图函数"><a class="anchor" href="#二-调用seaborn绘图函数">#</a> 二、调用seaborn绘图函数</h2>
+<p>Seaborn 提供了多种高级绘图函数，主要分为以下几类：<strong>关系型</strong>、<strong>分布型</strong>、<strong>分类型</strong>、<strong>回归型</strong>、<strong>矩阵型</strong> 和 <strong>其他辅助函数</strong>。以下是详细的分类说明和示例：</p>
+<hr />
+<h3 id="1-关系型绘图relational-plots"><a class="anchor" href="#1-关系型绘图relational-plots">#</a> 1. <strong>关系型绘图（Relational Plots）</strong></h3>
+<p>用于展示变量之间的关系（通常用于连续数据）。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+<th>示例图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sns.scatterplot()</code></td>
+<td>散点图（基础）</td>
+<td><code>sns.scatterplot(data=tips, x=&quot;total_bill&quot;, y=&quot;tip&quot;, hue=&quot;time&quot;)</code></td>
+<td><img loading="lazy" src="https://seaborn.pydata.org/_images/scatterplot_3_0.png" alt="scatterplot" /></td>
+</tr>
+<tr>
+<td><code>sns.lineplot()</code></td>
+<td>折线图（趋势展示）</td>
+<td><code>sns.lineplot(data=flights, x=&quot;year&quot;, y=&quot;passengers&quot;, hue=&quot;month&quot;)</code></td>
+<td><img loading="lazy" src="https://seaborn.pydata.org/_images/lineplot_3_0.png" alt="lineplot" /></td>
+</tr>
+<tr>
+<td><code>sns.relplot()</code></td>
+<td>分面关系图（散点）</td>
+<td><code>sns.relplot(data=tips, x=&quot;total_bill&quot;, y=&quot;tip&quot;, col=&quot;time&quot;, kind=&quot;scatter&quot;)</code></td>
+<td><img loading="lazy" src="https://seaborn.pydata.org/_images/scatterplot_29_0.png" alt="relplot scatter" /></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="2-分布型绘图distribution-plots"><a class="anchor" href="#2-分布型绘图distribution-plots">#</a> 2. <strong>分布型绘图（Distribution Plots）</strong></h3>
+<p>用于展示数据的分布特征。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+<th>示例图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sns.histplot()</code></td>
+<td>直方图（单变量分布）</td>
+<td><code>sns.histplot(data=tips, x=&quot;total_bill&quot;, bins=20, kde=True)</code></td>
+<td><img loading="lazy" src="https://seaborn.pydata.org/_images/histplot_13_0.png" alt="histplot 示例" /></td>
+</tr>
+<tr>
+<td><code>sns.kdeplot()</code></td>
+<td>核密度估计图（光滑分布）</td>
+<td><code>sns.kdeplot(data=tips, x=&quot;total_bill&quot;, hue=&quot;time&quot;, fill=True)</code></td>
+<td><img loading="lazy" src="https://seaborn.pydata.org/_images/kdeplot_35_0.png" alt="kdeplot 示例" /></td>
+</tr>
+<tr>
+<td><code>sns.ecdfplot()</code></td>
+<td>经验累积分布函数图</td>
+<td><code>sns.ecdfplot(data=tips, x=&quot;total_bill&quot;, hue=&quot;time&quot;)</code></td>
+<td><img loading="lazy" src="https://raw.githubusercontent.com/koen666/image/master/exp.png" alt="ecdfplot 示例" /> <em>(示意)</em></td>
+</tr>
+<tr>
+<td><code>sns.displot()</code></td>
+<td>分面分布图（直方/KDE）</td>
+<td><code>sns.displot(data=tips, x=&quot;total_bill&quot;, col=&quot;time&quot;, kind=&quot;hist&quot;)</code></td>
+<td><img loading="lazy" src="https://seaborn.pydata.org/_images/distributions_31_0.png" alt="displot 示例" /></td>
+</tr>
+<tr>
+<td><code>sns.boxplot()</code></td>
+<td>箱线图（五数概括）</td>
+<td><code>sns.boxplot(data=tips, x=&quot;day&quot;, y=&quot;total_bill&quot;, hue=&quot;sex&quot;)</code></td>
+<td><img loading="lazy" src="https://raw.githubusercontent.com/koen666/image/master/boxplot.png" alt="boxplot 示例" /> <em>(占位)</em> (<a target="_blank" rel="noopener" href="https://docs.kanaries.net/topics/Seaborn/sns-boxplot?utm_source=chatgpt.com" title="Seaborn Boxplot Tutorial: Create Custom Box Plots in Python">Kanaries Docs</a>)</td>
+</tr>
+<tr>
+<td><code>sns.violinplot()</code></td>
+<td>小提琴图（分布+密度）</td>
+<td><code>sns.violinplot(data=tips, x=&quot;day&quot;, y=&quot;total_bill&quot;, hue=&quot;sex&quot;, split=True)</code></td>
+<td><img loading="lazy" src="https://seaborn.pydata.org/_images/violinplot_5_0.png" alt="violinplot 示例" /> <em>(占位)</em> (<a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/python/violinplot-using-seaborn-in-python/?utm_source=chatgpt.com" title="Violinplot using Seaborn in Python - GeeksforGeeks">GeeksforGeeks</a>)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="3-分类型绘图categorical-plots"><a class="anchor" href="#3-分类型绘图categorical-plots">#</a> 3. <strong>分类型绘图（Categorical Plots）</strong></h3>
+<p>用于分类变量的可视化。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+<th>示例图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sns.barplot()</code></td>
+<td>条形图（均值/置信区间）</td>
+<td><code>sns.barplot(data=tips, x=&quot;day&quot;, y=&quot;total_bill&quot;, hue=&quot;sex&quot;)</code></td>
+<td><img loading="lazy" src="https://seaborn.pydata.org/_images/barplot_9_0.png" alt="barplot" /></td>
+</tr>
+<tr>
+<td><code>sns.countplot()</code></td>
+<td>计数条形图（频次）</td>
+<td><code>sns.countplot(data=tips, x=&quot;day&quot;, hue=&quot;sex&quot;)</code></td>
+<td><img loading="lazy" src="https://seaborn.pydata.org/_images/countplot_1_0.png" alt="countplot" /></td>
+</tr>
+<tr>
+<td><code>sns.pointplot()</code></td>
+<td>点图（均值+置信区间）</td>
+<td><code>sns.pointplot(data=tips, x=&quot;day&quot;, y=&quot;total_bill&quot;, hue=&quot;sex&quot;)</code></td>
+<td><img loading="lazy" src="https://seaborn.pydata.org/_images/pointplot_6_0.png" alt="pointplot" /></td>
+</tr>
+<tr>
+<td><code>sns.stripplot()</code></td>
+<td>散点图（分类+抖动）</td>
+<td><code>sns.stripplot(data=tips, x=&quot;day&quot;, y=&quot;total_bill&quot;, hue=&quot;sex&quot;, dodge=True)</code></td>
+<td><img loading="lazy" src="https://seaborn.pydata.org/_images/stripplot_8_0.png" alt="stripplot" /></td>
+</tr>
+<tr>
+<td><code>sns.swarmplot()</code></td>
+<td>蜂群图（无重叠散点）</td>
+<td><code>sns.swarmplot(data=tips, x=&quot;day&quot;, y=&quot;total_bill&quot;, hue=&quot;sex&quot;)</code></td>
+<td><img loading="lazy" src="https://seaborn.pydata.org/_images/swarmplot_5_0.png" alt="swarmplot" /></td>
+</tr>
+<tr>
+<td><code>sns.catplot()</code></td>
+<td>分面绘制分类图（多功能）</td>
+<td><code>sns.catplot(data=tips, x=&quot;day&quot;, y=&quot;total_bill&quot;, col=&quot;sex&quot;, kind=&quot;box&quot;)</code></td>
+<td><img loading="lazy" src="https://seaborn.pydata.org/_images/catplot_11_0.png" alt="catplot" /></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="4-回归型绘图regression-plots"><a class="anchor" href="#4-回归型绘图regression-plots">#</a> 4. <strong>回归型绘图（Regression Plots）</strong></h3>
+<p>用于展示变量间的统计关系（含回归线）。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+<th>示例图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sns.regplot()</code></td>
+<td>回归散点图（单次拟合）</td>
+<td><code>sns.regplot(data=tips, x=&quot;total_bill&quot;, y=&quot;tip&quot;, ci=95)</code></td>
+<td><img loading="lazy" src="https://seaborn.pydata.org/_images/regplot_5_0.png" alt="regplot" /></td>
+</tr>
+<tr>
+<td><code>sns.lmplot()</code></td>
+<td>分面回归图（多功能）</td>
+<td><code>sns.lmplot(data=tips, x=&quot;total_bill&quot;, y=&quot;tip&quot;, col=&quot;time&quot;, order=2)</code></td>
+<td><img loading="lazy" src="https://seaborn.pydata.org/_images/lmplot_12_0.png" alt="lmplot" /></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="5-矩阵型绘图matrix-plots"><a class="anchor" href="#5-矩阵型绘图matrix-plots">#</a> 5. <strong>矩阵型绘图（Matrix Plots）</strong></h3>
+<p>用于矩阵数据的可视化（如相关性、聚类）。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+<th>示例图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sns.heatmap()</code></td>
+<td>热力图（矩阵值颜色映射）</td>
+<td><code>sns.heatmap(data.corr(), annot=True, cmap=&quot;coolwarm&quot;)</code></td>
+<td><img loading="lazy" src="https://seaborn.pydata.org/_images/heatmap_2_0.png" alt="heatmap" /></td>
+</tr>
+<tr>
+<td><code>sns.clustermap()</code></td>
+<td>聚类热力图（行列聚类）</td>
+<td><code>sns.clustermap(data.corr(), method=&quot;ward&quot;, cmap=&quot;vlag&quot;)</code></td>
+<td><img loading="lazy" src="https://seaborn.pydata.org/_images/clustermap_1_0.png" alt="clustermap" /></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="6-其他辅助函数"><a class="anchor" href="#6-其他辅助函数">#</a> 6. <strong>其他辅助函数</strong></h3>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+<th>示例图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sns.pairplot()</code></td>
+<td>变量两两关系矩阵</td>
+<td><code>sns.pairplot(data=iris, hue=&quot;species&quot;, diag_kind=&quot;kde&quot;)</code></td>
+<td><img loading="lazy" src="https://seaborn.pydata.org/_images/pairplot_6_0.png" alt="pairplot" /></td>
+</tr>
+<tr>
+<td><code>sns.jointplot()</code></td>
+<td>双变量联合分布图</td>
+<td><code>sns.jointplot(data=tips, x=&quot;total_bill&quot;, y=&quot;tip&quot;, kind=&quot;hex&quot;)</code></td>
+<td><img loading="lazy" src="https://seaborn.pydata.org/_images/jointplot_9_0.png" alt="jointplot" /></td>
+</tr>
+<tr>
+<td><code>sns.FacetGrid()</code></td>
+<td>自定义分面网格（底层控制）</td>
+<td><code>g = sns.FacetGrid(tips, col=&quot;time&quot;); g.map(sns.scatterplot, &quot;total_bill&quot;, &quot;tip&quot;)</code></td>
+<td><img loading="lazy" src="https://seaborn.pydata.org/_images/facetgrid_3_0.png" alt="FacetGrid" /></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="关键区别"><a class="anchor" href="#关键区别">#</a> 关键区别：</h3>
+<ul>
+<li><strong>基础函数</strong>（如 <code>scatterplot</code>） vs <strong>分面函数</strong>（如 <code>relplot/catplot</code>）：
+<ul>
+<li>基础函数直接绘图，分面函数通过 <code>col/row</code> 参数分面。</li>
+</ul>
+</li>
+<li><strong>通用参数</strong>：
+<ul>
+<li><code>data</code>：DataFrame 数据源。</li>
+<li><code>x/y</code>：轴变量。</li>
+<li><code>hue</code>：颜色分组。</li>
+<li><code>style</code>：标记样式分组。</li>
+<li><code>size</code>：大小分组。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="示例分面绘图catplot"><a class="anchor" href="#示例分面绘图catplot">#</a> 示例：分面绘图（<code>catplot</code>）</h3>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> seaborn </span><span style="color:#1E754F;--shiki-dark:#4D9375">as</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> sns</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">tips </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> sns</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">load_dataset</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">tips</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 分面绘制箱线图（按 day 分组，按 sex 分面）</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sns</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">catplot</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    data</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">tips</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> </span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    x</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">day</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> </span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    y</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">total_bill</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">  </span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    col</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">sex</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> </span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    kind</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">box</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    height</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">4</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> </span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    aspect</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0.7</span></span>
+<span class="line"><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">show</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre>
+<h2 id="三-结合-matplotlib-细化"><a class="anchor" href="#三-结合-matplotlib-细化">#</a> 三、结合 Matplotlib 细化</h2>
+<p>Seaborn 虽然提供了简洁的高级 API，但底层仍基于 Matplotlib。通过 <code>matplotlib.pyplot</code>（通常缩写为 <code>plt</code>）可以对 Seaborn 生成的图表进行精细化调整。以下是详细分类说明和实用技巧：</p>
+<hr />
+<h3 id="31基础调整"><a class="anchor" href="#31基础调整">#</a> 3.1<strong>基础调整</strong></h3>
+<h4 id="311-标题与坐标轴标签"><a class="anchor" href="#311-标题与坐标轴标签">#</a> 3.1.1 <strong>标题与坐标轴标签</strong></h4>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> matplotlib</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">pyplot </span><span style="color:#1E754F;--shiki-dark:#4D9375">as</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> plt</span></span>
+<span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> seaborn </span><span style="color:#1E754F;--shiki-dark:#4D9375">as</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> sns</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">tips </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> sns</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">load_dataset</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">tips</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sns</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">boxplot</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B07D48;--shiki-dark:#BD976A">data</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">tips</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> x</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">day</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> y</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">total_bill</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 添加标题和标签</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">title</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">Daily Bill Distribution</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> fontsize</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">14</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> pad</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">20</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  # pad 控制标题距离</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">xlabel</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">Day of Week</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> fontsize</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">12</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">                    # X轴标签</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">ylabel</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">Total Bill ($)</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> fontsize</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">12</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">                 # Y轴标签</span></span></code></pre>
+<h4 id="312-刻度调整"><a class="anchor" href="#312-刻度调整">#</a> 3.1.2 <strong>刻度调整</strong></h4>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 旋转刻度标签（解决重叠问题）</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">xticks</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B07D48;--shiki-dark:#BD976A">rotation</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">45</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> ha</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">right</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  # ha: 旋转后对齐方式（right/center）</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 设置刻度范围和密度</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">yticks</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B07D48;--shiki-dark:#BD976A">ticks</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#1e754f;--shiki-dark:#4d9375">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 20</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 40</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 60</span><span style="color:#1e754f;--shiki-dark:#4d9375">]</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> fontsize</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">10</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  # 自定义Y轴刻度</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">xlim</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#AB5959;--shiki-dark:#CB7676">-</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0.5</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 3.5</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">                             # 设置X轴范围</span></span></code></pre>
+<hr />
+<h3 id="32-图例与颜色"><a class="anchor" href="#32-图例与颜色">#</a> 3.2 <strong>图例与颜色</strong></h3>
+<h4 id="321-图例控制"><a class="anchor" href="#321-图例控制">#</a> 3.2.1 <strong>图例控制</strong></h4>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sns</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">scatterplot</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B07D48;--shiki-dark:#BD976A">data</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">tips</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> x</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">total_bill</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> y</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">tip</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> hue</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">time</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 调整图例</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">legend</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    title</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">Meal Time</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">           # 修改图例标题</span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    loc</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">upper right</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">           # 位置（best, upper right, lower left等）</span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    bbox_to_anchor</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1.3</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">     # 将图例移到图外（右侧）</span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    frameon</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#1E754F;--shiki-dark:#4D9375">False</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">                # 去掉图例边框</span></span>
+<span class="line"><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre>
+<h4 id="322-颜色与样式"><a class="anchor" href="#322-颜色与样式">#</a> 3.2.2 <strong>颜色与样式</strong></h4>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 修改单个元素的颜色（通过Matplotlib）</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">setp</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">gca</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">get_xticklabels</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> color</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">red</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  # 设置X轴刻度为红色</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 修改所有文本颜色（全局）</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">rcParams</span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">text.color</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span><span style="color:#999999;--shiki-dark:#666666"> =</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> "</span><span style="color:#B56959;--shiki-dark:#C98A7D">blue</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  # 影响标题、标签等</span></span></code></pre>
+<hr />
+<h3 id="33-布局与子图"><a class="anchor" href="#33-布局与子图">#</a> 3.3 <strong>布局与子图</strong></h3>
+<h4 id="331-调整边距与布局"><a class="anchor" href="#331-调整边距与布局">#</a> 3.3.1 <strong>调整边距与布局</strong></h4>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">tight_layout</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B07D48;--shiki-dark:#BD976A">pad</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">2</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  # 自动调整子图间距（防止标签重叠）</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">subplots_adjust</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    left</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0.1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">            # 左边距</span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    right</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0.9</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">           # 右边距</span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    top</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0.9</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">             # 上边距</span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    bottom</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0.2</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">           # 下边距</span></span>
+<span class="line"><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre>
+<h4 id="332-与matplotlib子图结合"><a class="anchor" href="#332-与matplotlib子图结合">#</a> 3.3.2 <strong>与Matplotlib子图结合</strong></h4>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">fig</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> axes </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">subplots</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 2</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> figsize</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#2F798A;--shiki-dark:#4C9A91">12</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 5</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  # 创建1行2列的子图</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 在第一个子图绘制</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sns</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">histplot</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B07D48;--shiki-dark:#BD976A">data</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">tips</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> x</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">total_bill</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> ax</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">axes</span><span style="color:#1e754f;--shiki-dark:#4d9375">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0</span><span style="color:#1e754f;--shiki-dark:#4d9375">]</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">axes</span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">set_title</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">Total Bill Distribution</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 在第二个子图绘制</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sns</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">boxplot</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B07D48;--shiki-dark:#BD976A">data</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">tips</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> x</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">day</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> y</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">total_bill</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> ax</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">axes</span><span style="color:#1e754f;--shiki-dark:#4d9375">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#1e754f;--shiki-dark:#4d9375">]</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">axes</span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">set_xticklabels</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#1e754f;--shiki-dark:#4d9375">[</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">Thu</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> "</span><span style="color:#B56959;--shiki-dark:#C98A7D">Fri</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> "</span><span style="color:#B56959;--shiki-dark:#C98A7D">Sat</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> "</span><span style="color:#B56959;--shiki-dark:#C98A7D">Sun</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#1e754f;--shiki-dark:#4d9375">]</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  # 自定义刻度标签</span></span></code></pre>
+<hr />
+<h3 id="34-高级定制"><a class="anchor" href="#34-高级定制">#</a> 3.4 <strong>高级定制</strong></h3>
+<h4 id="341-网格线与背景"><a class="anchor" href="#341-网格线与背景">#</a> 3.4.1 <strong>网格线与背景</strong></h4>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">grid</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#1E754F;--shiki-dark:#4D9375">True</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> linestyle</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">--</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> alpha</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0.6</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  # 显示网格线（虚线，半透明）</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">gca</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">set_facecolor</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">#f5f5f5</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">         # 设置图表背景色（灰色）</span></span></code></pre>
+<h4 id="342-注释与箭头"><a class="anchor" href="#342-注释与箭头">#</a> 3.4.2 <strong>注释与箭头</strong></h4>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 添加文本注释</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">text</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    x</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">30</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> y</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">10</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">                           # 坐标位置</span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    s</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">Outlier Point</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">                     # 文本内容</span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    fontsize</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">12</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> </span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    color</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">red</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    bbox</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#998418;--shiki-dark:#B8A965">dict</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#B07D48;--shiki-dark:#BD976A">facecolor</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">white</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> alpha</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0.8</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> # 文本框样式</span></span>
+<span class="line"><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 添加箭头</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">annotate</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span></span>
+<span class="line"><span style="color:#B5695977;--shiki-dark:#C98A7D77">    "</span><span style="color:#B56959;--shiki-dark:#C98A7D">High Tip</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> </span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    xy</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#2F798A;--shiki-dark:#4C9A91">40</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 10</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">                          # 箭头指向的点</span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    xytext</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#2F798A;--shiki-dark:#4C9A91">35</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 15</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">                      # 文本起始位置</span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    arrowprops</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#998418;--shiki-dark:#B8A965">dict</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#B07D48;--shiki-dark:#BD976A">arrowstyle</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">-></span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> color</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">black</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span></span>
+<span class="line"><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre>
+<hr />
+<h3 id="35-保存图表"><a class="anchor" href="#35-保存图表">#</a> 3.5 <strong>保存图表</strong></h3>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">savefig</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span></span>
+<span class="line"><span style="color:#B5695977;--shiki-dark:#C98A7D77">    "</span><span style="color:#B56959;--shiki-dark:#C98A7D">plot.png</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> </span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    dpi</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">300</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">                   # 分辨率</span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    bbox_inches</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">tight</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">       # 去除白边</span></span>
+<span class="line"><span style="color:#B07D48;--shiki-dark:#BD976A">    transparent</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#1E754F;--shiki-dark:#4D9375">True</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">           # 透明背景（适合PPT）</span></span>
+<span class="line"><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre>
+<hr />
+<h3 id="36-调试技巧"><a class="anchor" href="#36-调试技巧">#</a> 3.6 <strong>调试技巧</strong></h3>
+<ol>
+<li>
+<p><strong>获取当前Axes对象</strong>：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">ax </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">gca</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  # 获取当前Axes</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">ax</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">spines</span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">top</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">set_visible</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#1E754F;--shiki-dark:#4D9375">False</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  # 隐藏顶部边框线</span></span></code></pre>
+</li>
+<li>
+<p><strong>批量设置样式</strong>：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">params </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#2993a3;--shiki-dark:#5eaab5">&#123;</span></span>
+<span class="line"><span style="color:#B5695977;--shiki-dark:#C98A7D77">    "</span><span style="color:#B56959;--shiki-dark:#C98A7D">axes.labelsize</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 14</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#B5695977;--shiki-dark:#C98A7D77">    "</span><span style="color:#B56959;--shiki-dark:#C98A7D">xtick.labelsize</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 12</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#B5695977;--shiki-dark:#C98A7D77">    "</span><span style="color:#B56959;--shiki-dark:#C98A7D">ytick.labelsize</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 12</span></span>
+<span class="line"><span style="color:#2993a3;--shiki-dark:#5eaab5">&#125;</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">rcParams</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">update</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">params</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  # 全局生效</span></span></code></pre>
+</li>
+</ol>
+<hr />
+<h3 id="完整示例"><a class="anchor" href="#完整示例">#</a> 完整示例</h3>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> seaborn </span><span style="color:#1E754F;--shiki-dark:#4D9375">as</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> sns</span></span>
+<span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> matplotlib</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">pyplot </span><span style="color:#1E754F;--shiki-dark:#4D9375">as</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> plt</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 数据准备</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">tips </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> sns</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">load_dataset</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">tips</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 1. 绘制基础图表</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sns</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">boxplot</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B07D48;--shiki-dark:#BD976A">data</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">tips</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> x</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">day</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> y</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">total_bill</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> hue</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">sex</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 2. 使用Matplotlib调整</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">title</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">Bill Distribution by Day and Gender</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> fontsize</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">16</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">xlabel</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">Day</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> fontsize</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">14</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">ylabel</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">Total Bill (USD)</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> fontsize</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">14</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">xticks</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B07D48;--shiki-dark:#BD976A">rotation</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">15</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">legend</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B07D48;--shiki-dark:#BD976A">title</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">Gender</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> bbox_to_anchor</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 3. 调整布局</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">tight_layout</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 4. 保存或显示</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">savefig</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">boxplot.png</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> dpi</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">200</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">plt</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">show</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre>
+<h2 id="四-显示或者保存图表格"><a class="anchor" href="#四-显示或者保存图表格">#</a> 四、显示或者保存图表格</h2>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bash"><span class="line"><span style="color:#59873A;--shiki-dark:#80A665">plt.show</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">plt.savefig</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#59873A;--shiki-dark:#80A665">"plot.png"</span><span style="color:#59873A;--shiki-dark:#80A665">,</span><span style="color:#B56959;--shiki-dark:#C98A7D"> dpi=300,</span><span style="color:#B56959;--shiki-dark:#C98A7D"> bbox_inches=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">tight</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre>
+<div class="tags"><a href="/tags/python/" rel="tag"><i class="ic i-tag"></i>python</a><a href="/tags/saaborn/" rel="tag"><i class="ic i-tag"></i>saaborn</a></div></div><footer><div class="meta"><span class="item"><span class="icon"><i class="ic i-calendar-check"></i></span><span class="text">更新于 </span><time title="修改时间：2025-08-10 19:17:16" itemprop="dateModified" datetime="2025-08-10T19:17:16+08:00">2025-08-10</time></span></div><div class="reward"><button><i class="ic i-heartbeat"></i>赞赏</button><p>请我喝[茶]~(￣▽￣)~*</p><div id="qr"><div><img loading="lazy" src="/assets/wechatpay.png" alt="koen 微信支付"/><p>微信支付</p></div><div><img loading="lazy" src="/assets/alipay.png" alt="koen 支付宝"/><p>支付宝</p></div></div></div><div id="copyright"><ul><li class="author"><strong>本文作者：</strong>koen<i class="ic i-at"><em>@</em></i>木语</li><li class="link"><strong>本文链接：</strong><a href="http://example.com/2025/08/10/seaborn/" title="seaborn实现统计图绘制">http://example.com/2025/08/10/seaborn/</a></li><li class="license"><strong>版权声明：</strong>本站所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/2025/08/09/yolo-dataset/" rel="prev" itemprop="url" data-background-image="&#x2F;images&#x2F;pytorch&#x2F;transformer.jpg" title="yolo+AnyLabeling实现数据集的自动标注"><span class="type">上一篇</span><span class="category"><i class="ic i-flag"></i>dataset</span><h3>yolo+AnyLabeling实现数据集的自动标注</h3></a></div><div class="item right"><a href="/2025/08/11/scipy/" rel="next" itemprop="url" data-background-image="&#x2F;images&#x2F;pytorch&#x2F;CNN.png" title="scipy基本模块及其使用"><span class="type">下一篇</span><span class="category"><i class="ic i-flag"></i>code</span><h3>scipy基本模块及其使用</h3></a></div></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="文章目录"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E8%AE%BE%E7%BD%AE%E4%B8%BB%E9%A2%98%E5%92%8C%E6%A0%B7%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text"> 一、设置主题和样式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-snsset_theme-%E7%9A%84-style-%E5%8F%82%E6%95%B0%E5%9B%BE%E8%A1%A8%E9%A3%8E%E6%A0%BC"><span class="toc-number">1.1.</span> <span class="toc-text"> 1. sns.set_theme() 的 style 参数（图表风格）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-snsset_palette-%E7%9A%84%E8%B0%83%E8%89%B2%E6%9D%BF%E5%8F%82%E6%95%B0"><span class="toc-number">1.2.</span> <span class="toc-text"> 2. sns.set_palette() 的调色板参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-snsset_context-%E7%9A%84-context-%E5%8F%82%E6%95%B0%E5%9B%BE%E8%A1%A8%E6%AF%94%E4%BE%8B"><span class="toc-number">1.3.</span> <span class="toc-text"> 3. sns.set_context() 的 context 参数（图表比例）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%99%84set_theme-%E7%9A%84%E5%AE%8C%E6%95%B4%E5%8F%82%E6%95%B0%E5%8F%AF%E9%80%89"><span class="toc-number">1.4.</span> <span class="toc-text"> 附：set_theme() 的完整参数（可选）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="toc-number">1.5.</span> <span class="toc-text"> 示例代码：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E8%B0%83%E7%94%A8seaborn%E7%BB%98%E5%9B%BE%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text"> 二、调用seaborn绘图函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%85%B3%E7%B3%BB%E5%9E%8B%E7%BB%98%E5%9B%BErelational-plots"><span class="toc-number">2.1.</span> <span class="toc-text"> 1. 关系型绘图（Relational Plots）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%86%E5%B8%83%E5%9E%8B%E7%BB%98%E5%9B%BEdistribution-plots"><span class="toc-number">2.2.</span> <span class="toc-text"> 2. 分布型绘图（Distribution Plots）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%86%E7%B1%BB%E5%9E%8B%E7%BB%98%E5%9B%BEcategorical-plots"><span class="toc-number">2.3.</span> <span class="toc-text"> 3. 分类型绘图（Categorical Plots）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%9B%9E%E5%BD%92%E5%9E%8B%E7%BB%98%E5%9B%BEregression-plots"><span class="toc-number">2.4.</span> <span class="toc-text"> 4. 回归型绘图（Regression Plots）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E7%9F%A9%E9%98%B5%E5%9E%8B%E7%BB%98%E5%9B%BEmatrix-plots"><span class="toc-number">2.5.</span> <span class="toc-text"> 5. 矩阵型绘图（Matrix Plots）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%85%B6%E4%BB%96%E8%BE%85%E5%8A%A9%E5%87%BD%E6%95%B0"><span class="toc-number">2.6.</span> <span class="toc-text"> 6. 其他辅助函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%8C%BA%E5%88%AB"><span class="toc-number">2.7.</span> <span class="toc-text"> 关键区别：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E5%88%86%E9%9D%A2%E7%BB%98%E5%9B%BEcatplot"><span class="toc-number">2.8.</span> <span class="toc-text"> 示例：分面绘图（catplot）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E7%BB%93%E5%90%88-matplotlib-%E7%BB%86%E5%8C%96"><span class="toc-number">3.</span> <span class="toc-text"> 三、结合 Matplotlib 细化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#31%E5%9F%BA%E7%A1%80%E8%B0%83%E6%95%B4"><span class="toc-number">3.1.</span> <span class="toc-text"> 3.1基础调整</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#311-%E6%A0%87%E9%A2%98%E4%B8%8E%E5%9D%90%E6%A0%87%E8%BD%B4%E6%A0%87%E7%AD%BE"><span class="toc-number">3.1.1.</span> <span class="toc-text"> 3.1.1 标题与坐标轴标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#312-%E5%88%BB%E5%BA%A6%E8%B0%83%E6%95%B4"><span class="toc-number">3.1.2.</span> <span class="toc-text"> 3.1.2 刻度调整</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#32-%E5%9B%BE%E4%BE%8B%E4%B8%8E%E9%A2%9C%E8%89%B2"><span class="toc-number">3.2.</span> <span class="toc-text"> 3.2 图例与颜色</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#321-%E5%9B%BE%E4%BE%8B%E6%8E%A7%E5%88%B6"><span class="toc-number">3.2.1.</span> <span class="toc-text"> 3.2.1 图例控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#322-%E9%A2%9C%E8%89%B2%E4%B8%8E%E6%A0%B7%E5%BC%8F"><span class="toc-number">3.2.2.</span> <span class="toc-text"> 3.2.2 颜色与样式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#33-%E5%B8%83%E5%B1%80%E4%B8%8E%E5%AD%90%E5%9B%BE"><span class="toc-number">3.3.</span> <span class="toc-text"> 3.3 布局与子图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#331-%E8%B0%83%E6%95%B4%E8%BE%B9%E8%B7%9D%E4%B8%8E%E5%B8%83%E5%B1%80"><span class="toc-number">3.3.1.</span> <span class="toc-text"> 3.3.1 调整边距与布局</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#332-%E4%B8%8Ematplotlib%E5%AD%90%E5%9B%BE%E7%BB%93%E5%90%88"><span class="toc-number">3.3.2.</span> <span class="toc-text"> 3.3.2 与Matplotlib子图结合</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#34-%E9%AB%98%E7%BA%A7%E5%AE%9A%E5%88%B6"><span class="toc-number">3.4.</span> <span class="toc-text"> 3.4 高级定制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#341-%E7%BD%91%E6%A0%BC%E7%BA%BF%E4%B8%8E%E8%83%8C%E6%99%AF"><span class="toc-number">3.4.1.</span> <span class="toc-text"> 3.4.1 网格线与背景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#342-%E6%B3%A8%E9%87%8A%E4%B8%8E%E7%AE%AD%E5%A4%B4"><span class="toc-number">3.4.2.</span> <span class="toc-text"> 3.4.2 注释与箭头</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#35-%E4%BF%9D%E5%AD%98%E5%9B%BE%E8%A1%A8"><span class="toc-number">3.5.</span> <span class="toc-text"> 3.5 保存图表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#36-%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7"><span class="toc-number">3.6.</span> <span class="toc-text"> 3.6 调试技巧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%A4%BA%E4%BE%8B"><span class="toc-number">3.7.</span> <span class="toc-text"> 完整示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E6%98%BE%E7%A4%BA%E6%88%96%E8%80%85%E4%BF%9D%E5%AD%98%E5%9B%BE%E8%A1%A8%E6%A0%BC"><span class="toc-number">4.</span> <span class="toc-text"> 四、显示或者保存图表格</span></a></li></ol></div><div class="related panel pjax" data-title="系列文章"><ul><li ><a href="/2025/07/25/git-basic-usage/" rel="bookmark" title="Git 基本使用教程">Git 基本使用教程</a></li><li ><a href="/2025/07/26/docker-basic-usage/" rel="bookmark" title="Docker 基本使用教程">Docker 基本使用教程</a></li><li ><a href="/2025/07/27/latex/" rel="bookmark" title="Latex常见数学公式">Latex常见数学公式</a></li><li ><a href="/2025/07/27/issue/" rel="bookmark" title="常见BUG汇总">常见BUG汇总</a></li><li ><a href="/2025/07/29/electron/" rel="bookmark" title="Electron 基本使用教程">Electron 基本使用教程</a></li><li  class="active"><a href="/2025/08/10/seaborn/" rel="bookmark" title="seaborn实现统计图绘制">seaborn实现统计图绘制</a></li><li ><a href="/2025/08/11/scipy/" rel="bookmark" title="scipy基本模块及其使用">scipy基本模块及其使用</a></li><li ><a href="/2025/08/18/latex_2/" rel="bookmark" title="Latex全语法使用">Latex全语法使用</a></li><li ><a href="/2025/08/25/Koa/" rel="bookmark" title="Koa 框架使用">Koa 框架使用</a></li><li ><a href="/2025/11/28/pipenv/" rel="bookmark" title="像前端package.json那样管理python依赖 (uv篇)">像前端package.json那样管理python依赖 (uv篇)</a></li></ul></div><div class="overview panel" data-title="站点概览"><div class="author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><img class="image" loading="lazy" decoding="async" itemprop="image" alt="koen" src="/assets/avatar.jpg"/><p class="name" itemprop="name">koen</p><div class="description" itemprop="description">Spark!</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">33</span><span class="name">文章</span></a></div><div class="item categories"><a href="/categories/"><span class="count">16</span><span class="name">分类</span></a></div><div class="item tags"><a href="/tags/"><span class="count">60</span><span class="name">标签</span></a></div></nav><div class="social"><a target="_blank" rel="noopener" href="https://github.com/yourname" class="item github" title="https:&#x2F;&#x2F;github.com&#x2F;yourname"><i class="ic i-github"></i></a></div><div class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>首页</a></li></div></div></div></div><ul id="quick"><li class="prev pjax"><a href="/2025/08/11/scipy/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"><a href="/2025/08/09/yolo-dataset/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div><div id="player"></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>随机文章</h2><ul><li class="item"><div class="breadcrumb"><a href="/categories/code/" title="分类于code">code</a></div><span><a href="/2025/08/10/seaborn/">seaborn实现统计图绘制</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/backen/" title="分类于backen">backen</a></div><span><a href="/2025/09/24/flask/">Flask框架 基本使用教程</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/cmd/" title="分类于cmd">cmd</a></div><span><a href="/2025/07/26/curl/">curl使用教学</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/agent/" title="分类于agent">agent</a></div><span><a href="/2025/12/02/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%BC%96%E6%8E%92/">五种多agent编排方式</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/deeplearning/" title="分类于deeplearning">deeplearning</a></div><span><a href="/2025/10/05/%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F/">Imperative，Symbolic and Hybrid Programming</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/code/" title="分类于code">code</a></div><span><a href="/2025/07/25/git-basic-usage/">Git 基本使用教程</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/code/" title="分类于code">code</a></div><span><a href="/2025/07/26/docker-basic-usage/">Docker 基本使用教程</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/code/" title="分类于code">code</a></div><span><a href="/2025/08/18/latex_2/">Latex全语法使用</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/machinelearning/" title="分类于machinelearning">machinelearning</a></div><span><a href="/2025/11/23/GA/">GA遗传算法</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/code/" title="分类于code">code</a></div><span><a href="/2025/08/11/scipy/">scipy基本模块及其使用</a></span></li></ul></div><div class="rpost pjax"><h2>最新评论</h2></div></div><div class="status"><div class="copyright">&copy; 2022 -<span itemprop="copyrightYear">2026</span><span class="with-love"><i class="ic i-sakura rotate"></i></span><span class="author" itemprop="copyrightHolder">koen @ testName</span></div><div class="count"><span class="post-meta-item-icon"><i class="ic i-chart-area"></i></span><span title="站点总字数">198k 字</span><span class="post-meta-divider"> | </span><span class="post-meta-item-icon"><i class="ic i-coffee"></i></span><span title="站点阅读时长">3:01</span></div><div class="powered-by">基于 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & Theme.<a target="_blank" rel="noopener" href="https://github.com/theme-shoka-x/hexo-theme-shokaX/">ShokaX</a></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL = {
+    ispost: true,
+    path: `2025/08/10/seaborn/`,
+    favicon: {
+        show: `（●´3｀●）やれやれだぜ`,
+        hide: `(´Д｀)大変だ！`
+    },
+    search: {
+        placeholder: "文章搜索",
+        empty: "关于 「 ${query} 」，什么也没搜到",
+        stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    nocopy: "false",
+    copyright: `复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。`,
+    copy_tex: false,
+    katex: false,
+    mermaid: false,
+    audio: undefined,
+    nocopy: false,
+    outime: true,
+    template: `<div class="note warning"><p><span class="label warning">文章时效性提示</span><br>这是一篇发布于 {{publish}} 天前，最后一次更新在 {{updated}} 天前的文章，部分信息可能已经发生改变，请注意甄别。</p></div>`,
+    quiz: {
+        choice: `单选题`,
+        multiple: `多选题`,
+        true_false: `判断题`,
+        essay: `问答题`,
+        gap_fill: `填空题`,
+        mistake: `错题备注`
+    }
+};
+</script><script src="/js/siteInit.js?v=0.5.4" type="module" fetchpriority="high" defer></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

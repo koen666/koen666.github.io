@@ -1,0 +1,446 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"/><meta name="theme-color" content="#222"/><meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1"/><meta name="renderer" content="webkit"/><link rel="icon" type="image/ico" sizes="32x32" href="/assets/favicon.ico"/><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/><link rel="alternate" href="/rss.xml" title="木语" type="application/rss+xml"><link rel="alternate" href="/atom.xml" title="木语" type="application/atom+xml"><link rel="alternate" type="application/json" title="木语" href="http://example.com/feed.json"/><link rel="preconnect" href="https://s4.zstatic.net"/><link rel="preconnect" href="https://at.alicdn.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CFredericka%20the%20Great:400,400italic,700,700italic%7CNoto%20Serif%20JP:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CInconsolata:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="none" onload="this.media&#x3D;&#39;all&#39;"><link rel="modulepreload" href="/js/siteInit.js"></link><link rel="modulepreload" href="/js/nyx-player-XQO4656G.js"></link><link rel="modulepreload" href="/js/copy-tex-DSIH3K5D.js"></link><link rel="modulepreload" href="/js/post-MISE4AQZ.js"></link><link rel="modulepreload" href="/js/chunk-QP4NXAPX.js"></link><link rel="modulepreload" href="/js/index.esm-AEKIGOYH.js"></link><link rel="modulepreload" href="/js/chunk-RK7HQRIO.js"></link><link rel="modulepreload" href="/js/chunk-SK7HHSJC.js"></link><link rel="stylesheet" href="/css/siteInit.css" media="none" onload="this.media&#x3D;&#39;all&#39;"></link><link rel="preload" href="/images/pytorch/RNN.png" as="image" fetchpriority="high"><link rel="preload" href="/images/pytorch/transformer.jpg" as="image" fetchpriority="high"><link rel="preload" href="/images/pytorch/GAN.png" as="image" fetchpriority="high"><link rel="preload" href="/images/pytorch/RNN.png" as="image" fetchpriority="high"><link rel="preload" href="/images/background.png" as="image" fetchpriority="high"><link rel="preload" href="/images/pytorch/attention.png" as="image" fetchpriority="high"><meta name="keywords" content="gpu,"/><meta name="description" content="本文介绍了多种gpu深度学习训练的方式"/><link rel="canonical" href="http://example.com/2025/10/05/%E5%A4%9Agpu/"><link rel="stylesheet" href="/css/post.css?v=0.5.4"><link rel="stylesheet" href="/css/mermaid.css?v=0.5.4"><!-- 临时处理--><link rel="stylesheet" media="none" onload="this.media='all'" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css"><title>多gpu训练方式</title><meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="pagefind_mount"></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">多gpu训练方式</h1><div class="meta"><span class="item" title="创建时间：2025-10-05 00:00:00"><span class="icon"><i class="ic i-calendar"></i></span><span class="text">发表于</span><time itemprop="dateCreated datePublished" datetime="2025-10-05T00:00:00+08:00">2025-10-05</time></span><span class="item" title="本文字数"><span class="icon"><i class="ic i-pen"></i></span><span class="text">本文字数</span><span>4.1k</span><span class="text">字</span></span><span class="item" title="阅读时长"><span class="icon"><i class="ic i-clock"></i></span><span class="text">阅读时长</span><span>4 分钟</span></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="切换导航栏"><span class="line"></span><span class="line"></span><span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">testName</a></li></ul><ul class="right" id="rightNav"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div class="pjax" id="imgs"><ul><li class="item" style="background-image: url(&quot;/images/pytorch/RNN.png&quot;);"></li><li class="item" style="background-image: url(&quot;/images/pytorch/transformer.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;/images/pytorch/GAN.png&quot;);"></li><li class="item" style="background-image: url(&quot;/images/pytorch/RNN.png&quot;);"></li><li class="item" style="background-image: url(&quot;/images/background.png&quot;);"></li><li class="item" style="background-image: url(&quot;/images/pytorch/attention.png&quot;);"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><main><div class="inner"><div class="pjax" id="main"><div class="article wrap"><div class="breadcrumb" itemListElement itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i><span><a href="/">首页</a></span><i class="ic i-angle-right"></i><span class="current" itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><a href="/categories/deeplearning/" itemprop="item" rel="index" title="分类于deeplearning"><span itemprop="name">deeplearning<meta itemprop="position" content="0"/></span></a></span></div><article class="post block" itemscope="itemscope" itemtype="http://schema.org/Article" data-pagefind-body="data-pagefind-body" lang="zh-CN"><link itemprop="mainEntityOfPage" href="http://example.com/2025/10/05/%E5%A4%9Agpu/"/><span hidden="hidden" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><meta itemprop="image" content="/assets/avatar.jpg"/><meta itemprop="name" content="koen"/><meta itemprop="description" content="技术是逻辑，木是自然，语是表达, Spark!"/></span><span hidden="hidden" itemprop="publisher" itemscope="itemscope" itemtype="http://schema.org/Organization"><meta itemprop="name" content="木语"/></span><div class="body md" itemprop="articleBody"><h2 id="一-为什么需要多-gpu"><a class="anchor" href="#一-为什么需要多-gpu">#</a> 一、为什么需要多 GPU？</h2>
+<p>当我们训练深度学习模型（特别是大模型）时，单张 GPU 往往不够：</p>
+<ul>
+<li>数据太大，单卡放不下；</li>
+<li>模型太复杂，训练太慢；</li>
+<li>想更快训练完成。</li>
+</ul>
+<p>于是就有了「<strong>多 GPU 训练</strong>」这个想法：<br>
+<strong>让多张显卡一起干活，分担计算任务。</strong></p>
+<hr>
+<h2 id="二-多-gpu-的三种主要方式"><a class="anchor" href="#二-多-gpu-的三种主要方式">#</a> 二、多 GPU 的三种主要方式</h2>
+<p>多 GPU 的实现方式有很多，但核心分为三类</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>中文名称</th>
+<th>思路</th>
+<th>优缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1️⃣ 模型并行（Model Parallel）</td>
+<td>模型拆开</td>
+<td>把模型的不同层分给不同 GPU</td>
+<td>适合模型太大放不下一张卡；通信频繁，实现复杂</td>
+</tr>
+<tr>
+<td>2️⃣ 数据并行（Data Parallel）</td>
+<td>数据拆开</td>
+<td>模型每张卡都复制一份，每张卡训练一部分数据</td>
+<td>通用、最常见</td>
+</tr>
+<tr>
+<td>3️⃣ 分布式数据并行（Distributed Data Parallel, DDP）</td>
+<td>高效数据并行</td>
+<td>每张卡独立进程，自动同步梯度</td>
+<td>工业级方案，最快、最稳定</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="三-核心思想数据并行"><a class="anchor" href="#三-核心思想数据并行">#</a> 三、核心思想：数据并行</h2>
+<p>多 GPU 训练中，<strong>数据并行</strong>是最常用的方式。</p>
+<p>其思想非常简单：</p>
+<blockquote>
+<p><strong>模型每张卡都有一份副本；每张卡训练不同部分的数据；最后汇总结果。</strong></p>
+</blockquote>
+<p>假设你有 2 张 GPU，每次 batch 有 4 张图片：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-text"><span class="line"><span>批次数据： [1, 2, 3, 4]</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>GPU0 ← [1, 2]</span></span>
+<span class="line"><span>GPU1 ← [3, 4]</span></span></code></pre>
+<p>训练流程<br>
+1️⃣ 每张 GPU 都有一份相同的模型副本。<br>
+2️⃣ 各 GPU 前向计算 → 得到自己的 loss。<br>
+3️⃣ 各 GPU 反向传播 → 得到自己的梯度。<br>
+4️⃣ <strong>梯度同步（allreduce）</strong> → 求平均。<br>
+5️⃣ 各 GPU 同步更新参数。</p>
+<p>这样每张 GPU 的参数始终保持一致。</p>
+<hr>
+<h2 id="四-关键概念详解"><a class="anchor" href="#四-关键概念详解">#</a> 四、关键概念详解</h2>
+<p>下面是训练中会出现的一些关键术语</p>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>train</strong></td>
+<td>训练集，用于更新模型参数。</td>
+</tr>
+<tr>
+<td><strong>val (validation)</strong></td>
+<td>验证集，用于评估模型是否过拟合，不参与训练。</td>
+</tr>
+<tr>
+<td><strong>test</strong></td>
+<td>测试集，用于最终测试模型效果。</td>
+</tr>
+<tr>
+<td><strong>query</strong></td>
+<td>查询集，常见于检索任务，用来搜索匹配结果。</td>
+</tr>
+<tr>
+<td><strong>gallery / bounding_box</strong></td>
+<td>检索任务中的数据库部分（比如人脸库、行人库）。</td>
+</tr>
+<tr>
+<td><strong>batch（批次）</strong></td>
+<td>一次喂给模型的数据量。</td>
+</tr>
+<tr>
+<td><strong>split_batch</strong></td>
+<td>把一个 batch 的数据拆成几份给不同 GPU。</td>
+</tr>
+<tr>
+<td><strong>allreduce</strong></td>
+<td>把多 GPU 的梯度相加、平均，让模型参数保持一致。</td>
+</tr>
+<tr>
+<td><strong>scatter</strong></td>
+<td>把数据分发到多个 GPU。</td>
+</tr>
+<tr>
+<td><strong>gather / concat</strong></td>
+<td>把多个 GPU 的结果合并回来。</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="五-三种实现方式详解"><a class="anchor" href="#五-三种实现方式详解">#</a> 五、三种实现方式详解</h2>
+<h3 id="1️⃣-模型并行model-parallel"><a class="anchor" href="#1️⃣-模型并行model-parallel">#</a> 1️⃣ 模型并行（Model Parallel）</h3>
+<p><strong>思想：</strong></p>
+<blockquote>
+<p>模型太大，一张卡放不下，就把不同层放到不同 GPU 上。</p>
+</blockquote>
+<p>示意：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-text"><span class="line"><span>GPU0: 负责模型前半部分</span></span>
+<span class="line"><span>GPU1: 负责模型后半部分</span></span></code></pre>
+<p><strong>特点：</strong></p>
+<ul>
+<li>模型能变得更大；</li>
+<li>但通信频繁，效率不高；</li>
+<li>实现较复杂。</li>
+</ul>
+<p>适用：GPT、BERT 这类超大模型。</p>
+<hr>
+<h3 id="2️⃣-数据并行data-paralleldp"><a class="anchor" href="#2️⃣-数据并行data-paralleldp">#</a> 2️⃣ 数据并行（Data Parallel，DP）</h3>
+<p><strong>思想：</strong></p>
+<blockquote>
+<p>每张卡都有一份完整模型副本，但处理不同部分的数据。</p>
+</blockquote>
+<p>PyTorch 用法：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">model </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> torch</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">nn</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">DataParallel</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">model</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre>
+<p><strong>流程：</strong></p>
+<ol>
+<li>数据被平均分配给每张 GPU（scatter）。</li>
+<li>各 GPU 前向 &amp; 反向传播。</li>
+<li>主 GPU（GPU0）收集所有梯度，求平均。</li>
+<li>GPU0 更新参数，再广播回所有 GPU。</li>
+</ol>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>GPU0 负担过重（通信瓶颈）；</li>
+<li>不能多机训练。</li>
+</ul>
+<p>适用：快速实验、小模型。</p>
+<hr>
+<h3 id="3️⃣-分布式数据并行distributed-data-parallelddp"><a class="anchor" href="#3️⃣-分布式数据并行distributed-data-parallelddp">#</a> 3️⃣ 分布式数据并行（Distributed Data Parallel，DDP）</h3>
+<p><strong>思想：</strong></p>
+<blockquote>
+<p>数据并行的改进版，每张 GPU 独立进程，自动通信同步。</p>
+</blockquote>
+<p>PyTorch 用法：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">from</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> torch</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">nn</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">parallel </span><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> DistributedDataParallel </span><span style="color:#1E754F;--shiki-dark:#4D9375">as</span><span style="color:#A65E2B;--shiki-dark:#C99076"> DDP</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">model </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> DDP</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">model</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre>
+<p><strong>流程图示（假设2张GPU）</strong></p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-text"><span class="line"><span>Step 1: 复制模型</span></span>
+<span class="line"><span>GPU0: 模型A</span></span>
+<span class="line"><span>GPU1: 模型A</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Step 2: 拆分数据</span></span>
+<span class="line"><span>GPU0: batch[0:2]</span></span>
+<span class="line"><span>GPU1: batch[2:4]</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Step 3: 前向+反向</span></span>
+<span class="line"><span>各GPU独立算梯度</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Step 4: allreduce同步</span></span>
+<span class="line"><span>梯度平均后广播到每张卡</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Step 5: 更新参数（同步）</span></span></code></pre>
+<p><strong>一句话总结：</strong></p>
+<blockquote>
+<p>DDP 是 PyTorch 官方推荐的多 GPU 训练标准方案。</p>
+</blockquote>
+<hr>
+<h2 id="六-底层机制理解scatter-allreduce-gather"><a class="anchor" href="#六-底层机制理解scatter-allreduce-gather">#</a> 六、底层机制理解：scatter / allreduce / gather</h2>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>作用</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>scatter</strong></td>
+<td>拆数据</td>
+<td>把 100 张图片分成两份发到 GPU0、GPU1</td>
+</tr>
+<tr>
+<td><strong>allreduce</strong></td>
+<td>同步梯度</td>
+<td>GPU0 的梯度 + GPU1 的梯度 → 平均后广播</td>
+</tr>
+<tr>
+<td><strong>gather / concat</strong></td>
+<td>合并结果</td>
+<td>把每个 GPU 的预测拼起来做整体评估</td>
+</tr>
+</tbody>
+</table>
+<p>这些操作是 <strong>数据并行的核心通信机制</strong>。<br>
+在 DDP 中，它们是由 PyTorch 自动完成的。</p>
+<hr>
+<h2 id="七-在-ddp-中训练需要注意什么"><a class="anchor" href="#七-在-ddp-中训练需要注意什么">#</a> 七、在 DDP 中训练需要注意什么</h2>
+<table>
+<thead>
+<tr>
+<th>事项</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>每个 GPU 独立进程</td>
+<td>保证同步和效率</td>
+</tr>
+<tr>
+<td>使用 <code>DistributedSampler</code></td>
+<td>自动分配数据给不同 GPU</td>
+</tr>
+<tr>
+<td>设置环境变量（rank, world_size）</td>
+<td>标识 GPU 编号和总数</td>
+</tr>
+<tr>
+<td>初始化通信（init_process_group）</td>
+<td>建立 NCCL 通信通道</td>
+</tr>
+<tr>
+<td>每个进程保存日志、模型</td>
+<td>避免覆盖</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="八-三个阶段的总结对比表"><a class="anchor" href="#八-三个阶段的总结对比表">#</a> 八、三个阶段的总结对比表</h2>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>干的事</th>
+<th>特点</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模型并行</td>
+<td>模型拆分</td>
+<td>各 GPU 存不同层</td>
+<td>GPT、BERT</td>
+</tr>
+<tr>
+<td>数据并行（DP）</td>
+<td>数据拆分 + 主卡同步</td>
+<td>简单但低效</td>
+<td><code>nn.DataParallel</code></td>
+</tr>
+<tr>
+<td>分布式数据并行（DDP）</td>
+<td>数据拆分 + 自动同步</td>
+<td>高效工业级</td>
+<td><code>DistributedDataParallel</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="九-类比理解多-gpu-像工厂流水线"><a class="anchor" href="#九-类比理解多-gpu-像工厂流水线">#</a> 九、类比理解：多 GPU 像工厂流水线</h2>
+<table>
+<thead>
+<tr>
+<th>工人</th>
+<th>工作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPU0</td>
+<td>处理样本1-50</td>
+</tr>
+<tr>
+<td>GPU1</td>
+<td>处理样本51-100</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>每个工人有同样的手册（模型）；</li>
+<li>干完活后汇报经验（梯度）；</li>
+<li>经理平均总结经验（allreduce）；</li>
+<li>更新手册；</li>
+<li>下一轮所有人继续。</li>
+</ul>
+<p>这，就是数据并行和 DDP 的本质。</p>
+<div class="tags"><a href="/tags/gpu/" rel="tag"><i class="ic i-tag"></i>gpu</a><a href="/tags/data/" rel="tag"><i class="ic i-tag"></i>data</a></div></div><footer><div class="meta"><span class="item"><span class="icon"><i class="ic i-calendar-check"></i></span><span class="text">更新于 </span><time title="修改时间：2025-10-05 20:25:07" itemprop="dateModified" datetime="2025-10-05T20:25:07+08:00">2025-10-05</time></span></div><div class="reward"><button><i class="ic i-heartbeat"></i>赞赏</button><p>请我喝[茶]~(￣▽￣)~*</p><div id="qr"><div><img loading="lazy" src="/assets/wechatpay.png" alt="koen 微信支付"/><p>微信支付</p></div><div><img loading="lazy" src="/assets/alipay.png" alt="koen 支付宝"/><p>支付宝</p></div></div></div><div id="copyright"><ul><li class="author"><strong>本文作者：</strong>koen<i class="ic i-at"><em>@</em></i>木语</li><li class="link"><strong>本文链接：</strong><a href="http://example.com/2025/10/05/%E5%A4%9Agpu/" title="多gpu训练方式">http://example.com/2025/10/05/多gpu/</a></li><li class="license"><strong>版权声明：</strong>本站所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/2025/10/05/%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F/" rel="prev" itemprop="url" data-background-image="&#x2F;images&#x2F;pytorch&#x2F;attention.png" title="Imperative，Symbolic and Hybrid Programming"><span class="type">上一篇</span><span class="category"><i class="ic i-flag"></i>deeplearning</span><h3>Imperative，Symbolic and Hybrid Programming</h3></a></div><div class="item right"><a href="/2025/10/06/screen/" rel="next" itemprop="url" data-background-image="&#x2F;images&#x2F;pytorch&#x2F;transformer.jpg" title="screen---virtual termux"><span class="type">下一篇</span><span class="category"><i class="ic i-flag"></i>linux</span><h3>screen---virtual termux</h3></a></div></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="文章目录"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%A4%9A-gpu"><span class="toc-number">1.</span> <span class="toc-text"> 一、为什么需要多 GPU？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E5%A4%9A-gpu-%E7%9A%84%E4%B8%89%E7%A7%8D%E4%B8%BB%E8%A6%81%E6%96%B9%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text"> 二、多 GPU 的三种主要方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%A1%8C"><span class="toc-number">3.</span> <span class="toc-text"> 三、核心思想：数据并行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E5%85%B3%E9%94%AE%E6%A6%82%E5%BF%B5%E8%AF%A6%E8%A7%A3"><span class="toc-number">4.</span> <span class="toc-text"> 四、关键概念详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E4%B8%89%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F%E8%AF%A6%E8%A7%A3"><span class="toc-number">5.</span> <span class="toc-text"> 五、三种实现方式详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%B8%8F%E2%83%A3-%E6%A8%A1%E5%9E%8B%E5%B9%B6%E8%A1%8Cmodel-parallel"><span class="toc-number">5.1.</span> <span class="toc-text"> 1️⃣ 模型并行（Model Parallel）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%B8%8F%E2%83%A3-%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%A1%8Cdata-paralleldp"><span class="toc-number">5.2.</span> <span class="toc-text"> 2️⃣ 数据并行（Data Parallel，DP）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%B8%8F%E2%83%A3-%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%A1%8Cdistributed-data-parallelddp"><span class="toc-number">5.3.</span> <span class="toc-text"> 3️⃣ 分布式数据并行（Distributed Data Parallel，DDP）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD-%E5%BA%95%E5%B1%82%E6%9C%BA%E5%88%B6%E7%90%86%E8%A7%A3scatter-allreduce-gather"><span class="toc-number">6.</span> <span class="toc-text"> 六、底层机制理解：scatter &#x2F; allreduce &#x2F; gather</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83-%E5%9C%A8-ddp-%E4%B8%AD%E8%AE%AD%E7%BB%83%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BB%80%E4%B9%88"><span class="toc-number">7.</span> <span class="toc-text"> 七、在 DDP 中训练需要注意什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB-%E4%B8%89%E4%B8%AA%E9%98%B6%E6%AE%B5%E7%9A%84%E6%80%BB%E7%BB%93%E5%AF%B9%E6%AF%94%E8%A1%A8"><span class="toc-number">8.</span> <span class="toc-text"> 八、三个阶段的总结对比表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%9D-%E7%B1%BB%E6%AF%94%E7%90%86%E8%A7%A3%E5%A4%9A-gpu-%E5%83%8F%E5%B7%A5%E5%8E%82%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="toc-number">9.</span> <span class="toc-text"> 九、类比理解：多 GPU 像工厂流水线</span></a></li></ol></div><div class="related panel pjax" data-title="系列文章"><ul><li ><a href="/2025/09/21/yaml+argparse/" rel="bookmark" title="argparse + yaml 在训练脚本中的使用">argparse + yaml 在训练脚本中的使用</a></li><li ><a href="/2025/09/22/KL/" rel="bookmark" title="KL散度">KL散度</a></li><li ><a href="/2025/09/29/MLC/" rel="bookmark" title="MLP 多层感知机制">MLP 多层感知机制</a></li><li ><a href="/2025/10/04/vit/" rel="bookmark" title="vit">vit</a></li><li  class="active"><a href="/2025/10/05/%E5%A4%9Agpu/" rel="bookmark" title="多gpu训练方式">多gpu训练方式</a></li><li ><a href="/2025/10/05/%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F/" rel="bookmark" title="Imperative，Symbolic and Hybrid Programming">Imperative，Symbolic and Hybrid Programming</a></li></ul></div><div class="overview panel" data-title="站点概览"><div class="author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><img class="image" loading="lazy" decoding="async" itemprop="image" alt="koen" src="/assets/avatar.jpg"/><p class="name" itemprop="name">koen</p><div class="description" itemprop="description">Spark!</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">33</span><span class="name">文章</span></a></div><div class="item categories"><a href="/categories/"><span class="count">16</span><span class="name">分类</span></a></div><div class="item tags"><a href="/tags/"><span class="count">60</span><span class="name">标签</span></a></div></nav><div class="social"><a target="_blank" rel="noopener" href="https://github.com/yourname" class="item github" title="https:&#x2F;&#x2F;github.com&#x2F;yourname"><i class="ic i-github"></i></a></div><div class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>首页</a></li></div></div></div></div><ul id="quick"><li class="prev pjax"><a href="/2025/10/06/screen/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"><a href="/2025/10/05/%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div><div id="player"></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>随机文章</h2><ul><li class="item"><div class="breadcrumb"><a href="/categories/fronted/" title="分类于fronted">fronted</a></div><span><a href="/2025/09/16/vue-router/">vue-router</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/machinelearning/" title="分类于machinelearning">machinelearning</a></div><span><a href="/2025/11/23/GA/">GA遗传算法</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/mathematical-modeling/" title="分类于mathematical modeling">mathematical modeling</a></div><span><a href="/2025/08/12/23%E5%B9%B4%E5%9B%BD%E8%B5%9B/">23年数学建模国赛</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/database/" title="分类于database">database</a></div><span><a href="/2025/09/01/sql/">SQL语法规则</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/deeplearning/" title="分类于deeplearning">deeplearning</a></div><span><a href="/2025/10/04/vit/">vit</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/network/" title="分类于network">network</a></div><span><a href="/2025/09/03/network/">网络核心概念精讲</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/fronted/" title="分类于fronted">fronted</a></div><span><a href="/2025/09/08/gradio/">关于模型可视化---Gradio</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/code/" title="分类于code">code</a></div><span><a href="/2025/08/18/latex_2/">Latex全语法使用</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/python/" title="分类于python">python</a></div><span><a href="/2025/09/15/py_collections/">collections</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/code/" title="分类于code">code</a></div><span><a href="/2025/07/29/electron/">Electron 基本使用教程</a></span></li></ul></div><div class="rpost pjax"><h2>最新评论</h2></div></div><div class="status"><div class="copyright">&copy; 2022 -<span itemprop="copyrightYear">2026</span><span class="with-love"><i class="ic i-sakura rotate"></i></span><span class="author" itemprop="copyrightHolder">koen @ testName</span></div><div class="count"><span class="post-meta-item-icon"><i class="ic i-chart-area"></i></span><span title="站点总字数">198k 字</span><span class="post-meta-divider"> | </span><span class="post-meta-item-icon"><i class="ic i-coffee"></i></span><span title="站点阅读时长">3:01</span></div><div class="powered-by">基于 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & Theme.<a target="_blank" rel="noopener" href="https://github.com/theme-shoka-x/hexo-theme-shokaX/">ShokaX</a></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL = {
+    ispost: true,
+    path: `2025/10/05/多gpu/`,
+    favicon: {
+        show: `（●´3｀●）やれやれだぜ`,
+        hide: `(´Д｀)大変だ！`
+    },
+    search: {
+        placeholder: "文章搜索",
+        empty: "关于 「 ${query} 」，什么也没搜到",
+        stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    nocopy: "false",
+    copyright: `复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。`,
+    copy_tex: false,
+    katex: false,
+    mermaid: false,
+    audio: undefined,
+    nocopy: false,
+    outime: true,
+    template: `<div class="note warning"><p><span class="label warning">文章时效性提示</span><br>这是一篇发布于 {{publish}} 天前，最后一次更新在 {{updated}} 天前的文章，部分信息可能已经发生改变，请注意甄别。</p></div>`,
+    quiz: {
+        choice: `单选题`,
+        multiple: `多选题`,
+        true_false: `判断题`,
+        essay: `问答题`,
+        gap_fill: `填空题`,
+        mistake: `错题备注`
+    }
+};
+</script><script src="/js/siteInit.js?v=0.5.4" type="module" fetchpriority="high" defer></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

@@ -106,9 +106,9 @@
     <category term="machinelearning" scheme="http://example.com/categories/machinelearning/"/>
     
     
-    <category term="python" scheme="http://example.com/tags/python/"/>
-    
     <category term="GA" scheme="http://example.com/tags/GA/"/>
+    
+    <category term="python" scheme="http://example.com/tags/python/"/>
     
   </entry>
   
@@ -286,11 +286,11 @@
     <category term="backen" scheme="http://example.com/categories/backen/"/>
     
     
+    <category term="python" scheme="http://example.com/tags/python/"/>
+    
     <category term="web" scheme="http://example.com/tags/web/"/>
     
     <category term="flask" scheme="http://example.com/tags/flask/"/>
-    
-    <category term="python" scheme="http://example.com/tags/python/"/>
     
   </entry>
   
@@ -430,9 +430,9 @@
     <category term="fronted" scheme="http://example.com/categories/fronted/"/>
     
     
-    <category term="web" scheme="http://example.com/tags/web/"/>
-    
     <category term="python" scheme="http://example.com/tags/python/"/>
+    
+    <category term="web" scheme="http://example.com/tags/web/"/>
     
     <category term="gradio" scheme="http://example.com/tags/gradio/"/>
     

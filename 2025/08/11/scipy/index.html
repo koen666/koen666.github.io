@@ -1,0 +1,746 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"/><meta name="theme-color" content="#222"/><meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1"/><meta name="renderer" content="webkit"/><link rel="icon" type="image/ico" sizes="32x32" href="/assets/favicon.ico"/><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/><link rel="alternate" href="/rss.xml" title="木语" type="application/rss+xml"><link rel="alternate" href="/atom.xml" title="木语" type="application/atom+xml"><link rel="alternate" type="application/json" title="木语" href="http://example.com/feed.json"/><link rel="preconnect" href="https://s4.zstatic.net"/><link rel="preconnect" href="https://at.alicdn.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CFredericka%20the%20Great:400,400italic,700,700italic%7CNoto%20Serif%20JP:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CInconsolata:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="none" onload="this.media&#x3D;&#39;all&#39;"><link rel="modulepreload" href="/js/siteInit.js"></link><link rel="modulepreload" href="/js/nyx-player-XQO4656G.js"></link><link rel="modulepreload" href="/js/copy-tex-DSIH3K5D.js"></link><link rel="modulepreload" href="/js/post-MISE4AQZ.js"></link><link rel="modulepreload" href="/js/chunk-QP4NXAPX.js"></link><link rel="modulepreload" href="/js/index.esm-AEKIGOYH.js"></link><link rel="modulepreload" href="/js/chunk-RK7HQRIO.js"></link><link rel="modulepreload" href="/js/chunk-SK7HHSJC.js"></link><link rel="stylesheet" href="/css/siteInit.css" media="none" onload="this.media&#x3D;&#39;all&#39;"></link><link rel="preload" href="/images/pytorch/CNN.png" as="image" fetchpriority="high"><link rel="preload" href="/images/pytorch/RNN.png" as="image" fetchpriority="high"><link rel="preload" href="/images/pytorch/transformer.jpg" as="image" fetchpriority="high"><link rel="preload" href="/images/pytorch/RNN.png" as="image" fetchpriority="high"><link rel="preload" href="/images/pytorch/attention.png" as="image" fetchpriority="high"><link rel="preload" href="/images/pytorch/CNN.png" as="image" fetchpriority="high"><meta name="keywords" content="python,scipy"/><meta name="description" content="本文介绍scipy几大基本模块及其与其相关数学原理"/><link rel="canonical" href="http://example.com/2025/08/11/scipy/"><link rel="stylesheet" href="/css/post.css?v=0.5.4"><link rel="stylesheet" href="/css/mermaid.css?v=0.5.4"><!-- 临时处理--><link rel="stylesheet" media="none" onload="this.media='all'" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css"><title>scipy基本模块及其使用</title><meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="pagefind_mount"></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">scipy基本模块及其使用</h1><div class="meta"><span class="item" title="创建时间：2025-08-11 13:50:14"><span class="icon"><i class="ic i-calendar"></i></span><span class="text">发表于</span><time itemprop="dateCreated datePublished" datetime="2025-08-11T13:50:14+08:00">2025-08-11</time></span><span class="item" title="本文字数"><span class="icon"><i class="ic i-pen"></i></span><span class="text">本文字数</span><span>9.8k</span><span class="text">字</span></span><span class="item" title="阅读时长"><span class="icon"><i class="ic i-clock"></i></span><span class="text">阅读时长</span><span>9 分钟</span></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="切换导航栏"><span class="line"></span><span class="line"></span><span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">testName</a></li></ul><ul class="right" id="rightNav"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div class="pjax" id="imgs"><ul><li class="item" style="background-image: url(&quot;/images/pytorch/CNN.png&quot;);"></li><li class="item" style="background-image: url(&quot;/images/pytorch/RNN.png&quot;);"></li><li class="item" style="background-image: url(&quot;/images/pytorch/transformer.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;/images/pytorch/RNN.png&quot;);"></li><li class="item" style="background-image: url(&quot;/images/pytorch/attention.png&quot;);"></li><li class="item" style="background-image: url(&quot;/images/pytorch/CNN.png&quot;);"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><main><div class="inner"><div class="pjax" id="main"><div class="article wrap"><div class="breadcrumb" itemListElement itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i><span><a href="/">首页</a></span><i class="ic i-angle-right"></i><span class="current" itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><a href="/categories/code/" itemprop="item" rel="index" title="分类于code"><span itemprop="name">code<meta itemprop="position" content="0"/></span></a></span></div><article class="post block" itemscope="itemscope" itemtype="http://schema.org/Article" data-pagefind-body="data-pagefind-body" lang="zh-CN"><link itemprop="mainEntityOfPage" href="http://example.com/2025/08/11/scipy/"/><span hidden="hidden" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><meta itemprop="image" content="/assets/avatar.jpg"/><meta itemprop="name" content="koen"/><meta itemprop="description" content="技术是逻辑，木是自然，语是表达, Spark!"/></span><span hidden="hidden" itemprop="publisher" itemscope="itemscope" itemtype="http://schema.org/Organization"><meta itemprop="name" content="木语"/></span><div class="body md" itemprop="articleBody"><h2 id="一-常量模块constants"><a class="anchor" href="#一-常量模块constants">#</a> 一、常量模块(constants)</h2>
+<p>以下是 <code>scipy.constants</code> 模块中主要常量的分类表格：</p>
+<hr>
+<h3 id="11-数学常数"><a class="anchor" href="#11-数学常数">#</a> <strong>1.1 数学常数</strong></h3>
+<table>
+<thead>
+<tr>
+<th>常量名</th>
+<th>描述</th>
+<th>值 (近似)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pi</code></td>
+<td>圆周率 π</td>
+<td>3.141592653589793</td>
+</tr>
+<tr>
+<td><code>golden</code></td>
+<td>黄金比例 (φ)</td>
+<td>1.618033988749895</td>
+</tr>
+<tr>
+<td><code>e</code></td>
+<td>自然对数的底 (e)</td>
+<td>2.718281828459045</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="12-通用物理常数"><a class="anchor" href="#12-通用物理常数">#</a> <strong>1.2 通用物理常数</strong></h3>
+<table>
+<thead>
+<tr>
+<th>常量名</th>
+<th>描述</th>
+<th>值 (单位)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>c</code></td>
+<td>真空光速</td>
+<td>299792458.0 m/s</td>
+</tr>
+<tr>
+<td><code>h</code></td>
+<td>普朗克常数</td>
+<td>6.62607015e-34 J·s</td>
+</tr>
+<tr>
+<td><code>hbar</code></td>
+<td>约化普朗克常数 (h/2π)</td>
+<td>1.054571817e-34 J·s</td>
+</tr>
+<tr>
+<td><code>G</code></td>
+<td>万有引力常数</td>
+<td>6.67430e-11 m³/(kg·s²)</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td>标准重力加速度</td>
+<td>9.80665 m/s²</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="13-电磁学常数"><a class="anchor" href="#13-电磁学常数">#</a> <strong>1.3 电磁学常数</strong></h3>
+<table>
+<thead>
+<tr>
+<th>常量名</th>
+<th>描述</th>
+<th>值 (单位)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mu_0</code></td>
+<td>真空磁导率</td>
+<td>1.25663706212e-6 N/A²</td>
+</tr>
+<tr>
+<td><code>epsilon_0</code></td>
+<td>真空电容率</td>
+<td>8.8541878128e-12 F/m</td>
+</tr>
+<tr>
+<td><code>e</code> (或 <code>elementary_charge</code>)</td>
+<td>元电荷</td>
+<td>1.602176634e-19 C</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="14-原子与核物理常数"><a class="anchor" href="#14-原子与核物理常数">#</a> <strong>1.4 原子与核物理常数</strong></h3>
+<table>
+<thead>
+<tr>
+<th>常量名</th>
+<th>描述</th>
+<th>值 (单位)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>m_e</code></td>
+<td>电子质量</td>
+<td>9.1093837015e-31 kg</td>
+</tr>
+<tr>
+<td><code>m_p</code></td>
+<td>质子质量</td>
+<td>1.67262192369e-27 kg</td>
+</tr>
+<tr>
+<td><code>m_n</code></td>
+<td>中子质量</td>
+<td>1.67492749804e-27 kg</td>
+</tr>
+<tr>
+<td><code>Rydberg</code></td>
+<td>里德伯常数</td>
+<td>10973731.568160 1/m</td>
+</tr>
+<tr>
+<td><code>alpha</code></td>
+<td>精细结构常数</td>
+<td>0.0072973525693</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="15-化学相关常数"><a class="anchor" href="#15-化学相关常数">#</a> <strong>1.5 化学相关常数</strong></h3>
+<table>
+<thead>
+<tr>
+<th>常量名</th>
+<th>描述</th>
+<th>值 (单位)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>N_A</code></td>
+<td>阿伏伽德罗常数</td>
+<td>6.02214076e23 1/mol</td>
+</tr>
+<tr>
+<td><code>R</code></td>
+<td>通用气体常数</td>
+<td>8.314462618 J/(mol·K)</td>
+</tr>
+<tr>
+<td><code>atomic_mass</code></td>
+<td>原子质量单位 (u)</td>
+<td>1.66053906660e-27 kg</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="16-常用单位换算因子"><a class="anchor" href="#16-常用单位换算因子">#</a> <strong>1.6 常用单位换算因子</strong></h3>
+<table>
+<thead>
+<tr>
+<th>常量名</th>
+<th>描述</th>
+<th>换算关系</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>inch</code></td>
+<td>英寸 → 米</td>
+<td>0.0254 m</td>
+</tr>
+<tr>
+<td><code>foot</code></td>
+<td>英尺 → 米</td>
+<td>0.3048 m</td>
+</tr>
+<tr>
+<td><code>mile</code></td>
+<td>英里 → 米</td>
+<td>1609.344 m</td>
+</tr>
+<tr>
+<td><code>lb</code></td>
+<td>磅 → 千克</td>
+<td>0.45359237 kg</td>
+</tr>
+<tr>
+<td><code>eV</code></td>
+<td>电子伏特 → 焦耳</td>
+<td>1.602176634e-19 J</td>
+</tr>
+<tr>
+<td><code>atm</code></td>
+<td>标准大气压 → 帕斯卡</td>
+<td>101325.0 Pa</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="17-温度相关"><a class="anchor" href="#17-温度相关">#</a> <strong>1.7 温度相关</strong></h3>
+<table>
+<thead>
+<tr>
+<th>常量名</th>
+<th>描述</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>zero_Celsius</code></td>
+<td>0°C 对应的开尔文温度</td>
+<td>273.15 K</td>
+</tr>
+<tr>
+<td><code>degree_Fahrenheit</code></td>
+<td>1°F 对应的开尔文间隔</td>
+<td>0.555555... K</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="查找所有常量的方法"><a class="anchor" href="#查找所有常量的方法">#</a> <strong>查找所有常量的方法</strong></h3>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">from</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> scipy </span><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> constants</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 列出所有常量</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#998418;--shiki-dark:#B8A965">dir</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">constants</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 搜索包含关键词的常量（例如 'mass'）</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">constants</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">find</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="color:#B56959;--shiki-dark:#C98A7D">mass</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre>
+<h2 id="二-优化器optimize"><a class="anchor" href="#二-优化器optimize">#</a> 二、优化器(optimize)</h2>
+<p>scipy的优化器是数学建模的工具，它的核心目标是 寻找函数的最小值（或最大值）、拟合模型、求解方程或系统，适用于传统数学问题<code>而非深度学习</code>(注意和pytorch这些的优化器函数区分开来)</p>
+<h3 id="21-无约束优化"><a class="anchor" href="#21-无约束优化">#</a> <strong>2.1 无约束优化</strong></h3>
+<ul>
+<li>用途:实现查找给定区间内函数的最小值</li>
+<li>实现：</li>
+</ul>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bash"><span class="line"><span style="color:#59873A;--shiki-dark:#80A665">minimize_scalar</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> #单变量函数</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">minimize</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">        #多变量函数</span></span></code></pre>
+<ul>
+<li>
+<p>查找方法：</p>
+<ul>
+<li>单变量：<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bash"><span class="line"><span style="color:#59873A;--shiki-dark:#80A665">brent:</span><span style="color:#B56959;--shiki-dark:#C98A7D"> 使用Brent方法（结合抛物线插值和黄金分割法）</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">bounded:</span><span style="color:#B56959;--shiki-dark:#C98A7D"> 在有界区间内搜索</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">golden:</span><span style="color:#B56959;--shiki-dark:#C98A7D"> 黄金分割法</span></span></code></pre>
+</li>
+<li>多变量<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bash"><span class="line"><span style="color:#59873A;--shiki-dark:#80A665">Nelder-Mead:</span><span style="color:#B56959;--shiki-dark:#C98A7D"> 单纯形法，不需要梯度</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">BFGS:</span><span style="color:#B56959;--shiki-dark:#C98A7D"> 拟牛顿法，需要梯度</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">CG:</span><span style="color:#B56959;--shiki-dark:#C98A7D"> 共轭梯度法</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">L-BFGS-B:</span><span style="color:#B56959;--shiki-dark:#C98A7D"> 有限内存BFGS，适用于大规模问题</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">TNC:</span><span style="color:#B56959;--shiki-dark:#C98A7D"> 截断牛顿法</span></span></code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>实现实例：</p>
+</li>
+</ul>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bash"><span class="line"><span style="color:#59873A;--shiki-dark:#80A665">from</span><span style="color:#B56959;--shiki-dark:#C98A7D"> scipy.optimize</span><span style="color:#B56959;--shiki-dark:#C98A7D"> import</span><span style="color:#B56959;--shiki-dark:#C98A7D"> minimize</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">def</span><span style="color:#B56959;--shiki-dark:#C98A7D"> rosen</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#59873A;--shiki-dark:#80A665">x</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#B56959;--shiki-dark:#C98A7D">:</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">    """Rosenbrock函数"""</span></span>
+<span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">    return</span><span style="color:#B56959;--shiki-dark:#C98A7D"> sum</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#59873A;--shiki-dark:#80A665">100.0*</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#59873A;--shiki-dark:#80A665">x</span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#59873A;--shiki-dark:#80A665">1:</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span><span style="color:#59873A;--shiki-dark:#80A665">-x</span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#59873A;--shiki-dark:#80A665">:-1</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span><span style="color:#59873A;--shiki-dark:#80A665">**2.0</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#A65E2B;--shiki-dark:#C99076">**</span><span style="color:#B56959;--shiki-dark:#C98A7D">2.0</span><span style="color:#B56959;--shiki-dark:#C98A7D"> +</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">1-x</span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">:-1</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#AB5959;--shiki-dark:#CB7676">**</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">2.0</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">x0</span><span style="color:#B56959;--shiki-dark:#C98A7D"> =</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> </span><span style="color:rgba(255, 18, 18, 0.8);--shiki-dark:rgba(255, 18, 18, 0.8)">[</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">1.3, </span><span style="color:#B56959;--shiki-dark:#C98A7D">0.7,</span><span style="color:#B56959;--shiki-dark:#C98A7D"> 0.8,</span><span style="color:#B56959;--shiki-dark:#C98A7D"> 1.9,</span><span style="color:#B56959;--shiki-dark:#C98A7D"> 1.2]</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> #x0 是多维优化问题（如 minimize）的 初始猜测值（initial guess）。优化算法需要一个起点开始搜索最小值。</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">res</span><span style="color:#B56959;--shiki-dark:#C98A7D"> =</span><span style="color:#B56959;--shiki-dark:#C98A7D"> minimize</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#59873A;--shiki-dark:#80A665">rosen,</span><span style="color:#B56959;--shiki-dark:#C98A7D"> x0,</span><span style="color:#B56959;--shiki-dark:#C98A7D"> method=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="color:#B56959;--shiki-dark:#C98A7D">BFGS</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="color:#B56959;--shiki-dark:#C98A7D">,</span><span style="color:#B56959;--shiki-dark:#C98A7D"> options={</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="color:#B56959;--shiki-dark:#C98A7D">disp</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="color:#B56959;--shiki-dark:#C98A7D">:</span><span style="color:#B56959;--shiki-dark:#C98A7D"> True}</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> #res 是 minimize 或 minimize_scalar 函数的返回结果，它是一个 OptimizeResult 对象 </span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#B56959;--shiki-dark:#C98A7D">res.x</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span></span></code></pre>
+<p>其中res的解有如下内容</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bash"><span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># res 包含的重要属性：</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">res.x</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">       # 最优解（最小值点）</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">res.fun</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">     # 最优解处的函数值</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">res.nfev</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">    # 函数评估次数</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">res.nit</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">     # 迭代次数</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">res.success</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> # 是否成功收敛</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">res.message</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> # 状态描述（如收敛信息）</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">res.jac</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">     # 最优解处的梯度（一阶导数）</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">res.hess</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">    # 最优解处的Hessian矩阵（二阶导数，如果可用）</span></span></code></pre>
+<h3 id="22-全局优化"><a class="anchor" href="#22-全局优化">#</a> <strong>2.2 全局优化</strong></h3>
+<ul>
+<li>用途：避免传统优化算法（如 minimize）陷入局部最优解，转而寻找 全局最优解。</li>
+<li>实现函数：</li>
+</ul>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bash"><span class="line"><span style="color:#59873A;--shiki-dark:#80A665">basinhopping</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">: </span><span style="color:#59873A;--shiki-dark:#80A665">盆地跳跃算法basinhopping</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">: 盆地跳跃算法</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">shgo</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">: 单纯形同伦全局优化</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">differential_evolution</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">: 差分进化算法</span></span></code></pre>
+<ul>
+<li>实例：</li>
+</ul>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bash"><span class="line"><span style="color:#59873A;--shiki-dark:#80A665">from</span><span style="color:#B56959;--shiki-dark:#C98A7D"> scipy.optimize</span><span style="color:#B56959;--shiki-dark:#C98A7D"> import</span><span style="color:#B56959;--shiki-dark:#C98A7D"> basinhopping</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">def</span><span style="color:#B56959;--shiki-dark:#C98A7D"> func</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#59873A;--shiki-dark:#80A665">x</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#B56959;--shiki-dark:#C98A7D">:</span></span>
+<span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">    return</span><span style="color:#B56959;--shiki-dark:#C98A7D"> np.cos</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#59873A;--shiki-dark:#80A665">14.5</span><span style="color:#A65E2B;--shiki-dark:#C99076"> *</span><span style="color:#B56959;--shiki-dark:#C98A7D"> x</span><span style="color:#B56959;--shiki-dark:#C98A7D"> -</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0.3</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#B56959;--shiki-dark:#C98A7D"> +</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> </span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x </span><span style="color:#B56959;--shiki-dark:#C98A7D">+</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0.2</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> </span><span style="color:#AB5959;--shiki-dark:#CB7676">*</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> x</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">res</span><span style="color:#B56959;--shiki-dark:#C98A7D"> =</span><span style="color:#B56959;--shiki-dark:#C98A7D"> basinhopping</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#59873A;--shiki-dark:#80A665">func,</span><span style="color:#B56959;--shiki-dark:#C98A7D"> x0=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1.0</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#59873A;--shiki-dark:#80A665">"全局最小值：x = %.4f, f(x) = %.4f"</span><span style="color:#B56959;--shiki-dark:#C98A7D"> %</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">res.x, </span><span style="color:#B56959;--shiki-dark:#C98A7D">res.fun</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre>
+<h3 id="23-最小二乘拟合"><a class="anchor" href="#23-最小二乘拟合">#</a> <strong>2.3 最小二乘拟合</strong></h3>
+<ul>
+<li>
+<p>用途：解决非线性最小二乘问题，常用于曲线拟合。</p>
+</li>
+<li>
+<p>实现函数：</p>
+</li>
+</ul>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bash"><span class="line"><span style="color:#59873A;--shiki-dark:#80A665">least_squares</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">: 解决非线性最小二乘问题</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">curve_fit</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">: 使用最小二乘法拟合曲线</span></span></code></pre>
+<ul>
+<li>实例：</li>
+</ul>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bash"><span class="line"><span style="color:#59873A;--shiki-dark:#80A665">from</span><span style="color:#B56959;--shiki-dark:#C98A7D"> scipy.optimize</span><span style="color:#B56959;--shiki-dark:#C98A7D"> import</span><span style="color:#B56959;--shiki-dark:#C98A7D"> curve_fit</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">import</span><span style="color:#B56959;--shiki-dark:#C98A7D"> numpy</span><span style="color:#B56959;--shiki-dark:#C98A7D"> as</span><span style="color:#B56959;--shiki-dark:#C98A7D"> np</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 定义模型函数</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">def</span><span style="color:#B56959;--shiki-dark:#C98A7D"> func</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#59873A;--shiki-dark:#80A665">x,</span><span style="color:#B56959;--shiki-dark:#C98A7D"> a,</span><span style="color:#B56959;--shiki-dark:#C98A7D"> b,</span><span style="color:#B56959;--shiki-dark:#C98A7D"> c</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#B56959;--shiki-dark:#C98A7D">:</span></span>
+<span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">    return</span><span style="color:#B56959;--shiki-dark:#C98A7D"> a</span><span style="color:#A65E2B;--shiki-dark:#C99076"> *</span><span style="color:#B56959;--shiki-dark:#C98A7D"> np.exp</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#59873A;--shiki-dark:#80A665">-b</span><span style="color:#A65E2B;--shiki-dark:#C99076"> *</span><span style="color:#B56959;--shiki-dark:#C98A7D"> x</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#B56959;--shiki-dark:#C98A7D"> +</span><span style="color:#B56959;--shiki-dark:#C98A7D"> c</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 生成带噪声的数据</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">xdata</span><span style="color:#B56959;--shiki-dark:#C98A7D"> =</span><span style="color:#B56959;--shiki-dark:#C98A7D"> np.linspace</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#59873A;--shiki-dark:#80A665">0,</span><span style="color:#B56959;--shiki-dark:#C98A7D"> 4,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 50</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">y</span><span style="color:#B56959;--shiki-dark:#C98A7D"> =</span><span style="color:#B56959;--shiki-dark:#C98A7D"> func</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#59873A;--shiki-dark:#80A665">xdata,</span><span style="color:#B56959;--shiki-dark:#C98A7D"> 2.5,</span><span style="color:#B56959;--shiki-dark:#C98A7D"> 1.3,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0.5</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">ydata</span><span style="color:#B56959;--shiki-dark:#C98A7D"> =</span><span style="color:#B56959;--shiki-dark:#C98A7D"> y</span><span style="color:#B56959;--shiki-dark:#C98A7D"> +</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0.2</span><span style="color:#A65E2B;--shiki-dark:#C99076"> *</span><span style="color:#B56959;--shiki-dark:#C98A7D"> np.random.normal</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B07D48;--shiki-dark:#BD976A">size</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B56959;--shiki-dark:#C98A7D">len</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#59873A;--shiki-dark:#80A665">xdata</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 拟合数据</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">popt,</span><span style="color:#B56959;--shiki-dark:#C98A7D"> pcov</span><span style="color:#B56959;--shiki-dark:#C98A7D"> =</span><span style="color:#B56959;--shiki-dark:#C98A7D"> curve_fit</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#59873A;--shiki-dark:#80A665">func,</span><span style="color:#B56959;--shiki-dark:#C98A7D"> xdata,</span><span style="color:#B56959;--shiki-dark:#C98A7D"> ydata</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#59873A;--shiki-dark:#80A665">"拟合参数："</span><span style="color:#59873A;--shiki-dark:#80A665">,</span><span style="color:#B56959;--shiki-dark:#C98A7D"> popt</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> </span><span style="color:#A0ADA0;--shiki-dark:#758575DD">#返回[a,b,c]</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#59873A;--shiki-dark:#80A665">"协方差矩阵"</span><span style="color:#59873A;--shiki-dark:#80A665">,</span><span style="color:#B56959;--shiki-dark:#C98A7D"> pcov</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> </span><span style="color:#A0ADA0;--shiki-dark:#758575DD">#评估可靠性</span></span></code></pre>
+<p>[a,b,c]-&gt; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>a</mi><msup><mi>e</mi><mrow><mo>−</mo><mi>b</mi><mi>x</mi></mrow></msup><mo>+</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">f(x)=ae^{-bx}+c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9324em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">a</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mathnormal mtight">b</span><span class="mord mathnormal mtight">x</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">c</span></span></span></span></p>
+<h3 id="24-方程求根"><a class="anchor" href="#24-方程求根">#</a> <strong>2.4 方程求根</strong></h3>
+<ul>
+<li>方法：</li>
+</ul>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bash"><span class="line"><span style="color:#59873A;--shiki-dark:#80A665">root_scalar</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">: 单变量方程求根 </span><span style="color:#A0ADA0;--shiki-dark:#758575DD">#brentq, brenth, ridder, bisect, newton: 特定算法</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">root</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">: 多变量方程组求根</span></span></code></pre>
+<ul>
+<li>实现：</li>
+</ul>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">from</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> scipy</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">optimize </span><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> root_scalar</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#AB5959;--shiki-dark:#CB7676">def</span><span style="color:#59873A;--shiki-dark:#80A665"> f</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#999999;--shiki-dark:#666666">:</span></span>
+<span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">    return</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> x</span><span style="color:#AB5959;--shiki-dark:#CB7676">**</span><span style="color:#2F798A;--shiki-dark:#4C9A91">3</span><span style="color:#AB5959;--shiki-dark:#CB7676"> -</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  # 寻找x^3 = 1的解</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sol </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> root_scalar</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">f</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> bracket</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#1e754f;--shiki-dark:#4d9375">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 2</span><span style="color:#1e754f;--shiki-dark:#4d9375">]</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> method</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="color:#B56959;--shiki-dark:#C98A7D">brentq</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">方程的根：</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> sol</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">root</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">from</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> scipy</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">optimize </span><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> root</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#AB5959;--shiki-dark:#CB7676">def</span><span style="color:#59873A;--shiki-dark:#80A665"> func</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#999999;--shiki-dark:#666666">:</span></span>
+<span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">    return</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#1e754f;--shiki-dark:#4d9375">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0</span><span style="color:#1e754f;--shiki-dark:#4d9375">]</span><span style="color:#AB5959;--shiki-dark:#CB7676"> +</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0.5</span><span style="color:#AB5959;--shiki-dark:#CB7676"> *</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span><span style="color:#AB5959;--shiki-dark:#CB7676"> -</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> x</span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#AB5959;--shiki-dark:#CB7676">**</span><span style="color:#2F798A;--shiki-dark:#4C9A91">3</span><span style="color:#AB5959;--shiki-dark:#CB7676"> -</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1.0</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#2F798A;--shiki-dark:#4C9A91">            0.5</span><span style="color:#AB5959;--shiki-dark:#CB7676"> *</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span><span style="color:#AB5959;--shiki-dark:#CB7676"> -</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> x</span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#AB5959;--shiki-dark:#CB7676">**</span><span style="color:#2F798A;--shiki-dark:#4C9A91">3</span><span style="color:#AB5959;--shiki-dark:#CB7676"> +</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> x</span><span style="color:#1e754f;--shiki-dark:#4d9375">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#1e754f;--shiki-dark:#4d9375">]</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sol </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> root</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">func</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#1e754f;--shiki-dark:#4d9375">]</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">方程组的解：</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> sol</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre>
+<h3 id="25-线性规划"><a class="anchor" href="#25-线性规划">#</a> <strong>2.5 线性规划</strong></h3>
+<ul>
+<li>什么是线性规划：结构化决策框架，其核心是在一个由线性关系定义的几何空间中，寻找最优的"角落"解。比如如下这个问题</li>
+</ul>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bash"><span class="line"><span style="color:#59873A;--shiki-dark:#80A665">想象你是一个工厂经理，需要决定生产两种产品A和B的数量：</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">生产A每个利润100元，B每个利润150元</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">但受限于：</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">原材料X：生产A消耗3kg，B消耗2kg，总共只有120kg</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">工时：生产A需要2小时，B需要4小时，总共只有160小时</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">线性规划就是帮你找到在资源限制下能获得最大利润的生产方案</span></span>
+<span class="line"></span></code></pre>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>p</mi><mi>r</mi><mi>o</mi><mi>f</mi><mi>i</mi><mi>t</mi><mo>=</mo><mo>−</mo><mn>100</mn><mi>x</mi><mo>−</mo><mn>150</mn><mi>y</mi></mrow><annotation encoding="application/x-tex">profit=-100x-150y
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span><span class="mord mathnormal">ro</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">i</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">100</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">150</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span></span></span></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mrow><mo fence="true">[</mo><mtable rowspacing="0.16em" columnalign="center center" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>3</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>2</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>2</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>4</mn></mstyle></mtd></mtr></mtable><mo fence="true">]</mo></mrow><mrow><mo fence="true">[</mo><mtable rowspacing="0.16em" columnalign="center" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mi>x</mi></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mi>y</mi></mstyle></mtd></mtr></mtable><mo fence="true">]</mo></mrow><mo>≤</mo><mrow><mo fence="true">[</mo><mtable rowspacing="0.16em" columnalign="center" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>120</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>160</mn></mstyle></mtd></mtr></mtable><mo fence="true">]</mo></mrow></mrow><annotation encoding="application/x-tex">\begin{bmatrix}
+3 &amp; 2 \\
+2 &amp; 4
+\end{bmatrix}
+\begin{bmatrix}
+x \\
+y
+\end{bmatrix}
+\le
+\begin{bmatrix}
+120 \\
+160
+\end{bmatrix}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.4em;vertical-align:-0.95em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">[</span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.45em;"><span style="top:-3.61em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">3</span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.95em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.45em;"><span style="top:-3.61em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">4</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.95em;"><span></span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">]</span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">[</span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.45em;"><span style="top:-3.61em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">x</span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.95em;"><span></span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">]</span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.4em;vertical-align:-0.95em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">[</span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.45em;"><span style="top:-3.61em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">120</span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">160</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.95em;"><span></span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">]</span></span></span></span></span></span></span></p>
+<p>抽象一下就是：<br>
+输入: (A, b, c) → 处理: 代数变换 → 输出: x*</p>
+<p>其中：</p>
+<p>A 是约束矩阵（系统限制的编码）=&gt;不等式左侧系数 A=<br>
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo fence="true">[</mo><mtable rowspacing="0.16em" columnalign="center center" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>3</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>2</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>2</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>4</mn></mstyle></mtd></mtr></mtable><mo fence="true">]</mo></mrow><annotation encoding="application/x-tex">
+\begin{bmatrix}
+3 &amp; 2 \\
+2 &amp; 4
+\end{bmatrix}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.4em;vertical-align:-0.95em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">[</span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.45em;"><span style="top:-3.61em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">3</span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.95em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.45em;"><span style="top:-3.61em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">4</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.95em;"><span></span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">]</span></span></span></span></span></span></p>
+<p>b 是资源向量（约束条件的量化）=&gt;不等式右侧系数 b=[120,160]</p>
+<p>c 是价值向量（目标函数的权重）=&gt;利润最大化 c=[-100,-150] (线性规划默认求最小值问题) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><mn>100</mn><mi>x</mi><mo>−</mo><mn>150</mn><mi>y</mi></mrow><annotation encoding="application/x-tex">f(x)=-100x-150y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">100</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">150</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span></span></p>
+<p>x* 是最优决策（系统输出的解决方案）</p>
+<ul>
+<li>实现实例:</li>
+</ul>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">from</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> scipy</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">optimize </span><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> linprog</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 最小化 c^T x</span></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 约束条件: A_ub x &lt;= b_ub, A_eq x = b_eq</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">c </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#AB5959;--shiki-dark:#CB7676">-</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 4</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  # 目标函数系数</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">A_ub </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#1e754f;--shiki-dark:#4d9375">[</span><span style="color:#AB5959;--shiki-dark:#CB7676">-</span><span style="color:#2F798A;--shiki-dark:#4C9A91">3</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#1e754f;--shiki-dark:#4d9375">]</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 2</span><span style="color:#1e754f;--shiki-dark:#4d9375">]</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  # 不等式约束矩阵</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">b_ub </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">6</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 4</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">             # 不等式约束右侧</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">res </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> linprog</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">c</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> A_ub</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">A_ub</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> b_ub</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">b_ub</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> bounds</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#1E754F;--shiki-dark:#4D9375">None</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#1E754F;--shiki-dark:#4D9375"> None</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">最优解：</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> res</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">最优值：</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> res</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">fun</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre>
+<h3 id="26-约束优化"><a class="anchor" href="#26-约束优化">#</a> <strong>2.6 约束优化</strong></h3>
+<ul>
+<li>用途：在有等式或不等式约束条件下优化目标函数。</li>
+<li>方法：</li>
+</ul>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bash"><span class="line"><span style="color:#59873A;--shiki-dark:#80A665">minimize</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> 配合约束参数</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">SLSQP:</span><span style="color:#B56959;--shiki-dark:#C98A7D"> 序列二次规划算法</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">trust-constr:</span><span style="color:#B56959;--shiki-dark:#C98A7D"> 信赖域算法</span></span></code></pre>
+<ul>
+<li>实现：</li>
+</ul>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">from</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> scipy</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">optimize </span><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> minimize</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 目标函数</span></span>
+<span class="line"><span style="color:#AB5959;--shiki-dark:#CB7676">def</span><span style="color:#59873A;--shiki-dark:#80A665"> objective</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#999999;--shiki-dark:#666666">:</span></span>
+<span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">    return</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> x</span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span><span style="color:#AB5959;--shiki-dark:#CB7676">*</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">3</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span><span style="color:#AB5959;--shiki-dark:#CB7676">*</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#1e754f;--shiki-dark:#4d9375">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0</span><span style="color:#1e754f;--shiki-dark:#4d9375">]</span><span style="color:#AB5959;--shiki-dark:#CB7676">+</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#1e754f;--shiki-dark:#4d9375">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#1e754f;--shiki-dark:#4d9375">]</span><span style="color:#AB5959;--shiki-dark:#CB7676">+</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#1e754f;--shiki-dark:#4d9375">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">2</span><span style="color:#1e754f;--shiki-dark:#4d9375">]</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#AB5959;--shiki-dark:#CB7676">+</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">2</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 约束条件</span></span>
+<span class="line"><span style="color:#AB5959;--shiki-dark:#CB7676">def</span><span style="color:#59873A;--shiki-dark:#80A665"> constraint1</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#999999;--shiki-dark:#666666">:</span></span>
+<span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">    return</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> x</span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span><span style="color:#AB5959;--shiki-dark:#CB7676">*</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span><span style="color:#AB5959;--shiki-dark:#CB7676">*</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">2</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span><span style="color:#AB5959;--shiki-dark:#CB7676">*</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">3</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span><span style="color:#AB5959;--shiki-dark:#CB7676">-</span><span style="color:#2F798A;--shiki-dark:#4C9A91">25.0</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#AB5959;--shiki-dark:#CB7676">def</span><span style="color:#59873A;--shiki-dark:#80A665"> constraint2</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#999999;--shiki-dark:#666666">:</span></span>
+<span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">    return</span><span style="color:#998418;--shiki-dark:#B8A965"> sum</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#AB5959;--shiki-dark:#CB7676">**</span><span style="color:#2F798A;--shiki-dark:#4C9A91">2</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#AB5959;--shiki-dark:#CB7676">-</span><span style="color:#2F798A;--shiki-dark:#4C9A91">40.0</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 初始猜测</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x0 </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91">5</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91">5</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 设置约束</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">con1 </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="color:#B56959;--shiki-dark:#C98A7D">type</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> '</span><span style="color:#B56959;--shiki-dark:#C98A7D">ineq</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> '</span><span style="color:#B56959;--shiki-dark:#C98A7D">fun</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> constraint1</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">con2 </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="color:#B56959;--shiki-dark:#C98A7D">type</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> '</span><span style="color:#B56959;--shiki-dark:#C98A7D">eq</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> '</span><span style="color:#B56959;--shiki-dark:#C98A7D">fun</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> constraint2</span><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">cons </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#2993a3;--shiki-dark:#5eaab5">[</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">con1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">con2</span><span style="color:#2993a3;--shiki-dark:#5eaab5">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 优化</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sol </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> minimize</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">objective</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A">method</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="color:#B56959;--shiki-dark:#C98A7D">SLSQP</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A">constraints</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">cons</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#B56959;--shiki-dark:#C98A7D">最优解：</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> sol</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre>
+<h2 id="三-稀疏矩阵sparse"><a class="anchor" href="#三-稀疏矩阵sparse">#</a> 三、稀疏矩阵(sparse)</h2>
+<p>专门针对那些绝大多数元素为零的矩阵数据结构</p>
+<h3 id="31-处理稀疏矩阵"><a class="anchor" href="#31-处理稀疏矩阵">#</a> <strong>3.1 处理稀疏矩阵</strong></h3>
+<ul>
+<li>方法:</li>
+</ul>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bash"><span class="line"><span style="color:#59873A;--shiki-dark:#80A665">CSC</span><span style="color:#B56959;--shiki-dark:#C98A7D"> -</span><span style="color:#B56959;--shiki-dark:#C98A7D"> 压缩稀疏列（Compressed</span><span style="color:#B56959;--shiki-dark:#C98A7D"> Sparse</span><span style="color:#B56959;--shiki-dark:#C98A7D"> Column），按列压缩。</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">CSR</span><span style="color:#B56959;--shiki-dark:#C98A7D"> -</span><span style="color:#B56959;--shiki-dark:#C98A7D"> 压缩稀疏行（Compressed</span><span style="color:#B56959;--shiki-dark:#C98A7D"> Sparse</span><span style="color:#B56959;--shiki-dark:#C98A7D"> Row），按行压缩。</span></span></code></pre>
+<ul>
+<li>实现:</li>
+</ul>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> numpy </span><span style="color:#1E754F;--shiki-dark:#4D9375">as</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> np</span></span>
+<span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">from</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> scipy</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sparse </span><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> csr_matrix</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">arr </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> np</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">array</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#1e754f;--shiki-dark:#4d9375">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 2</span><span style="color:#1e754f;--shiki-dark:#4d9375">]</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">csr_matrix</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">arr</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> </span></span></code></pre>
+<p>输出:</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bash"><span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#59873A;--shiki-dark:#80A665">0,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 5</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#59873A;--shiki-dark:#80A665">        1</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#59873A;--shiki-dark:#80A665">0,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 6</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#59873A;--shiki-dark:#80A665">        1</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#59873A;--shiki-dark:#80A665">0,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 8</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#59873A;--shiki-dark:#80A665">        2</span></span></code></pre>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">csr_matrix</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">arr</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">data</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> #输出不为零的元素[1,1,2]</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">csr_matrix</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">arr</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">count_nonzero</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> #输出非0元素总数3</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">mat </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> csr_matrix</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">arr</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">mat</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">eliminate_zeros</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">mat</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> #删除矩阵中的0元素</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">mat </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> csr_matrix</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">arr</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">mat</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sum_duplicates</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">mat</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> #删除重复项</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">newarr </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> csr_matrix</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">arr</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">tocsc</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> #将csr转为csc</span></span></code></pre>
+<h3 id="32图结构sparsecsgraph"><a class="anchor" href="#32图结构sparsecsgraph">#</a> <strong>3.2图结构(sparse.csgraph)</strong></h3>
+<ul>
+<li>如何查看连接组件(连接组件是指图中所有互相连通的节点的集合)</li>
+</ul>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">connected_components</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> numpy </span><span style="color:#1E754F;--shiki-dark:#4D9375">as</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> np</span></span>
+<span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">from</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> scipy</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sparse</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">csgraph </span><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> connected_components</span></span>
+<span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">from</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> scipy</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sparse </span><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> csr_matrix</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">arr </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> np</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">array</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#1e754f;--shiki-dark:#4d9375">[</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 2</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">2</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span></span>
+<span class="line"><span style="color:#1e754f;--shiki-dark:#4d9375">]</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">newarr </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> csr_matrix</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">arr</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">connected_components</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">newarr</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre>
+<p>输出:</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bash"><span class="line"><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#59873A;--shiki-dark:#80A665">1,</span><span style="color:#B56959;--shiki-dark:#C98A7D"> array</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">0, 0, 0</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">, </span><span style="color:#B07D48;--shiki-dark:#BD976A">dtype</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B56959;--shiki-dark:#C98A7D">int32</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> #1代表一个连接组件，[0,0,0]代表每个元素属于哪个连接组件</span></span></code></pre>
+<ul>
+<li>Dijkstra 算法调用(用于计算一个节点到其他所有节点的最短路径)</li>
+</ul>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> numpy </span><span style="color:#1E754F;--shiki-dark:#4D9375">as</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> np</span></span>
+<span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">from</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> scipy</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sparse</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">csgraph </span><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> dijkstra</span></span>
+<span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">from</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> scipy</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sparse </span><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> csr_matrix</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">arr </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> np</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">array</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#1e754f;--shiki-dark:#4d9375">[</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 2</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">2</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span></span>
+<span class="line"><span style="color:#1e754f;--shiki-dark:#4d9375">]</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">newarr </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> csr_matrix</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">arr</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">dijkstra</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">newarr</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> return_predecessors</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#1E754F;--shiki-dark:#4D9375">True</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> indices</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre>
+<p>其中dijkstra的参数：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bash"><span class="line"><span style="color:#59873A;--shiki-dark:#80A665">return_predecessors:</span><span style="color:#B56959;--shiki-dark:#C98A7D"> 布尔值，设置</span><span style="color:#B56959;--shiki-dark:#C98A7D"> True，遍历所有路径，如果不想遍历所有路径可以设置为</span><span style="color:#B56959;--shiki-dark:#C98A7D"> False。</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">indices:</span><span style="color:#B56959;--shiki-dark:#C98A7D"> 元素的索引，返回该元素的所有路径。</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">limit:</span><span style="color:#B56959;--shiki-dark:#C98A7D"> 路径的最大权重。</span></span></code></pre>
+<ul>
+<li>Floyd Warshall -- 弗洛伊德算法(解决任意两点间的最短路径)</li>
+</ul>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> numpy </span><span style="color:#1E754F;--shiki-dark:#4D9375">as</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> np</span></span>
+<span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">from</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> scipy</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sparse</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">csgraph </span><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> floyd_warshall</span></span>
+<span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">from</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> scipy</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sparse </span><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> csr_matrix</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">arr </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> np</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">array</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#1e754f;--shiki-dark:#4d9375">[</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 2</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">2</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span></span>
+<span class="line"><span style="color:#1e754f;--shiki-dark:#4d9375">]</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">newarr </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> csr_matrix</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">arr</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">floyd_warshall</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">newarr</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> return_predecessors</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#1E754F;--shiki-dark:#4D9375">True</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre>
+<ul>
+<li>Bellman Ford -- 贝尔曼-福特算法(任意两点间的最短路径)</li>
+</ul>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> numpy </span><span style="color:#1E754F;--shiki-dark:#4D9375">as</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> np</span></span>
+<span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">from</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> scipy</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sparse</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">csgraph </span><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> bellman_ford</span></span>
+<span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">from</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> scipy</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sparse </span><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> csr_matrix</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">arr </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> np</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">array</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#1e754f;--shiki-dark:#4d9375">[</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#AB5959;--shiki-dark:#CB7676"> -</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 2</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">2</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span></span>
+<span class="line"><span style="color:#1e754f;--shiki-dark:#4d9375">]</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">newarr </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> csr_matrix</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">arr</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">bellman_ford</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">newarr</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> return_predecessors</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#1E754F;--shiki-dark:#4D9375">True</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B07D48;--shiki-dark:#BD976A"> indices</span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre>
+<ul>
+<li>dfs</li>
+</ul>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> numpy </span><span style="color:#1E754F;--shiki-dark:#4D9375">as</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> np</span></span>
+<span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">from</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> scipy</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sparse</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">csgraph </span><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> depth_first_order</span></span>
+<span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">from</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> scipy</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sparse </span><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> csr_matrix</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">arr </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> np</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">array</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#1e754f;--shiki-dark:#4d9375">[</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">2</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span></span>
+<span class="line"><span style="color:#1e754f;--shiki-dark:#4d9375">]</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">newarr </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> csr_matrix</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">arr</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">depth_first_order</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">newarr</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> #传入邻接矩阵和起始遍历元素</span></span></code></pre>
+<ul>
+<li>bfs</li>
+</ul>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> numpy </span><span style="color:#1E754F;--shiki-dark:#4D9375">as</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> np</span></span>
+<span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">from</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> scipy</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sparse</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">csgraph </span><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> breadth_first_order</span></span>
+<span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">from</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> scipy</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">sparse </span><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> csr_matrix</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">arr </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> np</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">array</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#1e754f;--shiki-dark:#4d9375">[</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">2</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#a65e2b;--shiki-dark:#d4976c">[</span><span style="color:#2F798A;--shiki-dark:#4C9A91">0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#a65e2b;--shiki-dark:#d4976c">]</span></span>
+<span class="line"><span style="color:#1e754f;--shiki-dark:#4d9375">]</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">newarr </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> csr_matrix</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">arr</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">breadth_first_order</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">newarr</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 1</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre>
+<div class="tags"><a href="/tags/python/" rel="tag"><i class="ic i-tag"></i>python</a><a href="/tags/math/" rel="tag"><i class="ic i-tag"></i>math</a><a href="/tags/scipy/" rel="tag"><i class="ic i-tag"></i>scipy</a></div></div><footer><div class="meta"><span class="item"><span class="icon"><i class="ic i-calendar-check"></i></span><span class="text">更新于 </span><time title="修改时间：2025-08-11 18:48:14" itemprop="dateModified" datetime="2025-08-11T18:48:14+08:00">2025-08-11</time></span></div><div class="reward"><button><i class="ic i-heartbeat"></i>赞赏</button><p>请我喝[茶]~(￣▽￣)~*</p><div id="qr"><div><img loading="lazy" src="/assets/wechatpay.png" alt="koen 微信支付"/><p>微信支付</p></div><div><img loading="lazy" src="/assets/alipay.png" alt="koen 支付宝"/><p>支付宝</p></div></div></div><div id="copyright"><ul><li class="author"><strong>本文作者：</strong>koen<i class="ic i-at"><em>@</em></i>木语</li><li class="link"><strong>本文链接：</strong><a href="http://example.com/2025/08/11/scipy/" title="scipy基本模块及其使用">http://example.com/2025/08/11/scipy/</a></li><li class="license"><strong>版权声明：</strong>本站所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/2025/08/10/seaborn/" rel="prev" itemprop="url" data-background-image="&#x2F;images&#x2F;pytorch&#x2F;attention.png" title="seaborn实现统计图绘制"><span class="type">上一篇</span><span class="category"><i class="ic i-flag"></i>code</span><h3>seaborn实现统计图绘制</h3></a></div><div class="item right"><a href="/2025/08/12/23%E5%B9%B4%E5%9B%BD%E8%B5%9B/" rel="next" itemprop="url" data-background-image="&#x2F;images&#x2F;pytorch&#x2F;attention.png" title="23年数学建模国赛"><span class="type">下一篇</span><span class="category"><i class="ic i-flag"></i>mathematical modeling</span><h3>23年数学建模国赛</h3></a></div></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="文章目录"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E5%B8%B8%E9%87%8F%E6%A8%A1%E5%9D%97constants"><span class="toc-number">1.</span> <span class="toc-text"> 一、常量模块(constants)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E6%95%B0%E5%AD%A6%E5%B8%B8%E6%95%B0"><span class="toc-number">1.1.</span> <span class="toc-text"> 1.1 数学常数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-%E9%80%9A%E7%94%A8%E7%89%A9%E7%90%86%E5%B8%B8%E6%95%B0"><span class="toc-number">1.2.</span> <span class="toc-text"> 1.2 通用物理常数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-%E7%94%B5%E7%A3%81%E5%AD%A6%E5%B8%B8%E6%95%B0"><span class="toc-number">1.3.</span> <span class="toc-text"> 1.3 电磁学常数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-%E5%8E%9F%E5%AD%90%E4%B8%8E%E6%A0%B8%E7%89%A9%E7%90%86%E5%B8%B8%E6%95%B0"><span class="toc-number">1.4.</span> <span class="toc-text"> 1.4 原子与核物理常数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-%E5%8C%96%E5%AD%A6%E7%9B%B8%E5%85%B3%E5%B8%B8%E6%95%B0"><span class="toc-number">1.5.</span> <span class="toc-text"> 1.5 化学相关常数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-%E5%B8%B8%E7%94%A8%E5%8D%95%E4%BD%8D%E6%8D%A2%E7%AE%97%E5%9B%A0%E5%AD%90"><span class="toc-number">1.6.</span> <span class="toc-text"> 1.6 常用单位换算因子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-%E6%B8%A9%E5%BA%A6%E7%9B%B8%E5%85%B3"><span class="toc-number">1.7.</span> <span class="toc-text"> 1.7 温度相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E6%89%80%E6%9C%89%E5%B8%B8%E9%87%8F%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">1.8.</span> <span class="toc-text"> 查找所有常量的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E4%BC%98%E5%8C%96%E5%99%A8optimize"><span class="toc-number">2.</span> <span class="toc-text"> 二、优化器(optimize)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-%E6%97%A0%E7%BA%A6%E6%9D%9F%E4%BC%98%E5%8C%96"><span class="toc-number">2.1.</span> <span class="toc-text"> 2.1 无约束优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-%E5%85%A8%E5%B1%80%E4%BC%98%E5%8C%96"><span class="toc-number">2.2.</span> <span class="toc-text"> 2.2 全局优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%8B%9F%E5%90%88"><span class="toc-number">2.3.</span> <span class="toc-text"> 2.3 最小二乘拟合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#24-%E6%96%B9%E7%A8%8B%E6%B1%82%E6%A0%B9"><span class="toc-number">2.4.</span> <span class="toc-text"> 2.4 方程求根</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#25-%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92"><span class="toc-number">2.5.</span> <span class="toc-text"> 2.5 线性规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#26-%E7%BA%A6%E6%9D%9F%E4%BC%98%E5%8C%96"><span class="toc-number">2.6.</span> <span class="toc-text"> 2.6 约束优化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5sparse"><span class="toc-number">3.</span> <span class="toc-text"> 三、稀疏矩阵(sparse)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#31-%E5%A4%84%E7%90%86%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5"><span class="toc-number">3.1.</span> <span class="toc-text"> 3.1 处理稀疏矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#32%E5%9B%BE%E7%BB%93%E6%9E%84sparsecsgraph"><span class="toc-number">3.2.</span> <span class="toc-text"> 3.2图结构(sparse.csgraph)</span></a></li></ol></li></ol></div><div class="related panel pjax" data-title="系列文章"><ul><li ><a href="/2025/07/25/git-basic-usage/" rel="bookmark" title="Git 基本使用教程">Git 基本使用教程</a></li><li ><a href="/2025/07/26/docker-basic-usage/" rel="bookmark" title="Docker 基本使用教程">Docker 基本使用教程</a></li><li ><a href="/2025/07/27/latex/" rel="bookmark" title="Latex常见数学公式">Latex常见数学公式</a></li><li ><a href="/2025/07/27/issue/" rel="bookmark" title="常见BUG汇总">常见BUG汇总</a></li><li ><a href="/2025/07/29/electron/" rel="bookmark" title="Electron 基本使用教程">Electron 基本使用教程</a></li><li ><a href="/2025/08/10/seaborn/" rel="bookmark" title="seaborn实现统计图绘制">seaborn实现统计图绘制</a></li><li  class="active"><a href="/2025/08/11/scipy/" rel="bookmark" title="scipy基本模块及其使用">scipy基本模块及其使用</a></li><li ><a href="/2025/08/18/latex_2/" rel="bookmark" title="Latex全语法使用">Latex全语法使用</a></li><li ><a href="/2025/08/25/Koa/" rel="bookmark" title="Koa 框架使用">Koa 框架使用</a></li><li ><a href="/2025/11/28/pipenv/" rel="bookmark" title="像前端package.json那样管理python依赖 (uv篇)">像前端package.json那样管理python依赖 (uv篇)</a></li></ul></div><div class="overview panel" data-title="站点概览"><div class="author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><img class="image" loading="lazy" decoding="async" itemprop="image" alt="koen" src="/assets/avatar.jpg"/><p class="name" itemprop="name">koen</p><div class="description" itemprop="description">Spark!</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">33</span><span class="name">文章</span></a></div><div class="item categories"><a href="/categories/"><span class="count">16</span><span class="name">分类</span></a></div><div class="item tags"><a href="/tags/"><span class="count">60</span><span class="name">标签</span></a></div></nav><div class="social"><a target="_blank" rel="noopener" href="https://github.com/yourname" class="item github" title="https:&#x2F;&#x2F;github.com&#x2F;yourname"><i class="ic i-github"></i></a></div><div class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>首页</a></li></div></div></div></div><ul id="quick"><li class="prev pjax"><a href="/2025/08/12/23%E5%B9%B4%E5%9B%BD%E8%B5%9B/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"><a href="/2025/08/10/seaborn/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div><div id="player"></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>随机文章</h2><ul><li class="item"><div class="breadcrumb"><a href="/categories/code/" title="分类于code">code</a></div><span><a href="/2025/08/18/latex_2/">Latex全语法使用</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/machinelearning/" title="分类于machinelearning">machinelearning</a></div><span><a href="/2025/11/23/GA/">GA遗传算法</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/code/" title="分类于code">code</a></div><span><a href="/2025/08/11/scipy/">scipy基本模块及其使用</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/code/" title="分类于code">code</a></div><span><a href="/2025/08/25/Koa/">Koa 框架使用</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/code/" title="分类于code">code</a></div><span><a href="/2025/07/27/latex/">Latex常见数学公式</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/fronted/" title="分类于fronted">fronted</a></div><span><a href="/2025/09/16/vue-router/">vue-router</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/fronted/" title="分类于fronted">fronted</a></div><span><a href="/2025/09/08/gradio/">关于模型可视化---Gradio</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/deeplearning/" title="分类于deeplearning">deeplearning</a></div><span><a href="/2025/09/22/KL/">KL散度</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/docker/" title="分类于docker">docker</a></div><span><a href="/2026/01/15/udocker/">让你在没有 root 权限的机子上跑镜像</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/deeplearning/" title="分类于deeplearning">deeplearning</a></div><span><a href="/2025/10/05/%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F/">Imperative，Symbolic and Hybrid Programming</a></span></li></ul></div><div class="rpost pjax"><h2>最新评论</h2></div></div><div class="status"><div class="copyright">&copy; 2022 -<span itemprop="copyrightYear">2026</span><span class="with-love"><i class="ic i-sakura rotate"></i></span><span class="author" itemprop="copyrightHolder">koen @ testName</span></div><div class="count"><span class="post-meta-item-icon"><i class="ic i-chart-area"></i></span><span title="站点总字数">198k 字</span><span class="post-meta-divider"> | </span><span class="post-meta-item-icon"><i class="ic i-coffee"></i></span><span title="站点阅读时长">3:01</span></div><div class="powered-by">基于 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & Theme.<a target="_blank" rel="noopener" href="https://github.com/theme-shoka-x/hexo-theme-shokaX/">ShokaX</a></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL = {
+    ispost: true,
+    path: `2025/08/11/scipy/`,
+    favicon: {
+        show: `（●´3｀●）やれやれだぜ`,
+        hide: `(´Д｀)大変だ！`
+    },
+    search: {
+        placeholder: "文章搜索",
+        empty: "关于 「 ${query} 」，什么也没搜到",
+        stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    nocopy: "false",
+    copyright: `复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。`,
+    copy_tex: false,
+    katex: false,
+    mermaid: false,
+    audio: undefined,
+    nocopy: false,
+    outime: true,
+    template: `<div class="note warning"><p><span class="label warning">文章时效性提示</span><br>这是一篇发布于 {{publish}} 天前，最后一次更新在 {{updated}} 天前的文章，部分信息可能已经发生改变，请注意甄别。</p></div>`,
+    quiz: {
+        choice: `单选题`,
+        multiple: `多选题`,
+        true_false: `判断题`,
+        essay: `问答题`,
+        gap_fill: `填空题`,
+        mistake: `错题备注`
+    }
+};
+</script><script src="/js/siteInit.js?v=0.5.4" type="module" fetchpriority="high" defer></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
