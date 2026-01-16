@@ -7,66 +7,66 @@
         <language>zh-CN</language>
         <pubDate>Tue, 29 Jul 2025 09:20:04 +0800</pubDate>
         <lastBuildDate>Tue, 29 Jul 2025 09:20:04 +0800</lastBuildDate>
-        <category>math</category>
-        <category>GA</category>
-        <category>python</category>
         <category>KL</category>
         <category>RE-ID</category>
-        <category>MLC</category>
-        <category>cmd</category>
-        <category>curl</category>
-        <category>learn</category>
+        <category>GA</category>
+        <category>python</category>
+        <category>math</category>
         <category>Koa</category>
         <category>backen</category>
         <category>nodejs</category>
+        <category>MLC</category>
         <category>cypher</category>
         <category>neo4j</category>
         <category>database</category>
+        <category>container</category>
+        <category>docker</category>
+        <category>learn</category>
+        <category>linux</category>
+        <category>virtual</category>
         <category>electron</category>
         <category>web</category>
         <category>desk</category>
-        <category>container</category>
-        <category>docker</category>
-        <category>linux</category>
-        <category>virtual</category>
+        <category>cmd</category>
+        <category>curl</category>
         <category>flask</category>
+        <category>gradio</category>
         <category>repo</category>
         <category>git</category>
         <category>markdown</category>
         <category>latex</category>
+        <category>uv</category>
+        <category>environment</category>
+        <category>collections</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
-        <category>collections</category>
-        <category>uv</category>
-        <category>environment</category>
-        <category>gradio</category>
-        <category>scipy</category>
-        <category>sql</category>
         <category>deeplearning</category>
         <category>pytorch</category>
         <category>Transformer</category>
+        <category>scipy</category>
+        <category>screen</category>
+        <category>termux</category>
+        <category>saaborn</category>
+        <category>sql</category>
         <category>ssh</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
-        <category>screen</category>
-        <category>termux</category>
-        <category>saaborn</category>
-        <category>vue</category>
         <category>cv</category>
         <category>transforer</category>
+        <category>vue</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
+        <category>yolo</category>
         <category>dataset</category>
+        <category>AnyLabeling</category>
         <category>dataloader</category>
         <category>gpu</category>
         <category>data</category>
-        <category>agent</category>
         <category>code</category>
-        <category>yolo</category>
-        <category>AnyLabeling</category>
+        <category>agent</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2025/07/29/electron/</guid>
             <title>Electron 基本使用教程</title>
