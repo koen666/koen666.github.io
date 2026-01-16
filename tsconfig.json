@@ -1,0 +1,1 @@
+{"compilerOptions":{"target":"ES2022","composite":true,"declaration":true,"esModuleInterop":true,"module":"ESNext","moduleResolution":"bundler","skipLibCheck":true},"include":["./**/*.ts"]}

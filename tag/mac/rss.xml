@@ -1,0 +1,276 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>木语 • Posts by &#34;mac&#34; tag</title>
+        <link>http://example.com</link>
+        <description>Spark!</description>
+        <language>zh-CN</language>
+        <pubDate>Wed, 03 Sep 2025 00:00:00 +0800</pubDate>
+        <lastBuildDate>Wed, 03 Sep 2025 00:00:00 +0800</lastBuildDate>
+        <category>math</category>
+        <category>MLC</category>
+        <category>Koa</category>
+        <category>backen</category>
+        <category>nodejs</category>
+        <category>cypher</category>
+        <category>neo4j</category>
+        <category>database</category>
+        <category>KL</category>
+        <category>RE-ID</category>
+        <category>electron</category>
+        <category>web</category>
+        <category>desk</category>
+        <category>cmd</category>
+        <category>curl</category>
+        <category>learn</category>
+        <category>container</category>
+        <category>docker</category>
+        <category>linux</category>
+        <category>virtual</category>
+        <category>markdown</category>
+        <category>flask</category>
+        <category>python</category>
+        <category>repo</category>
+        <category>git</category>
+        <category>gradio</category>
+        <category>GA</category>
+        <category>latex</category>
+        <category>uv</category>
+        <category>environment</category>
+        <category>router</category>
+        <category>ip</category>
+        <category>MAC</category>
+        <category>collections</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
+        <category>Transformer</category>
+        <category>screen</category>
+        <category>termux</category>
+        <category>scipy</category>
+        <category>saaborn</category>
+        <category>sql</category>
+        <category>ssh</category>
+        <category>images</category>
+        <category>hpc</category>
+        <category>tutorial</category>
+        <category>cv</category>
+        <category>transforer</category>
+        <category>vue</category>
+        <category>yaml</category>
+        <category>argparse</category>
+        <category>easydict</category>
+        <category>yolo</category>
+        <category>dataset</category>
+        <category>AnyLabeling</category>
+        <category>dataloader</category>
+        <category>gpu</category>
+        <category>data</category>
+        <category>agent</category>
+        <category>code</category>
+        <item>
+            <guid isPermalink="true">http://example.com/2025/09/03/network/</guid>
+            <title>网络核心概念精讲</title>
+            <link>http://example.com/2025/09/03/network/</link>
+            <category>router</category>
+            <category>ip</category>
+            <category>MAC</category>
+            <pubDate>Wed, 03 Sep 2025 00:00:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;网络核心概念精讲从-ip-地址到-mac-地址&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#网络核心概念精讲从-ip-地址到-mac-地址&#34;&gt;#&lt;/a&gt; 网络核心概念精讲：从 IP 地址到 MAC 地址&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文旨在系统性地讲解计算机网络的核心概念，包括 IP 地址、子网、路由器、DNS 等，力求用通俗易懂的语言和比喻解释复杂的技术原理。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;1-网络层级模型互联网的交通规则&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1-网络层级模型互联网的交通规则&#34;&gt;#&lt;/a&gt; 1. 网络层级模型：互联网的交通规则&lt;/h2&gt;
+&lt;p&gt;理解网络，首先要理解它的分层模型。最著名的 OSI 七层模型和 TCP/IP 五层模型将复杂的网络通信过程分解为多个层次，每一层只专注于自己的任务。&lt;/p&gt;
+&lt;p&gt;一个经典的比喻是&lt;strong&gt;发送快递&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;应用层&lt;/strong&gt;：你要寄的东西本身（比如一封信），决定了通信的&lt;strong&gt;内容&lt;/strong&gt;（HTTP, FTP）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;传输层&lt;/strong&gt;：将东西打包，贴上“顺丰”或“EMS”的标签，并确保包裹完整送达（TCP, UDP）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络层&lt;/strong&gt;：填写&lt;strong&gt;收件人地址&lt;/strong&gt;和&lt;strong&gt;发件人地址&lt;/strong&gt;（IP 地址），负责在不同网络间选择路径（IP, 路由器）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据链路层&lt;/strong&gt;：快递员在包裹上盖“下一站”的印章，负责在&lt;strong&gt;同一条路&lt;/strong&gt;上把包裹送到下一个中转站（MAC 地址，交换机）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;物理层&lt;/strong&gt;：包裹本身和运送的卡车、公路，负责最终的&lt;strong&gt;比特流&lt;/strong&gt;传输（网线、光纤、无线电波）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2-ip-地址互联网上的门牌号&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2-ip-地址互联网上的门牌号&#34;&gt;#&lt;/a&gt; 2. IP 地址：互联网上的“门牌号”&lt;/h2&gt;
+&lt;h3 id=&#34;21-什么是-ip-地址&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#21-什么是-ip-地址&#34;&gt;#&lt;/a&gt; 2.1 什么是 IP 地址？&lt;/h3&gt;
+&lt;p&gt;IP 地址是为互联网上的每一个设备分配的一个&lt;strong&gt;逻辑地址&lt;/strong&gt;，用于在网络中定位和寻址。它就像你家的门牌号，知道了这个地址，数据包才能找到你。&lt;/p&gt;
+&lt;h3 id=&#34;22-公有-ip-vs-私有-ip&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#22-公有-ip-vs-私有-ip&#34;&gt;#&lt;/a&gt; 2.2 公有 IP vs. 私有 IP&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;公有 IP (Public IP)&lt;/strong&gt;：全球唯一，由运营商分配，是你在互联网上的“家庭住址”。可以直接被互联网上的其他设备访问。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;如何查看&lt;/strong&gt;：在浏览器中访问 &lt;code&gt;ip.cn&lt;/code&gt; 或 &lt;code&gt;whatismyip.com&lt;/code&gt;，或在 PowerShell 中运行 &lt;code&gt;(Invoke-RestMethod -Uri &#34;https://api.ipify.org&#34;).Trim()&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;私有 IP (Private IP)&lt;/strong&gt;：在局域网（LAN）内使用，非全球唯一。你家中的电脑、手机获得的都是私有 IP。它们通过&lt;strong&gt;路由器&lt;/strong&gt;共享一个公有 IP 上网。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;常见范围&lt;/strong&gt;：&lt;code&gt;10.0.0.0/8&lt;/code&gt;, &lt;code&gt;172.16.0.0/12&lt;/code&gt;, &lt;code&gt;192.168.0.0/16&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;如何查看&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Windows&lt;/strong&gt;: &lt;code&gt;Win + R&lt;/code&gt; -&amp;gt; 输入 &lt;code&gt;cmd&lt;/code&gt; -&amp;gt; 输入 &lt;code&gt;ipconfig&lt;/code&gt;，查看“IPv4 地址”。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;macOS/Linux&lt;/strong&gt;: 打开“终端”，输入 &lt;code&gt;ifconfig&lt;/code&gt; 或 &lt;code&gt;ip addr&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;23-ipv4-vs-ipv6&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#23-ipv4-vs-ipv6&#34;&gt;#&lt;/a&gt; 2.3 IPv4 vs. IPv6&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;特性&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;IPv4&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;IPv6&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;strong&gt;地址长度&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;32 位&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;128 位&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;strong&gt;地址总量&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;约 42.9 亿&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;近乎无限（&lt;code&gt;2^128&lt;/code&gt; 个）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;strong&gt;表示方法&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;十进制（如 &lt;code&gt;192.168.1.1&lt;/code&gt;）&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;十六进制（如 &lt;code&gt;2001:db8::1&lt;/code&gt;）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;strong&gt;本质&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;都是二进制数，只是对人类的不同表示方式&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;3-子网掩码与网络划分划定社区的范围&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3-子网掩码与网络划分划定社区的范围&#34;&gt;#&lt;/a&gt; 3. 子网掩码与网络划分：划定“社区”的范围&lt;/h2&gt;
+&lt;p&gt;光有门牌号不够，还需要知道这个门牌号属于哪个小区（网络）。&lt;strong&gt;子网掩码&lt;/strong&gt;就是用来界定“小区”范围的工具。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：将 IP 地址划分为&lt;strong&gt;网络号&lt;/strong&gt;（小区名）和&lt;strong&gt;主机号&lt;/strong&gt;（门牌号）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;计算&lt;/strong&gt;：将 IP 地址与子网掩码进行&lt;strong&gt;逻辑与运算&lt;/strong&gt;，即可得到网络号。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;例子&lt;/strong&gt;：IP &lt;code&gt;192.168.1.100&lt;/code&gt;，掩码 &lt;code&gt;255.255.255.0&lt;/code&gt;。
+&lt;ul&gt;
+&lt;li&gt;二进制“与”运算后得到网络号：&lt;code&gt;192.168.1.0&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;这意味着 &lt;code&gt;192.168.1.1&lt;/code&gt; 到 &lt;code&gt;192.168.1.254&lt;/code&gt; 的设备都在同一个“小区”内，可以直接通信。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CIDR 表示法&lt;/strong&gt;：&lt;code&gt;192.168.1.0/24&lt;/code&gt;，其中 &lt;code&gt;/24&lt;/code&gt; 表示子网掩码前 24 位是 &lt;code&gt;1&lt;/code&gt;（即 &lt;code&gt;255.255.255.0&lt;/code&gt;）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;特殊的子网掩码&lt;/strong&gt;：像 &lt;code&gt;255.255.128.0&lt;/code&gt; 这样的掩码，它提供了更灵活的划分方式，可以将一个大的地址段（如 &lt;code&gt;172.16.0.0/16&lt;/code&gt;）划分为两个更小的子网，以满足不同规模的网络需求。&lt;/p&gt;
+&lt;h2 id=&#34;4-网关与路由器网络的出入口和交通枢纽&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#4-网关与路由器网络的出入口和交通枢纽&#34;&gt;#&lt;/a&gt; 4. 网关与路由器：网络的“出入口”和“交通枢纽”&lt;/h2&gt;
+&lt;h3 id=&#34;41-网关-gateway&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#41-网关-gateway&#34;&gt;#&lt;/a&gt; 4.1 网关 (Gateway)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;定义&lt;/strong&gt;：连接两个不同网络的&lt;strong&gt;出入口&lt;/strong&gt;。是一个逻辑概念。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;地址&lt;/strong&gt;：网关必须有一个 IP 地址，这个地址就是&lt;strong&gt;路由器局域网口的 IP 地址&lt;/strong&gt;（如 &lt;code&gt;192.168.1.1&lt;/code&gt;, &lt;code&gt;10.138.255.254&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：当你的设备要访问互联网（另一个网络）时，它会把所有数据包都发给网关，由网关负责转发。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;42-路由器-router&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#42-路由器-router&#34;&gt;#&lt;/a&gt; 4.2 路由器 (Router)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;定义&lt;/strong&gt;：是实现网关功能的&lt;strong&gt;物理设备&lt;/strong&gt;。是网络的“交通枢纽”，根据“地图”（路由表）决定数据包的下一站去哪。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;核心功能&lt;/strong&gt;：
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;路由&lt;/strong&gt;：在不同网络间转发数据包。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;NAT (网络地址转换)&lt;/strong&gt;：将局域网内多个设备的私有 IP 转换为一个公有 IP 上网，是共享上网的基础。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DHCP 服务&lt;/strong&gt;：自动为局域网内的设备分配 IP 地址、子网掩码、网关和 DNS 地址。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;交换机 &amp;amp; 无线 AP&lt;/strong&gt;：提供有线端口和 Wi-Fi 信号接入。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;43-硬路由-vs-软路由&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#43-硬路由-vs-软路由&#34;&gt;#&lt;/a&gt; 4.3 硬路由 vs. 软路由&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;特性&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;硬路由&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;软路由&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;strong&gt;本质&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;专用硬件设备（如家用路由器）&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;在通用硬件（电脑/工控机）上运行的路由软件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;strong&gt;优点&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;稳定、省电、即插即用&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;性能强大、功能无限（通过插件实现科学上网、去广告等）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;strong&gt;缺点&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;功能固定、性能有限&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;需自行配置、功耗较高、有学习成本&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;strong&gt;例子&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;华硕、TP-Link、网件路由器&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;strong&gt;OpenWrt&lt;/strong&gt;, &lt;strong&gt;爱快(iKuai)&lt;/strong&gt;, &lt;strong&gt;ROS&lt;/strong&gt; 系统&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;5-dhcp-vs-静态-ip自动分配与手动指定&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#5-dhcp-vs-静态-ip自动分配与手动指定&#34;&gt;#&lt;/a&gt; 5. DHCP vs. 静态 IP：自动分配与手动指定&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;特性&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;DHCP (动态分配)&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;静态 IP (手动配置)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;strong&gt;配置方式&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;strong&gt;自动&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;strong&gt;手动&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;strong&gt;地址变化&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;可能变化（租期到期）&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;strong&gt;固定不变&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;strong&gt;适用场景&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;绝大多数设备（手机、电脑）&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;需要固定地址的设备（服务器、打印机、NAS）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;strong&gt;比喻&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;strong&gt;租房子&lt;/strong&gt;（地址可能变）&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;strong&gt;自己买的房子&lt;/strong&gt;（地址永久）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;6-dns互联网的电话簿&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#6-dns互联网的电话簿&#34;&gt;#&lt;/a&gt; 6. DNS：互联网的“电话簿”&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;全称&lt;/strong&gt;：域名系统 (Domain Name System)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;作用&lt;/strong&gt;：将人类容易记住的&lt;strong&gt;域名&lt;/strong&gt;（如 &lt;code&gt;www.google.com&lt;/code&gt;）翻译成计算机用于通信的 &lt;strong&gt;IP 地址&lt;/strong&gt;（如 &lt;code&gt;142.251.42.206&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;提供者&lt;/strong&gt;：通常由你的网络运营商（ISP）自动分配，也可以手动设置为公共 DNS（如 &lt;code&gt;8.8.8.8&lt;/code&gt; Google DNS 或 &lt;code&gt;1.1.1.1&lt;/code&gt; Cloudflare DNS）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;查看方式&lt;/strong&gt;：在 &lt;code&gt;ipconfig /all&lt;/code&gt; 命令结果中查看“DNS 服务器”项。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;7-mac-地址网卡的身份证&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#7-mac-地址网卡的身份证&#34;&gt;#&lt;/a&gt; 7. MAC 地址：网卡的“身份证”&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;定义&lt;/strong&gt;：媒体访问控制地址，是固化在网卡硬件中的&lt;strong&gt;全球唯一&lt;/strong&gt;的&lt;strong&gt;物理地址&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;格式&lt;/strong&gt;：48 位，16 进制表示（如 &lt;code&gt;00:1A:2B:3C:4D:5E&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;结构&lt;/strong&gt;：前 24 位是厂商标识（OUI），后 24 位是厂商分配的序列号。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;作用层级&lt;/strong&gt;：工作在&lt;strong&gt;数据链路层&lt;/strong&gt;，负责在&lt;strong&gt;同一个局域网内&lt;/strong&gt;进行设备间的直接寻址（“下一跳”通信）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;核心协议&lt;/strong&gt;：&lt;strong&gt;ARP&lt;/strong&gt;。设备通过广播“这个 IP 的 MAC 地址是什么？”来获取目标设备的物理地址，从而在局域网内直接通信。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;与 IP 地址的关系&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;IP 地址&lt;/strong&gt;：像&lt;strong&gt;收件地址&lt;/strong&gt;，负责&lt;strong&gt;端到端&lt;/strong&gt;的全局寻址（“我要去上海”）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MAC 地址&lt;/strong&gt;：像&lt;strong&gt;当前路段的下一站&lt;/strong&gt;，负责&lt;strong&gt;一跳接一跳&lt;/strong&gt;的局部寻址（“下一站去天津”）。数据包每经过一个路由器，其源和目的 MAC 地址都会被重写，而 IP 地址保持不变。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;8-总结&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#8-总结&#34;&gt;#&lt;/a&gt; 8. 总结&lt;/h2&gt;
+&lt;p&gt;网络通信是一个精妙的协作过程：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;你想访问 &lt;code&gt;www.google.com&lt;/code&gt;，&lt;strong&gt;DNS&lt;/strong&gt; 首先将其解析为 IP 地址。&lt;/li&gt;
+&lt;li&gt;你的电脑判断目标 IP 不在当前局域网，于是将数据包发往&lt;strong&gt;网关&lt;/strong&gt;（你的路由器）。&lt;/li&gt;
+&lt;li&gt;路由器通过 &lt;strong&gt;NAT&lt;/strong&gt; 将你的私有 IP 转为公有 IP，并根据路由表将数据包发往互联网的下一跳。&lt;/li&gt;
+&lt;li&gt;在每一跳中，设备都通过 &lt;strong&gt;MAC 地址&lt;/strong&gt;和 &lt;strong&gt;ARP&lt;/strong&gt; 协议在局部链路上寻址。&lt;/li&gt;
+&lt;li&gt;数据包最终到达目标服务器，响应再沿着相反的路径回到你的电脑。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;理解这些核心概念，就能拨开互联网的迷雾，看清数据流动的轨迹。&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

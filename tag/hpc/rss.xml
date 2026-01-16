@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>木语 • Posts by &#34;hpc&#34; tag</title>
+        <link>http://example.com</link>
+        <description>Spark!</description>
+        <language>zh-CN</language>
+        <pubDate>Thu, 15 Jan 2026 00:00:00 +0800</pubDate>
+        <lastBuildDate>Thu, 15 Jan 2026 00:00:00 +0800</lastBuildDate>
+        <category>math</category>
+        <category>MLC</category>
+        <category>Koa</category>
+        <category>backen</category>
+        <category>nodejs</category>
+        <category>cypher</category>
+        <category>neo4j</category>
+        <category>database</category>
+        <category>KL</category>
+        <category>RE-ID</category>
+        <category>electron</category>
+        <category>web</category>
+        <category>desk</category>
+        <category>cmd</category>
+        <category>curl</category>
+        <category>learn</category>
+        <category>container</category>
+        <category>docker</category>
+        <category>linux</category>
+        <category>virtual</category>
+        <category>markdown</category>
+        <category>flask</category>
+        <category>python</category>
+        <category>repo</category>
+        <category>git</category>
+        <category>gradio</category>
+        <category>GA</category>
+        <category>latex</category>
+        <category>uv</category>
+        <category>environment</category>
+        <category>router</category>
+        <category>ip</category>
+        <category>MAC</category>
+        <category>collections</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
+        <category>Transformer</category>
+        <category>screen</category>
+        <category>termux</category>
+        <category>scipy</category>
+        <category>saaborn</category>
+        <category>sql</category>
+        <category>ssh</category>
+        <category>images</category>
+        <category>hpc</category>
+        <category>tutorial</category>
+        <category>cv</category>
+        <category>transforer</category>
+        <category>vue</category>
+        <category>yaml</category>
+        <category>argparse</category>
+        <category>easydict</category>
+        <category>yolo</category>
+        <category>dataset</category>
+        <category>AnyLabeling</category>
+        <category>dataloader</category>
+        <category>gpu</category>
+        <category>data</category>
+        <category>agent</category>
+        <category>code</category>
+        <item>
+            <guid isPermalink="true">http://example.com/2026/01/15/udocker/</guid>
+            <title>让你在没有 root 权限的机子上跑镜像</title>
+            <link>http://example.com/2026/01/15/udocker/</link>
+            <category>docker</category>
+            <category>images</category>
+            <category>hpc</category>
+            <category>tutorial</category>
+            <pubDate>Thu, 15 Jan 2026 00:00:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;背景为什么我们需要它&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#背景为什么我们需要它&#34;&gt;#&lt;/a&gt; 背景：为什么我们需要它？&lt;/h2&gt;
+&lt;p&gt;在科研和开发过程中，我们经常遇到这样的死结：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;环境依赖地狱&lt;/strong&gt;：代码依赖特定的 CUDA 版本、Ubuntu 版本或一大堆 Python 库，手动配置极易冲突。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;没有 Root 权限&lt;/strong&gt;：实验室的服务器、学校的 HPC 集群通常由管理员统一管理，普通学生账户没有 &lt;code&gt;sudo&lt;/code&gt; 权限。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Docker 无法使用&lt;/strong&gt;：标准的 Docker 需要守护进程（Daemon）以 root 身份运行，没有权限意味着 &lt;code&gt;docker: command not found&lt;/code&gt; 或 &lt;code&gt;permission denied&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;虽然 &lt;strong&gt;Podman&lt;/strong&gt; 是一个很好的无 Root 替代品，但它对 Linux 内核版本有要求（需要 User Namespaces 支持），且在某些老旧的超算系统上仍然难以安装。&lt;/p&gt;
+&lt;p&gt;这时候，&lt;strong&gt;udocker&lt;/strong&gt; 就是一个非常实用的解决方案。&lt;/p&gt;
+&lt;h2 id=&#34;什么是-udocker&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#什么是-udocker&#34;&gt;#&lt;/a&gt; 什么是 udocker？&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;udocker&lt;/code&gt; 是一个专门为在用户空间运行 Docker 容器而设计的工具：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;纯用户空间&lt;/strong&gt;：不需要 root 权限，也不需要安装系统级守护进程。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;兼容性强&lt;/strong&gt;：本质上是一个 Python 脚本，几乎可以在任何 Linux 发行版（CentOS 6/7、Ubuntu、Fedora 等）上运行。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;原理&lt;/strong&gt;：通过 &lt;strong&gt;PRoot&lt;/strong&gt;（利用 &lt;code&gt;ptrace&lt;/code&gt; 机制）或 &lt;strong&gt;Fakechroot&lt;/strong&gt; 等技术，模拟 root 环境和文件系统挂载，让容器“以为”自己运行在特权环境中。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一句话总结：&lt;strong&gt;只要你能跑 Python，就能跑 udocker，进而跑 Docker 镜像。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;1-安装-udocker&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1-安装-udocker&#34;&gt;#&lt;/a&gt; 1. 安装 udocker&lt;/h2&gt;
+&lt;p&gt;安装过程很简单：下载脚本并初始化。&lt;/p&gt;
+&lt;h3 id=&#34;11-下载-udocker-脚本&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#11-下载-udocker-脚本&#34;&gt;#&lt;/a&gt; 1.1 下载 udocker 脚本&lt;/h3&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;curl&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; -L&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; https://raw.githubusercontent.com/indigo-dc/udocker/master/udocker.py&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&gt;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; udocker&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;12-赋予执行权限&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#12-赋予执行权限&#34;&gt;#&lt;/a&gt; 1.2 赋予执行权限&lt;/h3&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;chmod&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; +x&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; udocker&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;13-移动到你的-bin-目录可选&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#13-移动到你的-bin-目录可选&#34;&gt;#&lt;/a&gt; 1.3 移动到你的 bin 目录（可选）&lt;/h3&gt;
+&lt;p&gt;前提：&lt;code&gt;~/.local/bin&lt;/code&gt; 已在 &lt;code&gt;PATH&lt;/code&gt; 中。&lt;/p&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;mv&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; udocker&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; ~/.local/bin/&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;14-初始化&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#14-初始化&#34;&gt;#&lt;/a&gt; 1.4 初始化&lt;/h3&gt;
+&lt;p&gt;这会自动下载所需的引擎二进制文件到 &lt;code&gt;~/.udocker&lt;/code&gt; 目录。&lt;/p&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;udocker&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; install&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;15-验证安装&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#15-验证安装&#34;&gt;#&lt;/a&gt; 1.5 验证安装&lt;/h3&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;udocker&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; version&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;2-基本使用像-docker-一样操作&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2-基本使用像-docker-一样操作&#34;&gt;#&lt;/a&gt; 2. 基本使用：像 Docker 一样操作&lt;/h2&gt;
+&lt;p&gt;udocker 的命令设计上尽量模仿 Docker，但有一个关键区别：&lt;strong&gt;udocker 严格区分“容器创建”和“容器运行”。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;21-拉取镜像pull&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#21-拉取镜像pull&#34;&gt;#&lt;/a&gt; 2.1 拉取镜像（pull）&lt;/h3&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;# 拉取 PyTorch 镜像&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;udocker&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; pull&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; pytorch/pytorch:1.13.0-cuda11.6-cudnn8-runtime&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;22-创建容器create&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#22-创建容器create&#34;&gt;#&lt;/a&gt; 2.2 创建容器（create）&lt;/h3&gt;
+&lt;p&gt;在 Docker 中，&lt;code&gt;docker run&lt;/code&gt; 常同时完成创建和启动；在 udocker 中，更推荐先显式创建容器。&lt;/p&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;# 从镜像创建一个名为 &#34;my_experiment&#34; 的容器&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;udocker&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; create&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; --name=my_experiment&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; pytorch/pytorch:1.13.0-cuda11.6-cudnn8-runtime&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;23-运行容器run&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#23-运行容器run&#34;&gt;#&lt;/a&gt; 2.3 运行容器（run）&lt;/h3&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;# 运行容器并进入交互式终端&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;# -v 挂载目录：将宿主机当前目录挂载到容器的 /workspace&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;udocker&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; run&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; -v&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;$(&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;pwd&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;:/workspace&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; my_experiment&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; /bin/bash&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;进入容器后，你会看到自己是 root（容器内部视角）。你可以 &lt;code&gt;apt-get install&lt;/code&gt; 或 &lt;code&gt;pip install&lt;/code&gt;，但这些改动只影响容器文件系统，不会影响宿主机。&lt;/p&gt;
+&lt;h2 id=&#34;3-进阶技巧科研场景专用&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3-进阶技巧科研场景专用&#34;&gt;#&lt;/a&gt; 3. 进阶技巧：科研场景专用&lt;/h2&gt;
+&lt;h3 id=&#34;31-启用-gpu-支持nvidia&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#31-启用-gpu-支持nvidia&#34;&gt;#&lt;/a&gt; 3.1 启用 GPU 支持（NVIDIA）&lt;/h3&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;# 使用 --nvidia 标志启用 GPU 支持&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;udocker&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; run&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; --nvidia&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; my_experiment&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; nvidia-smi&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;注意：udocker &lt;strong&gt;不包含&lt;/strong&gt;驱动程序，它只是将宿主机的 &lt;code&gt;/dev/nvidia*&lt;/code&gt; 设备和相关库映射进容器。请确保宿主机已正确安装显卡驱动。&lt;/p&gt;
+&lt;h3 id=&#34;32-更改运行模式execmode&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#32-更改运行模式execmode&#34;&gt;#&lt;/a&gt; 3.2 更改运行模式（execmode）&lt;/h3&gt;
+&lt;p&gt;如果遇到 &lt;code&gt;Segmentation fault&lt;/code&gt; 或某些程序跑不起来，可以尝试更改执行模式。udocker 提供多种模式（不同版本的可用项可能略有差异）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;P1/P2（PRoot）&lt;/strong&gt;：默认模式，兼容性最好，但 I/O 密集任务可能有性能损耗。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;F1/F2/F3（Fakechroot）&lt;/strong&gt;：性能更好，但兼容性可能稍差。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;R1（RunC）&lt;/strong&gt;：若内核/环境满足条件，性能接近原生 Docker。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;查看当前模式：&lt;/p&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;udocker&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; setup&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; --execmode&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; my_experiment&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;切换为某个模式（示例：F3）：&lt;/p&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;udocker&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; setup&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; --execmode=F3&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; my_experiment&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;4-常见问题与局限&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#4-常见问题与局限&#34;&gt;#&lt;/a&gt; 4. 常见问题与局限&lt;/h2&gt;
+&lt;h3 id=&#34;41-端口映射&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#41-端口映射&#34;&gt;#&lt;/a&gt; 4.1 端口映射&lt;/h3&gt;
+&lt;p&gt;udocker 默认使用宿主机网络栈（Host Mode）。因此通常不能像 Docker 那样用 &lt;code&gt;-p 8080:80&lt;/code&gt; 做 NAT 端口转发。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果容器内服务监听 &lt;code&gt;8000&lt;/code&gt;，它往往就是在宿主机的 &lt;code&gt;8000&lt;/code&gt; 上监听。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;42-安全性&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#42-安全性&#34;&gt;#&lt;/a&gt; 4.2 安全性&lt;/h3&gt;
+&lt;p&gt;udocker 的目标偏向“可用性”，而不是强隔离。不要在容器里运行不可信/恶意代码，因为它可能影响当前用户可访问的文件（例如你的 &lt;code&gt;HOME&lt;/code&gt; 目录）。&lt;/p&gt;
+&lt;h3 id=&#34;43-清理与空间占用&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#43-清理与空间占用&#34;&gt;#&lt;/a&gt; 4.3 清理与空间占用&lt;/h3&gt;
+&lt;p&gt;容器文件默认存储在 &lt;code&gt;~/.udocker/containers&lt;/code&gt; 下，不用的容器/镜像建议定期清理：&lt;/p&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;# 删除容器&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;udocker&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; rm&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; my_experiment&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;# 删除镜像（按实际 tag 替换）&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;udocker&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; rmi&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; pytorch/pytorch:xxxx&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;总结&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#总结&#34;&gt;#&lt;/a&gt; 总结&lt;/h2&gt;
+&lt;p&gt;在受限的服务器或 HPC 环境下，udocker 可以在&lt;strong&gt;无需 root 权限&lt;/strong&gt;的前提下运行容器化环境，适合解决“在别人的机器上跑我的环境”这一类问题。&lt;/p&gt;
+&lt;p&gt;如果你在集群上装不上 Docker，又想复用 Docker Hub 上现成镜像，可以优先试试 udocker。&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

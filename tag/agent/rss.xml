@@ -1,0 +1,326 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>木语 • Posts by &#34;agent&#34; tag</title>
+        <link>http://example.com</link>
+        <description>Spark!</description>
+        <language>zh-CN</language>
+        <pubDate>Tue, 02 Dec 2025 00:00:00 +0800</pubDate>
+        <lastBuildDate>Tue, 02 Dec 2025 00:00:00 +0800</lastBuildDate>
+        <category>math</category>
+        <category>MLC</category>
+        <category>Koa</category>
+        <category>backen</category>
+        <category>nodejs</category>
+        <category>cypher</category>
+        <category>neo4j</category>
+        <category>database</category>
+        <category>KL</category>
+        <category>RE-ID</category>
+        <category>electron</category>
+        <category>web</category>
+        <category>desk</category>
+        <category>cmd</category>
+        <category>curl</category>
+        <category>learn</category>
+        <category>container</category>
+        <category>docker</category>
+        <category>linux</category>
+        <category>virtual</category>
+        <category>markdown</category>
+        <category>flask</category>
+        <category>python</category>
+        <category>repo</category>
+        <category>git</category>
+        <category>gradio</category>
+        <category>GA</category>
+        <category>latex</category>
+        <category>uv</category>
+        <category>environment</category>
+        <category>router</category>
+        <category>ip</category>
+        <category>MAC</category>
+        <category>collections</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
+        <category>Transformer</category>
+        <category>screen</category>
+        <category>termux</category>
+        <category>scipy</category>
+        <category>saaborn</category>
+        <category>sql</category>
+        <category>ssh</category>
+        <category>images</category>
+        <category>hpc</category>
+        <category>tutorial</category>
+        <category>cv</category>
+        <category>transforer</category>
+        <category>vue</category>
+        <category>yaml</category>
+        <category>argparse</category>
+        <category>easydict</category>
+        <category>yolo</category>
+        <category>dataset</category>
+        <category>AnyLabeling</category>
+        <category>dataloader</category>
+        <category>gpu</category>
+        <category>data</category>
+        <category>agent</category>
+        <category>code</category>
+        <item>
+            <guid isPermalink="true">http://example.com/2025/12/02/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%BC%96%E6%8E%92/</guid>
+            <title>五种多agent编排方式</title>
+            <link>http://example.com/2025/12/02/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%BC%96%E6%8E%92/</link>
+            <category>agent</category>
+            <pubDate>Tue, 02 Dec 2025 00:00:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;五种多agent编排方式详解&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#五种多agent编排方式详解&#34;&gt;#&lt;/a&gt; 五种多Agent编排方式详解&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;摘要&lt;/strong&gt;：随着 AI 应用从单体 LLM 向多智能体（Multi-Agent）协作演进，如何高效协调这些智能体成为关键。本文深入浅出地介绍业界最主流的五种多Agent编排模式及其应用场景。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;一-顺序编排-the-chain-sequential&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一-顺序编排-the-chain-sequential&#34;&gt;#&lt;/a&gt; 一、 顺序编排 (The Chain / Sequential)&lt;/h2&gt;
+&lt;p&gt;这是最直观、最基础的协作方式，常被称为“流水线模式”。&lt;/p&gt;
+&lt;h3 id=&#34;核心逻辑&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#核心逻辑&#34;&gt;#&lt;/a&gt; 核心逻辑&lt;/h3&gt;
+&lt;p&gt;就像现代工厂的装配流水线，任务沿着预定义好的路径单向流动。前一个智能体完成工作后的输出，直接作为下一个智能体的输入。各个环节环环相扣，依赖关系明确。&lt;/p&gt;
+&lt;p&gt;其工作流可以简单表示为：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34; display=&#34;block&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mtext&gt;Input&lt;/mtext&gt;&lt;mo&gt;→&lt;/mo&gt;&lt;mtext&gt;Agent A&lt;/mtext&gt;&lt;mo&gt;→&lt;/mo&gt;&lt;mtext&gt;Agent B&lt;/mtext&gt;&lt;mo&gt;→&lt;/mo&gt;&lt;mtext&gt;Agent C&lt;/mtext&gt;&lt;mo&gt;→&lt;/mo&gt;&lt;mtext&gt;Output&lt;/mtext&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\text{Input} \rightarrow \text{Agent A} \rightarrow \text{Agent B} \rightarrow \text{Agent C} \rightarrow \text{Output}
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8778em;vertical-align:-0.1944em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord&#34;&gt;Input&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;→&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8778em;vertical-align:-0.1944em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord&#34;&gt;Agent A&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;→&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8778em;vertical-align:-0.1944em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord&#34;&gt;Agent B&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;→&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8778em;vertical-align:-0.1944em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord&#34;&gt;Agent C&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;→&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8778em;vertical-align:-0.1944em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord&#34;&gt;Output&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&#34;适用场景&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#适用场景&#34;&gt;#&lt;/a&gt; 适用场景&lt;/h3&gt;
+&lt;p&gt;非常适用于步骤固定、确定性强、不需要回头修改的标准作业流程（SOP），例如数据处理管道或审批流程。&lt;/p&gt;
+&lt;h3 id=&#34;实战案例自动化公众号文章生成器&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#实战案例自动化公众号文章生成器&#34;&gt;#&lt;/a&gt; 实战案例：自动化公众号文章生成器&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;场景目标&lt;/strong&gt;：建立一条自动化流水线，将用户提供的英文科技新闻链接，全自动转换为一篇符合中文阅读习惯、风格活泼的公众号推文。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;流程拆解&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;输入层&lt;/strong&gt;：用户提供一个目标文章的 URL 链接。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;第一环：信息获取（Agent A - 爬虫员）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;任务&lt;/em&gt;：访问 URL，智能提取网页核心正文内容，清洗掉导航栏、广告和多余的 HTML 标签。&lt;/li&gt;
+&lt;li&gt;➡️ &lt;em&gt;交付成果&lt;/em&gt;：纯净的英文文本素材。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;strong&gt;第二环：内容翻译（Agent B - 翻译员）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;任务&lt;/em&gt;：接收英文素材，结合上下文将其翻译成流畅、准确的中文草稿。&lt;/li&gt;
+&lt;li&gt;➡️ &lt;em&gt;交付成果&lt;/em&gt;：中文文章草稿。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;&lt;strong&gt;第三环：风格润色（Agent C - 编辑员）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;任务&lt;/em&gt;：根据预设的公众号人设，对草稿进行二次加工：优化分段结构、加入符合语境的表情包、起一个吸引点击的标题。&lt;/li&gt;
+&lt;li&gt;➡️ &lt;em&gt;最终输出&lt;/em&gt;：一篇可直接发布的成品推文。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;模式特点&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#模式特点&#34;&gt;#&lt;/a&gt; 模式特点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;：结构简单清晰，易于构建、理解和调试。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺点&lt;/strong&gt;：鲁棒性较差。由于路径是单一线性的，存在严重的级联效应。如果源头的 Agent A 抓取内容失败或产生幻觉，后续所有环节都会基于错误信息进行加工，导致整个流程失败（Garbage in, garbage out）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;二-并行编排-mapreduce&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#二-并行编排-mapreduce&#34;&gt;#&lt;/a&gt; 二、 并行编排 (MapReduce)&lt;/h2&gt;
+&lt;p&gt;这种模式借鉴了分布式计算的思想，核心目的是“分而治之”，通过并行化突破单点能力或窗口限制。&lt;/p&gt;
+&lt;h3 id=&#34;核心逻辑-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#核心逻辑-2&#34;&gt;#&lt;/a&gt; 核心逻辑&lt;/h3&gt;
+&lt;p&gt;将一个巨大的复杂任务拆解为多个相互独立的子任务，分发给多个 Agent 并行处理（Map），最后将所有结果汇总整合（Reduce）。&lt;/p&gt;
+&lt;p&gt;其工作流可以简单表示为：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34; display=&#34;block&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mtext&gt;Input&lt;/mtext&gt;&lt;mover&gt;&lt;mo stretchy=&#34;true&#34; minsize=&#34;3.0em&#34;&gt;→&lt;/mo&gt;&lt;mpadded width=&#34;+0.6em&#34; lspace=&#34;0.3em&#34;&gt;&lt;mtext&gt;Split&lt;/mtext&gt;&lt;/mpadded&gt;&lt;/mover&gt;&lt;mo stretchy=&#34;false&#34;&gt;{&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/msub&gt;&lt;mo separator=&#34;true&#34;&gt;,&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msub&gt;&lt;mo separator=&#34;true&#34;&gt;,&lt;/mo&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;.&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;.&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;.&lt;/mi&gt;&lt;mo stretchy=&#34;false&#34;&gt;}&lt;/mo&gt;&lt;mover&gt;&lt;mo stretchy=&#34;true&#34; minsize=&#34;3.0em&#34;&gt;→&lt;/mo&gt;&lt;mpadded width=&#34;+0.6em&#34; lspace=&#34;0.3em&#34;&gt;&lt;mtext&gt;Map&lt;/mtext&gt;&lt;/mpadded&gt;&lt;/mover&gt;&lt;mo stretchy=&#34;false&#34;&gt;{&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/msub&gt;&lt;mo separator=&#34;true&#34;&gt;,&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msub&gt;&lt;mo separator=&#34;true&#34;&gt;,&lt;/mo&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;.&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;.&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;.&lt;/mi&gt;&lt;mo stretchy=&#34;false&#34;&gt;}&lt;/mo&gt;&lt;mover&gt;&lt;mo stretchy=&#34;true&#34; minsize=&#34;3.0em&#34;&gt;→&lt;/mo&gt;&lt;mpadded width=&#34;+0.6em&#34; lspace=&#34;0.3em&#34;&gt;&lt;mtext&gt;Reduce&lt;/mtext&gt;&lt;/mpadded&gt;&lt;/mover&gt;&lt;mtext&gt;Output&lt;/mtext&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\text{Input} \xrightarrow{\text{Split}} \{d_1, d_2, ...\} \xrightarrow{\text{Map}} \{r_1, r_2, ...\} \xrightarrow{\text{Reduce}} \text{Output}
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.3025em;vertical-align:-0.1944em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord&#34;&gt;Input&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel x-arrow&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:1.1081em;&#34;&gt;&lt;span style=&#34;top:-3.322em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight x-arrow-pad&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord text mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;Split&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;svg-align&#34; style=&#34;top:-2.689em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;hide-tail&#34; style=&#34;height:0.522em;min-width:1.469em;&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;400em&#34; height=&#34;0.522em&#34; viewBox=&#34;0 0 400000 522&#34; preserveAspectRatio=&#34;xMaxYMin slice&#34;&gt;&lt;path d=&#34;M0 241v40h399891c-47.3 35.3-84 78-110 128
+-16.7 32-27.7 63.7-33 95 0 1.3-.2 2.7-.5 4-.3 1.3-.5 2.3-.5 3 0 7.3 6.7 11 20
+ 11 8 0 13.2-.8 15.5-2.5 2.3-1.7 4.2-5.5 5.5-11.5 2-13.3 5.7-27 11-41 14.7-44.7
+ 39-84.5 73-119.5s73.7-60.2 119-75.5c6-2 9-5.7 9-11s-3-9-9-11c-45.3-15.3-85
+-40.5-119-75.5s-58.3-74.8-73-119.5c-4.7-14-8.3-27.3-11-40-1.3-6.7-3.2-10.8-5.5
+-12.5-2.3-1.7-7.5-2.5-15.5-2.5-14 0-21 3.7-21 11 0 2 2 10.3 6 25 20.7 83.3 67
+ 151.7 139 205zm0 0v40h399900v-40z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.011em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.3503em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathnormal&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.3011em;&#34;&gt;&lt;span style=&#34;top:-2.55em;margin-left:0em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mpunct&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.1667em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathnormal&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.3011em;&#34;&gt;&lt;span style=&#34;top:-2.55em;margin-left:0em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mpunct&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.1667em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;...&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel x-arrow&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:1.1003em;&#34;&gt;&lt;span style=&#34;top:-3.322em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight x-arrow-pad&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord text mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;Map&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;svg-align&#34; style=&#34;top:-2.689em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;hide-tail&#34; style=&#34;height:0.522em;min-width:1.469em;&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;400em&#34; height=&#34;0.522em&#34; viewBox=&#34;0 0 400000 522&#34; preserveAspectRatio=&#34;xMaxYMin slice&#34;&gt;&lt;path d=&#34;M0 241v40h399891c-47.3 35.3-84 78-110 128
+-16.7 32-27.7 63.7-33 95 0 1.3-.2 2.7-.5 4-.3 1.3-.5 2.3-.5 3 0 7.3 6.7 11 20
+ 11 8 0 13.2-.8 15.5-2.5 2.3-1.7 4.2-5.5 5.5-11.5 2-13.3 5.7-27 11-41 14.7-44.7
+ 39-84.5 73-119.5s73.7-60.2 119-75.5c6-2 9-5.7 9-11s-3-9-9-11c-45.3-15.3-85
+-40.5-119-75.5s-58.3-74.8-73-119.5c-4.7-14-8.3-27.3-11-40-1.3-6.7-3.2-10.8-5.5
+-12.5-2.3-1.7-7.5-2.5-15.5-2.5-14 0-21 3.7-21 11 0 2 2 10.3 6 25 20.7 83.3 67
+ 151.7 139 205zm0 0v40h399900v-40z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.011em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.3581em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.02778em;&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.3011em;&#34;&gt;&lt;span style=&#34;top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mpunct&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.1667em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.02778em;&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.3011em;&#34;&gt;&lt;span style=&#34;top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mpunct&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.1667em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;...&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel x-arrow&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:1.1081em;&#34;&gt;&lt;span style=&#34;top:-3.322em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight x-arrow-pad&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord text mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;Reduce&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;svg-align&#34; style=&#34;top:-2.689em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;hide-tail&#34; style=&#34;height:0.522em;min-width:1.469em;&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;400em&#34; height=&#34;0.522em&#34; viewBox=&#34;0 0 400000 522&#34; preserveAspectRatio=&#34;xMaxYMin slice&#34;&gt;&lt;path d=&#34;M0 241v40h399891c-47.3 35.3-84 78-110 128
+-16.7 32-27.7 63.7-33 95 0 1.3-.2 2.7-.5 4-.3 1.3-.5 2.3-.5 3 0 7.3 6.7 11 20
+ 11 8 0 13.2-.8 15.5-2.5 2.3-1.7 4.2-5.5 5.5-11.5 2-13.3 5.7-27 11-41 14.7-44.7
+ 39-84.5 73-119.5s73.7-60.2 119-75.5c6-2 9-5.7 9-11s-3-9-9-11c-45.3-15.3-85
+-40.5-119-75.5s-58.3-74.8-73-119.5c-4.7-14-8.3-27.3-11-40-1.3-6.7-3.2-10.8-5.5
+-12.5-2.3-1.7-7.5-2.5-15.5-2.5-14 0-21 3.7-21 11 0 2 2 10.3 6 25 20.7 83.3 67
+ 151.7 139 205zm0 0v40h399900v-40z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.011em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8778em;vertical-align:-0.1944em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord&#34;&gt;Output&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&#34;适用场景-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#适用场景-2&#34;&gt;#&lt;/a&gt; 适用场景&lt;/h3&gt;
+&lt;p&gt;适用于需要处理的数据量巨大或文本超长（如整本书籍、长达数小时的会议记录、海量日志），且被切分的子任务之间相互独立、互不干扰的场景。&lt;/p&gt;
+&lt;h3 id=&#34;实战案例万字用户反馈分析&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#实战案例万字用户反馈分析&#34;&gt;#&lt;/a&gt; 实战案例：万字用户反馈分析&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;场景目标&lt;/strong&gt;：作为产品经理，面对突然涌入的 10,000 条用户 Excel 评论，需要快速找出核心槽点，单次输入 LLM 会超出 Token 限制。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;流程拆解&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;输入层&lt;/strong&gt;：一个包含 1 万条用户评论的 Excel 文件。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;预处理环：切分（Splitting）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;任务&lt;/em&gt;：系统将巨大的文件切分成 20 个小片段，每个片段包含 500 条评论。&lt;/li&gt;
+&lt;li&gt;➡️ &lt;em&gt;交付成果&lt;/em&gt;：20 个独立的数据块。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;strong&gt;Map 阶段：并行分析（Agent A 组 - 分析员 x 20）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;任务&lt;/em&gt;：并发启动 20 个相同能力的分析 Agent，每个 Agent 只负责阅读分配给它的 500 条评论，并总结出该片段中的“Top 3 问题”。&lt;/li&gt;
+&lt;li&gt;➡️ &lt;em&gt;交付成果&lt;/em&gt;：20 份独立的局部总结报告。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;&lt;strong&gt;Reduce 阶段：全局汇总（Agent B - 汇总员）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;任务&lt;/em&gt;：接收这 20 份局部报告，进行去重、合并同类项和统计分析。&lt;/li&gt;
+&lt;li&gt;➡️ &lt;em&gt;最终输出&lt;/em&gt;：一份全局核心问题报告（例如：“核心槽点：1.登录失败(占比 60%); 2.UI 交互差(占比 20%)”）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;模式特点-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#模式特点-2&#34;&gt;#&lt;/a&gt; 模式特点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;：极大提升效率，有效突破 LLM 的上下文窗口（Context Window）限制。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺点&lt;/strong&gt;：信息割裂。在 Map 阶段，各 Agent 之间互不沟通，如果文档前后有强逻辑关联（如小说情节），切分后可能会丢失上下文线索。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;三-共识编排-consensus-voting&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#三-共识编排-consensus-voting&#34;&gt;#&lt;/a&gt; 三、 共识编排 (Consensus / Voting)&lt;/h2&gt;
+&lt;p&gt;这种模式类似于“专家会诊”或“模型集成”，利用多个不同视角或设定的 Agent 来解决同一个问题。&lt;/p&gt;
+&lt;h3 id=&#34;核心逻辑-3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#核心逻辑-3&#34;&gt;#&lt;/a&gt; 核心逻辑&lt;/h3&gt;
+&lt;p&gt;通过让多个 Agent 独立生成结果，然后引入一个“投票机制”或“法官 Agent”来裁决，从而过滤掉个体的幻觉和偏见，通过群体智慧提升准确度。&lt;/p&gt;
+&lt;p&gt;其工作流可以简单表示为：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34; display=&#34;block&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mrow&gt;&lt;mo fence=&#34;true&#34;&gt;{&lt;/mo&gt;&lt;mtable rowspacing=&#34;0.36em&#34; columnalign=&#34;left left&#34; columnspacing=&#34;1em&#34;&gt;&lt;mtr&gt;&lt;mtd&gt;&lt;mstyle scriptlevel=&#34;0&#34; displaystyle=&#34;false&#34;&gt;&lt;mrow&gt;&lt;mtext&gt;Agent A&lt;/mtext&gt;&lt;mo&gt;→&lt;/mo&gt;&lt;mtext&gt;Result A&lt;/mtext&gt;&lt;/mrow&gt;&lt;/mstyle&gt;&lt;/mtd&gt;&lt;/mtr&gt;&lt;mtr&gt;&lt;mtd&gt;&lt;mstyle scriptlevel=&#34;0&#34; displaystyle=&#34;false&#34;&gt;&lt;mrow&gt;&lt;mtext&gt;Agent B&lt;/mtext&gt;&lt;mo&gt;→&lt;/mo&gt;&lt;mtext&gt;Result B&lt;/mtext&gt;&lt;/mrow&gt;&lt;/mstyle&gt;&lt;/mtd&gt;&lt;/mtr&gt;&lt;mtr&gt;&lt;mtd&gt;&lt;mstyle scriptlevel=&#34;0&#34; displaystyle=&#34;false&#34;&gt;&lt;mrow&gt;&lt;mtext&gt;Agent C&lt;/mtext&gt;&lt;mo&gt;→&lt;/mo&gt;&lt;mtext&gt;Result C&lt;/mtext&gt;&lt;/mrow&gt;&lt;/mstyle&gt;&lt;/mtd&gt;&lt;/mtr&gt;&lt;/mtable&gt;&lt;/mrow&gt;&lt;mover&gt;&lt;mo stretchy=&#34;true&#34; minsize=&#34;3.0em&#34;&gt;→&lt;/mo&gt;&lt;mpadded width=&#34;+0.6em&#34; lspace=&#34;0.3em&#34;&gt;&lt;mtext&gt;Judge/Vote&lt;/mtext&gt;&lt;/mpadded&gt;&lt;/mover&gt;&lt;mtext&gt;Final Output&lt;/mtext&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\begin{cases} \text{Agent A} \rightarrow \text{Result A} \\ \text{Agent B} \rightarrow \text{Result B} \\ \text{Agent C} \rightarrow \text{Result C} \end{cases} \xrightarrow{\text{Judge/Vote}} \text{Final Output}
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:4.32em;vertical-align:-1.91em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;minner&#34;&gt;&lt;span class=&#34;mopen&#34;&gt;&lt;span class=&#34;delimsizing mult&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:2.35em;&#34;&gt;&lt;span style=&#34;top:-2.2em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3.15em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;delimsizinginner delim-size4&#34;&gt;&lt;span&gt;⎩&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-2.192em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3.15em;&#34;&gt;&lt;/span&gt;&lt;span style=&#34;height:0.316em;width:0.8889em;&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;0.8889em&#34; height=&#34;0.316em&#34; style=&#34;width:0.8889em&#34; viewBox=&#34;0 0 888.89 316&#34; preserveAspectRatio=&#34;xMinYMin&#34;&gt;&lt;path d=&#34;M384 0 H504 V316 H384z M384 0 H504 V316 H384z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.15em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3.15em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;delimsizinginner delim-size4&#34;&gt;&lt;span&gt;⎨&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-4.292em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3.15em;&#34;&gt;&lt;/span&gt;&lt;span style=&#34;height:0.316em;width:0.8889em;&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;0.8889em&#34; height=&#34;0.316em&#34; style=&#34;width:0.8889em&#34; viewBox=&#34;0 0 888.89 316&#34; preserveAspectRatio=&#34;xMinYMin&#34;&gt;&lt;path d=&#34;M384 0 H504 V316 H384z M384 0 H504 V316 H384z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-4.6em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3.15em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;delimsizinginner delim-size4&#34;&gt;&lt;span&gt;⎧&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:1.85em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mtable&#34;&gt;&lt;span class=&#34;col-align-l&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:2.41em;&#34;&gt;&lt;span style=&#34;top:-4.41em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3.008em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord&#34;&gt;Agent A&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;→&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord&#34;&gt;Result A&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-2.97em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3.008em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord&#34;&gt;Agent B&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;→&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord&#34;&gt;Result B&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-1.53em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3.008em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord&#34;&gt;Agent C&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;→&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord&#34;&gt;Result C&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:1.91em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mclose nulldelimiter&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel x-arrow&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:1.147em;&#34;&gt;&lt;span style=&#34;top:-3.322em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight x-arrow-pad&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord text mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;Judge/Vote&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;svg-align&#34; style=&#34;top:-2.689em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;hide-tail&#34; style=&#34;height:0.522em;min-width:1.469em;&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;400em&#34; height=&#34;0.522em&#34; viewBox=&#34;0 0 400000 522&#34; preserveAspectRatio=&#34;xMaxYMin slice&#34;&gt;&lt;path d=&#34;M0 241v40h399891c-47.3 35.3-84 78-110 128
+-16.7 32-27.7 63.7-33 95 0 1.3-.2 2.7-.5 4-.3 1.3-.5 2.3-.5 3 0 7.3 6.7 11 20
+ 11 8 0 13.2-.8 15.5-2.5 2.3-1.7 4.2-5.5 5.5-11.5 2-13.3 5.7-27 11-41 14.7-44.7
+ 39-84.5 73-119.5s73.7-60.2 119-75.5c6-2 9-5.7 9-11s-3-9-9-11c-45.3-15.3-85
+-40.5-119-75.5s-58.3-74.8-73-119.5c-4.7-14-8.3-27.3-11-40-1.3-6.7-3.2-10.8-5.5
+-12.5-2.3-1.7-7.5-2.5-15.5-2.5-14 0-21 3.7-21 11 0 2 2 10.3 6 25 20.7 83.3 67
+ 151.7 139 205zm0 0v40h399900v-40z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.011em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8889em;vertical-align:-0.1944em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord&#34;&gt;Final Output&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&#34;适用场景-3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#适用场景-3&#34;&gt;#&lt;/a&gt; 适用场景&lt;/h3&gt;
+&lt;p&gt;适用于高风险决策、需要极高准确率、容错率低，或者容易产生幻觉的复杂判断场景（如医疗建议、金融风控、法律咨询）。&lt;/p&gt;
+&lt;h3 id=&#34;实战案例股票投资顾问&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#实战案例股票投资顾问&#34;&gt;#&lt;/a&gt; 实战案例：股票投资顾问&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;场景目标&lt;/strong&gt;：用户询问是否应该买入某只波动剧烈的股票，系统需要给出全面且审慎的投资建议。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;流程拆解&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;输入层&lt;/strong&gt;：用户询问“我现在是否应该买入特斯拉股票？”&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;并行生成环：多视角分析&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Agent A (激进派技术分析师)&lt;/strong&gt;：侧重分析 K 线图和 RSI 指标。➡️ &lt;em&gt;输出&lt;/em&gt;：“买入，技术指标显示超卖。”&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Agent B (保守派宏观分析师)&lt;/strong&gt;：侧重分析美联储政策和市场情绪。➡️ &lt;em&gt;输出&lt;/em&gt;：“卖出，宏观环境风险极高。”&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Agent C (基本面分析师)&lt;/strong&gt;：侧重分析财报和现金流。➡️ &lt;em&gt;输出&lt;/em&gt;：“持有，估值合理但缺乏短期爆发力。”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;strong&gt;裁决环：综合决策（Agent D - 主裁决官）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;任务&lt;/em&gt;：阅读并理解上述三种截然不同的观点及其论据，进行加权分析和权衡。&lt;/li&gt;
+&lt;li&gt;➡️ &lt;em&gt;最终输出&lt;/em&gt;：一份综合建议报告（例如：“尽管技术面有反弹迹象，但考虑到宏观风险尚未释放，建议暂时观望（持有），不要大举加仓”）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;模式特点-3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#模式特点-3&#34;&gt;#&lt;/a&gt; 模式特点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;：高可靠性。通过引入“反对意见”和多样性视角，有效避免单一模型的盲目自信。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺点&lt;/strong&gt;：成本高昂。需要多次调用模型，响应速度较慢，不适合实时对话场景。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;四-分层编排-hierarchical-supervisor&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#四-分层编排-hierarchical-supervisor&#34;&gt;#&lt;/a&gt; 四、 分层编排 (Hierarchical / Supervisor)&lt;/h2&gt;
+&lt;p&gt;这是目前最接近人类公司组织架构的模式，包含动态路由和状态管理。&lt;/p&gt;
+&lt;h3 id=&#34;核心逻辑-4&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#核心逻辑-4&#34;&gt;#&lt;/a&gt; 核心逻辑&lt;/h3&gt;
+&lt;p&gt;引入一个“主管（Supervisor）”Agent，它不直接干活，而是负责理解意图、拆解任务、分发给 Worker Agent，并根据 Worker 的反馈动态决定下一步操作。这是一个有状态的循环图结构。&lt;/p&gt;
+&lt;p&gt;其工作流可以简单表示为：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34; display=&#34;block&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mtext&gt;Supervisor&lt;/mtext&gt;&lt;mo&gt;⇆&lt;/mo&gt;&lt;mo stretchy=&#34;false&#34;&gt;{&lt;/mo&gt;&lt;mtext&gt;Worker A&lt;/mtext&gt;&lt;mo separator=&#34;true&#34;&gt;,&lt;/mo&gt;&lt;mtext&gt;Worker B&lt;/mtext&gt;&lt;mo separator=&#34;true&#34;&gt;,&lt;/mo&gt;&lt;mtext&gt;Worker C&lt;/mtext&gt;&lt;mo stretchy=&#34;false&#34;&gt;}&lt;/mo&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\text{Supervisor} \leftrightarrows \{ \text{Worker A}, \text{Worker B}, \text{Worker C} \}
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8778em;vertical-align:-0.1944em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord&#34;&gt;Supervisor&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel amsrm&#34;&gt;⇆&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord&#34;&gt;Worker A&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mpunct&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.1667em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord&#34;&gt;Worker B&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mpunct&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.1667em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord&#34;&gt;Worker C&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&#34;适用场景-4&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#适用场景-4&#34;&gt;#&lt;/a&gt; 适用场景&lt;/h3&gt;
+&lt;p&gt;适用于任务复杂庞大、执行步骤不确定、需要根据中间步骤的结果动态调整后续计划的场景（如复杂的助理任务、软件开发）。&lt;/p&gt;
+&lt;h3 id=&#34;实战案例智能旅行行程规划&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#实战案例智能旅行行程规划&#34;&gt;#&lt;/a&gt; 实战案例：智能旅行行程规划&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;场景目标&lt;/strong&gt;：用户提出一个模糊且复杂的旅行需求，涉及机票、酒店、餐厅，且任务间存在强依赖关系（订不到房就不能订餐厅）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;流程拆解&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;输入层&lt;/strong&gt;：用户需求“帮我订去东京的行程，要在富士山下住一晚，还要订个当地的米其林餐厅。”&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;规划环：Supervisor（总管）介入&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;任务&lt;/em&gt;：总管分析需求，识别出需要调用航班、酒店、餐厅三个专业 Agent。它首先规划第一步：调用航班 Agent。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;strong&gt;执行环 1：航班预订（Worker A）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;反馈&lt;/em&gt;：向总管汇报“已查询到 X 月 X 日的航班并锁定”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;&lt;strong&gt;执行环 2：酒店预订（Worker B）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;反馈&lt;/em&gt;：向总管汇报“失败，指定日期的富士山酒店已满房”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;&lt;strong&gt;动态调整环：Supervisor 重规划&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;任务&lt;/em&gt;：接收到失败反馈，总管意识到原计划不可行。它不会报错退出，而是动态指令航班 Agent“改查下周的票”，随后再次尝试预定酒店。&lt;/li&gt;
+&lt;li&gt;➡️ &lt;em&gt;最终输出&lt;/em&gt;：经过多轮动态调整，向用户输出一份完整的、闭环的行程单。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;模式特点-4&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#模式特点-4&#34;&gt;#&lt;/a&gt; 模式特点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;：极强的灵活性。只有 Supervisor 拥有全局视野和状态记忆，能够处理异常情况和复杂的依赖逻辑。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺点&lt;/strong&gt;：单点瓶颈。系统的表现高度依赖 Supervisor 的推理能力，如果主管分配错误，可能导致死循环。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;五-制作者-检查者编排-producer-reviewer-reflexion&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#五-制作者-检查者编排-producer-reviewer-reflexion&#34;&gt;#&lt;/a&gt; 五、 制作者-检查者编排 (Producer-Reviewer / Reflexion)&lt;/h2&gt;
+&lt;p&gt;这种模式建立了内容生成与质量控制的闭环反馈机制，是提升 LLM 输出质量性价比最高的方式。&lt;/p&gt;
+&lt;h3 id=&#34;核心逻辑-5&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#核心逻辑-5&#34;&gt;#&lt;/a&gt; 核心逻辑&lt;/h3&gt;
+&lt;p&gt;包含一个生成-评估的迭代循环。制作者负责生成内容，检查者负责挑刺和提建议。如果质量不达标，则将修改意见回传给制作者重写，直到满足条件。&lt;/p&gt;
+&lt;p&gt;其工作流可以简单表示为：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34; display=&#34;block&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mtext&gt;Generate&lt;/mtext&gt;&lt;mover&gt;&lt;mo stretchy=&#34;true&#34; minsize=&#34;3.0em&#34;&gt;→&lt;/mo&gt;&lt;mpadded width=&#34;+0.6em&#34; lspace=&#34;0.3em&#34;&gt;&lt;mtext&gt;Draft&lt;/mtext&gt;&lt;/mpadded&gt;&lt;/mover&gt;&lt;mtext&gt;Critique&lt;/mtext&gt;&lt;mover&gt;&lt;mo stretchy=&#34;true&#34; minsize=&#34;3.0em&#34;&gt;→&lt;/mo&gt;&lt;mpadded width=&#34;+0.6em&#34; lspace=&#34;0.3em&#34;&gt;&lt;mtext&gt;Feedback&lt;/mtext&gt;&lt;/mpadded&gt;&lt;/mover&gt;&lt;mtext&gt;Refine&lt;/mtext&gt;&lt;mover&gt;&lt;mo stretchy=&#34;true&#34; minsize=&#34;3.0em&#34;&gt;→&lt;/mo&gt;&lt;mpadded width=&#34;+0.6em&#34; lspace=&#34;0.3em&#34;&gt;&lt;mtext&gt;Loop...&lt;/mtext&gt;&lt;/mpadded&gt;&lt;/mover&gt;&lt;mtext&gt;Final Output&lt;/mtext&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\text{Generate} \xrightarrow{\text{Draft}} \text{Critique} \xrightarrow{\text{Feedback}} \text{Refine} \xrightarrow{\text{Loop...}} \text{Final Output}
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.1191em;vertical-align:-0.011em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord&#34;&gt;Generate&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel x-arrow&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:1.1081em;&#34;&gt;&lt;span style=&#34;top:-3.322em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight x-arrow-pad&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord text mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;Draft&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;svg-align&#34; style=&#34;top:-2.689em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;hide-tail&#34; style=&#34;height:0.522em;min-width:1.469em;&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;400em&#34; height=&#34;0.522em&#34; viewBox=&#34;0 0 400000 522&#34; preserveAspectRatio=&#34;xMaxYMin slice&#34;&gt;&lt;path d=&#34;M0 241v40h399891c-47.3 35.3-84 78-110 128
+-16.7 32-27.7 63.7-33 95 0 1.3-.2 2.7-.5 4-.3 1.3-.5 2.3-.5 3 0 7.3 6.7 11 20
+ 11 8 0 13.2-.8 15.5-2.5 2.3-1.7 4.2-5.5 5.5-11.5 2-13.3 5.7-27 11-41 14.7-44.7
+ 39-84.5 73-119.5s73.7-60.2 119-75.5c6-2 9-5.7 9-11s-3-9-9-11c-45.3-15.3-85
+-40.5-119-75.5s-58.3-74.8-73-119.5c-4.7-14-8.3-27.3-11-40-1.3-6.7-3.2-10.8-5.5
+-12.5-2.3-1.7-7.5-2.5-15.5-2.5-14 0-21 3.7-21 11 0 2 2 10.3 6 25 20.7 83.3 67
+ 151.7 139 205zm0 0v40h399900v-40z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.011em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.3025em;vertical-align:-0.1944em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord&#34;&gt;Critique&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel x-arrow&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:1.1081em;&#34;&gt;&lt;span style=&#34;top:-3.322em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight x-arrow-pad&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord text mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;Feedback&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;svg-align&#34; style=&#34;top:-2.689em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;hide-tail&#34; style=&#34;height:0.522em;min-width:1.469em;&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;400em&#34; height=&#34;0.522em&#34; viewBox=&#34;0 0 400000 522&#34; preserveAspectRatio=&#34;xMaxYMin slice&#34;&gt;&lt;path d=&#34;M0 241v40h399891c-47.3 35.3-84 78-110 128
+-16.7 32-27.7 63.7-33 95 0 1.3-.2 2.7-.5 4-.3 1.3-.5 2.3-.5 3 0 7.3 6.7 11 20
+ 11 8 0 13.2-.8 15.5-2.5 2.3-1.7 4.2-5.5 5.5-11.5 2-13.3 5.7-27 11-41 14.7-44.7
+ 39-84.5 73-119.5s73.7-60.2 119-75.5c6-2 9-5.7 9-11s-3-9-9-11c-45.3-15.3-85
+-40.5-119-75.5s-58.3-74.8-73-119.5c-4.7-14-8.3-27.3-11-40-1.3-6.7-3.2-10.8-5.5
+-12.5-2.3-1.7-7.5-2.5-15.5-2.5-14 0-21 3.7-21 11 0 2 2 10.3 6 25 20.7 83.3 67
+ 151.7 139 205zm0 0v40h399900v-40z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.011em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.1113em;vertical-align:-0.011em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord&#34;&gt;Refine&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel x-arrow&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:1.1003em;&#34;&gt;&lt;span style=&#34;top:-3.322em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight x-arrow-pad&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord text mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;Loop...&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;svg-align&#34; style=&#34;top:-2.689em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;hide-tail&#34; style=&#34;height:0.522em;min-width:1.469em;&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;400em&#34; height=&#34;0.522em&#34; viewBox=&#34;0 0 400000 522&#34; preserveAspectRatio=&#34;xMaxYMin slice&#34;&gt;&lt;path d=&#34;M0 241v40h399891c-47.3 35.3-84 78-110 128
+-16.7 32-27.7 63.7-33 95 0 1.3-.2 2.7-.5 4-.3 1.3-.5 2.3-.5 3 0 7.3 6.7 11 20
+ 11 8 0 13.2-.8 15.5-2.5 2.3-1.7 4.2-5.5 5.5-11.5 2-13.3 5.7-27 11-41 14.7-44.7
+ 39-84.5 73-119.5s73.7-60.2 119-75.5c6-2 9-5.7 9-11s-3-9-9-11c-45.3-15.3-85
+-40.5-119-75.5s-58.3-74.8-73-119.5c-4.7-14-8.3-27.3-11-40-1.3-6.7-3.2-10.8-5.5
+-12.5-2.3-1.7-7.5-2.5-15.5-2.5-14 0-21 3.7-21 11 0 2 2 10.3 6 25 20.7 83.3 67
+ 151.7 139 205zm0 0v40h399900v-40z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.011em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8889em;vertical-align:-0.1944em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord&#34;&gt;Final Output&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&#34;适用场景-5&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#适用场景-5&#34;&gt;#&lt;/a&gt; 适用场景&lt;/h3&gt;
+&lt;p&gt;适用于对输出质量要求极高的场景，如代码生成（Coding）、数学解题、长篇小说创作或法律文书撰写。&lt;/p&gt;
+&lt;h3 id=&#34;实战案例python-代码生成助手&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#实战案例python-代码生成助手&#34;&gt;#&lt;/a&gt; 实战案例：Python 代码生成助手&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;场景目标&lt;/strong&gt;：用户要求写一个贪吃蛇游戏的代码，一次性生成的代码往往无法直接运行。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;流程拆解&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;输入层&lt;/strong&gt;：用户需求“写一个 Python 贪吃蛇游戏”。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;第一环：生成（Agent A - 程序员）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;任务&lt;/em&gt;：编写初始代码。➡️ &lt;em&gt;交付成果&lt;/em&gt;：代码版本 V1。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;strong&gt;第二环：评估（Agent B - 测试员/编译器）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;任务&lt;/em&gt;：模拟运行代码，进行静态分析或执行测试。&lt;/li&gt;
+&lt;li&gt;➡️ &lt;em&gt;反馈意见&lt;/em&gt;：发现第 30 行存在索引越界错误，且蛇撞墙后游戏未结束。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;&lt;strong&gt;第三环：修正（Agent A - 程序员）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;任务&lt;/em&gt;：读取测试员的反馈，针对性地修复 Bug。➡️ &lt;em&gt;交付成果&lt;/em&gt;：代码版本 V2。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;&lt;strong&gt;循环终止&lt;/strong&gt;：再次测试通过，或达到最大重试次数。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;➡️ &lt;em&gt;最终输出&lt;/em&gt;：一段无 Bug、可运行的贪吃蛇代码。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;模式特点-5&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#模式特点-5&#34;&gt;#&lt;/a&gt; 模式特点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;：自我修正。通过迭代反馈机制，让模型有机会“审视”自己的错误，显著提升最终产出的可用性。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺点&lt;/strong&gt;：可能陷入死循环。如果制作者能力太差，怎么改都达不到检查者的标准，系统会无限运行。通常需要设置最大迭代次数（Max Iterations）。&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
