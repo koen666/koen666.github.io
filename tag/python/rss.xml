@@ -2,39 +2,40 @@
 <rss version="2.0">
     <channel>
         <title>木语 • Posts by &#34;python&#34; tag</title>
-        <link>http://example.com</link>
+        <link>https://koen666.github.io</link>
         <description>Spark!</description>
         <language>zh-CN</language>
         <pubDate>Fri, 28 Nov 2025 00:00:00 +0800</pubDate>
         <lastBuildDate>Fri, 28 Nov 2025 00:00:00 +0800</lastBuildDate>
         <category>math</category>
-        <category>MLC</category>
         <category>GA</category>
         <category>python</category>
+        <category>KL</category>
+        <category>RE-ID</category>
+        <category>MLC</category>
         <category>Koa</category>
         <category>backen</category>
         <category>nodejs</category>
-        <category>cypher</category>
-        <category>neo4j</category>
-        <category>database</category>
-        <category>KL</category>
-        <category>RE-ID</category>
+        <category>cmd</category>
+        <category>curl</category>
+        <category>learn</category>
+        <category>container</category>
+        <category>docker</category>
+        <category>linux</category>
+        <category>virtual</category>
         <category>electron</category>
         <category>web</category>
         <category>desk</category>
-        <category>container</category>
-        <category>docker</category>
-        <category>learn</category>
-        <category>linux</category>
-        <category>virtual</category>
-        <category>cmd</category>
-        <category>curl</category>
-        <category>flask</category>
+        <category>cypher</category>
+        <category>neo4j</category>
+        <category>database</category>
         <category>repo</category>
         <category>git</category>
-        <category>gradio</category>
-        <category>markdown</category>
+        <category>flask</category>
         <category>latex</category>
+        <category>markdown</category>
+        <category>uv</category>
+        <category>environment</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
@@ -42,35 +43,34 @@
         <category>scipy</category>
         <category>screen</category>
         <category>termux</category>
-        <category>uv</category>
-        <category>environment</category>
-        <category>ssh</category>
-        <category>sql</category>
+        <category>gradio</category>
         <category>saaborn</category>
+        <category>sql</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>Transformer</category>
+        <category>ssh</category>
         <category>cv</category>
         <category>transforer</category>
         <category>vue</category>
-        <category>yaml</category>
-        <category>argparse</category>
-        <category>easydict</category>
         <category>yolo</category>
         <category>dataset</category>
         <category>AnyLabeling</category>
-        <category>code</category>
-        <category>agent</category>
+        <category>yaml</category>
+        <category>argparse</category>
+        <category>easydict</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
+        <category>dataloader</category>
         <category>gpu</category>
         <category>data</category>
-        <category>dataloader</category>
+        <category>code</category>
+        <category>Transformer</category>
+        <category>agent</category>
         <item>
-            <guid isPermalink="true">http://example.com/2025/11/28/pipenv/</guid>
+            <guid isPermalink="true">https://koen666.github.io/2025/11/28/pipenv/</guid>
             <title>像前端package.json那样管理python依赖 (uv篇)</title>
-            <link>http://example.com/2025/11/28/pipenv/</link>
+            <link>https://koen666.github.io/2025/11/28/pipenv/</link>
             <category>python</category>
             <category>uv</category>
             <category>environment</category>
@@ -169,9 +169,9 @@
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://example.com/2025/11/23/GA/</guid>
+            <guid isPermalink="true">https://koen666.github.io/2025/11/23/GA/</guid>
             <title>GA遗传算法</title>
-            <link>http://example.com/2025/11/23/GA/</link>
+            <link>https://koen666.github.io/2025/11/23/GA/</link>
             <category>GA</category>
             <category>python</category>
             <pubDate>Sun, 23 Nov 2025 10:58:59 +0800</pubDate>
@@ -395,9 +395,9 @@ N 个解组成一代种群：&lt;/p&gt;
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://example.com/2025/09/24/flask/</guid>
+            <guid isPermalink="true">https://koen666.github.io/2025/09/24/flask/</guid>
             <title>Flask框架 基本使用教程</title>
-            <link>http://example.com/2025/09/24/flask/</link>
+            <link>https://koen666.github.io/2025/09/24/flask/</link>
             <category>python</category>
             <category>web</category>
             <category>flask</category>
@@ -458,9 +458,9 @@ N 个解组成一代种群：&lt;/p&gt;
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://example.com/2025/09/08/gradio/</guid>
+            <guid isPermalink="true">https://koen666.github.io/2025/09/08/gradio/</guid>
             <title>关于模型可视化---Gradio</title>
-            <link>http://example.com/2025/09/08/gradio/</link>
+            <link>https://koen666.github.io/2025/09/08/gradio/</link>
             <category>python</category>
             <category>web</category>
             <category>gradio</category>
@@ -656,9 +656,9 @@ N 个解组成一代种群：&lt;/p&gt;
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://example.com/2025/08/11/scipy/</guid>
+            <guid isPermalink="true">https://koen666.github.io/2025/08/11/scipy/</guid>
             <title>scipy基本模块及其使用</title>
-            <link>http://example.com/2025/08/11/scipy/</link>
+            <link>https://koen666.github.io/2025/08/11/scipy/</link>
             <category>math</category>
             <category>python</category>
             <category>scipy</category>
@@ -1269,9 +1269,9 @@ y
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://example.com/2025/08/10/seaborn/</guid>
+            <guid isPermalink="true">https://koen666.github.io/2025/08/10/seaborn/</guid>
             <title>seaborn实现统计图绘制</title>
-            <link>http://example.com/2025/08/10/seaborn/</link>
+            <link>https://koen666.github.io/2025/08/10/seaborn/</link>
             <category>python</category>
             <category>saaborn</category>
             <pubDate>Sun, 10 Aug 2025 14:50:00 +0800</pubDate>

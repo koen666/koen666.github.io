@@ -2,11 +2,11 @@
     "version": "https://jsonfeed.org/version/1",
     "title": "木语 • All posts by \"markdown\" tag",
     "description": "Spark!",
-    "home_page_url": "http://example.com",
+    "home_page_url": "https://koen666.github.io",
     "items": [
         {
-            "id": "http://example.com/2025/07/27/issue/",
-            "url": "http://example.com/2025/07/27/issue/",
+            "id": "https://koen666.github.io/2025/07/27/issue/",
+            "url": "https://koen666.github.io/2025/07/27/issue/",
             "title": "常见BUG汇总",
             "date_published": "2025-07-27T00:29:00.000Z",
             "content_html": "<h2 id=\"一-markdown\"><a class=\"anchor\" href=\"#一-markdown\">#</a> 一、Markdown</h2>\n<h3 id=\"11-为什么vscode编辑md文件十分卡顿\"><a class=\"anchor\" href=\"#11-为什么vscode编辑md文件十分卡顿\">#</a> 1.1 为什么vscode编辑md文件十分卡顿</h3>\n<p>解决方法:禁用cpp extension pack扩展</p>\n<h2 id=\"二-hexo\"><a class=\"anchor\" href=\"#二-hexo\">#</a> 二、Hexo</h2>\n<h3 id=\"21-出现spawn-failed报错\"><a class=\"anchor\" href=\"#21-出现spawn-failed报错\">#</a> 2.1 出现Spawn Failed报错</h3>\n<p>首先尝试关机重启</p>\n<p>其次删除<code>.deploy_git</code>文件夹</p>\n<p>最后实在不行找到<code>.ssh</code>文件，先测试</p>\n<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code class=\"language-bash\"><span class=\"line\"><span style=\"color:#59873A;--shiki-dark:#80A665\">ssh</span><span style=\"color:#A65E2B;--shiki-dark:#C99076\"> -T</span><span style=\"color:#B56959;--shiki-dark:#C98A7D\"> git@github.com</span></span></code></pre>\n<p>如果出现22端口连接超时，改成443端口即可</p>\n<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code class=\"language-bash\"><span class=\"line\"><span style=\"color:#59873A;--shiki-dark:#80A665\">Host</span><span style=\"color:#B56959;--shiki-dark:#C98A7D\"> github.com</span></span>\n<span class=\"line\"><span style=\"color:#59873A;--shiki-dark:#80A665\">  HostName</span><span style=\"color:#B56959;--shiki-dark:#C98A7D\"> ssh.github.com</span></span>\n<span class=\"line\"><span style=\"color:#59873A;--shiki-dark:#80A665\">  Port</span><span style=\"color:#2F798A;--shiki-dark:#4C9A91\"> 443</span></span>\n<span class=\"line\"><span style=\"color:#59873A;--shiki-dark:#80A665\">  User</span><span style=\"color:#B56959;--shiki-dark:#C98A7D\"> git</span></span>\n<span class=\"line\"><span style=\"color:#59873A;--shiki-dark:#80A665\">  IdentityFile</span><span style=\"color:#B56959;--shiki-dark:#C98A7D\"> ~/.ssh/id_rsa</span></span>\n<span class=\"line\"><span style=\"color:#59873A;--shiki-dark:#80A665\">  IdentitiesOnly</span><span style=\"color:#B56959;--shiki-dark:#C98A7D\"> yes</span></span></code></pre>\n",

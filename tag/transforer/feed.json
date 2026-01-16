@@ -2,11 +2,11 @@
     "version": "https://jsonfeed.org/version/1",
     "title": "木语 • All posts by \"transforer\" tag",
     "description": "Spark!",
-    "home_page_url": "http://example.com",
+    "home_page_url": "https://koen666.github.io",
     "items": [
         {
-            "id": "http://example.com/2025/10/04/vit/",
-            "url": "http://example.com/2025/10/04/vit/",
+            "id": "https://koen666.github.io/2025/10/04/vit/",
+            "url": "https://koen666.github.io/2025/10/04/vit/",
             "title": "vit",
             "date_published": "2025-10-03T16:00:00.000Z",
             "content_html": "",

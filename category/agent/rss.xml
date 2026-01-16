@@ -2,39 +2,40 @@
 <rss version="2.0">
     <channel>
         <title>木语 • Posts by &#34;agent&#34; category</title>
-        <link>http://example.com</link>
+        <link>https://koen666.github.io</link>
         <description>Spark!</description>
         <language>zh-CN</language>
         <pubDate>Tue, 02 Dec 2025 00:00:00 +0800</pubDate>
         <lastBuildDate>Tue, 02 Dec 2025 00:00:00 +0800</lastBuildDate>
         <category>math</category>
-        <category>MLC</category>
         <category>GA</category>
         <category>python</category>
+        <category>KL</category>
+        <category>RE-ID</category>
+        <category>MLC</category>
         <category>Koa</category>
         <category>backen</category>
         <category>nodejs</category>
-        <category>cypher</category>
-        <category>neo4j</category>
-        <category>database</category>
-        <category>KL</category>
-        <category>RE-ID</category>
+        <category>cmd</category>
+        <category>curl</category>
+        <category>learn</category>
+        <category>container</category>
+        <category>docker</category>
+        <category>linux</category>
+        <category>virtual</category>
         <category>electron</category>
         <category>web</category>
         <category>desk</category>
-        <category>container</category>
-        <category>docker</category>
-        <category>learn</category>
-        <category>linux</category>
-        <category>virtual</category>
-        <category>cmd</category>
-        <category>curl</category>
-        <category>flask</category>
+        <category>cypher</category>
+        <category>neo4j</category>
+        <category>database</category>
         <category>repo</category>
         <category>git</category>
-        <category>gradio</category>
-        <category>markdown</category>
+        <category>flask</category>
         <category>latex</category>
+        <category>markdown</category>
+        <category>uv</category>
+        <category>environment</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
@@ -42,35 +43,34 @@
         <category>scipy</category>
         <category>screen</category>
         <category>termux</category>
-        <category>uv</category>
-        <category>environment</category>
-        <category>ssh</category>
-        <category>sql</category>
+        <category>gradio</category>
         <category>saaborn</category>
+        <category>sql</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>Transformer</category>
+        <category>ssh</category>
         <category>cv</category>
         <category>transforer</category>
         <category>vue</category>
-        <category>yaml</category>
-        <category>argparse</category>
-        <category>easydict</category>
         <category>yolo</category>
         <category>dataset</category>
         <category>AnyLabeling</category>
-        <category>code</category>
-        <category>agent</category>
+        <category>yaml</category>
+        <category>argparse</category>
+        <category>easydict</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
+        <category>dataloader</category>
         <category>gpu</category>
         <category>data</category>
-        <category>dataloader</category>
+        <category>code</category>
+        <category>Transformer</category>
+        <category>agent</category>
         <item>
-            <guid isPermalink="true">http://example.com/2025/12/02/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%BC%96%E6%8E%92/</guid>
+            <guid isPermalink="true">https://koen666.github.io/2025/12/02/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%BC%96%E6%8E%92/</guid>
             <title>五种多agent编排方式</title>
-            <link>http://example.com/2025/12/02/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%BC%96%E6%8E%92/</link>
+            <link>https://koen666.github.io/2025/12/02/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%BC%96%E6%8E%92/</link>
             <category>agent</category>
             <pubDate>Tue, 02 Dec 2025 00:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;五种多agent编排方式详解&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#五种多agent编排方式详解&#34;&gt;#&lt;/a&gt; 五种多Agent编排方式详解&lt;/h1&gt;

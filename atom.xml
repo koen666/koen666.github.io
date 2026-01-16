@@ -3,11 +3,11 @@
   <title>木语</title>
   
   <subtitle>技术是逻辑，木是自然，语是表达</subtitle>
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="https://koen666.github.io/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
+  <link href="https://koen666.github.io/"/>
   <updated>2026-01-15T15:42:35.407Z</updated>
-  <id>http://example.com/</id>
+  <id>https://koen666.github.io/</id>
   
   <author>
     <name>koen</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>让你在没有 root 权限的机子上跑镜像</title>
-    <link href="http://example.com/2026/01/15/udocker/"/>
-    <id>http://example.com/2026/01/15/udocker/</id>
+    <link href="https://koen666.github.io/2026/01/15/udocker/"/>
+    <id>https://koen666.github.io/2026/01/15/udocker/</id>
     <published>2026-01-14T16:00:00.000Z</published>
     <updated>2026-01-15T15:42:35.407Z</updated>
     
@@ -30,23 +30,23 @@
     
     
     
-    <category term="docker" scheme="http://example.com/categories/docker/"/>
+    <category term="docker" scheme="https://koen666.github.io/categories/docker/"/>
     
     
-    <category term="docker" scheme="http://example.com/tags/docker/"/>
+    <category term="docker" scheme="https://koen666.github.io/tags/docker/"/>
     
-    <category term="images" scheme="http://example.com/tags/images/"/>
+    <category term="images" scheme="https://koen666.github.io/tags/images/"/>
     
-    <category term="hpc" scheme="http://example.com/tags/hpc/"/>
+    <category term="hpc" scheme="https://koen666.github.io/tags/hpc/"/>
     
-    <category term="tutorial" scheme="http://example.com/tags/tutorial/"/>
+    <category term="tutorial" scheme="https://koen666.github.io/tags/tutorial/"/>
     
   </entry>
   
   <entry>
     <title>五种多agent编排方式</title>
-    <link href="http://example.com/2025/12/02/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%BC%96%E6%8E%92/"/>
-    <id>http://example.com/2025/12/02/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%BC%96%E6%8E%92/</id>
+    <link href="https://koen666.github.io/2025/12/02/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%BC%96%E6%8E%92/"/>
+    <id>https://koen666.github.io/2025/12/02/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%BC%96%E6%8E%92/</id>
     <published>2025-12-01T16:00:00.000Z</published>
     <updated>2025-12-22T15:32:01.194Z</updated>
     
@@ -57,17 +57,17 @@
     
     
     
-    <category term="agent" scheme="http://example.com/categories/agent/"/>
+    <category term="agent" scheme="https://koen666.github.io/categories/agent/"/>
     
     
-    <category term="agent" scheme="http://example.com/tags/agent/"/>
+    <category term="agent" scheme="https://koen666.github.io/tags/agent/"/>
     
   </entry>
   
   <entry>
     <title>像前端package.json那样管理python依赖 (uv篇)</title>
-    <link href="http://example.com/2025/11/28/pipenv/"/>
-    <id>http://example.com/2025/11/28/pipenv/</id>
+    <link href="https://koen666.github.io/2025/11/28/pipenv/"/>
+    <id>https://koen666.github.io/2025/11/28/pipenv/</id>
     <published>2025-11-27T16:00:00.000Z</published>
     <updated>2025-11-28T01:12:17.059Z</updated>
     
@@ -78,21 +78,21 @@
     
     
     
-    <category term="code" scheme="http://example.com/categories/code/"/>
+    <category term="code" scheme="https://koen666.github.io/categories/code/"/>
     
     
-    <category term="python" scheme="http://example.com/tags/python/"/>
+    <category term="python" scheme="https://koen666.github.io/tags/python/"/>
     
-    <category term="uv" scheme="http://example.com/tags/uv/"/>
+    <category term="uv" scheme="https://koen666.github.io/tags/uv/"/>
     
-    <category term="environment" scheme="http://example.com/tags/environment/"/>
+    <category term="environment" scheme="https://koen666.github.io/tags/environment/"/>
     
   </entry>
   
   <entry>
     <title>GA遗传算法</title>
-    <link href="http://example.com/2025/11/23/GA/"/>
-    <id>http://example.com/2025/11/23/GA/</id>
+    <link href="https://koen666.github.io/2025/11/23/GA/"/>
+    <id>https://koen666.github.io/2025/11/23/GA/</id>
     <published>2025-11-23T02:58:59.514Z</published>
     <updated>2025-11-23T03:35:03.910Z</updated>
     
@@ -103,19 +103,19 @@
     
     
     
-    <category term="machinelearning" scheme="http://example.com/categories/machinelearning/"/>
+    <category term="machinelearning" scheme="https://koen666.github.io/categories/machinelearning/"/>
     
     
-    <category term="GA" scheme="http://example.com/tags/GA/"/>
+    <category term="GA" scheme="https://koen666.github.io/tags/GA/"/>
     
-    <category term="python" scheme="http://example.com/tags/python/"/>
+    <category term="python" scheme="https://koen666.github.io/tags/python/"/>
     
   </entry>
   
   <entry>
     <title>cypher与neo4j</title>
-    <link href="http://example.com/2025/10/17/cypher/"/>
-    <id>http://example.com/2025/10/17/cypher/</id>
+    <link href="https://koen666.github.io/2025/10/17/cypher/"/>
+    <id>https://koen666.github.io/2025/10/17/cypher/</id>
     <published>2025-10-17T04:00:00.000Z</published>
     <updated>2025-10-17T14:30:56.057Z</updated>
     
@@ -126,21 +126,21 @@
     
     
     
-    <category term="database" scheme="http://example.com/categories/database/"/>
+    <category term="database" scheme="https://koen666.github.io/categories/database/"/>
     
     
-    <category term="cypher" scheme="http://example.com/tags/cypher/"/>
+    <category term="cypher" scheme="https://koen666.github.io/tags/cypher/"/>
     
-    <category term="neo4j" scheme="http://example.com/tags/neo4j/"/>
+    <category term="neo4j" scheme="https://koen666.github.io/tags/neo4j/"/>
     
-    <category term="database" scheme="http://example.com/tags/database/"/>
+    <category term="database" scheme="https://koen666.github.io/tags/database/"/>
     
   </entry>
   
   <entry>
     <title>ssh-agent</title>
-    <link href="http://example.com/2025/10/10/ssh-agent/"/>
-    <id>http://example.com/2025/10/10/ssh-agent/</id>
+    <link href="https://koen666.github.io/2025/10/10/ssh-agent/"/>
+    <id>https://koen666.github.io/2025/10/10/ssh-agent/</id>
     <published>2025-10-09T16:00:00.000Z</published>
     <updated>2025-10-10T12:19:36.026Z</updated>
     
@@ -151,17 +151,17 @@
     
     
     
-    <category term="ssh" scheme="http://example.com/categories/ssh/"/>
+    <category term="ssh" scheme="https://koen666.github.io/categories/ssh/"/>
     
     
-    <category term="ssh" scheme="http://example.com/tags/ssh/"/>
+    <category term="ssh" scheme="https://koen666.github.io/tags/ssh/"/>
     
   </entry>
   
   <entry>
     <title>screen---virtual termux</title>
-    <link href="http://example.com/2025/10/06/screen/"/>
-    <id>http://example.com/2025/10/06/screen/</id>
+    <link href="https://koen666.github.io/2025/10/06/screen/"/>
+    <id>https://koen666.github.io/2025/10/06/screen/</id>
     <published>2025-10-05T16:00:00.000Z</published>
     <updated>2025-10-06T00:50:14.443Z</updated>
     
@@ -172,40 +172,19 @@
     
     
     
-    <category term="linux" scheme="http://example.com/categories/linux/"/>
+    <category term="linux" scheme="https://koen666.github.io/categories/linux/"/>
     
     
-    <category term="screen" scheme="http://example.com/tags/screen/"/>
+    <category term="screen" scheme="https://koen666.github.io/tags/screen/"/>
     
-    <category term="termux" scheme="http://example.com/tags/termux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Imperative，Symbolic and Hybrid Programming</title>
-    <link href="http://example.com/2025/10/05/%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F/"/>
-    <id>http://example.com/2025/10/05/%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F/</id>
-    <published>2025-10-04T16:00:00.000Z</published>
-    <updated>2025-10-05T01:14:00.177Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1️⃣-命令式编程imperative-programming"><a class="anchor" href="#1️⃣-命令式编程imperative-programming">#</a> 1️⃣ 命令式编程（Imperative Programming）</h2><h3 id="核心思想"><a class="anchor" href="#核心思想">#</a> 核心思想</h3><ul><li><strong>按顺序执行每条语句</strong>，每执行一步就会改变程序的状态。</li><li>Python 就是典型的解释型语言，执行代码时会 <strong>逐行运行</strong>。</li></ul><h3 id="示例"><a class="anchor" href="#示例">#</a> 示例</h3><pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#AB5959;--shiki-dark:#CB7676">def</span><span style="color:#59873A;--shiki-dark:#80A665"> add</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">a</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> b</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#999999;--shiki-dark:#666666">:</span></span><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">    return</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> a </span><span style="color:#AB5959;--shiki-dark:#CB7676">+</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> b</span></span><span class="line"></span><span class="line"><span style="color:#AB5959;--shiki-dark:#CB7676">def</span><span style="color:#59873A;--shiki-dark:#80A665"> fancy_func</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">a</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> b</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> c</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> d</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#999999;--shiki-dark:#666666">:</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">    e </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> add</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">a</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> b</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">    f </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> add</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">c</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> d</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">    g </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> add</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">e</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> f</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">    return</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> g</span></span><span class="line"></span><span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">fancy_func</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 2</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 3</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 4</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre><p>执行过程：</p><ol><li><code>e = add(a, b)</code> → 计算 1+2 = 3，并存到变量 <code>e</code></li><li><code>f = add(c, d)</code> → 计算 3+4 = 7，并存到变量 <code>f</code></li><li><code>g = add(e, f)</code> → 计算 3+7 = 10</li><li>返回并打印结果 <code>10</code></li></ol><p>特点：</p><ul><li><strong>直观易懂</strong>，方便调试</li><li>每次函数调用都需要解释器处理，效率不高（尤其在 GPU 上运行大批量计算时）</li></ul><hr /><h2 id="2️⃣-符号式编程symbolic-programming"><a class="anchor" href="#2️⃣-符号式编程symbolic-programming">#</a> 2️⃣ 符号式编程（Symbolic Programming）</h2><h3 id="核心思想-2"><a class="anchor" href="#核心思想-2">#</a> 核心思想</h3><ul><li><p><strong>先定义整个计算图/计算流程，再一次性执行</strong></p></li><li><p>可以让编译器提前做优化，例如：</p><ul><li>合并重复计算</li><li>直接生成最优机器指令</li><li>提前释放不再需要的内存</li></ul></li></ul><h3 id="示例模拟"><a class="anchor" href="#示例模拟">#</a> 示例（模拟）</h3><pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">prog </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> """</span></span><span class="line"><span style="color:#B56959;--shiki-dark:#C98A7D">def add(a, b):</span></span><span class="line"><span style="color:#B56959;--shiki-dark:#C98A7D">    return a + b</span></span><span class="line"></span><span class="line"><span style="color:#B56959;--shiki-dark:#C98A7D">def fancy_func(a, b, c, d):</span></span><span class="line"><span style="color:#B56959;--shiki-dark:#C98A7D">    e = add(a, b)</span></span><span class="line"><span style="color:#B56959;--shiki-dark:#C98A7D">    f = add(c, d)</span></span><span class="line"><span style="color:#B56959;--shiki-dark:#C98A7D">    g = add(e, f)</span></span><span class="line"><span style="color:#B56959;--shiki-dark:#C98A7D">    return g</span></span><span class="line"></span><span class="line"><span style="color:#B56959;--shiki-dark:#C98A7D">print(fancy_func(1, 2, 3, 4))</span></span><span class="line"><span style="color:#B5695977;--shiki-dark:#C98A7D77">"""</span></span><span class="line"></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">y </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#998418;--shiki-dark:#B8A965"> compile</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">prog</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> ''</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> '</span><span style="color:#B56959;--shiki-dark:#C98A7D">exec</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  # 编译成可执行代码</span></span><span class="line"><span style="color:#998418;--shiki-dark:#B8A965">exec</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">y</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">                        # 一次性运行</span></span></code></pre><p>特点：</p><ul><li><strong>运行更快</strong>，可以做优化</li><li>可以生成与 Python 无关的可执行代码，更容易移植</li><li>调试不如命令式方便</li></ul><hr /><h2 id="3️⃣-混合式编程hybrid-programming"><a class="anchor" href="#3️⃣-混合式编程hybrid-programming">#</a> 3️⃣ 混合式编程（Hybrid Programming）</h2><h3 id="背景"><a class="anchor" href="#背景">#</a> 背景</h3><ul><li><p>很多深度学习框架历史上在命令式和符号式之间选择：</p><ul><li>TensorFlow 1.x：符号式</li><li>PyTorch：命令式</li></ul></li><li><p>混合式编程的出现是为了 <strong>兼顾易用性和性能</strong></p><ul><li>开发时用命令式调试方便</li><li>部署时用符号式优化和移植方便</li></ul></li></ul><h3 id="pytorch-示例torchjit"><a class="anchor" href="#pytorch-示例torchjit">#</a> PyTorch 示例：<code>torch.jit</code></h3><pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> torch</span></span><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">from</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> torch </span><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> nn</span></span><span class="line"></span><span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 定义网络</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">net </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> nn</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">Sequential</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">    nn</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">Linear</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#2F798A;--shiki-dark:#4C9A91">512</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 256</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#999999;--shiki-dark:#666666">,</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">    nn</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">ReLU</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#999999;--shiki-dark:#666666">,</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">    nn</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">Linear</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#2F798A;--shiki-dark:#4C9A91">256</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 128</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#999999;--shiki-dark:#666666">,</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">    nn</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">ReLU</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#999999;--shiki-dark:#666666">,</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">    nn</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">Linear</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#2F798A;--shiki-dark:#4C9A91">128</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 2</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span></span><span class="line"><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span><span class="line"></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> torch</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">randn</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 512</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">net</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  # 命令式执行</span></span><span class="line"></span><span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 转换为符号式/优化版本</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">net </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> torch</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">jit</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">script</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">net</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">net</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  # 编译后的网络，效率更高</span></span></code></pre><ul><li><p><code>torch.jit.script</code> 会把命令式网络转换成 <strong>静态计算图</strong>，实现：</p><ol><li>编译优化</li><li>多 GPU 高效运行</li><li>可导出为非 Python 环境使用</li></ol></li></ul><hr /><h2 id="4️⃣-总结对比"><a class="anchor" href="#4️⃣-总结对比">#</a> 4️⃣ 总结对比</h2><table><thead><tr><th>编程方式</th><th>优点</th><th>缺点</th><th>示例框架</th></tr></thead><tbody><tr><td>命令式</td><td>易懂、易调试</td><td>运行慢，难优化</td><td>PyTorch</td></tr><tr><td>符号式</td><td>高效，可优化，易移植</td><td>调试不方便</td><td>TensorFlow 1.x, Theano</td></tr><tr><td>混合式</td><td>易调试 + 高效部署</td><td>需要额外转换步骤</td><td>PyTorch + torch.jit, TensorFlow 2.x</td></tr></tbody></table><hr /><p><strong>理解</strong>：</p><ul><li>命令式：边写边运行</li><li>符号式：先写完整程序再运行</li><li>混合式：平时用命令式调试，部署用符号式加速</li></ul>]]></content>
-    
-    
-    <summary type="html">本文介绍三种编程方式</summary>
-    
-    
-    
-    <category term="deeplearning" scheme="http://example.com/categories/deeplearning/"/>
-    
-    
-    <category term="code" scheme="http://example.com/tags/code/"/>
+    <category term="termux" scheme="https://koen666.github.io/tags/termux/"/>
     
   </entry>
   
   <entry>
     <title>多gpu训练方式</title>
-    <link href="http://example.com/2025/10/05/%E5%A4%9Agpu/"/>
-    <id>http://example.com/2025/10/05/%E5%A4%9Agpu/</id>
+    <link href="https://koen666.github.io/2025/10/05/%E5%A4%9Agpu/"/>
+    <id>https://koen666.github.io/2025/10/05/%E5%A4%9Agpu/</id>
     <published>2025-10-04T16:00:00.000Z</published>
     <updated>2025-10-05T12:25:07.934Z</updated>
     
@@ -216,19 +195,40 @@
     
     
     
-    <category term="deeplearning" scheme="http://example.com/categories/deeplearning/"/>
+    <category term="deeplearning" scheme="https://koen666.github.io/categories/deeplearning/"/>
     
     
-    <category term="gpu" scheme="http://example.com/tags/gpu/"/>
+    <category term="gpu" scheme="https://koen666.github.io/tags/gpu/"/>
     
-    <category term="data" scheme="http://example.com/tags/data/"/>
+    <category term="data" scheme="https://koen666.github.io/tags/data/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Imperative，Symbolic and Hybrid Programming</title>
+    <link href="https://koen666.github.io/2025/10/05/%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F/"/>
+    <id>https://koen666.github.io/2025/10/05/%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F/</id>
+    <published>2025-10-04T16:00:00.000Z</published>
+    <updated>2025-10-05T01:14:00.177Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1️⃣-命令式编程imperative-programming"><a class="anchor" href="#1️⃣-命令式编程imperative-programming">#</a> 1️⃣ 命令式编程（Imperative Programming）</h2><h3 id="核心思想"><a class="anchor" href="#核心思想">#</a> 核心思想</h3><ul><li><strong>按顺序执行每条语句</strong>，每执行一步就会改变程序的状态。</li><li>Python 就是典型的解释型语言，执行代码时会 <strong>逐行运行</strong>。</li></ul><h3 id="示例"><a class="anchor" href="#示例">#</a> 示例</h3><pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#AB5959;--shiki-dark:#CB7676">def</span><span style="color:#59873A;--shiki-dark:#80A665"> add</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">a</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> b</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#999999;--shiki-dark:#666666">:</span></span><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">    return</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> a </span><span style="color:#AB5959;--shiki-dark:#CB7676">+</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> b</span></span><span class="line"></span><span class="line"><span style="color:#AB5959;--shiki-dark:#CB7676">def</span><span style="color:#59873A;--shiki-dark:#80A665"> fancy_func</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">a</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> b</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> c</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> d</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#999999;--shiki-dark:#666666">:</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">    e </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> add</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">a</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> b</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">    f </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> add</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">c</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> d</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">    g </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> add</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">e</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> f</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">    return</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> g</span></span><span class="line"></span><span class="line"><span style="color:#998418;--shiki-dark:#B8A965">print</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">fancy_func</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 2</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 3</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 4</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span></code></pre><p>执行过程：</p><ol><li><code>e = add(a, b)</code> → 计算 1+2 = 3，并存到变量 <code>e</code></li><li><code>f = add(c, d)</code> → 计算 3+4 = 7，并存到变量 <code>f</code></li><li><code>g = add(e, f)</code> → 计算 3+7 = 10</li><li>返回并打印结果 <code>10</code></li></ol><p>特点：</p><ul><li><strong>直观易懂</strong>，方便调试</li><li>每次函数调用都需要解释器处理，效率不高（尤其在 GPU 上运行大批量计算时）</li></ul><hr /><h2 id="2️⃣-符号式编程symbolic-programming"><a class="anchor" href="#2️⃣-符号式编程symbolic-programming">#</a> 2️⃣ 符号式编程（Symbolic Programming）</h2><h3 id="核心思想-2"><a class="anchor" href="#核心思想-2">#</a> 核心思想</h3><ul><li><p><strong>先定义整个计算图/计算流程，再一次性执行</strong></p></li><li><p>可以让编译器提前做优化，例如：</p><ul><li>合并重复计算</li><li>直接生成最优机器指令</li><li>提前释放不再需要的内存</li></ul></li></ul><h3 id="示例模拟"><a class="anchor" href="#示例模拟">#</a> 示例（模拟）</h3><pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">prog </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> """</span></span><span class="line"><span style="color:#B56959;--shiki-dark:#C98A7D">def add(a, b):</span></span><span class="line"><span style="color:#B56959;--shiki-dark:#C98A7D">    return a + b</span></span><span class="line"></span><span class="line"><span style="color:#B56959;--shiki-dark:#C98A7D">def fancy_func(a, b, c, d):</span></span><span class="line"><span style="color:#B56959;--shiki-dark:#C98A7D">    e = add(a, b)</span></span><span class="line"><span style="color:#B56959;--shiki-dark:#C98A7D">    f = add(c, d)</span></span><span class="line"><span style="color:#B56959;--shiki-dark:#C98A7D">    g = add(e, f)</span></span><span class="line"><span style="color:#B56959;--shiki-dark:#C98A7D">    return g</span></span><span class="line"></span><span class="line"><span style="color:#B56959;--shiki-dark:#C98A7D">print(fancy_func(1, 2, 3, 4))</span></span><span class="line"><span style="color:#B5695977;--shiki-dark:#C98A7D77">"""</span></span><span class="line"></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">y </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#998418;--shiki-dark:#B8A965"> compile</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">prog</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> ''</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> '</span><span style="color:#B56959;--shiki-dark:#C98A7D">exec</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  # 编译成可执行代码</span></span><span class="line"><span style="color:#998418;--shiki-dark:#B8A965">exec</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">y</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">                        # 一次性运行</span></span></code></pre><p>特点：</p><ul><li><strong>运行更快</strong>，可以做优化</li><li>可以生成与 Python 无关的可执行代码，更容易移植</li><li>调试不如命令式方便</li></ul><hr /><h2 id="3️⃣-混合式编程hybrid-programming"><a class="anchor" href="#3️⃣-混合式编程hybrid-programming">#</a> 3️⃣ 混合式编程（Hybrid Programming）</h2><h3 id="背景"><a class="anchor" href="#背景">#</a> 背景</h3><ul><li><p>很多深度学习框架历史上在命令式和符号式之间选择：</p><ul><li>TensorFlow 1.x：符号式</li><li>PyTorch：命令式</li></ul></li><li><p>混合式编程的出现是为了 <strong>兼顾易用性和性能</strong></p><ul><li>开发时用命令式调试方便</li><li>部署时用符号式优化和移植方便</li></ul></li></ul><h3 id="pytorch-示例torchjit"><a class="anchor" href="#pytorch-示例torchjit">#</a> PyTorch 示例：<code>torch.jit</code></h3><pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-python"><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> torch</span></span><span class="line"><span style="color:#1E754F;--shiki-dark:#4D9375">from</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> torch </span><span style="color:#1E754F;--shiki-dark:#4D9375">import</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> nn</span></span><span class="line"></span><span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 定义网络</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">net </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> nn</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">Sequential</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">    nn</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">Linear</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#2F798A;--shiki-dark:#4C9A91">512</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 256</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#999999;--shiki-dark:#666666">,</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">    nn</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">ReLU</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#999999;--shiki-dark:#666666">,</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">    nn</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">Linear</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#2F798A;--shiki-dark:#4C9A91">256</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 128</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#999999;--shiki-dark:#666666">,</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">    nn</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">ReLU</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span><span style="color:#999999;--shiki-dark:#666666">,</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">    nn</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">Linear</span><span style="color:#1e754f;--shiki-dark:#4d9375">(</span><span style="color:#2F798A;--shiki-dark:#4C9A91">128</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 2</span><span style="color:#1e754f;--shiki-dark:#4d9375">)</span></span><span class="line"><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span><span class="line"></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> torch</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">randn</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#2F798A;--shiki-dark:#4C9A91">1</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#2F798A;--shiki-dark:#4C9A91"> 512</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">net</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  # 命令式执行</span></span><span class="line"></span><span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 转换为符号式/优化版本</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">net </span><span style="color:#999999;--shiki-dark:#666666">=</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> torch</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">jit</span><span style="color:#999999;--shiki-dark:#666666">.</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">script</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">net</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span></span><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">net</span><span style="color:#2993a3;--shiki-dark:#5eaab5">(</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE">x</span><span style="color:#2993a3;--shiki-dark:#5eaab5">)</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">  # 编译后的网络，效率更高</span></span></code></pre><ul><li><p><code>torch.jit.script</code> 会把命令式网络转换成 <strong>静态计算图</strong>，实现：</p><ol><li>编译优化</li><li>多 GPU 高效运行</li><li>可导出为非 Python 环境使用</li></ol></li></ul><hr /><h2 id="4️⃣-总结对比"><a class="anchor" href="#4️⃣-总结对比">#</a> 4️⃣ 总结对比</h2><table><thead><tr><th>编程方式</th><th>优点</th><th>缺点</th><th>示例框架</th></tr></thead><tbody><tr><td>命令式</td><td>易懂、易调试</td><td>运行慢，难优化</td><td>PyTorch</td></tr><tr><td>符号式</td><td>高效，可优化，易移植</td><td>调试不方便</td><td>TensorFlow 1.x, Theano</td></tr><tr><td>混合式</td><td>易调试 + 高效部署</td><td>需要额外转换步骤</td><td>PyTorch + torch.jit, TensorFlow 2.x</td></tr></tbody></table><hr /><p><strong>理解</strong>：</p><ul><li>命令式：边写边运行</li><li>符号式：先写完整程序再运行</li><li>混合式：平时用命令式调试，部署用符号式加速</li></ul>]]></content>
+    
+    
+    <summary type="html">本文介绍三种编程方式</summary>
+    
+    
+    
+    <category term="deeplearning" scheme="https://koen666.github.io/categories/deeplearning/"/>
+    
+    
+    <category term="code" scheme="https://koen666.github.io/tags/code/"/>
     
   </entry>
   
   <entry>
     <title>vit</title>
-    <link href="http://example.com/2025/10/04/vit/"/>
-    <id>http://example.com/2025/10/04/vit/</id>
+    <link href="https://koen666.github.io/2025/10/04/vit/"/>
+    <id>https://koen666.github.io/2025/10/04/vit/</id>
     <published>2025-10-03T16:00:00.000Z</published>
     <updated>2025-11-05T04:40:04.223Z</updated>
     
@@ -237,19 +237,19 @@
     
     
     
-    <category term="deeplearning" scheme="http://example.com/categories/deeplearning/"/>
+    <category term="deeplearning" scheme="https://koen666.github.io/categories/deeplearning/"/>
     
     
-    <category term="cv" scheme="http://example.com/tags/cv/"/>
+    <category term="cv" scheme="https://koen666.github.io/tags/cv/"/>
     
-    <category term="transforer" scheme="http://example.com/tags/transforer/"/>
+    <category term="transforer" scheme="https://koen666.github.io/tags/transforer/"/>
     
   </entry>
   
   <entry>
     <title>MLP 多层感知机制</title>
-    <link href="http://example.com/2025/09/29/MLC/"/>
-    <id>http://example.com/2025/09/29/MLC/</id>
+    <link href="https://koen666.github.io/2025/09/29/MLC/"/>
+    <id>https://koen666.github.io/2025/09/29/MLC/</id>
     <published>2025-09-28T16:00:00.000Z</published>
     <updated>2025-10-06T02:53:43.066Z</updated>
     
@@ -260,19 +260,19 @@
     
     
     
-    <category term="deeplearning" scheme="http://example.com/categories/deeplearning/"/>
+    <category term="deeplearning" scheme="https://koen666.github.io/categories/deeplearning/"/>
     
     
-    <category term="math" scheme="http://example.com/tags/math/"/>
+    <category term="math" scheme="https://koen666.github.io/tags/math/"/>
     
-    <category term="MLC" scheme="http://example.com/tags/MLC/"/>
+    <category term="MLC" scheme="https://koen666.github.io/tags/MLC/"/>
     
   </entry>
   
   <entry>
     <title>Flask框架 基本使用教程</title>
-    <link href="http://example.com/2025/09/24/flask/"/>
-    <id>http://example.com/2025/09/24/flask/</id>
+    <link href="https://koen666.github.io/2025/09/24/flask/"/>
+    <id>https://koen666.github.io/2025/09/24/flask/</id>
     <published>2025-09-24T13:54:47.228Z</published>
     <updated>2025-09-24T13:59:22.606Z</updated>
     
@@ -283,21 +283,21 @@
     
     
     
-    <category term="backen" scheme="http://example.com/categories/backen/"/>
+    <category term="backen" scheme="https://koen666.github.io/categories/backen/"/>
     
     
-    <category term="python" scheme="http://example.com/tags/python/"/>
+    <category term="python" scheme="https://koen666.github.io/tags/python/"/>
     
-    <category term="web" scheme="http://example.com/tags/web/"/>
+    <category term="web" scheme="https://koen666.github.io/tags/web/"/>
     
-    <category term="flask" scheme="http://example.com/tags/flask/"/>
+    <category term="flask" scheme="https://koen666.github.io/tags/flask/"/>
     
   </entry>
   
   <entry>
     <title>KL散度</title>
-    <link href="http://example.com/2025/09/22/KL/"/>
-    <id>http://example.com/2025/09/22/KL/</id>
+    <link href="https://koen666.github.io/2025/09/22/KL/"/>
+    <id>https://koen666.github.io/2025/09/22/KL/</id>
     <published>2025-09-21T16:00:00.000Z</published>
     <updated>2025-09-22T06:34:49.898Z</updated>
     
@@ -308,19 +308,19 @@
     
     
     
-    <category term="deeplearning" scheme="http://example.com/categories/deeplearning/"/>
+    <category term="deeplearning" scheme="https://koen666.github.io/categories/deeplearning/"/>
     
     
-    <category term="KL" scheme="http://example.com/tags/KL/"/>
+    <category term="KL" scheme="https://koen666.github.io/tags/KL/"/>
     
-    <category term="RE-ID" scheme="http://example.com/tags/RE-ID/"/>
+    <category term="RE-ID" scheme="https://koen666.github.io/tags/RE-ID/"/>
     
   </entry>
   
   <entry>
     <title>argparse + yaml 在训练脚本中的使用</title>
-    <link href="http://example.com/2025/09/21/yaml+argparse/"/>
-    <id>http://example.com/2025/09/21/yaml+argparse/</id>
+    <link href="https://koen666.github.io/2025/09/21/yaml+argparse/"/>
+    <id>https://koen666.github.io/2025/09/21/yaml+argparse/</id>
     <published>2025-09-20T16:00:00.000Z</published>
     <updated>2025-09-21T06:36:08.162Z</updated>
     
@@ -331,21 +331,21 @@
     
     
     
-    <category term="deeplearning" scheme="http://example.com/categories/deeplearning/"/>
+    <category term="deeplearning" scheme="https://koen666.github.io/categories/deeplearning/"/>
     
     
-    <category term="yaml" scheme="http://example.com/tags/yaml/"/>
+    <category term="yaml" scheme="https://koen666.github.io/tags/yaml/"/>
     
-    <category term="argparse" scheme="http://example.com/tags/argparse/"/>
+    <category term="argparse" scheme="https://koen666.github.io/tags/argparse/"/>
     
-    <category term="easydict" scheme="http://example.com/tags/easydict/"/>
+    <category term="easydict" scheme="https://koen666.github.io/tags/easydict/"/>
     
   </entry>
   
   <entry>
     <title>vue-router</title>
-    <link href="http://example.com/2025/09/16/vue-router/"/>
-    <id>http://example.com/2025/09/16/vue-router/</id>
+    <link href="https://koen666.github.io/2025/09/16/vue-router/"/>
+    <id>https://koen666.github.io/2025/09/16/vue-router/</id>
     <published>2025-09-15T16:00:00.000Z</published>
     <updated>2025-09-16T07:22:22.374Z</updated>
     
@@ -356,19 +356,19 @@
     
     
     
-    <category term="fronted" scheme="http://example.com/categories/fronted/"/>
+    <category term="fronted" scheme="https://koen666.github.io/categories/fronted/"/>
     
     
-    <category term="router" scheme="http://example.com/tags/router/"/>
+    <category term="router" scheme="https://koen666.github.io/tags/router/"/>
     
-    <category term="vue" scheme="http://example.com/tags/vue/"/>
+    <category term="vue" scheme="https://koen666.github.io/tags/vue/"/>
     
   </entry>
   
   <entry>
     <title>collections</title>
-    <link href="http://example.com/2025/09/15/py_collections/"/>
-    <id>http://example.com/2025/09/15/py_collections/</id>
+    <link href="https://koen666.github.io/2025/09/15/py_collections/"/>
+    <id>https://koen666.github.io/2025/09/15/py_collections/</id>
     <published>2025-09-14T16:00:00.000Z</published>
     <updated>2025-09-15T12:25:48.748Z</updated>
     
@@ -379,17 +379,17 @@
     
     
     
-    <category term="python" scheme="http://example.com/categories/python/"/>
+    <category term="python" scheme="https://koen666.github.io/categories/python/"/>
     
     
-    <category term="collections" scheme="http://example.com/tags/collections/"/>
+    <category term="collections" scheme="https://koen666.github.io/tags/collections/"/>
     
   </entry>
   
   <entry>
     <title>从dataset-&gt;dataloader</title>
-    <link href="http://example.com/2025/09/15/%E4%BB%8Edataset%E5%88%B0dataloader/"/>
-    <id>http://example.com/2025/09/15/%E4%BB%8Edataset%E5%88%B0dataloader/</id>
+    <link href="https://koen666.github.io/2025/09/15/%E4%BB%8Edataset%E5%88%B0dataloader/"/>
+    <id>https://koen666.github.io/2025/09/15/%E4%BB%8Edataset%E5%88%B0dataloader/</id>
     <published>2025-09-14T16:00:00.000Z</published>
     <updated>2025-09-15T14:08:55.519Z</updated>
     
@@ -400,23 +400,23 @@
     
     
     
-    <category term="pytorch" scheme="http://example.com/categories/pytorch/"/>
+    <category term="pytorch" scheme="https://koen666.github.io/categories/pytorch/"/>
     
     
-    <category term="deeplearning" scheme="http://example.com/tags/deeplearning/"/>
+    <category term="dataset" scheme="https://koen666.github.io/tags/dataset/"/>
     
-    <category term="pytorch" scheme="http://example.com/tags/pytorch/"/>
+    <category term="deeplearning" scheme="https://koen666.github.io/tags/deeplearning/"/>
     
-    <category term="dataset" scheme="http://example.com/tags/dataset/"/>
+    <category term="pytorch" scheme="https://koen666.github.io/tags/pytorch/"/>
     
-    <category term="dataloader" scheme="http://example.com/tags/dataloader/"/>
+    <category term="dataloader" scheme="https://koen666.github.io/tags/dataloader/"/>
     
   </entry>
   
   <entry>
     <title>关于模型可视化---Gradio</title>
-    <link href="http://example.com/2025/09/08/gradio/"/>
-    <id>http://example.com/2025/09/08/gradio/</id>
+    <link href="https://koen666.github.io/2025/09/08/gradio/"/>
+    <id>https://koen666.github.io/2025/09/08/gradio/</id>
     <published>2025-09-07T16:00:00.000Z</published>
     <updated>2025-09-09T10:58:44.306Z</updated>
     
@@ -427,21 +427,21 @@
     
     
     
-    <category term="fronted" scheme="http://example.com/categories/fronted/"/>
+    <category term="fronted" scheme="https://koen666.github.io/categories/fronted/"/>
     
     
-    <category term="python" scheme="http://example.com/tags/python/"/>
+    <category term="python" scheme="https://koen666.github.io/tags/python/"/>
     
-    <category term="web" scheme="http://example.com/tags/web/"/>
+    <category term="web" scheme="https://koen666.github.io/tags/web/"/>
     
-    <category term="gradio" scheme="http://example.com/tags/gradio/"/>
+    <category term="gradio" scheme="https://koen666.github.io/tags/gradio/"/>
     
   </entry>
   
   <entry>
     <title>网络核心概念精讲</title>
-    <link href="http://example.com/2025/09/03/network/"/>
-    <id>http://example.com/2025/09/03/network/</id>
+    <link href="https://koen666.github.io/2025/09/03/network/"/>
+    <id>https://koen666.github.io/2025/09/03/network/</id>
     <published>2025-09-02T16:00:00.000Z</published>
     <updated>2025-09-03T12:58:07.805Z</updated>
     
@@ -452,21 +452,21 @@
     
     
     
-    <category term="network" scheme="http://example.com/categories/network/"/>
+    <category term="network" scheme="https://koen666.github.io/categories/network/"/>
     
     
-    <category term="router" scheme="http://example.com/tags/router/"/>
+    <category term="router" scheme="https://koen666.github.io/tags/router/"/>
     
-    <category term="ip" scheme="http://example.com/tags/ip/"/>
+    <category term="ip" scheme="https://koen666.github.io/tags/ip/"/>
     
-    <category term="MAC" scheme="http://example.com/tags/MAC/"/>
+    <category term="MAC" scheme="https://koen666.github.io/tags/MAC/"/>
     
   </entry>
   
   <entry>
     <title>SQL语法规则</title>
-    <link href="http://example.com/2025/09/01/sql/"/>
-    <id>http://example.com/2025/09/01/sql/</id>
+    <link href="https://koen666.github.io/2025/09/01/sql/"/>
+    <id>https://koen666.github.io/2025/09/01/sql/</id>
     <published>2025-08-31T16:00:00.000Z</published>
     <updated>2025-11-07T14:14:51.099Z</updated>
     
@@ -477,12 +477,12 @@
     
     
     
-    <category term="database" scheme="http://example.com/categories/database/"/>
+    <category term="database" scheme="https://koen666.github.io/categories/database/"/>
     
     
-    <category term="database" scheme="http://example.com/tags/database/"/>
+    <category term="database" scheme="https://koen666.github.io/tags/database/"/>
     
-    <category term="sql" scheme="http://example.com/tags/sql/"/>
+    <category term="sql" scheme="https://koen666.github.io/tags/sql/"/>
     
   </entry>
   

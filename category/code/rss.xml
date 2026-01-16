@@ -2,39 +2,40 @@
 <rss version="2.0">
     <channel>
         <title>木语 • Posts by &#34;code&#34; category</title>
-        <link>http://example.com</link>
+        <link>https://koen666.github.io</link>
         <description>Spark!</description>
         <language>zh-CN</language>
         <pubDate>Fri, 28 Nov 2025 00:00:00 +0800</pubDate>
         <lastBuildDate>Fri, 28 Nov 2025 00:00:00 +0800</lastBuildDate>
         <category>math</category>
-        <category>MLC</category>
         <category>GA</category>
         <category>python</category>
+        <category>KL</category>
+        <category>RE-ID</category>
+        <category>MLC</category>
         <category>Koa</category>
         <category>backen</category>
         <category>nodejs</category>
-        <category>cypher</category>
-        <category>neo4j</category>
-        <category>database</category>
-        <category>KL</category>
-        <category>RE-ID</category>
+        <category>cmd</category>
+        <category>curl</category>
+        <category>learn</category>
+        <category>container</category>
+        <category>docker</category>
+        <category>linux</category>
+        <category>virtual</category>
         <category>electron</category>
         <category>web</category>
         <category>desk</category>
-        <category>container</category>
-        <category>docker</category>
-        <category>learn</category>
-        <category>linux</category>
-        <category>virtual</category>
-        <category>cmd</category>
-        <category>curl</category>
-        <category>flask</category>
+        <category>cypher</category>
+        <category>neo4j</category>
+        <category>database</category>
         <category>repo</category>
         <category>git</category>
-        <category>gradio</category>
-        <category>markdown</category>
+        <category>flask</category>
         <category>latex</category>
+        <category>markdown</category>
+        <category>uv</category>
+        <category>environment</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
@@ -42,35 +43,34 @@
         <category>scipy</category>
         <category>screen</category>
         <category>termux</category>
-        <category>uv</category>
-        <category>environment</category>
-        <category>ssh</category>
-        <category>sql</category>
+        <category>gradio</category>
         <category>saaborn</category>
+        <category>sql</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>Transformer</category>
+        <category>ssh</category>
         <category>cv</category>
         <category>transforer</category>
         <category>vue</category>
-        <category>yaml</category>
-        <category>argparse</category>
-        <category>easydict</category>
         <category>yolo</category>
         <category>dataset</category>
         <category>AnyLabeling</category>
-        <category>code</category>
-        <category>agent</category>
+        <category>yaml</category>
+        <category>argparse</category>
+        <category>easydict</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
+        <category>dataloader</category>
         <category>gpu</category>
         <category>data</category>
-        <category>dataloader</category>
+        <category>code</category>
+        <category>Transformer</category>
+        <category>agent</category>
         <item>
-            <guid isPermalink="true">http://example.com/2025/11/28/pipenv/</guid>
+            <guid isPermalink="true">https://koen666.github.io/2025/11/28/pipenv/</guid>
             <title>像前端package.json那样管理python依赖 (uv篇)</title>
-            <link>http://example.com/2025/11/28/pipenv/</link>
+            <link>https://koen666.github.io/2025/11/28/pipenv/</link>
             <category>python</category>
             <category>uv</category>
             <category>environment</category>
@@ -169,9 +169,9 @@
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://example.com/2025/08/25/Koa/</guid>
+            <guid isPermalink="true">https://koen666.github.io/2025/08/25/Koa/</guid>
             <title>Koa 框架使用</title>
-            <link>http://example.com/2025/08/25/Koa/</link>
+            <link>https://koen666.github.io/2025/08/25/Koa/</link>
             <category>Koa</category>
             <category>backen</category>
             <category>nodejs</category>
@@ -1298,9 +1298,9 @@
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://example.com/2025/08/18/latex_2/</guid>
+            <guid isPermalink="true">https://koen666.github.io/2025/08/18/latex_2/</guid>
             <title>Latex全语法使用</title>
-            <link>http://example.com/2025/08/18/latex_2/</link>
+            <link>https://koen666.github.io/2025/08/18/latex_2/</link>
             <category>math</category>
             <category>latex</category>
             <pubDate>Mon, 18 Aug 2025 17:20:00 +0800</pubDate>
@@ -1563,9 +1563,9 @@
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://example.com/2025/08/11/scipy/</guid>
+            <guid isPermalink="true">https://koen666.github.io/2025/08/11/scipy/</guid>
             <title>scipy基本模块及其使用</title>
-            <link>http://example.com/2025/08/11/scipy/</link>
+            <link>https://koen666.github.io/2025/08/11/scipy/</link>
             <category>math</category>
             <category>python</category>
             <category>scipy</category>
@@ -2176,9 +2176,9 @@ y
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://example.com/2025/08/10/seaborn/</guid>
+            <guid isPermalink="true">https://koen666.github.io/2025/08/10/seaborn/</guid>
             <title>seaborn实现统计图绘制</title>
-            <link>http://example.com/2025/08/10/seaborn/</link>
+            <link>https://koen666.github.io/2025/08/10/seaborn/</link>
             <category>python</category>
             <category>saaborn</category>
             <pubDate>Sun, 10 Aug 2025 14:50:00 +0800</pubDate>
@@ -2730,9 +2730,9 @@ y
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://example.com/2025/07/29/electron/</guid>
+            <guid isPermalink="true">https://koen666.github.io/2025/07/29/electron/</guid>
             <title>Electron 基本使用教程</title>
-            <link>http://example.com/2025/07/29/electron/</link>
+            <link>https://koen666.github.io/2025/07/29/electron/</link>
             <category>electron</category>
             <category>web</category>
             <category>desk</category>
@@ -2807,33 +2807,9 @@ y
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://example.com/2025/07/27/issue/</guid>
-            <title>常见BUG汇总</title>
-            <link>http://example.com/2025/07/27/issue/</link>
-            <category>markdown</category>
-            <pubDate>Sun, 27 Jul 2025 08:29:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h2 id=&#34;一-markdown&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一-markdown&#34;&gt;#&lt;/a&gt; 一、Markdown&lt;/h2&gt;
-&lt;h3 id=&#34;11-为什么vscode编辑md文件十分卡顿&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#11-为什么vscode编辑md文件十分卡顿&#34;&gt;#&lt;/a&gt; 1.1 为什么vscode编辑md文件十分卡顿&lt;/h3&gt;
-&lt;p&gt;解决方法:禁用cpp extension pack扩展&lt;/p&gt;
-&lt;h2 id=&#34;二-hexo&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#二-hexo&#34;&gt;#&lt;/a&gt; 二、Hexo&lt;/h2&gt;
-&lt;h3 id=&#34;21-出现spawn-failed报错&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#21-出现spawn-failed报错&#34;&gt;#&lt;/a&gt; 2.1 出现Spawn Failed报错&lt;/h3&gt;
-&lt;p&gt;首先尝试关机重启&lt;/p&gt;
-&lt;p&gt;其次删除&lt;code&gt;.deploy_git&lt;/code&gt;文件夹&lt;/p&gt;
-&lt;p&gt;最后实在不行找到&lt;code&gt;.ssh&lt;/code&gt;文件，先测试&lt;/p&gt;
-&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;ssh&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; -T&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; git@github.com&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;如果出现22端口连接超时，改成443端口即可&lt;/p&gt;
-&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;Host&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; github.com&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;  HostName&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; ssh.github.com&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;  Port&lt;/span&gt;&lt;span style=&#34;color:#2F798A;--shiki-dark:#4C9A91&#34;&gt; 443&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;  User&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; git&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;  IdentityFile&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; ~/.ssh/id_rsa&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;  IdentitiesOnly&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; yes&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">http://example.com/2025/07/27/latex/</guid>
+            <guid isPermalink="true">https://koen666.github.io/2025/07/27/latex/</guid>
             <title>Latex常见数学公式</title>
-            <link>http://example.com/2025/07/27/latex/</link>
+            <link>https://koen666.github.io/2025/07/27/latex/</link>
             <category>math</category>
             <category>latex</category>
             <pubDate>Sun, 27 Jul 2025 08:29:00 +0800</pubDate>
@@ -3204,12 +3180,36 @@ c-16-25.333-24-45-24-59z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://example.com/2025/07/26/docker-basic-usage/</guid>
+            <guid isPermalink="true">https://koen666.github.io/2025/07/27/issue/</guid>
+            <title>常见BUG汇总</title>
+            <link>https://koen666.github.io/2025/07/27/issue/</link>
+            <category>markdown</category>
+            <pubDate>Sun, 27 Jul 2025 08:29:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;一-markdown&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一-markdown&#34;&gt;#&lt;/a&gt; 一、Markdown&lt;/h2&gt;
+&lt;h3 id=&#34;11-为什么vscode编辑md文件十分卡顿&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#11-为什么vscode编辑md文件十分卡顿&#34;&gt;#&lt;/a&gt; 1.1 为什么vscode编辑md文件十分卡顿&lt;/h3&gt;
+&lt;p&gt;解决方法:禁用cpp extension pack扩展&lt;/p&gt;
+&lt;h2 id=&#34;二-hexo&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#二-hexo&#34;&gt;#&lt;/a&gt; 二、Hexo&lt;/h2&gt;
+&lt;h3 id=&#34;21-出现spawn-failed报错&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#21-出现spawn-failed报错&#34;&gt;#&lt;/a&gt; 2.1 出现Spawn Failed报错&lt;/h3&gt;
+&lt;p&gt;首先尝试关机重启&lt;/p&gt;
+&lt;p&gt;其次删除&lt;code&gt;.deploy_git&lt;/code&gt;文件夹&lt;/p&gt;
+&lt;p&gt;最后实在不行找到&lt;code&gt;.ssh&lt;/code&gt;文件，先测试&lt;/p&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;ssh&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; -T&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; git@github.com&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果出现22端口连接超时，改成443端口即可&lt;/p&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;Host&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; github.com&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;  HostName&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; ssh.github.com&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;  Port&lt;/span&gt;&lt;span style=&#34;color:#2F798A;--shiki-dark:#4C9A91&#34;&gt; 443&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;  User&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; git&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;  IdentityFile&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; ~/.ssh/id_rsa&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;  IdentitiesOnly&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; yes&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://koen666.github.io/2025/07/26/docker-basic-usage/</guid>
             <title>Docker 基本使用教程</title>
-            <link>http://example.com/2025/07/26/docker-basic-usage/</link>
+            <link>https://koen666.github.io/2025/07/26/docker-basic-usage/</link>
+            <category>learn</category>
             <category>container</category>
             <category>docker</category>
-            <category>learn</category>
             <category>linux</category>
             <category>virtual</category>
             <pubDate>Sat, 26 Jul 2025 08:53:34 +0800</pubDate>
@@ -3366,9 +3366,9 @@ image 文件可以看作是容器的模板，Docker 根据 image 文件生成容
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://example.com/2025/07/25/git-basic-usage/</guid>
+            <guid isPermalink="true">https://koen666.github.io/2025/07/25/git-basic-usage/</guid>
             <title>Git 基本使用教程</title>
-            <link>http://example.com/2025/07/25/git-basic-usage/</link>
+            <link>https://koen666.github.io/2025/07/25/git-basic-usage/</link>
             <category>learn</category>
             <category>repo</category>
             <category>git</category>
