@@ -7,64 +7,64 @@
         <language>zh-CN</language>
         <pubDate>Tue, 29 Jul 2025 09:20:04 +0800</pubDate>
         <lastBuildDate>Tue, 29 Jul 2025 09:20:04 +0800</lastBuildDate>
-        <category>KL</category>
-        <category>RE-ID</category>
         <category>GA</category>
         <category>python</category>
-        <category>MLC</category>
         <category>math</category>
-        <category>Koa</category>
-        <category>backen</category>
-        <category>nodejs</category>
+        <category>KL</category>
+        <category>RE-ID</category>
+        <category>MLC</category>
+        <category>cmd</category>
+        <category>curl</category>
+        <category>learn</category>
         <category>cypher</category>
         <category>neo4j</category>
         <category>database</category>
-        <category>electron</category>
-        <category>web</category>
-        <category>desk</category>
-        <category>flask</category>
-        <category>gradio</category>
-        <category>repo</category>
-        <category>git</category>
-        <category>learn</category>
         <category>container</category>
         <category>docker</category>
         <category>linux</category>
         <category>virtual</category>
-        <category>cmd</category>
-        <category>curl</category>
-        <category>markdown</category>
+        <category>electron</category>
+        <category>web</category>
+        <category>desk</category>
+        <category>Koa</category>
+        <category>backen</category>
+        <category>nodejs</category>
+        <category>flask</category>
+        <category>gradio</category>
+        <category>repo</category>
+        <category>git</category>
         <category>latex</category>
+        <category>markdown</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
         <category>uv</category>
         <category>environment</category>
         <category>collections</category>
+        <category>saaborn</category>
         <category>screen</category>
         <category>termux</category>
+        <category>sql</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
+        <category>Transformer</category>
+        <category>ssh</category>
+        <category>cv</category>
+        <category>transforer</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
-        <category>sql</category>
-        <category>saaborn</category>
-        <category>scipy</category>
-        <category>cv</category>
-        <category>transforer</category>
-        <category>vue</category>
-        <category>ssh</category>
-        <category>yaml</category>
-        <category>argparse</category>
-        <category>easydict</category>
         <category>yolo</category>
         <category>dataset</category>
         <category>AnyLabeling</category>
-        <category>agent</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
+        <category>scipy</category>
         <category>dataloader</category>
+        <category>vue</category>
+        <category>yaml</category>
+        <category>argparse</category>
+        <category>easydict</category>
+        <category>agent</category>
         <category>code</category>
-        <category>Transformer</category>
         <category>gpu</category>
         <category>data</category>
         <item>
