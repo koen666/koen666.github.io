@@ -2113,6 +2113,11 @@ main >.inner {
   z-index: 1;
   transition: all 0.2s ease-in-out 0s;
 }
+#header.home-hero #imgs {
+  height: 100vh;
+  min-height: 0;
+  contain-intrinsic-size: 100vw 100vh;
+}
 @-moz-keyframes imageAnimation {
   0% {
     opacity: 0;
