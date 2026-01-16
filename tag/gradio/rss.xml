@@ -7,66 +7,66 @@
         <language>zh-CN</language>
         <pubDate>Mon, 08 Sep 2025 00:00:00 +0800</pubDate>
         <lastBuildDate>Mon, 08 Sep 2025 00:00:00 +0800</lastBuildDate>
-        <category>GA</category>
-        <category>python</category>
         <category>math</category>
         <category>MLC</category>
+        <category>GA</category>
+        <category>python</category>
         <category>Koa</category>
         <category>backen</category>
         <category>nodejs</category>
-        <category>KL</category>
-        <category>RE-ID</category>
-        <category>cmd</category>
-        <category>curl</category>
-        <category>learn</category>
-        <category>electron</category>
-        <category>web</category>
-        <category>desk</category>
-        <category>repo</category>
-        <category>git</category>
-        <category>container</category>
-        <category>docker</category>
-        <category>linux</category>
-        <category>virtual</category>
         <category>cypher</category>
         <category>neo4j</category>
         <category>database</category>
-        <category>latex</category>
+        <category>KL</category>
+        <category>RE-ID</category>
+        <category>electron</category>
+        <category>web</category>
+        <category>desk</category>
+        <category>container</category>
+        <category>docker</category>
+        <category>learn</category>
+        <category>linux</category>
+        <category>virtual</category>
+        <category>cmd</category>
+        <category>curl</category>
         <category>flask</category>
+        <category>repo</category>
+        <category>git</category>
+        <category>gradio</category>
+        <category>markdown</category>
+        <category>latex</category>
+        <category>router</category>
+        <category>ip</category>
+        <category>MAC</category>
         <category>collections</category>
-        <category>uv</category>
-        <category>environment</category>
+        <category>scipy</category>
         <category>screen</category>
         <category>termux</category>
-        <category>markdown</category>
-        <category>gradio</category>
-        <category>scipy</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>Transformer</category>
+        <category>uv</category>
+        <category>environment</category>
+        <category>ssh</category>
         <category>sql</category>
         <category>saaborn</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
-        <category>router</category>
-        <category>ip</category>
-        <category>MAC</category>
-        <category>yolo</category>
-        <category>dataset</category>
-        <category>AnyLabeling</category>
-        <category>ssh</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
+        <category>Transformer</category>
+        <category>cv</category>
+        <category>transforer</category>
+        <category>vue</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
-        <category>cv</category>
-        <category>transforer</category>
+        <category>yolo</category>
+        <category>dataset</category>
+        <category>AnyLabeling</category>
+        <category>code</category>
         <category>agent</category>
-        <category>dataloader</category>
-        <category>vue</category>
         <category>gpu</category>
         <category>data</category>
-        <category>code</category>
+        <category>dataloader</category>
         <item>
             <guid isPermalink="true">http://example.com/2025/09/08/gradio/</guid>
             <title>关于模型可视化---Gradio</title>
