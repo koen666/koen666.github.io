@@ -2452,8 +2452,37 @@ main >.inner {
   font-size: 0.875em;
   margin: 0;
 }
+#brand .meta #subtitle-typewriter {
+  position: relative;
+}
+#brand .meta #subtitle-typewriter::after {
+  content: '▌';
+  display: inline-block;
+  margin-left: 0.2rem;
+  animation: shokax-type-caret 1s steps(1) infinite;
+}
 #brand .meta .item+.item {
   margin-left: 0.625rem;
+}
+@-moz-keyframes shokax-type-caret {
+  50% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes shokax-type-caret {
+  50% {
+    opacity: 0;
+  }
+}
+@-o-keyframes shokax-type-caret {
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes shokax-type-caret {
+  50% {
+    opacity: 0;
+  }
 }
 @media (min-width: 820px) and (max-width: 1043px) {
   #brand .meta {
