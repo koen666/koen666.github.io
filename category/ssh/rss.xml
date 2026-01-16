@@ -7,61 +7,61 @@
         <language>zh-CN</language>
         <pubDate>Fri, 10 Oct 2025 00:00:00 +0800</pubDate>
         <lastBuildDate>Fri, 10 Oct 2025 00:00:00 +0800</lastBuildDate>
+        <category>GA</category>
+        <category>python</category>
         <category>math</category>
+        <category>KL</category>
+        <category>RE-ID</category>
         <category>Koa</category>
         <category>backen</category>
         <category>nodejs</category>
         <category>MLC</category>
-        <category>KL</category>
-        <category>RE-ID</category>
-        <category>cypher</category>
-        <category>neo4j</category>
-        <category>database</category>
         <category>cmd</category>
         <category>curl</category>
         <category>learn</category>
+        <category>electron</category>
+        <category>web</category>
+        <category>desk</category>
         <category>container</category>
         <category>docker</category>
         <category>linux</category>
         <category>virtual</category>
-        <category>electron</category>
-        <category>web</category>
-        <category>desk</category>
-        <category>GA</category>
-        <category>python</category>
         <category>flask</category>
-        <category>markdown</category>
-        <category>repo</category>
-        <category>git</category>
         <category>gradio</category>
+        <category>markdown</category>
+        <category>cypher</category>
+        <category>neo4j</category>
+        <category>database</category>
         <category>latex</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
         <category>uv</category>
         <category>environment</category>
+        <category>repo</category>
+        <category>git</category>
         <category>collections</category>
+        <category>scipy</category>
         <category>deeplearning</category>
         <category>pytorch</category>
         <category>Transformer</category>
-        <category>scipy</category>
+        <category>screen</category>
+        <category>termux</category>
         <category>saaborn</category>
         <category>sql</category>
         <category>ssh</category>
-        <category>screen</category>
-        <category>termux</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
         <category>cv</category>
         <category>transforer</category>
+        <category>vue</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
         <category>yolo</category>
         <category>dataset</category>
         <category>AnyLabeling</category>
-        <category>vue</category>
         <category>dataloader</category>
         <category>gpu</category>
         <category>data</category>
