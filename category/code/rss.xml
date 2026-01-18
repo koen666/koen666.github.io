@@ -8,63 +8,63 @@
         <pubDate>Fri, 28 Nov 2025 00:00:00 +0800</pubDate>
         <lastBuildDate>Fri, 28 Nov 2025 00:00:00 +0800</lastBuildDate>
         <category>math</category>
-        <category>cmd</category>
-        <category>curl</category>
-        <category>learn</category>
-        <category>electron</category>
-        <category>web</category>
-        <category>desk</category>
         <category>KL</category>
         <category>RE-ID</category>
         <category>GA</category>
         <category>python</category>
+        <category>cmd</category>
+        <category>curl</category>
+        <category>learn</category>
+        <category>Koa</category>
+        <category>backen</category>
+        <category>nodejs</category>
+        <category>cypher</category>
+        <category>neo4j</category>
+        <category>database</category>
+        <category>electron</category>
+        <category>web</category>
+        <category>desk</category>
         <category>container</category>
         <category>docker</category>
         <category>linux</category>
         <category>virtual</category>
-        <category>cypher</category>
-        <category>neo4j</category>
-        <category>database</category>
-        <category>MLC</category>
-        <category>Koa</category>
-        <category>backen</category>
-        <category>nodejs</category>
+        <category>flask</category>
+        <category>gradio</category>
         <category>repo</category>
         <category>git</category>
-        <category>gradio</category>
-        <category>latex</category>
-        <category>flask</category>
-        <category>uv</category>
-        <category>environment</category>
         <category>markdown</category>
-        <category>collections</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>Transformer</category>
-        <category>scipy</category>
-        <category>saaborn</category>
-        <category>ssh</category>
-        <category>sql</category>
-        <category>screen</category>
-        <category>termux</category>
+        <category>latex</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
+        <category>MLC</category>
+        <category>collections</category>
+        <category>uv</category>
+        <category>environment</category>
+        <category>scipy</category>
+        <category>saaborn</category>
+        <category>screen</category>
+        <category>termux</category>
+        <category>sql</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
+        <category>Transformer</category>
+        <category>ssh</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
+        <category>vue</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
         <category>yolo</category>
         <category>dataset</category>
         <category>AnyLabeling</category>
-        <category>agent</category>
-        <category>code</category>
-        <category>vue</category>
         <category>gpu</category>
         <category>data</category>
+        <category>agent</category>
         <category>dataloader</category>
+        <category>code</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2025/11/28/pipenv/</guid>
             <title>像前端package.json那样管理python依赖 (uv篇)</title>
@@ -2805,6 +2805,30 @@ y
  ]]></description>
         </item>
         <item>
+            <guid isPermalink="true">https://koen666.github.io/2025/07/27/issue/</guid>
+            <title>常见BUG汇总</title>
+            <link>https://koen666.github.io/2025/07/27/issue/</link>
+            <category>markdown</category>
+            <pubDate>Sun, 27 Jul 2025 08:29:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;一-markdown&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一-markdown&#34;&gt;#&lt;/a&gt; 一、Markdown&lt;/h2&gt;
+&lt;h3 id=&#34;11-为什么vscode编辑md文件十分卡顿&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#11-为什么vscode编辑md文件十分卡顿&#34;&gt;#&lt;/a&gt; 1.1 为什么vscode编辑md文件十分卡顿&lt;/h3&gt;
+&lt;p&gt;解决方法:禁用cpp extension pack扩展&lt;/p&gt;
+&lt;h2 id=&#34;二-hexo&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#二-hexo&#34;&gt;#&lt;/a&gt; 二、Hexo&lt;/h2&gt;
+&lt;h3 id=&#34;21-出现spawn-failed报错&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#21-出现spawn-failed报错&#34;&gt;#&lt;/a&gt; 2.1 出现Spawn Failed报错&lt;/h3&gt;
+&lt;p&gt;首先尝试关机重启&lt;/p&gt;
+&lt;p&gt;其次删除&lt;code&gt;.deploy_git&lt;/code&gt;文件夹&lt;/p&gt;
+&lt;p&gt;最后实在不行找到&lt;code&gt;.ssh&lt;/code&gt;文件，先测试&lt;/p&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;ssh&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; -T&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; git@github.com&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果出现22端口连接超时，改成443端口即可&lt;/p&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;Host&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; github.com&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;  HostName&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; ssh.github.com&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;  Port&lt;/span&gt;&lt;span style=&#34;color:#2F798A;--shiki-dark:#4C9A91&#34;&gt; 443&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;  User&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; git&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;  IdentityFile&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; ~/.ssh/id_rsa&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;  IdentitiesOnly&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; yes&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+ ]]></description>
+        </item>
+        <item>
             <guid isPermalink="true">https://koen666.github.io/2025/07/27/latex/</guid>
             <title>Latex常见数学公式</title>
             <link>https://koen666.github.io/2025/07/27/latex/</link>
@@ -3175,30 +3199,6 @@ c-16-25.333-24-45-24-59z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;hr&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://koen666.github.io/2025/07/27/issue/</guid>
-            <title>常见BUG汇总</title>
-            <link>https://koen666.github.io/2025/07/27/issue/</link>
-            <category>markdown</category>
-            <pubDate>Sun, 27 Jul 2025 08:29:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h2 id=&#34;一-markdown&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一-markdown&#34;&gt;#&lt;/a&gt; 一、Markdown&lt;/h2&gt;
-&lt;h3 id=&#34;11-为什么vscode编辑md文件十分卡顿&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#11-为什么vscode编辑md文件十分卡顿&#34;&gt;#&lt;/a&gt; 1.1 为什么vscode编辑md文件十分卡顿&lt;/h3&gt;
-&lt;p&gt;解决方法:禁用cpp extension pack扩展&lt;/p&gt;
-&lt;h2 id=&#34;二-hexo&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#二-hexo&#34;&gt;#&lt;/a&gt; 二、Hexo&lt;/h2&gt;
-&lt;h3 id=&#34;21-出现spawn-failed报错&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#21-出现spawn-failed报错&#34;&gt;#&lt;/a&gt; 2.1 出现Spawn Failed报错&lt;/h3&gt;
-&lt;p&gt;首先尝试关机重启&lt;/p&gt;
-&lt;p&gt;其次删除&lt;code&gt;.deploy_git&lt;/code&gt;文件夹&lt;/p&gt;
-&lt;p&gt;最后实在不行找到&lt;code&gt;.ssh&lt;/code&gt;文件，先测试&lt;/p&gt;
-&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;ssh&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; -T&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; git@github.com&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;如果出现22端口连接超时，改成443端口即可&lt;/p&gt;
-&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;Host&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; github.com&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;  HostName&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; ssh.github.com&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;  Port&lt;/span&gt;&lt;span style=&#34;color:#2F798A;--shiki-dark:#4C9A91&#34;&gt; 443&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;  User&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; git&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;  IdentityFile&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; ~/.ssh/id_rsa&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;  IdentitiesOnly&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; yes&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
  ]]></description>
         </item>
         <item>

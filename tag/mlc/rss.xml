@@ -8,63 +8,63 @@
         <pubDate>Mon, 29 Sep 2025 00:00:00 +0800</pubDate>
         <lastBuildDate>Mon, 29 Sep 2025 00:00:00 +0800</lastBuildDate>
         <category>math</category>
-        <category>cmd</category>
-        <category>curl</category>
-        <category>learn</category>
-        <category>electron</category>
-        <category>web</category>
-        <category>desk</category>
         <category>KL</category>
         <category>RE-ID</category>
         <category>GA</category>
         <category>python</category>
+        <category>cmd</category>
+        <category>curl</category>
+        <category>learn</category>
+        <category>Koa</category>
+        <category>backen</category>
+        <category>nodejs</category>
+        <category>cypher</category>
+        <category>neo4j</category>
+        <category>database</category>
+        <category>electron</category>
+        <category>web</category>
+        <category>desk</category>
         <category>container</category>
         <category>docker</category>
         <category>linux</category>
         <category>virtual</category>
-        <category>cypher</category>
-        <category>neo4j</category>
-        <category>database</category>
-        <category>MLC</category>
-        <category>Koa</category>
-        <category>backen</category>
-        <category>nodejs</category>
+        <category>flask</category>
+        <category>gradio</category>
         <category>repo</category>
         <category>git</category>
-        <category>gradio</category>
-        <category>latex</category>
-        <category>flask</category>
-        <category>uv</category>
-        <category>environment</category>
         <category>markdown</category>
-        <category>collections</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>Transformer</category>
-        <category>scipy</category>
-        <category>saaborn</category>
-        <category>ssh</category>
-        <category>sql</category>
-        <category>screen</category>
-        <category>termux</category>
+        <category>latex</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
+        <category>MLC</category>
+        <category>collections</category>
+        <category>uv</category>
+        <category>environment</category>
+        <category>scipy</category>
+        <category>saaborn</category>
+        <category>screen</category>
+        <category>termux</category>
+        <category>sql</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
+        <category>Transformer</category>
+        <category>ssh</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
+        <category>vue</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
         <category>yolo</category>
         <category>dataset</category>
         <category>AnyLabeling</category>
-        <category>agent</category>
-        <category>code</category>
-        <category>vue</category>
         <category>gpu</category>
         <category>data</category>
+        <category>agent</category>
         <category>dataloader</category>
+        <category>code</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2025/09/29/MLC/</guid>
             <title>MLP 多层感知机制</title>
