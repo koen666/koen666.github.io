@@ -2690,6 +2690,8 @@ main >.inner {
   width: 100%;
   line-height: 0;
   position: relative;
+  overflow: hidden;
+  background-color: var(--grey-1);
 }
 #header.home-hero + #waves {
   position: absolute;
@@ -2701,7 +2703,8 @@ main >.inner {
 .waves {
   width: 100%;
   height: var(--shokax-waves-height);
-  margin-bottom: -0.6875rem;
+  display: block;
+  margin-bottom: -1px;
   min-height: 3.125rem;
   max-height: 9.375rem;
   position: relative;
