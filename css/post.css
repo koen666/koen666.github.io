@@ -2014,7 +2014,19 @@ textarea {
   width: 100%;
 }
 main {
-  background: linear-gradient(to top, var(--body-bg-shadow) 0, var(--grey-1) 20%) no-repeat bottom;
+  background: var(--grey-1) linear-gradient(to top, var(--body-bg-shadow) 0, var(--grey-1) 20%) no-repeat bottom;
+  position: relative;
+}
+main::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--grey-1);
+  pointer-events: none;
+  z-index: 10;
 }
 main >.inner {
   width: calc(100% - 0.625rem);
@@ -2691,15 +2703,16 @@ main >.inner {
   line-height: 0;
   position: relative;
   overflow: hidden;
-  background-color: var(--grey-1);
+  margin-bottom: -1px;
+  z-index: 2;
 }
 #header.home-hero + #waves {
   position: absolute;
   left: 0;
   right: 0;
-  top: auto;
-  bottom: 0;
-  z-index: 1;
+  top: calc(100vh - var(--shokax-waves-height));
+  z-index: 2;
+  transform: translateY(1px);
 }
 .waves {
   width: 100%;
