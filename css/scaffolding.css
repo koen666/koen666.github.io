@@ -2657,7 +2657,8 @@ main >.inner {
   position: absolute;
   left: 0;
   right: 0;
-  top: calc(100vh - var(--shokax-waves-height));
+  top: auto;
+  bottom: 0;
   z-index: 1;
 }
 .waves {
