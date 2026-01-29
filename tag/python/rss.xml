@@ -7,66 +7,66 @@
         <language>zh-CN</language>
         <pubDate>Fri, 28 Nov 2025 00:00:00 +0800</pubDate>
         <lastBuildDate>Fri, 28 Nov 2025 00:00:00 +0800</lastBuildDate>
-        <category>math</category>
-        <category>GA</category>
-        <category>python</category>
-        <category>MLC</category>
+        <category>KL</category>
+        <category>RE-ID</category>
         <category>Koa</category>
         <category>backen</category>
         <category>nodejs</category>
-        <category>KL</category>
-        <category>RE-ID</category>
-        <category>cmd</category>
-        <category>curl</category>
-        <category>learn</category>
+        <category>MLC</category>
+        <category>math</category>
         <category>container</category>
         <category>docker</category>
+        <category>learn</category>
         <category>linux</category>
         <category>virtual</category>
+        <category>cypher</category>
+        <category>neo4j</category>
+        <category>database</category>
         <category>electron</category>
         <category>web</category>
         <category>desk</category>
         <category>flask</category>
+        <category>python</category>
         <category>repo</category>
         <category>git</category>
         <category>gradio</category>
-        <category>cypher</category>
-        <category>neo4j</category>
-        <category>database</category>
+        <category>cmd</category>
+        <category>curl</category>
         <category>markdown</category>
+        <category>GA</category>
         <category>latex</category>
+        <category>collections</category>
+        <category>uv</category>
+        <category>environment</category>
+        <category>screen</category>
+        <category>termux</category>
+        <category>scipy</category>
+        <category>saaborn</category>
+        <category>sql</category>
+        <category>ssh</category>
+        <category>vue</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
-        <category>uv</category>
-        <category>environment</category>
-        <category>collections</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>Transformer</category>
-        <category>scipy</category>
-        <category>sql</category>
-        <category>ssh</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
-        <category>screen</category>
-        <category>termux</category>
-        <category>vue</category>
-        <category>saaborn</category>
-        <category>yolo</category>
-        <category>dataset</category>
-        <category>AnyLabeling</category>
-        <category>dataloader</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
-        <category>gpu</category>
-        <category>data</category>
-        <category>agent</category>
+        <category>yolo</category>
+        <category>dataset</category>
+        <category>AnyLabeling</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
+        <category>dataloader</category>
         <category>code</category>
+        <category>Transformer</category>
+        <category>agent</category>
         <category>theory</category>
         <category>bayesian</category>
+        <category>gpu</category>
+        <category>data</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2025/11/28/pipenv/</guid>
             <title>像前端package.json那样管理python依赖 (uv篇)</title>
@@ -172,8 +172,8 @@
             <guid isPermalink="true">https://koen666.github.io/2025/11/23/GA/</guid>
             <title>GA遗传算法</title>
             <link>https://koen666.github.io/2025/11/23/GA/</link>
-            <category>GA</category>
             <category>python</category>
+            <category>GA</category>
             <pubDate>Sun, 23 Nov 2025 10:58:59 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;遗传算法ga&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#遗传算法ga&#34;&gt;#&lt;/a&gt; 遗传算法（GA）&lt;/h1&gt;
 &lt;p&gt;遗传算法如今已经发展出来了很多家族&lt;/p&gt;
@@ -398,9 +398,9 @@ N 个解组成一代种群：&lt;/p&gt;
             <guid isPermalink="true">https://koen666.github.io/2025/09/24/flask/</guid>
             <title>Flask框架 基本使用教程</title>
             <link>https://koen666.github.io/2025/09/24/flask/</link>
-            <category>python</category>
             <category>web</category>
             <category>flask</category>
+            <category>python</category>
             <pubDate>Wed, 24 Sep 2025 21:54:47 +0800</pubDate>
             <description><![CDATA[ &lt;h2 id=&#34;基础介绍&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#基础介绍&#34;&gt;#&lt;/a&gt; 基础介绍&lt;/h2&gt;
 &lt;p&gt;Flask 是一个 &lt;strong&gt;轻量级 Python Web 框架&lt;/strong&gt;，特点：&lt;/p&gt;
@@ -461,8 +461,8 @@ N 个解组成一代种群：&lt;/p&gt;
             <guid isPermalink="true">https://koen666.github.io/2025/09/08/gradio/</guid>
             <title>关于模型可视化Gradio的使用</title>
             <link>https://koen666.github.io/2025/09/08/gradio/</link>
-            <category>python</category>
             <category>web</category>
+            <category>python</category>
             <category>gradio</category>
             <pubDate>Mon, 08 Sep 2025 00:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;h2 id=&#34;1-hello-world-入门示例&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1-hello-world-入门示例&#34;&gt;#&lt;/a&gt; 1. Hello World 入门示例&lt;/h2&gt;

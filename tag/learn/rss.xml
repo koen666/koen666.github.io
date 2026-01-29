@@ -7,73 +7,73 @@
         <language>zh-CN</language>
         <pubDate>Sat, 26 Jul 2025 12:00:00 +0800</pubDate>
         <lastBuildDate>Sat, 26 Jul 2025 12:00:00 +0800</lastBuildDate>
-        <category>math</category>
-        <category>GA</category>
-        <category>python</category>
-        <category>MLC</category>
+        <category>KL</category>
+        <category>RE-ID</category>
         <category>Koa</category>
         <category>backen</category>
         <category>nodejs</category>
-        <category>KL</category>
-        <category>RE-ID</category>
-        <category>cmd</category>
-        <category>curl</category>
-        <category>learn</category>
+        <category>MLC</category>
+        <category>math</category>
         <category>container</category>
         <category>docker</category>
+        <category>learn</category>
         <category>linux</category>
         <category>virtual</category>
+        <category>cypher</category>
+        <category>neo4j</category>
+        <category>database</category>
         <category>electron</category>
         <category>web</category>
         <category>desk</category>
         <category>flask</category>
+        <category>python</category>
         <category>repo</category>
         <category>git</category>
         <category>gradio</category>
-        <category>cypher</category>
-        <category>neo4j</category>
-        <category>database</category>
+        <category>cmd</category>
+        <category>curl</category>
         <category>markdown</category>
+        <category>GA</category>
         <category>latex</category>
+        <category>collections</category>
+        <category>uv</category>
+        <category>environment</category>
+        <category>screen</category>
+        <category>termux</category>
+        <category>scipy</category>
+        <category>saaborn</category>
+        <category>sql</category>
+        <category>ssh</category>
+        <category>vue</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
-        <category>uv</category>
-        <category>environment</category>
-        <category>collections</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>Transformer</category>
-        <category>scipy</category>
-        <category>sql</category>
-        <category>ssh</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
-        <category>screen</category>
-        <category>termux</category>
-        <category>vue</category>
-        <category>saaborn</category>
-        <category>yolo</category>
-        <category>dataset</category>
-        <category>AnyLabeling</category>
-        <category>dataloader</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
-        <category>gpu</category>
-        <category>data</category>
-        <category>agent</category>
+        <category>yolo</category>
+        <category>dataset</category>
+        <category>AnyLabeling</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
+        <category>dataloader</category>
         <category>code</category>
+        <category>Transformer</category>
+        <category>agent</category>
         <category>theory</category>
         <category>bayesian</category>
+        <category>gpu</category>
+        <category>data</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2025/07/26/curl/</guid>
             <title>curl使用教学</title>
             <link>https://koen666.github.io/2025/07/26/curl/</link>
+            <category>learn</category>
             <category>cmd</category>
             <category>curl</category>
-            <category>learn</category>
             <pubDate>Sat, 26 Jul 2025 12:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;blockquote&gt;
 &lt;p&gt;curl 是一个强大的命令行工具，用于在命令行或脚本中发送 HTTP 请求，与服务器通信。它可以用来下载网页、调用 API 接口、上传文件、发送表单等。几乎所有支持网络通信的协议 curl 都能处理，包括 HTTP、HTTPS、FTP、SFTP、SMTP 等&lt;/p&gt;
@@ -169,9 +169,9 @@
             <guid isPermalink="true">https://koen666.github.io/2025/07/26/docker-basic-usage/</guid>
             <title>Docker 基本使用教程</title>
             <link>https://koen666.github.io/2025/07/26/docker-basic-usage/</link>
-            <category>learn</category>
             <category>container</category>
             <category>docker</category>
+            <category>learn</category>
             <category>linux</category>
             <category>virtual</category>
             <pubDate>Sat, 26 Jul 2025 08:53:34 +0800</pubDate>
