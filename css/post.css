@@ -593,6 +593,27 @@ details summary::before {
 .i-gitee:before {
   content: "\e607";
 }
+.ic.i-ml,
+.ic.i-engineering {
+  font-family: inherit;
+  background-color: currentColor;
+  width: 1.25em;
+  height: 1.25em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  -webkit-mask: url("../assets/icon-ml.svg") no-repeat center/contain;
+  mask: url("../assets/icon-ml.svg") no-repeat center/contain;
+}
+.ic.i-engineering {
+  -webkit-mask: url("../assets/icon-engineering.svg") no-repeat center/contain;
+  mask: url("../assets/icon-engineering.svg") no-repeat center/contain;
+}
+.ic.i-ml:before,
+.ic.i-engineering:before {
+  content: '';
+}
 /* modern-normalize v2.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
 *,
 ::before,
@@ -2014,19 +2035,7 @@ textarea {
   width: 100%;
 }
 main {
-  background: var(--grey-1) linear-gradient(to top, var(--body-bg-shadow) 0, var(--grey-1) 20%) no-repeat bottom;
-  position: relative;
-}
-main::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--grey-1);
-  pointer-events: none;
-  z-index: 10;
+  background: linear-gradient(to top, var(--body-bg-shadow) 0, var(--grey-1) 20%) no-repeat bottom;
 }
 main >.inner {
   width: calc(100% - 0.625rem);
@@ -2321,6 +2330,7 @@ main >.inner {
 #nav .inner {
   height: 100%;
   display: flex;
+  align-items: center;
   width: calc(100% - 0.625rem);
   flex-wrap: nowrap;
 }
@@ -2356,7 +2366,8 @@ main >.inner {
   width: 100%;
 }
 #nav .menu .item {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   position: relative;
   padding: 0 0.625rem;
   letter-spacing: 0.0625rem;
@@ -2372,10 +2383,21 @@ main >.inner {
 }
 #nav .menu .item .ic {
   margin-right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+#nav .menu .item .ic svg {
+  display: block;
+  vertical-align: middle;
+  height: 1em;
+  width: auto;
 }
 #nav .menu .item:not(.title) a {
-  display: block;
+  display: inline-flex;
+  align-items: center;
   font-size: 1em;
+  gap: 0.5rem;
 }
 #nav .menu .item.active:not(.dropdown) a::before,
 #nav .menu .item:not(.dropdown):hover a::before {
@@ -2702,23 +2724,18 @@ main >.inner {
   width: 100%;
   line-height: 0;
   position: relative;
-  overflow: hidden;
-  margin-bottom: -1px;
-  z-index: 2;
 }
 #header.home-hero + #waves {
   position: absolute;
   left: 0;
   right: 0;
   top: calc(100vh - var(--shokax-waves-height));
-  z-index: 2;
-  transform: translateY(1px);
+  z-index: 1;
 }
 .waves {
   width: 100%;
   height: var(--shokax-waves-height);
-  display: block;
-  margin-bottom: -1px;
+  margin-bottom: -0.6875rem;
   min-height: 3.125rem;
   max-height: 9.375rem;
   position: relative;
