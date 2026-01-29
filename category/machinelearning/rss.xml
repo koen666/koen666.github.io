@@ -7,19 +7,18 @@
         <language>zh-CN</language>
         <pubDate>Thu, 29 Jan 2026 00:00:00 +0800</pubDate>
         <lastBuildDate>Thu, 29 Jan 2026 00:00:00 +0800</lastBuildDate>
+        <category>math</category>
         <category>GA</category>
         <category>python</category>
-        <category>math</category>
         <category>MLC</category>
-        <category>cmd</category>
-        <category>curl</category>
-        <category>learn</category>
         <category>Koa</category>
         <category>backen</category>
         <category>nodejs</category>
-        <category>cypher</category>
-        <category>neo4j</category>
-        <category>database</category>
+        <category>KL</category>
+        <category>RE-ID</category>
+        <category>cmd</category>
+        <category>curl</category>
+        <category>learn</category>
         <category>container</category>
         <category>docker</category>
         <category>linux</category>
@@ -31,39 +30,40 @@
         <category>repo</category>
         <category>git</category>
         <category>gradio</category>
-        <category>latex</category>
-        <category>KL</category>
-        <category>RE-ID</category>
+        <category>cypher</category>
+        <category>neo4j</category>
+        <category>database</category>
         <category>markdown</category>
+        <category>latex</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
         <category>uv</category>
         <category>environment</category>
         <category>collections</category>
-        <category>screen</category>
-        <category>termux</category>
-        <category>saaborn</category>
-        <category>sql</category>
-        <category>ssh</category>
         <category>deeplearning</category>
         <category>pytorch</category>
         <category>Transformer</category>
+        <category>scipy</category>
+        <category>sql</category>
+        <category>ssh</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
+        <category>screen</category>
+        <category>termux</category>
         <category>vue</category>
+        <category>saaborn</category>
         <category>yolo</category>
         <category>dataset</category>
         <category>AnyLabeling</category>
+        <category>dataloader</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
-        <category>dataloader</category>
         <category>gpu</category>
         <category>data</category>
         <category>agent</category>
-        <category>scipy</category>
         <category>code</category>
         <category>theory</category>
         <category>bayesian</category>
@@ -155,7 +155,7 @@
 &lt;/ul&gt;
 &lt;hr /&gt;
 &lt;h2 id=&#34;5-总结&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#5-总结&#34;&gt;#&lt;/a&gt; 5. 总结&lt;/h2&gt;
-&lt;p&gt;从最基础的&lt;strong&gt;贝叶斯公式&lt;/strong&gt;，到为了计算妥协的&lt;strong&gt;朴素贝叶斯&lt;/strong&gt;，再到能够刻画因果结构的&lt;strong&gt;贝叶斯网络&lt;/strong&gt;，最后到融合了深度学习拟合能力的&lt;strong&gt;贝叶斯神经网络&lt;/strong&gt;，这是一条从**“规则”&lt;strong&gt;到&lt;/strong&gt;“学习”&lt;strong&gt;，再回归到&lt;/strong&gt;“理性怀疑”**的技术演进之路。&lt;/p&gt;
+&lt;p&gt;从最基础的&lt;strong&gt;贝叶斯公式&lt;/strong&gt;，到为了计算妥协的&lt;strong&gt;朴素贝叶斯&lt;/strong&gt;，再到能够刻画因果结构的&lt;strong&gt;贝叶斯网络&lt;/strong&gt;，最后到融合了深度学习拟合能力的&lt;strong&gt;贝叶斯神经网络&lt;/strong&gt;，这是一条从“规则”到“学习”，再回归到“理性怀疑”**的技术演进之路。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;朴素贝叶斯&lt;/strong&gt;告诉我们：有时候为了效率，可以忽略细节。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;贝叶斯网络&lt;/strong&gt;告诉我们：世界的运作是有因果结构的，掌握结构就能反演阈值。&lt;/li&gt;
