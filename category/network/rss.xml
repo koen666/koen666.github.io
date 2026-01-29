@@ -7,15 +7,19 @@
         <language>zh-CN</language>
         <pubDate>Wed, 03 Sep 2025 00:00:00 +0800</pubDate>
         <lastBuildDate>Wed, 03 Sep 2025 00:00:00 +0800</lastBuildDate>
-        <category>KL</category>
-        <category>RE-ID</category>
         <category>GA</category>
         <category>python</category>
+        <category>math</category>
+        <category>MLC</category>
         <category>cmd</category>
         <category>curl</category>
         <category>learn</category>
-        <category>math</category>
-        <category>MLC</category>
+        <category>Koa</category>
+        <category>backen</category>
+        <category>nodejs</category>
+        <category>cypher</category>
+        <category>neo4j</category>
+        <category>database</category>
         <category>container</category>
         <category>docker</category>
         <category>linux</category>
@@ -23,50 +27,46 @@
         <category>electron</category>
         <category>web</category>
         <category>desk</category>
-        <category>Koa</category>
-        <category>backen</category>
-        <category>nodejs</category>
-        <category>gradio</category>
         <category>flask</category>
         <category>repo</category>
         <category>git</category>
-        <category>markdown</category>
+        <category>gradio</category>
         <category>latex</category>
+        <category>KL</category>
+        <category>RE-ID</category>
+        <category>markdown</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
-        <category>cypher</category>
-        <category>neo4j</category>
-        <category>database</category>
         <category>uv</category>
         <category>environment</category>
         <category>collections</category>
-        <category>sql</category>
         <category>screen</category>
         <category>termux</category>
-        <category>scipy</category>
+        <category>saaborn</category>
+        <category>sql</category>
+        <category>ssh</category>
         <category>deeplearning</category>
         <category>pytorch</category>
         <category>Transformer</category>
-        <category>ssh</category>
-        <category>saaborn</category>
-        <category>vue</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
-        <category>yaml</category>
-        <category>argparse</category>
-        <category>easydict</category>
+        <category>vue</category>
         <category>yolo</category>
         <category>dataset</category>
         <category>AnyLabeling</category>
-        <category>code</category>
+        <category>yaml</category>
+        <category>argparse</category>
+        <category>easydict</category>
         <category>dataloader</category>
-        <category>agent</category>
-        <category>theory</category>
-        <category>bayesian</category>
         <category>gpu</category>
         <category>data</category>
+        <category>agent</category>
+        <category>scipy</category>
+        <category>code</category>
+        <category>theory</category>
+        <category>bayesian</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2025/09/03/network/</guid>
             <title>网络核心概念精讲</title>

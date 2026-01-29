@@ -7,15 +7,19 @@
         <language>zh-CN</language>
         <pubDate>Thu, 29 Jan 2026 00:00:00 +0800</pubDate>
         <lastBuildDate>Thu, 29 Jan 2026 00:00:00 +0800</lastBuildDate>
-        <category>KL</category>
-        <category>RE-ID</category>
         <category>GA</category>
         <category>python</category>
+        <category>math</category>
+        <category>MLC</category>
         <category>cmd</category>
         <category>curl</category>
         <category>learn</category>
-        <category>math</category>
-        <category>MLC</category>
+        <category>Koa</category>
+        <category>backen</category>
+        <category>nodejs</category>
+        <category>cypher</category>
+        <category>neo4j</category>
+        <category>database</category>
         <category>container</category>
         <category>docker</category>
         <category>linux</category>
@@ -23,50 +27,46 @@
         <category>electron</category>
         <category>web</category>
         <category>desk</category>
-        <category>Koa</category>
-        <category>backen</category>
-        <category>nodejs</category>
-        <category>gradio</category>
         <category>flask</category>
         <category>repo</category>
         <category>git</category>
-        <category>markdown</category>
+        <category>gradio</category>
         <category>latex</category>
+        <category>KL</category>
+        <category>RE-ID</category>
+        <category>markdown</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
-        <category>cypher</category>
-        <category>neo4j</category>
-        <category>database</category>
         <category>uv</category>
         <category>environment</category>
         <category>collections</category>
-        <category>sql</category>
         <category>screen</category>
         <category>termux</category>
-        <category>scipy</category>
+        <category>saaborn</category>
+        <category>sql</category>
+        <category>ssh</category>
         <category>deeplearning</category>
         <category>pytorch</category>
         <category>Transformer</category>
-        <category>ssh</category>
-        <category>saaborn</category>
-        <category>vue</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
-        <category>yaml</category>
-        <category>argparse</category>
-        <category>easydict</category>
+        <category>vue</category>
         <category>yolo</category>
         <category>dataset</category>
         <category>AnyLabeling</category>
-        <category>code</category>
+        <category>yaml</category>
+        <category>argparse</category>
+        <category>easydict</category>
         <category>dataloader</category>
-        <category>agent</category>
-        <category>theory</category>
-        <category>bayesian</category>
         <category>gpu</category>
         <category>data</category>
+        <category>agent</category>
+        <category>scipy</category>
+        <category>code</category>
+        <category>theory</category>
+        <category>bayesian</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2026/01/29/%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%A8%A1%E5%9E%8B/</guid>
             <title>一文讲通贝叶斯理论：从概率公式到贝叶斯神经网络</title>
@@ -115,12 +115,12 @@
 &lt;p&gt;尽管独立性假设不符合物理直觉，但在高维分类任务（如垃圾邮件识别、简单的文本分类）中，朴素贝叶斯依然表现出色。这是因为我们主要关注的是&lt;strong&gt;哪个类别的概率最大&lt;/strong&gt;，而不是精确的概率值。只要各特征对分类的“投票方向”一致，独立性假设带来的偏差就不会改变最终的分类结果。&lt;/p&gt;
 &lt;hr /&gt;
 &lt;h2 id=&#34;3-结构化的因果概率图模型-pgm-贝叶斯网络&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3-结构化的因果概率图模型-pgm-贝叶斯网络&#34;&gt;#&lt;/a&gt; 3. 结构化的因果：概率图模型 (PGM) / 贝叶斯网络&lt;/h2&gt;
-&lt;p&gt;在你的&lt;strong&gt;灾害链研究&lt;/strong&gt;中，不能容忍“特征独立”这种天真的假设。我们需要描述&lt;strong&gt;因果链条&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;但是在很多场景中，不能容忍“特征独立”这种天真的假设。我们需要描述&lt;strong&gt;因果链条&lt;/strong&gt;。&lt;/p&gt;
 &lt;h3 id=&#34;31-经典的洒水车-下雨模型&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#31-经典的洒水车-下雨模型&#34;&gt;#&lt;/a&gt; 3.1 经典的“洒水车-下雨”模型&lt;/h3&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/SimpleBayesNet.svg/600px-SimpleBayesNet.svg.png&#34; alt=&#34;简单的贝叶斯网络DAG&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;(图源：Wikimedia Commons. 这是一个经典的有向无环图 (DAG)。草湿了 (Grass Wet) 既可能是因为下雨 (Rain)，也可能是因为洒水车 (Sprinkler))&lt;/em&gt;&lt;/p&gt;
 &lt;h3 id=&#34;32-灾害链中的应用&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#32-灾害链中的应用&#34;&gt;#&lt;/a&gt; 3.2 灾害链中的应用&lt;/h3&gt;
-&lt;p&gt;对应到灾害推演，这个图的结构可能变成：&lt;br /&gt;
+&lt;p&gt;给出一个博主正在做的灾害链推演模型，这个图的结构可能变成：&lt;br /&gt;
 &lt;strong&gt;[暴雨] &lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mo&gt;→&lt;/mo&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\rightarrow&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.3669em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;→&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; [山洪] &lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mo&gt;→&lt;/mo&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\rightarrow&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.3669em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;→&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; [泥石流]&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;我们利用这种结构进行&lt;strong&gt;阈值反演&lt;/strong&gt;：&lt;/p&gt;
 &lt;ul&gt;
