@@ -7,68 +7,68 @@
         <language>zh-CN</language>
         <pubDate>Wed, 03 Sep 2025 00:00:00 +0800</pubDate>
         <lastBuildDate>Wed, 03 Sep 2025 00:00:00 +0800</lastBuildDate>
-        <category>math</category>
-        <category>GA</category>
-        <category>python</category>
         <category>KL</category>
         <category>RE-ID</category>
         <category>Koa</category>
         <category>backen</category>
         <category>nodejs</category>
-        <category>container</category>
-        <category>docker</category>
-        <category>learn</category>
-        <category>linux</category>
-        <category>virtual</category>
         <category>cmd</category>
         <category>curl</category>
-        <category>flask</category>
-        <category>web</category>
-        <category>electron</category>
-        <category>desk</category>
+        <category>learn</category>
+        <category>GA</category>
+        <category>python</category>
+        <category>math</category>
         <category>cypher</category>
         <category>neo4j</category>
         <category>database</category>
+        <category>container</category>
+        <category>docker</category>
+        <category>linux</category>
+        <category>virtual</category>
+        <category>electron</category>
+        <category>web</category>
+        <category>desk</category>
         <category>MLC</category>
-        <category>gradio</category>
-        <category>markdown</category>
         <category>repo</category>
         <category>git</category>
-        <category>uv</category>
-        <category>environment</category>
-        <category>latex</category>
-        <category>collections</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>Transformer</category>
+        <category>flask</category>
+        <category>gradio</category>
+        <category>markdown</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
+        <category>uv</category>
+        <category>environment</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
+        <category>Transformer</category>
+        <category>scipy</category>
+        <category>latex</category>
         <category>screen</category>
         <category>termux</category>
         <category>saaborn</category>
-        <category>sql</category>
         <category>ssh</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
-        <category>scipy</category>
+        <category>sql</category>
         <category>vue</category>
-        <category>dataset</category>
-        <category>dataloader</category>
-        <category>gpu</category>
-        <category>data</category>
-        <category>diffusionmodel</category>
-        <category>generative-ai</category>
-        <category>yolo</category>
-        <category>AnyLabeling</category>
-        <category>theory</category>
-        <category>bayesian</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
-        <category>code</category>
+        <category>yolo</category>
+        <category>dataset</category>
+        <category>AnyLabeling</category>
+        <category>dataloader</category>
         <category>agent</category>
+        <category>diffusionmodel</category>
+        <category>generative-ai</category>
+        <category>gpu</category>
+        <category>data</category>
+        <category>code</category>
+        <category>theory</category>
+        <category>bayesian</category>
+        <category>collections</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2025/09/03/network/</guid>
             <title>网络核心概念精讲</title>
