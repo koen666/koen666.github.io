@@ -10,62 +10,64 @@
         <category>math</category>
         <category>GA</category>
         <category>python</category>
+        <category>KL</category>
+        <category>RE-ID</category>
         <category>Koa</category>
         <category>backen</category>
         <category>nodejs</category>
-        <category>cmd</category>
-        <category>curl</category>
-        <category>learn</category>
         <category>container</category>
         <category>docker</category>
+        <category>learn</category>
         <category>linux</category>
         <category>virtual</category>
-        <category>KL</category>
-        <category>RE-ID</category>
-        <category>MLC</category>
-        <category>cypher</category>
-        <category>neo4j</category>
-        <category>database</category>
+        <category>cmd</category>
+        <category>curl</category>
         <category>flask</category>
         <category>web</category>
         <category>electron</category>
         <category>desk</category>
+        <category>cypher</category>
+        <category>neo4j</category>
+        <category>database</category>
+        <category>MLC</category>
+        <category>gradio</category>
         <category>markdown</category>
         <category>repo</category>
         <category>git</category>
-        <category>latex</category>
-        <category>gradio</category>
-        <category>router</category>
-        <category>ip</category>
-        <category>MAC</category>
         <category>uv</category>
         <category>environment</category>
+        <category>latex</category>
         <category>collections</category>
-        <category>scipy</category>
-        <category>screen</category>
-        <category>termux</category>
-        <category>sql</category>
         <category>deeplearning</category>
         <category>pytorch</category>
         <category>Transformer</category>
+        <category>router</category>
+        <category>ip</category>
+        <category>MAC</category>
+        <category>screen</category>
+        <category>termux</category>
+        <category>saaborn</category>
+        <category>sql</category>
         <category>ssh</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
+        <category>scipy</category>
         <category>vue</category>
+        <category>dataset</category>
+        <category>dataloader</category>
+        <category>gpu</category>
+        <category>data</category>
+        <category>diffusionmodel</category>
+        <category>generative-ai</category>
+        <category>yolo</category>
+        <category>AnyLabeling</category>
+        <category>theory</category>
+        <category>bayesian</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
-        <category>saaborn</category>
-        <category>dataset</category>
-        <category>dataloader</category>
-        <category>yolo</category>
-        <category>AnyLabeling</category>
-        <category>gpu</category>
-        <category>data</category>
         <category>code</category>
-        <category>theory</category>
-        <category>bayesian</category>
         <category>agent</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2025/10/17/cypher/</guid>
