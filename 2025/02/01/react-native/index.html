@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"/><meta name="theme-color" content="#222"/><meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1"/><meta name="renderer" content="webkit"/><link rel="icon" type="image/ico" sizes="32x32" href="/assets/favicon.ico"/><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/><link rel="alternate" href="/rss.xml" title="木语" type="application/rss+xml"><link rel="alternate" href="/atom.xml" title="木语" type="application/atom+xml"><link rel="alternate" type="application/json" title="木语" href="https://koen666.github.io/feed.json"/><link rel="preconnect" href="https://s4.zstatic.net"/><link rel="preconnect" href="https://at.alicdn.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CFredericka%20the%20Great:400,400italic,700,700italic%7CNoto%20Serif%20JP:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CInconsolata:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="none" onload="this.media&#x3D;&#39;all&#39;"><link rel="modulepreload" href="/js/siteInit.js"></link><link rel="modulepreload" href="/js/nyx-player-RT6Y6A2P.js"></link><link rel="modulepreload" href="/js/copy-tex-XZBHQKN2.js"></link><link rel="modulepreload" href="/js/post-2QNEWI46.js"></link><link rel="modulepreload" href="/js/chunk-KZR3QQFA.js"></link><link rel="modulepreload" href="/js/index.esm-JYVAQ62Y.js"></link><link rel="modulepreload" href="/js/chunk-RK7HQRIO.js"></link><link rel="modulepreload" href="/js/chunk-FQAC5HAL.js"></link><link rel="stylesheet" href="/css/siteInit.css" media="none" onload="this.media&#x3D;&#39;all&#39;"></link><link rel="preload" href="/images/bg/%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E5%8A%A8%E6%BC%AB%E5%A5%B3%E5%AD%A9-%E5%92%8C%E6%A0%97%E8%96%B0%E5%AD%90.png" as="image" fetchpriority="high"><link rel="preload" href="/images/bg/%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E5%8A%A8%E6%BC%AB-%E7%BE%8E%E5%A5%B3.png" as="image" fetchpriority="high"><link rel="preload" href="/images/bg/%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E4%BA%8C%E6%AC%A1%E5%85%83%E7%BE%8E%E5%A5%B3-%E5%8A%A8%E6%BC%AB.png" as="image" fetchpriority="high"><link rel="preload" href="/images/bg/%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E5%8A%A8%E6%BC%AB%E5%A5%B3%E5%AD%A9-%E6%B5%B7%E6%B4%8B%E5%A5%B3%E5%AD%A9.png" as="image" fetchpriority="high"><link rel="preload" href="/images/bg/R.png" as="image" fetchpriority="high"><link rel="preload" href="/images/bg/%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E4%BA%8C%E6%AC%A1%E5%85%83%E7%BE%8E%E5%A5%B3-%E5%8A%A8%E6%BC%AB.png" as="image" fetchpriority="high"><meta name="keywords" content="python,expo"/><meta name="description" content="记录使用 Expo EAS Build 服务将 React Native 项目打包成 Android APK 的完整流程，包含自定义包名配置及 Python 辅助脚本。"/><link rel="canonical" href="https://koen666.github.io/2025/02/01/react-native/"><link rel="stylesheet" href="/css/post.css?v=0.5.4"><link rel="stylesheet" href="/css/mermaid.css?v=0.5.4"><!-- 临时处理--><link rel="stylesheet" media="none" onload="this.media='all'" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css"><title>React Native打包实战：配置 EAS Build 生成 APK</title><meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="pagefind_mount"></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">React Native打包实战：配置 EAS Build 生成 APK</h1><div class="meta"><span class="item" title="创建时间：2025-02-01 00:00:00"><span class="icon"><i class="ic i-calendar"></i></span><span class="text">发表于</span><time itemprop="dateCreated datePublished" datetime="2025-02-01T00:00:00+08:00">2025-02-01</time></span><span class="item" title="本文字数"><span class="icon"><i class="ic i-pen"></i></span><span class="text">本文字数</span><span>1.5k</span><span class="text">字</span></span><span class="item" title="阅读时长"><span class="icon"><i class="ic i-clock"></i></span><span class="text">阅读时长</span><span>1 分钟</span></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="切换导航栏"><span class="line"></span><span class="line"></span><span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">木语</a></li></ul><ul class="right" id="rightNav"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div class="pjax" id="imgs"><ul><li class="item" style="background-image: url(&quot;/images/bg/%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E5%8A%A8%E6%BC%AB%E5%A5%B3%E5%AD%A9-%E5%92%8C%E6%A0%97%E8%96%B0%E5%AD%90.png&quot;);"></li><li class="item" style="background-image: url(&quot;/images/bg/%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E5%8A%A8%E6%BC%AB-%E7%BE%8E%E5%A5%B3.png&quot;);"></li><li class="item" style="background-image: url(&quot;/images/bg/%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E4%BA%8C%E6%AC%A1%E5%85%83%E7%BE%8E%E5%A5%B3-%E5%8A%A8%E6%BC%AB.png&quot;);"></li><li class="item" style="background-image: url(&quot;/images/bg/%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E5%8A%A8%E6%BC%AB%E5%A5%B3%E5%AD%A9-%E6%B5%B7%E6%B4%8B%E5%A5%B3%E5%AD%A9.png&quot;);"></li><li class="item" style="background-image: url(&quot;/images/bg/R.png&quot;);"></li><li class="item" style="background-image: url(&quot;/images/bg/%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E4%BA%8C%E6%AC%A1%E5%85%83%E7%BE%8E%E5%A5%B3-%E5%8A%A8%E6%BC%AB.png&quot;);"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><main><div class="inner"><div class="pjax" id="main"><div class="article wrap"><div class="breadcrumb" itemListElement itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i><span><a href="/">首页</a></span><i class="ic i-angle-right"></i><span class="current" itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><a href="/categories/frontend/" itemprop="item" rel="index" title="分类于frontend"><span itemprop="name">frontend<meta itemprop="position" content="0"/></span></a></span></div><article class="post block" itemscope="itemscope" itemtype="http://schema.org/Article" data-pagefind-body="data-pagefind-body" lang="zh-CN"><link itemprop="mainEntityOfPage" href="https://koen666.github.io/2025/02/01/react-native/"/><span hidden="hidden" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><meta itemprop="image" content="/images/head.png"/><meta itemprop="name" content="koen"/><meta itemprop="description" content="技术是逻辑，木是自然，语是表达, Spark!"/></span><span hidden="hidden" itemprop="publisher" itemscope="itemscope" itemtype="http://schema.org/Organization"><meta itemprop="name" content="木语"/></span><div class="body md" itemprop="articleBody"><p>在 React Native (Expo) 开发完成后，如何将代码变成可以在真机上安装的 <code>.apk</code> 文件？本文记录了使用 <strong>EAS Build (Expo Application Services)</strong> 进行云端打包的详细步骤。</p>
+<h2 id="1-准备工作"><a class="anchor" href="#1-准备工作">#</a> 1. 准备工作</h2>
+<p>首先，我们需要安装 Expo 提供的构建工具 <code>eas-cli</code> 并登录账号。若没有账号则需要注册 <a target="_blank" rel="noopener" href="https://expo.dev/">https://expo.dev/</a></p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bash"><span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 全局安装 EAS CLI</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">npm</span><span style="color:#B56959;--shiki-dark:#C98A7D"> install</span><span style="color:#A65E2B;--shiki-dark:#C99076"> -g</span><span style="color:#B56959;--shiki-dark:#C98A7D"> eas-cli</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0ADA0;--shiki-dark:#758575DD"># 登录 Expo 账号</span></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">eas</span><span style="color:#B56959;--shiki-dark:#C98A7D"> login</span></span></code></pre>
+<h2 id="2-项目标识配置-appjson"><a class="anchor" href="#2-项目标识配置-appjson">#</a> 2. 项目标识配置 (app.json)</h2>
+<p>在打包前，必须确定 App 的名称和唯一的包名（Package Name）。打开项目根目录下的 app.json 进行修改：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-json"><span class="line"></span>
+<span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">JSON</span></span>
+<span class="line"><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span></span>
+<span class="line"><span style="color:#99841877;--shiki-dark:#B8A96577">  "</span><span style="color:#998418;--shiki-dark:#B8A965">expo</span><span style="color:#99841877;--shiki-dark:#B8A96577">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span></span>
+<span class="line"><span style="color:#99841877;--shiki-dark:#B8A96577">    "</span><span style="color:#998418;--shiki-dark:#B8A965">name</span><span style="color:#99841877;--shiki-dark:#B8A96577">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> "</span><span style="color:#B56959;--shiki-dark:#C98A7D">中医智能面诊</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#A0ADA0;--shiki-dark:#758575DD">        // App 在手机桌面上显示的名字</span></span>
+<span class="line"><span style="color:#99841877;--shiki-dark:#B8A96577">    "</span><span style="color:#998418;--shiki-dark:#B8A965">slug</span><span style="color:#99841877;--shiki-dark:#B8A96577">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> "</span><span style="color:#B56959;--shiki-dark:#C98A7D">tcm-face-diagnosis</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> // Expo 项目标识（英文）</span></span>
+<span class="line"><span style="color:#99841877;--shiki-dark:#B8A96577">    "</span><span style="color:#998418;--shiki-dark:#B8A965">version</span><span style="color:#99841877;--shiki-dark:#B8A96577">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> "</span><span style="color:#B56959;--shiki-dark:#C98A7D">1.0.0</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#99841877;--shiki-dark:#B8A96577">    "</span><span style="color:#998418;--shiki-dark:#B8A965">android</span><span style="color:#99841877;--shiki-dark:#B8A96577">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#a65e2b;--shiki-dark:#d4976c">{</span></span>
+<span class="line"><span style="color:#99841877;--shiki-dark:#B8A96577">      "</span><span style="color:#998418;--shiki-dark:#B8A965">package</span><span style="color:#99841877;--shiki-dark:#B8A96577">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> "</span><span style="color:#B56959;--shiki-dark:#C98A7D">com.koen.tcmface</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> // 【关键】安卓包名，必须唯一</span></span>
+<span class="line"><span style="color:#99841877;--shiki-dark:#B8A96577">      "</span><span style="color:#998418;--shiki-dark:#B8A965">adaptiveIcon</span><span style="color:#99841877;--shiki-dark:#B8A96577">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#a13865;--shiki-dark:#d9739f">{</span></span>
+<span class="line"><span style="color:#99841877;--shiki-dark:#B8A96577">        "</span><span style="color:#998418;--shiki-dark:#B8A965">foregroundImage</span><span style="color:#99841877;--shiki-dark:#B8A96577">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> "</span><span style="color:#B56959;--shiki-dark:#C98A7D">./assets/adaptive-icon.png</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#99841877;--shiki-dark:#B8A96577">        "</span><span style="color:#998418;--shiki-dark:#B8A965">backgroundColor</span><span style="color:#99841877;--shiki-dark:#B8A96577">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> "</span><span style="color:#B56959;--shiki-dark:#C98A7D">#ffffff</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">      </span><span style="color:#a13865;--shiki-dark:#d9739f">}</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    </span><span style="color:#a65e2b;--shiki-dark:#d4976c">}</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#99841877;--shiki-dark:#B8A96577">    "</span><span style="color:#998418;--shiki-dark:#B8A965">ios</span><span style="color:#99841877;--shiki-dark:#B8A96577">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#a65e2b;--shiki-dark:#d4976c">{</span></span>
+<span class="line"><span style="color:#99841877;--shiki-dark:#B8A96577">      "</span><span style="color:#998418;--shiki-dark:#B8A965">bundleIdentifier</span><span style="color:#99841877;--shiki-dark:#B8A96577">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> "</span><span style="color:#B56959;--shiki-dark:#C98A7D">com.koen.tcmface</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> // iOS 包名</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    </span><span style="color:#a65e2b;--shiki-dark:#d4976c">}</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span></span>
+<span class="line"><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span></code></pre>
+<h2 id="3-构建配置-easjson"><a class="anchor" href="#3-构建配置-easjson">#</a> 3. 构建配置 (eas.json)</h2>
+<p>默认情况下，EAS Build 会生成 .aab 文件（用于上架 Google Play）。如果我们想直接生成可安装的 .apk 文件，需要修改 eas.json。</p>
+<p>运行初始化命令：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bash"><span class="line"><span style="color:#59873A;--shiki-dark:#80A665">eas</span><span style="color:#B56959;--shiki-dark:#C98A7D"> build:configure</span></span></code></pre>
+<p>然后修改生成的 eas.json，重点是添加 preview 字段中的 buildType: "apk"：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-json"><span class="line"><span style="color:#393A34;--shiki-dark:#DBD7CAEE">JSON</span></span>
+<span class="line"><span style="color:#2993a3;--shiki-dark:#5eaab5">{</span></span>
+<span class="line"><span style="color:#99841877;--shiki-dark:#B8A96577">  "</span><span style="color:#998418;--shiki-dark:#B8A965">cli</span><span style="color:#99841877;--shiki-dark:#B8A96577">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span></span>
+<span class="line"><span style="color:#99841877;--shiki-dark:#B8A96577">    "</span><span style="color:#998418;--shiki-dark:#B8A965">version</span><span style="color:#99841877;--shiki-dark:#B8A96577">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> "</span><span style="color:#B56959;--shiki-dark:#C98A7D">&gt;= 7.0.0</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#99841877;--shiki-dark:#B8A96577">  "</span><span style="color:#998418;--shiki-dark:#B8A965">build</span><span style="color:#99841877;--shiki-dark:#B8A96577">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#1e754f;--shiki-dark:#4d9375">{</span></span>
+<span class="line"><span style="color:#99841877;--shiki-dark:#B8A96577">    "</span><span style="color:#998418;--shiki-dark:#B8A965">development</span><span style="color:#99841877;--shiki-dark:#B8A96577">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#a65e2b;--shiki-dark:#d4976c">{</span></span>
+<span class="line"><span style="color:#99841877;--shiki-dark:#B8A96577">      "</span><span style="color:#998418;--shiki-dark:#B8A965">developmentClient</span><span style="color:#99841877;--shiki-dark:#B8A96577">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#1E754F;--shiki-dark:#4D9375"> true</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#99841877;--shiki-dark:#B8A96577">      "</span><span style="color:#998418;--shiki-dark:#B8A965">distribution</span><span style="color:#99841877;--shiki-dark:#B8A96577">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> "</span><span style="color:#B56959;--shiki-dark:#C98A7D">internal</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    </span><span style="color:#a65e2b;--shiki-dark:#d4976c">}</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#99841877;--shiki-dark:#B8A96577">    "</span><span style="color:#998418;--shiki-dark:#B8A965">preview</span><span style="color:#99841877;--shiki-dark:#B8A96577">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#a65e2b;--shiki-dark:#d4976c">{</span></span>
+<span class="line"><span style="color:#99841877;--shiki-dark:#B8A96577">      "</span><span style="color:#998418;--shiki-dark:#B8A965">android</span><span style="color:#99841877;--shiki-dark:#B8A96577">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#a13865;--shiki-dark:#d9739f">{</span></span>
+<span class="line"><span style="color:#99841877;--shiki-dark:#B8A96577">        "</span><span style="color:#998418;--shiki-dark:#B8A965">buildType</span><span style="color:#99841877;--shiki-dark:#B8A96577">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> "</span><span style="color:#B56959;--shiki-dark:#C98A7D">apk</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span><span style="color:#393A34;--shiki-dark:#DBD7CAEE"> </span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">      </span><span style="color:#a13865;--shiki-dark:#d9739f">}</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    </span><span style="color:#a65e2b;--shiki-dark:#d4976c">}</span><span style="color:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="color:#99841877;--shiki-dark:#B8A96577">    "</span><span style="color:#998418;--shiki-dark:#B8A965">production</span><span style="color:#99841877;--shiki-dark:#B8A96577">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#a65e2b;--shiki-dark:#d4976c">{</span></span>
+<span class="line"><span style="color:#99841877;--shiki-dark:#B8A96577">      "</span><span style="color:#998418;--shiki-dark:#B8A965">android</span><span style="color:#99841877;--shiki-dark:#B8A96577">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#999999;--shiki-dark:#666666"> </span><span style="color:#a13865;--shiki-dark:#d9739f">{</span></span>
+<span class="line"><span style="color:#99841877;--shiki-dark:#B8A96577">        "</span><span style="color:#998418;--shiki-dark:#B8A965">buildType</span><span style="color:#99841877;--shiki-dark:#B8A96577">"</span><span style="color:#999999;--shiki-dark:#666666">:</span><span style="color:#B5695977;--shiki-dark:#C98A7D77"> "</span><span style="color:#B56959;--shiki-dark:#C98A7D">app-bundle</span><span style="color:#B5695977;--shiki-dark:#C98A7D77">"</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">      </span><span style="color:#a13865;--shiki-dark:#d9739f">}</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">    </span><span style="color:#a65e2b;--shiki-dark:#d4976c">}</span></span>
+<span class="line"><span style="color:#999999;--shiki-dark:#666666">  </span><span style="color:#1e754f;--shiki-dark:#4d9375">}</span></span>
+<span class="line"><span style="color:#2993a3;--shiki-dark:#5eaab5">}</span></span></code></pre>
+<h2 id="4-执行打包"><a class="anchor" href="#4-执行打包">#</a> 4. 执行打包</h2>
+<p>一切准备就绪后，运行以下命令开始云端构建：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-bash"><span class="line"><span style="color:#59873A;--shiki-dark:#80A665">eas</span><span style="color:#B56959;--shiki-dark:#C98A7D"> build</span><span style="color:#A65E2B;--shiki-dark:#C99076"> -p</span><span style="color:#B56959;--shiki-dark:#C98A7D"> android</span><span style="color:#A65E2B;--shiki-dark:#C99076"> --profile</span><span style="color:#B56959;--shiki-dark:#C98A7D"> preview</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">-p</span><span style="color:#B56959;--shiki-dark:#C98A7D"> android:</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> #指定打包安卓平台。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#59873A;--shiki-dark:#80A665">--profile</span><span style="color:#B56959;--shiki-dark:#C98A7D"> preview:</span><span style="color:#A0ADA0;--shiki-dark:#758575DD"> #使用我们刚才配置的 preview 模式（生成 APK）。</span></span>
+<span class="line"></span></code></pre>
+<p>构建完成后，终端会生成一个二维码和下载链接，直接下载安装即可。</p>
+<div class="tags"><a href="/tags/python/" rel="tag"><i class="ic i-tag"></i>python</a><a href="/tags/react-native/" rel="tag"><i class="ic i-tag"></i>react-native</a><a href="/tags/expo/" rel="tag"><i class="ic i-tag"></i>expo</a></div></div><footer><div class="meta"><span class="item"><span class="icon"><i class="ic i-calendar-check"></i></span><span class="text">更新于 </span><time title="修改时间：2026-02-01 12:33:01" itemprop="dateModified" datetime="2026-02-01T12:33:01+08:00">2026-02-01</time></span></div><div class="reward"><button><i class="ic i-heartbeat"></i>赞赏</button><p>请我喝[茶]~(￣▽￣)~*</p><div id="qr"><div><img loading="lazy" src="/assets/wechatpay.png" alt="koen 微信支付"/><p>微信支付</p></div><div><img loading="lazy" src="/assets/alipay.png" alt="koen 支付宝"/><p>支付宝</p></div></div></div><div id="copyright"><ul><li class="author"><strong>本文作者：</strong>koen<i class="ic i-at"><em>@</em></i>木语</li><li class="link"><strong>本文链接：</strong><a href="https://koen666.github.io/2025/02/01/react-native/" title="React Native打包实战：配置 EAS Build 生成 APK">https://koen666.github.io/2025/02/01/react-native/</a></li><li class="license"><strong>版权声明：</strong>本站所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"></div><div class="item right"><a href="/2025/07/25/git-basic-usage/" rel="next" itemprop="url" data-background-image="&#x2F;images&#x2F;bg&#x2F;%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E5%8A%A8%E6%BC%AB-%E7%BE%8E%E5%A5%B3.png" title="Git 基本使用教程"><span class="type">下一篇</span><span class="category"><i class="ic i-flag"></i>code</span><h3>Git 基本使用教程</h3></a></div></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="文章目录"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text"> 1. 准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%A1%B9%E7%9B%AE%E6%A0%87%E8%AF%86%E9%85%8D%E7%BD%AE-appjson"><span class="toc-number">2.</span> <span class="toc-text"> 2. 项目标识配置 (app.json)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%9E%84%E5%BB%BA%E9%85%8D%E7%BD%AE-easjson"><span class="toc-number">3.</span> <span class="toc-text"> 3. 构建配置 (eas.json)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%89%A7%E8%A1%8C%E6%89%93%E5%8C%85"><span class="toc-number">4.</span> <span class="toc-text"> 4. 执行打包</span></a></li></ol></div><div class="related panel pjax" data-title="系列文章"><ul><li  class="active"><a href="/2025/02/01/react-native/" rel="bookmark" title="React Native打包实战：配置 EAS Build 生成 APK">React Native打包实战：配置 EAS Build 生成 APK</a></li></ul></div><div class="overview panel" data-title="站点概览"><div class="author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><img class="image" loading="lazy" decoding="async" itemprop="image" alt="koen" src="/images/head.png"/><p class="name" itemprop="name">koen</p><div class="description" itemprop="description">Spark!</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">35</span><span class="name">文章</span></a></div><div class="item categories"><a href="/categories/"><span class="count">17</span><span class="name">分类</span></a></div><div class="item tags"><a href="/tags/"><span class="count">64</span><span class="name">标签</span></a></div></nav><div class="social"><a target="_blank" rel="noopener" href="https://github.com/yourname" class="item github" title="https:&#x2F;&#x2F;github.com&#x2F;yourname"><i class="ic i-github"></i></a></div><div class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>首页</a></li><li class="item"><a href="/about/" rel="section"><i class="ic i-user"></i>关于</a></li></div></div></div></div><ul id="quick"><li class="prev pjax"><a href="/2025/07/25/git-basic-usage/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div><div id="player"></div></main><footer id="footer"><div class="inner"><div class="widgets"></div><div class="status"><div class="copyright">&copy; 2022 -<span itemprop="copyrightYear">2026</span><span class="with-love"><i class="ic i-sakura rotate"></i></span><span class="author" itemprop="copyrightHolder">koen @ 木语</span></div><div class="count"><span class="post-meta-item-icon"><i class="ic i-chart-area"></i></span><span title="站点总字数">206k 字</span><span class="post-meta-divider"> | </span><span class="post-meta-item-icon"><i class="ic i-coffee"></i></span><span title="站点阅读时长">3:07</span></div><div class="powered-by">基于 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & Theme.<a target="_blank" rel="noopener" href="https://github.com/theme-shoka-x/hexo-theme-shokaX/">ShokaX</a></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL = {
+    ispost: true,
+    path: `2025/02/01/react-native/`,
+    favicon: {
+        show: `（●′3｀●）一切正常`,
+        hide: `(′Д｀) 出问题啦！`
+    },
+    search: {
+        placeholder: "文章搜索",
+        empty: "关于 「 ${query} 」，什么也没搜到",
+        stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    nocopy: "false",
+    copyright: `复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。`,
+    copy_tex: false,
+    katex: false,
+    mermaid: false,
+    audio: undefined,
+    nocopy: false,
+    outime: true,
+    template: `<div class="note warning"><p><span class="label warning">文章时效性提示</span><br>这是一篇发布于 {{publish}} 天前，最后一次更新在 {{updated}} 天前的文章，部分信息可能已经发生改变，请注意甄别。</p></div>`,
+    quiz: {
+        choice: `单选题`,
+        multiple: `多选题`,
+        true_false: `判断题`,
+        essay: `问答题`,
+        gap_fill: `填空题`,
+        mistake: `错题备注`
+    }
+};
+</script><script src="/js/siteInit.js?v=0.5.4" type="module" fetchpriority="high" defer></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

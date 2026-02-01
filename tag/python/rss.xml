@@ -7,68 +7,70 @@
         <language>zh-CN</language>
         <pubDate>Fri, 28 Nov 2025 00:00:00 +0800</pubDate>
         <lastBuildDate>Fri, 28 Nov 2025 00:00:00 +0800</lastBuildDate>
+        <category>math</category>
         <category>KL</category>
         <category>RE-ID</category>
-        <category>Koa</category>
-        <category>backen</category>
-        <category>nodejs</category>
         <category>cmd</category>
         <category>curl</category>
         <category>learn</category>
         <category>GA</category>
         <category>python</category>
-        <category>math</category>
-        <category>cypher</category>
-        <category>neo4j</category>
-        <category>database</category>
         <category>container</category>
         <category>docker</category>
         <category>linux</category>
         <category>virtual</category>
+        <category>MLC</category>
+        <category>Koa</category>
+        <category>backen</category>
+        <category>nodejs</category>
+        <category>cypher</category>
+        <category>neo4j</category>
+        <category>database</category>
         <category>electron</category>
         <category>web</category>
         <category>desk</category>
-        <category>MLC</category>
         <category>repo</category>
         <category>git</category>
-        <category>flask</category>
         <category>gradio</category>
-        <category>markdown</category>
+        <category>flask</category>
+        <category>latex</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
-        <category>uv</category>
-        <category>environment</category>
+        <category>markdown</category>
+        <category>react-native</category>
+        <category>expo</category>
         <category>deeplearning</category>
         <category>pytorch</category>
         <category>Transformer</category>
         <category>scipy</category>
-        <category>latex</category>
+        <category>collections</category>
         <category>screen</category>
         <category>termux</category>
         <category>saaborn</category>
-        <category>ssh</category>
+        <category>sql</category>
+        <category>uv</category>
+        <category>environment</category>
+        <category>vue</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
-        <category>sql</category>
-        <category>vue</category>
+        <category>ssh</category>
+        <category>gpu</category>
+        <category>data</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
+        <category>diffusionmodel</category>
+        <category>generative-ai</category>
         <category>yolo</category>
         <category>dataset</category>
         <category>AnyLabeling</category>
         <category>dataloader</category>
         <category>agent</category>
-        <category>diffusionmodel</category>
-        <category>generative-ai</category>
-        <category>gpu</category>
-        <category>data</category>
         <category>code</category>
         <category>theory</category>
         <category>bayesian</category>
-        <category>collections</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2025/11/28/pipenv/</guid>
             <title>像前端package.json那样管理python依赖 (uv篇)</title>
@@ -661,8 +663,8 @@ N 个解组成一代种群：&lt;/p&gt;
             <guid isPermalink="true">https://koen666.github.io/2025/08/11/scipy/</guid>
             <title>scipy基本模块及其使用</title>
             <link>https://koen666.github.io/2025/08/11/scipy/</link>
-            <category>python</category>
             <category>math</category>
+            <category>python</category>
             <category>scipy</category>
             <pubDate>Mon, 11 Aug 2025 13:50:14 +0800</pubDate>
             <description><![CDATA[ &lt;h2 id=&#34;一-常量模块constants&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一-常量模块constants&#34;&gt;#&lt;/a&gt; 一、常量模块(constants)&lt;/h2&gt;
@@ -1822,6 +1824,82 @@ y
 &lt;h2 id=&#34;四-显示或者保存图表格&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#四-显示或者保存图表格&#34;&gt;#&lt;/a&gt; 四、显示或者保存图表格&lt;/h2&gt;
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;plt.show&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;plt.savefig&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;&#34;plot.png&#34;&lt;/span&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; dpi=300,&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; bbox_inches=&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;tight&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://koen666.github.io/2025/02/01/react-native/</guid>
+            <title>React Native打包实战：配置 EAS Build 生成 APK</title>
+            <link>https://koen666.github.io/2025/02/01/react-native/</link>
+            <category>python</category>
+            <category>react-native</category>
+            <category>expo</category>
+            <pubDate>Sat, 01 Feb 2025 00:00:00 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;在 React Native (Expo) 开发完成后，如何将代码变成可以在真机上安装的 &lt;code&gt;.apk&lt;/code&gt; 文件？本文记录了使用 &lt;strong&gt;EAS Build (Expo Application Services)&lt;/strong&gt; 进行云端打包的详细步骤。&lt;/p&gt;
+&lt;h2 id=&#34;1-准备工作&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1-准备工作&#34;&gt;#&lt;/a&gt; 1. 准备工作&lt;/h2&gt;
+&lt;p&gt;首先，我们需要安装 Expo 提供的构建工具 &lt;code&gt;eas-cli&lt;/code&gt; 并登录账号。若没有账号则需要注册 &lt;a href=&#34;https://expo.dev/&#34;&gt;https://expo.dev/&lt;/a&gt;&lt;/p&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;# 全局安装 EAS CLI&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;npm&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; install&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; -g&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; eas-cli&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;# 登录 Expo 账号&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;eas&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; login&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;2-项目标识配置-appjson&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2-项目标识配置-appjson&#34;&gt;#&lt;/a&gt; 2. 项目标识配置 (app.json)&lt;/h2&gt;
+&lt;p&gt;在打包前，必须确定 App 的名称和唯一的包名（Package Name）。打开项目根目录下的 app.json 进行修改：&lt;/p&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;JSON&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;  &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;expo&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;    &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;中医智能面诊&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;        // App 在手机桌面上显示的名字&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;    &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;slug&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;tcm-face-diagnosis&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt; // Expo 项目标识（英文）&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;    &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;version&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;1.0.0&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;    &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;android&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a65e2b;--shiki-dark:#d4976c&#34;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;      &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;package&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;com.koen.tcmface&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt; // 【关键】安卓包名，必须唯一&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;      &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;adaptiveIcon&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a13865;--shiki-dark:#d9739f&#34;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;        &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;foregroundImage&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;./assets/adaptive-icon.png&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;        &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;backgroundColor&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;#ffffff&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#a13865;--shiki-dark:#d9739f&#34;&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#a65e2b;--shiki-dark:#d4976c&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;    &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;ios&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a65e2b;--shiki-dark:#d4976c&#34;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;      &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;bundleIdentifier&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;com.koen.tcmface&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt; // iOS 包名&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#a65e2b;--shiki-dark:#d4976c&#34;&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;3-构建配置-easjson&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3-构建配置-easjson&#34;&gt;#&lt;/a&gt; 3. 构建配置 (eas.json)&lt;/h2&gt;
+&lt;p&gt;默认情况下，EAS Build 会生成 .aab 文件（用于上架 Google Play）。如果我们想直接生成可安装的 .apk 文件，需要修改 eas.json。&lt;/p&gt;
+&lt;p&gt;运行初始化命令：&lt;/p&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;eas&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; build:configure&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;然后修改生成的 eas.json，重点是添加 preview 字段中的 buildType: &#34;apk&#34;：&lt;/p&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;JSON&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;  &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;cli&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;    &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;version&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;&amp;gt;= 7.0.0&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;  &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;build&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;    &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;development&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a65e2b;--shiki-dark:#d4976c&#34;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;      &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;developmentClient&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt; true&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;      &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;distribution&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;internal&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#a65e2b;--shiki-dark:#d4976c&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;    &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;preview&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a65e2b;--shiki-dark:#d4976c&#34;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;      &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;android&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a13865;--shiki-dark:#d9739f&#34;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;        &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;buildType&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;apk&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#a13865;--shiki-dark:#d9739f&#34;&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#a65e2b;--shiki-dark:#d4976c&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;    &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;production&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a65e2b;--shiki-dark:#d4976c&#34;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;      &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;android&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a13865;--shiki-dark:#d9739f&#34;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;        &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;buildType&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;app-bundle&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#a13865;--shiki-dark:#d9739f&#34;&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#a65e2b;--shiki-dark:#d4976c&#34;&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;4-执行打包&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#4-执行打包&#34;&gt;#&lt;/a&gt; 4. 执行打包&lt;/h2&gt;
+&lt;p&gt;一切准备就绪后，运行以下命令开始云端构建：&lt;/p&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;eas&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; build&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; -p&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; android&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; --profile&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; preview&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;-p&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; android:&lt;/span&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt; #指定打包安卓平台。&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;--profile&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; preview:&lt;/span&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt; #使用我们刚才配置的 preview 模式（生成 APK）。&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;构建完成后，终端会生成一个二维码和下载链接，直接下载安装即可。&lt;/p&gt;
  ]]></description>
         </item>
     </channel>

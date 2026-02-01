@@ -7,68 +7,70 @@
         <language>zh-CN</language>
         <pubDate>Fri, 30 Jan 2026 00:00:00 +0800</pubDate>
         <lastBuildDate>Fri, 30 Jan 2026 00:00:00 +0800</lastBuildDate>
+        <category>math</category>
         <category>KL</category>
         <category>RE-ID</category>
-        <category>Koa</category>
-        <category>backen</category>
-        <category>nodejs</category>
         <category>cmd</category>
         <category>curl</category>
         <category>learn</category>
         <category>GA</category>
         <category>python</category>
-        <category>math</category>
-        <category>cypher</category>
-        <category>neo4j</category>
-        <category>database</category>
         <category>container</category>
         <category>docker</category>
         <category>linux</category>
         <category>virtual</category>
+        <category>MLC</category>
+        <category>Koa</category>
+        <category>backen</category>
+        <category>nodejs</category>
+        <category>cypher</category>
+        <category>neo4j</category>
+        <category>database</category>
         <category>electron</category>
         <category>web</category>
         <category>desk</category>
-        <category>MLC</category>
         <category>repo</category>
         <category>git</category>
-        <category>flask</category>
         <category>gradio</category>
-        <category>markdown</category>
+        <category>flask</category>
+        <category>latex</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
-        <category>uv</category>
-        <category>environment</category>
+        <category>markdown</category>
+        <category>react-native</category>
+        <category>expo</category>
         <category>deeplearning</category>
         <category>pytorch</category>
         <category>Transformer</category>
         <category>scipy</category>
-        <category>latex</category>
+        <category>collections</category>
         <category>screen</category>
         <category>termux</category>
         <category>saaborn</category>
-        <category>ssh</category>
+        <category>sql</category>
+        <category>uv</category>
+        <category>environment</category>
+        <category>vue</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
-        <category>sql</category>
-        <category>vue</category>
+        <category>ssh</category>
+        <category>gpu</category>
+        <category>data</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
+        <category>diffusionmodel</category>
+        <category>generative-ai</category>
         <category>yolo</category>
         <category>dataset</category>
         <category>AnyLabeling</category>
         <category>dataloader</category>
         <category>agent</category>
-        <category>diffusionmodel</category>
-        <category>generative-ai</category>
-        <category>gpu</category>
-        <category>data</category>
         <category>code</category>
         <category>theory</category>
         <category>bayesian</category>
-        <category>collections</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2026/01/30/%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/</guid>
             <title>扩散模型 (Diffusion Model)原理详解</title>
