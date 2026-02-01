@@ -5,21 +5,21 @@
         <link>https://koen666.github.io</link>
         <description>Spark!</description>
         <language>zh-CN</language>
-        <pubDate>Sat, 01 Feb 2025 00:00:00 +0800</pubDate>
-        <lastBuildDate>Sat, 01 Feb 2025 00:00:00 +0800</lastBuildDate>
-        <category>math</category>
+        <pubDate>Sun, 01 Feb 2026 00:00:00 +0800</pubDate>
+        <lastBuildDate>Sun, 01 Feb 2026 00:00:00 +0800</lastBuildDate>
+        <category>GA</category>
+        <category>python</category>
         <category>KL</category>
         <category>RE-ID</category>
+        <category>math</category>
         <category>cmd</category>
         <category>curl</category>
         <category>learn</category>
-        <category>GA</category>
-        <category>python</category>
+        <category>MLC</category>
         <category>container</category>
         <category>docker</category>
         <category>linux</category>
         <category>virtual</category>
-        <category>MLC</category>
         <category>Koa</category>
         <category>backen</category>
         <category>nodejs</category>
@@ -29,56 +29,56 @@
         <category>electron</category>
         <category>web</category>
         <category>desk</category>
+        <category>flask</category>
+        <category>gradio</category>
         <category>repo</category>
         <category>git</category>
-        <category>gradio</category>
-        <category>flask</category>
+        <category>markdown</category>
         <category>latex</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
-        <category>markdown</category>
-        <category>react-native</category>
-        <category>expo</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>Transformer</category>
-        <category>scipy</category>
-        <category>collections</category>
-        <category>screen</category>
-        <category>termux</category>
-        <category>saaborn</category>
-        <category>sql</category>
         <category>uv</category>
         <category>environment</category>
-        <category>vue</category>
+        <category>collections</category>
+        <category>react-native</category>
+        <category>expo</category>
+        <category>screen</category>
+        <category>termux</category>
+        <category>scipy</category>
+        <category>saaborn</category>
+        <category>sql</category>
+        <category>ssh</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
-        <category>ssh</category>
-        <category>gpu</category>
-        <category>data</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
+        <category>Transformer</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
-        <category>diffusionmodel</category>
-        <category>generative-ai</category>
         <category>yolo</category>
         <category>dataset</category>
         <category>AnyLabeling</category>
         <category>dataloader</category>
+        <category>gpu</category>
+        <category>data</category>
         <category>agent</category>
+        <category>vue</category>
+        <category>diffusionmodel</category>
+        <category>generative-ai</category>
         <category>code</category>
         <category>theory</category>
         <category>bayesian</category>
         <item>
-            <guid isPermalink="true">https://koen666.github.io/2025/02/01/react-native/</guid>
+            <guid isPermalink="true">https://koen666.github.io/2026/02/01/react-native/</guid>
             <title>React Native打包实战：配置 EAS Build 生成 APK</title>
-            <link>https://koen666.github.io/2025/02/01/react-native/</link>
+            <link>https://koen666.github.io/2026/02/01/react-native/</link>
             <category>python</category>
             <category>react-native</category>
             <category>expo</category>
-            <pubDate>Sat, 01 Feb 2025 00:00:00 +0800</pubDate>
+            <pubDate>Sun, 01 Feb 2026 00:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;在 React Native (Expo) 开发完成后，如何将代码变成可以在真机上安装的 &lt;code&gt;.apk&lt;/code&gt; 文件？本文记录了使用 &lt;strong&gt;EAS Build (Expo Application Services)&lt;/strong&gt; 进行云端打包的详细步骤。&lt;/p&gt;
 &lt;h2 id=&#34;1-准备工作&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1-准备工作&#34;&gt;#&lt;/a&gt; 1. 准备工作&lt;/h2&gt;
 &lt;p&gt;首先，我们需要安装 Expo 提供的构建工具 &lt;code&gt;eas-cli&lt;/code&gt; 并登录账号。若没有账号则需要注册 &lt;a href=&#34;https://expo.dev/&#34;&gt;https://expo.dev/&lt;/a&gt;&lt;/p&gt;
