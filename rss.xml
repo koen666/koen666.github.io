@@ -7,17 +7,17 @@
         <language>zh-CN</language>
         <pubDate>Mon, 02 Feb 2026 00:00:00 +0800</pubDate>
         <lastBuildDate>Mon, 02 Feb 2026 00:00:00 +0800</lastBuildDate>
+        <category>math</category>
         <category>GA</category>
         <category>python</category>
         <category>KL</category>
         <category>RE-ID</category>
+        <category>MLC</category>
         <category>container</category>
         <category>docker</category>
         <category>learn</category>
         <category>linux</category>
         <category>virtual</category>
-        <category>math</category>
-        <category>MLC</category>
         <category>Koa</category>
         <category>backen</category>
         <category>nodejs</category>
@@ -26,54 +26,54 @@
         <category>cypher</category>
         <category>neo4j</category>
         <category>database</category>
-        <category>electron</category>
+        <category>gradio</category>
         <category>web</category>
-        <category>desk</category>
+        <category>flask</category>
         <category>repo</category>
         <category>git</category>
-        <category>flask</category>
-        <category>latex</category>
+        <category>electron</category>
+        <category>desk</category>
         <category>markdown</category>
-        <category>gradio</category>
+        <category>latex</category>
+        <category>uv</category>
+        <category>environment</category>
         <category>react-native</category>
         <category>expo</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
+        <category>Transformer</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
         <category>collections</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>Transformer</category>
-        <category>uv</category>
-        <category>environment</category>
-        <category>screen</category>
-        <category>termux</category>
         <category>scipy</category>
+        <category>saaborn</category>
         <category>SSH</category>
         <category>端口转发</category>
         <category>内网穿透</category>
-        <category>saaborn</category>
         <category>sql</category>
         <category>ssh</category>
+        <category>screen</category>
+        <category>termux</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
         <category>vue</category>
         <category>gpu</category>
         <category>data</category>
-        <category>dataset</category>
-        <category>dataloader</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
-        <category>yolo</category>
-        <category>AnyLabeling</category>
-        <category>agent</category>
-        <category>theory</category>
-        <category>bayesian</category>
-        <category>code</category>
         <category>diffusionmodel</category>
         <category>generative-ai</category>
+        <category>yolo</category>
+        <category>dataset</category>
+        <category>AnyLabeling</category>
+        <category>agent</category>
+        <category>dataloader</category>
+        <category>code</category>
+        <category>theory</category>
+        <category>bayesian</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2026/02/02/ssh-l-r/</guid>
             <title>SSH 端口转发详解：彻底搞懂 -L 和 -R 的区别</title>
@@ -201,6 +201,56 @@
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;--profile&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; preview:&lt;/span&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt; #使用我们刚才配置的 preview 模式（生成 APK）。&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;构建完成后，终端会生成一个二维码和下载链接，直接下载安装即可。&lt;/p&gt;
+&lt;h2 id=&#34;5可能出现的问题&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#5可能出现的问题&#34;&gt;#&lt;/a&gt; 5.可能出现的问题&lt;/h2&gt;
+&lt;h3 id=&#34;51-打包后连不上后端服务器-network-error&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#51-打包后连不上后端服务器-network-error&#34;&gt;#&lt;/a&gt; 5.1. 打包后连不上后端服务器 (Network Error)&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;现象描述：&lt;/strong&gt;&lt;br&gt;
+在开发阶段（使用 Expo Go）时，APP 可以正常连接本地后端（如 &lt;code&gt;http://192.168.x.x:8000&lt;/code&gt;）。但是一旦打包成 APK（Release 版本）安装到手机上，所有涉及后端接口的请求全部失败，或者直接抛出 &lt;code&gt;Network Error&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;根本原因：&lt;/strong&gt;&lt;br&gt;
+这是因为 &lt;strong&gt;Android 9 (API 28)&lt;/strong&gt; 及以上版本，默认的安全策略&lt;strong&gt;禁止明文 HTTP 流量 (Cleartext Traffic)&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;开发版 (Expo Go)&lt;/strong&gt;：为了方便调试，Expo Go 默认开启了 HTTP 白名单。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;正式版 (Build)&lt;/strong&gt;：出于安全考虑，默认强制要求使用 HTTPS。如果你的后端是自建的且使用 HTTP IP 直连，请求会被系统底层直接拦截。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;解决方案：&lt;/strong&gt;&lt;br&gt;
+在 Expo (Managed Workflow) 中，我们不能直接修改 &lt;code&gt;AndroidManifest.xml&lt;/code&gt;。我们需要使用 &lt;code&gt;expo-build-properties&lt;/code&gt; 插件来注入网络配置。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;操作步骤：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;安装配置插件&lt;/strong&gt;&lt;br&gt;
+在项目根目录下运行：&lt;/p&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;npm&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; install&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; expo-build-properties&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;修改 &lt;code&gt;app.json&lt;/code&gt;&lt;/strong&gt;&lt;br&gt;
+在 &lt;code&gt;plugins&lt;/code&gt; 字段中添加配置，显式开启 &lt;code&gt;usesCleartextTraffic&lt;/code&gt;。请确保结构如下：&lt;/p&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;  &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;expo&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;    &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;plugins&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a65e2b;--shiki-dark:#d4976c&#34;&gt;[&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#a13865;--shiki-dark:#d9739f&#34;&gt;[&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;        &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;expo-build-properties&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#bda437;--shiki-dark:#e6cc77&#34;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;          &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;android&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#296aa3;--shiki-dark:#6394bf&#34;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;            &#34;&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;usesCleartextTraffic&lt;/span&gt;&lt;span style=&#34;color:#99841877;--shiki-dark:#B8A96577&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt; true&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#296aa3;--shiki-dark:#6394bf&#34;&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#bda437;--shiki-dark:#e6cc77&#34;&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#a13865;--shiki-dark:#d9739f&#34;&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#a65e2b;--shiki-dark:#d4976c&#34;&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;提交并重新构建&lt;/strong&gt;&lt;br&gt;
+修改配置后，必须重新运行构建命令（Native Build），配置才会写入原生层：&lt;/p&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;# 如果是本地构建&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;npx&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; expo&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; prebuild&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;# 如果是 EAS 构建&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;eas&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; build&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; -p&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; android&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：虽然开启 &lt;code&gt;usesCleartextTraffic&lt;/code&gt; 可以解决连接问题，但在生产环境中，建议还是为后端配置 SSL 证书，使用 HTTPS 进行通信以确保数据安全。&lt;/p&gt;
+&lt;/blockquote&gt;
  ]]></description>
         </item>
         <item>

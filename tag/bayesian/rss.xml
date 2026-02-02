@@ -7,17 +7,17 @@
         <language>zh-CN</language>
         <pubDate>Thu, 29 Jan 2026 00:00:00 +0800</pubDate>
         <lastBuildDate>Thu, 29 Jan 2026 00:00:00 +0800</lastBuildDate>
+        <category>math</category>
         <category>GA</category>
         <category>python</category>
         <category>KL</category>
         <category>RE-ID</category>
+        <category>MLC</category>
         <category>container</category>
         <category>docker</category>
         <category>learn</category>
         <category>linux</category>
         <category>virtual</category>
-        <category>math</category>
-        <category>MLC</category>
         <category>Koa</category>
         <category>backen</category>
         <category>nodejs</category>
@@ -26,54 +26,54 @@
         <category>cypher</category>
         <category>neo4j</category>
         <category>database</category>
-        <category>electron</category>
+        <category>gradio</category>
         <category>web</category>
-        <category>desk</category>
+        <category>flask</category>
         <category>repo</category>
         <category>git</category>
-        <category>flask</category>
-        <category>latex</category>
+        <category>electron</category>
+        <category>desk</category>
         <category>markdown</category>
-        <category>gradio</category>
+        <category>latex</category>
+        <category>uv</category>
+        <category>environment</category>
         <category>react-native</category>
         <category>expo</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
+        <category>Transformer</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
         <category>collections</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>Transformer</category>
-        <category>uv</category>
-        <category>environment</category>
-        <category>screen</category>
-        <category>termux</category>
         <category>scipy</category>
+        <category>saaborn</category>
         <category>SSH</category>
         <category>端口转发</category>
         <category>内网穿透</category>
-        <category>saaborn</category>
         <category>sql</category>
         <category>ssh</category>
+        <category>screen</category>
+        <category>termux</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
         <category>vue</category>
         <category>gpu</category>
         <category>data</category>
-        <category>dataset</category>
-        <category>dataloader</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
-        <category>yolo</category>
-        <category>AnyLabeling</category>
-        <category>agent</category>
-        <category>theory</category>
-        <category>bayesian</category>
-        <category>code</category>
         <category>diffusionmodel</category>
         <category>generative-ai</category>
+        <category>yolo</category>
+        <category>dataset</category>
+        <category>AnyLabeling</category>
+        <category>agent</category>
+        <category>dataloader</category>
+        <category>code</category>
+        <category>theory</category>
+        <category>bayesian</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2026/01/29/%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%A8%A1%E5%9E%8B/</guid>
             <title>一文讲通贝叶斯理论：从概率公式到贝叶斯神经网络</title>

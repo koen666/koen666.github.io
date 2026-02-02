@@ -7,17 +7,17 @@
         <language>zh-CN</language>
         <pubDate>Mon, 08 Sep 2025 00:00:00 +0800</pubDate>
         <lastBuildDate>Mon, 08 Sep 2025 00:00:00 +0800</lastBuildDate>
+        <category>math</category>
         <category>GA</category>
         <category>python</category>
         <category>KL</category>
         <category>RE-ID</category>
+        <category>MLC</category>
         <category>container</category>
         <category>docker</category>
         <category>learn</category>
         <category>linux</category>
         <category>virtual</category>
-        <category>math</category>
-        <category>MLC</category>
         <category>Koa</category>
         <category>backen</category>
         <category>nodejs</category>
@@ -26,61 +26,61 @@
         <category>cypher</category>
         <category>neo4j</category>
         <category>database</category>
-        <category>electron</category>
+        <category>gradio</category>
         <category>web</category>
-        <category>desk</category>
+        <category>flask</category>
         <category>repo</category>
         <category>git</category>
-        <category>flask</category>
-        <category>latex</category>
+        <category>electron</category>
+        <category>desk</category>
         <category>markdown</category>
-        <category>gradio</category>
+        <category>latex</category>
+        <category>uv</category>
+        <category>environment</category>
         <category>react-native</category>
         <category>expo</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
+        <category>Transformer</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
         <category>collections</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>Transformer</category>
-        <category>uv</category>
-        <category>environment</category>
-        <category>screen</category>
-        <category>termux</category>
         <category>scipy</category>
+        <category>saaborn</category>
         <category>SSH</category>
         <category>端口转发</category>
         <category>内网穿透</category>
-        <category>saaborn</category>
         <category>sql</category>
         <category>ssh</category>
+        <category>screen</category>
+        <category>termux</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
         <category>vue</category>
         <category>gpu</category>
         <category>data</category>
-        <category>dataset</category>
-        <category>dataloader</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
-        <category>yolo</category>
-        <category>AnyLabeling</category>
-        <category>agent</category>
-        <category>theory</category>
-        <category>bayesian</category>
-        <category>code</category>
         <category>diffusionmodel</category>
         <category>generative-ai</category>
+        <category>yolo</category>
+        <category>dataset</category>
+        <category>AnyLabeling</category>
+        <category>agent</category>
+        <category>dataloader</category>
+        <category>code</category>
+        <category>theory</category>
+        <category>bayesian</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2025/09/08/gradio/</guid>
             <title>关于模型可视化Gradio的使用</title>
             <link>https://koen666.github.io/2025/09/08/gradio/</link>
             <category>python</category>
-            <category>web</category>
             <category>gradio</category>
+            <category>web</category>
             <pubDate>Mon, 08 Sep 2025 00:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;h2 id=&#34;1-hello-world-入门示例&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1-hello-world-入门示例&#34;&gt;#&lt;/a&gt; 1. Hello World 入门示例&lt;/h2&gt;
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt;import&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; gradio &lt;/span&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt;as&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; gr&lt;/span&gt;&lt;/span&gt;
