@@ -11,73 +11,76 @@
         <category>python</category>
         <category>KL</category>
         <category>RE-ID</category>
-        <category>math</category>
-        <category>cmd</category>
-        <category>curl</category>
-        <category>learn</category>
-        <category>MLC</category>
         <category>container</category>
         <category>docker</category>
+        <category>learn</category>
         <category>linux</category>
         <category>virtual</category>
+        <category>math</category>
+        <category>MLC</category>
         <category>Koa</category>
         <category>backen</category>
         <category>nodejs</category>
+        <category>cmd</category>
+        <category>curl</category>
         <category>cypher</category>
         <category>neo4j</category>
         <category>database</category>
         <category>electron</category>
         <category>web</category>
         <category>desk</category>
-        <category>flask</category>
-        <category>gradio</category>
         <category>repo</category>
         <category>git</category>
-        <category>markdown</category>
+        <category>flask</category>
         <category>latex</category>
+        <category>markdown</category>
+        <category>gradio</category>
+        <category>react-native</category>
+        <category>expo</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
+        <category>collections</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
+        <category>Transformer</category>
         <category>uv</category>
         <category>environment</category>
-        <category>collections</category>
-        <category>react-native</category>
-        <category>expo</category>
         <category>screen</category>
         <category>termux</category>
         <category>scipy</category>
+        <category>SSH</category>
+        <category>端口转发</category>
+        <category>内网穿透</category>
         <category>saaborn</category>
         <category>sql</category>
         <category>ssh</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>Transformer</category>
+        <category>vue</category>
+        <category>gpu</category>
+        <category>data</category>
+        <category>dataset</category>
+        <category>dataloader</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
         <category>yolo</category>
-        <category>dataset</category>
         <category>AnyLabeling</category>
-        <category>dataloader</category>
-        <category>gpu</category>
-        <category>data</category>
         <category>agent</category>
-        <category>vue</category>
-        <category>diffusionmodel</category>
-        <category>generative-ai</category>
-        <category>code</category>
         <category>theory</category>
         <category>bayesian</category>
+        <category>code</category>
+        <category>diffusionmodel</category>
+        <category>generative-ai</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2025/07/26/curl/</guid>
             <title>curl使用教学</title>
             <link>https://koen666.github.io/2025/07/26/curl/</link>
+            <category>learn</category>
             <category>cmd</category>
             <category>curl</category>
-            <category>learn</category>
             <pubDate>Sat, 26 Jul 2025 12:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;blockquote&gt;
 &lt;p&gt;curl 是一个强大的命令行工具，用于在命令行或脚本中发送 HTTP 请求，与服务器通信。它可以用来下载网页、调用 API 接口、上传文件、发送表单等。几乎所有支持网络通信的协议 curl 都能处理，包括 HTTP、HTTPS、FTP、SFTP、SMTP 等&lt;/p&gt;

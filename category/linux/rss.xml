@@ -5,72 +5,128 @@
         <link>https://koen666.github.io</link>
         <description>Spark!</description>
         <language>zh-CN</language>
-        <pubDate>Mon, 06 Oct 2025 00:00:00 +0800</pubDate>
-        <lastBuildDate>Mon, 06 Oct 2025 00:00:00 +0800</lastBuildDate>
+        <pubDate>Mon, 02 Feb 2026 00:00:00 +0800</pubDate>
+        <lastBuildDate>Mon, 02 Feb 2026 00:00:00 +0800</lastBuildDate>
         <category>GA</category>
         <category>python</category>
         <category>KL</category>
         <category>RE-ID</category>
-        <category>math</category>
-        <category>cmd</category>
-        <category>curl</category>
-        <category>learn</category>
-        <category>MLC</category>
         <category>container</category>
         <category>docker</category>
+        <category>learn</category>
         <category>linux</category>
         <category>virtual</category>
+        <category>math</category>
+        <category>MLC</category>
         <category>Koa</category>
         <category>backen</category>
         <category>nodejs</category>
+        <category>cmd</category>
+        <category>curl</category>
         <category>cypher</category>
         <category>neo4j</category>
         <category>database</category>
         <category>electron</category>
         <category>web</category>
         <category>desk</category>
-        <category>flask</category>
-        <category>gradio</category>
         <category>repo</category>
         <category>git</category>
-        <category>markdown</category>
+        <category>flask</category>
         <category>latex</category>
+        <category>markdown</category>
+        <category>gradio</category>
+        <category>react-native</category>
+        <category>expo</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
+        <category>collections</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
+        <category>Transformer</category>
         <category>uv</category>
         <category>environment</category>
-        <category>collections</category>
-        <category>react-native</category>
-        <category>expo</category>
         <category>screen</category>
         <category>termux</category>
         <category>scipy</category>
+        <category>SSH</category>
+        <category>端口转发</category>
+        <category>内网穿透</category>
         <category>saaborn</category>
         <category>sql</category>
         <category>ssh</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>Transformer</category>
+        <category>vue</category>
+        <category>gpu</category>
+        <category>data</category>
+        <category>dataset</category>
+        <category>dataloader</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
         <category>yolo</category>
-        <category>dataset</category>
         <category>AnyLabeling</category>
-        <category>dataloader</category>
-        <category>gpu</category>
-        <category>data</category>
         <category>agent</category>
-        <category>vue</category>
-        <category>diffusionmodel</category>
-        <category>generative-ai</category>
-        <category>code</category>
         <category>theory</category>
         <category>bayesian</category>
+        <category>code</category>
+        <category>diffusionmodel</category>
+        <category>generative-ai</category>
+        <item>
+            <guid isPermalink="true">https://koen666.github.io/2026/02/02/ssh-l-r/</guid>
+            <title>SSH 端口转发详解：彻底搞懂 -L 和 -R 的区别</title>
+            <link>https://koen666.github.io/2026/02/02/ssh-l-r/</link>
+            <category>SSH</category>
+            <category>端口转发</category>
+            <category>内网穿透</category>
+            <pubDate>Mon, 02 Feb 2026 00:00:00 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;在日常开发中，我们经常会遇到这样的需求：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;想连线上的数据库&lt;/strong&gt;，但服务器为了安全只开放了 SSH 端口，数据库端口被防火墙挡住了。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;在本地开发了一个 Web 应用&lt;/strong&gt;，想发给异地的同事或客户体验一下，但没有公网 IP。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;其实，只要你有一台能 SSH 登录的服务器（或者使用像 localhost.run 这样的公共服务），&lt;strong&gt;一条 SSH 命令&lt;/strong&gt;就能解决上述所有问题。&lt;/p&gt;
+&lt;p&gt;这就是 SSH 的**隧道（Tunneling）**功能。最常用的两个参数是 &lt;code&gt;-L&lt;/code&gt; 和 &lt;code&gt;-R&lt;/code&gt;，但很多人经常搞混。今天我们就来彻底理清它们。&lt;/p&gt;
+&lt;p&gt;记住这句口诀：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;-L&lt;/code&gt; (Local)&lt;/strong&gt;：&lt;strong&gt;把远程的拉回来&lt;/strong&gt;（我想访问别人）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;-R&lt;/code&gt; (Remote)&lt;/strong&gt;：&lt;strong&gt;把本地的推出去&lt;/strong&gt;（我想让别人访问我）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-ssh-l本地端口转发-local-port-forwarding&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1-ssh-l本地端口转发-local-port-forwarding&#34;&gt;#&lt;/a&gt; 1. SSH -L：本地端口转发 (Local Port Forwarding)&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;场景：&lt;/strong&gt; 安全地连接远程服务器上的服务（如 MySQL、Redis）。&lt;/p&gt;
+&lt;p&gt;假设你有一台阿里云服务器 &lt;code&gt;1.2.3.4&lt;/code&gt;，上面运行着 MySQL（3306 端口），但防火墙只允许 &lt;code&gt;127.0.0.1&lt;/code&gt; 访问。你在本地 Mac/Windows 上想用 Navicat 或 DBeaver 图形化管理它。&lt;/p&gt;
+&lt;h3 id=&#34;命令格式&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#命令格式&#34;&gt;#&lt;/a&gt; 命令格式&lt;/h3&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;ssh&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; -L&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;本地端&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;口&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;目标I&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;P&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;目标端&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;口&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;用户&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;名&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;@&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;跳板机I&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;P&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;实战示例&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;Bash&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;ssh&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; -L&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; 3000:localhost:3306&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; root@1.2.3.4&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;流量是如何走的？&lt;br&gt;
+当你执行这条命令后，SSH 客户端会在你本地监听 3000 端口。&lt;/p&gt;
+&lt;p&gt;发起请求：你在本地 Navicat 连接 localhost:3000。&lt;/p&gt;
+&lt;p&gt;进入隧道：请求被 SSH 客户端捕获，加密后通过 SSH 隧道发送给远程服务器 1.2.3.4。&lt;/p&gt;
+&lt;p&gt;解密转发：服务器收到数据，解密后，根据命令中的 localhost:3306，把请求转发给它自己的 3306 端口。&lt;/p&gt;
+&lt;p&gt;响应返回：数据库的数据原路返回。&lt;/p&gt;
+&lt;p&gt;效果：你访问本地的 3000 端口，就等于在访问远程服务器的 3306 端口。&lt;/p&gt;
+&lt;h2 id=&#34;2-ssh-r远程端口转发-remote-port-forwarding&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2-ssh-r远程端口转发-remote-port-forwarding&#34;&gt;#&lt;/a&gt; 2. SSH -R：远程端口转发 (Remote Port Forwarding)&lt;/h2&gt;
+&lt;p&gt;场景： 内网穿透。将本地开发的服务暴露给公网。&lt;/p&gt;
+&lt;p&gt;假设你在本地（Mac mini）开发了一个 FastAPI 服务，运行在 8001 端口。现在你需要给在国外的老板演示，或者配合微信小程序调试，需要一个公网 HTTPS 地址。&lt;/p&gt;
+&lt;p&gt;命令格式&lt;/p&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;ssh&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; -R&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;远程端&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;口&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;本地I&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;P&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;本地端&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;口&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;用户&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;名&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;@&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;远程服务器I&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;P&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;实战示例&lt;br&gt;
+这里以公共服务 localhost.run 为例（如果你有自己的服务器也是同理）：&lt;/p&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;ssh&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; -R&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; 80:localhost:8001&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; nokey@localhost.run&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;流量是如何走的？&lt;br&gt;
+当你执行这条命令后，SSH 服务端会在远程服务器上监听端口（或分配域名）。&lt;/p&gt;
+&lt;p&gt;外部访问：老板在浏览器访问远程服务器提供的域名（如 &lt;a href=&#34;https://xyz.lhr.life&#34;&gt;https://xyz.lhr.life&lt;/a&gt;）。&lt;/p&gt;
+&lt;p&gt;进入隧道：远程服务器收到请求，发现这是你绑定的隧道，于是把数据包塞进 SSH 连接发给你。&lt;/p&gt;
+&lt;p&gt;穿透内网：数据穿过互联网和家里的路由器，到达你的电脑。&lt;/p&gt;
+&lt;p&gt;本地转发：你的 SSH 客户端收到数据，转发给你本地的 localhost:8001。&lt;/p&gt;
+&lt;p&gt;效果：全世界都能通过那个公网链接，访问你藏在内网里的本地服务。&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2025/10/06/screen/</guid>
             <title>介绍screen，挂起的虚拟终端使用</title>
