@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://koen666.github.io/2026/02/08/NeRF/</loc>
+    <lastmod>2026-02-08</lastmod>
+  </url>
+  <url>
+    <loc>https://koen666.github.io/2025/09/29/MLC/</loc>
+    <lastmod>2026-02-08</lastmod>
+  </url>
+  <url>
     <loc>https://koen666.github.io/2026/02/01/react-native/</loc>
     <lastmod>2026-02-02</lastmod>
   </url>
@@ -67,10 +75,6 @@
   <url>
     <loc>https://koen666.github.io/2025/10/17/cypher/</loc>
     <lastmod>2025-10-17</lastmod>
-  </url>
-  <url>
-    <loc>https://koen666.github.io/2025/09/29/MLC/</loc>
-    <lastmod>2025-10-06</lastmod>
   </url>
   <url>
     <loc>https://koen666.github.io/2025/10/05/%E5%A4%9Agpu/</loc>
