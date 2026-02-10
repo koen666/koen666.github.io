@@ -7,19 +7,17 @@
         <language>zh-CN</language>
         <pubDate>Sat, 26 Jul 2025 12:00:00 +0800</pubDate>
         <lastBuildDate>Sat, 26 Jul 2025 12:00:00 +0800</lastBuildDate>
-        <category>MLP</category>
+        <category>GA</category>
+        <category>python</category>
         <category>math</category>
-        <category>NeRF</category>
-        <category>Koa</category>
-        <category>backen</category>
-        <category>nodejs</category>
-        <category>KL</category>
-        <category>RE-ID</category>
+        <category>MLP</category>
         <category>cmd</category>
         <category>curl</category>
         <category>learn</category>
-        <category>GA</category>
-        <category>python</category>
+        <category>Koa</category>
+        <category>backen</category>
+        <category>nodejs</category>
+        <category>NeRF</category>
         <category>container</category>
         <category>docker</category>
         <category>linux</category>
@@ -33,48 +31,49 @@
         <category>flask</category>
         <category>repo</category>
         <category>git</category>
-        <category>latex</category>
         <category>gradio</category>
+        <category>latex</category>
         <category>markdown</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
         <category>react-native</category>
         <category>expo</category>
-        <category>collections</category>
         <category>uv</category>
         <category>environment</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>Transformer</category>
-        <category>sql</category>
+        <category>scipy</category>
         <category>screen</category>
         <category>termux</category>
-        <category>scipy</category>
+        <category>sql</category>
+        <category>collections</category>
+        <category>saaborn</category>
         <category>ssh</category>
+        <category>SSH</category>
+        <category>端口转发</category>
+        <category>内网穿透</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
         <category>vue</category>
-        <category>saaborn</category>
-        <category>SSH</category>
-        <category>端口转发</category>
-        <category>内网穿透</category>
-        <category>gpu</category>
-        <category>data</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
         <category>yolo</category>
         <category>dataset</category>
         <category>AnyLabeling</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
         <category>dataloader</category>
+        <category>gpu</category>
+        <category>data</category>
+        <category>agent</category>
         <category>diffusionmodel</category>
         <category>generative-ai</category>
         <category>code</category>
         <category>theory</category>
         <category>bayesian</category>
-        <category>agent</category>
+        <category>KL</category>
+        <category>RE-ID</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2025/07/26/curl/</guid>
             <title>curl使用教学</title>
@@ -84,10 +83,10 @@
             <category>learn</category>
             <pubDate>Sat, 26 Jul 2025 12:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;blockquote&gt;
-&lt;p&gt;curl 是一个强大的命令行工具，用于在命令行或脚本中发送 HTTP 请求，与服务器通信。它可以用来下载网页、调用 API 接口、上传文件、发送表单等。几乎所有支持网络通信的协议 curl 都能处理，包括 HTTP、HTTPS、FTP、SFTP、SMTP 等&lt;/p&gt;
+&lt;p&gt;curl 是一个强大的命令行工具，用于在命令行或脚本中发起 HTTP 请求，与服务器通信。它可以用来下载网页、调试 API 接口、上传文件、发送表单等。几乎所有支持网络通信的协议 curl 都能处理，包括 HTTP、HTTPS、FTP、SFTP、SMTP 等。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;hr /&gt;
-&lt;h2 id=&#34;一-所以curl能干啥&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一-所以curl能干啥&#34;&gt;#&lt;/a&gt; 一、所以curl能干啥&lt;/h2&gt;
+&lt;h2 id=&#34;一-curl-能做什么&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一-curl-能做什么&#34;&gt;#&lt;/a&gt; 一、curl 能做什么&lt;/h2&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -122,31 +121,31 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;以下将对其功能进行详细解释&lt;/p&gt;
+&lt;p&gt;下面对常用功能做更详细的说明。&lt;/p&gt;
 &lt;hr /&gt;
-&lt;h2 id=&#34;二-利用curl获取网页内容&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#二-利用curl获取网页内容&#34;&gt;#&lt;/a&gt; 二、利用curl获取网页内容&lt;/h2&gt;
-&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;curl&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; url&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;会将get请求返回结果直接输出在命令行中&lt;/p&gt;
+&lt;h2 id=&#34;二-获取网页内容&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#二-获取网页内容&#34;&gt;#&lt;/a&gt; 二、获取网页内容&lt;/h2&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;curl&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&amp;#x3C;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;ur&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;l&lt;/span&gt;&lt;span style=&#34;color:#AB5959;--shiki-dark:#CB7676&#34;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;会将 GET 请求返回结果直接输出在命令行。&lt;/p&gt;
+&lt;p&gt;保存输出到文件：&lt;/p&gt;
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;curl&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; https://example.com&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; -o&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; index.html&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;保存指定内容到文件，地址为cmd当前地址&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;index.html&lt;/code&gt; 会保存到当前命令行所在目录。&lt;/p&gt;
 &lt;hr /&gt;
-&lt;h2 id=&#34;三-发送post请求&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#三-发送post请求&#34;&gt;#&lt;/a&gt; 三、发送post请求&lt;/h2&gt;
-&lt;p&gt;一般用于测试接口是否正常&lt;/p&gt;
+&lt;h2 id=&#34;三-发送-post-请求&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#三-发送-post-请求&#34;&gt;#&lt;/a&gt; 三、发送 POST 请求&lt;/h2&gt;
+&lt;p&gt;一般用于测试接口是否正常：&lt;/p&gt;
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;curl&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; -X&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; POST&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; -d&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;name=Koen&amp;#x26;age=20&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; https://example.com/api&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;带上请求头和请求体：&lt;/p&gt;
+&lt;p&gt;带上请求头和 JSON 请求体：&lt;/p&gt;
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;curl&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; -X&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; POST&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; https://api.example.com/data&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; \&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt;  -H&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;Authorization: Bearer abc123&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; \&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt;  -H&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;Content-Type: application/json&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; \&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt;  -d&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#39;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;&amp;#123;&#34;key&#34;:&#34;va&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;lue&#34;&amp;#125;&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#39;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt;  -d&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#39;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;&amp;#123;&#34;key&#34;:&#34;value&#34;&amp;#125;&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#39;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;另一个例子（登录接口）：&lt;/p&gt;
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;curl&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; -X&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; POST&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; -H&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;Content-Type: application/json&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; \&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt;     -d&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#39;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;&amp;#123;&#34;username&#34;:&#34;koen&#34;,&#34;password&#34;:&#34;123456&#34;&amp;#125;&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#39;&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; \&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;     https://example.com/api&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt;  -d&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#39;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;&amp;#123;&#34;username&#34;:&#34;koen&#34;,&#34;password&#34;:&#34;123456&#34;&amp;#125;&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#39;&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; \&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;  https://example.com/api&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;hr /&gt;
-&lt;h2 id=&#34;四-利用curl进行文件上传&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#四-利用curl进行文件上传&#34;&gt;#&lt;/a&gt; 四、利用curl进行文件上传&lt;/h2&gt;
+&lt;h2 id=&#34;四-上传文件&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#四-上传文件&#34;&gt;#&lt;/a&gt; 四、上传文件&lt;/h2&gt;
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;curl&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; -F&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;file=@test.png&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; https://example.com/upload&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;-F就是指定用表单的方式进行字段的上传&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-F&lt;/code&gt; 表示使用表单（multipart/form-data）的方式提交字段/文件。&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -157,7 +156,7 @@
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;file&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;表单字段的名字。就像网页表单中 &lt;code&gt;&amp;lt;input type=&amp;quot;file&amp;quot; name=&amp;quot;file&amp;quot;&amp;gt;&lt;/code&gt;。&lt;/td&gt;
+&lt;td&gt;表单字段名，类似 &lt;code&gt;&amp;lt;input type=&amp;quot;file&amp;quot; name=&amp;quot;file&amp;quot;&amp;gt;&lt;/code&gt; 的 &lt;code&gt;name&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;=&lt;/code&gt;&lt;/td&gt;
@@ -169,8 +168,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;其实就是post请求上传文件的方式&lt;/p&gt;
-&lt;hr /&gt;
+&lt;p&gt;本质就是用 POST 请求上传文件的一种方式。&lt;/p&gt;
  ]]></description>
         </item>
     </channel>

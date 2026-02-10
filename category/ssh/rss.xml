@@ -7,19 +7,17 @@
         <language>zh-CN</language>
         <pubDate>Fri, 10 Oct 2025 00:00:00 +0800</pubDate>
         <lastBuildDate>Fri, 10 Oct 2025 00:00:00 +0800</lastBuildDate>
-        <category>MLP</category>
+        <category>GA</category>
+        <category>python</category>
         <category>math</category>
-        <category>NeRF</category>
-        <category>Koa</category>
-        <category>backen</category>
-        <category>nodejs</category>
-        <category>KL</category>
-        <category>RE-ID</category>
+        <category>MLP</category>
         <category>cmd</category>
         <category>curl</category>
         <category>learn</category>
-        <category>GA</category>
-        <category>python</category>
+        <category>Koa</category>
+        <category>backen</category>
+        <category>nodejs</category>
+        <category>NeRF</category>
         <category>container</category>
         <category>docker</category>
         <category>linux</category>
@@ -33,48 +31,49 @@
         <category>flask</category>
         <category>repo</category>
         <category>git</category>
-        <category>latex</category>
         <category>gradio</category>
+        <category>latex</category>
         <category>markdown</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
         <category>react-native</category>
         <category>expo</category>
-        <category>collections</category>
         <category>uv</category>
         <category>environment</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>Transformer</category>
-        <category>sql</category>
+        <category>scipy</category>
         <category>screen</category>
         <category>termux</category>
-        <category>scipy</category>
+        <category>sql</category>
+        <category>collections</category>
+        <category>saaborn</category>
         <category>ssh</category>
+        <category>SSH</category>
+        <category>端口转发</category>
+        <category>内网穿透</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
         <category>vue</category>
-        <category>saaborn</category>
-        <category>SSH</category>
-        <category>端口转发</category>
-        <category>内网穿透</category>
-        <category>gpu</category>
-        <category>data</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
         <category>yolo</category>
         <category>dataset</category>
         <category>AnyLabeling</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
         <category>dataloader</category>
+        <category>gpu</category>
+        <category>data</category>
+        <category>agent</category>
         <category>diffusionmodel</category>
         <category>generative-ai</category>
         <category>code</category>
         <category>theory</category>
         <category>bayesian</category>
-        <category>agent</category>
+        <category>KL</category>
+        <category>RE-ID</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2025/10/10/ssh-agent/</guid>
             <title>让 SSH 登录变得“无感”且更安全</title>
@@ -83,12 +82,12 @@
             <pubDate>Fri, 10 Oct 2025 00:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;h2 id=&#34;ssh-agent-的工作原理&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#ssh-agent-的工作原理&#34;&gt;#&lt;/a&gt; ssh-agent 的工作原理&lt;/h2&gt;
 &lt;p&gt;简化流程：&lt;/p&gt;
-&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span&gt;[用户] → ssh 命令 → [ssh-agent] → [私钥] → [服务器]&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span&gt;[用户] -&gt; ssh 命令 -&gt; [ssh-agent] -&gt; [私钥] -&gt; [服务器]&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;ol&gt;
 &lt;li&gt;用户运行 &lt;code&gt;ssh user@host&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;SSH 客户端向 ssh-agent 请求签名（用私钥解密挑战）。&lt;/li&gt;
+&lt;li&gt;SSH 客户端向 ssh-agent 请求签名（用私钥完成挑战响应）。&lt;/li&gt;
 &lt;li&gt;ssh-agent 返回签名，完成认证。&lt;/li&gt;
-&lt;li&gt;私钥从来不会被写入磁盘或发送到服务器。&lt;/li&gt;
+&lt;li&gt;私钥不会被发送到服务器；通常也不会被明文写入磁盘。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;ssh-agent-的主要命令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#ssh-agent-的主要命令&#34;&gt;#&lt;/a&gt; ssh-agent 的主要命令&lt;/h2&gt;
 &lt;h3 id=&#34;启动服务&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#启动服务&#34;&gt;#&lt;/a&gt; 启动服务&lt;/h3&gt;
@@ -105,7 +104,7 @@
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;ssh-add&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; C:&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt;\U&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;sers&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt;\2&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;8058&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt;\.&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;ssh&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt;\i&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;d_rsa&lt;/span&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;   # Windows&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;第一次添加会要求输入私钥密码（passphrase）&lt;/li&gt;
-&lt;li&gt;添加后 session 内就无需再次输入密码&lt;/li&gt;
+&lt;li&gt;添加后在当前 session 内通常无需再次输入密码&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;查看已加载密钥&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#查看已加载密钥&#34;&gt;#&lt;/a&gt; 查看已加载密钥&lt;/h3&gt;
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;ssh-add&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; -l&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
@@ -115,15 +114,15 @@
 &lt;h3 id=&#34;删除密钥&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#删除密钥&#34;&gt;#&lt;/a&gt; 删除密钥&lt;/h3&gt;
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;ssh-add&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; -D&lt;/span&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;   # 删除 agent 中的所有密钥&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;ssh-add&lt;/span&gt;&lt;span style=&#34;color:#A65E2B;--shiki-dark:#C99076&#34;&gt; -d&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; ~/.ssh/id_rsa&lt;/span&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;  # 删除指定密钥&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;windows-上-ssh-agent-服务&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#windows-上-ssh-agent-服务&#34;&gt;#&lt;/a&gt; Windows 上 ssh-agent 服务&lt;/h2&gt;
+&lt;h2 id=&#34;windows-上的-ssh-agent-服务&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#windows-上的-ssh-agent-服务&#34;&gt;#&lt;/a&gt; Windows 上的 ssh-agent 服务&lt;/h2&gt;
 &lt;h3 id=&#34;41-服务特点&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#41-服务特点&#34;&gt;#&lt;/a&gt; 4.1 服务特点&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Windows 上 ssh-agent 是一个 &lt;strong&gt;系统服务（OpenSSH Authentication Agent）&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;可以设置为 &lt;strong&gt;自动启动&lt;/strong&gt;：&lt;/li&gt;
+&lt;li&gt;Windows 的 ssh-agent 是一个系统服务（OpenSSH Authentication Agent）。&lt;/li&gt;
+&lt;li&gt;可以设置为自动启动。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;Set-Service&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt; -&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;Name ssh&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;agent &lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;StartupType Automatic&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
-&lt;li&gt;启动后在后台运行，不用每次手动开启&lt;/li&gt;
+&lt;li&gt;启动后在后台运行，不用每次手动开启。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;42-常见命令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#42-常见命令&#34;&gt;#&lt;/a&gt; 4.2 常见命令&lt;/h3&gt;
 &lt;ul&gt;
@@ -145,25 +144,25 @@
 &lt;h2 id=&#34;优势&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#优势&#34;&gt;#&lt;/a&gt; 优势&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;免密码登录&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;免密体验&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;解锁一次私钥后，整个 session 或服务周期内都无需再输入 passphrase。&lt;/li&gt;
+&lt;li&gt;解锁一次私钥后，在同一 session 或服务周期内通常无需重复输入 passphrase。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;安全&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;私钥只存在内存中，不会被写到磁盘或传输到服务器。&lt;/li&gt;
+&lt;li&gt;私钥主要在本机使用，常驻内存，不会被传输到服务器。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;支持多密钥&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;支持多密钥&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;可以同时缓存多把私钥，适合管理多个服务器或 GitHub、GitLab 等不同账号。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;与 SSH 配置结合&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;与 SSH 配置结合&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;配合 &lt;code&gt;~/.ssh/config&lt;/code&gt; 可以针对不同 host 自动选择对应私钥。&lt;/li&gt;
 &lt;/ul&gt;

@@ -594,7 +594,9 @@ details summary::before {
   content: "\e607";
 }
 .ic.i-ml,
-.ic.i-engineering {
+.ic.i-engineering,
+.ic.i-dev,
+.ic.i-ai {
   font-family: inherit;
   background-color: currentColor;
   width: 1.25em;
@@ -610,8 +612,18 @@ details summary::before {
   -webkit-mask: url("../assets/icon-engineering.svg") no-repeat center/contain;
   mask: url("../assets/icon-engineering.svg") no-repeat center/contain;
 }
+.ic.i-dev {
+  -webkit-mask: url("../assets/icon-dev.svg") no-repeat center/contain;
+  mask: url("../assets/icon-dev.svg") no-repeat center/contain;
+}
+.ic.i-ai {
+  -webkit-mask: url("../assets/icon-ai.svg") no-repeat center/contain;
+  mask: url("../assets/icon-ai.svg") no-repeat center/contain;
+}
 .ic.i-ml:before,
-.ic.i-engineering:before {
+.ic.i-engineering:before,
+.ic.i-dev:before,
+.ic.i-ai:before {
   content: '';
 }
 /* modern-normalize v2.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
@@ -2369,9 +2381,11 @@ main >.inner {
   display: inline-flex;
   align-items: center;
   position: relative;
+  vertical-align: middle;
   padding: 0 0.625rem;
   letter-spacing: 0.0625rem;
   text-align: center;
+  line-height: 3.125rem;
 }
 @media (max-width: 820px) {
   #nav .menu .item {

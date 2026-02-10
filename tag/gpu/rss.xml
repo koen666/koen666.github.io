@@ -7,19 +7,17 @@
         <language>zh-CN</language>
         <pubDate>Sun, 05 Oct 2025 00:00:00 +0800</pubDate>
         <lastBuildDate>Sun, 05 Oct 2025 00:00:00 +0800</lastBuildDate>
-        <category>MLP</category>
+        <category>GA</category>
+        <category>python</category>
         <category>math</category>
-        <category>NeRF</category>
-        <category>Koa</category>
-        <category>backen</category>
-        <category>nodejs</category>
-        <category>KL</category>
-        <category>RE-ID</category>
+        <category>MLP</category>
         <category>cmd</category>
         <category>curl</category>
         <category>learn</category>
-        <category>GA</category>
-        <category>python</category>
+        <category>Koa</category>
+        <category>backen</category>
+        <category>nodejs</category>
+        <category>NeRF</category>
         <category>container</category>
         <category>docker</category>
         <category>linux</category>
@@ -33,48 +31,49 @@
         <category>flask</category>
         <category>repo</category>
         <category>git</category>
-        <category>latex</category>
         <category>gradio</category>
+        <category>latex</category>
         <category>markdown</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
         <category>react-native</category>
         <category>expo</category>
-        <category>collections</category>
         <category>uv</category>
         <category>environment</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>Transformer</category>
-        <category>sql</category>
+        <category>scipy</category>
         <category>screen</category>
         <category>termux</category>
-        <category>scipy</category>
+        <category>sql</category>
+        <category>collections</category>
+        <category>saaborn</category>
         <category>ssh</category>
+        <category>SSH</category>
+        <category>端口转发</category>
+        <category>内网穿透</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
         <category>vue</category>
-        <category>saaborn</category>
-        <category>SSH</category>
-        <category>端口转发</category>
-        <category>内网穿透</category>
-        <category>gpu</category>
-        <category>data</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
         <category>yolo</category>
         <category>dataset</category>
         <category>AnyLabeling</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
         <category>dataloader</category>
+        <category>gpu</category>
+        <category>data</category>
+        <category>agent</category>
         <category>diffusionmodel</category>
         <category>generative-ai</category>
         <category>code</category>
         <category>theory</category>
         <category>bayesian</category>
-        <category>agent</category>
+        <category>KL</category>
+        <category>RE-ID</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2025/10/05/%E5%A4%9Agpu/</guid>
             <title>多gpu训练方式</title>
@@ -105,19 +104,19 @@
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;1️⃣ 模型并行（Model Parallel）&lt;/td&gt;
+&lt;td&gt;1. 模型并行（Model Parallel）&lt;/td&gt;
 &lt;td&gt;模型拆开&lt;/td&gt;
 &lt;td&gt;把模型的不同层分给不同 GPU&lt;/td&gt;
 &lt;td&gt;适合模型太大放不下一张卡；通信频繁，实现复杂&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;2️⃣ 数据并行（Data Parallel）&lt;/td&gt;
+&lt;td&gt;2. 数据并行（Data Parallel）&lt;/td&gt;
 &lt;td&gt;数据拆开&lt;/td&gt;
 &lt;td&gt;模型每张卡都复制一份，每张卡训练一部分数据&lt;/td&gt;
 &lt;td&gt;通用、最常见&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;3️⃣ 分布式数据并行（Distributed Data Parallel, DDP）&lt;/td&gt;
+&lt;td&gt;3. 分布式数据并行（Distributed Data Parallel, DDP）&lt;/td&gt;
 &lt;td&gt;高效数据并行&lt;/td&gt;
 &lt;td&gt;每张卡独立进程，自动同步梯度&lt;/td&gt;
 &lt;td&gt;工业级方案，最快、最稳定&lt;/td&gt;
@@ -136,12 +135,14 @@
 &lt;span class=&#34;line&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span&gt;GPU0 ← [1, 2]&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span&gt;GPU1 ← [3, 4]&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;训练流程&lt;br&gt;
-1️⃣ 每张 GPU 都有一份相同的模型副本。&lt;br&gt;
-2️⃣ 各 GPU 前向计算 → 得到自己的 loss。&lt;br&gt;
-3️⃣ 各 GPU 反向传播 → 得到自己的梯度。&lt;br&gt;
-4️⃣ &lt;strong&gt;梯度同步（allreduce）&lt;/strong&gt; → 求平均。&lt;br&gt;
-5️⃣ 各 GPU 同步更新参数。&lt;/p&gt;
+&lt;p&gt;训练流程：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;每张 GPU 都有一份相同的模型副本。&lt;/li&gt;
+&lt;li&gt;各 GPU 前向计算 → 得到自己的 loss。&lt;/li&gt;
+&lt;li&gt;各 GPU 反向传播 → 得到自己的梯度。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;梯度同步（allreduce）&lt;/strong&gt; → 求平均。&lt;/li&gt;
+&lt;li&gt;各 GPU 同步更新参数。&lt;/li&gt;
+&lt;/ol&gt;
 &lt;p&gt;这样每张 GPU 的参数始终保持一致。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;四-关键概念详解&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#四-关键概念详解&#34;&gt;#&lt;/a&gt; 四、关键概念详解&lt;/h2&gt;
@@ -198,7 +199,7 @@
 &lt;/table&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;五-三种实现方式详解&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#五-三种实现方式详解&#34;&gt;#&lt;/a&gt; 五、三种实现方式详解&lt;/h2&gt;
-&lt;h3 id=&#34;1️⃣-模型并行model-parallel&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1️⃣-模型并行model-parallel&#34;&gt;#&lt;/a&gt; 1️⃣ 模型并行（Model Parallel）&lt;/h3&gt;
+&lt;h3 id=&#34;1-模型并行model-parallel&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1-模型并行model-parallel&#34;&gt;#&lt;/a&gt; 1. 模型并行（Model Parallel）&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;思想：&lt;/strong&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;模型太大，一张卡放不下，就把不同层放到不同 GPU 上。&lt;/p&gt;
@@ -214,7 +215,7 @@
 &lt;/ul&gt;
 &lt;p&gt;适用：GPT、BERT 这类超大模型。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h3 id=&#34;2️⃣-数据并行data-paralleldp&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2️⃣-数据并行data-paralleldp&#34;&gt;#&lt;/a&gt; 2️⃣ 数据并行（Data Parallel，DP）&lt;/h3&gt;
+&lt;h3 id=&#34;2-数据并行data-paralleldp&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2-数据并行data-paralleldp&#34;&gt;#&lt;/a&gt; 2. 数据并行（Data Parallel，DP）&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;思想：&lt;/strong&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;每张卡都有一份完整模型副本，但处理不同部分的数据。&lt;/p&gt;
@@ -235,7 +236,7 @@
 &lt;/ul&gt;
 &lt;p&gt;适用：快速实验、小模型。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h3 id=&#34;3️⃣-分布式数据并行distributed-data-parallelddp&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3️⃣-分布式数据并行distributed-data-parallelddp&#34;&gt;#&lt;/a&gt; 3️⃣ 分布式数据并行（Distributed Data Parallel，DDP）&lt;/h3&gt;
+&lt;h3 id=&#34;3-分布式数据并行distributed-data-parallelddp&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3-分布式数据并行distributed-data-parallelddp&#34;&gt;#&lt;/a&gt; 3. 分布式数据并行（Distributed Data Parallel，DDP）&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;思想：&lt;/strong&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;数据并行的改进版，每张 GPU 独立进程，自动通信同步。&lt;/p&gt;

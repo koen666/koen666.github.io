@@ -7,19 +7,17 @@
         <language>zh-CN</language>
         <pubDate>Mon, 15 Sep 2025 00:00:00 +0800</pubDate>
         <lastBuildDate>Mon, 15 Sep 2025 00:00:00 +0800</lastBuildDate>
-        <category>MLP</category>
+        <category>GA</category>
+        <category>python</category>
         <category>math</category>
-        <category>NeRF</category>
-        <category>Koa</category>
-        <category>backen</category>
-        <category>nodejs</category>
-        <category>KL</category>
-        <category>RE-ID</category>
+        <category>MLP</category>
         <category>cmd</category>
         <category>curl</category>
         <category>learn</category>
-        <category>GA</category>
-        <category>python</category>
+        <category>Koa</category>
+        <category>backen</category>
+        <category>nodejs</category>
+        <category>NeRF</category>
         <category>container</category>
         <category>docker</category>
         <category>linux</category>
@@ -33,62 +31,63 @@
         <category>flask</category>
         <category>repo</category>
         <category>git</category>
-        <category>latex</category>
         <category>gradio</category>
+        <category>latex</category>
         <category>markdown</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
         <category>react-native</category>
         <category>expo</category>
-        <category>collections</category>
         <category>uv</category>
         <category>environment</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>Transformer</category>
-        <category>sql</category>
+        <category>scipy</category>
         <category>screen</category>
         <category>termux</category>
-        <category>scipy</category>
+        <category>sql</category>
+        <category>collections</category>
+        <category>saaborn</category>
         <category>ssh</category>
+        <category>SSH</category>
+        <category>端口转发</category>
+        <category>内网穿透</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
         <category>vue</category>
-        <category>saaborn</category>
-        <category>SSH</category>
-        <category>端口转发</category>
-        <category>内网穿透</category>
-        <category>gpu</category>
-        <category>data</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
         <category>yolo</category>
         <category>dataset</category>
         <category>AnyLabeling</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
         <category>dataloader</category>
+        <category>gpu</category>
+        <category>data</category>
+        <category>agent</category>
         <category>diffusionmodel</category>
         <category>generative-ai</category>
         <category>code</category>
         <category>theory</category>
         <category>bayesian</category>
-        <category>agent</category>
+        <category>KL</category>
+        <category>RE-ID</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2025/09/15/py_collections/</guid>
             <title>collections</title>
             <link>https://koen666.github.io/2025/09/15/py_collections/</link>
             <category>collections</category>
             <pubDate>Mon, 15 Sep 2025 00:00:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h2 id=&#34;1️⃣-导入方式&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1️⃣-导入方式&#34;&gt;#&lt;/a&gt; 1️⃣ 导入方式&lt;/h2&gt;
+            <description><![CDATA[ &lt;h2 id=&#34;1-导入方式&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1-导入方式&#34;&gt;#&lt;/a&gt; 1. 导入方式&lt;/h2&gt;
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt;import&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; collections&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;2️⃣-常用数据结构&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2️⃣-常用数据结构&#34;&gt;#&lt;/a&gt; 2️⃣ 常用数据结构&lt;/h2&gt;
-&lt;h3 id=&#34;1-counter-计数器&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1-counter-计数器&#34;&gt;#&lt;/a&gt; 1. &lt;code&gt;Counter&lt;/code&gt; —— 计数器&lt;/h3&gt;
+&lt;h2 id=&#34;2-常用数据结构&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2-常用数据结构&#34;&gt;#&lt;/a&gt; 2. 常用数据结构&lt;/h2&gt;
+&lt;h3 id=&#34;1-counter-计数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1-counter-计数&#34;&gt;#&lt;/a&gt; 1. &lt;code&gt;Counter&lt;/code&gt; — 计数&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;功能：统计元素出现的次数。&lt;/li&gt;
-&lt;li&gt;类似于 &lt;code&gt;dict&lt;/code&gt;，但是专门用于计数。&lt;/li&gt;
+&lt;li&gt;类似 &lt;code&gt;dict&lt;/code&gt;，但是专门用于计数。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt;from&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; collections &lt;/span&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt;import&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; Counter&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;/span&gt;
@@ -97,9 +96,9 @@
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;cnt&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;  # Counter({&#39;a&#39;: 3, &#39;b&#39;: 2, &#39;c&#39;: 1})&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;cnt&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;most_common&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#2F798A;--shiki-dark:#4C9A91&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;  # [(&#39;a&#39;, 3), (&#39;b&#39;, 2)]&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;hr&gt;
-&lt;h3 id=&#34;2-defaultdict-带默认值的字典&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2-defaultdict-带默认值的字典&#34;&gt;#&lt;/a&gt; 2. &lt;code&gt;defaultdict&lt;/code&gt; —— 带默认值的字典&lt;/h3&gt;
+&lt;h3 id=&#34;2-defaultdict-带默认值的字典&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2-defaultdict-带默认值的字典&#34;&gt;#&lt;/a&gt; 2. &lt;code&gt;defaultdict&lt;/code&gt; — 带默认值的字典&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;功能：&lt;strong&gt;访问不存在的 key 不会报错&lt;/strong&gt;，会返回默认值。&lt;/li&gt;
+&lt;li&gt;功能：访问不存在的 key 不会报错，会返回默认值。&lt;/li&gt;
 &lt;li&gt;构造时传入一个函数（如 &lt;code&gt;int&lt;/code&gt;、&lt;code&gt;list&lt;/code&gt;、&lt;code&gt;set&lt;/code&gt;）作为默认值。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt;from&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; collections &lt;/span&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt;import&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; defaultdict&lt;/span&gt;&lt;/span&gt;
@@ -118,9 +117,9 @@
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;index2label &lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; collections&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;defaultdict&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;就是用 &lt;code&gt;int&lt;/code&gt; 作为默认值 0，统计每个标签出现的次数。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h3 id=&#34;3-ordereddict-有序字典&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3-ordereddict-有序字典&#34;&gt;#&lt;/a&gt; 3. &lt;code&gt;OrderedDict&lt;/code&gt; —— 有序字典&lt;/h3&gt;
+&lt;h3 id=&#34;3-ordereddict-有序字典&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3-ordereddict-有序字典&#34;&gt;#&lt;/a&gt; 3. &lt;code&gt;OrderedDict&lt;/code&gt; — 有序字典&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;功能：&lt;strong&gt;保持 key 的插入顺序&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;功能：保持 key 的插入顺序。&lt;/li&gt;
 &lt;li&gt;Python 3.7+ 的普通 dict 已经默认保持顺序，所以用途不如以前重要，但有些方法如 &lt;code&gt;move_to_end&lt;/code&gt; 仍很有用。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt;from&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; collections &lt;/span&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt;import&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; OrderedDict&lt;/span&gt;&lt;/span&gt;
@@ -133,9 +132,9 @@
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;od&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;move_to_end&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#39;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#39;&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;list&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;od&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;keys&lt;/span&gt;&lt;span style=&#34;color:#a65e2b;--shiki-dark:#d4976c&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#a65e2b;--shiki-dark:#d4976c&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;  # [&#39;a&#39;, &#39;c&#39;, &#39;b&#39;]&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;hr&gt;
-&lt;h3 id=&#34;4-deque-双端队列&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#4-deque-双端队列&#34;&gt;#&lt;/a&gt; 4. &lt;code&gt;deque&lt;/code&gt; —— 双端队列&lt;/h3&gt;
+&lt;h3 id=&#34;4-deque-双端队列&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#4-deque-双端队列&#34;&gt;#&lt;/a&gt; 4. &lt;code&gt;deque&lt;/code&gt; — 双端队列&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;功能：可以 &lt;strong&gt;高效地从两端插入和删除元素&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;功能：可以高效地从两端插入和删除元素。&lt;/li&gt;
 &lt;li&gt;操作复杂度 O(1)，比 list 从左端插入快。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt;from&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; collections &lt;/span&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt;import&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; deque&lt;/span&gt;&lt;/span&gt;
@@ -147,9 +146,9 @@
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;q&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;pop&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;          # 右端删除&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;q&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;popleft&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;      # 左端删除&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;hr&gt;
-&lt;h3 id=&#34;5-namedtuple-命名元组&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#5-namedtuple-命名元组&#34;&gt;#&lt;/a&gt; 5. &lt;code&gt;namedtuple&lt;/code&gt; —— 命名元组&lt;/h3&gt;
+&lt;h3 id=&#34;5-namedtuple-命名元组&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#5-namedtuple-命名元组&#34;&gt;#&lt;/a&gt; 5. &lt;code&gt;namedtuple&lt;/code&gt; — 命名元组&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;功能：&lt;strong&gt;给元组的每个元素命名&lt;/strong&gt;，既可以像元组一样索引，也可以用属性名访问。&lt;/li&gt;
+&lt;li&gt;功能：给元组的每个元素命名，既可以像元组一样索引，也可以用属性名访问。&lt;/li&gt;
 &lt;li&gt;用于存储轻量对象。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt;from&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; collections &lt;/span&gt;&lt;span style=&#34;color:#1E754F;--shiki-dark:#4D9375&#34;&gt;import&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt; namedtuple&lt;/span&gt;&lt;/span&gt;
@@ -159,7 +158,7 @@
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color:#999999;--shiki-dark:#666666&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt;  # 10&lt;/span&gt;&lt;/span&gt;
 &lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#998418;--shiki-dark:#B8A965&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#393A34;--shiki-dark:#DBD7CAEE&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#2F798A;--shiki-dark:#4C9A91&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#1e754f;--shiki-dark:#4d9375&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#2993a3;--shiki-dark:#5eaab5&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#A0ADA0;--shiki-dark:#758575DD&#34;&gt; # 20&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;3️⃣-小结&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3️⃣-小结&#34;&gt;#&lt;/a&gt; 3️⃣ 小结&lt;/h2&gt;
+&lt;h2 id=&#34;3-小结&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3-小结&#34;&gt;#&lt;/a&gt; 3. 小结&lt;/h2&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;

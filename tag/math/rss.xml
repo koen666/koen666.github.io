@@ -7,19 +7,17 @@
         <language>zh-CN</language>
         <pubDate>Mon, 29 Sep 2025 00:00:00 +0800</pubDate>
         <lastBuildDate>Mon, 29 Sep 2025 00:00:00 +0800</lastBuildDate>
-        <category>MLP</category>
+        <category>GA</category>
+        <category>python</category>
         <category>math</category>
-        <category>NeRF</category>
-        <category>Koa</category>
-        <category>backen</category>
-        <category>nodejs</category>
-        <category>KL</category>
-        <category>RE-ID</category>
+        <category>MLP</category>
         <category>cmd</category>
         <category>curl</category>
         <category>learn</category>
-        <category>GA</category>
-        <category>python</category>
+        <category>Koa</category>
+        <category>backen</category>
+        <category>nodejs</category>
+        <category>NeRF</category>
         <category>container</category>
         <category>docker</category>
         <category>linux</category>
@@ -33,56 +31,57 @@
         <category>flask</category>
         <category>repo</category>
         <category>git</category>
-        <category>latex</category>
         <category>gradio</category>
+        <category>latex</category>
         <category>markdown</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
         <category>react-native</category>
         <category>expo</category>
-        <category>collections</category>
         <category>uv</category>
         <category>environment</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>Transformer</category>
-        <category>sql</category>
+        <category>scipy</category>
         <category>screen</category>
         <category>termux</category>
-        <category>scipy</category>
+        <category>sql</category>
+        <category>collections</category>
+        <category>saaborn</category>
         <category>ssh</category>
+        <category>SSH</category>
+        <category>端口转发</category>
+        <category>内网穿透</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
         <category>vue</category>
-        <category>saaborn</category>
-        <category>SSH</category>
-        <category>端口转发</category>
-        <category>内网穿透</category>
-        <category>gpu</category>
-        <category>data</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
         <category>yolo</category>
         <category>dataset</category>
         <category>AnyLabeling</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
         <category>dataloader</category>
+        <category>gpu</category>
+        <category>data</category>
+        <category>agent</category>
         <category>diffusionmodel</category>
         <category>generative-ai</category>
         <category>code</category>
         <category>theory</category>
         <category>bayesian</category>
-        <category>agent</category>
+        <category>KL</category>
+        <category>RE-ID</category>
         <item>
-            <guid isPermalink="true">https://koen666.github.io/2025/09/29/MLC/</guid>
+            <guid isPermalink="true">https://koen666.github.io/2025/09/29/MLP/</guid>
             <title>MLP 多层感知机制</title>
-            <link>https://koen666.github.io/2025/09/29/MLC/</link>
-            <category>MLP</category>
+            <link>https://koen666.github.io/2025/09/29/MLP/</link>
             <category>math</category>
+            <category>MLP</category>
             <pubDate>Mon, 29 Sep 2025 00:00:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h2 id=&#34;1️⃣-什么是-mlp&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1️⃣-什么是-mlp&#34;&gt;#&lt;/a&gt; 1️⃣  &lt;strong&gt;什么是 MLP&lt;/strong&gt;&lt;/h2&gt;
+            <description><![CDATA[ &lt;h2 id=&#34;1-什么是-mlp&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1-什么是-mlp&#34;&gt;#&lt;/a&gt; 1. 什么是 MLP&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;MLP（多层感知机）&lt;/strong&gt; 本质上就是：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;输入是一个 &lt;strong&gt;向量&lt;/strong&gt;（1D）&lt;/li&gt;
@@ -99,7 +98,7 @@
 &lt;/ul&gt;
 &lt;p&gt;关键点：&lt;strong&gt;MLP 不关心输入有没有二维结构，它只把输入当作一堆数字（向量）&lt;/strong&gt;。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;2️⃣-图像输入-mlp-的问题&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2️⃣-图像输入-mlp-的问题&#34;&gt;#&lt;/a&gt; 2️⃣ 图像输入 MLP 的问题&lt;/h2&gt;
+&lt;h2 id=&#34;2-图像输入-mlp-的问题&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2-图像输入-mlp-的问题&#34;&gt;#&lt;/a&gt; 2. 图像输入 MLP 的问题&lt;/h2&gt;
 &lt;p&gt;比如我们有一张 &lt;strong&gt;28×28 的图片&lt;/strong&gt;，像素矩阵是：&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34; display=&#34;block&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;X&lt;/mi&gt;&lt;mo stretchy=&#34;false&#34;&gt;[&lt;/mo&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mo separator=&#34;true&#34;&gt;,&lt;/mo&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;mo stretchy=&#34;false&#34;&gt;]&lt;/mo&gt;&lt;mo separator=&#34;true&#34;&gt;,&lt;/mo&gt;&lt;mspace width=&#34;1em&#34;&gt;&lt;/mspace&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mo separator=&#34;true&#34;&gt;,&lt;/mo&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo separator=&#34;true&#34;&gt;,&lt;/mo&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;.&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;.&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;.&lt;/mi&gt;&lt;mo separator=&#34;true&#34;&gt;,&lt;/mo&gt;&lt;mn&gt;28&lt;/mn&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;X[i,j], \quad i,j = 1,...,28
 &lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.07847em;&#34;&gt;X&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;mpunct&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.1667em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.05724em;&#34;&gt;j&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;mpunct&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:1em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.1667em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;mpunct&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.1667em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.05724em;&#34;&gt;j&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8389em;vertical-align:-0.1944em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;mpunct&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.1667em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;...&lt;/span&gt;&lt;span class=&#34;mpunct&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.1667em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;28&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
@@ -113,7 +112,7 @@ MLP 就直接做：&lt;/p&gt;
 &lt;p&gt;这样一来：原本的空间结构（像素的上下左右关系）就丢了。&lt;br&gt;
 它只知道“这是第 123 个输入值”，而不知道这个像素在图片的哪儿。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;3️⃣-如果想保留二维结构&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3️⃣-如果想保留二维结构&#34;&gt;#&lt;/a&gt; 3️⃣ 如果想保留二维结构&lt;/h2&gt;
+&lt;h2 id=&#34;3-如果想保留二维结构&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3-如果想保留二维结构&#34;&gt;#&lt;/a&gt; 3. 如果想保留二维结构&lt;/h2&gt;
 &lt;p&gt;假设我们不要拉直，而是直接保持：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;输入是二维矩阵 (X[i,j])&lt;/li&gt;
@@ -132,7 +131,7 @@ MLP 就直接做：&lt;/p&gt;
 &lt;li&gt;&lt;strong&gt;二维输入+二维输出：&lt;/strong&gt; 用的是四阶张量（4D 权重），输入输出都是矩阵。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;4️⃣-举个例子&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#4️⃣-举个例子&#34;&gt;#&lt;/a&gt; 4️⃣ 举个例子&lt;/h2&gt;
+&lt;h2 id=&#34;4-举个例子&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#4-举个例子&#34;&gt;#&lt;/a&gt; 4. 举个例子&lt;/h2&gt;
 &lt;p&gt;假设输入图像 (X) 是 &lt;strong&gt;2×2&lt;/strong&gt;：&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34; display=&#34;block&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;X&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mrow&gt;&lt;mo fence=&#34;true&#34;&gt;[&lt;/mo&gt;&lt;mtable rowspacing=&#34;0.16em&#34; columnalign=&#34;center center center&#34; columnspacing=&#34;1em&#34;&gt;&lt;mtr&gt;&lt;mtd&gt;&lt;mstyle scriptlevel=&#34;0&#34; displaystyle=&#34;false&#34;&gt;&lt;msub&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mn&gt;11&lt;/mn&gt;&lt;/msub&gt;&lt;/mstyle&gt;&lt;/mtd&gt;&lt;mtd&gt;&lt;mstyle scriptlevel=&#34;0&#34; displaystyle=&#34;false&#34;&gt;&lt;mrow&gt;&lt;msub&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mn&gt;12&lt;/mn&gt;&lt;/msub&gt;&lt;mtext&gt; &lt;/mtext&gt;&lt;msub&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mn&gt;21&lt;/mn&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;/mstyle&gt;&lt;/mtd&gt;&lt;mtd&gt;&lt;mstyle scriptlevel=&#34;0&#34; displaystyle=&#34;false&#34;&gt;&lt;msub&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mn&gt;22&lt;/mn&gt;&lt;/msub&gt;&lt;/mstyle&gt;&lt;/mtd&gt;&lt;/mtr&gt;&lt;/mtable&gt;&lt;mo fence=&#34;true&#34;&gt;]&lt;/mo&gt;&lt;/mrow&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;X = \begin{bmatrix}
 x_{11} &amp;amp; x_{12} \
@@ -160,7 +159,7 @@ x_{21} &amp;amp; x_{22}
 &lt;li&gt;输出是矩阵 (H)。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;5️⃣-总结&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#5️⃣-总结&#34;&gt;#&lt;/a&gt; 5️⃣ 总结&lt;/h2&gt;
+&lt;h2 id=&#34;5-总结&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#5-总结&#34;&gt;#&lt;/a&gt; 5. 总结&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;MLP 的本质：&lt;/strong&gt; 向量输入 → 矩阵乘法 → 向量输出。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;为什么会出现“四维权重”：&lt;/strong&gt;&lt;br&gt;
@@ -1242,8 +1241,8 @@ M834 80h400000v40h-400000z&#34;/&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;/s
             <guid isPermalink="true">https://koen666.github.io/2025/08/11/scipy/</guid>
             <title>scipy基本模块及其使用</title>
             <link>https://koen666.github.io/2025/08/11/scipy/</link>
-            <category>math</category>
             <category>python</category>
+            <category>math</category>
             <category>scipy</category>
             <pubDate>Mon, 11 Aug 2025 13:50:14 +0800</pubDate>
             <description><![CDATA[ &lt;h2 id=&#34;一-常量模块constants&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一-常量模块constants&#34;&gt;#&lt;/a&gt; 一、常量模块(constants)&lt;/h2&gt;

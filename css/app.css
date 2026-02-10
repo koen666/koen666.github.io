@@ -523,7 +523,9 @@
   content: "\e607";
 }
 .ic.i-ml,
-.ic.i-engineering {
+.ic.i-engineering,
+.ic.i-dev,
+.ic.i-ai {
   font-family: inherit;
   background-color: currentColor;
   width: 1.25em;
@@ -539,7 +541,17 @@
   -webkit-mask: url("../assets/icon-engineering.svg") no-repeat center/contain;
   mask: url("../assets/icon-engineering.svg") no-repeat center/contain;
 }
+.ic.i-dev {
+  -webkit-mask: url("../assets/icon-dev.svg") no-repeat center/contain;
+  mask: url("../assets/icon-dev.svg") no-repeat center/contain;
+}
+.ic.i-ai {
+  -webkit-mask: url("../assets/icon-ai.svg") no-repeat center/contain;
+  mask: url("../assets/icon-ai.svg") no-repeat center/contain;
+}
 .ic.i-ml:before,
-.ic.i-engineering:before {
+.ic.i-engineering:before,
+.ic.i-dev:before,
+.ic.i-ai:before {
   content: '';
 }

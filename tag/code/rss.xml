@@ -7,19 +7,17 @@
         <language>zh-CN</language>
         <pubDate>Sun, 05 Oct 2025 00:00:00 +0800</pubDate>
         <lastBuildDate>Sun, 05 Oct 2025 00:00:00 +0800</lastBuildDate>
-        <category>MLP</category>
+        <category>GA</category>
+        <category>python</category>
         <category>math</category>
-        <category>NeRF</category>
-        <category>Koa</category>
-        <category>backen</category>
-        <category>nodejs</category>
-        <category>KL</category>
-        <category>RE-ID</category>
+        <category>MLP</category>
         <category>cmd</category>
         <category>curl</category>
         <category>learn</category>
-        <category>GA</category>
-        <category>python</category>
+        <category>Koa</category>
+        <category>backen</category>
+        <category>nodejs</category>
+        <category>NeRF</category>
         <category>container</category>
         <category>docker</category>
         <category>linux</category>
@@ -33,55 +31,56 @@
         <category>flask</category>
         <category>repo</category>
         <category>git</category>
-        <category>latex</category>
         <category>gradio</category>
+        <category>latex</category>
         <category>markdown</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
         <category>react-native</category>
         <category>expo</category>
-        <category>collections</category>
         <category>uv</category>
         <category>environment</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>Transformer</category>
-        <category>sql</category>
+        <category>scipy</category>
         <category>screen</category>
         <category>termux</category>
-        <category>scipy</category>
+        <category>sql</category>
+        <category>collections</category>
+        <category>saaborn</category>
         <category>ssh</category>
+        <category>SSH</category>
+        <category>端口转发</category>
+        <category>内网穿透</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
         <category>vue</category>
-        <category>saaborn</category>
-        <category>SSH</category>
-        <category>端口转发</category>
-        <category>内网穿透</category>
-        <category>gpu</category>
-        <category>data</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
         <category>yolo</category>
         <category>dataset</category>
         <category>AnyLabeling</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
         <category>dataloader</category>
+        <category>gpu</category>
+        <category>data</category>
+        <category>agent</category>
         <category>diffusionmodel</category>
         <category>generative-ai</category>
         <category>code</category>
         <category>theory</category>
         <category>bayesian</category>
-        <category>agent</category>
+        <category>KL</category>
+        <category>RE-ID</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2025/10/05/%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F/</guid>
             <title>Imperative，Symbolic and Hybrid Programming</title>
             <link>https://koen666.github.io/2025/10/05/%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F/</link>
             <category>code</category>
             <pubDate>Sun, 05 Oct 2025 00:00:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h2 id=&#34;1️⃣-命令式编程imperative-programming&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1️⃣-命令式编程imperative-programming&#34;&gt;#&lt;/a&gt; 1️⃣ 命令式编程（Imperative Programming）&lt;/h2&gt;
+            <description><![CDATA[ &lt;h2 id=&#34;1-命令式编程imperative-programming&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1-命令式编程imperative-programming&#34;&gt;#&lt;/a&gt; 1. 命令式编程（Imperative Programming）&lt;/h2&gt;
 &lt;h3 id=&#34;核心思想&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#核心思想&#34;&gt;#&lt;/a&gt; 核心思想&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;按顺序执行每条语句&lt;/strong&gt;，每执行一步就会改变程序的状态。&lt;/li&gt;
@@ -107,15 +106,15 @@
 &lt;/ol&gt;
 &lt;p&gt;特点：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;直观易懂&lt;/strong&gt;，方便调试&lt;/li&gt;
-&lt;li&gt;每次函数调用都需要解释器处理，效率不高（尤其在 GPU 上运行大批量计算时）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;直观易懂&lt;/strong&gt;，方便调试。&lt;/li&gt;
+&lt;li&gt;每次函数调用都需要解释器处理，效率不高（尤其是在 GPU 上运行大批量计算时）。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr /&gt;
-&lt;h2 id=&#34;2️⃣-符号式编程symbolic-programming&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2️⃣-符号式编程symbolic-programming&#34;&gt;#&lt;/a&gt; 2️⃣ 符号式编程（Symbolic Programming）&lt;/h2&gt;
+&lt;h2 id=&#34;2-符号式编程symbolic-programming&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2-符号式编程symbolic-programming&#34;&gt;#&lt;/a&gt; 2. 符号式编程（Symbolic Programming）&lt;/h2&gt;
 &lt;h3 id=&#34;核心思想-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#核心思想-2&#34;&gt;#&lt;/a&gt; 核心思想&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;先定义整个计算图/计算流程，再一次性执行&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;先定义整个计算图/计算流程，再一次性执行&lt;/strong&gt;。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;可以让编译器提前做优化，例如：&lt;/p&gt;
@@ -145,11 +144,11 @@
 &lt;p&gt;特点：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;运行更快&lt;/strong&gt;，可以做优化&lt;/li&gt;
-&lt;li&gt;可以生成与 Python 无关的可执行代码，更容易移植&lt;/li&gt;
-&lt;li&gt;调试不如命令式方便&lt;/li&gt;
+&lt;li&gt;可以生成与 Python 无关的可执行代码，更容易移植。&lt;/li&gt;
+&lt;li&gt;调试不如命令式方便。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr /&gt;
-&lt;h2 id=&#34;3️⃣-混合式编程hybrid-programming&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3️⃣-混合式编程hybrid-programming&#34;&gt;#&lt;/a&gt; 3️⃣ 混合式编程（Hybrid Programming）&lt;/h2&gt;
+&lt;h2 id=&#34;3-混合式编程hybrid-programming&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3-混合式编程hybrid-programming&#34;&gt;#&lt;/a&gt; 3. 混合式编程（Hybrid Programming）&lt;/h2&gt;
 &lt;h3 id=&#34;背景&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#背景&#34;&gt;#&lt;/a&gt; 背景&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -160,7 +159,7 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;混合式编程的出现是为了 &lt;strong&gt;兼顾易用性和性能&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;混合式编程的出现是为了 &lt;strong&gt;兼顾易用性和性能&lt;/strong&gt;：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;开发时用命令式调试方便&lt;/li&gt;
 &lt;li&gt;部署时用符号式优化和移植方便&lt;/li&gt;
@@ -191,13 +190,13 @@
 &lt;p&gt;&lt;code&gt;torch.jit.script&lt;/code&gt; 会把命令式网络转换成 &lt;strong&gt;静态计算图&lt;/strong&gt;，实现：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;编译优化&lt;/li&gt;
-&lt;li&gt;多 GPU 高效运行&lt;/li&gt;
+&lt;li&gt;在 GPU 上高效运行&lt;/li&gt;
 &lt;li&gt;可导出为非 Python 环境使用&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr /&gt;
-&lt;h2 id=&#34;4️⃣-总结对比&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#4️⃣-总结对比&#34;&gt;#&lt;/a&gt; 4️⃣ 总结对比&lt;/h2&gt;
+&lt;h2 id=&#34;4-总结对比&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#4-总结对比&#34;&gt;#&lt;/a&gt; 4. 总结对比&lt;/h2&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
