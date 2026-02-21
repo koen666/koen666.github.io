@@ -9,9 +9,9 @@
         <lastBuildDate>Sun, 08 Feb 2026 00:00:00 +0800</lastBuildDate>
         <category>GA</category>
         <category>python</category>
-        <category>math</category>
         <category>KL</category>
         <category>RE-ID</category>
+        <category>math</category>
         <category>MLP</category>
         <category>Koa</category>
         <category>backen</category>
@@ -19,56 +19,56 @@
         <category>cmd</category>
         <category>curl</category>
         <category>learn</category>
-        <category>NeRF</category>
         <category>cypher</category>
         <category>neo4j</category>
         <category>database</category>
+        <category>NeRF</category>
+        <category>flask</category>
+        <category>web</category>
         <category>container</category>
         <category>docker</category>
         <category>linux</category>
         <category>virtual</category>
         <category>electron</category>
-        <category>web</category>
         <category>desk</category>
-        <category>flask</category>
-        <category>gradio</category>
-        <category>markdown</category>
         <category>repo</category>
         <category>git</category>
+        <category>gradio</category>
+        <category>markdown</category>
         <category>latex</category>
-        <category>uv</category>
-        <category>environment</category>
-        <category>collections</category>
-        <category>react-native</category>
-        <category>expo</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
-        <category>scipy</category>
+        <category>uv</category>
+        <category>environment</category>
+        <category>react-native</category>
+        <category>expo</category>
+        <category>collections</category>
         <category>screen</category>
         <category>termux</category>
         <category>saaborn</category>
+        <category>scipy</category>
         <category>sql</category>
-        <category>ssh</category>
         <category>SSH</category>
         <category>端口转发</category>
         <category>内网穿透</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
-        <category>vue</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
-        <category>yolo</category>
-        <category>dataset</category>
-        <category>AnyLabeling</category>
-        <category>gpu</category>
-        <category>data</category>
+        <category>vue</category>
+        <category>ssh</category>
         <category>deeplearning</category>
         <category>pytorch</category>
+        <category>dataset</category>
         <category>dataloader</category>
+        <category>gpu</category>
+        <category>data</category>
         <category>agent</category>
+        <category>yolo</category>
+        <category>AnyLabeling</category>
         <category>diffusionmodel</category>
         <category>generative-ai</category>
         <category>code</category>
