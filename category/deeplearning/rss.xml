@@ -7,15 +7,15 @@
         <language>zh-CN</language>
         <pubDate>Sun, 08 Feb 2026 00:00:00 +0800</pubDate>
         <lastBuildDate>Sun, 08 Feb 2026 00:00:00 +0800</lastBuildDate>
-        <category>math</category>
         <category>GA</category>
         <category>python</category>
-        <category>KL</category>
-        <category>RE-ID</category>
-        <category>MLP</category>
+        <category>math</category>
         <category>Koa</category>
         <category>backen</category>
         <category>nodejs</category>
+        <category>KL</category>
+        <category>RE-ID</category>
+        <category>MLP</category>
         <category>NeRF</category>
         <category>cmd</category>
         <category>curl</category>
@@ -23,56 +23,56 @@
         <category>cypher</category>
         <category>neo4j</category>
         <category>database</category>
-        <category>electron</category>
-        <category>web</category>
-        <category>desk</category>
         <category>container</category>
         <category>docker</category>
         <category>linux</category>
         <category>virtual</category>
-        <category>flask</category>
-        <category>gradio</category>
         <category>markdown</category>
+        <category>electron</category>
+        <category>web</category>
+        <category>desk</category>
         <category>repo</category>
         <category>git</category>
+        <category>flask</category>
         <category>latex</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
-        <category>uv</category>
-        <category>environment</category>
-        <category>collections</category>
-        <category>react-native</category>
-        <category>expo</category>
-        <category>scipy</category>
         <category>screen</category>
         <category>termux</category>
-        <category>saaborn</category>
+        <category>react-native</category>
+        <category>expo</category>
+        <category>uv</category>
+        <category>environment</category>
+        <category>scipy</category>
+        <category>collections</category>
         <category>ssh</category>
-        <category>sql</category>
-        <category>images</category>
-        <category>hpc</category>
-        <category>tutorial</category>
         <category>SSH</category>
         <category>端口转发</category>
         <category>内网穿透</category>
+        <category>saaborn</category>
+        <category>gradio</category>
         <category>vue</category>
+        <category>sql</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>dataset</category>
-        <category>dataloader</category>
         <category>yolo</category>
+        <category>dataset</category>
         <category>AnyLabeling</category>
         <category>gpu</category>
         <category>data</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
+        <category>dataloader</category>
+        <category>agent</category>
         <category>diffusionmodel</category>
         <category>generative-ai</category>
-        <category>code</category>
-        <category>agent</category>
+        <category>images</category>
+        <category>hpc</category>
+        <category>tutorial</category>
         <category>theory</category>
+        <category>code</category>
         <category>bayesian</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2026/02/08/NeRF/</guid>
@@ -1827,9 +1827,9 @@ x_{21} &amp;amp; x_{22}
             <guid isPermalink="true">https://koen666.github.io/2025/09/15/%E4%BB%8Edataset%E5%88%B0dataloader/</guid>
             <title>从 dataset 到 DataLoader 的过程究竟是什么？</title>
             <link>https://koen666.github.io/2025/09/15/%E4%BB%8Edataset%E5%88%B0dataloader/</link>
+            <category>dataset</category>
             <category>deeplearning</category>
             <category>pytorch</category>
-            <category>dataset</category>
             <category>dataloader</category>
             <pubDate>Mon, 15 Sep 2025 00:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;h2 id=&#34;dataset-dataloader&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#dataset-dataloader&#34;&gt;#&lt;/a&gt; &lt;strong&gt;dataset-&amp;gt;dataloader&lt;/strong&gt;&lt;/h2&gt;
@@ -2944,8 +2944,8 @@ M834 80h400000v40h-400000z&#34;/&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;/s
             <guid isPermalink="true">https://koen666.github.io/2025/08/09/yolo-dataset/</guid>
             <title>yolo+AnyLabeling实现数据集的自动标注</title>
             <link>https://koen666.github.io/2025/08/09/yolo-dataset/</link>
-            <category>dataset</category>
             <category>yolo</category>
+            <category>dataset</category>
             <category>AnyLabeling</category>
             <pubDate>Sat, 09 Aug 2025 23:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;h2 id=&#34;一-环境准备&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一-环境准备&#34;&gt;#&lt;/a&gt; 一、环境准备&lt;/h2&gt;
