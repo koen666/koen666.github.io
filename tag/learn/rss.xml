@@ -7,15 +7,15 @@
         <language>zh-CN</language>
         <pubDate>Sat, 26 Jul 2025 12:00:00 +0800</pubDate>
         <lastBuildDate>Sat, 26 Jul 2025 12:00:00 +0800</lastBuildDate>
+        <category>math</category>
         <category>GA</category>
         <category>python</category>
-        <category>math</category>
         <category>Koa</category>
         <category>backen</category>
         <category>nodejs</category>
+        <category>MLP</category>
         <category>KL</category>
         <category>RE-ID</category>
-        <category>MLP</category>
         <category>NeRF</category>
         <category>cmd</category>
         <category>curl</category>
@@ -23,56 +23,56 @@
         <category>cypher</category>
         <category>neo4j</category>
         <category>database</category>
+        <category>electron</category>
+        <category>web</category>
+        <category>desk</category>
         <category>container</category>
         <category>docker</category>
         <category>linux</category>
         <category>virtual</category>
-        <category>markdown</category>
-        <category>electron</category>
-        <category>web</category>
-        <category>desk</category>
+        <category>flask</category>
         <category>repo</category>
         <category>git</category>
-        <category>flask</category>
+        <category>gradio</category>
         <category>latex</category>
+        <category>markdown</category>
+        <category>collections</category>
+        <category>uv</category>
+        <category>environment</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
-        <category>screen</category>
-        <category>termux</category>
         <category>react-native</category>
         <category>expo</category>
-        <category>uv</category>
-        <category>environment</category>
-        <category>scipy</category>
-        <category>collections</category>
-        <category>ssh</category>
-        <category>SSH</category>
-        <category>端口转发</category>
-        <category>内网穿透</category>
+        <category>screen</category>
+        <category>termux</category>
         <category>saaborn</category>
-        <category>gradio</category>
-        <category>vue</category>
         <category>sql</category>
-        <category>yaml</category>
-        <category>argparse</category>
-        <category>easydict</category>
-        <category>yolo</category>
-        <category>dataset</category>
-        <category>AnyLabeling</category>
-        <category>gpu</category>
-        <category>data</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>dataloader</category>
-        <category>agent</category>
-        <category>diffusionmodel</category>
-        <category>generative-ai</category>
+        <category>scipy</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
-        <category>theory</category>
+        <category>SSH</category>
+        <category>端口转发</category>
+        <category>内网穿透</category>
+        <category>ssh</category>
+        <category>vue</category>
+        <category>yolo</category>
+        <category>dataset</category>
+        <category>AnyLabeling</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
+        <category>dataloader</category>
+        <category>yaml</category>
+        <category>argparse</category>
+        <category>easydict</category>
+        <category>agent</category>
+        <category>gpu</category>
+        <category>data</category>
         <category>code</category>
+        <category>diffusionmodel</category>
+        <category>generative-ai</category>
+        <category>theory</category>
         <category>bayesian</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2025/07/26/curl/</guid>
