@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>木语 • Posts by &#34;embodied-ai&#34; tag</title>
+        <link>https://koen666.github.io</link>
+        <description>Spark!</description>
+        <language>zh-CN</language>
+        <pubDate>Wed, 13 May 2026 00:00:00 +0800</pubDate>
+        <lastBuildDate>Wed, 13 May 2026 00:00:00 +0800</lastBuildDate>
+        <category>math</category>
+        <category>GA</category>
+        <category>python</category>
+        <category>KL</category>
+        <category>RE-ID</category>
+        <category>Koa</category>
+        <category>backen</category>
+        <category>nodejs</category>
+        <category>MLP</category>
+        <category>worldmodel</category>
+        <category>embodied-ai</category>
+        <category>multi-agent</category>
+        <category>cypher</category>
+        <category>neo4j</category>
+        <category>database</category>
+        <category>cmd</category>
+        <category>curl</category>
+        <category>learn</category>
+        <category>container</category>
+        <category>docker</category>
+        <category>linux</category>
+        <category>virtual</category>
+        <category>electron</category>
+        <category>web</category>
+        <category>desk</category>
+        <category>flask</category>
+        <category>repo</category>
+        <category>git</category>
+        <category>gradio</category>
+        <category>markdown</category>
+        <category>NeRF</category>
+        <category>latex</category>
+        <category>router</category>
+        <category>ip</category>
+        <category>MAC</category>
+        <category>uv</category>
+        <category>environment</category>
+        <category>react-native</category>
+        <category>expo</category>
+        <category>collections</category>
+        <category>scipy</category>
+        <category>screen</category>
+        <category>termux</category>
+        <category>saaborn</category>
+        <category>sql</category>
+        <category>ssh</category>
+        <category>SSH</category>
+        <category>端口转发</category>
+        <category>内网穿透</category>
+        <category>images</category>
+        <category>hpc</category>
+        <category>tutorial</category>
+        <category>vue</category>
+        <category>yaml</category>
+        <category>argparse</category>
+        <category>easydict</category>
+        <category>yolo</category>
+        <category>dataset</category>
+        <category>AnyLabeling</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
+        <category>dataloader</category>
+        <category>gpu</category>
+        <category>data</category>
+        <category>agent</category>
+        <category>code</category>
+        <category>theory</category>
+        <category>bayesian</category>
+        <category>diffusionmodel</category>
+        <category>generative-ai</category>
+        <item>
+            <guid isPermalink="true">https://koen666.github.io/2026/05/13/WM/</guid>
+            <title>世界模型：迈向具身智能与通用物理模拟的终极基座</title>
+            <link>https://koen666.github.io/2026/05/13/WM/</link>
+            <category>worldmodel</category>
+            <category>embodied-ai</category>
+            <category>multi-agent</category>
+            <pubDate>Wed, 13 May 2026 00:00:00 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;人工智能的发展正在跨越一道关键的鸿沟：从“理解文本与逻辑的静态表征”走向“模拟物理世界的动态交互”。在这场范式转移中，&lt;strong&gt;世界模型（World Models）&lt;/strong&gt; 成为了通向通用人工智能（AGI）和具身智能（Embodied AI）的核心基座。&lt;/p&gt;
+&lt;p&gt;简而言之，世界模型是智能体内部对外部环境运作规律的抽象模拟器。它让 AI 拥有了类似人类的“前额叶皮层”，能够在真实行动前，在脑海中进行“零成本”的沙盘推演（Plan in Imagination）。&lt;/p&gt;
+&lt;p&gt;其核心运作机制可以用一个经典的动力学转移公式概括：&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msub&gt;&lt;mi&gt;S&lt;/mi&gt;&lt;mrow&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mi&gt;f&lt;/mi&gt;&lt;mo stretchy=&#34;false&#34;&gt;(&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;S&lt;/mi&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;/msub&gt;&lt;mo separator=&#34;true&#34;&gt;,&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;A&lt;/mi&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;/msub&gt;&lt;mo stretchy=&#34;false&#34;&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;S_{t+1} = f(S_t, A_t)&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8917em;vertical-align:-0.2083em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.05764em;&#34;&gt;S&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.3011em;&#34;&gt;&lt;span style=&#34;top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mathnormal mtight&#34;&gt;t&lt;/span&gt;&lt;span class=&#34;mbin mtight&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mord mtight&#34;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.2083em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.10764em;&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.05764em;&#34;&gt;S&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.2806em;&#34;&gt;&lt;span style=&#34;top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathnormal mtight&#34;&gt;t&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mpunct&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.1667em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathnormal&#34;&gt;A&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.2806em;&#34;&gt;&lt;span style=&#34;top:-2.55em;margin-left:0em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathnormal mtight&#34;&gt;t&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;。即根据当前状态（&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msub&gt;&lt;mi&gt;S&lt;/mi&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;S_t&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8333em;vertical-align:-0.15em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.05764em;&#34;&gt;S&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.2806em;&#34;&gt;&lt;span style=&#34;top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathnormal mtight&#34;&gt;t&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;）和智能体采取的动作（&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msub&gt;&lt;mi&gt;A&lt;/mi&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;A_t&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8333em;vertical-align:-0.15em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathnormal&#34;&gt;A&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.2806em;&#34;&gt;&lt;span style=&#34;top:-2.55em;margin-left:0em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathnormal mtight&#34;&gt;t&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;），准确推演和预测未来的世界状态（&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msub&gt;&lt;mi&gt;S&lt;/mi&gt;&lt;mrow&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;S_{t+1}&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8917em;vertical-align:-0.2083em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.05764em;&#34;&gt;S&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.3011em;&#34;&gt;&lt;span style=&#34;top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mathnormal mtight&#34;&gt;t&lt;/span&gt;&lt;span class=&#34;mbin mtight&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mord mtight&#34;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.2083em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;）。&lt;/p&gt;
+&lt;p&gt;当前，学术界与工业界在构建这一终极物理模拟器时，主要分化出了三大主流范式。它们在“如何表征世界”与“如何预测未来”上各辟蹊径。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h3 id=&#34;一-生成式重建范式-generative-reconstruction-based-paradigm&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一-生成式重建范式-generative-reconstruction-based-paradigm&#34;&gt;#&lt;/a&gt; 一、 生成式重建范式 (Generative / Reconstruction-based Paradigm)&lt;/h3&gt;
+&lt;p&gt;这一范式的底层信仰是：“能完美生成世界，就意味着理解了世界”。模型往往基于先进的扩散模型（Diffusion）或自回归 Transformer 构建，强迫 AI 吞噬海量互联网视频，从而拟合出三维几何与时空连续性。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;核心机制：&lt;/strong&gt; 模型直接在&lt;strong&gt;像素空间（Pixel Space）&lt;/strong&gt; 或高保真视觉空间中预测未来的画面。它接收历史帧和动作指令，重建出极其逼真的连续视觉演变。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优势与局限：&lt;/strong&gt; 优势在于极高的视觉保真度，天然适合作为“数据引擎”来无限合成交互数据，打破具身智能的数据壁垒。然而，其预测成本极高，模型需要耗费大量算力去渲染随风飘动的树叶等无关紧要的背景冗余信息。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;代表性基座模型：&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;OpenAI Sora:&lt;/strong&gt; 早期的纯物理世界模拟器雏形，通过海量数据拟合物理规律。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Google DeepMind Genie:&lt;/strong&gt; 一个 110 亿参数的生成式交互环境基座。它能从无动作标签的视频中隐式提取“潜动作（Latent Actions）”，让用户能像玩游戏一样控制生成的 2D 世界。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;二-潜空间预测范式-latent-space-predictive-paradigm&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#二-潜空间预测范式-latent-space-predictive-paradigm&#34;&gt;#&lt;/a&gt; 二、 潜空间预测范式 (Latent Space Predictive Paradigm)&lt;/h3&gt;
+&lt;p&gt;与执着于表象重建的生成式范式不同，潜空间预测范式认为：真正的物理规律和逻辑存在于抽象的高维特征中。它坚决摒弃对冗余像素的重建。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;核心机制：&lt;/strong&gt; 依靠强大的编码器（如 VQ-VAE），将复杂的现实世界剥离噪声，压缩成纯粹的&lt;strong&gt;潜状态向量（Latent States，&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msub&gt;&lt;mi&gt;Z&lt;/mi&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;Z_t&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8333em;vertical-align:-0.15em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathnormal&#34; style=&#34;margin-right:0.07153em;&#34;&gt;Z&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.2806em;&#34;&gt;&lt;span style=&#34;top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathnormal mtight&#34;&gt;t&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;）&lt;/strong&gt;。随后的动力学转移模型（如 RSSM）完全在这个低维的高效潜空间内预测状态的演化，并结合价值网络评估风险与收益。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;深层潜力（异构通信与 MAS）：&lt;/strong&gt; 这种范式在&lt;strong&gt;多智能体系统（MAS）&lt;/strong&gt; 中展现出革命性的潜力。如果异构的智能体（例如无人机与多足机器人）能够对齐它们的世界模型潜空间，它们便能跨越形态差异，实现极高带宽的&lt;strong&gt;潜空间通信（Latent Communication）&lt;/strong&gt;，在底层直接交互对物理世界的理解，而非低效的自然语言或图像。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;代表性基座模型：&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Dreamer 系列 (V1-V3):&lt;/strong&gt; 强化学习领域的绝对标杆。完全在潜空间中进行极速推演，指导智能体在复杂环境中做出最优决策。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Meta V-JEPA:&lt;/strong&gt; 由 Yann LeCun 团队主推的联合嵌入预测架构。利用滑动平均更新（EMA）等非对称网络结构，巧妙解决了潜空间预测中极易发生的“特征坍缩（Collapse）”问题。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;三-结构化与图网络范式-structured-graph-based-paradigm&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#三-结构化与图网络范式-structured-graph-based-paradigm&#34;&gt;#&lt;/a&gt; 三、 结构化与图网络范式 (Structured / Graph-based Paradigm)&lt;/h3&gt;
+&lt;p&gt;前两种范式大多仍是某种程度的黑盒预测，而结构化范式更强调对世界进行显式的逻辑与因果建模。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;核心机制：&lt;/strong&gt; 将世界抽象为“实体（Entities）”以及实体之间的“关系（Relationships）”。通常采用槽注意力机制（Slot Attention）提取独立实体，并利用图神经网络（GNN）推演实体状态的改变与边关系的重组。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优势与落地场景：&lt;/strong&gt; 具备极强的可解释性和严密的逻辑推理能力。这种高度结构化的特性，使其非常契合具有复杂拓扑关联的专业垂直领域。例如，在&lt;strong&gt;医疗世界模型（Medical World Models）&lt;/strong&gt; 的构建中，可以将肿瘤、病灶与器官视为图节点，结合多层图检索增强（Poly-layer GraphRAG）的思想，推演病患在不同干预治疗方案（如 TACE 介入治疗）下的疾病演化，从而实现精准的预后辅助决策。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;代表性实现：&lt;/strong&gt; 基于 Graph Networks 的物理模拟器（如 DeepMind 早期对积木塔稳定性的预测），以及前沿的医学时序推演框架。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h3 id=&#34;结语与展望&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#结语与展望&#34;&gt;#&lt;/a&gt; 结语与展望&lt;/h3&gt;
+&lt;p&gt;世界模型绝非单一技术的孤岛。如果将生成式范式比作描绘物理细节的“画家”，潜空间预测范式则是纯粹推演局势的“棋手”，而结构化范式则是严谨构建因果蓝图的“系统工程师”。&lt;/p&gt;
+&lt;p&gt;站在当下的技术节点，这三大范式正处于激烈的交锋与融合期。未来的终极基座模型，极有可能走向一种优雅的混合架构：在底层的异构感知与高频控制上采用高效的潜空间预测，在严密的因果规划上依赖图结构化图谱，而在需要提供人类视觉验证与反馈时，按需调用扩散生成。这将是通向真正具身智能的必由之路。&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
