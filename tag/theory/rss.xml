@@ -7,76 +7,76 @@
         <language>zh-CN</language>
         <pubDate>Sat, 21 Feb 2026 00:00:00 +0800</pubDate>
         <lastBuildDate>Sat, 21 Feb 2026 00:00:00 +0800</lastBuildDate>
-        <category>math</category>
         <category>GA</category>
         <category>python</category>
+        <category>math</category>
         <category>KL</category>
         <category>RE-ID</category>
         <category>Koa</category>
         <category>backen</category>
         <category>nodejs</category>
         <category>MLP</category>
-        <category>worldmodel</category>
-        <category>embodied-ai</category>
-        <category>multi-agent</category>
-        <category>cypher</category>
-        <category>neo4j</category>
-        <category>database</category>
+        <category>NeRF</category>
         <category>cmd</category>
         <category>curl</category>
         <category>learn</category>
+        <category>cypher</category>
+        <category>neo4j</category>
+        <category>database</category>
+        <category>worldmodel</category>
+        <category>embodied-ai</category>
+        <category>multi-agent</category>
+        <category>electron</category>
+        <category>web</category>
+        <category>desk</category>
         <category>container</category>
         <category>docker</category>
         <category>linux</category>
         <category>virtual</category>
-        <category>electron</category>
-        <category>web</category>
-        <category>desk</category>
         <category>flask</category>
         <category>repo</category>
         <category>git</category>
-        <category>gradio</category>
         <category>markdown</category>
-        <category>NeRF</category>
+        <category>uv</category>
+        <category>environment</category>
+        <category>gradio</category>
         <category>latex</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
-        <category>uv</category>
-        <category>environment</category>
+        <category>collections</category>
         <category>react-native</category>
         <category>expo</category>
-        <category>collections</category>
-        <category>scipy</category>
         <category>screen</category>
         <category>termux</category>
         <category>saaborn</category>
-        <category>sql</category>
+        <category>scipy</category>
         <category>ssh</category>
+        <category>sql</category>
         <category>SSH</category>
         <category>端口转发</category>
         <category>内网穿透</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
-        <category>vue</category>
+        <category>deeplearning</category>
+        <category>pytorch</category>
+        <category>dataset</category>
+        <category>dataloader</category>
+        <category>yolo</category>
+        <category>AnyLabeling</category>
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
-        <category>yolo</category>
-        <category>dataset</category>
-        <category>AnyLabeling</category>
-        <category>deeplearning</category>
-        <category>pytorch</category>
-        <category>dataloader</category>
+        <category>vue</category>
         <category>gpu</category>
         <category>data</category>
         <category>agent</category>
+        <category>diffusionmodel</category>
+        <category>generative-ai</category>
         <category>code</category>
         <category>theory</category>
         <category>bayesian</category>
-        <category>diffusionmodel</category>
-        <category>generative-ai</category>
         <item>
             <guid isPermalink="true">https://koen666.github.io/2026/02/21/%E8%B4%9D%E5%B0%94%E6%9B%BC%E6%96%B9%E7%A8%8B/</guid>
             <title>强化学习篇，贝尔曼方程</title>
