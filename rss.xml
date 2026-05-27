@@ -15,11 +15,11 @@
         <category>Koa</category>
         <category>backen</category>
         <category>nodejs</category>
-        <category>MLP</category>
-        <category>NeRF</category>
         <category>worldmodel</category>
         <category>embodied-ai</category>
         <category>multi-agent</category>
+        <category>MLP</category>
+        <category>NeRF</category>
         <category>cmd</category>
         <category>curl</category>
         <category>learn</category>
@@ -30,15 +30,15 @@
         <category>docker</category>
         <category>linux</category>
         <category>virtual</category>
+        <category>flask</category>
+        <category>web</category>
+        <category>electron</category>
+        <category>desk</category>
         <category>repo</category>
         <category>git</category>
-        <category>electron</category>
-        <category>web</category>
-        <category>desk</category>
-        <category>flask</category>
+        <category>markdown</category>
         <category>gradio</category>
         <category>latex</category>
-        <category>markdown</category>
         <category>router</category>
         <category>ip</category>
         <category>MAC</category>
@@ -47,15 +47,15 @@
         <category>react-native</category>
         <category>expo</category>
         <category>collections</category>
+        <category>scipy</category>
         <category>screen</category>
         <category>termux</category>
-        <category>scipy</category>
         <category>saaborn</category>
-        <category>ssh</category>
         <category>SSH</category>
         <category>端口转发</category>
         <category>内网穿透</category>
         <category>sql</category>
+        <category>ssh</category>
         <category>images</category>
         <category>hpc</category>
         <category>tutorial</category>
@@ -63,12 +63,12 @@
         <category>yaml</category>
         <category>argparse</category>
         <category>easydict</category>
+        <category>yolo</category>
+        <category>dataset</category>
+        <category>AnyLabeling</category>
         <category>deeplearning</category>
         <category>pytorch</category>
-        <category>dataset</category>
         <category>dataloader</category>
-        <category>yolo</category>
-        <category>AnyLabeling</category>
         <category>gpu</category>
         <category>data</category>
         <category>agent</category>
@@ -2853,8 +2853,8 @@ x_{21} &amp;amp; x_{22}
             <title>Flask框架 基本使用教程</title>
             <link>https://koen666.github.io/2025/09/24/flask/</link>
             <category>python</category>
-            <category>web</category>
             <category>flask</category>
+            <category>web</category>
             <pubDate>Wed, 24 Sep 2025 00:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;h2 id=&#34;基础介绍&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#基础介绍&#34;&gt;#&lt;/a&gt; 基础介绍&lt;/h2&gt;
 &lt;p&gt;Flask 是一个 &lt;strong&gt;轻量级 Python Web 框架&lt;/strong&gt;，特点：&lt;/p&gt;
